@@ -20,8 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
         let tint = OTFConfigManager.shared.tintColor()
-        print(tint)
 
+        let defaultProtection = OTFConfigManager.shared.defaultOTFProtectionLevel()
+
+        switch defaultProtection {
+        case .runToCompletionWithIn10Seconds:
+            print("Default protection is set runToCompletionWithIn10Seconds")
+        case .runToCompletionBeyond10Seconds:
+            print("Default protection is set runToCompletionBeyond10Seconds")
+        case .backgroundMode:
+            print("Default protection is set background Mode")
+        case .none:
+            print("Default protection is not set")
+        }
+        
         return true
     }
 
