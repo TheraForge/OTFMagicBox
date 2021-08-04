@@ -12,7 +12,7 @@ struct LaunchView: View {
     var body: some View {
         VStack(spacing: 10) {
                 
-            OnboardingView()
+            MainView()
         
         }
     }
