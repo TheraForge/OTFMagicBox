@@ -4,7 +4,7 @@ platform :ios, '13.0'
 target 'SampleApp' do
   use_frameworks!
   
-  source 'https://github.com/CocoaPods/Specs'
+  source 'https://cdn.cocoapods.org'
   source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
   pod 'OTFToolBox/Core'

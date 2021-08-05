@@ -136,15 +136,6 @@ struct OnboardingDetailsView: View {
     var body: some View {
         VStack(spacing: 10) {
 
-          /*  Circle()
-                .fill(color)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(6)
-                .overlay(
-                    Image(logo)
-                        .foregroundColor(.white)
-                        .frame(width: 40, height: 40, alignment: .center)
-                )*/
             Spacer()
             
             Image(logo)

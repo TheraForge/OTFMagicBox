@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A41CD212665CD1E007CCEB4 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41CD202665CD1E007CCEB4 /* HealthRecordStep.swift */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
 		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
 		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
@@ -22,7 +21,6 @@
 		5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */; };
 		5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */; };
 		5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4F264E9A880069FEF7 /* Constants.swift */; };
-		5AADFD53264F8D400069FEF7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD52264F8D400069FEF7 /* LoginViewController.swift */; };
 		5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */; };
 		5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */; };
 		5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806726B882E9007AF766 /* ContactsViewController.swift */; };
@@ -40,6 +38,8 @@
 		5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */; };
 		5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808726B9C489007AF766 /* ScheduleViewController.swift */; };
 		5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */; };
+		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
+		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
 		899BD0C0762F0196A484706C /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 403DB90E707CF384F58E65B4 /* Pods_SampleApp.framework */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
 		CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */; };
@@ -53,7 +53,6 @@
 /* Begin PBXFileReference section */
 		403DB90E707CF384F58E65B4 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45190879CA862B54AF49913F /* Pods-CompletelyNewApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompletelyNewApp.debug.xcconfig"; path = "Target Support Files/Pods-CompletelyNewApp/Pods-CompletelyNewApp.debug.xcconfig"; sourceTree = "<group>"; };
-		5A41CD202665CD1E007CCEB4 /* HealthRecordStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
 		5A41D036266A955C007CCEB4 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -68,7 +67,6 @@
 		5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewCoordinator.swift; sourceTree = "<group>"; };
 		5AADFD4F264E9A880069FEF7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5AADFD52264F8D400069FEF7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		5AAF2A78E4B83D2C842E9960 /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.release.xcconfig"; path = "Target Support Files/Pods-SampleApp/Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewControllerRepresentable.swift; sourceTree = "<group>"; };
@@ -87,6 +85,8 @@
 		5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
 		5AB1808726B9C489007AF766 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
+		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		6C2C6FCBD3F638794C9A981C /* Pods-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.debug.xcconfig"; path = "Target Support Files/Pods-SampleApp/Pods-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +123,7 @@
 		5A41CD0D2664D729007CCEB4 /* HealthData */ = {
 			isa = PBXGroup;
 			children = (
-				5A41CD202665CD1E007CCEB4 /* HealthRecordStep.swift */,
+				5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */,
 				5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */,
 			);
 			path = HealthData;
@@ -176,7 +176,7 @@
 		5AADFD43264E86B00069FEF7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				5AADFD52264F8D400069FEF7 /* LoginViewController.swift */,
+				5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -422,9 +422,9 @@
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
+				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
 				5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */,
 				5AB1808226B88A2B007AF766 /* Metrics.swift in Sources */,
-				5A41CD212665CD1E007CCEB4 /* HealthRecordStep.swift in Sources */,
 				5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */,
 				5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */,
 				5AB1807926B8849A007AF766 /* SupportView.swift in Sources */,
@@ -436,8 +436,8 @@
 				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
-				5AADFD53264F8D400069FEF7 /* LoginViewController.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
+				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				5AB1807B26B8849A007AF766 /* SendRecordsView.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,

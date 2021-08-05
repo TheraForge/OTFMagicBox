@@ -9,6 +9,6 @@ import Foundation
 import ResearchKit
 
 /**
-  The Login view.
+  The LoginViewController provides the default login view from ResearchKit.
  */
 class LoginViewController: ORKLoginStepViewController { }

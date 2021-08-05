@@ -19,15 +19,14 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     typealias UIViewControllerType = ORKTaskViewController
     
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {}
+    
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-
-        //let config = CKPropertyReader(file: "CKConfiguration")
         
         var loginSteps: [ORKStep]
         
-            let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+        let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass:        LoginViewController.self)
             
-            loginSteps = [loginStep]
+        loginSteps = [loginStep]
         
         // use the `ORKPasscodeStep` from ResearchKit.
         let passcodeStep = ORKPasscodeStep(identifier: "Passcode") //NOTE: requires NSFaceIDUsageDescription in info.plist

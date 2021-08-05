@@ -30,21 +30,6 @@ struct SendRecordsView: View {
     
     fileprivate func onPress() {
         guard !isSending else { return }
-        
-        isSending = true
-      /*  CKHealthRecordsManager.shared.getAuth { (success, _) in
-            guard success else {
-                isSending = false
-                return
-            }
-            
-            CKHealthRecordsManager.shared.upload() { success, _ in
-                isSending = false
-                if success {
-                    lastSentDate = recordsLastUploaded
-                }
-            }
-        }*/
     }
     
     var body: some View {

@@ -27,6 +27,9 @@ class Constants {
     
     struct UserDefaults {
         
+        //Consent
+        static let ConsentDocumentSignature = "ConsentDocumentParticipantSignature"
+        
         //Misc
         static let FirstRun = "firstRun"
         static let FirstLogin = "firstLogin"

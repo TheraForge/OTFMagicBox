@@ -29,10 +29,6 @@ struct ProfileUIView: View {
                     SupportView(color: .blue, phone: "0730000")
                 }
                 
-               /* Section {
-                    WithdrawView(color: self.color)
-                }*/
-                
                 Section {
                     Text("Copyright")
                 }

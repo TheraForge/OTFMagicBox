@@ -2,14 +2,14 @@
 //  HealthRecordStep.swift
 //  CompletelyNewApp
 //
-//  Created by Spurti Benakatti on 01.06.21.
+//  Created by Spurti Benakatti on 26/07/21.
 //
 
 import HealthKit
 import ResearchKit
 
 /**
-  The Health Records Step of the patient.
+  The Health Records Step will ask for a permission to collect HealthKit health records data of a patient.
  */
 class HealthRecordsStep: ORKInstructionStep {
     
