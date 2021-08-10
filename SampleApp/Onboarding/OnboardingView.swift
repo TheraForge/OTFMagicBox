@@ -34,7 +34,7 @@ struct OnboardingView: View {
     init(onComplete: (() -> Void)? = nil) {
         
         self.color = UIColor.primaryColor
-        let onboardingData = [["logo":"TakeCare", "Description":"Take PRIME care of your health"], ["logo":"HealthScore", "Description":"Find your health score in minutes"], ["logo":"TeleConsultation", "Description":"Tele-consult with Doctors"]]
+        let onboardingData = [["logo": "1️⃣", "Description":"Take PRIME care of your health"], ["logo": "2️⃣", "Description":"Find your health score in minutes"], ["logo": "3️⃣", "Description":"Tele-consult with Doctors"]]
         self.onComplete = onComplete
         for data in onboardingData {
             self.onboardingElements.append(OnboardingElement(logo: data["logo"]!, description: data["Description"]!))
@@ -138,8 +138,15 @@ struct OnboardingDetailsView: View {
 
             Spacer()
             
-            Image(logo)
-                .frame(width: 40, height: 40, alignment: .center)
+            Circle()
+                .fill(color)
+                .frame(width: 100, height: 100, alignment: .center)
+                .padding(6)
+                .overlay(
+                    Text(logo)
+                        .foregroundColor(.white)
+                        .font(.system(size: 42, weight: .light, design: .default))
+                )
             
             Spacer()
             

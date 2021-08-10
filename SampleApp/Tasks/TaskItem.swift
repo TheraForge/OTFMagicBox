@@ -8,7 +8,6 @@
 import Foundation
 import ResearchKit
 import SwiftUI
-import CDTDatastore
 
 /**
   The list of tasks for the user.
