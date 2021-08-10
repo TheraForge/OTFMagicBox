@@ -1,13 +1,19 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '14.0'
+platform :ios, '13.0'
 
-target 'CompletelyNewApp' do
-  # Comment the next line if you don't want to use dynamic frameworks
+target 'SampleApp' do
   use_frameworks!
-
-  source 'http://cdn.cocoapods.org'
+  
+  source 'https://cdn.cocoapods.org'
   source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
+  pod 'OTFToolBox/Core'
+  pod 'OTFCloudantStore'
+  pod 'Moonshine'
+  pod 'CDTDatastore', '0.0.1'
+  pod 'ResearchKit'
   pod 'OTFCareKit'
 
 end
+
+

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ResearchKit
 
 struct ContentView: View {
     var body: some View {
