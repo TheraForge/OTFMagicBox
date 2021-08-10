@@ -58,23 +58,17 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
             // the `LoginCustomWaitStep` waits for email verification.
 
             var loginSteps: [ORKStep]
-            /*if config["Login-Sign-In-With-Apple"]["Enabled"] as? Bool == true {
-                let signInWithAppleStep = CKSignInWithAppleStep(identifier: "SignInWithApple")
-                loginSteps = [signInWithAppleStep]
-            } else if config.readBool(query: "Login-Passwordless") == true {
-                let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
-                let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
-                
-                loginSteps = [loginStep, loginVerificationStep]
-            } else { */
-                let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
 
-                let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: [])
+            let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+            
+            let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB]
+            
+            let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: registrationOptions)
 
-                let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+            let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
 
                 loginSteps = [registerStep, loginStep]
-            //}
+       
             
             /* **************************************************************
             *  STEP (5): ask the user to create a security passcode
