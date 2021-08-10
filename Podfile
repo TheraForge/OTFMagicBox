@@ -13,9 +13,7 @@ target 'SampleApp' do
   pod 'CDTDatastore', '0.0.1'
   pod 'ResearchKit'
   pod 'OTFCareKit'
-  #pod 'CareKit', :git => 'https://github.com/HippocratesTech/OTFCareKit'
-  #pod 'CareKitUI', :git => 'https://github.com/HippocratesTech/OTFCareKit'
-  
+
 end
 
 
