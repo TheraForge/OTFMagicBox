@@ -10,7 +10,7 @@ target 'SampleApp' do
   pod 'OTFToolBox/Core'
   pod 'OTFCloudantStore'
   pod 'Moonshine'
-  pod 'CDTDatastore', '0.0.1'
+  pod 'OTFCDTDatastore', '0.0.1'
   pod 'ResearchKit'
   pod 'OTFCareKit'
 
