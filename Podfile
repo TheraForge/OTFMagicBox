@@ -11,7 +11,6 @@ target 'OTFMagicBox' do
   pod 'OTFCloudantStore'
   pod 'Moonshine'
   pod 'OTFCDTDatastore'
- # pod 'OTFResearchKit' #,  :git => 'https://github.com/HippocratesTech/OTFCocoapodSpecs/OTFResearchKit.git', :branch => 'feature/targets-renaming'
   pod 'OTFCareKit'
   pod 'ResearchKit'
 
