@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE482CF2262C954A00C0A2D5"
-               BuildableName = "SampleApp.app"
-               BlueprintName = "SampleApp"
-               ReferencedContainer = "container:SampleApp.xcodeproj">
+               BuildableName = "OTFMagicBox.app"
+               BlueprintName = "OTFMagicBox"
+               ReferencedContainer = "container:OTFMagicBox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE482CF2262C954A00C0A2D5"
-            BuildableName = "SampleApp.app"
-            BlueprintName = "SampleApp"
-            ReferencedContainer = "container:SampleApp.xcodeproj">
+            BuildableName = "OTFMagicBox.app"
+            BlueprintName = "OTFMagicBox"
+            ReferencedContainer = "container:OTFMagicBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE482CF2262C954A00C0A2D5"
-            BuildableName = "SampleApp.app"
-            BlueprintName = "SampleApp"
-            ReferencedContainer = "container:SampleApp.xcodeproj">
+            BuildableName = "OTFMagicBox.app"
+            BlueprintName = "OTFMagicBox"
+            ReferencedContainer = "container:OTFMagicBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

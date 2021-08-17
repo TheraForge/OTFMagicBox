@@ -7,6 +7,7 @@
 
 import UIKit
 import Moonshine
+import OTFCDTDatastore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
