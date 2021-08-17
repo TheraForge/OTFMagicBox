@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import ResearchKit
+//import ResearchKit
 
 /**
   The Tasks view, where a patient performs activities.
