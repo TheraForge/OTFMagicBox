@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Moonshine
+import OTFTemplateBox
 import OTFCDTDatastore
 
 @main
