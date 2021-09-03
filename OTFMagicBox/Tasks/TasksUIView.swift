@@ -42,7 +42,7 @@ struct TasksUIView: View {
     
     var body: some View {
         VStack {
-            Text("Hippocrates Technology")
+            Text(YmlReader().studyTitle())
                 .font(.system(size: 28, weight:.bold))
                 .foregroundColor(self.color)
                 .padding(.top, 20)

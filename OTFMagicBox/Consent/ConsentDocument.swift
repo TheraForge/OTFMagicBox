@@ -8,7 +8,7 @@
 import ResearchKit
 
 /**
-  The Consent document of the patient.
+ The Consent document of the patient.
  */
 class ConsentDocument: ORKConsentDocument {
     
@@ -17,9 +17,9 @@ class ConsentDocument: ORKConsentDocument {
     override init() {
         super.init()
         
-        let consentTitle = "Consent Title"
+        let consentTitle = YmlReader().consentTitle()
         
-        title = NSLocalizedString(consentTitle, comment: "")
+        title = consentTitle ?? "Consent Title"
         sections = []
         
         let sectionTypes: [ORKConsentSectionType] = [
@@ -32,26 +32,18 @@ class ConsentDocument: ORKConsentDocument {
             .withdrawing,
         ]
         
-        let consentForm = ["Overview": ["Title": "Overview", "Summary": "Hi there", "Content": "Hi there"],
-                           "": ["Title": "Data Gathering", "Summary": "Set of public and private data collection systems, including health surveys, administrative enrollment and billing records and medical records used by various entities including hospitals, CHCs, physicians and health plans", "Content": "Set of public and private data collection systems, including health surveys, administrative enrollment and billing records and medical records used by various entities including hospitals, CHCs, physicians and health plans."],
-                           "Privacy": ["Title": "Privacy", "Summary": "Patient data provides an invaluable resource for improving operational and clinical efficiencies.", "Content": "Patient data provides an invaluable resource for improving operational and clinical efficiencies."],
-                           "DataUse": ["Title": "Data Use", "Summary": "Healthcare data collection is used to make digital analysis faster and more accurate.", "Content": "Healthcare data collection is used to make digital analysis faster and more accurate."],
-                           "StudySurvey": ["Title": "Study Survey", "Summary": "Your survey answers, health information and a copy of this document will be locked in our files.", "Content": "Your survey answers, health information and a copy of this document will be locked in our files."],
-                           "StudyTasks": ["Title": "Study Tasks", "Summary": "Various tasks depending on your health issues.", "Content": "Various tasks depending on your health issues."],
-                           "Withdrawing": ["Title": "Withdrawing", "Summary": "You can any time withdraw the study.", "Content": "You can any time withdraw the study."]]
-        
-        for type in sectionTypes {
-            let section = ORKConsentSection(type: type)
-            
-            if let consentSection = consentForm[type.description] {
-                
-                let errorMessage = "We didn't find a consent form for your project."
-            
-                section.title = NSLocalizedString(consentSection["Title"] ?? ":(", comment: "")
-                section.summary = NSLocalizedString(consentSection["Summary"] ?? errorMessage, comment: "")
-                section.content = NSLocalizedString(consentSection["Content"] ?? errorMessage, comment: "")
-                
-                sections?.append(section)
+        let consentData = YmlReader().consent() as Array
+        for data in consentData {
+            for type in sectionTypes {
+                if (type.description == data.title) {
+                    
+                    let section = ORKConsentSection(type: type)
+                    section.title = data.title
+                    section.summary = data.summary
+                    section.content = data.content
+                    
+                    sections?.append(section)
+                }
             }
         }
         
@@ -96,11 +88,12 @@ extension ORKConsentSectionType: CustomStringConvertible {
             
         case .onlyInDocument:
             return "OnlyInDocument"
+            
         case .dataGathering:
-            return ""
+            return "DataGathering"
+            
         @unknown default:
             return ""
         }
     }
 }
-

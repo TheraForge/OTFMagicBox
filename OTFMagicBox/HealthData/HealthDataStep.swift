@@ -9,15 +9,15 @@ import ResearchKit
 
 
 /**
-  The Health data step of the patient.
+ The Health data step of the patient.
  */
 class HealthDataStep: ORKInstructionStep {
     
     override init(identifier: String) {
         super.init(identifier: identifier)
         
-        title = "Permission to read Activity Data"
-        text = "Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data."
+        title = YmlReader().healthPermissionsTitle()
+        text = YmlReader().healthPermissionsText()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -26,3 +26,17 @@ class HealthDataStep: ORKInstructionStep {
     
 }
 
+/**
+ This class was created to override the `goForward` functionality.
+ */
+class HealthDataStepViewController: ORKInstructionStepViewController {
+    
+    override func goForward() {
+        let manager = OTFHealthKitManager.shared
+        manager.getHealthAuthorization() { _,_ in
+            OperationQueue.main.addOperation {
+                super.goForward()
+            }
+        }
+    }
+}

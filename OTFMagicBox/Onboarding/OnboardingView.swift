@@ -33,12 +33,13 @@ struct OnboardingView: View {
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
         
-        self.color = UIColor.primaryColor
-        let onboardingData = [["logo": "1️⃣", "Description":"Take PRIME care of your health"], ["logo": "2️⃣", "Description":"Find your health score in minutes"], ["logo": "3️⃣", "Description":"Tele-consult with Doctors"]]
-        self.onComplete = onComplete
-        for data in onboardingData {
-            self.onboardingElements.append(OnboardingElement(logo: data["logo"]!, description: data["Description"]!))
+        let onboardingdata = (YmlReader().onboardingData() ?? [Onboarding(logo: "logo", description: "Default: This is the description.")]) as Array
+ 
+        for data in onboardingdata {
+            self.onboardingElements.append(OnboardingElement(logo: data.logo, description: data.description))
         }
+        
+        self.color = Color(YmlReader().primaryColor())
     }
 
     /// Onboarding  view.
@@ -54,7 +55,14 @@ struct OnboardingView: View {
             
             Spacer(minLength: 2)
             
-            Text("Digital Health Study")
+            Text(YmlReader().studyTitle())
+                .foregroundColor(self.color)
+                .multilineTextAlignment(.center)
+                .font(.system(size: 35, weight: .bold, design: .default))
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+            
+            Text(YmlReader().teamName())
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 35, weight: .bold, design: .default))

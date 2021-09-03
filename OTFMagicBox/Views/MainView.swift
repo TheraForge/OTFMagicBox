@@ -11,9 +11,8 @@ struct MainView: View {
     
     let color: Color
     
-    
     init() {
-        self.color = Color.red
+        self.color = Color(YmlReader().primaryColor())
     }
     
     var body: some View {
@@ -23,14 +22,16 @@ struct MainView: View {
                 Text("Tasks")
             }
             
-            ScheduleViewControllerRepresentable().tabItem {
-                Image("tab_schedule").renderingMode(.template)
-                Text("Schedule")
-            }
-            
-            ContactsViewController().tabItem {
-                Image("tab_care").renderingMode(.template)
-                Text("Contacts")
+            if YmlReader().useCareKit() == "true" {
+                ScheduleViewControllerRepresentable().tabItem {
+                    Image("tab_schedule").renderingMode(.template)
+                    Text("Schedule")
+                }
+                
+                ContactsViewController().tabItem {
+                    Image("tab_care").renderingMode(.template)
+                    Text("Contacts")
+                }
             }
             
             ProfileUIView().tabItem {
@@ -39,6 +40,7 @@ struct MainView: View {
             }
         }
         .accentColor(self.color)
+        
     }
 }
 
@@ -51,12 +53,11 @@ import UIKit
 struct TasksViewController: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIViewController
+    
     var dataStore = OCKStore(name: "SampleAppStore", type: .inMemory)
-
-   
     
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
-   
+    
     func makeUIViewController(context: Context) -> UIViewController {
         var healthKitStore = OCKHealthKitPassthroughStore(store: dataStore)
         let synchronizedStoreManager: OCKSynchronizedStoreManager = {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		376B473E6B1320B510CDE27A /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BEAE3D6B4CD3A1DBBD6B74 /* Pods_OTFMagicBox.framework */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
 		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
 		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
@@ -14,6 +15,18 @@
 		5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03C266AA305007CCEB4 /* TaskSamples.swift */; };
 		5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03F266AA517007CCEB4 /* TaskItemView.swift */; };
 		5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */; };
+		5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626E26D4A2EA00A4B4DF /* DataModel.swift */; };
+		5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */; };
+		5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */; };
+		5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */; };
+		5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */; };
+		5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */; };
+		5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627F26DF3EC900A4B4DF /* OTFLog.swift */; };
+		5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49628426DF73B700A4B4DF /* HealthKit.framework */; };
+		5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */; };
+		5A49628926DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */; };
+		5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628C26E1BD5C00A4B4DF /* UIColor.swift */; };
+		5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
 		5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */; };
@@ -30,7 +43,6 @@
 		5AB1807826B8849A007AF766 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807126B8849A007AF766 /* ReportView.swift */; };
 		5AB1807926B8849A007AF766 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807226B8849A007AF766 /* SupportView.swift */; };
 		5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807326B8849A007AF766 /* HelpView.swift */; };
-		5AB1807B26B8849A007AF766 /* SendRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807426B8849A007AF766 /* SendRecordsView.swift */; };
 		5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807526B8849A007AF766 /* WithdrawView.swift */; };
 		5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */; };
 		5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */; };
@@ -57,6 +69,19 @@
 		5A41D03C266AA305007CCEB4 /* TaskSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSamples.swift; sourceTree = "<group>"; };
 		5A41D03F266AA517007CCEB4 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
+		5A49626E26D4A2EA00A4B4DF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YmlReader.swift; sourceTree = "<group>"; };
+		5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFHealthKitManager.swift; sourceTree = "<group>"; };
+		5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
+		5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		5A49627F26DF3EC900A4B4DF /* OTFLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFLog.swift; sourceTree = "<group>"; };
+		5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBox.entitlements; sourceTree = "<group>"; };
+		5A49628426DF73B700A4B4DF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
+		5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStepViewController.swift; sourceTree = "<group>"; };
+		5A49628C26E1BD5C00A4B4DF /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordManager.swift; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
@@ -73,7 +98,6 @@
 		5AB1807126B8849A007AF766 /* ReportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		5AB1807226B8849A007AF766 /* SupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		5AB1807326B8849A007AF766 /* HelpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
-		5AB1807426B8849A007AF766 /* SendRecordsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendRecordsView.swift; sourceTree = "<group>"; };
 		5AB1807526B8849A007AF766 /* WithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
 		5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OCKStore + SampleData.swift"; sourceTree = "<group>"; };
@@ -83,6 +107,8 @@
 		5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
 		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
+		7E6F4B3F432E6CCCF59C0F52 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		85BEAE3D6B4CD3A1DBBD6B74 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +118,7 @@
 		CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE482D02262C954C00C0A2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE482D04262C954C00C0A2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E70AF36DC1FAEC7BE7ECCA0B /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
+				376B473E6B1320B510CDE27A /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +165,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		5A49626D26D4A2EA00A4B4DF /* Yaml */ = {
+			isa = PBXGroup;
+			children = (
+				5A49626E26D4A2EA00A4B4DF /* DataModel.swift */,
+				5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */,
+			);
+			path = Yaml;
+			sourceTree = "<group>";
+		};
 		5AADFD35264E86950069FEF7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +181,7 @@
 				5AADFD38264E86950069FEF7 /* OnboardingView.swift */,
 				5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */,
 				5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */,
-				5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */,
+				5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -151,9 +189,16 @@
 		5AADFD3D264E86A20069FEF7 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */,
+				5A49626D26D4A2EA00A4B4DF /* Yaml */,
 				5AADFD4F264E9A880069FEF7 /* Constants.swift */,
 				5AB1808126B88A2B007AF766 /* Metrics.swift */,
+				5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */,
+				5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */,
+				5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */,
+				5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */,
+				5A49627F26DF3EC900A4B4DF /* OTFLog.swift */,
+				5A49628C26E1BD5C00A4B4DF /* UIColor.swift */,
+				5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -162,6 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */,
+				5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */,
+				5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -201,8 +248,8 @@
 				5AB1807126B8849A007AF766 /* ReportView.swift */,
 				5AB1807226B8849A007AF766 /* SupportView.swift */,
 				5AB1807326B8849A007AF766 /* HelpView.swift */,
-				5AB1807426B8849A007AF766 /* SendRecordsView.swift */,
 				5AB1807526B8849A007AF766 /* WithdrawView.swift */,
+				5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,8 +265,19 @@
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				7E6F4B3F432E6CCCF59C0F52 /* Pods-OTFMagicBox.debug.xcconfig */,
+				E70AF36DC1FAEC7BE7ECCA0B /* Pods-OTFMagicBox.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C9D92AAC7DE27C25427A4DB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
+				85BEAE3D6B4CD3A1DBBD6B74 /* Pods_OTFMagicBox.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CE482CEA262C954A00C0A2D5 = {
@@ -228,6 +286,7 @@
 				CE482CF5262C954A00C0A2D5 /* OTFMagicBox */,
 				CE482CF4262C954A00C0A2D5 /* Products */,
 				8C979D2203D122CC68BA93F2 /* Pods */,
+				C9D92AAC7DE27C25427A4DB9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -242,6 +301,7 @@
 		CE482CF5262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXGroup;
 			children = (
+				5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */,
 				5AB1808B26BAADB1007AF766 /* Contacts */,
 				5AB1806D26B8849A007AF766 /* Profile */,
 				5AB1806426B87FCB007AF766 /* Schedule */,
@@ -254,8 +314,8 @@
 				5AADFD35264E86950069FEF7 /* Onboarding */,
 				CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */,
 				CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */,
-				CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */,
 				5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */,
+				CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */,
 				CE482CFA262C954A00C0A2D5 /* ContentView.swift */,
 				CE482CFC262C954C00C0A2D5 /* Assets.xcassets */,
 				CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */,
@@ -280,9 +340,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
+				AEDE9E377AB5E73F37337812 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
+				7B397C6D0872B3C1DAEBC826 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -339,6 +401,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7B397C6D0872B3C1DAEBC826 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEDE9E377AB5E73F37337812 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OTFMagicBox-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE482CEF262C954A00C0A2D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -350,21 +454,27 @@
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
 				5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */,
+				5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */,
+				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
 				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
+				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
 				5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
+				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
 				5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */,
 				5AB1808226B88A2B007AF766 /* Metrics.swift in Sources */,
 				5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */,
+				5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */,
 				5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */,
 				5AB1807926B8849A007AF766 /* SupportView.swift in Sources */,
 				CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */,
+				5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */,
 				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
@@ -374,9 +484,13 @@
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
+				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
-				5AB1807B26B8849A007AF766 /* SendRecordsView.swift in Sources */,
+				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
+				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
+				5A49628926DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
+				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
 				5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */,
 				5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */,
 				5A41D023266A9106007CCEB4 /* MainView.swift in Sources */,
@@ -515,9 +629,11 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E6F4B3F432E6CCCF59C0F52 /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
 				DEVELOPMENT_TEAM = D25537G8CD;
@@ -536,9 +652,11 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E70AF36DC1FAEC7BE7ECCA0B /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
 				DEVELOPMENT_TEAM = D25537G8CD;

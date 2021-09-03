@@ -14,23 +14,25 @@ struct ProfileUIView: View {
             Text("Profile").font(.system(size: 25, weight:.bold))
             List {
                 Section {
-                   // PatientIDView()
                     Text("Patient name")
                 }.listRowBackground(Color.white)
                 
                 Section {
-                    SendRecordsView()
                     ChangePasscodeView()
-                    HelpView(site: "https://www.hippocratestech.com/")
+                    HelpView(site: YmlReader().teamWebsite())
                 }
                 
                 Section {
-                    ReportView(color: .blue, email: "test@email.com")
-                    SupportView(color: .blue, phone: "0730000")
+                    ReportView(color: .blue, email: YmlReader().teamEmail())
+                    SupportView(color: .blue, phone: YmlReader().teamPhone())
                 }
                 
                 Section {
-                    Text("Copyright")
+                    WithdrawView()
+                }
+                
+                Section {
+                    Text(YmlReader().teamCopyright())
                 }
             }.listStyle(GroupedListStyle())
         }

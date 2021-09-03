@@ -9,6 +9,14 @@ import Foundation
 
 class Constants {
     
+    enum Environment {
+        case development
+        case production
+    }
+    
+    static let environment: Environment = .production
+    static let app = "otfmagicbox.theraforge"
+    
     static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"
     static let prefFirstRunWasMarked = "PREF_FIRST_RUN"
     static let prefUserEmail = "PREF_USER_EMAIL"
@@ -74,14 +82,30 @@ class Constants {
         static let SessionWatchStateDidChange = "sessionWatchStateDidChange"
     }
     
-    struct Sync {
-        static let completed = "edu.stanford.vasctrac.sync.completed"
-        static let eventsCompleted = "edu.stanford.vasctrac.sync.events.completed"
-        static let surveysCompleted = "edu.stanford.vasctrac.sync.surveys.completed"
-        static let walkTestCompleted = "edu.stanford.vasctrac.sync.walktest.completed"
-        static let hkDay = "edu.stanford.vasctrac.sync.hk.day.completed"
-        static let hkEverything = "edu.stanford.vasctrac.sync.hk.everything.completed"
+    struct YamlDefaults {
+        static let FileName = "AppSysParameters.yml"
+        static let LoginStepTitle = "Default: login step title"
+        static let LoginStepText = "Default: login step text"
+        static let StudyTitle = "Default: study Title"
+        static let TeamName = "Default: team name"
+        static let TeamEmail = "Default: team email"
+        static let TeamPhone = "Default: team phone"
+        static let TeamCopyright = "Default: copyright"
+        static let TeamWebsite = "Default: team website"
+        static let ReviewConsentStepText = "Default: review consent step text"
+        static let ReasonForConsentText = "Default: reason for consent step text"
+        static let ConsentFileName = "Default: consent file name"
+        static let PasscodeText = "Default: passcode text"
+        static let PasscodeOnReturnText = "Default: passcode on return text"
+        static let CompletionStepTitle = "Default: completion step title"
+        static let CompletionStepText = "Default: completion step text"
+        static let FailedLoginText = "Default: failed login text"
+        static let FailedLoginTitle = "Default: failed login title"
+        static let HealthPermissionsTitle = "Default: health permissions title"
+        static let HealthPermissionsText = "Default: health permissions text"
+        static let ConsentTitle = "Default: consent title"
+        static let HealthRecordsPermissionsTitle = "Default: health records permissions title"
+        static let HealthRecordsPermissionsText = "Default: health records permissions text"
     }
-    
     
 }

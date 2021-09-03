@@ -13,6 +13,5 @@ target 'OTFMagicBox' do
   pod 'OTFCareKit'
   pod 'ResearchKit'
   pod 'OTFTemplateBox'
-  pod 'OTFMagicBox'
 
 end
