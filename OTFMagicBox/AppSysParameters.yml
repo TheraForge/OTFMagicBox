@@ -1,100 +1,197 @@
-- name: importDatabaseFromFile
-  textValue: no
-- name: tintColor
-  textValue: '#42b6ff'
-- name: HomeTitle
-  textValue: HomeScreen
-- name: SettingTitle
-  textValue: Settings
-- name: offset
-  textValue: '20'
-- name: startDate
-  textValue: 30/08/2020
-- name: label
-  textValue: '#5b4337'
-- name: secondaryLabel
-  textValue: '#876351'
-- name: tertiaryLabel
-  textValue: '#1c135b'
-- name: customBackground
-  textValue: '#331f24'
-- name: secondaryCustomBackground
-  textValue: '#0d2308'
-- name: customGroupedBackground
-  textValue: '#54484c'
-- name: secondaryCustomGroupedBackground
-  textValue: '#5e5155'
-- name: tertiaryCustomGroupedBackground
-  textValue: '#2d2729'
-- name: separator
-  textValue: '#5d5d5d'
-- name: customFill
-  textValue: '#3445a0'
-- name: secondaryCustomFill
-  textValue: '#3749aa'
-- name: tertiaryCustomFill
-  textValue: '#3e52bf'
-- name: quaternaryCustomFill
-  textValue: '#445ad1'
-- name: customBlue
-  textValue: '#4d66ed'
-- name: customGray
-  textValue: '#95aaad'
-- name: customGray2
-  textValue: '#8ea2a5'
-- name: customGray3
-  textValue: '#819396'
-- name: customGray4
-  textValue: '#748487'
-- name: customGray5
-  textValue: '#6b7a7c'
-- name: black
-  textValue: '#0f1111'
-- name: white
-  textValue: '#ffffff'
-- name: largeTitleFontName
-  textValue: Gotham-Book
-- name: largeTitleFontSize
-  textValue: 20
-- name: titleFontName
-  textValue: Gotham-Book
-- name: titleFontSize
-  textValue: 17
-- name: title2FontName
-  textValue: Gotham-Book
-- name: title2FontSize
-  textValue: 18
-- name: title3FontName
-  textValue: Gotham-Book
-- name: title3FontSize
-  textValue: 19
-- name: headlineFontName
-  textValue: Gotham-Book
-- name: headlineFontSize
-  textValue: 22
-- name: subheadlineFontName
-  textValue: Gotham-Bold
-- name: subheadlineFontSize
-  textValue: 20
-- name: bodyFontName
-  textValue: Gotham-Book
-- name: bodyFontSize
-  textValue: 15
-- name: calloutFontName
-  textValue: Gotham-Book
-- name: calloutFontSize
-  textValue: 9
-- name: captionFontName
-  textValue: Gotham-Book
-- name: captionFontSize
-  textValue: 12
-- name: caption2FontName
-  textValue: Gotham-Book
-- name: caption2FontSize
-  textValue: 20
-- name: footnoteFontName
-  textValue: Gotham-Book
-- name: footnoteFontSize
-  textValue: 20
-- name: otfProtectionLevel
-  textValue: runToCompletionWithIn10Seconds
+# Digital Health Application Customization Guide
+DataModel:
+# Design Configurations
+  designConfig:
+      - name: 'importDatabaseFromFile'
+        textValue: 'no'
+      - name: 'tintColor'
+        textValue: '#b6133f'
+      - name: 'HomeTitle'
+        textValue: 'HomeScreen'
+      - name: 'SettingTitle'
+        textValue: 'Settings'
+      - name: 'offset'
+        textValue: '20'
+      - name: 'startDate'
+        textValue: '30/08/2020'
+      - name: 'label'
+        textValue: '#5b4337'
+      - name: 'secondaryLabel'
+        textValue: '#876351'
+      - name: 'tertiaryLabel'
+        textValue: '#1c135b'
+      - name: 'customBackground'
+        textValue: '#331f24'
+      - name: 'secondaryCustomBackground'
+        textValue: '#0d2308'
+      - name: 'customGroupedBackground'
+        textValue: '#54484c'
+      - name: 'secondaryCustomGroupedBackground'
+        textValue: '#5e5155'
+      - name: 'tertiaryCustomGroupedBackground'
+        textValue: '#2d2729'
+      - name: 'separator'
+        textValue: '#5d5d5d'
+      - name: 'customFill'
+        textValue: '#3445a0'
+      - name: 'secondaryCustomFill'
+        textValue: '#3749aa'
+      - name: 'tertiaryCustomFill'
+        textValue: '#3e52bf'
+      - name: 'quaternaryCustomFill'
+        textValue: '#445ad1'
+      - name: 'customBlue'
+        textValue: '#4d66ed'
+      - name: 'customGray'
+        textValue: '#95aaad'
+      - name: 'customGray2'
+        textValue: '#8ea2a5'
+      - name: 'customGray3'
+        textValue: '#819396'
+      - name: 'customGray4'
+        textValue: '#748487'
+      - name: 'customGray5'
+        textValue: '#6b7a7c'
+      - name: 'black'
+        textValue: '#0f1111'
+      - name: 'white'
+        textValue: '#ffffff'
+      - name: 'largeTitleFontName'
+        textValue: 'Gotham-Book'
+      - name: 'largeTitleFontSize'
+        textValue: '20'
+      - name: 'titleFontName'
+        textValue: 'Gotham-Book'
+      - name: 'titleFontSize'
+        textValue: '17'
+      - name: 'title2FontName'
+        textValue: 'Gotham-Book'
+      - name: 'title2FontSize'
+        textValue: '18'
+      - name: 'title3FontName'
+        textValue: 'Gotham-Book'
+      - name: 'title3FontSize'
+        textValue: '19'
+      - name: 'headlineFontName'
+        textValue: 'Gotham-Book'
+      - name: 'headlineFontSize'
+        textValue: '22'
+      - name: 'subheadlineFontName'
+        textValue: 'Gotham-Bold'
+      - name: 'subheadlineFontSize'
+        textValue: '20'
+      - name: 'bodyFontName'
+        textValue: 'Gotham-Book'
+      - name: 'bodyFontSize'
+        textValue: '15'
+      - name: 'calloutFontName'
+        textValue: 'Gotham-Book'
+      - name: 'calloutFontSize'
+        textValue: '9'
+      - name: 'captionFontName'
+        textValue: 'Gotham-Book'
+      - name: 'captionFontSize'
+        textValue: '12'
+      - name: 'caption2FontName'
+        textValue: 'Gotham-Book'
+      - name: 'caption2FontSize'
+        textValue: '20'
+      - name: 'footnoteFontName'
+        textValue: 'Gotham-Book'
+      - name: 'footnoteFontSize'
+        textValue: '20'
+      - name: 'otfProtectionLevel'
+        textValue: 'runToCompletionWithIn10Seconds'
+
+  # Application Specifications.
+  studyTitle: 'Theraforge'
+  teamName: 'Digital Health Study'
+  teamEmail: 'contact@theraforge.com'
+  teamPhone: '123-456-7890'
+  copyright: 'Made at Theraforge'
+  teamWebsite: 'https://www.hippocratestech.com/'
+  
+ # Basic CareKit and ResearchKit Specifications.
+ 
+ # Onboarding
+  onboarding:
+   - logo: '1️⃣'
+     description: 'Take PRIME care of your health'
+     
+   - logo: '2️⃣'
+     description: 'Find your health score in minutes'
+     
+# Consent
+  reviewConsentStepText: 'Review Theraforge Consent Form'
+  reasonForConsentText: 'Consent to join the Theraforge Health Research Study.'
+  consentFileName: 'My Consent Form'
+  consentTitle: 'Theraforge Consent'
+  
+# Please add the exact title for the Consent type(refer ConsentDocument.swift).
+  consent:
+   - title: "Overview"
+     summary: "Hi there"
+     content: "Hi there"
+     
+   - title: "Privacy"
+     summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+     content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+     
+   - title: "DataUse"
+     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+     content: "Healthcare data collection is used to make digital analysis faster and more accurate."
+     
+   - title: "StudyTasks"
+     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+     content: "Healthcare data collection is used to make digital analysis faster and more accurate."
+     
+# Registration
+  registration:
+    isDOB: 'true'
+    isGender: 'true'
+
+ # Login
+  loginPasswordless: 'false'
+  loginStepTitle: 'Almost done!'
+  loginStepText: 'We need to confirm your email address and send you a copy of the consent you just signed.'
+  failedLoginTitle: 'Unable to Login'
+  failedLoginText: 'Please try again in five minutes'
+  
+ # Passcode
+  passcodeOnReturnText: 'Welcome back!'
+  passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
+  passcodeType: '4'
+  
+# Health Records
+  healthRecords:
+    enabled: 'true'
+    permissionsText: 'Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).'
+    permissionsTitle: 'Permission to read Health Records 🏥'
+  
+ # CareKit
+  useCareKit: 'true'
+    
+# Withdrawl
+  withdrawl:
+    withdrawalInstructionTitle: 'Are you sure you want to withdraw?'
+    withdrawalInstructionText: 'Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.'
+    withdrawTitle: 'Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.'
+    withdrawText: 'Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close.'
+    
+# HealthKitData
+  healthPermissionsTitle: 'Permission to read Activity Data 🏃🏽‍♀️'
+  healthPermissionsText: 'Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.'
+  backgroundReadFrequency: 'immediate'
+# Please add the exact word for the HK type(refer https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier).
+  healthKitDataToRead:
+    - type: 'StepCount'
+    
+    - type: 'DistanceWalkingRunning'
+    
+    - type: 'FlightsClimbed'
+    
+    
+# CompletionStep
+  completionStepTitle: 'Welcome aboard.'
+  completionStepText: 'This step concludes the onboarding and consent process of the Theraforge framework. Next up, you will see main app functionality.'
+    
