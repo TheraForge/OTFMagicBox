@@ -5,7 +5,7 @@
 //  Created by Spurti Benakatti on 31.05.21.
 //
 
-import ResearchKit
+import OTFResearchKit
 
 
 /**

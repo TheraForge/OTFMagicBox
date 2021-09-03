@@ -6,7 +6,7 @@
 //
 
 import HealthKit
-import ResearchKit
+import OTFResearchKit
 
 /**
  The Health Records Step will ask for a permission to collect HealthKit health records data of a patient.

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-import ResearchKit
+import OTFResearchKit
 import Yams
 import OTFCareKit
 import OTFCareKitStore

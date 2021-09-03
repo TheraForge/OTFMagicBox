@@ -5,7 +5,7 @@
 //  Created by Spurti Benakatti on 14.05.21.
 //
 
-import ResearchKit
+import OTFResearchKit
 
 class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
     

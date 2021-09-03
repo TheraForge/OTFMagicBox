@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ResearchKit
+import OTFResearchKit
 
 /**
   The LoginViewController provides the default login view from ResearchKit.

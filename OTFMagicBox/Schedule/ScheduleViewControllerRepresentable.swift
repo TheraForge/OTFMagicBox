@@ -10,7 +10,7 @@ import OTFCareKit
 import Foundation
 import UIKit
 import SwiftUI
-import ResearchKit
+import OTFResearchKit
 
 struct ScheduleViewControllerRepresentable: UIViewControllerRepresentable {
     

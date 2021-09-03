@@ -7,7 +7,7 @@
 
 import UIKit
 import OTFTemplateBox
-import ResearchKit
+import OTFResearchKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
