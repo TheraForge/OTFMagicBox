@@ -115,10 +115,10 @@ DataModel:
  
  # Onboarding
   onboarding:
-   - logo: '1️⃣'
+   - logo: 'heart.circle'
      description: 'Take PRIME care of your health'
      
-   - logo: '2️⃣'
+   - logo: '⏱'
      description: 'Find your health score in minutes'
      
 # Consent

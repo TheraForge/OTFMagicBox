@@ -146,16 +146,16 @@ struct OnboardingDetailsView: View {
 
             Spacer()
             
-            Circle()
-                .fill(color)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(6)
-                .overlay(
+            if let img = loadImage(named: logo) {
+               
+                Image(uiImage: img).resizable().frame(width: 40, height: 40)
+            
+            } else {
+           
                     Text(logo)
                         .foregroundColor(.white)
                         .font(.system(size: 42, weight: .light, design: .default))
-                )
-            
+            }
             Spacer()
             
             Text(description)
@@ -167,6 +167,15 @@ struct OnboardingDetailsView: View {
             Spacer()
         }
     }
+    
+    // Checks whether the given image is a SF symbol, if not returns it as a normal image.
+    func loadImage (named: String) -> UIImage? {
+        if let sfImage = UIImage(systemName: named){
+            return sfImage
+        }
+        return UIImage(named: logo)
+    }
+
 }
 
 struct OnboardingView_Previews: PreviewProvider {
