@@ -1,19 +1,109 @@
-# Digital Health Application Customization Guide
+
+###################################################################################################################################
+#                                           Digital Health Application Customization Guide                                        #
+###################################################################################################################################
+# The AppSysParameters.yml file provides the structure to design your health application.
+# The structure contains the keys for which you can assign the value according to your application requirements.
+# Some of the keys are used for the design of the application, such as Fonts and Colors.
+# And some other keys are related to the application features, such as Onboarding, Consent etc.
+
+
+##############################################################################
+#                   IMPORTANT RULES TO USE THIS FILE                         #
+##############################################################################
+# 1. Kindly do not change the indentation of this file. Suppose if you change the indentation then this particular yaml file key - value will not be read.
+# 2. Do not delete any of the keys and lines from this file.
+# 3. Do not edit the Objects and keys names.
+# 4. Only the values of the keys within the quotes have to be edited.
+# 5. All the values should be mentioned within the quotes(''), otherwise that particular key's value will not be read and the default value will be displayed.
+
+
+# Key and Value:
+# Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
+# Example: teamEmail: 'contact@TheraForge.com', here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon 'contact@TheraForge.com' is the value assigned for that Key.
+
+
+# Default Values:-
+# Default values will be displayed in your application in the format 'Default: '
+# Example: Key teamName default value will be displayed like 'Default: team name', you can see this on the screen where this key value will be displayed.
+
+
+# Edit Values:-
+# If you want to edit the basic details like title of the study, then go to key studyTitle and edit the value part which is under quotes('')
+# Example: studyTitle: 'TheraForge' ---> studyTitle: 'NewValue'
+
+
+# Edit List:-
+# If you have list of things, you can denote that sequence using hyphen ('-')
+# Object which has list of values, you can add and delete any number of key-values. While adding a new value to the list, all the keys within that list value should be declared.
+# Example: Consent which has a set of values like title, summary and content. So, while adding new value for that list all the three properties(title, summary and content) should be declared.
+# Example: currently Consent contains 4 values.
+# consent:
+#   - title: "Overview"
+#     summary: "Hi there"
+#     content: "Hi there"
+#
+#   - title: "Privacy"
+#     summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+#     content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+#
+#   - title: "DataUse"
+#     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+#     content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment,# resulting in lower costs and enhanced patient care."
+#
+#   - title: "StudyTasks"
+#     summary: "Study tasks involve many aspects of daily functionalities."
+#     content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+     
+# Now you can add a new Consent value at any position in the list according to your requirements.
+# Most importantly new Consent value should maintain the correct indentation and must include all the three keys, as shown below:
+#
+#   - title: "New title"
+#     summary: "New summary."
+#     content: "New Content."
+
+
+# Edit Boolean Object:-
+# Some of the objects will have a Boolean value('true' or 'false').
+# Example: 'useCareKit', for this key if you assign a value 'true' then Schedule and Contacts views will be displayed. Otherwise Schedule and Contacts views will not be displayed.
+
+
+##############################################################################
+#                      TheraForge Configurations                             #
+##############################################################################
+
 DataModel:
-# Design Configurations
+  # Design Configurations
   designConfig:
+      # Whether to import Database from file.
       - name: 'importDatabaseFromFile'
         textValue: 'no'
-      - name: 'tintColor'
-        textValue: '#b6133f'
+        
+      # OTF Protection level.
+      - name: 'otfProtectionLevel'
+        textValue: 'runToCompletionWithIn10Seconds'
+        
+      # Home page title.
       - name: 'HomeTitle'
         textValue: 'HomeScreen'
+        
+      # Settings page title.
       - name: 'SettingTitle'
         textValue: 'Settings'
+        
+      # Offset value.
       - name: 'offset'
         textValue: '20'
+        
+      # Start Date
       - name: 'startDate'
         textValue: '30/08/2020'
+        
+      # Color codes
+      # Colors will be used in the design of the application.
+      # Value for the color should start with #, for example '#5b4337'.
+      - name: 'tintColor'
+        textValue: '#b6133f'
       - name: 'label'
         textValue: '#5b4337'
       - name: 'secondaryLabel'
@@ -56,6 +146,9 @@ DataModel:
         textValue: '#0f1111'
       - name: 'white'
         textValue: '#ffffff'
+        
+      # Fonts
+      # Fonts will be used in the design of the application.
       - name: 'largeTitleFontName'
         textValue: 'Gotham-Book'
       - name: 'largeTitleFontSize'
@@ -100,34 +193,48 @@ DataModel:
         textValue: 'Gotham-Book'
       - name: 'footnoteFontSize'
         textValue: '20'
-      - name: 'otfProtectionLevel'
-        textValue: 'runToCompletionWithIn10Seconds'
+        
+        
+##############################################################################
+#                      CardinalKit Configurations                            #
+##############################################################################
 
-  # Application Specifications.
-  studyTitle: 'Theraforge'
+ # Application Specifications.
+  studyTitle: 'TheraForge'
   teamName: 'Digital Health Study'
   teamEmail: 'contact@theraforge.com'
   teamPhone: '123-456-7890'
-  copyright: 'Made at Theraforge'
+  copyright: 'Made at TheraForge'
   teamWebsite: 'https://www.hippocratestech.com/'
   
- # Basic CareKit and ResearchKit Specifications.
+ # CareKit and ResearchKit Specifications.
  
  # Onboarding
+ # Onboarding contains an array of image and description values. You can add any number of values.
+ # Image can be any SF Symbols(version 1.1), Emoji Symbols or any other images from Assets.
+ # It is mandatory to write the exact spelling for the image value, if the image is not found then the default string will be displayed.
+ # If you are new to SF Symbols then read this apple document: https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/
+ # You can install SF Symbol 1.1 from https://developer.apple.com/sf-symbols/ and choose any symbol as per your requirement and write the exact spelling of that particular symbol in the value field of image.
+ # Example: If the application requires a message symbol then, I look for a message symbol from the sf-symbols and check the exact name of that symbol and write the same value for the image property (image: 'message').
+ # If you would like to input your own image then save that image in the Assets folder of the project with a descriptive name and write the same name for the image property value field.
   onboarding:
-   - logo: 'heart.circle'
+   - image: 'heart.circle'
      description: 'Take PRIME care of your health'
      
-   - logo: '⏱'
+   - image: '⏱'
      description: 'Find your health score in minutes'
      
-# Consent
-  reviewConsentStepText: 'Review Theraforge Consent Form'
-  reasonForConsentText: 'Consent to join the Theraforge Health Research Study.'
+ # Review Consent
+ # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
+ # Property consentFileName is the name by which your consent file is created.
+  reviewConsentStepText: 'Review TheraForge Consent Form'
+  reasonForConsentText: 'Consent to join the TheraForge Health Research Study.'
   consentFileName: 'My Consent Form'
-  consentTitle: 'Theraforge Consent'
-  
-# Please add the exact title for the Consent type(refer ConsentDocument.swift).
+  consentTitle: 'TheraForge Consent'
+
+ # Consent contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
   consent:
    - title: "Overview"
      summary: "Hi there"
@@ -139,50 +246,72 @@ DataModel:
      
    - title: "DataUse"
      summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
-     content: "Healthcare data collection is used to make digital analysis faster and more accurate."
+     content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
      
    - title: "StudyTasks"
-     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
-     content: "Healthcare data collection is used to make digital analysis faster and more accurate."
+     summary: "Study tasks involve many aspects of daily functionalities."
+     content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
      
-# Registration
+ # Registration
+ # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
+ # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
   registration:
     isDOB: 'true'
     isGender: 'true'
 
  # Login
+ # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either 'true' or 'false'.
   loginPasswordless: 'false'
+  
+ # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
   loginStepTitle: 'Almost done!'
   loginStepText: 'We need to confirm your email address and send you a copy of the consent you just signed.'
+  
+ # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
   failedLoginTitle: 'Unable to Login'
   failedLoginText: 'Please try again in five minutes'
   
  # Passcode
+ # Properties passcodeOnReturnText and passcodeText are displayed on a passcode generation screen.
   passcodeOnReturnText: 'Welcome back!'
   passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
+  
+ # Property passcodeType value can be either '4' or '6' only, which describes the number of digits for the passcode.
   passcodeType: '4'
   
-# Health Records
+ # Health Records
+ # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
   healthRecords:
     enabled: 'true'
     permissionsText: 'Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).'
     permissionsTitle: 'Permission to read Health Records 🏥'
   
  # CareKit
+ # Boolean value will be used to mention whether you want to display the carekit features Schedule and Contacts.
+ # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
   useCareKit: 'true'
     
-# Withdrawl
+ # Withdrawal
+ # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
+ # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
   withdrawl:
     withdrawalInstructionTitle: 'Are you sure you want to withdraw?'
     withdrawalInstructionText: 'Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.'
     withdrawTitle: 'Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.'
     withdrawText: 'Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close.'
     
-# HealthKitData
+ # HealthPermission
+ # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
+ # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
+ # BackgroundReadFrequency value can be: 'daily', 'weekly', 'hourly' or 'immediate'.
   healthPermissionsTitle: 'Permission to read Activity Data 🏃🏽‍♀️'
   healthPermissionsText: 'Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.'
   backgroundReadFrequency: 'immediate'
-# Please add the exact word for the HK type(refer https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier).
+ 
+ # HealthKit data
+ # healthKitDataToRead object contains only the HK types, whose authorization will be asked for.
+ # You can add any number of HK types.
+ # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
   healthKitDataToRead:
     - type: 'StepCount'
     
@@ -191,7 +320,9 @@ DataModel:
     - type: 'FlightsClimbed'
     
     
-# CompletionStep
+ # CompletionStep
+ # Properties completionStepTitle and completionStepText are displayed after successful authorization of a new user.
   completionStepTitle: 'Welcome aboard.'
-  completionStepText: 'This step concludes the onboarding and consent process of the Theraforge framework. Next up, you will see main app functionality.'
+  completionStepText: 'This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality.'
     
+ # Link to ReadMe document
