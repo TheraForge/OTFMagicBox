@@ -27,6 +27,9 @@
 		5A49628926DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */; };
 		5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628C26E1BD5C00A4B4DF /* UIColor.swift */; };
 		5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */; };
+		5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632326EB257200A4B4DF /* Extension+UIImage.swift */; };
+		5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632526EB5D8F00A4B4DF /* Extension+String.swift */; };
+		5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
 		5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */; };
@@ -82,6 +85,9 @@
 		5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStepViewController.swift; sourceTree = "<group>"; };
 		5A49628C26E1BD5C00A4B4DF /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordManager.swift; sourceTree = "<group>"; };
+		5A49632326EB257200A4B4DF /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
+		5A49632526EB5D8F00A4B4DF /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Character.swift"; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
@@ -174,6 +180,17 @@
 			path = Yaml;
 			sourceTree = "<group>";
 		};
+		5A49632926EB5E2E00A4B4DF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */,
+				5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */,
+				5A49632526EB5D8F00A4B4DF /* Extension+String.swift */,
+				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		5AADFD35264E86950069FEF7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,11 +206,11 @@
 		5AADFD3D264E86A20069FEF7 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				5A49632926EB5E2E00A4B4DF /* Extension */,
 				5A49626D26D4A2EA00A4B4DF /* Yaml */,
 				5AADFD4F264E9A880069FEF7 /* Constants.swift */,
 				5AB1808126B88A2B007AF766 /* Metrics.swift */,
 				5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */,
-				5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */,
 				5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */,
 				5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */,
 				5A49627F26DF3EC900A4B4DF /* OTFLog.swift */,
@@ -452,10 +469,12 @@
 				5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */,
 				5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */,
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
+				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
 				5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */,
 				5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */,
 				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
+				5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */,
 				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
 				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
@@ -479,6 +498,7 @@
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
 				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
+				5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */,
 				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,

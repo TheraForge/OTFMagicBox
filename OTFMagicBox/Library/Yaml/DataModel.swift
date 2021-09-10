@@ -8,7 +8,7 @@
 import Foundation
 
 struct Onboarding: Codable {
-    let logo: String
+    let image: String
     let description: String
 }
 

@@ -11,8 +11,8 @@ import UIKit
 /// The onboarding view elements.
 struct OnboardingElement {
     
-    /// Title of the onboarding item.
-    let logo: String
+    /// Title or image of the onboarding item.
+    let image: String
     
     /// Description of the onboarding item.
     let description: String
@@ -33,10 +33,10 @@ struct OnboardingView: View {
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
         
-        let onboardingdata = (YmlReader().onboardingData() ?? [Onboarding(logo: "logo", description: "Default: This is the description.")]) as Array
+        let onboardingdata = (YmlReader().onboardingData() ?? [Onboarding(image: "image", description: "Default: This is the description.")]) as Array
  
         for data in onboardingdata {
-            self.onboardingElements.append(OnboardingElement(logo: data.logo, description: data.description))
+            self.onboardingElements.append(OnboardingElement(image: data.image, description: data.description))
         }
         
         self.color = Color(YmlReader().primaryColor())
@@ -47,7 +47,7 @@ struct OnboardingView: View {
         VStack(spacing: 10) {
             Spacer()
             
-            Image("TheraforgeLogo")
+            UIImage().loadImage(named: "TheraforgeLogo")
                 .resizable()
                 .scaledToFit()
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
@@ -69,7 +69,7 @@ struct OnboardingView: View {
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
-            OnboardingItemView(self.onboardingElements.map { OnboardingDetailsView(logo: $0.logo, description: $0.description, color: UIColor.primaryColor) })
+            OnboardingItemView(self.onboardingElements.map { OnboardingDetailsView(image: $0.image, description: $0.description, color: UIColor.primaryColor) })
 
             Spacer()
             
@@ -132,7 +132,7 @@ struct OnboardingView: View {
 struct OnboardingDetailsView: View {
     
     /// Title of the onboarding item.
-    let logo: String
+    let image: String
     
     /// Description of the onboarding item.
     let description: String
@@ -146,16 +146,16 @@ struct OnboardingDetailsView: View {
 
             Spacer()
             
-            if let img = loadImage(named: logo) {
-               
-                Image(uiImage: img).resizable().frame(width: 40, height: 40)
-            
+            if image.containsEmojis() {
+                Text(image)
+                    .foregroundColor(.white)
+                    .font(.system(size: 42, weight: .light, design: .default))
             } else {
-           
-                    Text(logo)
-                        .foregroundColor(.white)
-                        .font(.system(size: 42, weight: .light, design: .default))
+                UIImage().loadImage(named: image)
+                    .resizable()
+                    .frame(width: 40, height: 40)
             }
+    
             Spacer()
             
             Text(description)
@@ -166,14 +166,6 @@ struct OnboardingDetailsView: View {
             
             Spacer()
         }
-    }
-    
-    // Checks whether the given image is a SF symbol, if not returns it as a normal image.
-    func loadImage (named: String) -> UIImage? {
-        if let sfImage = UIImage(systemName: named){
-            return sfImage
-        }
-        return UIImage(named: logo)
     }
 
 }
