@@ -44,13 +44,6 @@ class HealthKitManager: SyncDelegate {
     }
     
     public func getHealthKitAuth(forTypes types: Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
-        
-      /*  guard HKHealthStore.isHealthDataAvailable() && SessionManager.shared.userId != nil else {
-            let error = NSError(domain: Constants.app, code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
-            completion(false, error)
-            return
-        } */
-        
         healthStore.requestAuthorization(toShare: nil, read: types) {
             [weak self] success, error in
             
@@ -80,6 +73,8 @@ extension HealthKitManager {
     
     fileprivate func setUpBackgroundDeliveryForDataTypes(types: Set<HKQuantityType>, frequency: HKUpdateFrequency, _ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
 
+        let dispatchGroup = DispatchGroup()
+        
         for type in types {
             let query = HKObserverQuery(sampleType: type, predicate: nil, updateHandler: { [weak self] (query, completionHandler, error) in
                 
@@ -87,8 +82,7 @@ extension HealthKitManager {
                     completionHandler()
                     return
                 }
-                
-                let dispatchGroup = DispatchGroup()
+               
                 dispatchGroup.enter()
                 strongSelf.backgroundQuery(forType: type, completionHandler: {
                     dispatchGroup.leave()

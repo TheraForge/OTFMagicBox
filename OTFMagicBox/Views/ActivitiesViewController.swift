@@ -41,8 +41,8 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
-        reviewConsentStep.text = YmlReader().reviewConsentStepText()
-        reviewConsentStep.reasonForConsent = YmlReader().reasonForConsentText()
+        reviewConsentStep.text = YmlReader().reviewConsentStepText
+        reviewConsentStep.reasonForConsent = YmlReader().reasonForConsentText
         
         /* **************************************************************
          *  STEP (3): get permission to collect HealthKit data
@@ -65,7 +65,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         
         let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
         
-        let registration = YmlReader().registration()
+        let registration = YmlReader().registration
         
         var regOption = ORKRegistrationStepOption()
         
@@ -81,7 +81,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         
         let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: regOption)
         
-        if YmlReader().loginPasswordless() == "true" {
+        if YmlReader().loginPasswordless{
             let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
             let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
             
@@ -99,22 +99,22 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         // use the `ORKPasscodeStep` from ResearchKit.
         let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
         
-        let type = YmlReader().passcodeType()
+        let type = YmlReader().passcodeType
         if type == "6" {
             passcodeStep.passcodeType = .type6Digit
         } else {
             passcodeStep.passcodeType = .type4Digit
         }
         
-        passcodeStep.text = YmlReader().passcodeText()
+        passcodeStep.text = YmlReader().passcodeText
         
         /* **************************************************************
          *  STEP (6): inform the user that they are done with sign-up!
          **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = YmlReader().completionStepTitle()
-        completionStep.text = YmlReader().completionStepText()
+        completionStep.title = YmlReader().completionStepTitle
+        completionStep.text = YmlReader().completionStepText
         
         /* **************************************************************
          * finally, CREATE an array with the steps to show the user

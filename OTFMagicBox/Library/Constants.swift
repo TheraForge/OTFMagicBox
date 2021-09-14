@@ -7,14 +7,7 @@
 
 import Foundation
 
-class Constants {
-    
-    enum Environment {
-        case development
-        case production
-    }
-    
-    static let environment: Environment = .production
+enum Constants {
     static let app = "otfmagicbox.theraforge"
     
     static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"

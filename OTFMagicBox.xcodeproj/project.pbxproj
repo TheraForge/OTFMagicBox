@@ -24,12 +24,12 @@
 		5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627F26DF3EC900A4B4DF /* OTFLog.swift */; };
 		5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49628426DF73B700A4B4DF /* HealthKit.framework */; };
 		5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */; };
-		5A49628926DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */; };
 		5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628C26E1BD5C00A4B4DF /* UIColor.swift */; };
 		5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */; };
 		5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632326EB257200A4B4DF /* Extension+UIImage.swift */; };
 		5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632526EB5D8F00A4B4DF /* Extension+String.swift */; };
 		5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */; };
+		5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
 		5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */; };
@@ -82,12 +82,12 @@
 		5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBox.entitlements; sourceTree = "<group>"; };
 		5A49628426DF73B700A4B4DF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
-		5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStepViewController.swift; sourceTree = "<group>"; };
 		5A49628C26E1BD5C00A4B4DF /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordManager.swift; sourceTree = "<group>"; };
 		5A49632326EB257200A4B4DF /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		5A49632526EB5D8F00A4B4DF /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Character.swift"; sourceTree = "<group>"; };
+		5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStep.swift; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
@@ -224,8 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */,
-				5A49628826DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift */,
 				5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */,
+				5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -495,6 +495,7 @@
 				CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */,
 				5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */,
 				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
+				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
 				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
@@ -508,7 +509,6 @@
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
 				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
-				5A49628926DFFFF400A4B4DF /* LoginCustomWaitStepViewController.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
 				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
 				5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */,

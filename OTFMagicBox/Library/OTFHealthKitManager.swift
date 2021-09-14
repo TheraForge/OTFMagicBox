@@ -15,7 +15,7 @@ class OTFHealthKitManager : NSObject {
     fileprivate var hkTypesToReadInBackground: Set<HKQuantityType> = []
     
     override init() {
-        let healthKitData = YmlReader().healthKitDataToRead() as Array
+        let healthKitData = YmlReader().healthKitDataToRead as Array
         for requestedHKType in healthKitData {
             let id = HKQuantityTypeIdentifier(rawValue: "HKQuantityTypeIdentifier" + requestedHKType.type)
             let hkType = HKQuantityType.quantityType(forIdentifier: id)
@@ -35,7 +35,7 @@ class OTFHealthKitManager : NSObject {
        // handle authorization from the OS
        ActivityManager.shared.getHealthAuthorizaton(forTypes: hkTypesToReadInBackground) { [weak self] (success, error) in
            if (success) {
-            let frequency = YmlReader().backgroundReadFrequency()
+            let frequency = YmlReader().backgroundReadFrequency
 
                if frequency == "daily" {
                    ActivityManager.shared.startHealthKitCollectionInBackground(withFrequency: .daily)

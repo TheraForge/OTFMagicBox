@@ -19,12 +19,12 @@ struct ProfileUIView: View {
                 
                 Section {
                     ChangePasscodeView()
-                    HelpView(site: YmlReader().teamWebsite())
+                    HelpView(site: YmlReader().teamWebsite)
                 }
                 
                 Section {
-                    ReportView(color: .blue, email: YmlReader().teamEmail())
-                    SupportView(color: .blue, phone: YmlReader().teamPhone())
+                    ReportView(color: .blue, email: YmlReader().teamEmail)
+                    SupportView(color: .blue, phone: YmlReader().teamPhone)
                 }
                 
                 Section {
@@ -32,7 +32,7 @@ struct ProfileUIView: View {
                 }
                 
                 Section {
-                    Text(YmlReader().teamCopyright())
+                    Text(YmlReader().teamCopyright)
                 }
             }.listStyle(GroupedListStyle())
         }

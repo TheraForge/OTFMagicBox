@@ -16,7 +16,7 @@ class HealthRecordsStep: ORKInstructionStep {
     override init(identifier: String) {
         super.init(identifier: identifier)
         
-        let recordsConfig = YmlReader().healthRecords()
+        let recordsConfig = YmlReader().healthRecords
         
         title = recordsConfig?.permissionsTitle ?? Constants.YamlDefaults.HealthRecordsPermissionsTitle
         

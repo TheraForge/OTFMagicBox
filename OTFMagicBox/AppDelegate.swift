@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
-        let tintColor = YmlReader().tintColor()
+        let tintColor = YmlReader().tintColor
 
         let defaultProtection = OTFConfigManager.shared.defaultOTFProtectionLevel()
 

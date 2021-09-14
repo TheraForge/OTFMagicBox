@@ -75,29 +75,10 @@
 DataModel:
   # Design Configurations
   designConfig:
-      # Whether to import Database from file.
-      - name: 'importDatabaseFromFile'
-        textValue: 'no'
-        
-      # OTF Protection level.
-      - name: 'otfProtectionLevel'
-        textValue: 'runToCompletionWithIn10Seconds'
-        
-      # Home page title.
-      - name: 'HomeTitle'
-        textValue: 'HomeScreen'
-        
-      # Settings page title.
-      - name: 'SettingTitle'
-        textValue: 'Settings'
         
       # Offset value.
       - name: 'offset'
         textValue: '20'
-        
-      # Start Date
-      - name: 'startDate'
-        textValue: '30/08/2020'
         
       # Color codes
       # Colors will be used in the design of the application.
@@ -194,6 +175,21 @@ DataModel:
       - name: 'footnoteFontSize'
         textValue: '20'
         
+  # Whether to import Database from file.
+  importDatabaseFromFile: 'no'
+        
+  # OTF Protection level.
+  otfProtectionLevel: 'runToCompletionWithIn10Seconds'
+    
+  # Setting Title.
+  settingTitle: 'Settings'
+    
+  # Home Title.
+  homeTitle: 'Home'
+    
+  # Start Date.
+  startDate: '30/08/2020'
+        
         
 ##############################################################################
 #                      CardinalKit Configurations                            #
@@ -224,33 +220,34 @@ DataModel:
    - image: '⏱'
      description: 'Find your health score in minutes'
      
- # Review Consent
+ # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
  # Property consentFileName is the name by which your consent file is created.
-  reviewConsentStepText: 'Review TheraForge Consent Form'
-  reasonForConsentText: 'Consent to join the TheraForge Health Research Study.'
-  consentFileName: 'My Consent Form'
-  consentTitle: 'TheraForge Consent'
+  consent:
+    reviewConsentStepText: 'Review TheraForge Consent Form'
+    reasonForConsentText: 'Consent to join the TheraForge Health Research Study.'
+    fileName: 'My Consent Form'
+    title: 'TheraForge Consent'
 
- # Consent contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
  # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
  # Summary and content value can be same or different.
-  consent:
-   - title: "Overview"
-     summary: "Hi there"
-     content: "Hi there"
+    data:
+      - title: "Overview"
+        summary: "Hi there"
+        content: "Hi there"
      
-   - title: "Privacy"
-     summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-     content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+      - title: "Privacy"
+        summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+        content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
      
-   - title: "DataUse"
-     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
-     content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
+      - title: "DataUse"
+        summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+        content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
      
-   - title: "StudyTasks"
-     summary: "Study tasks involve many aspects of daily functionalities."
-     content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+      - title: "StudyTasks"
+        summary: "Study tasks involve many aspects of daily functionalities."
+        content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
      
  # Registration
  # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
@@ -261,23 +258,25 @@ DataModel:
 
  # Login
  # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either 'true' or 'false'.
-  loginPasswordless: 'false'
+  login:
+    loginPasswordless: 'false'
   
  # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
-  loginStepTitle: 'Almost done!'
-  loginStepText: 'We need to confirm your email address and send you a copy of the consent you just signed.'
+    loginStepTitle: 'Almost done!'
+    loginStepText: 'We need to confirm your email address and send you a copy of the consent you just signed.'
   
  # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
-  failedLoginTitle: 'Unable to Login'
-  failedLoginText: 'Please try again in five minutes'
+    failedLoginTitle: 'Unable to Login'
+    failedLoginText: 'Please try again in five minutes'
   
  # Passcode
  # Properties passcodeOnReturnText and passcodeText are displayed on a passcode generation screen.
-  passcodeOnReturnText: 'Welcome back!'
-  passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
+  passcode:
+    passcodeOnReturnText: 'Welcome back!'
+    passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
   
  # Property passcodeType value can be either '4' or '6' only, which describes the number of digits for the passcode.
-  passcodeType: '4'
+    passcodeType: '4'
   
  # Health Records
  # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
@@ -294,35 +293,37 @@ DataModel:
  # Withdrawal
  # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
  # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
-  withdrawl:
+  withdrawal:
     withdrawalInstructionTitle: 'Are you sure you want to withdraw?'
     withdrawalInstructionText: 'Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.'
     withdrawTitle: 'Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study.'
     withdrawText: 'Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close.'
     
- # HealthPermission
+ # HealthKitData
  # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
  # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
  # BackgroundReadFrequency value can be: 'daily', 'weekly', 'hourly' or 'immediate'.
-  healthPermissionsTitle: 'Permission to read Activity Data 🏃🏽‍♀️'
-  healthPermissionsText: 'Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.'
-  backgroundReadFrequency: 'immediate'
+  healthKitData:
+    healthPermissionsTitle: 'Permission to read Activity Data 🏃🏽‍♀️'
+    healthPermissionsText: 'Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.'
+    backgroundReadFrequency: 'immediate'
  
- # HealthKit data
- # healthKitDataToRead object contains only the HK types, whose authorization will be asked for.
+ # HealthKit types
+ # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
  # You can add any number of HK types.
  # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
-  healthKitDataToRead:
-    - type: 'StepCount'
+    healthKitTypes:
+      - type: 'StepCount'
     
-    - type: 'DistanceWalkingRunning'
+      - type: 'DistanceWalkingRunning'
     
-    - type: 'FlightsClimbed'
+      - type: 'FlightsClimbed'
     
     
  # CompletionStep
  # Properties completionStepTitle and completionStepText are displayed after successful authorization of a new user.
-  completionStepTitle: 'Welcome aboard.'
-  completionStepText: 'This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality.'
+  completionStep:
+    title: 'Welcome aboard.'
+    text: 'This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality.'
     
  # Link to ReadMe document

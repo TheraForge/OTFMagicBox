@@ -33,13 +33,14 @@ struct OnboardingView: View {
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
         
-        let onboardingdata = (YmlReader().onboardingData() ?? [Onboarding(image: "image", description: "Default: This is the description.")]) as Array
+        // TODO: Add the actual default image, if the user doesnt enter any image.
+        let onboardingdata = (YmlReader().onboardingData ?? [Onboarding(image: "image", description: "Default: This is the description.")]) as Array
  
         for data in onboardingdata {
             self.onboardingElements.append(OnboardingElement(image: data.image, description: data.description))
         }
         
-        self.color = Color(YmlReader().primaryColor())
+        self.color = Color(YmlReader().primaryColor)
     }
 
     /// Onboarding  view.
@@ -55,14 +56,10 @@ struct OnboardingView: View {
             
             Spacer(minLength: 2)
             
-            Text(YmlReader().studyTitle())
-                .foregroundColor(self.color)
-                .multilineTextAlignment(.center)
-                .font(.system(size: 35, weight: .bold, design: .default))
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-            
-            Text(YmlReader().teamName())
+            VStack() {
+              Text(YmlReader().studyTitle)
+              Text(YmlReader().teamName)
+            }
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 35, weight: .bold, design: .default))

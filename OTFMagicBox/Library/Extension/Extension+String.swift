@@ -19,11 +19,11 @@ extension String {
             return false
         }
         for character in self {
-            if !character.isEmoji {
-                return false
+            if character.isEmoji {
+                return true
             }
         }
-        return true
+        return false
     }
 
 }

@@ -21,12 +21,12 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         
         let instructionStep = ORKInstructionStep(identifier: "WithdrawlInstruction")
-        instructionStep.title = YmlReader().withdrawl()?.withdrawalInstructionTitle
-        instructionStep.text = YmlReader().withdrawl()?.withdrawalInstructionText
+        instructionStep.title = YmlReader().withdrawl?.withdrawalInstructionTitle
+        instructionStep.text = YmlReader().withdrawl?.withdrawalInstructionText
         
         let completionStep = ORKCompletionStep(identifier: "Withdraw")
-        completionStep.title = YmlReader().withdrawl()?.withdrawTitle
-        completionStep.text = YmlReader().withdrawl()?.withdrawText
+        completionStep.title = YmlReader().withdrawl?.withdrawTitle
+        completionStep.text = YmlReader().withdrawl?.withdrawText
         
         let withdrawTask = ORKOrderedTask(identifier: "Withdraw", steps: [instructionStep, completionStep])
         
@@ -43,23 +43,19 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
     class Coordinator: NSObject, ORKTaskViewControllerDelegate {
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
             switch reason {
-            case .completed:
-                
+                case .completed:
                     if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {
                         ORKPasscodeViewController.removePasscodeFromKeychain()
                     }
-                    
                     NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
-
                     UserDefaults.standard.set(nil, forKey: Constants.prefCareKitDataInitDate)
                     UserDefaults.standard.set(nil, forKey: Constants.prefHealthRecordsLastUploaded)
                     UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
                 
-                fallthrough
-            default:
-                
-                // otherwise dismiss onboarding without proceeding.
-                taskViewController.dismiss(animated: true, completion: nil)
+                    fallthrough
+                default:
+                    // otherwise dismiss onboarding without proceeding.
+                    taskViewController.dismiss(animated: true, completion: nil)
                 
             }
         }

@@ -12,7 +12,7 @@ struct MainView: View {
     let color: Color
     
     init() {
-        self.color = Color(YmlReader().primaryColor())
+        self.color = Color(YmlReader().primaryColor)
     }
     
     var body: some View {
@@ -22,7 +22,7 @@ struct MainView: View {
                 Text("Tasks")
             }
             
-            if YmlReader().useCareKit() == "true" {
+            if YmlReader().useCareKit {
                 ScheduleViewControllerRepresentable().tabItem {
                     UIImage().loadImage(named: "tab_schedule").renderingMode(.template)
                     Text("Schedule")

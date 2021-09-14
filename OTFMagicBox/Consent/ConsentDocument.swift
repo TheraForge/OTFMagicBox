@@ -17,7 +17,7 @@ class ConsentDocument: ORKConsentDocument {
     override init() {
         super.init()
         
-        let consentTitle = YmlReader().consentTitle()
+        let consentTitle = YmlReader().consentTitle
         
         title = consentTitle ?? "Consent Title"
         sections = []
@@ -32,7 +32,7 @@ class ConsentDocument: ORKConsentDocument {
             .withdrawing,
         ]
         
-        let consentData = YmlReader().consent() as Array
+        let consentData = (YmlReader().consent?.data ?? [ConsentData(title: "Default: consent title", summary: "Default: consent summary", content: "Default: consent content")])
         for data in consentData {
             for type in sectionTypes {
                 if (type.description == data.title) {

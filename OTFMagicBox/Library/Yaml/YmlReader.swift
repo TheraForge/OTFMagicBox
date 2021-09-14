@@ -36,8 +36,8 @@ public class YmlReader {
     }
     
     // Returns primary color.
-    func primaryColor() -> UIColor {
-        let valueSet = (dataModel?.designConfig ?? []) as Array
+    var primaryColor: UIColor {
+        let valueSet = (dataModel?.designConfig ?? [])
         
         for value in valueSet {
             if value.name == "label" {
@@ -49,8 +49,8 @@ public class YmlReader {
     
     
     // Returns tint color.
-    func tintColor() -> UIColor {
-        let valueSet = (dataModel?.designConfig ?? []) as Array
+    var tintColor: UIColor {
+        let valueSet = (dataModel?.designConfig ?? [])
         
         for value in valueSet {
             if value.name == "tintColor" {
@@ -60,126 +60,126 @@ public class YmlReader {
         return UIColor()
     }
     
-    func loginPasswordless() -> String {
-        return dataModel?.loginPasswordless ?? "true"
+    var loginPasswordless: Bool {
+        return dataModel?.login.loginPasswordless ?? false
     }
     
-    func loginStepTitle() -> String {
-        return dataModel?.loginStepTitle ?? Constants.YamlDefaults.LoginStepTitle
+    var loginStepTitle: String {
+        return dataModel?.login.loginStepTitle ?? Constants.YamlDefaults.LoginStepTitle
     }
     
-    func loginStepText() -> String {
-        return dataModel?.loginStepText ?? Constants.YamlDefaults.LoginStepText
+    var loginStepText: String {
+        return dataModel?.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
     }
     
-    func onboardingData() -> [Onboarding]? {
+    var onboardingData: [Onboarding]? {
         return dataModel?.onboarding
     }
     
-    func registration() -> Registration? {
+    var registration: Registration? {
         return dataModel?.registration
     }
     
-    func studyTitle() -> String {
+    var studyTitle: String {
         if let title = dataModel?.studyTitle {
             return title
         }
         return Constants.YamlDefaults.TeamName
     }
     
-    func teamName() -> String {
+    var teamName: String {
         return dataModel?.teamName ?? Constants.YamlDefaults.TeamName
     }
     
-    func teamEmail() -> String {
+    var teamEmail: String {
         return dataModel?.teamEmail ?? Constants.YamlDefaults.TeamEmail
     }
     
-    func teamPhone() -> String {
+    var teamPhone: String {
         return dataModel?.teamPhone ?? Constants.YamlDefaults.TeamPhone
     }
     
-    func teamCopyright() -> String {
+    var teamCopyright: String {
         return dataModel?.copyright ?? Constants.YamlDefaults.TeamCopyright
     }
     
-    func teamWebsite() -> String {
+    var teamWebsite: String {
         return dataModel?.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
     }
     
-    func reviewConsentStepText() -> String {
-        return dataModel?.reviewConsentStepText ?? Constants.YamlDefaults.ReasonForConsentText
+    var reviewConsentStepText: String {
+        return dataModel?.consent.reviewConsentStepText ?? Constants.YamlDefaults.ReasonForConsentText
     }
     
-    func reasonForConsentText() -> String {
-        return dataModel?.reasonForConsentText ?? Constants.YamlDefaults.TeamWebsite
+    var reasonForConsentText: String {
+        return dataModel?.consent.reasonForConsentText ?? Constants.YamlDefaults.TeamWebsite
     }
     
-    func consentFileName() -> String {
-        return dataModel?.consentFileName ?? Constants.YamlDefaults.ConsentFileName
+    var consentFileName: String {
+        return dataModel?.consent.fileName ?? Constants.YamlDefaults.ConsentFileName
     }
     
-    func passcodeText() -> String {
-        return dataModel?.passcodeText ?? Constants.YamlDefaults.PasscodeText
+    var consentTitle: String? {
+        return dataModel?.consent.title ?? Constants.YamlDefaults.ConsentTitle
     }
     
-    func passcodeOnReturnText() -> String {
-        return dataModel?.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
+    var passcodeText: String {
+        return dataModel?.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
     }
     
-    func passcodeType() -> String {
-        return dataModel?.passcodeType ?? "4"
+    var passcodeOnReturnText: String {
+        return dataModel?.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
     }
     
-    func completionStepTitle() -> String? {
-        return dataModel?.completionStepTitle ?? Constants.YamlDefaults.CompletionStepTitle
+    var passcodeType: String {
+        return dataModel?.passcode.passcodeType ?? "4"
     }
     
-    func completionStepText() -> String? {
-        return dataModel?.completionStepText ?? Constants.YamlDefaults.CompletionStepText
+    var failedLoginText: String? {
+        return dataModel?.login.failedLoginText ?? Constants.YamlDefaults.FailedLoginText
     }
     
-    func failedLoginText() -> String? {
-        return dataModel?.failedLoginText ?? Constants.YamlDefaults.FailedLoginText
+    var failedLoginTitle: String? {
+        return dataModel?.login.failedLoginTitle ?? Constants.YamlDefaults.FailedLoginTitle
     }
     
-    func failedLoginTitle() -> String? {
-        return dataModel?.failedLoginTitle ?? Constants.YamlDefaults.FailedLoginTitle
+    var healthPermissionsTitle: String? {
+        return dataModel?.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
     }
     
-    func healthPermissionsTitle() -> String? {
-        return dataModel?.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+    var healthPermissionsText: String? {
+        return dataModel?.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
     }
     
-    func healthPermissionsText() -> String? {
-        return dataModel?.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+    var useCareKit: Bool {
+        return dataModel?.useCareKit ?? false
     }
     
-    func consentTitle() -> String? {
-        return dataModel?.consentTitle ?? Constants.YamlDefaults.ConsentTitle
+    var backgroundReadFrequency: String? {
+        return dataModel?.healthKitData.backgroundReadFrequency ?? "immediate"
     }
     
-    func useCareKit() -> String? {
-        return dataModel?.useCareKit ?? "true"
-    }
-    
-    func backgroundReadFrequency() -> String? {
-        return dataModel?.backgroundReadFrequency ?? "immediate"
-    }
-    
-    func healthRecords() -> HealthRecords? {
+    var healthRecords: HealthRecords? {
         return dataModel?.healthRecords
     }
     
-    func consent() -> [Consent] {
-        return dataModel?.consent ?? []
+    var consent: Consent? {
+        return dataModel?.consent
     }
     
-    func withdrawl() -> Withdrawl? {
-        return dataModel?.withdrawl
+    var withdrawl: Withdrawal? {
+        return dataModel?.withdrawal
     }
     
-    func healthKitDataToRead() -> [HealthKitDataToRead] {
-        return dataModel?.healthKitDataToRead ?? []
+    var healthKitDataToRead: [HealthKitTypes] {
+        return dataModel?.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+    }
+    
+    var completionStepTitle: String? {
+        return dataModel?.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
+    }
+    
+    var completionStepText: String? {
+        return dataModel?.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
     }
 }

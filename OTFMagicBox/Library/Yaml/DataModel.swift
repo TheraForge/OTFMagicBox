@@ -17,10 +17,39 @@ struct Registration: Codable {
     let isGender: String
 }
 
+struct Login: Codable {
+    let loginPasswordless: Bool
+    let loginStepTitle: String
+    let loginStepText: String
+    let failedLoginTitle: String
+    let failedLoginText: String
+}
+
 struct Consent: Codable {
+    let reviewConsentStepText: String
+    let reasonForConsentText: String
+    let fileName: String
+    let title: String
+    let data: [ConsentData]
+}
+
+struct ConsentData: Codable {
     let title: String
     let summary: String
     let content: String
+}
+
+struct Passcode: Codable {
+    let passcodeOnReturnText: String
+    let passcodeText: String
+    let passcodeType: String
+}
+
+struct HealthKitData: Codable {
+    let healthPermissionsTitle: String
+    let healthPermissionsText: String
+    let backgroundReadFrequency: String
+    let healthKitTypes: [HealthKitTypes]
 }
 
 struct HealthRecords: Codable {
@@ -29,15 +58,20 @@ struct HealthRecords: Codable {
     let permissionsTitle: String
 }
 
-struct Withdrawl: Codable {
+struct Withdrawal: Codable {
     let withdrawTitle: String
     let withdrawText: String
     let withdrawalInstructionTitle: String
     let withdrawalInstructionText: String
 }
 
-struct HealthKitDataToRead: Codable {
+struct HealthKitTypes: Codable {
     let type: String
+}
+
+struct CompletionStep: Codable {
+    let title: String
+    let text: String
 }
 
 struct DesignConfig: Codable {
@@ -53,28 +87,14 @@ struct DataModel: Codable {
     let teamPhone: String
     let copyright: String
     let teamWebsite: String
-    let reviewConsentStepText: String
-    let reasonForConsentText: String
-    let consentFileName: String
-    let passcodeOnReturnText: String
-    let passcodeText: String
-    let passcodeType: String
-    let completionStepTitle: String
-    let completionStepText: String
-    let failedLoginTitle: String
-    let failedLoginText: String
-    let healthPermissionsTitle: String
-    let healthPermissionsText: String
-    let consentTitle: String
-    let useCareKit: String
-    let backgroundReadFrequency: String
-    let loginPasswordless: String
-    let loginStepTitle: String
-    let loginStepText: String
+    let passcode: Passcode
+    let completionStep: CompletionStep
+    let useCareKit: Bool
+    let login: Login
     let registration: Registration
     let onboarding: [Onboarding]
-    let consent: [Consent]
+    let consent: Consent
     let healthRecords: HealthRecords
-    let healthKitDataToRead: [HealthKitDataToRead]
-    let withdrawl: Withdrawl
+    let healthKitData: HealthKitData
+    let withdrawal: Withdrawal
 }
