@@ -5,7 +5,7 @@
 //  Created by Spurti Benakatti on 04.06.21.
 //
 
-import ResearchKit
+import OTFResearchKit
 
 /**
  The sample tasks for a user.

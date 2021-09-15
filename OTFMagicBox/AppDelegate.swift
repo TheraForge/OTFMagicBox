@@ -7,7 +7,7 @@
 
 import UIKit
 import OTFTemplateBox
-import OTFCDTDatastore
+import OTFResearchKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
-        let tint = OTFConfigManager.shared.tintColor()
+        let tintColor = YmlReader().tintColor
 
         let defaultProtection = OTFConfigManager.shared.defaultOTFProtectionLevel()
 
@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .none:
             print("Default protection is not set")
         }
+        
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = tintColor
         
         return true
     }

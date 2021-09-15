@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import ResearchKit
+import OTFResearchKit
 
 struct ChangePasscodeView: View {
     @State var showPasscode = false

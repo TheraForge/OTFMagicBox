@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct LaunchView: View {
-
+    
     var body: some View {
         VStack(spacing: 10) {
-            
+            //TODO: Fix this after backend connection.
             OnboardingView()
-            //MainView()
-        
+            //MainView()            
         }
     }
-
 }
+
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {

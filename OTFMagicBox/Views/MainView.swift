@@ -11,34 +11,36 @@ struct MainView: View {
     
     let color: Color
     
-    
     init() {
-        self.color = Color.red
+        self.color = Color(YmlReader().primaryColor)
     }
     
     var body: some View {
         TabView {
             TasksUIView(color: self.color).tabItem {
-                Image("tab_tasks").renderingMode(.template)
+                UIImage().loadImage(named: "tab_tasks").renderingMode(.template)
                 Text("Tasks")
             }
             
-            ScheduleViewControllerRepresentable().tabItem {
-                Image("tab_schedule").renderingMode(.template)
-                Text("Schedule")
-            }
-            
-            ContactsViewController().tabItem {
-                Image("tab_care").renderingMode(.template)
-                Text("Contacts")
+            if YmlReader().useCareKit {
+                ScheduleViewControllerRepresentable().tabItem {
+                    UIImage().loadImage(named: "tab_schedule").renderingMode(.template)
+                    Text("Schedule")
+                }
+                
+                ContactsViewController().tabItem {
+                    UIImage().loadImage(named: "tab_care").renderingMode(.template)
+                    Text("Contacts")
+                }
             }
             
             ProfileUIView().tabItem {
-                Image("tab_profile").renderingMode(.template)
+                UIImage().loadImage(named: "tab_profile").renderingMode(.template)
                 Text("Profile")
             }
         }
         .accentColor(self.color)
+        
     }
 }
 
@@ -51,12 +53,11 @@ import UIKit
 struct TasksViewController: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIViewController
+    
     var dataStore = OCKStore(name: "SampleAppStore", type: .inMemory)
-
-   
     
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
-   
+    
     func makeUIViewController(context: Context) -> UIViewController {
         var healthKitStore = OCKHealthKitPassthroughStore(store: dataStore)
         let synchronizedStoreManager: OCKSynchronizedStoreManager = {

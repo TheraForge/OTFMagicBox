@@ -11,8 +11,8 @@ import UIKit
 /// The onboarding view elements.
 struct OnboardingElement {
     
-    /// Title of the onboarding item.
-    let logo: String
+    /// Title or image of the onboarding item.
+    let image: String
     
     /// Description of the onboarding item.
     let description: String
@@ -33,12 +33,14 @@ struct OnboardingView: View {
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
         
-        self.color = UIColor.primaryColor
-        let onboardingData = [["logo": "1️⃣", "Description":"Take PRIME care of your health"], ["logo": "2️⃣", "Description":"Find your health score in minutes"], ["logo": "3️⃣", "Description":"Tele-consult with Doctors"]]
-        self.onComplete = onComplete
-        for data in onboardingData {
-            self.onboardingElements.append(OnboardingElement(logo: data["logo"]!, description: data["Description"]!))
+        // TODO: Add the actual default image, if the user doesnt enter any image.
+        let onboardingdata = (YmlReader().onboardingData ?? [Onboarding(image: "image", description: "Default: This is the description.")]) as Array
+ 
+        for data in onboardingdata {
+            self.onboardingElements.append(OnboardingElement(image: data.image, description: data.description))
         }
+        
+        self.color = Color(YmlReader().primaryColor)
     }
 
     /// Onboarding  view.
@@ -46,7 +48,7 @@ struct OnboardingView: View {
         VStack(spacing: 10) {
             Spacer()
             
-            Image("TheraforgeLogo")
+            UIImage().loadImage(named: "TheraforgeLogo")
                 .resizable()
                 .scaledToFit()
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
@@ -54,14 +56,17 @@ struct OnboardingView: View {
             
             Spacer(minLength: 2)
             
-            Text("Digital Health Study")
+            VStack() {
+              Text(YmlReader().studyTitle)
+              Text(YmlReader().teamName)
+            }
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 35, weight: .bold, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
-            OnboardingItemView(self.onboardingElements.map { OnboardingDetailsView(logo: $0.logo, description: $0.description, color: UIColor.primaryColor) })
+            OnboardingItemView(self.onboardingElements.map { OnboardingDetailsView(image: $0.image, description: $0.description, color: UIColor.primaryColor) })
 
             Spacer()
             
@@ -124,7 +129,7 @@ struct OnboardingView: View {
 struct OnboardingDetailsView: View {
     
     /// Title of the onboarding item.
-    let logo: String
+    let image: String
     
     /// Description of the onboarding item.
     let description: String
@@ -138,16 +143,16 @@ struct OnboardingDetailsView: View {
 
             Spacer()
             
-            Circle()
-                .fill(color)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(6)
-                .overlay(
-                    Text(logo)
-                        .foregroundColor(.white)
-                        .font(.system(size: 42, weight: .light, design: .default))
-                )
-            
+            if image.containsEmojis() {
+                Text(image)
+                    .foregroundColor(.white)
+                    .font(.system(size: 42, weight: .light, design: .default))
+            } else {
+                UIImage().loadImage(named: image)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+            }
+    
             Spacer()
             
             Text(description)
@@ -159,6 +164,7 @@ struct OnboardingDetailsView: View {
             Spacer()
         }
     }
+
 }
 
 struct OnboardingView_Previews: PreviewProvider {

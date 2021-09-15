@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import ResearchKit
+import OTFResearchKit
 
 struct ContentView: View {
     var body: some View {

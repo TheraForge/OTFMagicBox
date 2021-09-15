@@ -8,32 +8,27 @@
 import SwiftUI
 
 struct WithdrawView: View {
-    let color: Color
     @State var showWithdraw = false
-    
-    init(color: Color) {
-        self.color = color
-    }
     
     var body: some View {
         HStack {
-            Text("Withdraw from Study").foregroundColor(self.color)
+            Text("Withdraw from Study")
             Spacer()
-            Text("›").foregroundColor(self.color)
+            Text("›")
         }.frame(height: 60)
-            .contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
-                self.showWithdraw.toggle()
-            })).sheet(isPresented: $showWithdraw, onDismiss: {
-                
-            }, content: {
-               // WithdrawalViewController()
-            })
+        .contentShape(Rectangle())
+        .gesture(TapGesture().onEnded({
+            self.showWithdraw.toggle()
+        })).sheet(isPresented: $showWithdraw, onDismiss: {
+            
+        }, content: {
+            WithdrawalViewController()
+        })
     }
 }
 
 struct WithdrawView_Previews: PreviewProvider {
     static var previews: some View {
-        WithdrawView(color: Color.red)
+        WithdrawView()
     }
 }

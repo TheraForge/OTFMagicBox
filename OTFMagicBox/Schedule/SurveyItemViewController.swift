@@ -7,7 +7,7 @@
 
 import Foundation
 import OTFCareKit
-import ResearchKit
+import OTFResearchKit
 import OTFCareKitUI
 import OTFCareKitStore
 

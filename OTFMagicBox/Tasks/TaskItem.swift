@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ResearchKit
+import OTFResearchKit
 import SwiftUI
 
 /**

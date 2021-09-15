@@ -11,8 +11,7 @@ target 'OTFMagicBox' do
   pod 'OTFCloudantStore'
   pod 'OTFCDTDatastore'
   pod 'OTFCareKit'
-  pod 'ResearchKit'
+  pod 'OTFResearchKit'
   pod 'OTFTemplateBox'
-  pod 'OTFMagicBox'
 
 end
