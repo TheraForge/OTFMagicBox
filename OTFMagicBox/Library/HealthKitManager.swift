@@ -85,11 +85,8 @@ extension HealthKitManager {
                
                 dispatchGroup.enter()
                 strongSelf.backgroundQuery(forType: type, completionHandler: {
-                    dispatchGroup.leave()
-                })
-                
-                dispatchGroup.notify(queue: .main, execute: {
                     completionHandler()
+                    dispatchGroup.leave()
                 })
                 
             })
@@ -103,6 +100,11 @@ extension HealthKitManager {
             })
             
         }
+        
+        dispatchGroup.notify(queue: .main) {
+            print("Task finished.")
+        }
+
     }
     
     //TODO: (delete) running the old data collection solution as a baseline to compare new values

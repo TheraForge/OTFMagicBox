@@ -10,8 +10,6 @@ import HealthKit
 
 class OTFHealthKitManager : NSObject {
     
-    static let shared = OTFHealthKitManager()
-    
     fileprivate var hkTypesToReadInBackground: Set<HKQuantityType> = []
     
     override init() {
