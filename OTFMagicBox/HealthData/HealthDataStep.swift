@@ -32,7 +32,7 @@ class HealthDataStep: ORKInstructionStep {
 class HealthDataStepViewController: ORKInstructionStepViewController {
     
     override func goForward() {
-        let manager = OTFHealthKitManager()
+        let manager = OTFHealthKitManager.shared
         manager.getHealthAuthorization() { _,_ in
             OperationQueue.main.addOperation {
                 super.goForward()
