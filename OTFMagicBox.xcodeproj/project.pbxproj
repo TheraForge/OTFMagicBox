@@ -32,7 +32,6 @@
 		5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
-		5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */; };
 		5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD46264E89510069FEF7 /* ConsentDocument.swift */; };
 		5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */; };
 		5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */; };
@@ -90,7 +89,6 @@
 		5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStep.swift; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
 		5AADFD46264E89510069FEF7 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewCoordinator.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 		5A49632926EB5E2E00A4B4DF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */,
 				5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */,
 				5A49632526EB5D8F00A4B4DF /* Extension+String.swift */,
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
@@ -480,7 +477,6 @@
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
-				5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,

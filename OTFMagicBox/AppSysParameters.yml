@@ -20,7 +20,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: 'contact@TheraForge.com', here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon 'contact@TheraForge.com' is the value assigned for that Key.
+# Example: teamEmail: 'info@hippocratestech.com', here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon 'info@hippocratestech.com' is the value assigned for that Key.
 
 
 # Default Values:-
@@ -84,49 +84,49 @@ DataModel:
       # Colors will be used in the design of the application.
       # Value for the color should start with #, for example '#5b4337'.
       - name: 'tintColor'
-        textValue: '#b6133f'
+        textValue: 'Blue'
       - name: 'label'
-        textValue: '#5b4337'
+        textValue: 'Teal'
       - name: 'secondaryLabel'
-        textValue: '#876351'
+        textValue: 'Brown'
       - name: 'tertiaryLabel'
-        textValue: '#1c135b'
+        textValue: 'Cyan'
       - name: 'customBackground'
-        textValue: '#331f24'
+        textValue: 'Brown'
       - name: 'secondaryCustomBackground'
-        textValue: '#0d2308'
+        textValue: 'Black'
       - name: 'customGroupedBackground'
-        textValue: '#54484c'
+        textValue: 'Brown'
       - name: 'secondaryCustomGroupedBackground'
-        textValue: '#5e5155'
+        textValue: 'Brown'
       - name: 'tertiaryCustomGroupedBackground'
-        textValue: '#2d2729'
+        textValue: 'Brown'
       - name: 'separator'
-        textValue: '#5d5d5d'
+        textValue: 'Gray'
       - name: 'customFill'
-        textValue: '#3445a0'
+        textValue: 'Blue'
       - name: 'secondaryCustomFill'
-        textValue: '#3749aa'
+        textValue: 'Mint'
       - name: 'tertiaryCustomFill'
-        textValue: '#3e52bf'
+        textValue: 'Teal'
       - name: 'quaternaryCustomFill'
-        textValue: '#445ad1'
+        textValue: 'Blue'
       - name: 'customBlue'
-        textValue: '#4d66ed'
+        textValue: 'blue'
       - name: 'customGray'
-        textValue: '#95aaad'
+        textValue: 'Gray'
       - name: 'customGray2'
-        textValue: '#8ea2a5'
+        textValue: 'Gray2'
       - name: 'customGray3'
-        textValue: '#819396'
+        textValue: 'Gray3'
       - name: 'customGray4'
-        textValue: '#748487'
+        textValue: 'Gray4'
       - name: 'customGray5'
-        textValue: '#6b7a7c'
+        textValue: 'Gray5'
       - name: 'black'
-        textValue: '#0f1111'
+        textValue: 'black'
       - name: 'white'
-        textValue: '#ffffff'
+        textValue: 'white'
         
       # Fonts
       # Fonts will be used in the design of the application.
@@ -192,21 +192,21 @@ DataModel:
         
         
 ##############################################################################
-#                      CardinalKit Configurations                            #
+#                               App Customization                            #
 ##############################################################################
 
  # Application Specifications.
-  studyTitle: 'TheraForge'
-  teamName: 'Digital Health Study'
-  teamEmail: 'contact@theraforge.com'
+  studyTitle: 'Health Study'
+  teamName: 'by Hippocrates Technologies'
+  teamEmail: 'info@hippocratestech.com'
   teamPhone: '123-456-7890'
-  copyright: 'Made at TheraForge'
+  copyright: 'Made by Hippocrates Technologies'
   teamWebsite: 'https://www.hippocratestech.com/'
   
  # CareKit and ResearchKit Specifications.
  
  # Onboarding
- # Onboarding contains an array of image and description values. You can add any number of values.
+ # Onboarding contains number of pages of image and description values. You can add any number of values.
  # Image can be any SF Symbols(version 1.1), Emoji Symbols or any other images from Assets.
  # It is mandatory to write the exact spelling for the image value, if the image is not found then the default string will be displayed.
  # If you are new to SF Symbols then read this apple document: https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/
@@ -220,13 +220,16 @@ DataModel:
    - image: '⏱'
      description: 'Find your health score in minutes'
      
+   - image: 'cross.case'
+     description: 'Test message'
+     
  # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
  # Property consentFileName is the name by which your consent file is created.
   consent:
     reviewConsentStepText: 'Review TheraForge Consent Form'
     reasonForConsentText: 'Consent to join the TheraForge Health Research Study.'
-    fileName: 'My Consent Form'
+    fileName: 'Consent Form Agreement File'
     title: 'TheraForge Consent'
 
  # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
@@ -280,8 +283,10 @@ DataModel:
   
  # Health Records
  # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
   healthRecords:
-    enabled: 'true'
+    enabled: 'false'
     permissionsText: 'Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).'
     permissionsTitle: 'Permission to read Health Records 🏥'
   
@@ -304,7 +309,7 @@ DataModel:
  # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
  # BackgroundReadFrequency value can be: 'daily', 'weekly', 'hourly' or 'immediate'.
   healthKitData:
-    healthPermissionsTitle: 'Permission to read Activity Data 🏃🏽‍♀️'
+    healthPermissionsTitle: 'Permission to Read Activity Data 🏃🏽‍♀️'
     healthPermissionsText: 'Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.'
     backgroundReadFrequency: 'immediate'
  
