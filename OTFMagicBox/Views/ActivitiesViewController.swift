@@ -63,7 +63,8 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         
         var loginSteps: [ORKStep]
         
-        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+        // swiftlint:disable all
+        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{10,}")
         
         let registration = YmlReader().registration
         
@@ -79,7 +80,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         regOption.insert( .includeGivenName)
         regOption.insert( .includeFamilyName)
         
-        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character", options: regOption)
+        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Password must be at least 10 characters in length.", options: regOption)
         
         if YmlReader().loginPasswordless{
             let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
