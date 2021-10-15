@@ -97,16 +97,21 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
          *  that will be required to use this app!
          **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
-        let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
+        if YmlReader().isPasscodeEnabled {
+            let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
         
-        let type = YmlReader().passcodeType
-        if type == "6" {
-            passcodeStep.passcodeType = .type6Digit
-        } else {
-            passcodeStep.passcodeType = .type4Digit
+            let type = YmlReader().passcodeType
+            if type == "6" {
+                passcodeStep.passcodeType = .type6Digit
+            } else {
+                passcodeStep.passcodeType = .type4Digit
+            }
+        
+            passcodeStep.text = YmlReader().passcodeText
+            
+            loginSteps += [passcodeStep]
+        
         }
-        
-        passcodeStep.text = YmlReader().passcodeText
         
         /* **************************************************************
          *  STEP (6): inform the user that they are done with sign-up!
@@ -124,7 +129,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        let emailVerificationSteps = loginSteps + [healthDataStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps

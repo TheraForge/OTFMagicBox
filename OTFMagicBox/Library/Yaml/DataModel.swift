@@ -40,6 +40,7 @@ struct ConsentData: Codable {
 }
 
 struct Passcode: Codable {
+    let enable: Bool
     let passcodeOnReturnText: String
     let passcodeText: String
     let passcodeType: String

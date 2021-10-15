@@ -272,6 +272,7 @@ DataModel:
  # Passcode
  # Properties passcodeOnReturnText and passcodeText are displayed on a passcode generation screen.
   passcode:
+    enable: 'false'
     passcodeOnReturnText: 'Welcome back!'
     passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
   

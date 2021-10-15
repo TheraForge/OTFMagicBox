@@ -127,6 +127,10 @@ public class YmlReader {
         return dataModel?.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
     }
     
+    var isPasscodeEnabled: Bool {
+        return dataModel?.passcode.enable ?? true
+    }
+    
     var passcodeOnReturnText: String {
         return dataModel?.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
     }
