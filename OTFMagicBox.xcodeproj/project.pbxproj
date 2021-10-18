@@ -29,6 +29,7 @@
 		5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632526EB5D8F00A4B4DF /* Extension+String.swift */; };
 		5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */; };
 		5A4F633D271F412D0080F0D7 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F633C271F412D0080F0D7 /* LogoutView.swift */; };
+		5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */; };
 		5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */; };
 		5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
@@ -92,6 +93,7 @@
 		5A49632526EB5D8F00A4B4DF /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Character.swift"; sourceTree = "<group>"; };
 		5A4F633C271F412D0080F0D7 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStep.swift; sourceTree = "<group>"; };
 		5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFTheraforgeNetwork.swift; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
@@ -280,6 +282,8 @@
 				5AB1807526B8849A007AF766 /* WithdrawView.swift */,
 				5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */,
 				5A4F633C271F412D0080F0D7 /* LogoutView.swift */,
+				5A7B6DC326FE5FC700F872A1 /* LogoutView.swift */,
+				5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -513,6 +517,7 @@
 				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
 				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
+				5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
 				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
 				5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */,

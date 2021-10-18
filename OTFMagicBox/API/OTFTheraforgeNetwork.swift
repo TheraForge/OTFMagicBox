@@ -93,5 +93,18 @@ class OTFTheraforgeNetwork {
             }
         })
     }
+    
+    // Change password request.
+    public func changePassword(email: String, oldPassword: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
+        otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword), completionHandler: { (result) in
+            switch result {
+            case .success(let response):
+                    print(response)
+            case .failure(let error):
+                    print(error)
+            }
+            completionHandler(result)
+        })
+    }
 
 }

@@ -25,6 +25,10 @@ struct ProfileUIView: View {
                 }
                 
                 Section {
+                    ChangePasswordView()
+                }
+                
+                Section {
                     ReportView(color: .blue, email: YmlReader().teamEmail)
                     SupportView(color: .blue, phone: YmlReader().teamPhone)
                 }
