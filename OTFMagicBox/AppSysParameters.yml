@@ -82,7 +82,8 @@ DataModel:
         
       # Color codes
       # Colors will be used in the design of the application.
-      # Value for the color should start with #, for example '#5b4337'.
+      # Please choose the colors according to Human Interface Guidelines from Apple.
+      # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
       - name: 'tintColor'
         textValue: 'Blue'
       - name: 'label'
