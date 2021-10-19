@@ -257,7 +257,7 @@ DataModel:
  # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
  # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
   registration:
-    showDOB: 'yes'
+    showDateOfBirth: 'yes'
     showGender: 'yes'
 
  # Login

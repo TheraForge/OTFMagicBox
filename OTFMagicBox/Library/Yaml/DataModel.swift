@@ -13,7 +13,7 @@ struct Onboarding: Codable {
 }
 
 struct Registration: Codable {
-    let showDOB: String
+    let showDateOfBirth: String
     let showGender: String
 }
 
