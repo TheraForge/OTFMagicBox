@@ -189,6 +189,9 @@ DataModel:
     
   # Start Date.
   startDate: '30/08/2020'
+  
+  # API key for the server integration.
+  apiKey: 'He3zxB6mkyevlP1KnIzKJk2vEKFgZMMfhuRwdNt7FniTmKrsHIgTx5ngYg0yRYCxHTJ3JTvMf37B60xhHw9ofamtXRHXmJQpexs1uufKkGPpJoLOilmlqvc6vbG8ztvWFKOT98awdW28yj3SraOh4tNT6UcmQdixtQb7Qz7BwfIftN0NybLPuq54uQEKorq33rCewHhu'
         
         
 ##############################################################################

@@ -53,7 +53,8 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         /* **************************************************************
          *  STEP (3.5): get permission to collect HealthKit health records data
          **************************************************************/
-        let healthRecordsStep = HealthRecordsStep(identifier: "HealthRecords")
+        // TODO: Add this after enabling HealthKit in Xcode
+        //let healthRecordsStep = HealthRecordsStep(identifier: "HealthRecords")
         
         /* **************************************************************
          *  STEP (4): ask user to enter their email address for login
@@ -124,7 +125,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // and steps regarding login / security
-        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, healthRecordsStep, completionStep]
+        let emailVerificationSteps = loginSteps + [passcodeStep, healthDataStep, completionStep]
         
         // guide the user through ALL steps
         let fullSteps = introSteps + emailVerificationSteps

@@ -9,7 +9,7 @@ import Foundation
 
 enum Constants {
     static let app = "otfmagicbox.theraforge"
-    
+    static let patientEmail = "patientEmail"
     static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"
     static let prefFirstRunWasMarked = "PREF_FIRST_RUN"
     static let prefUserEmail = "PREF_USER_EMAIL"
@@ -76,6 +76,7 @@ enum Constants {
     }
     
     struct YamlDefaults {
+        static let APIKey = "He3zxB6mkyevlP1KnIzKJk2vEKFgZMMfhuRwdNt7FniTmKrsHIgTx5ngYg0yRYCxHTJ3JTvMf37B60xhHw9ofamtXRHXmJQpexs1uufKkGPpJoLOilmlqvc6vbG8ztvWFKOT98awdW28yj3SraOh4tNT6UcmQdixtQb7Qz7BwfIftN0NybLPuq54uQEKorq33rCewHhu"
         static let FileName = "AppSysParameters.yml"
         static let LoginStepTitle = "Default: login step title"
         static let LoginStepText = "Default: login step text"
@@ -99,6 +100,11 @@ enum Constants {
         static let ConsentTitle = "Default: consent title"
         static let HealthRecordsPermissionsTitle = "Default: health records permissions title"
         static let HealthRecordsPermissionsText = "Default: health records permissions text"
+    }
+    
+    struct API {
+        static let developmentUrl = "https://theraforge.org/api"
+        static let serverApiKey = "API-KEY"
     }
     
 }

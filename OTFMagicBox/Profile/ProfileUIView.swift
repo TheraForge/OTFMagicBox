@@ -9,12 +9,14 @@ import SwiftUI
 
 struct ProfileUIView: View {
     
+    let email = UserDefaults.standard.object(forKey: Constants.patientEmail)
+    
     var body: some View {
         VStack {
             Text("Profile").font(.system(size: 25, weight:.bold))
             List {
                 Section {
-                    Text("Patient name")
+                    Text(email as? String ?? "")
                 }.listRowBackground(Color.white)
                 
                 Section {
@@ -34,6 +36,11 @@ struct ProfileUIView: View {
                 Section {
                     Text(YmlReader().teamCopyright)
                 }
+                
+                Section {
+                    LogoutView()
+                }
+                
             }.listStyle(GroupedListStyle())
         }
     }

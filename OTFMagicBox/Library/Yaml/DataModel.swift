@@ -81,6 +81,7 @@ struct DesignConfig: Codable {
 
 struct DataModel: Codable {
     let designConfig: [DesignConfig]
+    let apiKey: String
     let studyTitle: String
     let teamName: String
     let teamEmail: String

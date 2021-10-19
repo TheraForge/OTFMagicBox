@@ -60,6 +60,10 @@ public class YmlReader {
         return UIColor()
     }
     
+    var apiKey: String {
+        return dataModel!.apiKey
+    }
+    
     var loginPasswordless: Bool {
         return dataModel?.login.loginPasswordless ?? false
     }
