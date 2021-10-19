@@ -25,7 +25,8 @@ public class YmlReader {
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String : DataModel].self, from: dataSet) else {
+                guard let data = try? YAMLDecoder().decode([String: DataModel].self, from: dataSet) else {
+                    OTFLog("Yaml decode error")
                     return
                 }
                 if data["DataModel"] != nil {

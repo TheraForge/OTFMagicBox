@@ -233,19 +233,23 @@ DataModel:
  # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
  # Summary and content value can be same or different.
     data:
-      - title: "Overview"
-        summary: "Hi there"
-        content: "Hi there"
-     
-      - title: "Privacy"
+ ## Consent Overview, if you want to dsiplay this in your application then assign "yes" value otherwise "no" for the 'show' key.
+      - show: "yes"
+        summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. "
+        content: "Your participation in this program is entirely voluntary.  You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
+ 
+ ## Consent Privacy, if you want to dsiplay this in your application then assign "yes" value otherwise "no" for the 'show' key.
+      - show: "yes"
         summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
         content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-     
-      - title: "DataUse"
+  
+ ## Consent Data Use, if you want to dsiplay this in your application then assign "yes" value otherwise "no" for the 'show' key.
+      - show: "no"
         summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
         content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
-     
-      - title: "StudyTasks"
+ 
+ ## Consent Study Survey, if you want to dsiplay this in your application then assign "yes" value otherwise "no" for the 'show' key.
+      - show: "yes"
         summary: "Study tasks involve many aspects of daily functionalities."
         content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
      
@@ -253,8 +257,8 @@ DataModel:
  # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
  # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
   registration:
-    isDOB: 'true'
-    isGender: 'true'
+    showDOB: 'yes'
+    showGender: 'yes'
 
  # Login
  # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either 'true' or 'false'.

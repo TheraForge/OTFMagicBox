@@ -69,11 +69,11 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         
         var regOption = ORKRegistrationStepOption()
         
-        if registration?.isDOB == "true" {
+        if registration?.showDOB == "yes" {
             regOption.insert(.includeDOB)
         }
         
-        if registration?.isGender == "true" {
+        if registration?.showGender == "yes" {
             regOption.insert(.includeGender)
         }
         regOption.insert( .includeGivenName)

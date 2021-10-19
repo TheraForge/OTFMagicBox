@@ -24,27 +24,19 @@ class ConsentDocument: ORKConsentDocument {
         
         let sectionTypes: [ORKConsentSectionType] = [
             .overview,
-            .dataGathering,
             .privacy,
             .dataUse,
-            .studySurvey,
-            .studyTasks,
-            .withdrawing,
+            .studySurvey
         ]
         
-        let consentData = (YmlReader().consent?.data ?? [ConsentData(title: "Default: consent title", summary: "Default: consent summary", content: "Default: consent content")])
-        for data in consentData {
-            for type in sectionTypes {
-                if (type.description == data.title) {
-                    
-                    let section = ORKConsentSection(type: type)
-                    section.title = data.title
-                    section.summary = data.summary
-                    section.content = data.content
-                    
-                    sections?.append(section)
-                }
-            }
+        let consentData = (YmlReader().consent?.data ?? [ConsentDescription(show: "Default: consent title", summary: "Default: consent summary", content: "Default: consent content")])
+        
+        for (sectionType, consentData) in zip(sectionTypes, consentData) where consentData.show == "yes" {
+                let section = ORKConsentSection(type: sectionType)
+                section.title = sectionType.description
+                section.summary = consentData.summary
+                section.content = consentData.content
+                sections?.append(section)
         }
         
         let signature = ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: Constants.UserDefaults.ConsentDocumentSignature)
