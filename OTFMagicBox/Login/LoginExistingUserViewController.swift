@@ -34,7 +34,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         
             let type = YmlReader().passcodeType
         
-            if type == "6" {
+            if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
             } else {
                 passcodeStep.passcodeType = .type4Digit

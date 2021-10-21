@@ -89,7 +89,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         } else {
             let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
             
-            loginSteps = [registerStep, loginStep]
+            loginSteps = []
         }
         
         /* **************************************************************
@@ -101,7 +101,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
         
             let type = YmlReader().passcodeType
-            if type == "6" {
+            if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
             } else {
                 passcodeStep.passcodeType = .type4Digit

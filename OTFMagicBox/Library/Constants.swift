@@ -101,4 +101,8 @@ enum Constants {
         static let HealthRecordsPermissionsText = "Default: health records permissions text"
     }
     
+    struct Passcode {
+        static let lengthSix = "6"
+    }
+    
 }
