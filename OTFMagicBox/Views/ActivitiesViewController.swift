@@ -16,7 +16,7 @@ import OTFCareKitStore
  */
 struct ActivitiesViewController: UIViewControllerRepresentable {
     
-    private let fileName = "AppSysParameters.yml"
+    private let fileName = Constants.yamlFile
     
     func makeCoordinator() -> OnboardingTaskViewControllerDelegate {
         OnboardingTaskViewControllerDelegate()
@@ -33,14 +33,14 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
          **************************************************************/
         // use the `ORKVisualConsentStep` from ResearchKit
         let consentDocument = ConsentDocument()
-        let consentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
+        let consentStep = ORKVisualConsentStep(identifier: Constants.Identifier.ConsentStep, document: consentDocument)
         
         /* **************************************************************
          *  STEP (2): ask user to review and sign consent document
          **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures?.first
-        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
+        let reviewConsentStep = ORKConsentReviewStep(identifier: Constants.Identifier.ConsentReviewStep, signature: signature, in: consentDocument)
         reviewConsentStep.text = YmlReader().reviewConsentStepText
         reviewConsentStep.reasonForConsent = YmlReader().reasonForConsentText
         
@@ -48,12 +48,12 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
          *  STEP (3): get permission to collect HealthKit data
          **************************************************************/
         // see `HealthDataStep` to configure!
-        let healthDataStep = HealthDataStep(identifier: "Healthkit")
+        let healthDataStep = HealthDataStep(identifier: Constants.Identifier.HealthKitDataStep)
         
         /* **************************************************************
          *  STEP (3.5): get permission to collect HealthKit health records data
          **************************************************************/
-        let healthRecordsStep = HealthRecordsStep(identifier: "HealthRecords")
+        let healthRecordsStep = HealthRecordsStep(identifier: Constants.Identifier.HealthRecordsStep)
         
         /* **************************************************************
          *  STEP (4): ask user to enter their email address for login
@@ -80,7 +80,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         regOption.insert( .includeGivenName)
         regOption.insert( .includeFamilyName)
         
-        let registerStep = ORKRegistrationStep(identifier: "RegistrationStep", title: "Registration", text: "Sign up for this study.", passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: "Password must be at least 10 characters in length.", options: regOption)
+        let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier, title: Constants.Registration.Title, text: Constants.Registration.Text, passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage, options: regOption)
         
         if YmlReader().loginPasswordless{
             let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
@@ -88,7 +88,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
             
             loginSteps = [loginStep, loginVerificationStep]
         } else {
-            let loginStep = ORKLoginStep(identifier: "LoginStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+            let loginStep = ORKLoginStep(identifier: Constants.Login.Identifier, title: Constants.Login.Title, text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
             
             loginSteps = [registerStep, loginStep]
         }
@@ -98,7 +98,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
          *  that will be required to use this app!
          **************************************************************/
         // use the `ORKPasscodeStep` from ResearchKit.
-        let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
+        let passcodeStep = ORKPasscodeStep(identifier: Constants.Identifier.PasscodeStep)
         
         let type = YmlReader().passcodeType
         if type == "6" {
@@ -113,7 +113,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
          *  STEP (6): inform the user that they are done with sign-up!
          **************************************************************/
         // use the `ORKCompletionStep` from ResearchKit
-        let completionStep = ORKCompletionStep(identifier: "CompletionStep")
+        let completionStep = ORKCompletionStep(identifier: Constants.Identifier.CompletionStep)
         completionStep.title = YmlReader().completionStepTitle
         completionStep.text = YmlReader().completionStepText
         
@@ -138,7 +138,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
          * and SHOW the user these steps!
          **************************************************************/
         // create a task with each step
-        let orderedTask = ORKOrderedTask(identifier: "StudyOnboardingTask", steps: stepsToUse)
+        let orderedTask = ORKOrderedTask(identifier: Constants.Identifier.StudyOnboardingTask, steps: stepsToUse)
         
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
