@@ -10,6 +10,8 @@ import Foundation
 enum Constants {
     static let app = "otfmagicbox.theraforge"
     
+    static let yamlFile = "AppSysParameters.yml"
+    
     static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"
     static let prefFirstRunWasMarked = "PREF_FIRST_RUN"
     static let prefUserEmail = "PREF_USER_EMAIL"
@@ -103,6 +105,29 @@ enum Constants {
     
     struct Passcode {
         static let lengthSix = "6"
+    }
+  
+    struct Identifier {
+        static let ConsentStep = "VisualConsentStep"
+        static let ConsentReviewStep = "ConsentReviewStep"
+        static let HealthKitDataStep = "Healthkit"
+        static let HealthRecordsStep = "HealthRecords"
+        static let PasscodeStep = "PasscodeStep"
+        static let CompletionStep = "CompletionStep"
+        static let StudyOnboardingTask = "StudyOnboardingTask"
+    }
+    
+    struct Registration {
+        static let Identifier = "RegistrationStep"
+        static let Title = "Registration"
+        static let Text = "Sign up for this study."
+        static let PasscodeInvalidMessage = "Password must be at least 10 characters in length."
+    }
+    
+    struct Login {
+        static let Identifier = "LoginStep"
+        static let Title = "Login"
+        static let Text = "Log into this study."
     }
     
 }
