@@ -32,9 +32,10 @@
 		5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */; };
 		5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */; };
 		5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */; };
+		5A7B6DAC26FD282C00F872A1 /* OTFMagicBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */; };
+		5A7B6DB426FD285000F872A1 /* OTFMagicBoxYamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
-		5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */; };
 		5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD46264E89510069FEF7 /* ConsentDocument.swift */; };
 		5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */; };
 		5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */; };
@@ -67,6 +68,16 @@
 		CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5A7B6DAE26FD282C00F872A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE482CEB262C954A00C0A2D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE482CF2262C954A00C0A2D5;
+			remoteInfo = OTFMagicBox;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		45960166DEF3A139BF382F51 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		534F590DE6D5125B520FD2D6 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,9 +107,12 @@
 		5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStep.swift; sourceTree = "<group>"; };
 		5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFTheraforgeNetwork.swift; sourceTree = "<group>"; };
+		5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTFMagicBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxTests.swift; sourceTree = "<group>"; };
+		5A7B6DAD26FD282C00F872A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxYamlTests.swift; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
 		5AADFD46264E89510069FEF7 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewCoordinator.swift; sourceTree = "<group>"; };
@@ -134,6 +148,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5A7B6DA626FD282C00F872A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE482CF0262C954A00C0A2D5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,7 +210,6 @@
 		5A49632926EB5E2E00A4B4DF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				5AADFD3E264E86A20069FEF7 /* Extensions+UIColor.swift */,
 				5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */,
 				5A49632526EB5D8F00A4B4DF /* Extension+String.swift */,
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
@@ -203,6 +223,16 @@
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
 			);
 			path = API;
+
+		5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */,
+				5A7B6DAD26FD282C00F872A1 /* Info.plist */,
+				5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */,
+			);
+			path = OTFMagicBoxTests;
+
 			sourceTree = "<group>";
 		};
 		5AADFD35264E86950069FEF7 /* Onboarding */ = {
@@ -318,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				CE482CF5262C954A00C0A2D5 /* OTFMagicBox */,
+				5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */,
 				CE482CF4262C954A00C0A2D5 /* Products */,
 				8C979D2203D122CC68BA93F2 /* Pods */,
 				C9D92AAC7DE27C25427A4DB9 /* Frameworks */,
@@ -328,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */,
+				5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,6 +403,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A7B6DB226FD282C00F872A1 /* Build configuration list for PBXNativeTarget "OTFMagicBoxTests" */;
+			buildPhases = (
+				5A7B6DA526FD282C00F872A1 /* Sources */,
+				5A7B6DA626FD282C00F872A1 /* Frameworks */,
+				5A7B6DA726FD282C00F872A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A7B6DAF26FD282C00F872A1 /* PBXTargetDependency */,
+			);
+			name = OTFMagicBoxTests;
+			productName = OTFMagicBoxTests;
+			productReference = 5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE482CF2262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
@@ -396,9 +446,14 @@
 		CE482CEB262C954A00C0A2D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					5A7B6DA826FD282C00F872A1 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = CE482CF2262C954A00C0A2D5;
+					};
 					CE482CF2262C954A00C0A2D5 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -418,11 +473,19 @@
 			projectRoot = "";
 			targets = (
 				CE482CF2262C954A00C0A2D5 /* OTFMagicBox */,
+				5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5A7B6DA726FD282C00F872A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE482CF1262C954A00C0A2D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +542,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5A7B6DA526FD282C00F872A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A7B6DB426FD285000F872A1 /* OTFMagicBoxYamlTests.swift in Sources */,
+				5A7B6DAC26FD282C00F872A1 /* OTFMagicBoxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE482CEF262C954A00C0A2D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -499,7 +571,6 @@
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
-				5AADFD40264E86A20069FEF7 /* Extensions+UIColor.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
@@ -540,6 +611,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5A7B6DAF26FD282C00F872A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE482CF2262C954A00C0A2D5 /* OTFMagicBox */;
+			targetProxy = 5A7B6DAE26FD282C00F872A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -552,6 +631,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5A7B6DB026FD282C00F872A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D25537G8CD;
+				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = MyCompany.OTFMagicBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox.app/OTFMagicBox";
+			};
+			name = Debug;
+		};
+		5A7B6DB126FD282C00F872A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D25537G8CD;
+				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = MyCompany.OTFMagicBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox.app/OTFMagicBox";
+			};
+			name = Release;
+		};
 		CE482D05262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -675,17 +796,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.curlybracers.OTFMagicBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OTFMagicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -698,17 +821,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.curlybracers.OTFMagicBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OTFMagicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -717,6 +842,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5A7B6DB226FD282C00F872A1 /* Build configuration list for PBXNativeTarget "OTFMagicBoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A7B6DB026FD282C00F872A1 /* Debug */,
+				5A7B6DB126FD282C00F872A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE482CEE262C954A00C0A2D5 /* Build configuration list for PBXProject "OTFMagicBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
