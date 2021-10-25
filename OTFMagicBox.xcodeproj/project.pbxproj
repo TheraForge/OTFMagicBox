@@ -30,6 +30,8 @@
 		5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632526EB5D8F00A4B4DF /* Extension+String.swift */; };
 		5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */; };
 		5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */; };
+		5A7B6DAC26FD282C00F872A1 /* OTFMagicBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */; };
+		5A7B6DB426FD285000F872A1 /* OTFMagicBoxYamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */; };
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
 		5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD46264E89510069FEF7 /* ConsentDocument.swift */; };
@@ -63,6 +65,16 @@
 		CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5A7B6DAE26FD282C00F872A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE482CEB262C954A00C0A2D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE482CF2262C954A00C0A2D5;
+			remoteInfo = OTFMagicBox;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
@@ -87,6 +99,10 @@
 		5A49632526EB5D8F00A4B4DF /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Character.swift"; sourceTree = "<group>"; };
 		5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStep.swift; sourceTree = "<group>"; };
+		5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTFMagicBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxTests.swift; sourceTree = "<group>"; };
+		5A7B6DAD26FD282C00F872A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxYamlTests.swift; sourceTree = "<group>"; };
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5AADFD46264E89510069FEF7 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
@@ -126,6 +142,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5A7B6DA626FD282C00F872A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE482CF0262C954A00C0A2D5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,6 +209,16 @@
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */,
+				5A7B6DAD26FD282C00F872A1 /* Info.plist */,
+				5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */,
+			);
+			path = OTFMagicBoxTests;
 			sourceTree = "<group>";
 		};
 		5AADFD35264E86950069FEF7 /* Onboarding */ = {
@@ -298,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				CE482CF5262C954A00C0A2D5 /* OTFMagicBox */,
+				5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */,
 				CE482CF4262C954A00C0A2D5 /* Products */,
 				8C979D2203D122CC68BA93F2 /* Pods */,
 				C9D92AAC7DE27C25427A4DB9 /* Frameworks */,
@@ -308,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */,
+				5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +385,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A7B6DB226FD282C00F872A1 /* Build configuration list for PBXNativeTarget "OTFMagicBoxTests" */;
+			buildPhases = (
+				5A7B6DA526FD282C00F872A1 /* Sources */,
+				5A7B6DA626FD282C00F872A1 /* Frameworks */,
+				5A7B6DA726FD282C00F872A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A7B6DAF26FD282C00F872A1 /* PBXTargetDependency */,
+			);
+			name = OTFMagicBoxTests;
+			productName = OTFMagicBoxTests;
+			productReference = 5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE482CF2262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
@@ -375,9 +428,14 @@
 		CE482CEB262C954A00C0A2D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					5A7B6DA826FD282C00F872A1 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = CE482CF2262C954A00C0A2D5;
+					};
 					CE482CF2262C954A00C0A2D5 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -397,11 +455,19 @@
 			projectRoot = "";
 			targets = (
 				CE482CF2262C954A00C0A2D5 /* OTFMagicBox */,
+				5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5A7B6DA726FD282C00F872A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE482CF1262C954A00C0A2D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,6 +524,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5A7B6DA526FD282C00F872A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A7B6DB426FD285000F872A1 /* OTFMagicBoxYamlTests.swift in Sources */,
+				5A7B6DAC26FD282C00F872A1 /* OTFMagicBoxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE482CEF262C954A00C0A2D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -515,6 +590,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5A7B6DAF26FD282C00F872A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE482CF2262C954A00C0A2D5 /* OTFMagicBox */;
+			targetProxy = 5A7B6DAE26FD282C00F872A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -527,6 +610,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5A7B6DB026FD282C00F872A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D25537G8CD;
+				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = MyCompany.OTFMagicBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox.app/OTFMagicBox";
+			};
+			name = Debug;
+		};
+		5A7B6DB126FD282C00F872A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D25537G8CD;
+				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = MyCompany.OTFMagicBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox.app/OTFMagicBox";
+			};
+			name = Release;
+		};
 		CE482D05262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -696,6 +821,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5A7B6DB226FD282C00F872A1 /* Build configuration list for PBXNativeTarget "OTFMagicBoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A7B6DB026FD282C00F872A1 /* Debug */,
+				5A7B6DB126FD282C00F872A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE482CEE262C954A00C0A2D5 /* Build configuration list for PBXProject "OTFMagicBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

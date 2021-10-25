@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Onboarding: Codable {
+struct Onboarding: Codable, Equatable {
     let image: String
     let description: String
 }
@@ -66,7 +66,7 @@ struct Withdrawal: Codable {
     let withdrawalInstructionText: String
 }
 
-struct HealthKitTypes: Codable {
+struct HealthKitTypes: Codable, Equatable  {
     let type: String
 }
 
