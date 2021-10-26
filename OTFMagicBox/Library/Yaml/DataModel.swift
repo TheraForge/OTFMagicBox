@@ -34,7 +34,7 @@ struct Consent: Codable {
  }
 
  struct ConsentDescription: Codable {
-     let show: String
+     let show: Bool
      let summary: String
      let content: String
  }

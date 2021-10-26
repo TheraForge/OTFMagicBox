@@ -19,20 +19,32 @@ class ConsentDocument: ORKConsentDocument {
         
         let consentTitle = YmlReader().consentTitle
         
-        title = consentTitle ?? "Consent Title"
+        title = consentTitle ?? Constants.YamlDefaults.ConsentTitle
         sections = []
         
         let sectionTypes: [ORKConsentSectionType] = [
             .overview,
+            .dataGathering,
             .privacy,
             .dataUse,
-            .studySurvey
+            .timeCommitment,
+            .studySurvey,
+            .studyTasks,
+            .withdrawing,
+            .custom
         ]
         
-        let consentData = (YmlReader().consent?.data ?? [ConsentDescription(show: "Default: consent title", summary: "Default: consent summary", content: "Default: consent content")])
+        let consentData = (YmlReader().consent?.data ?? [ConsentDescription(show: Constants.YamlDefaults.ConsentShow, summary: Constants.YamlDefaults.ConsentSummary, content: Constants.YamlDefaults.ConsentContent)])
         
-        for (sectionType, consentData) in zip(sectionTypes, consentData) where consentData.show == "yes" {
-                let section = ORKConsentSection(type: sectionType)
+        for (sectionType, consentData) in zip(sectionTypes, consentData) where consentData.show {
+            let section = ORKConsentSection(type: sectionType)
+           
+            if sectionType == .custom {
+                section.customImage = UIImage(named: Constants.Images.ConsentCustomImg)
+                section.summary = consentData.summary
+                section.content = consentData.content
+            }
+                
                 section.title = sectionType.description
                 section.summary = consentData.summary
                 section.content = consentData.content
@@ -55,34 +67,34 @@ extension ORKConsentSectionType: CustomStringConvertible {
     public var description: String {
         switch self {
         case .overview:
-            return "Overview"
+            return "Welcome"
             
         case .privacy:
-            return "Privacy"
+            return "Protecting your Data"
             
         case .dataUse:
-            return "DataUse"
+            return "Data Use"
             
         case .timeCommitment:
-            return "TimeCommitment"
+            return "Time Commitment"
             
         case .studySurvey:
-            return "StudySurvey"
+            return "Surveys"
             
         case .studyTasks:
-            return "StudyTasks"
+            return "Study Tasks"
             
         case .withdrawing:
             return "Withdrawing"
             
         case .custom:
-            return "Custom"
+            return "Custom consent section"
             
         case .onlyInDocument:
-            return "OnlyInDocument"
+            return "Only In Document"
             
         case .dataGathering:
-            return "DataGathering"
+            return "Data Processing"
             
         @unknown default:
             return ""
