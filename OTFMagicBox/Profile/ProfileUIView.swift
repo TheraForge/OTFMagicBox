@@ -13,7 +13,7 @@ struct ProfileUIView: View {
     
     var body: some View {
         VStack {
-            Text("Profile").font(.system(size: 25, weight:.bold))
+            Text("Profile").font(.headerFontStyle)
             List {
                 Section {
                     Text(email as? String ?? "")

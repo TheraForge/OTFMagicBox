@@ -24,17 +24,21 @@ struct LaunchView: View {
                 }
             }
         }.onAppear(perform: ({
-            if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-               self.didCompleteOnboarding = completed
-            }
+            completeOnBoarding()
         })).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
             if let newValue = notification.object as? Bool {
                 self.didCompleteOnboarding = newValue
-            } else if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-               self.didCompleteOnboarding = completed
+            } else {
+                completeOnBoarding()
             }
         }
         
+    }
+    
+    func completeOnBoarding() {
+        if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
+            self.didCompleteOnboarding = completed
+        }
     }
 }
 

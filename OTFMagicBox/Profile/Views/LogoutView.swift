@@ -18,7 +18,7 @@ struct LogoutView: View {
                 OTFTheraforgeNetwork.shared.signOut()
             }, label: {
                  Text("Logout")
-                    .font(.system(size: 20, weight: .regular, design: .default))
+                    .font(.basicFontStyle)
             })
             
             Spacer()

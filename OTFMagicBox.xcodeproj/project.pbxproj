@@ -14,6 +14,7 @@
 		5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03C266AA305007CCEB4 /* TaskSamples.swift */; };
 		5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03F266AA517007CCEB4 /* TaskItemView.swift */; };
 		5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */; };
+		5A430489272884CB00926584 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A430488272884CB00926584 /* Extension+Font.swift */; };
 		5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626E26D4A2EA00A4B4DF /* DataModel.swift */; };
 		5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */; };
 		5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */; };
@@ -87,6 +88,7 @@
 		5A41D03C266AA305007CCEB4 /* TaskSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSamples.swift; sourceTree = "<group>"; };
 		5A41D03F266AA517007CCEB4 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
+		5A430488272884CB00926584 /* Extension+Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		5A49626E26D4A2EA00A4B4DF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YmlReader.swift; sourceTree = "<group>"; };
 		5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */,
 				5A49632526EB5D8F00A4B4DF /* Extension+String.swift */,
+				5A430488272884CB00926584 /* Extension+Font.swift */,
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
 			);
 			path = Extension;
@@ -221,8 +224,8 @@
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
 			);
 			path = API;
-               sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +593,7 @@
 				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
+				5A430489272884CB00926584 /* Extension+Font.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,

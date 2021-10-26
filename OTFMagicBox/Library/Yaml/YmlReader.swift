@@ -57,8 +57,11 @@ public class YmlReader {
         return UIColor()
     }
     
-    var apiKey: String {
-        return dataModel!.apiKey
+    func apiKey() throws -> String {
+        guard let apiKey = dataModel?.apiKey else {
+            return Constants.YamlDefaults.APIKey
+        }
+        return apiKey
     }
     
     var loginPasswordless: Bool {
@@ -137,7 +140,15 @@ public class YmlReader {
     }
     
     var passcodeType: String {
-        return dataModel?.passcode.passcodeType ?? "4"
+        return dataModel?.passcode.passcodeType ?? Constants.Passcode.lengthFour
+    }
+    
+    var showGender: Bool {
+        return dataModel?.registration.showGender ?? false
+    }
+    
+    var showDateOfBirth: Bool {
+        return dataModel?.registration.showDateOfBirth ?? false
     }
     
     var failedLoginText: String? {

@@ -62,7 +62,7 @@ struct OnboardingView: View {
             }
                 .foregroundColor(self.color)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 35, weight: .bold, design: .default))
+                .font(.titleFontStyle)
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
@@ -81,7 +81,7 @@ struct OnboardingView: View {
                         .foregroundColor(.white)
                         .background(self.color)
                         .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
-                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .font(.subHeaderFontStyle)
                 })
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
@@ -103,7 +103,7 @@ struct OnboardingView: View {
                         .padding(Metrics.PADDING_BUTTON_LABEL)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(self.color)
-                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .font(.subHeaderFontStyle)
                         .overlay(
                                     RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
                                         .stroke(self.color, lineWidth: 2)

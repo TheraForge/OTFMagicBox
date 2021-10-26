@@ -15,8 +15,15 @@ import OTFResearchKit
 class LoginViewController: ORKLoginStepViewController {
     
     override func goForward() {
-        if let emailRes = result?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer,
-           let passwordRes = result?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+            let emailRes = result?.results?.first as? ORKTextQuestionResult
+            guard let email = emailRes?.textAnswer else {
+                return
+            }
+       
+            let passwordRes = result?.results?[1] as? ORKTextQuestionResult
+            guard let pass = passwordRes?.textAnswer else {
+                return
+            }
             let alert = UIAlertController(title: nil, message: "Logging in...", preferredStyle: .alert)
 
             let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -47,7 +54,6 @@ class LoginViewController: ORKLoginStepViewController {
                 }
             }
         }
-    }
     
     // Forgot password.
     override func forgotPasswordButtonTapped() {
@@ -69,7 +75,6 @@ class LoginViewController: ORKLoginStepViewController {
                         let alert = UIAlertController(title: "Password Reset Error!", message: error.localizedDescription, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                         
-                        alert.dismiss(animated: true, completion: nil)
                         self.present(alert, animated: true)
                     }
 
@@ -102,9 +107,14 @@ class LoginViewController: ORKLoginStepViewController {
         }
 
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: ({ _ in
-            let code = alert.textFields![0]
-            let newPassword = alert.textFields![1]
-            OTFTheraforgeNetwork.shared.resetPassword(email: email, code: code.text ?? "", newPassword: newPassword.text ?? "", completionHandler: ({ results in
+            guard let code = alert.textFields![0].text else {
+                fatalError("Invalid code")
+            }
+            guard let newPassword = alert.textFields![1].text else {
+                fatalError("Invalid password")
+            }
+            
+            OTFTheraforgeNetwork.shared.resetPassword(email: email, code: code, newPassword: newPassword, completionHandler: ({ results in
                 
                 switch results {
                 case .failure(let error):

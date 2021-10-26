@@ -13,8 +13,8 @@ struct Onboarding: Codable, Equatable {
 }
 
 struct Registration: Codable {
-    let showDateOfBirth: String
-    let showGender: String
+    let showDateOfBirth: Bool
+    let showGender: Bool
 }
 
 struct Login: Codable {

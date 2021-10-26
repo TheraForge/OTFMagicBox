@@ -289,13 +289,13 @@ DataModel:
  # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
  # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
   registration:
-    showDateOfBirth: 'yes'
-    showGender: 'yes'
+    showDateOfBirth: true
+    showGender: true
 
  # Login
  # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either 'true' or 'false'.
   login:
-    loginPasswordless: 'false'
+    loginPasswordless: false
   
  # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
     loginStepTitle: 'Almost done!'
@@ -327,7 +327,7 @@ DataModel:
  # CareKit
  # Boolean value will be used to mention whether you want to display the carekit features Schedule and Contacts.
  # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
-  useCareKit: 'true'
+  useCareKit: true
     
  # Withdrawal
  # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.

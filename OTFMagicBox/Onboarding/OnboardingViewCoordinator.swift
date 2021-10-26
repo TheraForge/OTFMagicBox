@@ -50,7 +50,7 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
-           if stepViewController.step?.identifier == "LoginStep" {
+        if stepViewController.step?.identifier == Constants.Login.Identifier {
     
                 let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
 
@@ -62,15 +62,23 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
                 alert.view.addSubview(loadingIndicator)
                 taskViewController.present(alert, animated: true, completion: nil)
                 
-            let stepResult = taskViewController.result.stepResult(forStepIdentifier: "RegistrationStep")
-            if let emailRes = stepResult?.results?.first as? ORKTextQuestionResult, let email = emailRes.textAnswer {
-                if let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult, let pass = passwordRes.textAnswer {
+            let stepResult = taskViewController.result.stepResult(forStepIdentifier: Constants.Registration.Identifier)
+            
+                let emailRes = stepResult?.results?.first as? ORKTextQuestionResult
+                guard let email = emailRes?.textAnswer else {
+                    return
+                }
+           
+                let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult
+                guard let pass = passwordRes?.textAnswer else {
+                    return
+                }
                     let givenName = stepResult?.results?[3] as? ORKTextQuestionResult
                     let familyName = stepResult?.results?[4] as? ORKTextQuestionResult
                     let gender = stepResult?.results?[5] as? ORKTextQuestionResult
                     let dob = stepResult?.results?[6] as? ORKTextQuestionResult
                     
-                    OTFTheraforgeNetwork.shared.signupRequest(first_name: givenName?.textAnswer ?? "",
+                    OTFTheraforgeNetwork.shared.signUpRequest(first_name: givenName?.textAnswer ?? "",
                                                               last_name: familyName?.textAnswer ?? "",
                                                               type: "patient", email: email, password: pass,
                                                               dob: dob?.textAnswer ?? "",
@@ -97,8 +105,6 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
                     }))
                     
                 }
-            }
-        }
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
