@@ -13,8 +13,8 @@ struct Onboarding: Codable, Equatable {
 }
 
 struct Registration: Codable {
-    let isDOB: String
-    let isGender: String
+    let showDateOfBirth: String
+    let showGender: String
 }
 
 struct Login: Codable {
@@ -26,19 +26,19 @@ struct Login: Codable {
 }
 
 struct Consent: Codable {
-    let reviewConsentStepText: String
-    let reasonForConsentText: String
-    let fileName: String
-    let title: String
-    let data: [ConsentData]
-}
+     let reviewConsentStepText: String
+     let reasonForConsentText: String
+     let fileName: String
+     let title: String
+     let data: [ConsentDescription]
+ }
 
-struct ConsentData: Codable {
-    let title: String
-    let summary: String
-    let content: String
-}
-
+ struct ConsentDescription: Codable {
+     let show: Bool
+     let summary: String
+     let content: String
+ }
+ 
 struct Passcode: Codable {
     let enable: Bool
     let passcodeOnReturnText: String

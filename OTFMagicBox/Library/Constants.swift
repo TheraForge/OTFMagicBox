@@ -101,6 +101,13 @@ enum Constants {
         static let ConsentTitle = "Default: consent title"
         static let HealthRecordsPermissionsTitle = "Default: health records permissions title"
         static let HealthRecordsPermissionsText = "Default: health records permissions text"
+        static let ConsentSummary = "Default: consent summary"
+        static let ConsentContent = "Default: consent content"
+        static let ConsentShow = true
+    }
+    
+    struct Images {
+        static let ConsentCustomImg = "consent_custom_img1"
     }
     
     struct Passcode {
