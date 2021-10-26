@@ -20,7 +20,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: 'contact@TheraForge.com', here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon 'contact@TheraForge.com' is the value assigned for that Key.
+# Example: teamEmail: 'info@hippocratestech.com', here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon 'info@hippocratestech.com' is the value assigned for that Key.
 
 
 # Default Values:-
@@ -82,51 +82,52 @@ DataModel:
         
       # Color codes
       # Colors will be used in the design of the application.
-      # Value for the color should start with #, for example '#5b4337'.
+      # Please choose the colors according to Human Interface Guidelines from Apple.
+      # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
       - name: 'tintColor'
-        textValue: '#b6133f'
+        textValue: 'Blue'
       - name: 'label'
-        textValue: '#5b4337'
+        textValue: 'Teal'
       - name: 'secondaryLabel'
-        textValue: '#876351'
+        textValue: 'Brown'
       - name: 'tertiaryLabel'
-        textValue: '#1c135b'
+        textValue: 'Cyan'
       - name: 'customBackground'
-        textValue: '#331f24'
+        textValue: 'Brown'
       - name: 'secondaryCustomBackground'
-        textValue: '#0d2308'
+        textValue: 'Black'
       - name: 'customGroupedBackground'
-        textValue: '#54484c'
+        textValue: 'Brown'
       - name: 'secondaryCustomGroupedBackground'
-        textValue: '#5e5155'
+        textValue: 'Brown'
       - name: 'tertiaryCustomGroupedBackground'
-        textValue: '#2d2729'
+        textValue: 'Brown'
       - name: 'separator'
-        textValue: '#5d5d5d'
+        textValue: 'Gray'
       - name: 'customFill'
-        textValue: '#3445a0'
+        textValue: 'Blue'
       - name: 'secondaryCustomFill'
-        textValue: '#3749aa'
+        textValue: 'Mint'
       - name: 'tertiaryCustomFill'
-        textValue: '#3e52bf'
+        textValue: 'Teal'
       - name: 'quaternaryCustomFill'
-        textValue: '#445ad1'
+        textValue: 'Blue'
       - name: 'customBlue'
-        textValue: '#4d66ed'
+        textValue: 'blue'
       - name: 'customGray'
-        textValue: '#95aaad'
+        textValue: 'Gray'
       - name: 'customGray2'
-        textValue: '#8ea2a5'
+        textValue: 'Gray2'
       - name: 'customGray3'
-        textValue: '#819396'
+        textValue: 'Gray3'
       - name: 'customGray4'
-        textValue: '#748487'
+        textValue: 'Gray4'
       - name: 'customGray5'
-        textValue: '#6b7a7c'
+        textValue: 'Gray5'
       - name: 'black'
-        textValue: '#0f1111'
+        textValue: 'black'
       - name: 'white'
-        textValue: '#ffffff'
+        textValue: 'white'
         
       # Fonts
       # Fonts will be used in the design of the application.
@@ -195,21 +196,21 @@ DataModel:
         
         
 ##############################################################################
-#                      CardinalKit Configurations                            #
+#                               App Customization                            #
 ##############################################################################
 
  # Application Specifications.
-  studyTitle: 'TheraForge'
-  teamName: 'Digital Health Study'
-  teamEmail: 'contact@theraforge.com'
+  studyTitle: 'Health Study'
+  teamName: 'by Hippocrates Technologies'
+  teamEmail: 'info@hippocratestech.com'
   teamPhone: '123-456-7890'
-  copyright: 'Made at TheraForge'
+  copyright: 'Made by Hippocrates Technologies'
   teamWebsite: 'https://www.hippocratestech.com/'
   
  # CareKit and ResearchKit Specifications.
  
  # Onboarding
- # Onboarding contains an array of image and description values. You can add any number of values.
+ # Onboarding contains number of pages of image and description values. You can add any number of values.
  # Image can be any SF Symbols(version 1.1), Emoji Symbols or any other images from Assets.
  # It is mandatory to write the exact spelling for the image value, if the image is not found then the default string will be displayed.
  # If you are new to SF Symbols then read this apple document: https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/
@@ -223,41 +224,73 @@ DataModel:
    - image: '⏱'
      description: 'Find your health score in minutes'
      
+   - image: 'cross.case'
+     description: 'Test message'
+     
  # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
  # Property consentFileName is the name by which your consent file is created.
   consent:
     reviewConsentStepText: 'Review TheraForge Consent Form'
     reasonForConsentText: 'Consent to join the TheraForge Health Research Study.'
-    fileName: 'My Consent Form'
+    fileName: 'Consent Form Agreement File'
     title: 'TheraForge Consent'
 
  # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
  # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
  # Summary and content value can be same or different.
     data:
-      - title: "Overview"
-        summary: "Hi there"
-        content: "Hi there"
-     
-      - title: "Privacy"
-        summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-        content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-     
-      - title: "DataUse"
+ ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
+        content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
+        
+ ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
+        content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
+ 
+ ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+        content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+  
+ ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: false
         summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
         content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
-     
-      - title: "StudyTasks"
+        
+ ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
+        content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
+ 
+ ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
         summary: "Study tasks involve many aspects of daily functionalities."
+        content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
+        
+ ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
         content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+        
+ ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "You may withdraw your consent and discontinue participation at any time."
+        content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
+        
+ ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
+      - show: true
+        summary: "This is custom section."
+        content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
      
  # Registration
  # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
  # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
   registration:
-    isDOB: 'true'
-    isGender: 'true'
+    showDateOfBirth: 'yes'
+    showGender: 'yes'
 
  # Login
  # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either 'true' or 'false'.
@@ -275,6 +308,7 @@ DataModel:
  # Passcode
  # Properties passcodeOnReturnText and passcodeText are displayed on a passcode generation screen.
   passcode:
+    enable: true
     passcodeOnReturnText: 'Welcome back!'
     passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
   
@@ -283,8 +317,10 @@ DataModel:
   
  # Health Records
  # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
   healthRecords:
-    enabled: 'true'
+    enabled: 'false'
     permissionsText: 'Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted).'
     permissionsTitle: 'Permission to read Health Records 🏥'
   
@@ -307,7 +343,7 @@ DataModel:
  # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
  # BackgroundReadFrequency value can be: 'daily', 'weekly', 'hourly' or 'immediate'.
   healthKitData:
-    healthPermissionsTitle: 'Permission to read Activity Data 🏃🏽‍♀️'
+    healthPermissionsTitle: 'Permission to Read Activity Data 🏃🏽‍♀️'
     healthPermissionsText: 'Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data.'
     backgroundReadFrequency: 'immediate'
  

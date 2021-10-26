@@ -20,7 +20,9 @@ struct ProfileUIView: View {
                 }.listRowBackground(Color.white)
                 
                 Section {
-                    ChangePasscodeView()
+                    if YmlReader().isPasscodeEnabled {
+                        ChangePasscodeView()
+                    }
                     HelpView(site: YmlReader().teamWebsite)
                 }
                 

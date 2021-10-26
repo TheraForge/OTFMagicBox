@@ -25,7 +25,8 @@ public class YmlReader {
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String : DataModel].self, from: dataSet) else {
+                guard let data = try? YAMLDecoder().decode([String: DataModel].self, from: dataSet) else {
+                    OTFLog("Yaml decode error")
                     return
                 }
                 if data["DataModel"] != nil {
@@ -39,10 +40,8 @@ public class YmlReader {
     var primaryColor: UIColor {
         let valueSet = (dataModel?.designConfig ?? [])
         
-        for value in valueSet {
-            if value.name == "label" {
-                return UIColor().getColor(colorValue: value.textValue)
-            }
+        for value in valueSet where value.name == "label" {
+            return (value.textValue).color() ?? UIColor.black
         }
         return UIColor()
     }
@@ -52,10 +51,8 @@ public class YmlReader {
     var tintColor: UIColor {
         let valueSet = (dataModel?.designConfig ?? [])
         
-        for value in valueSet {
-            if value.name == "tintColor" {
-                return UIColor().getColor(colorValue: value.textValue)
-            }
+        for value in valueSet where value.name == "tintColor" {
+            return (value.textValue).color() ?? UIColor.black
         }
         return UIColor()
     }
@@ -129,6 +126,10 @@ public class YmlReader {
     
     var passcodeText: String {
         return dataModel?.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
+    }
+    
+    var isPasscodeEnabled: Bool {
+        return dataModel?.passcode.enable ?? true
     }
     
     var passcodeOnReturnText: String {
