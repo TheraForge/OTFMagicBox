@@ -18,7 +18,7 @@ struct Registration: Codable {
 }
 
 struct Login: Codable {
-    let loginPasswordless: Bool
+    let loginPasswordless: String
     let loginStepTitle: String
     let loginStepText: String
     let failedLoginTitle: String
@@ -34,13 +34,13 @@ struct Consent: Codable {
  }
 
  struct ConsentDescription: Codable {
-     let show: Bool
+     let show: String
      let summary: String
      let content: String
  }
  
 struct Passcode: Codable {
-    let enable: Bool
+    let enable: String
     let passcodeOnReturnText: String
     let passcodeText: String
     let passcodeType: String
@@ -82,6 +82,7 @@ struct DesignConfig: Codable {
 
 struct DataModel: Codable {
     let designConfig: [DesignConfig]
+    let apiKey: String
     let studyTitle: String
     let teamName: String
     let teamEmail: String
@@ -90,7 +91,7 @@ struct DataModel: Codable {
     let teamWebsite: String
     let passcode: Passcode
     let completionStep: CompletionStep
-    let useCareKit: Bool
+    let useCareKit: String
     let login: Login
     let registration: Registration
     let onboarding: [Onboarding]

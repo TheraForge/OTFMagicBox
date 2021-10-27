@@ -53,7 +53,8 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         /* **************************************************************
          *  STEP (3.5): get permission to collect HealthKit health records data
          **************************************************************/
-        let healthRecordsStep = HealthRecordsStep(identifier: Constants.Identifier.HealthRecordsStep)
+        // TODO: Add this after enabling HealthKit in Xcode
+        //let healthRecordsStep = HealthRecordsStep(identifier: "HealthRecords")
         
         /* **************************************************************
          *  STEP (4): ask user to enter their email address for login
@@ -66,15 +67,13 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         // swiftlint:disable all
         let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{10,}")
         
-        let registration = YmlReader().registration
-        
         var regOption = ORKRegistrationStepOption()
         
-        if registration?.showDateOfBirth == "yes" {
+        if YmlReader().showDateOfBirth {
             regOption.insert(.includeDOB)
         }
         
-        if registration?.showGender == "yes" {
+        if YmlReader().showGender {
             regOption.insert(.includeGender)
         }
         regOption.insert( .includeGivenName)
@@ -90,7 +89,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         } else {
             let loginStep = ORKLoginStep(identifier: Constants.Login.Identifier, title: Constants.Login.Title, text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
             
-            loginSteps = []
+            loginSteps = [registerStep, loginStep]
         }
         
         /* **************************************************************

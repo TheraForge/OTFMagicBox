@@ -4,7 +4,7 @@ platform :ios, '13.0'
 target 'OTFMagicBox' do
   use_frameworks!
   
-  source 'https://github.com/CocoaPods/Specs.git'
+  source 'https://cdn.cocoapods.org'
   source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
   pod 'OTFToolBoxCore'
@@ -13,5 +13,6 @@ target 'OTFMagicBox' do
   pod 'OTFCareKit'
   pod 'OTFResearchKit'
   pod 'OTFTemplateBox'
+  pod 'OTFCloudClientAPI'
 
 end

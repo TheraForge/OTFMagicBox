@@ -190,6 +190,9 @@ DataModel:
     
   # Start Date.
   startDate: '30/08/2020'
+  
+  # API key for the server integration.
+  apiKey: 'He3zxB6mkyevlP1KnIzKJk2vEKFgZMMfhuRwdNt7FniTmKrsHIgTx5ngYg0yRYCxHTJ3JTvMf37B60xhHw9ofamtXRHXmJQpexs1uufKkGPpJoLOilmlqvc6vbG8ztvWFKOT98awdW28yj3SraOh4tNT6UcmQdixtQb7Qz7BwfIftN0NybLPuq54uQEKorq33rCewHhu'
         
         
 ##############################################################################
@@ -238,47 +241,47 @@ DataModel:
  # Summary and content value can be same or different.
     data:
  ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
         content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
         
  ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
         content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
  
  ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
         content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
   
  ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: false
+      - show: 'false'
         summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
         content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
         
  ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
         content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
  
  ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "Study tasks involve many aspects of daily functionalities."
         content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
         
  ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
         content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
         
  ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "You may withdraw your consent and discontinue participation at any time."
         content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
         
  ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the 'show' key.
-      - show: true
+      - show: 'true'
         summary: "This is custom section."
         content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
      
@@ -286,8 +289,8 @@ DataModel:
  # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
  # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
   registration:
-    showDateOfBirth: 'yes'
-    showGender: 'yes'
+    showDateOfBirth: 'true'
+    showGender: 'true'
 
  # Login
  # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either 'true' or 'false'.
@@ -305,7 +308,7 @@ DataModel:
  # Passcode
  # Properties passcodeOnReturnText and passcodeText are displayed on a passcode generation screen.
   passcode:
-    enable: true
+    enable: 'true'
     passcodeOnReturnText: 'Welcome back!'
     passcodeText: 'Now you will create a passcode to identify yourself to the app and protect access to information you have entered.'
   

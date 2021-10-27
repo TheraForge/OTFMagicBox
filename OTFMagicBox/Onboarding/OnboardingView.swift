@@ -35,14 +35,14 @@ struct OnboardingView: View {
         
         // TODO: Add the actual default image, if the user doesnt enter any image.
         let onboardingdata = (YmlReader().onboardingData ?? [Onboarding(image: "image", description: "Default: This is the description.")]) as Array
- 
+        
         for data in onboardingdata {
             self.onboardingElements.append(OnboardingElement(image: data.image, description: data.description))
         }
         
         self.color = Color(YmlReader().primaryColor)
     }
-
+    
     /// Onboarding  view.
     var body: some View {
         VStack(spacing: 10) {
@@ -57,17 +57,17 @@ struct OnboardingView: View {
             Spacer(minLength: 2)
             
             VStack() {
-              Text(YmlReader().studyTitle)
-              Text(YmlReader().teamName)
+                Text(YmlReader().studyTitle)
+                Text(YmlReader().teamName)
             }
-                .foregroundColor(self.color)
-                .multilineTextAlignment(.center)
-                .font(.system(size: 35, weight: .bold, design: .default))
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+            .foregroundColor(self.color)
+            .multilineTextAlignment(.center)
+            .font(.titleFontStyle)
+            .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+            .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
             OnboardingItemView(self.onboardingElements.map { OnboardingDetailsView(image: $0.image, description: $0.description, color: self.color) })
-
+            
             Spacer()
             
             HStack {
@@ -75,13 +75,13 @@ struct OnboardingView: View {
                 Button(action: {
                     self.showingOnboard.toggle()
                 }, label: {
-                     Text("Join Study")
+                    Text("Join Study")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
                         .background(self.color)
                         .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
-                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .font(.subHeaderFontStyle)
                 })
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
@@ -90,7 +90,7 @@ struct OnboardingView: View {
                 }, content: {
                     ActivitiesViewController()
                 })
-        
+                
                 Spacer()
             }
             
@@ -99,15 +99,15 @@ struct OnboardingView: View {
                 Button(action: {
                     self.showingLogin.toggle()
                 }, label: {
-                     Text("I'm a Returning User")
+                    Text("I'm a Returning User")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(self.color)
-                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .font(.subHeaderFontStyle)
                         .overlay(
-                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                        .stroke(self.color, lineWidth: 2)
-                            )
+                            RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                .stroke(self.color, lineWidth: 2)
+                        )
                 })
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
@@ -116,7 +116,7 @@ struct OnboardingView: View {
                 }, content: {
                     LoginExistingUserViewController()
                 })
-        
+                
                 Spacer()
             }
             
@@ -140,7 +140,7 @@ struct OnboardingDetailsView: View {
     /// Onboarding detailed view.
     var body: some View {
         VStack(spacing: 10) {
-
+            
             Spacer()
             
             if image.containsEmojis() {
@@ -152,7 +152,7 @@ struct OnboardingDetailsView: View {
                     .resizable()
                     .frame(width: 40, height: 40)
             }
-    
+            
             Spacer()
             
             Text(description)
@@ -164,7 +164,7 @@ struct OnboardingDetailsView: View {
             Spacer()
         }
     }
-
+    
 }
 
 struct OnboardingView_Previews: PreviewProvider {

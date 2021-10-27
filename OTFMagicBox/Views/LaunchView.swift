@@ -9,15 +9,36 @@ import SwiftUI
 
 struct LaunchView: View {
     
+    @State var onboardingCompleted = false
+    
     var body: some View {
+        
         VStack(spacing: 10) {
-            //TODO: Fix this after backend connection.
-            OnboardingView()
-            //MainView()            
+            if onboardingCompleted {
+                MainView()
+            } else {
+                OnboardingView {
+                    didCompleteOnBoarding()
+                }
+            }
+        }.onAppear(perform: {
+            didCompleteOnBoarding()
+        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
+            if let newValue = notification.object as? Bool {
+                self.onboardingCompleted = newValue
+            } else {
+                didCompleteOnBoarding()
+            }
+        }
+        
+    }
+    
+    func didCompleteOnBoarding() {
+        if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
+            self.onboardingCompleted = completed
         }
     }
 }
-
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
