@@ -223,6 +223,8 @@
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
 			);
 			path = API;
+            sourceTree = "<group>";
+        };
 
 		5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */ = {
 			isa = PBXGroup;

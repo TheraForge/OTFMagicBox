@@ -114,7 +114,8 @@ enum Constants {
     struct API {
         static let developmentUrl = "https://theraforge.org/api"
         static let serverApiKey = "API-KEY"
-
+    }
+    
     struct Passcode {
         static let lengthSix = "6"
     }
