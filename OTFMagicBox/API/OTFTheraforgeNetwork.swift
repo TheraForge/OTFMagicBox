@@ -14,8 +14,6 @@ class OTFTheraforgeNetwork {
     
     var otfNetworkService: NetworkingLayer!
     
-    let apiKey = YmlReader().apiKey
-    
     var user: OTFCloudClientAPI.Response.User?
         
     private init() {
@@ -30,6 +28,12 @@ class OTFTheraforgeNetwork {
             OTFLog("Error: cannot create URL")
             return
           }
+        
+        guard let apiKey = try? YmlReader().apiKey() else {
+            OTFLog("Error: cannot find API key")
+            return
+        }
+        
         let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: apiKey)
         TheraForgeNetwork.configureNetwork(configurations)
         otfNetworkService = NetworkingLayer.shared
@@ -53,7 +57,7 @@ class OTFTheraforgeNetwork {
     
     // Registration request
     // swiftlint:disable all
-    public func signupRequest(first_name: String, last_name: String, type: String, email: String,
+    public func signUpRequest(first_name: String, last_name: String, type: String, email: String,
                               password: String, dob: String, gender: String,
                               completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: first_name,
@@ -86,6 +90,7 @@ class OTFTheraforgeNetwork {
             switch result {
             case .success(_):
                     DispatchQueue.main.async {
+                        self.user = nil
                         NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
                     }
             case .failure(_):

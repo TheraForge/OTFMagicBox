@@ -9,32 +9,34 @@ import SwiftUI
 
 struct LaunchView: View {
     
-    @State var didCompleteOnboarding = false
+    @State var onboardingCompleted = false
     
     var body: some View {
         
         VStack(spacing: 10) {
-            if didCompleteOnboarding {
+            if onboardingCompleted {
                 MainView()
             } else {
                 OnboardingView {
-                    if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-                       self.didCompleteOnboarding = completed
-                    }
+                    didCompleteOnBoarding()
                 }
             }
-        }.onAppear(perform: ({
-            if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-               self.didCompleteOnboarding = completed
-            }
-        })).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
+        }.onAppear(perform: {
+            didCompleteOnBoarding()
+        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
             if let newValue = notification.object as? Bool {
-                self.didCompleteOnboarding = newValue
-            } else if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-               self.didCompleteOnboarding = completed
+                self.onboardingCompleted = newValue
+            } else {
+                didCompleteOnBoarding()
             }
         }
         
+    }
+    
+    func didCompleteOnBoarding() {
+        if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
+            self.onboardingCompleted = completed
+        }
     }
 }
 

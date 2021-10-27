@@ -34,9 +34,9 @@ class ConsentDocument: ORKConsentDocument {
             .custom
         ]
         
-        let consentData = (YmlReader().consent?.data ?? [ConsentDescription(show: Constants.YamlDefaults.ConsentShow, summary: Constants.YamlDefaults.ConsentSummary, content: Constants.YamlDefaults.ConsentContent)])
+        let consentData = (YmlReader().consent?.data ?? [ConsentDescription(show: Constants.YamlDefaults.ConsentShow ? "true" : "false", summary: Constants.YamlDefaults.ConsentSummary, content: Constants.YamlDefaults.ConsentContent)])
         
-        for (sectionType, consentData) in zip(sectionTypes, consentData) where consentData.show {
+        for (sectionType, consentData) in zip(sectionTypes, consentData) where consentData.show == "true" {
             let section = ORKConsentSection(type: sectionType)
            
             if sectionType == .custom {

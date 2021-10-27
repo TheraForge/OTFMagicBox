@@ -57,12 +57,16 @@ public class YmlReader {
         return UIColor()
     }
     
-    var apiKey: String {
-        return dataModel!.apiKey
+    func apiKey() throws -> String {
+        guard let apiKey = dataModel?.apiKey else {
+            return Constants.YamlDefaults.APIKey
+        }
+        return apiKey
     }
     
     var loginPasswordless: Bool {
-        return dataModel?.login.loginPasswordless ?? false
+        guard let passwordless = dataModel?.login.loginPasswordless else { return false }
+        return passwordless == "true"
     }
     
     var loginStepTitle: String {
@@ -129,7 +133,8 @@ public class YmlReader {
     }
     
     var isPasscodeEnabled: Bool {
-        return dataModel?.passcode.enable ?? true
+        guard let passcode = dataModel?.passcode.enable else { return true }
+        return passcode != "false"
     }
     
     var passcodeOnReturnText: String {
@@ -137,7 +142,17 @@ public class YmlReader {
     }
     
     var passcodeType: String {
-        return dataModel?.passcode.passcodeType ?? "4"
+        return dataModel?.passcode.passcodeType ?? Constants.Passcode.lengthFour
+    }
+    
+    var showGender: Bool {
+        guard let showGender = dataModel?.registration.showGender else { return false }
+        return showGender == "true"
+    }
+    
+    var showDateOfBirth: Bool {
+        guard let showDOB = dataModel?.registration.showDateOfBirth else { return false }
+        return showDOB == "true"
     }
     
     var failedLoginText: String? {
@@ -157,7 +172,8 @@ public class YmlReader {
     }
     
     var useCareKit: Bool {
-        return dataModel?.useCareKit ?? false
+        guard let useCareKit = dataModel?.useCareKit else { return false }
+        return useCareKit == "true"
     }
     
     var backgroundReadFrequency: String? {

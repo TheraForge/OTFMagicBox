@@ -15,7 +15,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     func makeCoordinator() -> OnboardingTaskViewControllerDelegate {
         OnboardingTaskViewControllerDelegate()
     }
-
+    
     typealias UIViewControllerType = ORKTaskViewController
     
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {}
@@ -25,23 +25,23 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         var loginSteps: [ORKStep]
         
         let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass:        LoginViewController.self)
-            
+        
         loginSteps = [loginStep]
         
         // use the `ORKPasscodeStep` from ResearchKit.
         if YmlReader().isPasscodeEnabled {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
-        
+            
             let type = YmlReader().passcodeType
-        
+            
             if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
             } else {
                 passcodeStep.passcodeType = .type4Digit
             }
-                
+            
             passcodeStep.text = "Enter your passcode"
-        
+            
             loginSteps += [passcodeStep]
         }
         
