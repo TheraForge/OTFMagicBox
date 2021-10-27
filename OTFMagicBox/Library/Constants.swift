@@ -112,11 +112,6 @@ enum Constants {
         static let ConsentCustomImg = "consent_custom_img1"
     }
     
-    struct API {
-        static let developmentUrl = "https://theraforge.org/api"
-        static let serverApiKey = "API-KEY"
-    }
-    
     struct Passcode {
         static let lengthSix = "6"
         static let lengthFour = "4"
