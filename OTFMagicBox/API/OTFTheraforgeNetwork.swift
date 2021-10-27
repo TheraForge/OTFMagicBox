@@ -90,8 +90,8 @@ class OTFTheraforgeNetwork {
             switch result {
             case .success(_):
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
                         self.user = nil
+                        NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
                     }
             case .failure(_):
                     break

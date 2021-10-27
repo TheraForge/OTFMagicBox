@@ -12,7 +12,7 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .completed:
-           
+            
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
             }
@@ -51,60 +51,59 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
         if stepViewController.step?.identifier == Constants.Login.Identifier {
-    
-                let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
-
-                let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-                loadingIndicator.hidesWhenStopped = true
-                loadingIndicator.style = UIActivityIndicatorView.Style.medium
-                loadingIndicator.startAnimating()
-
-                alert.view.addSubview(loadingIndicator)
-                taskViewController.present(alert, animated: true, completion: nil)
-                
+            
+            let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
+            
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.medium
+            loadingIndicator.startAnimating()
+            
+            alert.view.addSubview(loadingIndicator)
+            taskViewController.present(alert, animated: true, completion: nil)
+            
             let stepResult = taskViewController.result.stepResult(forStepIdentifier: Constants.Registration.Identifier)
             
-                let emailRes = stepResult?.results?.first as? ORKTextQuestionResult
-                guard let email = emailRes?.textAnswer else {
-                    return
-                }
-           
-                let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult
-                guard let pass = passwordRes?.textAnswer else {
-                    return
-                }
-                    let givenName = stepResult?.results?[3] as? ORKTextQuestionResult
-                    let familyName = stepResult?.results?[4] as? ORKTextQuestionResult
-                    let gender = stepResult?.results?[5] as? ORKTextQuestionResult
-                    let dob = stepResult?.results?[6] as? ORKTextQuestionResult
+            let emailRes = stepResult?.results?.first as? ORKTextQuestionResult
+            guard let email = emailRes?.textAnswer else {
+                return
+            }
+            
+            let passwordRes = stepResult?.results?[1] as? ORKTextQuestionResult
+            guard let pass = passwordRes?.textAnswer else {
+                return
+            }
+            let givenName = stepResult?.results?[3] as? ORKTextQuestionResult
+            let familyName = stepResult?.results?[4] as? ORKTextQuestionResult
+            let gender = stepResult?.results?[5] as? ORKTextQuestionResult
+            let dob = stepResult?.results?[6] as? ORKTextQuestionResult
+            
+            OTFTheraforgeNetwork.shared.signUpRequest(first_name: givenName?.textAnswer ?? "",
+                                                      last_name: familyName?.textAnswer ?? "",
+                                                      type: "patient", email: email, password: pass,
+                                                      dob: dob?.textAnswer ?? "",
+                                                      gender: gender?.textAnswer ?? "") { results in
+                switch results {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        alert.dismiss(animated: true) {
+                            let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                            taskViewController.present(alert, animated: true)
+                        }
+                    }
                     
-                    OTFTheraforgeNetwork.shared.signUpRequest(first_name: givenName?.textAnswer ?? "",
-                                                              last_name: familyName?.textAnswer ?? "",
-                                                              type: "patient", email: email, password: pass,
-                                                              dob: dob?.textAnswer ?? "",
-                                                              gender: gender?.textAnswer ?? "",
-                                                       completionHandler: ({ results in
-                         switch results {
-                         case .failure(let error):
-                                  print(error.localizedDescription)
-                                  DispatchQueue.main.async {
-                                       alert.dismiss(animated: true) {
-                                       let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
-                                       alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                                       taskViewController.present(alert, animated: true)
-                                   }
-                                  }
-
-                         case .success(let result):
-                                   print(result)
-                                   DispatchQueue.main.async {
-                                        alert.dismiss(animated: true, completion: nil)
-                                   }
-                       }
-
-                    }))
-                    
+                case .success(let result):
+                    print(result)
+                    DispatchQueue.main.async {
+                        alert.dismiss(animated: true, completion: nil)
+                    }
                 }
+                
+            }
+            
+        }
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
