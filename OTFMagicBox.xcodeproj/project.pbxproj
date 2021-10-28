@@ -15,6 +15,7 @@
 		5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03F266AA517007CCEB4 /* TaskItemView.swift */; };
 		5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */; };
 		5A430489272884CB00926584 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A430488272884CB00926584 /* Extension+Font.swift */; };
+		5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049B272ADF7900926584 /* Extension+Date.swift */; };
 		5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626E26D4A2EA00A4B4DF /* DataModel.swift */; };
 		5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */; };
 		5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */; };
@@ -92,6 +93,7 @@
 		5A41D03F266AA517007CCEB4 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
 		5A430488272884CB00926584 /* Extension+Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
+		5A43049B272ADF7900926584 /* Extension+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		5A49626E26D4A2EA00A4B4DF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YmlReader.swift; sourceTree = "<group>"; };
 		5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				5A430488272884CB00926584 /* Extension+Font.swift */,
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
 				84771FA8272974B700468E0E /* Extension+Image.swift */,
+				5A43049B272ADF7900926584 /* Extension+Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
 				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
+				5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
 				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
 				5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */,

@@ -75,14 +75,22 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
             }
             let givenName = stepResult?.results?[3] as? ORKTextQuestionResult
             let familyName = stepResult?.results?[4] as? ORKTextQuestionResult
-            let gender = stepResult?.results?[5] as? ORKTextQuestionResult
-            let dob = stepResult?.results?[6] as? ORKTextQuestionResult
             
-            OTFTheraforgeNetwork.shared.signUpRequest(firstName: givenName?.textAnswer ?? "",
-                                                      lastName: familyName?.textAnswer ?? "",
-                                                      type: "patient", email: email, password: pass,
-                                                      dob: dob?.textAnswer ?? "",
-                                                      gender: gender?.textAnswer ?? "") { results in
+            let genderResult = stepResult?.results?[5] as? ORKChoiceQuestionResult
+            let dobResult = stepResult?.results?[6] as? ORKDateQuestionResult
+            
+            guard let gender = genderResult?.choiceAnswers?.first as? String else {
+                return
+            }
+            
+            guard let dob = dobResult?.dateAnswer?.toString() else {
+                return
+            }
+            
+            OTFTheraforgeNetwork.shared.signUpRequest(firstName: givenName?.textAnswer ?? Constants.patientFirstName,
+                                                      lastName: familyName?.textAnswer ?? Constants.patientLastName,
+                                                      type: Constants.userType, email: email, password: pass,
+                                                      dob: dob, gender: gender) { results in
                 switch results {
                 case .failure(let error):
                     print(error.localizedDescription)

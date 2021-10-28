@@ -10,6 +10,9 @@ import Foundation
 enum Constants {
     static let app = "otfmagicbox.theraforge"
     static let patientEmail = "patientEmail"
+    static let userType = "patient"
+    static let patientFirstName = "patientFirstName"
+    static let patientLastName = "patientLastName"
     
     static let yamlFile = "AppSysParameters.yml"
     
