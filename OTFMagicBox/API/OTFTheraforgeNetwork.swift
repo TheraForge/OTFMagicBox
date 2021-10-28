@@ -52,11 +52,11 @@ class OTFTheraforgeNetwork {
     
     // Registration request
     // swiftlint:disable all
-    public func signUpRequest(first_name: String, last_name: String, type: String, email: String,
+    public func signUpRequest(firstName: String, lastName: String, type: String, email: String,
                               password: String, dob: String, gender: String,
                               completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: first_name,
-                                                last_name: last_name, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
+        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName,
+                                                last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
        
             completionHandler(result)
         }

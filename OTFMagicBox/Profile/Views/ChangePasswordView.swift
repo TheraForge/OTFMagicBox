@@ -45,7 +45,7 @@ struct ChangePasswordDeatilsView: View {
             
             Spacer()
             
-            Image.theraforgeLogo
+            Image.theraforgeLogo.logoStyle()
             
             Spacer()
             

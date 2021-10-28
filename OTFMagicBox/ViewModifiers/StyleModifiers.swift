@@ -28,3 +28,13 @@ extension View {
         }
     }
 }
+
+
+extension Image {
+    func logoStyle() -> some View {
+        self.resizable()
+            .scaledToFit()
+            .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN * 4)
+            .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN * 4)
+    }
+}

@@ -48,7 +48,7 @@ struct OnboardingView: View {
         VStack(spacing: 10) {
             Spacer()
             
-            Image.theraforgeLogo
+            Image.theraforgeLogo.logoStyle()
             
             Spacer(minLength: 2)
             
