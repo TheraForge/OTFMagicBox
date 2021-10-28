@@ -41,7 +41,7 @@ public class YmlReader {
         let valueSet = (dataModel?.designConfig ?? [])
         
         for value in valueSet where value.name == "label" {
-            return (value.textValue).color() ?? UIColor.black
+            return value.textValue.color ?? UIColor.black
         }
         return UIColor()
     }
@@ -52,12 +52,12 @@ public class YmlReader {
         let valueSet = (dataModel?.designConfig ?? [])
         
         for value in valueSet where value.name == "tintColor" {
-            return (value.textValue).color() ?? UIColor.black
+            return value.textValue.color ?? UIColor.black
         }
         return UIColor()
     }
     
-    func apiKey() throws -> String {
+    var apiKey: String {
         guard let apiKey = dataModel?.apiKey else {
             return Constants.YamlDefaults.APIKey
         }

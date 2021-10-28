@@ -48,11 +48,7 @@ struct OnboardingView: View {
         VStack(spacing: 10) {
             Spacer()
             
-            UIImage().loadImage(named: "TheraforgeLogo")
-                .resizable()
-                .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+            Image.theraforgeLogo
             
             Spacer(minLength: 2)
             
@@ -143,12 +139,12 @@ struct OnboardingDetailsView: View {
             
             Spacer()
             
-            if image.containsEmojis() {
+            if image.containsEmojis {
                 Text(image)
                     .foregroundColor(.white)
                     .font(.system(size: 42, weight: .light, design: .default))
             } else {
-                UIImage().loadImage(named: image)
+                UIImage.loadImage(named: image)
                     .resizable()
                     .frame(width: 40, height: 40)
             }

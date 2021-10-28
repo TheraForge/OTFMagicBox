@@ -14,20 +14,20 @@ struct ChangePasswordView: View {
     @State var showResetPassword = false
     
     var body: some View {
-            HStack {
-                Text("Reset Passsword")
-                Spacer()
-                Text("›")
-            }.frame(height: 60)
-            .contentShape(Rectangle())
-            .gesture(TapGesture().onEnded {
-                self.showResetPassword.toggle()
-            }).sheet(isPresented: $showResetPassword, onDismiss: {
-                
-            }, content: {
-                ChangePasswordDeatilsView()
-            })
-        }
+        HStack {
+            Text("Reset Passsword")
+            Spacer()
+            Text("›")
+        }.frame(height: 60)
+        .contentShape(Rectangle())
+        .gesture(TapGesture().onEnded {
+            self.showResetPassword.toggle()
+        }).sheet(isPresented: $showResetPassword, onDismiss: {
+            
+        }, content: {
+            ChangePasswordDeatilsView()
+        })
+    }
 }
 
 // View where we can reset the password.
@@ -45,63 +45,52 @@ struct ChangePasswordDeatilsView: View {
             
             Spacer()
             
-            UIImage().loadImage(named: "TheraforgeLogo")
-                .resizable()
-                .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN * 4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN * 4)
+            Image.theraforgeLogo
             
             Spacer()
             
             TextField("Email", text: $email)
-                            .disabled(true)
-                            .autocapitalization(.none)
-                            .padding()
-                            .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
-                            .padding()
-
+                .style(.emailField)
+                .disabled(true)
+                
             SecureField("Old Password", text: $oldPassword)
-                            .padding()
-                            .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
-                            .padding()
-
+                .style(.secureField)
+            
             SecureField("New Password", text: $newPassword)
-                            .padding()
-                            .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
-                            .padding()
-
+                .style(.secureField)
+            
             Spacer()
             
             Button(action: {
                 OTFTheraforgeNetwork.shared.changePassword(email: email, oldPassword: oldPassword, newPassword: newPassword, completionHandler: ({ results in
+                    
+                    switch results {
+                    case .failure(let error):
+                        showFailureAlert = true
+                        print(error.localizedDescription)
                         
-                        switch results {
-                        case .failure(let error):
-                            showFailureAlert = true
-                            print(error.localizedDescription)
-
-                        case .success:
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        
-                    }))
+                    case .success:
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                }))
             }, label: {
-                 Text("Reset Password")
+                Text("Reset Password")
                     .padding(Metrics.PADDING_BUTTON_LABEL)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(self.color)
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .overlay(
-                                RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                    .stroke(self.color, lineWidth: 2)
-                        )
+                        RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                            .stroke(self.color, lineWidth: 2)
+                    )
             })
             .alert(isPresented: $showFailureAlert, content: ({
-                        Alert(title: Text("Password Reset Error!"), message: Text(""), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Password Reset Error!"), message: Text(""), dismissButton: .default(Text("OK")))
             }))
-                        
+            
             Spacer()
         }
-
+        
     }
 }

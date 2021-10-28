@@ -29,12 +29,7 @@ class OTFTheraforgeNetwork {
             return
           }
         
-        guard let apiKey = try? YmlReader().apiKey() else {
-            OTFLog("Error: cannot find API key")
-            return
-        }
-        
-        let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: apiKey)
+        let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: YmlReader().apiKey)
         TheraForgeNetwork.configureNetwork(configurations)
         otfNetworkService = NetworkingLayer.shared
     }
