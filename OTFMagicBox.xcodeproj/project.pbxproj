@@ -305,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				5AB1806E26B8849A007AF766 /* ProfileUIView.swift */,
-				844270A0272A6596000F7D78 /* ViewModifiers */,
 				5AB1806F26B8849A007AF766 /* Views */,
 			);
 			path = Profile;
@@ -389,6 +388,7 @@
 				5AB1806D26B8849A007AF766 /* Profile */,
 				5AB1806426B87FCB007AF766 /* Schedule */,
 				5A41D164266CBA41007CCEB4 /* Views */,
+				844270A0272A6596000F7D78 /* ViewModifiers */,
 				5A41D032266A91B0007CCEB4 /* Tasks */,
 				5A41CD0D2664D729007CCEB4 /* HealthData */,
 				5AADFD44264E86C40069FEF7 /* Consent */,
