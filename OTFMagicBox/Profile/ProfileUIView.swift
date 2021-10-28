@@ -36,6 +36,10 @@ struct ProfileUIView: View {
                 }
                 
                 Section {
+                    ConsentDocumentView()
+                }
+                
+                Section {
                     WithdrawView()
                 }
                 

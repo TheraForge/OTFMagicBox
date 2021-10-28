@@ -25,13 +25,12 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
                 consentDocument.makePDF { (data, error) -> Void in
                     
                     var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-                    docURL = docURL?.appendingPathComponent("\(YmlReader().teamName).pdf") as NSURL?
+                    docURL = docURL?.appendingPathComponent("\(YmlReader().consentFileName).pdf") as NSURL?
                     
                     do {
                         let url = docURL! as URL
                         try data?.write(to: url)
-                        
-                        UserDefaults.standard.set(url.path, forKey: "consentFormURL")
+                        UserDefaults.standard.set(url.path, forKey: Constants.UserDefaults.ConsentDocumentURL)
                         
                     } catch let error {
                         

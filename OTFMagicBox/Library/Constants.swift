@@ -36,6 +36,7 @@ enum Constants {
         
         //Consent
         static let ConsentDocumentSignature = "ConsentDocumentParticipantSignature"
+        static let ConsentDocumentURL = "consentFormURL"
         
         //Misc
         static let FirstRun = "firstRun"
