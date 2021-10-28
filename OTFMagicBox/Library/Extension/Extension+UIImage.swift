@@ -20,7 +20,7 @@ extension UIImage {
      
     Remark:- Use this method to display any of the images in your application. This method supports all kind of images like SF Symbols or any images saved from          Assets.
      */
-    func loadImage (named: String) -> Image {
+    static func loadImage (named: String) -> Image {
         if let sfImage = UIImage(systemName: named){
             return Image(uiImage: sfImage)
         }

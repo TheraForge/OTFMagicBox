@@ -14,7 +14,7 @@ import UIKit
 extension String {
     
     // Returns true if the given string contains Emoji.
-    func containsEmojis() -> Bool {
+    var containsEmojis: Bool {
         if count == 0 {
             return false
         }
@@ -25,7 +25,7 @@ extension String {
     }
     
     // swiftlint:disable all
-    func color() -> UIColor? {
+    var color: UIColor? {
         switch self {
         case "Red":
                 return UIColor.red

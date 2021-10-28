@@ -18,24 +18,24 @@ struct MainView: View {
     var body: some View {
         TabView {
             TasksUIView(color: self.color).tabItem {
-                UIImage().loadImage(named: "tab_tasks").renderingMode(.template)
+                UIImage.loadImage(named: "tab_tasks").renderingMode(.template)
                 Text("Tasks")
             }
             
             if YmlReader().useCareKit {
                 ScheduleViewControllerRepresentable().tabItem {
-                    UIImage().loadImage(named: "tab_schedule").renderingMode(.template)
+                    UIImage.loadImage(named: "tab_schedule").renderingMode(.template)
                     Text("Schedule")
                 }
                 
                 ContactsViewController().tabItem {
-                    UIImage().loadImage(named: "tab_care").renderingMode(.template)
+                    UIImage.loadImage(named: "tab_care").renderingMode(.template)
                     Text("Contacts")
                 }
             }
             
             ProfileUIView().tabItem {
-                UIImage().loadImage(named: "tab_profile").renderingMode(.template)
+                UIImage.loadImage(named: "tab_profile").renderingMode(.template)
                 Text("Profile")
             }
         }

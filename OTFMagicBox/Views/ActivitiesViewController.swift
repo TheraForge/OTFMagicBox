@@ -53,6 +53,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         /* **************************************************************
          *  STEP (3.5): get permission to collect HealthKit health records data
          **************************************************************/
+
         // TODO: Add this after enabling HealthKit in Xcode
         //let healthRecordsStep = HealthRecordsStep(identifier: "HealthRecords")
         

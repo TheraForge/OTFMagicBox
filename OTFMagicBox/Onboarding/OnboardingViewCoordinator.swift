@@ -78,8 +78,8 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
             let gender = stepResult?.results?[5] as? ORKTextQuestionResult
             let dob = stepResult?.results?[6] as? ORKTextQuestionResult
             
-            OTFTheraforgeNetwork.shared.signUpRequest(first_name: givenName?.textAnswer ?? "",
-                                                      last_name: familyName?.textAnswer ?? "",
+            OTFTheraforgeNetwork.shared.signUpRequest(firstName: givenName?.textAnswer ?? "",
+                                                      lastName: familyName?.textAnswer ?? "",
                                                       type: "patient", email: email, password: pass,
                                                       dob: dob?.textAnswer ?? "",
                                                       gender: gender?.textAnswer ?? "") { results in

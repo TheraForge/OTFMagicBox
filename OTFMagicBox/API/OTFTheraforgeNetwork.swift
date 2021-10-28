@@ -29,12 +29,7 @@ class OTFTheraforgeNetwork {
             return
           }
         
-        guard let apiKey = try? YmlReader().apiKey() else {
-            OTFLog("Error: cannot find API key")
-            return
-        }
-        
-        let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: apiKey)
+        let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: YmlReader().apiKey)
         TheraForgeNetwork.configureNetwork(configurations)
         otfNetworkService = NetworkingLayer.shared
     }
@@ -57,11 +52,11 @@ class OTFTheraforgeNetwork {
     
     // Registration request
     // swiftlint:disable all
-    public func signUpRequest(first_name: String, last_name: String, type: String, email: String,
+    public func signUpRequest(firstName: String, lastName: String, type: String, email: String,
                               password: String, dob: String, gender: String,
                               completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: first_name,
-                                                last_name: last_name, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
+        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName,
+                                                last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
        
             completionHandler(result)
         }
@@ -96,6 +91,19 @@ class OTFTheraforgeNetwork {
             case .failure(_):
                     break
             }
+        })
+    }
+    
+    // Change password request.
+    public func changePassword(email: String, oldPassword: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
+        otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword), completionHandler: { (result) in
+            switch result {
+            case .success(let response):
+                    print(response)
+            case .failure(let error):
+                    print(error)
+            }
+            completionHandler(result)
         })
     }
 
