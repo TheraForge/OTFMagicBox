@@ -69,5 +69,15 @@ extension String {
                 return nil
         }
     }
+    
+    func toDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        guard let date = dateFormatter.date(from: self) else {
+            fatalError()
+        }
+      
+        return date
+    }
 
 }

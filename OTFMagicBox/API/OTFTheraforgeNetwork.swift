@@ -42,6 +42,10 @@ class OTFTheraforgeNetwork {
             case .success(let response):
                     self.user = response.data
                     UserDefaults.standard.set(response.data.email, forKey: Constants.patientEmail)
+                    UserDefaults.standard.set(self.user?.firstName, forKey: Constants.UserDefaults.patientFirstName)
+                    UserDefaults.standard.set(self.user?.lastName, forKey: Constants.UserDefaults.patientLastName)
+                    UserDefaults.standard.set(self.user?.gender?.rawValue, forKey: Constants.UserDefaults.patientGender)
+                    UserDefaults.standard.set(self.user?.dob, forKey: Constants.UserDefaults.patientDob)
             case .failure(_):
                     break
             }

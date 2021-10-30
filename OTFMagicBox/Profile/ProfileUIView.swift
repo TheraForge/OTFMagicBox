@@ -16,8 +16,8 @@ struct ProfileUIView: View {
             Text("Profile").font(.headerFontStyle)
             List {
                 Section {
-                    Text(email as? String ?? "")
-                }.listRowBackground(Color.white)
+                    UpdateUserProfileView()
+                }
                 
                 Section {
                     if YmlReader().isPasscodeEnabled {

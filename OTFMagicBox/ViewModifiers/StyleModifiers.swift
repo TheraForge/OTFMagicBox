@@ -10,12 +10,19 @@ import SwiftUI
 enum CustomStyle {
     case emailField
     case secureField
+    case textField
 }
 
 extension View {
     @ViewBuilder func style(_ style: CustomStyle) -> some View {
         switch style {
         case .emailField:
+            self.autocapitalization(.none)
+                .padding()
+                .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
+                .padding()
+            
+        case .textField:
             self.autocapitalization(.none)
                 .padding()
                 .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
@@ -37,4 +44,12 @@ extension Image {
             .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN * 4)
             .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN * 4)
     }
+    
+    func iconStyle() -> some View {
+        self.resizable()
+            .clipped()
+            .clipShape(Circle())
+            .overlay(Circle().stroke(Color.blue, lineWidth: 2.0))
+    }
 }
+
