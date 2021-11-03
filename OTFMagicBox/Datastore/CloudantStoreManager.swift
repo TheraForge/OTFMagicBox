@@ -35,9 +35,6 @@ class CloudantStoreManager {
     
     private init() {
         cloudantStore = try? StoreService.shared.currentStore()
-        syncCloudantStore { error in
-            print(error ?? "Successfully synced!")
-        }
     }
     
     func syncCloudantStore(_ completion: @escaping ((Error?) -> Void)) {

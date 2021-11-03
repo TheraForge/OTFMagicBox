@@ -52,6 +52,9 @@ class CareKitManager: NSObject {
         
         if let cloudantStore = CloudantStoreManager.shared.cloudantStore {
             coordinator.attach(store: cloudantStore)
+            CloudantStoreManager.shared.syncCloudantStore { error in
+                print(error ?? "Successfully synced!")
+            }
         }
         
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)

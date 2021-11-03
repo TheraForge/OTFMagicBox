@@ -14,8 +14,8 @@ struct MainView: View {
     
     init() {
         self.color = Color(YmlReader().primaryColor)
-        TheraForgeNetwork.shared.refreshToken { _ in
-            
+        OTFTheraforgeNetwork.shared.refreshToken { response in
+            print(response)
         }
     }
     
