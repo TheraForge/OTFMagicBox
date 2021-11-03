@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct LaunchView: View {
     
-    @State var onboardingCompleted = false
+    @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     
     var body: some View {
         
         VStack(spacing: 10) {
-            if onboardingCompleted {
+            if onboardingCompleted, TheraForgeKeychainService.shared.loadUser() != nil {
                 MainView()
             } else {
                 OnboardingView {

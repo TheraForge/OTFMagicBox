@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct MainView: View {
     
@@ -13,6 +14,9 @@ struct MainView: View {
     
     init() {
         self.color = Color(YmlReader().primaryColor)
+        TheraForgeNetwork.shared.refreshToken { _ in
+            
+        }
     }
     
     var body: some View {

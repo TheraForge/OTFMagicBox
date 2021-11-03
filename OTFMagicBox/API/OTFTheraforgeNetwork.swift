@@ -106,5 +106,14 @@ class OTFTheraforgeNetwork {
             completionHandler(result)
         })
     }
+    
+    func refreshToken(_ completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
+        guard TheraForgeKeychainService.shared.loadAuth()?.refreshToken != nil else {
+            completionHandler(.failure(.missingCredential))
+            return
+        }
+        
+        TheraForgeNetwork.shared.refreshToken(completionHandler: completionHandler)
+    }
 
 }

@@ -8,9 +8,9 @@ target 'OTFMagicBox' do
   source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
   pod 'OTFToolBoxCore'
-  pod 'OTFCloudantStore'
+  pod 'OTFCloudantStore/CloudantCareHealth'
   pod 'OTFCDTDatastore'
-  pod 'OTFCareKit'
+  pod 'OTFCareKit/CareHealth'
   pod 'OTFResearchKit'
   pod 'OTFTemplateBox'
   pod 'OTFCloudClientAPI'

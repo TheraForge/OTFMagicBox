@@ -145,6 +145,9 @@ enum Constants {
     
     struct API {
         static let developmentUrl = "https://theraforge.org/api"
+        static let dbProxyURL = API.developmentUrl + "/v1/db/"
+        static let dbProxyEmail = "test_patient1@test.com"
+        static let dbProxyPassword = "123123123"
     }
     
 }
