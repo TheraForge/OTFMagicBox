@@ -11,12 +11,15 @@ import OTFCloudClientAPI
 class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
 
     func interceptRequest(in context: CDTHTTPInterceptorContext) -> CDTHTTPInterceptorContext? {
+        context.request.setValue("\(TheraForgeNetwork.shared.identifierForVendor)",
+                                 forHTTPHeaderField: "Client")
+        context.request.addValue("\(TheraForgeNetwork.configurations!.apiKey)",
+                                 forHTTPHeaderField: "API-KEY")
+        
         if let currentAuth = TheraForgeNetwork.shared.currentAuth {
-            context.request.setValue("\(TheraForgeNetwork.shared.identifierForVendor)",
-                                     forHTTPHeaderField: "Client")
             context.request.setValue("Bearer \(currentAuth.token)", forHTTPHeaderField: "Authorization")
-            context.request.addValue("\(TheraForgeNetwork.configurations!.apiKey)",
-                                     forHTTPHeaderField: "API-KEY")
+        } else if let auth = TheraForgeKeychainService.shared.loadAuth() {
+            context.request.setValue("Bearer \(auth.token)", forHTTPHeaderField: "Authorization")
         }
         return context
     }

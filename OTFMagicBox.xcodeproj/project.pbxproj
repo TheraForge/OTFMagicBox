@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		53765CFF95C118AF904A9088 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18391B2E6452349B47367E05 /* Pods_OTFMagicBox.framework */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
 		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
 		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
@@ -62,11 +61,13 @@
 		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
 		840682082731BEC9008339D5 /* Extension+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840682072731BEC9008339D5 /* Extension+URLRequest.swift */; };
-		8406820B2731BF3A008339D5 /* CloudantStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820A2731BF3A008339D5 /* CloudantStoreManager.swift */; };
+		8406820B2731BF3A008339D5 /* CloudantSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820A2731BF3A008339D5 /* CloudantSyncManager.swift */; };
 		8406820D2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820C2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift */; };
+		8406820F2732AF26008339D5 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820E2732AF26008339D5 /* SSEAndSyncManager.swift */; };
 		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
 		844270A8272C2076000F7D78 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A7272C2076000F7D78 /* UserDefaultsManager.swift */; };
 		84771FA9272974B700468E0E /* Extension+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84771FA8272974B700468E0E /* Extension+Image.swift */; };
+		B6CAE9DC71E4FB8FFDCB5350 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4331FC09A29791B28C0E5695 /* Pods_OTFMagicBox.framework */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
 		CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */; };
 		CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */; };
@@ -87,8 +88,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18391B2E6452349B47367E05 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		27574276CA75EF0450D1F0E3 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		1DFD6CD6DD155E701DD41D4A /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		4331FC09A29791B28C0E5695 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AFCA6E784BD976C502CE3F3 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
 		5A41D036266A955C007CCEB4 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -146,12 +148,12 @@
 		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		840682072731BEC9008339D5 /* Extension+URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLRequest.swift"; sourceTree = "<group>"; };
-		8406820A2731BF3A008339D5 /* CloudantStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantStoreManager.swift; sourceTree = "<group>"; };
+		8406820A2731BF3A008339D5 /* CloudantSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantSyncManager.swift; sourceTree = "<group>"; };
 		8406820C2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheraForgeHTTPInterceptor.swift; sourceTree = "<group>"; };
+		8406820E2732AF26008339D5 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
 		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
 		844270A7272C2076000F7D78 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
-		A845376DCC7D192AFB852674 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,7 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
-				53765CFF95C118AF904A9088 /* Pods_OTFMagicBox.framework in Frameworks */,
+				B6CAE9DC71E4FB8FFDCB5350 /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
+				8406820E2732AF26008339D5 /* SSEAndSyncManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -349,7 +352,7 @@
 		840682092731BF04008339D5 /* Datastore */ = {
 			isa = PBXGroup;
 			children = (
-				8406820A2731BF3A008339D5 /* CloudantStoreManager.swift */,
+				8406820A2731BF3A008339D5 /* CloudantSyncManager.swift */,
 				8406820C2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift */,
 			);
 			path = Datastore;
@@ -366,8 +369,8 @@
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A845376DCC7D192AFB852674 /* Pods-OTFMagicBox.debug.xcconfig */,
-				27574276CA75EF0450D1F0E3 /* Pods-OTFMagicBox.release.xcconfig */,
+				4AFCA6E784BD976C502CE3F3 /* Pods-OTFMagicBox.debug.xcconfig */,
+				1DFD6CD6DD155E701DD41D4A /* Pods-OTFMagicBox.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -376,7 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
-				18391B2E6452349B47367E05 /* Pods_OTFMagicBox.framework */,
+				4331FC09A29791B28C0E5695 /* Pods_OTFMagicBox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -464,11 +467,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
-				EF8D420764EEFA9DE5B5BCEB /* [CP] Check Pods Manifest.lock */,
+				03D969907A3A4C1860290A22 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
-				9BC30115E769C48F761CD7CA /* [CP] Embed Pods Frameworks */,
+				E9759CFB2B6C2B70EC210E1D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -539,24 +542,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9BC30115E769C48F761CD7CA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF8D420764EEFA9DE5B5BCEB /* [CP] Check Pods Manifest.lock */ = {
+		03D969907A3A4C1860290A22 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -576,6 +562,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9759CFB2B6C2B70EC210E1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -615,7 +618,7 @@
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
-				8406820B2731BF3A008339D5 /* CloudantStoreManager.swift in Sources */,
+				8406820B2731BF3A008339D5 /* CloudantSyncManager.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
@@ -631,6 +634,7 @@
 				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
 				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
+				8406820F2732AF26008339D5 /* SSEAndSyncManager.swift in Sources */,
 				8406820D2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
@@ -838,7 +842,7 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A845376DCC7D192AFB852674 /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = 4AFCA6E784BD976C502CE3F3 /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -863,7 +867,7 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27574276CA75EF0450D1F0E3 /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = 1DFD6CD6DD155E701DD41D4A /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

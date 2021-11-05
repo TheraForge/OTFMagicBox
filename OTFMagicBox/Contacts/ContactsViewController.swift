@@ -50,19 +50,12 @@ class CareKitManager: NSObject {
         #endif
 //        coordinator.attach(store: dataStore)
         
-        if let cloudantStore = CloudantStoreManager.shared.cloudantStore {
-            coordinator.attach(store: cloudantStore)
-            CloudantStoreManager.shared.syncCloudantStore { error in
-                print(error ?? "Successfully synced!")
-            }
-        }
-        
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
     }
     
     func wipe() throws {
 //        try dataStore.delete()
-        try CloudantStoreManager.shared.cloudantStore?.datastoreManager.deleteDatastoreNamed("local_db")
+        try CloudantSyncManager.shared.cloudantStore?.datastoreManager.deleteDatastoreNamed("local_db")
     }
     
     fileprivate func initStore(forceUpdate: Bool = false) {

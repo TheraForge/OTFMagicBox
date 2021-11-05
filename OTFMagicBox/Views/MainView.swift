@@ -15,7 +15,13 @@ struct MainView: View {
     init() {
         self.color = Color(YmlReader().primaryColor)
         OTFTheraforgeNetwork.shared.refreshToken { response in
-            print(response)
+            switch response {
+            case .success(let data):
+                SSEAndSyncManager.shared.subscribeToSSEWith(auth: data.accessToken)
+                
+            default:
+                break
+            }
         }
     }
     

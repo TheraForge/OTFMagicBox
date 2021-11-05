@@ -1,5 +1,5 @@
 //
-//  CloudantStoreManager.swift
+//  CloudantSyncManager.swift
 //  OTFMagicBox
 //
 //  Created by Admin on 02/11/2021.
@@ -29,8 +29,8 @@ enum ReplicationDirection: String {
     case push, pull
 }
 
-class CloudantStoreManager {
-    static let shared = CloudantStoreManager()
+class CloudantSyncManager {
+    static let shared = CloudantSyncManager()
     var cloudantStore: OTFCloudantStore?
     
     private init() {
@@ -38,15 +38,36 @@ class CloudantStoreManager {
     }
     
     func syncCloudantStore(_ completion: @escaping ((Error?) -> Void)) {
+        guard let auth = TheraForgeKeychainService.shared.loadAuth() else {
+            completion(ForgeError.missingCredential)
+            return
+        }
+        
+        if auth.isValid() {
+            startSync(completion)
+        } else {
+            OTFTheraforgeNetwork.shared.refreshToken { [unowned self] result in
+                switch result {
+                case .success(_):
+                    startSync(completion)
+                    
+                case .failure(let error):
+                    completion(error)
+                }
+            }
+        }
+    }
+    
+    func startSync(_ completion: @escaping ((Error?) -> Void)) {
         do {
-            try replicate(direction: .pull, completionBlock: { [weak self] error in
+            try replicate(direction: .push, completionBlock: { [unowned self] error in
                 guard error == nil else {
                     completion(error)
                     return
                 }
                 
                 do {
-                    try self?.replicate(direction: .push, completionBlock: { error in
+                    try replicate(direction: .pull, completionBlock: { error in
                         completion(error)
                     })
                 } catch {
@@ -58,7 +79,7 @@ class CloudantStoreManager {
         }
     }
     
-    func replicate(direction: ReplicationDirection, completionBlock: @escaping ((Error?) -> Void)) throws {
+    private func replicate(direction: ReplicationDirection, completionBlock: @escaping ((Error?) -> Void)) throws {
         let store = try StoreService.shared.currentStore()
         let datastoreManager = store.datastoreManager
         let factory = CDTReplicatorFactory(datastoreManager: datastoreManager)
