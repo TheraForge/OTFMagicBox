@@ -821,7 +821,7 @@
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
@@ -846,7 +846,7 @@
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
