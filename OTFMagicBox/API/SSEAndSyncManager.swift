@@ -19,6 +19,9 @@ class SSEAndSyncManager {
         
         OTFTheraforgeNetwork.shared.otfNetworkService.onReceivedMessage = { event in
             print(event)
+            guard event.message.count > 0 else {
+                return
+            }
             CloudantSyncManager.shared.syncCloudantStore { error in
                 print(error ?? "Synced successfully!")
             }
