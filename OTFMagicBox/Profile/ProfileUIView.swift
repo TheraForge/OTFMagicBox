@@ -36,6 +36,13 @@ struct ProfileUIView: View {
                     SupportView(color: .blue, phone: YmlReader().teamPhone)
                 }
                 
+                if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
+                    let url = URL(fileURLWithPath: documentsPath, isDirectory: false)
+                    Section {
+                        ConsentDocumentView(documentURL: url)
+                    }
+                }
+                
                 Section {
                     WithdrawView()
                 }
