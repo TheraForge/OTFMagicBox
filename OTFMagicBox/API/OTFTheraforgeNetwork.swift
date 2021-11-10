@@ -14,8 +14,6 @@ class OTFTheraforgeNetwork {
     
     var otfNetworkService: NetworkingLayer!
     
-    var user: OTFCloudClientAPI.Response.User?
-        
     private init() {
         
         configureNetwork()
@@ -39,15 +37,8 @@ class OTFTheraforgeNetwork {
         otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
                                                                          password: password)) { (result) in
             switch result {
-            case .success(let response):
-                    self.user = response.data
-                    UserDefaults.standard.set(response.data.email, forKey: Constants.patientEmail)
-                    UserDefaults.standard.set(self.user?.firstName, forKey: Constants.UserDefaults.patientFirstName)
-                    UserDefaults.standard.set(self.user?.lastName, forKey: Constants.UserDefaults.patientLastName)
-                    UserDefaults.standard.set(self.user?.gender?.rawValue, forKey: Constants.UserDefaults.patientGender)
-                    UserDefaults.standard.set(self.user?.dob, forKey: Constants.UserDefaults.patientDob)
-            case .failure(_):
-                    break
+            default:
+                break
             }
             completionHandler(result)
         }
@@ -89,7 +80,6 @@ class OTFTheraforgeNetwork {
             switch result {
             case .success(_):
                     DispatchQueue.main.async {
-                        self.user = nil
                         NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
                     }
             case .failure(_):

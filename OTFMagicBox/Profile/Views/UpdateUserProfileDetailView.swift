@@ -14,7 +14,6 @@ struct UpdateUserProfileDetailView: View {
     let genderValues = ["Male", "Female", "Other"]
     @State var showGenderPicker = false
     @State var showDatePicker = false
-    @State var date = Date()
     
     private var selectedDate: Binding<Date> {
         Binding<Date>(get: { self.date}, set : {
@@ -27,6 +26,7 @@ struct UpdateUserProfileDetailView: View {
     @State var firstName: String
     @State var lastName:String
     @State var genderSelection: String
+    @State var date: Date
     @State var dob: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -50,6 +50,7 @@ struct UpdateUserProfileDetailView: View {
         _lastName = State(initialValue: user.lastName ?? "")
         _genderSelection = State(initialValue: user.gender?.rawValue ?? "")
         _dob = State(initialValue: user.dob ?? "")
+        _date = State(initialValue: user.dateOfBirth ?? Date())
     }
     
     var body: some View {
@@ -141,7 +142,7 @@ struct UpdateUserProfileDetailView: View {
     
     func updatePatient() {
         OTFCloudantSync.shared.updatePatient(patientID: user.id, firstName: firstName, lastName: lastName,
-                                             gender: genderSelection, dob: dob.toDate()) { results in
+                                             gender: genderSelection, dob: date) { results in
             
             switch results {
             case .failure(let error):
