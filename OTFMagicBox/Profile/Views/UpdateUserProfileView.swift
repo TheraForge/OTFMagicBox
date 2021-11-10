@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct UpdateUserProfileView: View {
     
     @State var showUserProfile = false
-    let email = UserDefaults.standard.object(forKey: Constants.UserDefaults.patientEmail)
+    let user: Response.User
     
     var body: some View {
         VStack {
@@ -19,7 +20,7 @@ struct UpdateUserProfileView: View {
                 .frame(width: 40, height: 40, alignment: .center)
              
             HStack {
-                Text(email as? String ?? Constants.UserDefaults.patientEmail)
+                Text(user.email)
                 Spacer()
                 Text("›")
             }
@@ -29,13 +30,14 @@ struct UpdateUserProfileView: View {
         })).sheet(isPresented: $showUserProfile, onDismiss: {
             
         }, content: {
-            UpdateUserProfileDetailView()
+            UpdateUserProfileDetailView(user: user)
         })
     }
 }
 
 struct UpdateUserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateUserProfileView()
+        let user = TheraForgeKeychainService.shared.loadUser()
+        UpdateUserProfileView(user: user!)
     }
 }

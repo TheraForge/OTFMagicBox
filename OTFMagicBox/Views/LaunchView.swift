@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct LaunchView: View {
     
@@ -14,8 +15,8 @@ struct LaunchView: View {
     var body: some View {
         
         VStack(spacing: 10) {
-            if onboardingCompleted {
-                MainView()
+            if onboardingCompleted, let user = TheraForgeKeychainService.shared.loadUser() {
+                MainView(user: user)
             } else {
                 OnboardingView {
                     didCompleteOnBoarding()

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import OTFCloudClientAPI
 
 struct UpdateUserProfileDetailView: View {
     let color = Color(YmlReader().primaryColor)
@@ -22,10 +23,11 @@ struct UpdateUserProfileDetailView: View {
         })
     }
     
-    @State var firstName: String = UserDefaults.standard.object(forKey: Constants.UserDefaults.patientFirstName) as? String ?? ""
-    @State var lastName: String = UserDefaults.standard.object(forKey: Constants.UserDefaults.patientLastName) as? String ?? ""
-    @State var genderSelection: String = UserDefaults.standard.object(forKey: Constants.UserDefaults.patientGender) as? String ?? ""
-    @State var dob: String = UserDefaults.standard.object(forKey: Constants.UserDefaults.patientDob) as? String ?? ""
+    let user: OTFCloudClientAPI.Response.User
+    @State var firstName: String
+    @State var lastName:String
+    @State var genderSelection: String
+    @State var dob: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     private func setDateString() {
@@ -42,6 +44,13 @@ struct UpdateUserProfileDetailView: View {
         return formatter
     }()
     
+    init(user: Response.User) {
+        self.user = user
+        _firstName = State(initialValue: user.firstName ?? "")
+        _lastName = State(initialValue: user.lastName ?? "")
+        _genderSelection = State(initialValue: user.gender?.rawValue ?? "")
+        _dob = State(initialValue: user.dob ?? "")
+    }
     
     var body: some View {
         NavigationView {
@@ -108,16 +117,7 @@ struct UpdateUserProfileDetailView: View {
                 
                 Button(action: {
                     
-                    OTFCloudantSync.shared.updatePatient(firstName: firstName, lastName: lastName, gender: genderSelection, dob: dob.toDate(), completionHandler: ({ results in
-                        
-                        switch results {
-                        case .failure(let error):
-                            OTFLog("Error updating patient data", error.localizedDescription)
-                        case .success:
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        
-                    }))
+                    updatePatient()
                 }, label: {
                     Text("Save")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
@@ -135,7 +135,22 @@ struct UpdateUserProfileDetailView: View {
     }
     
     func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil, from: nil, for: nil)
+    }
+    
+    func updatePatient() {
+        OTFCloudantSync.shared.updatePatient(patientID: user.id, firstName: firstName, lastName: lastName,
+                                             gender: genderSelection, dob: dob.toDate()) { results in
+            
+            switch results {
+            case .failure(let error):
+                OTFLog("Error updating patient data", error.localizedDescription)
+            case .success:
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            
+        }
     }
 }
 

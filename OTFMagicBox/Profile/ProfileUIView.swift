@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct ProfileUIView: View {
     
-    let email = UserDefaults.standard.object(forKey: Constants.patientEmail)
+    let user: Response.User
     
     var body: some View {
         VStack {
             Text("Profile").font(.headerFontStyle)
             List {
                 Section {
-                    UpdateUserProfileView()
+                    UpdateUserProfileView(user: user)
                 }
                 
                 Section {

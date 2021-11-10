@@ -21,8 +21,9 @@ class OTFCloudantSync {
         
     }
     
-    func updatePatient(firstName: String, lastName: String, gender:String, dob: Date, completionHandler: ((Result<[OCKPatient], OCKStoreError>) -> Void)? = nil) {
-        var patient =  OCKPatient(id: UUID().uuidString, givenName: firstName, familyName: lastName)
+    func updatePatient(patientID: String, firstName: String, lastName: String, gender:String, dob: Date,
+                       completionHandler: ((Result<[OCKPatient], OCKStoreError>) -> Void)? = nil) {
+        var patient =  OCKPatient(id: patientID, givenName: firstName, familyName: lastName)
         patient.birthday = dob
         patient.sex = OCKBiologicalSex(rawValue: gender)
         
