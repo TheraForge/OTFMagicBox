@@ -11,4 +11,8 @@ extension Image {
     static var theraforgeLogo: Image {
         UIImage.loadImage(named: "TheraforgeLogo")
     }
+    
+    static var avatar: Image {
+        UIImage.loadImage(named: "avatar")
+    }
 }

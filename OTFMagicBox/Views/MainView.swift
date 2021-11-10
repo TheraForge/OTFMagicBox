@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct MainView: View {
     
     let color: Color
+    let user: Response.User
     
-    init() {
+    init(user: Response.User) {
+        self.user = user
         self.color = Color(YmlReader().primaryColor)
     }
     
@@ -34,7 +37,7 @@ struct MainView: View {
                 }
             }
             
-            ProfileUIView().tabItem {
+            ProfileUIView(user: user).tabItem {
                 UIImage.loadImage(named: "tab_profile").renderingMode(.template)
                 Text("Profile")
             }

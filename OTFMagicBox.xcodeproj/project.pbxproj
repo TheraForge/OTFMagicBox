@@ -16,6 +16,9 @@
 		5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */; };
 		5A430489272884CB00926584 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A430488272884CB00926584 /* Extension+Font.swift */; };
 		5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049B272ADF7900926584 /* Extension+Date.swift */; };
+		5A4304AA272CB05400926584 /* OTFCloudantSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304A9272CB05400926584 /* OTFCloudantSync.swift */; };
+		5A4304AC272CB22600926584 /* UpdateUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AB272CB22600926584 /* UpdateUserProfileView.swift */; };
+		5A4304AE272CB23000926584 /* UpdateUserProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */; };
 		5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049D272AE84A00926584 /* ConsentDocumentView.swift */; };
 		5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */; };
 		5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626E26D4A2EA00A4B4DF /* DataModel.swift */; };
@@ -96,6 +99,9 @@
 		5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
 		5A430488272884CB00926584 /* Extension+Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		5A43049B272ADF7900926584 /* Extension+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		5A4304A9272CB05400926584 /* OTFCloudantSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFCloudantSync.swift; sourceTree = "<group>"; };
+		5A4304AB272CB22600926584 /* UpdateUserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserProfileView.swift; sourceTree = "<group>"; };
+		5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserProfileDetailView.swift; sourceTree = "<group>"; };
 		5A43049D272AE84A00926584 /* ConsentDocumentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocumentView.swift; sourceTree = "<group>"; };
 		5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentPreviewViewController.swift; sourceTree = "<group>"; };
 		5A49626E26D4A2EA00A4B4DF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -208,6 +214,14 @@
 				5A41D022266A9106007CCEB4 /* MainView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5A4304A8272CB05400926584 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				5A4304A9272CB05400926584 /* OTFCloudantSync.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		5A49626D26D4A2EA00A4B4DF /* Yaml */ = {
@@ -328,6 +342,8 @@
 				5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */,
 				5A4F633C271F412D0080F0D7 /* LogoutView.swift */,
 				5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */,
+				5A4304AB272CB22600926584 /* UpdateUserProfileView.swift */,
+				5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */,
 				5A43049D272AE84A00926584 /* ConsentDocumentView.swift */,
 				5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */,
 			);
@@ -391,6 +407,7 @@
 		CE482CF5262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXGroup;
 			children = (
+				5A4304A8272CB05400926584 /* Store */,
 				5A7B6D8D26FA352000F872A1 /* API */,
 				5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */,
 				5AB1808B26BAADB1007AF766 /* Contacts */,
@@ -596,11 +613,13 @@
 				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
+				5A4304AA272CB05400926584 /* OTFCloudantSync.swift in Sources */,
 				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
+				5A4304AE272CB23000926584 /* UpdateUserProfileDetailView.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
@@ -631,6 +650,7 @@
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
 				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
+				5A4304AC272CB22600926584 /* UpdateUserProfileView.swift in Sources */,
 				5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
 				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
@@ -829,7 +849,7 @@
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
@@ -854,7 +874,7 @@
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
