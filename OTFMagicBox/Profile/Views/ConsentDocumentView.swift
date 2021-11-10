@@ -10,15 +10,11 @@ import SwiftUI
 struct ConsentDocumentView: View {
     
     @State private var showPreview = false
-    var documentsURL: URL? = nil
+    let documentsURL: URL
     
-    init() {
-        if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
-            self.documentsURL = URL(fileURLWithPath: documentsPath, isDirectory: false)
-            OTFLog("Opening document at:", self.documentsURL!.path)
-        } else {
-            OTFLog("No consent document to open at path", self.documentsURL!.path)
-        }
+    init(documentURL: URL) {
+        self.documentsURL = documentURL
+        OTFLog("Opening document at:", self.documentsURL.path)
     }
     
     var body: some View {
@@ -37,6 +33,8 @@ struct ConsentDocumentView: View {
 
 struct ConsentDocumentView_Previews: PreviewProvider {
     static var previews: some View {
-        ConsentDocumentView()
+        let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String
+        let url = URL(fileURLWithPath: documentsPath!, isDirectory: false)
+        ConsentDocumentView(documentURL: url)
     }
 }
