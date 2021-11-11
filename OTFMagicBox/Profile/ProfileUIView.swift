@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import OTFCloudClientAPI
 
 struct ProfileUIView: View {
     
-    let email = UserDefaults.standard.object(forKey: Constants.patientEmail)
+    let user: Response.User
     
     var body: some View {
         VStack {
             Text("Profile").font(.headerFontStyle)
             List {
                 Section {
-                    Text(email as? String ?? "")
-                }.listRowBackground(Color.white)
+                    UpdateUserProfileView(user: user)
+                }
                 
                 Section {
                     if YmlReader().isPasscodeEnabled {
@@ -33,6 +34,13 @@ struct ProfileUIView: View {
                 Section {
                     ReportView(color: .blue, email: YmlReader().teamEmail)
                     SupportView(color: .blue, phone: YmlReader().teamPhone)
+                }
+                
+                if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
+                    let url = URL(fileURLWithPath: documentsPath, isDirectory: false)
+                    Section {
+                        ConsentDocumentView(documentURL: url)
+                    }
                 }
                 
                 Section {

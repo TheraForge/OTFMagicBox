@@ -69,5 +69,4 @@ extension String {
                 return nil
         }
     }
-
 }

@@ -15,8 +15,8 @@ struct LaunchView: View {
     var body: some View {
         
         VStack(spacing: 10) {
-            if onboardingCompleted, TheraForgeKeychainService.shared.loadUser() != nil {
-                MainView()
+            if onboardingCompleted, let user = TheraForgeKeychainService.shared.loadUser() {
+                MainView(user: user)
             } else {
                 OnboardingView {
                     didCompleteOnBoarding()

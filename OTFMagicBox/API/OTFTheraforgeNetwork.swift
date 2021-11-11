@@ -14,8 +14,6 @@ class OTFTheraforgeNetwork {
     
     var otfNetworkService: TheraForgeNetwork!
     
-    var user: OTFCloudClientAPI.Response.User?
-    
     private init() {
         
         configureNetwork()
@@ -39,10 +37,7 @@ class OTFTheraforgeNetwork {
         otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
                                                                          password: password)) { (result) in
             switch result {
-            case .success(let response):
-                self.user = response.data
-                UserDefaults.standard.set(response.data.email, forKey: Constants.patientEmail)
-            case .failure(_):
+            default:
                 break
             }
             completionHandler(result)
@@ -89,10 +84,9 @@ class OTFTheraforgeNetwork {
         otfNetworkService.signOut(completionHandler: { (result) in
             switch result {
             case .success(_):
-                DispatchQueue.main.async {
-                    self.user = nil
-                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
-                }
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
+                    }
             case .failure(_):
                 break
             }
