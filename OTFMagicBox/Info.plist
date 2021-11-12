@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationUsageDescription</key>
-	<string>Used for sensor collection demo tasks</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used for sensor collection demo tasks</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Used for data security purposes.</string>
-	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Used for data security purposes.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Used for data security purposes.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -26,10 +16,24 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict/>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Used for data security purposes.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Used for data security purposes.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Used for data security purposes.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used for sensor collection demo tasks</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Used for sensor collection demo tasks</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -291,11 +291,13 @@ DataModel:
   registration:
     showDateOfBirth: "true"
     showGender: "true"
+    
+  showSocialLogin: "true"
 
  # Login
  # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either "true" or "false".
   login:
-    loginPasswordless: "false"
+    loginPasswordless: "true"
   
  # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
     loginStepTitle: "Almost done!"

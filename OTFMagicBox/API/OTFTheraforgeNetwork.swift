@@ -50,6 +50,21 @@ class OTFTheraforgeNetwork {
        
     }
     
+    public func socialLoginRequest(email: String, socialId: String, completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
+        otfNetworkService.socialLogin(request: OTFCloudClientAPI.Request.SocialLogin(type: .patient, email: email, loginType: .apple, socialId: socialId)) { (result) in
+            switch result {
+            case .success(let response):
+                    self.user = response.data
+                    UserDefaults.standard.set(response.data.email, forKey: Constants.patientEmail)
+            case .failure(_):
+                    break
+            }
+            completionHandler(result)
+        }
+       
+    }
+    
+    
     // Registration request
     // swiftlint:disable all
     public func signUpRequest(firstName: String, lastName: String, type: String, email: String,

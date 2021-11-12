@@ -120,6 +120,8 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
             return HealthDataStepViewController(step: step)
         case is HealthRecordsStep:
             return HealthRecordsStepViewController(step: step)
+        case is SignInWithAppleStep:
+            return SignInWithAppleStepViewController(step: step)
         default:
             return nil
         }

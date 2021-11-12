@@ -145,6 +145,11 @@ public class YmlReader {
         return dataModel?.passcode.passcodeType ?? Constants.Passcode.lengthFour
     }
     
+    var showSocialLogin: Bool {
+        guard let showSocialLogin = dataModel?.showSocialLogin else { return false }
+        return showSocialLogin == "true"
+    }
+    
     var showGender: Bool {
         guard let showGender = dataModel?.registration.showGender else { return false }
         return showGender == "true"

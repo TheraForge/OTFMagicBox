@@ -89,6 +89,7 @@ struct DataModel: Codable {
     let teamPhone: String
     let copyright: String
     let teamWebsite: String
+    let showSocialLogin: String
     let passcode: Passcode
     let completionStep: CompletionStep
     let useCareKit: String

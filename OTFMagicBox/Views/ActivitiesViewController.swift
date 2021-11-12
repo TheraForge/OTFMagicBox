@@ -82,11 +82,9 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         
         let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier, title: Constants.Registration.Title, text: Constants.Registration.Text, passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage, options: regOption)
         
-        if YmlReader().loginPasswordless{
-            let loginStep = PasswordlessLoginStep(identifier: PasswordlessLoginStep.identifier)
-            let loginVerificationStep = LoginCustomWaitStep(identifier: LoginCustomWaitStep.identifier)
-            
-            loginSteps = [loginStep, loginVerificationStep]
+        if YmlReader().showSocialLogin {
+            let signInWithAppleStep = SignInWithAppleStep(identifier: "SignInWithApple")
+            loginSteps = [signInWithAppleStep]
         } else {
             let loginStep = ORKLoginStep(identifier: Constants.Login.Identifier, title: Constants.Login.Title, text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
             
@@ -154,4 +152,3 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
     }
     
 }
-

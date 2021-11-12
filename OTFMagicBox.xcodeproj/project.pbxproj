@@ -60,7 +60,7 @@
 		5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */; };
 		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
-		6A7D9C4AF35C5CEFF8FFDF35 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45960166DEF3A139BF382F51 /* Pods_OTFMagicBox.framework */; };
+		6053244EC82A042C76411E4F /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F55B16F33D6AF8FB1DC2236 /* Pods_OTFMagicBox.framework */; };
 		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
 		84771FA9272974B700468E0E /* Extension+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84771FA8272974B700468E0E /* Extension+Image.swift */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
@@ -83,8 +83,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		45960166DEF3A139BF382F51 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		534F590DE6D5125B520FD2D6 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
 		5A41D036266A955C007CCEB4 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -143,6 +141,8 @@
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
 		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
+		9F55B16F33D6AF8FB1DC2236 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FCEE3DB0A0EF7F7A4980448 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE482D02262C954C00C0A2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE482D04262C954C00C0A2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D9E12014E4C4F767BC5878E3 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		F22914F089D2497CA0B209C7 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
-				6A7D9C4AF35C5CEFF8FFDF35 /* Pods_OTFMagicBox.framework in Frameworks */,
+				6053244EC82A042C76411E4F /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,8 +347,8 @@
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D9E12014E4C4F767BC5878E3 /* Pods-OTFMagicBox.debug.xcconfig */,
-				534F590DE6D5125B520FD2D6 /* Pods-OTFMagicBox.release.xcconfig */,
+				F22914F089D2497CA0B209C7 /* Pods-OTFMagicBox.debug.xcconfig */,
+				9FCEE3DB0A0EF7F7A4980448 /* Pods-OTFMagicBox.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
-				45960166DEF3A139BF382F51 /* Pods_OTFMagicBox.framework */,
+				9F55B16F33D6AF8FB1DC2236 /* Pods_OTFMagicBox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -444,11 +444,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
-				6A777A55BE2A62737224C680 /* [CP] Check Pods Manifest.lock */,
+				52B2243BF0E6CB6854291662 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
-				24D3A0902CF0B08E9DA5F795 /* [CP] Embed Pods Frameworks */,
+				8D6A0C4220B7A17DBDEDA593 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -519,24 +519,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24D3A0902CF0B08E9DA5F795 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6A777A55BE2A62737224C680 /* [CP] Check Pods Manifest.lock */ = {
+		52B2243BF0E6CB6854291662 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -556,6 +539,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D6A0C4220B7A17DBDEDA593 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -659,7 +659,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 66KGL6XTUS;
 				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -680,7 +680,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 66KGL6XTUS;
 				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -814,22 +814,22 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9E12014E4C4F767BC5878E3 /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = F22914F089D2497CA0B209C7 /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
+				DEVELOPMENT_ASSET_PATHS = "\"\"";
+				DEVELOPMENT_TEAM = 2ACH4UKQKX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.OTFMagicBox;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -839,22 +839,22 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 534F590DE6D5125B520FD2D6 /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = 9FCEE3DB0A0EF7F7A4980448 /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SampleApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
+				DEVELOPMENT_ASSET_PATHS = "\"\"";
+				DEVELOPMENT_TEAM = 2ACH4UKQKX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.OTFMagicBox;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
