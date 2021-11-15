@@ -49,7 +49,6 @@ class OTFTheraforgeNetwork {
         otfNetworkService.socialLogin(request: OTFCloudClientAPI.Request.SocialLogin(type: .patient, email: email, loginType: .apple, socialId: socialId)) { (result) in
             switch result {
             case .success(let response):
-                    self.user = response.data
                     UserDefaults.standard.set(response.data.email, forKey: Constants.patientEmail)
             case .failure(_):
                     break
