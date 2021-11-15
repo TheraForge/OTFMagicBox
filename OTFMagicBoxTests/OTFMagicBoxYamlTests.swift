@@ -25,13 +25,13 @@ class OTFMagicBoxYamlTests: XCTestCase {
     }
     
     func testRegistrationIsDOB() {
-        let inputValue = YmlReader().registration?.isDOB
+        let inputValue = YmlReader().registration?.showDateOfBirth
         let expectedValue = "true"
         XCTAssertEqual(inputValue, expectedValue);
     }
     
     func testRegistrationIsGender() {
-        let inputValue = YmlReader().registration?.isGender
+        let inputValue = YmlReader().registration?.showGender
         let expectedValue = "true"
         XCTAssertEqual(inputValue, expectedValue);
     }

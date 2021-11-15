@@ -33,9 +33,17 @@ enum Constants {
     static let onboardingDidComplete = "didCompleteOnboarding"
     
     struct UserDefaults {
+        //Patient data
+        static let patientEmail = "patientEmail"
+        static let patientFirstName = "patientFirstName"
+        static let patientLastName = "patientLastName"
+        static let patientGender = "female"
+        static let patientDob = "10/10/1990"
+        
         
         //Consent
         static let ConsentDocumentSignature = "ConsentDocumentParticipantSignature"
+        static let ConsentDocumentURL = "consentFormURL"
         
         //Misc
         static let FirstRun = "firstRun"
