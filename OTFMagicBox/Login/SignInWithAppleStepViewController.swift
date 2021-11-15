@@ -7,6 +7,7 @@
 
 import AuthenticationServices
 import Foundation
+import OTFResearchKit
 
 public class SignInWithAppleStep: ORKInstructionStep {
     /// The contact information to be requested from the user during authentication.
@@ -63,9 +64,6 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
             print("Unable to obtain AppleID credentials")
             return
         }
-        guard let nonce = currentNonce else {
-            fatalError("Invalid state: A login callback was received, but no login request was sent.")
-        }
         guard let appleIDToken = appleIDCredential.identityToken else {
             print("Unable to fetch identity token")
             return
@@ -80,11 +78,9 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
             return
         }
 
-         OTFTheraforgeNetwork.shared.socialLoginRequest(email: email, socialId: idTokenString, completionHandler: {
-                result in
-                print(result)
-            })
-    
+         OTFTheraforgeNetwork.shared.socialLoginRequest(email: email, socialId: idTokenString) { result in
+            print(result)
+        }
     }
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

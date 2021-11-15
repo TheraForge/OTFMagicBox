@@ -63,6 +63,7 @@
 		6053244EC82A042C76411E4F /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F55B16F33D6AF8FB1DC2236 /* Pods_OTFMagicBox.framework */; };
 		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
 		84771FA9272974B700468E0E /* Extension+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84771FA8272974B700468E0E /* Extension+Image.swift */; };
+		848DDFBB27423011004B98F1 /* SignInWithAppleStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DDFBA27423011004B98F1 /* SignInWithAppleStepViewController.swift */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
 		CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */; };
 		CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */; };
@@ -141,6 +142,7 @@
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
 		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
+		848DDFBA27423011004B98F1 /* SignInWithAppleStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleStepViewController.swift; sourceTree = "<group>"; };
 		9F55B16F33D6AF8FB1DC2236 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FCEE3DB0A0EF7F7A4980448 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */,
 				5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */,
 				5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */,
+				848DDFBA27423011004B98F1 /* SignInWithAppleStepViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
 				5A430489272884CB00926584 /* Extension+Font.swift in Sources */,
+				848DDFBB27423011004B98F1 /* SignInWithAppleStepViewController.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
