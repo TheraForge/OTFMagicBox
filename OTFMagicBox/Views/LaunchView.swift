@@ -12,6 +12,10 @@ struct LaunchView: View {
     
     @State var onboardingCompleted = false
     
+    init() {
+        didCompleteOnBoarding()
+    }
+    
     var body: some View {
         
         VStack(spacing: 10) {

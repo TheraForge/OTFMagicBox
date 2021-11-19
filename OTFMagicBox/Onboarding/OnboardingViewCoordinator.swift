@@ -14,6 +14,7 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
         case .completed:
             
             DispatchQueue.main.async {
+                UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
                 NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
             }
             

@@ -62,12 +62,13 @@ struct OnboardingView: View {
             .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
             .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
             
-            OnboardingItemView(self.onboardingElements.map { OnboardingDetailsView(image: $0.image, description: $0.description, color: self.color) })
+            OnboardingItemView(self.onboardingElements.map {
+                OnboardingDetailsView(image: $0.image, description: $0.description, color: self.color)
+            })
             
             Spacer()
             
             HStack {
-                Spacer()
                 Button(action: {
                     self.showingOnboard.toggle()
                 }, label: {
@@ -86,12 +87,9 @@ struct OnboardingView: View {
                 }, content: {
                     ActivitiesViewController()
                 })
-                
-                Spacer()
             }
             
             HStack {
-                Spacer()
                 Button(action: {
                     self.showingLogin.toggle()
                 }, label: {
@@ -112,8 +110,6 @@ struct OnboardingView: View {
                 }, content: {
                     LoginExistingUserViewController()
                 })
-                
-                Spacer()
             }
             
             Spacer()

@@ -12,7 +12,7 @@ import SwiftUI
 /**
   The list of tasks for the user.
  */
-enum TaskItem: Int {
+enum TaskItem: Int, CaseIterable {
 
     // Task items.
     case sampleSurvey,
@@ -69,17 +69,5 @@ enum TaskItem: Int {
     fileprivate func getImage(named: String) -> UIImage? {
         UIImage(named: named) ?? UIImage(systemName: "questionmark.square")
     }
-    
-    static var allValues: [TaskItem] {
-        var index = 0
-        return Array (
-            AnyIterator {
-                let returnedElement = self.init(rawValue: index)
-                index = index + 1
-                return returnedElement
-            }
-        )
-    }
-    
 }
 

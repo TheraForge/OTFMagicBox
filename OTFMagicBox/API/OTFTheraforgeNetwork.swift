@@ -45,7 +45,7 @@ class OTFTheraforgeNetwork {
        
     }
     
-    public func socialLoginRequest(email: String, socialId: String, completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
+    public func socialLoginRequest(email: String?, socialId: String, completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.socialLogin(request: OTFCloudClientAPI.Request.SocialLogin(type: .patient, email: email, loginType: .apple, socialId: socialId)) { (result) in
             switch result {
             case .success(let response):
@@ -89,16 +89,15 @@ class OTFTheraforgeNetwork {
     }
     
     // Signout request.
-    public func signOut() {
+    public func signOut(completionHandler: ((Result<Response.LogOut, ForgeError>) -> Void)?) {
         otfNetworkService.signOut(completionHandler: { (result) in
-            switch result {
-            case .success(_):
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
-                    }
-            case .failure(_):
-                    break
+            if case .success = result {
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
+                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
+                }
             }
+            completionHandler?(result)
         })
     }
     
