@@ -10,7 +10,7 @@ import OTFCloudClientAPI
 
 struct LaunchView: View {
     
-    @State var onboardingCompleted = false
+    @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     
     var body: some View {
         
