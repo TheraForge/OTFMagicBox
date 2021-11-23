@@ -45,13 +45,20 @@ class OTFTheraforgeNetwork {
        
     }
     
-    public func socialLoginRequest(email: String?, socialId: String, completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        otfNetworkService.socialLogin(request: OTFCloudClientAPI.Request.SocialLogin(type: .patient, email: email, loginType: .apple, socialId: socialId)) { (result) in
-            switch result {
-            case .success(let response):
-                    UserDefaults.standard.set(response.data.email, forKey: Constants.patientEmail)
-            case .failure(_):
-                    break
+    public func socialLoginRequest(email: String?,
+                                   socialId: String,
+                                   loginType: Request.SocialLogin.LoginType,
+                                   completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
+        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(type: .patient,
+                                                                  email: email,
+                                                                  loginType: loginType,
+                                                                  socialId: socialId)
+        otfNetworkService.socialLogin(request: socialRequest) { (result) in
+            if case .success = result, loginType == .apple {
+                if let email = email {
+                    let credentials = AppleAuthCredentials(email: email, userId: socialId)
+                    try? OTFKeychain().saveAppleAuthCredentials(credentials)
+                }
             }
             completionHandler(result)
         }

@@ -30,14 +30,35 @@ public class SignInWithAppleStep: ORKInstructionStep {
     }
 }
 
+public struct AppleAuthCredentials: Codable {
+    let email: String
+    let userId: String
+}
+
+public enum AuthType: String, Codable {
+    case signin, signup
+}
 
 public class SignInWithAppleStepViewController: ORKInstructionStepViewController,
-                                                  ASAuthorizationControllerDelegate {
+                                                ASAuthorizationControllerDelegate {
+    
+    let authType: AuthType
+    
     /// The step presented by the step view controller.
     public var signInWithAppleStep: SignInWithAppleStep! {
         return step as? SignInWithAppleStep
     }
-
+    
+    init(authType: AuthType, step: ORKStep?) {
+        self.authType = authType
+        
+        super.init(step: step)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
    
@@ -73,24 +94,57 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
             return
         }
 
-        guard let email = appleIDCredential.email else {
-            print("Unable to fetch email")
-            return
-        }
+        let email = appleIDCredential.email
+        
+        let alert = UIAlertController(title: nil,
+                                      message: authType == .signin ? "Signing in..." : "Siging up...",
+                                      preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        
+        taskViewController?.present(alert, animated: true, completion: nil)
 
-         OTFTheraforgeNetwork.shared.socialLoginRequest(email: email, socialId: idTokenString) { result in
-            print(result)
+        OTFTheraforgeNetwork.shared.socialLoginRequest(email: authType == .signup ? email : nil,
+                                                       socialId: appleIDCredential.user,
+                                                       loginType: .apple) { result in
+            DispatchQueue.main.async {
+                print(result)
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        alert.dismiss(animated: true) {
+                            let alert = UIAlertController(title: "Login Error!", message: "Please check your credentials.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                            self.taskViewController?.present(alert, animated: true)
+                            self.showError(error)
+                        }
+                    }
+                    
+                case .success:
+                    DispatchQueue.main.async {
+                        alert.dismiss(animated: true, completion: nil)
+                    }
+                    super.goForward()
+                }
+            }
         }
     }
 
-    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    public func authorizationController(controller: ASAuthorizationController,
+                                        didCompleteWithError error: Error) {
         showError(error)
     }
 
     private func showError(_ error: Error) {
         print("Sign in with Apple errored: \(error)")
         Alerts.showInfo(
-            title: NSLocalizedString("Failed to Sign in with Apple", comment: ""),
+            self,
+            title: "Error",// NSLocalizedString("Failed to Sign in with Apple", comment: ""),
             message: error.localizedDescription
         )
     }

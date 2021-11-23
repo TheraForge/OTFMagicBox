@@ -14,7 +14,7 @@ struct PasscodeViewController: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator()
     } 
-
+    
     typealias UIViewControllerType = ORKPasscodeViewController
     
     func updateUIViewController(_ uiViewController: ORKPasscodeViewController, context: Context) {}
@@ -22,11 +22,11 @@ struct PasscodeViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKPasscodeViewController {
         
         
-            let editPasscodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "", delegate: context.coordinator, passcodeType:.type4Digit)
-            
-            return editPasscodeViewController
+        let editPasscodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "", delegate: context.coordinator, passcodeType:.type4Digit)
+        
+        return editPasscodeViewController
     }
-
+    
     class Coordinator: NSObject, ORKPasscodeDelegate {
         func passcodeViewControllerDidCancel(_ viewController: UIViewController) {
             

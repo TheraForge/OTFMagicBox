@@ -16,10 +16,12 @@ import OTFCareKitStore
  */
 struct ActivitiesViewController: UIViewControllerRepresentable {
     
+    let authMethod: AuthMethod
+    
     private let fileName = Constants.yamlFile
     
-    func makeCoordinator() -> OnboardingTaskViewControllerDelegate {
-        OnboardingTaskViewControllerDelegate()
+    func makeCoordinator() -> OnboardingTaskCoordinator {
+        OnboardingTaskCoordinator(authMethod: authMethod, authType: .signup)
     }
     
     typealias UIViewControllerType = ORKTaskViewController
@@ -66,7 +68,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         var loginSteps: [ORKStep]
         
         // swiftlint:disable all
-        let regexp = try! NSRegularExpression(pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{10,}")
+        let regexp = try! NSRegularExpression(pattern: "^.{10,}$")
         
         var regOption = ORKRegistrationStepOption()
         
@@ -80,9 +82,14 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         regOption.insert( .includeGivenName)
         regOption.insert( .includeFamilyName)
         
-        let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier, title: Constants.Registration.Title, text: Constants.Registration.Text, passcodeValidationRegularExpression: regexp, passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage, options: regOption)
+        let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier,
+                                               title: Constants.Registration.Title,
+                                               text: Constants.Registration.Text,
+                                               passcodeValidationRegularExpression: regexp,
+                                               passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage,
+                                               options: regOption)
         
-        if YmlReader().showSocialLogin {
+        if authMethod == .apple {
             let signInWithAppleStep = SignInWithAppleStep(identifier: "SignInWithApple")
             loginSteps = [signInWithAppleStep]
         } else {

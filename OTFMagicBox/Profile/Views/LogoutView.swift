@@ -34,7 +34,7 @@ struct LogoutView: View {
                                 }
                             }
                         }),
-                        .default(Text("Cancel"))
+                        .cancel(Text("Cancel"))
                     ]
                 )
             }
