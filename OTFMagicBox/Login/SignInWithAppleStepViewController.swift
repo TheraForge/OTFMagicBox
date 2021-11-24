@@ -30,15 +30,6 @@ public class SignInWithAppleStep: ORKInstructionStep {
     }
 }
 
-public struct AppleAuthCredentials: Codable {
-    let email: String
-    let userId: String
-}
-
-public enum AuthType: String, Codable {
-    case signin, signup
-}
-
 public class SignInWithAppleStepViewController: ORKInstructionStepViewController,
                                                 ASAuthorizationControllerDelegate {
     
@@ -89,15 +80,17 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
             print("Unable to fetch identity token")
             return
         }
+        
+        // We are using this identity token to get other required fields e.g. email of the user.
+        // The JWT token's payload is decided by Apple itself. We should be cautious that Apple
+        // may change the format/composition of the token in the future.
         guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
             print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
             return
         }
 
-        let email = appleIDCredential.email
-        
         let alert = UIAlertController(title: nil,
-                                      message: authType == .signin ? "Signing in..." : "Siging up...",
+                                      message: authType == .login ? "Signing in..." : "Siging up...",
                                       preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -108,9 +101,10 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         
         taskViewController?.present(alert, animated: true, completion: nil)
 
-        OTFTheraforgeNetwork.shared.socialLoginRequest(email: authType == .signup ? email : nil,
-                                                       socialId: appleIDCredential.user,
-                                                       loginType: .apple) { result in
+        OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient,
+                                                       socialType: .apple,
+                                                       authType: authType,
+                                                       idToken: idTokenString) { result in
             DispatchQueue.main.async {
                 print(result)
                 switch result {
@@ -118,7 +112,9 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
                         alert.dismiss(animated: true) {
-                            let alert = UIAlertController(title: "Login Error!", message: "Please check your credentials.", preferredStyle: .alert)
+                            let alert = UIAlertController(title: nil,
+                                                          message: error.localizedDescription,
+                                                          preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
                             self.taskViewController?.present(alert, animated: true)
                             self.showError(error)
@@ -128,8 +124,8 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
                 case .success:
                     DispatchQueue.main.async {
                         alert.dismiss(animated: true, completion: nil)
+                        super.goForward()
                     }
-                    super.goForward()
                 }
             }
         }

@@ -8,6 +8,9 @@
 import Foundation
 import OTFCloudClientAPI
 
+typealias AuthType = Request.SocialLogin.AuthType
+typealias SocialType = Request.SocialLogin.SocialType
+
 class OTFTheraforgeNetwork {
     
     static let shared = OTFTheraforgeNetwork()
@@ -45,24 +48,15 @@ class OTFTheraforgeNetwork {
        
     }
     
-    public func socialLoginRequest(email: String?,
-                                   socialId: String,
-                                   loginType: Request.SocialLogin.LoginType,
+    public func socialLoginRequest(userType: UserType,
+                                   socialType: SocialType,
+                                   authType: AuthType,
+                                   idToken: String,
                                    completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(type: .patient,
-                                                                  email: email,
-                                                                  loginType: loginType,
-                                                                  socialId: socialId)
+        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType, socialType: socialType, authType: authType, identityToken: idToken)
         otfNetworkService.socialLogin(request: socialRequest) { (result) in
-            if case .success = result, loginType == .apple {
-                if let email = email {
-                    let credentials = AppleAuthCredentials(email: email, userId: socialId)
-                    try? OTFKeychain().saveAppleAuthCredentials(credentials)
-                }
-            }
             completionHandler(result)
         }
-       
     }
     
     

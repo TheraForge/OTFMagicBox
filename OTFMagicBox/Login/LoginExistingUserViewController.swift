@@ -39,7 +39,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     let authMethod: AuthMethod
     
     func makeCoordinator() -> OnboardingTaskCoordinator {
-        OnboardingTaskCoordinator(authMethod: authMethod, authType: .signin)
+        OnboardingTaskCoordinator(authMethod: authMethod, authType: .login)
     }
     
     typealias UIViewControllerType = ORKTaskViewController

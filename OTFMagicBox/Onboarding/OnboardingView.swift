@@ -36,8 +36,6 @@ struct OnboardingView: View {
     
     @State private var selectedAuthMethod = AuthMethod.email
     
-    @State private var showErrorAlert = false
-    
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
         
@@ -110,22 +108,7 @@ struct OnboardingView: View {
                     .sheet(isPresented: $showingOnboard, onDismiss: {
                         self.showingOnboard = false
                     }) {
-                        if self.selectedAuthMethod == .apple {
-                            if OTFKeychain().getAppleAuthCredentials() == nil {
-                                ActivitiesViewController(authMethod: .apple)
-                            } else {
-                                // Show alert that user should login
-                                AlertViewController(title: "Can't sign up again",
-                                                    message: "You have already signed up with Apple ID. Try logging in instead.",
-                                                    dismissButtonTitle: "Okay",
-                                                    buttonAction: {
-                                                        // Perform action if needed
-                                                    })
-                            }
-                        }
-                        else {
-                            ActivitiesViewController(authMethod: .email)
-                        }
+                        ActivitiesViewController(authMethod: self.selectedAuthMethod)
                     }
                 }
                 
@@ -160,23 +143,7 @@ struct OnboardingView: View {
                     .sheet(isPresented: $showingLogin, onDismiss: {
                         self.showingLogin = false
                     }) {
-                        if self.selectedAuthMethod == .apple {
-                            if OTFKeychain().getAppleAuthCredentials() != nil {
-                                LoginExistingUserViewController(authMethod: self.selectedAuthMethod)
-                            }
-                            else {
-                                // Show alert that user should sign up first
-                                AlertViewController(title: "Missing Credentials",
-                                                    message: "You cannot log in. Please sign up first.",
-                                                    dismissButtonTitle: "Okay",
-                                                    buttonAction: {
-                                                        // Perform action if needed
-                                                    })
-                            }
-                        }
-                        else {
-                            LoginExistingUserViewController(authMethod: self.selectedAuthMethod)
-                        }
+                        LoginExistingUserViewController(authMethod: self.selectedAuthMethod)
                     }
                 }
             } else {
