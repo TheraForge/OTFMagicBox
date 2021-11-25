@@ -15,7 +15,7 @@ class OTFTheraforgeNetwork {
     
     static let shared = OTFTheraforgeNetwork()
     
-    var otfNetworkService: NetworkingLayer!
+    var otfNetworkService: TheraForgeNetwork!
     
     private init() {
         
@@ -32,11 +32,12 @@ class OTFTheraforgeNetwork {
         
         let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: YmlReader().apiKey)
         TheraForgeNetwork.configureNetwork(configurations)
-        otfNetworkService = NetworkingLayer.shared
+        otfNetworkService = TheraForgeNetwork.shared
     }
     
     // Login request
-    public func loginRequest(email: String, password: String, completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
+    public func loginRequest(email: String, password: String,
+                             completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
                                                                          password: password)) { (result) in
             switch result {
@@ -53,7 +54,10 @@ class OTFTheraforgeNetwork {
                                    authType: AuthType,
                                    idToken: String,
                                    completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType, socialType: socialType, authType: authType, identityToken: idToken)
+        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType,
+                                                                  socialType: socialType,
+                                                                  authType: authType,
+                                                                  identityToken: idToken)
         otfNetworkService.socialLogin(request: socialRequest) { (result) in
             completionHandler(result)
         }
