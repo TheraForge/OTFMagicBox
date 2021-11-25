@@ -65,6 +65,11 @@
 		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
 		5DB5231E3B9C63375C446A41 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */; };
+		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
+		841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */; };
+		841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */; };
+		841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */; };
+		841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */; };
 		84268455274770A3007C5D50 /* LoginSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268454274770A3007C5D50 /* LoginSteps.swift */; };
 		84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */; };
 		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
@@ -152,6 +157,11 @@
 		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
+		841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudantSyncManager.swift; sourceTree = "<group>"; };
+		841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheraForgeHTTPInterceptor.swift; sourceTree = "<group>"; };
+		841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+URLRequest.swift"; sourceTree = "<group>"; };
 		84268454274770A3007C5D50 /* LoginSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSteps.swift; sourceTree = "<group>"; };
 		84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleStepViewController.swift; sourceTree = "<group>"; };
 		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
@@ -246,6 +256,7 @@
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
 				84771FA8272974B700468E0E /* Extension+Image.swift */,
 				5A43049B272ADF7900926584 /* Extension+Date.swift */,
+				841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
+				841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -293,6 +305,7 @@
 				5A49627F26DF3EC900A4B4DF /* OTFLog.swift */,
 				5A49628C26E1BD5C00A4B4DF /* UIColor.swift */,
 				5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */,
+				841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -364,6 +377,15 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
+		841FEFBC274E5D8200698892 /* Datastore */ = {
+			isa = PBXGroup;
+			children = (
+				841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */,
+				841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */,
+			);
+			path = Datastore;
+			sourceTree = "<group>";
+		};
 		844270A0272A6596000F7D78 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +435,7 @@
 		CE482CF5262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXGroup;
 			children = (
+				841FEFBC274E5D8200698892 /* Datastore */,
 				5A4304A8272CB05400926584 /* Store */,
 				5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */,
 				5A7B6D8D26FA352000F872A1 /* API */,
@@ -609,6 +632,7 @@
 				84771FA9272974B700468E0E /* Extension+Image.swift in Sources */,
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
 				84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */,
+				841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */,
 				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
 				5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
@@ -617,6 +641,7 @@
 				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
 				5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */,
 				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
+				841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */,
 				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
@@ -625,8 +650,10 @@
 				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
+				841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
+				841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
@@ -654,6 +681,7 @@
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
+				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,

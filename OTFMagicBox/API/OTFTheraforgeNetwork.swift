@@ -28,7 +28,7 @@ class OTFTheraforgeNetwork {
         guard let url = URL(string: Constants.API.developmentUrl) else {
             OTFLog("Error: cannot create URL")
             return
-          }
+        }
         
         let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: YmlReader().apiKey)
         TheraForgeNetwork.configureNetwork(configurations)
@@ -45,7 +45,7 @@ class OTFTheraforgeNetwork {
             }
             completionHandler(result)
         }
-       
+        
     }
     
     public func socialLoginRequest(userType: UserType,
@@ -66,8 +66,8 @@ class OTFTheraforgeNetwork {
                               password: String, dob: String, gender: String,
                               completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName,
-                                                last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
-       
+                                                                           last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
+            
             completionHandler(result)
         }
     }
@@ -75,18 +75,18 @@ class OTFTheraforgeNetwork {
     // Forgot password request
     public func forgotPassword(email: String, completionHandler:  @escaping (Result<Response.ForgotPassword, ForgeError>) -> Void) {
         otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email), completionHandler: { (result) in
-       
+            
             completionHandler(result)
         })
     }
-
+    
     // Reset password request
     public func resetPassword(email: String, code: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
         otfNetworkService.resetPassword(request: OTFCloudClientAPI.Request.ResetPassword(email: email, code: code,
-                                                            newPassword: newPassword), completionHandler: { (result) in
-    
-            completionHandler(result)
-        })
+                                                                                         newPassword: newPassword), completionHandler: { (result) in
+                                                                                            
+                                                                                            completionHandler(result)
+                                                                                         })
     }
     
     // Signout request.
@@ -107,12 +107,20 @@ class OTFTheraforgeNetwork {
         otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword), completionHandler: { (result) in
             switch result {
             case .success(let response):
-                    print(response)
+                print(response)
             case .failure(let error):
-                    print(error)
+                print(error)
             }
             completionHandler(result)
         })
     }
-
+    
+    func refreshToken(_ completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
+        guard let auth = TheraForgeKeychainService.shared.loadAuth() else {
+            completionHandler(.failure(.missingCredential))
+            return
+        }
+        print(auth)
+        otfNetworkService.refreshToken(completionHandler: completionHandler)
+    }
 }

@@ -10,7 +10,7 @@ target 'OTFMagicBox' do
   pod 'OTFToolBoxCore'
   pod 'OTFCloudantStore/CloudantCareHealth'
   pod 'OTFCDTDatastore'
-  pod 'OTFCareKit'
+  pod 'OTFCareKit/CareHealth'
   pod 'OTFResearchKit'
   pod 'OTFTemplateBox'
   pod 'OTFCloudClientAPI'

@@ -30,9 +30,9 @@ struct ContactsViewController: UIViewControllerRepresentable {
 
 class CareKitManager: NSObject {
     
-    let dataStore = OCKStore(name: "SampleAppStore", type: .inMemory)
     #if HEALTH
-    let healthKitStore = OCKHealthKitPassthroughStore(name: "CareKitHealthKitStore", type: .inMemory)
+    let healthKitStore = OCKHealthKitPassthroughStore(name: "CareKitHealthKitStore",
+                                                      type: .onDisk(protection: .none))
     #endif
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     
@@ -42,26 +42,26 @@ class CareKitManager: NSObject {
         super.init()
         
         initStore()
-
+        
         let coordinator = OCKStoreCoordinator()
         #if HEALTH
         coordinator.attach(store: healthKitStore)
         #endif
-        coordinator.attach(store: dataStore)
-
+        
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
+        
+        guard let cloudantStore = CloudantSyncManager.shared.cloudantStore else { return }
+        coordinator.attach(store: cloudantStore)
     }
     
     func wipe() throws {
-        try dataStore.delete()
+        try CloudantSyncManager.shared.cloudantStore?.datastoreManager.deleteDatastoreNamed("local_db")
     }
     
     fileprivate func initStore(forceUpdate: Bool = false) {
-            dataStore.populateSampleData()
-            #if HEALTH
-            healthKitStore.populateSampleData()
-            #endif
-            UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitDataInitDate)
+        #if HEALTH
+        healthKitStore.populateSampleData()
+        #endif
+        UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitDataInitDate)
     }
-    
 }
