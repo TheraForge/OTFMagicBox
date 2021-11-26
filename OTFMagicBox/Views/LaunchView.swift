@@ -28,7 +28,7 @@ struct LaunchView: View {
             }
         }.onAppear(perform: {
             didCompleteOnBoarding()
-        }).onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(Constants.onboardingDidComplete))) { notification in
+        }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
             if let newValue = notification.object as? Bool {
                 self.onboardingCompleted = newValue
             } else {

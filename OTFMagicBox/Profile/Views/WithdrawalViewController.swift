@@ -51,7 +51,7 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                     UserDefaults.standard.set(nil, forKey: Constants.prefCareKitDataInitDate)
                     UserDefaults.standard.set(nil, forKey: Constants.prefHealthRecordsLastUploaded)
                     
-                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
+                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
                     
                     fallthrough
                 default:

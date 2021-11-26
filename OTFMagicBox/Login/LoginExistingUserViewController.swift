@@ -19,7 +19,7 @@ enum AuthMethod: String, CaseIterable, Codable {
             return "Sign in with email"
             
         case .apple:
-            return "Sign in with Apple ID"
+            return "Sign in with Apple"
         }
     }
     
@@ -29,7 +29,7 @@ enum AuthMethod: String, CaseIterable, Codable {
             return "Sign up with email"
             
         case .apple:
-            return "Sign up with Apple ID"
+            return "Sign up with Apple"
         }
     }
 }

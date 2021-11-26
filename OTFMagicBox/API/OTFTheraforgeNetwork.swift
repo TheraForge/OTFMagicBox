@@ -99,7 +99,7 @@ class OTFTheraforgeNetwork {
             if case .success = result {
                 DispatchQueue.main.async {
                     UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
-                    NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
+                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
                 }
             }
             completionHandler?(result)

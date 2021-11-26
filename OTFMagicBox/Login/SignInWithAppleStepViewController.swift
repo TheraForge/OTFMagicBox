@@ -90,7 +90,7 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         }
 
         let alert = UIAlertController(title: nil,
-                                      message: authType == .login ? "Signing in..." : "Siging up...",
+                                      message: authType == .login ? "Signing in..." : "Signing up...",
                                       preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -99,7 +99,7 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         loadingIndicator.startAnimating()
         alert.view.addSubview(loadingIndicator)
         
-        taskViewController?.present(alert, animated: true, completion: nil)
+        taskViewController?.present(alert, animated: true)
 
         OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient,
                                                        socialType: .apple,
@@ -110,22 +110,18 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
                 switch result {
                 case .failure(let error):
                     print(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        alert.dismiss(animated: true) {
-                            let alert = UIAlertController(title: nil,
-                                                          message: error.localizedDescription,
-                                                          preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                            self.taskViewController?.present(alert, animated: true)
-                            self.showError(error)
-                        }
+                    alert.dismiss(animated: true) {
+                        let alert = UIAlertController(title: nil,
+                                                      message: error.localizedDescription,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                        self.taskViewController?.present(alert, animated: true)
+                        self.showError(error)
                     }
                     
                 case .success:
-                    DispatchQueue.main.async {
-                        alert.dismiss(animated: true, completion: nil)
-                        super.goForward()
-                    }
+                    alert.dismiss(animated: true, completion: nil)
+                    super.goForward()
                 }
             }
         }

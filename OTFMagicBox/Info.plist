@@ -31,9 +31,9 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Used for data security purposes.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Used for sensor collection demo tasks</string>
+	<string>Used for sensor collection demo tasks.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Used for sensor collection demo tasks</string>
+	<string>Used for sensor collection demo tasks.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

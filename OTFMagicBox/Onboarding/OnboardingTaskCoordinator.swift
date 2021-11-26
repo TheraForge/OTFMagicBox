@@ -7,7 +7,7 @@
 
 import OTFResearchKit
 
-class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
+final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
     
     let authMethod: AuthMethod
     let authType: AuthType
@@ -24,8 +24,7 @@ class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
             
             DispatchQueue.main.async {
                 UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
-                NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete),
-                                                object: true)
+                NotificationCenter.default.post(name: .onboardingDidComplete, object: true)
             }
             
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
