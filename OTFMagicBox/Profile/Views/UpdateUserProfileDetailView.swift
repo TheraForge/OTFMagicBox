@@ -141,17 +141,7 @@ struct UpdateUserProfileDetailView: View {
     }
     
     func updatePatient() {
-        OTFCloudantSync.shared.updatePatient(patientID: user.id, firstName: firstName, lastName: lastName,
-                                             gender: genderSelection, dob: date) { results in
-            
-            switch results {
-            case .failure(let error):
-                OTFLog("Error updating patient data", error.localizedDescription)
-            case .success:
-                self.presentationMode.wrappedValue.dismiss()
-            }
-            
-        }
+        // TODO: - Update user's profile here
     }
 }
 

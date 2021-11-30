@@ -35,22 +35,21 @@ class LoginViewController: ORKLoginStepViewController {
         taskViewController?.present(alert, animated: true, completion: nil)
         
         OTFTheraforgeNetwork.shared.loginRequest(email: email, password: pass) { (result) in
-            switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
                     alert.dismiss(animated: true) {
                         let alert = UIAlertController(title: "Login Error!", message: "Please check your credentials.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
                         self.taskViewController?.present(alert, animated: true)
                     }
-                }
-                
-            case .success:
-                DispatchQueue.main.async {
+                    
+                case .success:
                     alert.dismiss(animated: true, completion: nil)
+                    super.goForward()
                 }
-                super.goForward()
             }
         }
     }

@@ -18,7 +18,6 @@
 		5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049B272ADF7900926584 /* Extension+Date.swift */; };
 		5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049D272AE84A00926584 /* ConsentDocumentView.swift */; };
 		5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */; };
-		5A4304AA272CB05400926584 /* OTFCloudantSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304A9272CB05400926584 /* OTFCloudantSync.swift */; };
 		5A4304AC272CB22600926584 /* UpdateUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AB272CB22600926584 /* UpdateUserProfileView.swift */; };
 		5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626E26D4A2EA00A4B4DF /* DataModel.swift */; };
 		5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */; };
@@ -107,7 +106,6 @@
 		5A43049B272ADF7900926584 /* Extension+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		5A43049D272AE84A00926584 /* ConsentDocumentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocumentView.swift; sourceTree = "<group>"; };
 		5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentPreviewViewController.swift; sourceTree = "<group>"; };
-		5A4304A9272CB05400926584 /* OTFCloudantSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFCloudantSync.swift; sourceTree = "<group>"; };
 		5A4304AB272CB22600926584 /* UpdateUserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserProfileView.swift; sourceTree = "<group>"; };
 		5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserProfileDetailView.swift; sourceTree = "<group>"; };
 		5A49626E26D4A2EA00A4B4DF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 		5A4304A8272CB05400926584 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				5A4304A9272CB05400926584 /* OTFCloudantSync.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -650,7 +647,6 @@
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
 				84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */,
 				84268455274770A3007C5D50 /* LoginSteps.swift in Sources */,
-				5A4304AA272CB05400926584 /* OTFCloudantSync.swift in Sources */,
 				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,

@@ -33,50 +33,84 @@ class CloudantSyncManager {
     static let shared = CloudantSyncManager()
     var cloudantStore: OTFCloudantStore?
     
-    private init() {
-        cloudantStore = try? StoreService.shared.currentStore()
+    private var lastSynced: Date
+    private var shouldSyncAgain: Bool {
+        let secondsDiff = Date().timeIntervalSince(lastSynced)
+        return secondsDiff > 600
     }
     
-    func syncCloudantStore(_ completion: @escaping ((Error?) -> Void)) {
+    private init() {
+        cloudantStore = try? StoreService.shared.currentStore()
+        guard let lastDate = Calendar.current.date(byAdding: .minute, value: -10, to: Date()) else {
+            lastSynced = Date()
+            return
+        }
+        lastSynced = lastDate
+    }
+    
+    func syncCloudantStore(notifyWhenDone: Bool, completion: ((Error?) -> Void)?) {
         guard let auth = TheraForgeKeychainService.shared.loadAuth() else {
-            completion(ForgeError.missingCredential)
+            completion?(ForgeError.missingCredential)
+            return
+        }
+        
+        guard shouldSyncAgain else {
             return
         }
         
         if auth.isValid() {
-            startSync(completion)
+            startSync(notifyWhenDone: notifyWhenDone, completion: completion)
         } else {
             OTFTheraforgeNetwork.shared.refreshToken { [unowned self] result in
                 switch result {
                 case .success(_):
-                    startSync(completion)
+                    startSync(notifyWhenDone: notifyWhenDone, completion: completion)
                     
                 case .failure(let error):
-                    completion(error)
+                    completion?(error)
                 }
             }
         }
     }
     
-    func startSync(_ completion: @escaping ((Error?) -> Void)) {
+    private func startSync(notifyWhenDone: Bool, completion: ((Error?) -> Void)?) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         do {
             try replicate(direction: .push, completionBlock: { [unowned self] error in
                 guard error == nil else {
-                    completion(error)
+                    didFinishSyncWith(error: error, completion: completion)
                     return
                 }
                 
                 do {
                     try replicate(direction: .pull, completionBlock: { error in
-                        completion(error)
+                        if let error = error {
+                            print(error)
+                        }
+                        else {
+                            #if DEBUG
+                            print("Synced successfully!")
+                            #endif
+                            lastSynced = Date()
+                            if notifyWhenDone {
+                                NotificationCenter.default.post(name: .databaseSuccessfllySynchronized, object: nil)
+                            }
+                        }
+                        didFinishSyncWith(error: error, completion: completion)
                     })
                 } catch {
-                    completion(error)
+                    didFinishSyncWith(error: error, completion: completion)
                 }
             })
         } catch {
-            completion(error)
+            didFinishSyncWith(error: error, completion: completion)
         }
+    }
+    
+    private func didFinishSyncWith(error: Error?, completion: ((Error?) -> Void)?) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        completion?(error)
     }
     
     private func replicate(direction: ReplicationDirection, completionBlock: @escaping ((Error?) -> Void)) throws {

@@ -10,25 +10,41 @@ import OTFCareKit
 import Foundation
 import UIKit
 import SwiftUI
+import Combine
 
-struct ContactsViewController: UIViewControllerRepresentable {
+class OTFContactsListViewController: OCKContactsListViewController {
+    
+}
+
+final class ContactsViewController: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIViewController
     
+    @State private var contactsListViewController: OCKContactsListViewController
+    private var subscription: Cancellable?
+    
     init() {
-        CareKitManager.shared.synchronizedStoreManager.notificationPublisher.receive(subscriber: <#T##Subscriber#>)
+        let manager = CareKitManager.shared
+        let viewController = OCKContactsListViewController(storeManager: manager.synchronizedStoreManager)
+        viewController.title = "Care Team"
+        contactsListViewController = viewController
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification(_:)),
+                                               name: .databaseSuccessfllySynchronized, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
+    
     func makeUIViewController(context: Context) -> UIViewController {
-        let manager = CareKitManager.shared
-        
-        let viewController = OCKContactsListViewController(storeManager: manager.synchronizedStoreManager)
-        viewController.title = "Care Team"
-        
-        return UINavigationController(rootViewController: viewController)
+        return UINavigationController(rootViewController: contactsListViewController)
     }
     
+    @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
+        contactsListViewController.fetchContacts()
+    }
 }
 
 

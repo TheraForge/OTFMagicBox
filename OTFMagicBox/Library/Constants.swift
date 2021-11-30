@@ -80,6 +80,7 @@ enum Constants {
         static let WalkTestRequest = "WalkTestRequest"
         static let APIUserErrorNotification = "APIUserErrorNotification"
         static let DataSyncRequest = "DataSyncRequest"
+        static let DatabaseSynchronizedSuccessfully = "DatabaseSynchronizedSuccessfully"
         
         //Reset tab navigation badges
         static let BadgeReset = "BadgeReset"

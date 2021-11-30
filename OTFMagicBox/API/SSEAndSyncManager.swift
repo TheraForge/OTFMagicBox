@@ -13,26 +13,29 @@ class SSEAndSyncManager {
     
     // Subscribe to SSE
     public func subscribeToSSEWith(auth: Auth) {
-        OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnOpen = {
-            CloudantSyncManager.shared.syncCloudantStore { error in
-                print(error ?? "Synced successfully!")
-            }
+        OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnOpen = { [unowned self] in
+            syncDatabase()
         }
         
-        OTFTheraforgeNetwork.shared.otfNetworkService.onReceivedMessage = { event in
+        OTFTheraforgeNetwork.shared.otfNetworkService.onReceivedMessage = { [unowned self] event in
             print(event)
             guard event.message.count > 0 else {
                 return
             }
-            CloudantSyncManager.shared.syncCloudantStore { error in
-                print(error ?? "Synced successfully!")
-            }
+            syncDatabase(postNotification: true)
         }
         
         OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnComplete = { code, reconnect, error in
             print(error?.localizedDescription ?? "")
+            TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)
         }
         
         TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)
+    }
+    
+    private func syncDatabase(postNotification: Bool = false) {
+        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: postNotification) { error in
+            
+        }
     }
 }
