@@ -53,6 +53,8 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                     
                     NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
                     
+                    try? CareKitManager.shared.wipe()
+                    
                     fallthrough
                 default:
                     // otherwise dismiss onboarding without proceeding.

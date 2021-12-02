@@ -26,10 +26,13 @@ class ScheduleViewController: OCKDailyPageViewController {
 
         storeManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
             switch result {
-            case .failure(let error): print("Error: \(error)")
+            case .failure(let error):
+                print("Error: \(error)")
+                
             case .success(let tasks):
 
                 // Add a non-CareKit view into the list
+                /*
                 let tipTitle = "Customize your app!"
                 let tipText = ""
 
@@ -41,6 +44,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                     tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
                     listViewController.appendView(tipView, animated: false)
                 }
+                 */
 
                 if #available(iOS 14, *), let walkTask = tasks.first(where: { $0.id == "steps" }) {
 

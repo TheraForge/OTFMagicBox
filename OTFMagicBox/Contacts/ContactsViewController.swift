@@ -55,6 +55,13 @@ class CareKitManager: NSObject {
                                                       type: .onDisk(protection: .none))
     #endif
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
+    private(set) lazy var coordinator: OCKStoreCoordinator = {
+        let coordinator = OCKStoreCoordinator()
+        coordinator.taskDelegate = self
+        coordinator.contactDelegate = self
+        coordinator.outcomeDelegate = self
+        return coordinator
+    }()
     
     static let shared = CareKitManager()
     
@@ -63,12 +70,13 @@ class CareKitManager: NSObject {
         
         initStore()
         
-        let coordinator = OCKStoreCoordinator()
         #if HEALTH
         coordinator.attach(store: healthKitStore)
         #endif
         
         synchronizedStoreManager = OCKSynchronizedStoreManager(wrapping: coordinator)
+        
+        subscribeToNotifications()
         
         guard let cloudantStore = CloudantSyncManager.shared.cloudantStore else { return }
         coordinator.attach(store: cloudantStore)
@@ -83,5 +91,68 @@ class CareKitManager: NSObject {
         healthKitStore.populateSampleData()
         #endif
         UserDefaults.standard.set(Date(), forKey: Constants.prefCareKitDataInitDate)
+    }
+    
+    private func subscribeToNotifications() {
+        let subscriber = Subscribers.Sink<OCKStoreNotification, Never> { completion in
+            debugPrint(completion)
+        } receiveValue: { storeNotification in
+            if let outcomeStoreNotification = storeNotification as? OCKOutcomeNotification {
+                print(outcomeStoreNotification)
+            }
+            else if let taskStoreNotification = storeNotification as? OCKTaskNotification {
+                print(taskStoreNotification)
+            }
+            
+            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: false, completion: nil)
+        }
+        
+        synchronizedStoreManager.notificationPublisher.receive(subscriber: subscriber)
+    }
+}
+
+extension CareKitManager: OCKContactStoreDelegate {
+    func contactStore(_ store: OCKAnyReadOnlyContactStore, didAddContacts contacts: [OCKAnyContact]) {
+        print(contacts)
+    }
+    
+    func contactStore(_ store: OCKAnyReadOnlyContactStore, didUpdateContacts contacts: [OCKAnyContact]) {
+        
+    }
+    
+    func contactStore(_ store: OCKAnyReadOnlyContactStore, didDeleteContacts contacts: [OCKAnyContact]) {
+        
+    }
+}
+
+extension CareKitManager: OCKTaskStoreDelegate {
+    func taskStore(_ store: OCKAnyReadOnlyTaskStore, didAddTasks tasks: [OCKAnyTask]) {
+        print(tasks)
+    }
+    
+    func taskStore(_ store: OCKAnyReadOnlyTaskStore, didUpdateTasks tasks: [OCKAnyTask]) {
+        print(tasks)
+    }
+    
+    func taskStore(_ store: OCKAnyReadOnlyTaskStore, didDeleteTasks tasks: [OCKAnyTask]) {
+        print(tasks)
+    }
+}
+
+extension CareKitManager: OCKOutcomeStoreDelegate {
+    func outcomeStore(_ store: OCKAnyReadOnlyOutcomeStore, didAddOutcomes outcomes: [OCKAnyOutcome]) {
+        print(outcomes)
+    }
+    
+    func outcomeStore(_ store: OCKAnyReadOnlyOutcomeStore, didUpdateOutcomes outcomes: [OCKAnyOutcome]) {
+        print(outcomes)
+    }
+    
+    func outcomeStore(_ store: OCKAnyReadOnlyOutcomeStore, didDeleteOutcomes outcomes: [OCKAnyOutcome]) {
+        print(outcomes)
+    }
+    
+    func outcomeStore(_ store: OCKAnyReadOnlyOutcomeStore, didEncounterUnknownChange change: String) {
+        print(change)
     }
 }

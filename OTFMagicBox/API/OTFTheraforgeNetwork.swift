@@ -100,6 +100,7 @@ class OTFTheraforgeNetwork {
                 DispatchQueue.main.async {
                     UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
                     NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
+                    try? CareKitManager.shared.wipe()
                 }
             }
             completionHandler?(result)

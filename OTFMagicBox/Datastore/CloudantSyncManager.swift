@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OTFCareKit
 import OTFCloudantStore
 import OTFCloudClientAPI
 import OTFCDTDatastore
@@ -33,10 +34,14 @@ class CloudantSyncManager {
     static let shared = CloudantSyncManager()
     var cloudantStore: OTFCloudantStore?
     
+    var storeManager: OCKSynchronizedStoreManager {
+        CareKitManager.shared.synchronizedStoreManager
+    }
+    
     private var lastSynced: Date
     private var shouldSyncAgain: Bool {
         let secondsDiff = Date().timeIntervalSince(lastSynced)
-        return secondsDiff > 600
+        return secondsDiff >= 300
     }
     
     private init() {
@@ -54,9 +59,9 @@ class CloudantSyncManager {
             return
         }
         
-        guard shouldSyncAgain else {
-            return
-        }
+//        guard shouldSyncAgain else {
+//            return
+//        }
         
         if auth.isValid() {
             startSync(notifyWhenDone: notifyWhenDone, completion: completion)
@@ -74,7 +79,9 @@ class CloudantSyncManager {
     }
     
     private func startSync(notifyWhenDone: Bool, completion: ((Error?) -> Void)?) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
         
         do {
             try replicate(direction: .push, completionBlock: { [unowned self] error in
@@ -109,8 +116,10 @@ class CloudantSyncManager {
     }
     
     private func didFinishSyncWith(error: Error?, completion: ((Error?) -> Void)?) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        completion?(error)
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            completion?(error)
+        }
     }
     
     private func replicate(direction: ReplicationDirection, completionBlock: @escaping ((Error?) -> Void)) throws {
