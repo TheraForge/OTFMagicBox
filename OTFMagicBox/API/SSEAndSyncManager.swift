@@ -36,7 +36,7 @@ class SSEAndSyncManager {
     }
     
     private func syncDatabase(postNotification: Bool = false) {
-        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: postNotification) { error in
+        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: postNotification) { _ in
             
         }
     }
