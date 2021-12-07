@@ -23,7 +23,7 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
         case .completed:
             
             DispatchQueue.main.async {
-                UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
+                UserDefaultsManager.setOnboardingCompleted(true)
                 NotificationCenter.default.post(name: .onboardingDidComplete, object: true)
             }
             
@@ -95,7 +95,7 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 return
             }
             
-            guard let dob = dobResult?.dateAnswer?.toString() else {
+            guard let dob = dobResult?.dateAnswer?.toString else {
                 return
             }
             

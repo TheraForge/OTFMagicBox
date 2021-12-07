@@ -47,6 +47,7 @@ final class ContactsViewController: UIViewControllerRepresentable {
     }
 }
 
+import OTFCloudantStore
 
 class CareKitManager: NSObject {
     
@@ -54,6 +55,7 @@ class CareKitManager: NSObject {
     let healthKitStore = OCKHealthKitPassthroughStore(name: "CareKitHealthKitStore",
                                                       type: .onDisk(protection: .none))
     #endif
+    private(set) var cloudantStore: OTFCloudantStore?
     private(set) var synchronizedStoreManager: OCKSynchronizedStoreManager!
     private(set) lazy var coordinator: OCKStoreCoordinator = {
         let coordinator = OCKStoreCoordinator()
@@ -79,6 +81,7 @@ class CareKitManager: NSObject {
         subscribeToNotifications()
         
         guard let cloudantStore = CloudantSyncManager.shared.cloudantStore else { return }
+        self.cloudantStore = cloudantStore
         coordinator.attach(store: cloudantStore)
     }
     
@@ -104,7 +107,7 @@ class CareKitManager: NSObject {
                 print(taskStoreNotification)
             }
             
-            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: false, completion: nil)
+            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true, completion: nil)
         }
         
         synchronizedStoreManager.notificationPublisher.receive(subscriber: subscriber)

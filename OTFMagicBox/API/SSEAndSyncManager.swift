@@ -27,7 +27,9 @@ class SSEAndSyncManager {
         
         OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnComplete = { code, reconnect, error in
             print(error?.localizedDescription ?? "")
-            TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)
+            if reconnect == true {
+                TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)
+            }
         }
         
         TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)

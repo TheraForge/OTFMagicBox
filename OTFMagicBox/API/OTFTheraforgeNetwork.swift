@@ -98,9 +98,10 @@ class OTFTheraforgeNetwork {
         otfNetworkService.signOut(completionHandler: { (result) in
             if case .success = result {
                 DispatchQueue.main.async {
-                    UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
+                    UserDefaultsManager.setOnboardingCompleted(false)
                     NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
                     try? CareKitManager.shared.wipe()
+                    self.disconnectFromSSE()
                 }
             }
             completionHandler?(result)
@@ -127,5 +128,9 @@ class OTFTheraforgeNetwork {
         }
         print(auth)
         otfNetworkService.refreshToken(completionHandler: completionHandler)
+    }
+    
+    func disconnectFromSSE() {
+        NetworkingLayer.shared.eventSource?.disconnect()
     }
 }

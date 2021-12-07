@@ -121,6 +121,8 @@ extension OCKHealthKitPassthroughStore {
 
 
 #if DEBUG
+import OTFCloudClientAPI
+
 extension OTFCloudantStore {
     // Adds tasks and contacts into the store
     func populateSampleData() {
@@ -196,5 +198,35 @@ extension OTFCloudantStore {
 
         addContacts([contact1, contact2])
     }
+    
+    @discardableResult func convertUserToPatient(user: Response.User) -> OCKPatient? {
+        var patient = OCKPatient(id: user.id, givenName: user.firstName ?? "", familyName: user.lastName ?? "")
+        patient.uuid = UUID()
+        patient.birthday = user.dateOfBirth
+        patient.remoteID = user.email
+        patient.sex = (user.gender == .male) ? .male : .female
+        addPatient(patient)
+        return patient
+    }
 }
 #endif
+
+extension OTFCloudantStore {
+    func getThisPatient(_ completion: @escaping OCKResultClosure<OCKPatient>) {
+        guard let user = TheraForgeKeychainService.shared.loadUser() else {
+            completion(.failure(.fetchFailed(reason: "User not logged in.")))
+            return
+        }
+        CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
+            if case .failure(let error) = result, case .fetchFailed(let reason) = error, reason == "No patient with matching ID" {
+                guard let patient = self.convertUserToPatient(user: user) else {
+                    completion(result)
+                    return
+                }
+                completion(.success(patient))
+            } else {
+                completion(result)
+            }
+        })
+    }
+}
