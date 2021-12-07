@@ -8,10 +8,11 @@
 import Foundation
 import SwiftUI
 import OTFCareKitStore
+import OTFCloudClientAPI
 
 struct UpdateUserProfileDetailView: View {
     let color = Color(YmlReader().primaryColor)
-    let genderValues = ["Male", "Female", "Other"]
+    let genderValues = GenderType.allCases
     @State var showGenderPicker = false
     @State var showDatePicker = false
     
@@ -22,10 +23,10 @@ struct UpdateUserProfileDetailView: View {
         })
     }
     
-    let user: OCKPatient
+    @State private(set) var user: OCKPatient
     @State var firstName: String
     @State var lastName:String
-    @State var genderSelection: String
+    @State var genderSelection: GenderType
     @State var date: Date
     @State var dob: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -45,10 +46,10 @@ struct UpdateUserProfileDetailView: View {
     }()
     
     init(user: OCKPatient) {
-        self.user = user
+        _user = State(initialValue: user)
         _firstName = State(initialValue: user.name.givenName ?? "")
         _lastName = State(initialValue: user.name.familyName ?? "")
-        _genderSelection = State(initialValue: user.sex?.rawValue ?? "")
+        _genderSelection = State(initialValue: user.sex?.genderType ?? .other)
         _dob = State(initialValue: user.birthday?.toString ?? "")
         _date = State(initialValue: user.birthday ?? Date())
     }
@@ -76,7 +77,7 @@ struct UpdateUserProfileDetailView: View {
                     Button(action: {
                         self.showGenderPicker.toggle()
                     }) {
-                        Text(" \(genderSelection)")
+                        Text(" \(genderSelection.rawValue)")
                             .foregroundColor(.black)
                             .font(.system(size: 20, weight:.regular))
                     }
@@ -88,7 +89,7 @@ struct UpdateUserProfileDetailView: View {
                             }.frame(alignment: .trailing)
                             Picker("Select a gender", selection: $genderSelection) {
                                 ForEach(genderValues, id: \.self) {
-                                    Text($0)
+                                    Text($0.rawValue)
                                 }
                             }
                             .pickerStyle(WheelPickerStyle())
@@ -133,6 +134,13 @@ struct UpdateUserProfileDetailView: View {
                 
             }.navigationBarTitle(Text("Profile"))
         }
+        .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
+            CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
+                if case .success(let patient) = result {
+                    self.user = patient
+                }
+            })
+        }
     }
     
     func dismissKeyboard() {
@@ -142,9 +150,45 @@ struct UpdateUserProfileDetailView: View {
     
     func updatePatient() {
         // TODO: - Update user's profile here
+        var name = PersonNameComponents()
+        name.givenName = firstName
+        name.familyName = lastName
+        user.name = name
+        user.birthday = date
+        user.sex = genderSelection.carekitGender
+        CareKitManager.shared.cloudantStore?.updatePatient(user)
     }
 }
 
+extension GenderType {
+    var carekitGender: OCKBiologicalSex {
+        switch self {
+        case .male:
+            return .male
+            
+        case .female:
+        return .female
+        
+        case .other:
+            return .other("")
+        }
+    }
+}
+
+extension OCKBiologicalSex {
+    var genderType: GenderType {
+        switch self {
+        case .male:
+            return .male
+            
+        case .female:
+            return .female
+            
+        default:
+            return .other
+        }
+    }
+}
 
 struct IconView: View {
     @State private var image: Image?

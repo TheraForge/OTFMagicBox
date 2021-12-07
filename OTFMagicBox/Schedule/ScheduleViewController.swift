@@ -15,9 +15,17 @@ class ScheduleViewController: OCKDailyPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Schedule"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification(_:)),
+                                               name: .databaseSuccessfllySynchronized, object: nil)
     }
     
-    override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
+    @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
+        reload()
+    }
+    
+    override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController,
+                                          prepare listViewController: OCKListViewController, for date: Date) {
         
         let identifiers = ["doxylamine", "nausea", "coffee", "survey", "steps", "heartRate"]
         var query = OCKTaskQuery(for: date)
