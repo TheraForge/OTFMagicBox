@@ -84,9 +84,6 @@ struct UpdateUserProfileDetailView: View {
                     if showGenderPicker {
                         
                         VStack(alignment:.trailing){
-                            Button(action:{self.showGenderPicker = false}){
-                                Text("Done")
-                            }.frame(alignment: .trailing)
                             Picker("Select a gender", selection: $genderSelection) {
                                 ForEach(genderValues, id: \.self) {
                                     Text($0.rawValue)
@@ -107,9 +104,6 @@ struct UpdateUserProfileDetailView: View {
                     if showDatePicker {
                         
                         VStack(alignment:.trailing){
-                            Button(action:{self.showDatePicker = false}){
-                                Text("Done")
-                            }.frame(alignment: .topTrailing)
                             DatePicker("", selection: selectedDate, displayedComponents: .date)
                                 .datePickerStyle(WheelDatePickerStyle())
                         }
@@ -138,6 +132,11 @@ struct UpdateUserProfileDetailView: View {
             CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
                 if case .success(let patient) = result {
                     self.user = patient
+                    self.firstName = patient.name.givenName ?? ""
+                    self.lastName = patient.name.familyName ?? ""
+                    self.genderSelection = patient.sex?.genderType ?? .other
+                    self.date = patient.birthday ?? Date()
+                    setDateString()
                 }
             })
         }

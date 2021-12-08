@@ -10,7 +10,7 @@ import OTFCareKitStore
 
 struct ProfileUIView: View {
     
-    let user: OCKPatient
+    @State private(set) var user: OCKPatient
     
     var body: some View {
         VStack {
@@ -55,7 +55,22 @@ struct ProfileUIView: View {
                     LogoutView()
                 }
                 
-            }.listStyle(GroupedListStyle())
+            }
+            .listStyle(GroupedListStyle())
+            .onAppear {
+                fetchFromDB()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
+                fetchFromDB()
+            }
         }
+    }
+    
+    func fetchFromDB() {
+        CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
+            if case .success(let patient) = result {
+                self.user = patient
+            }
+        })
     }
 }

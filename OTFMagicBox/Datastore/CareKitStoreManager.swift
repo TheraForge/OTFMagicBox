@@ -65,7 +65,7 @@ class CareKitManager: NSObject {
                 print(taskStoreNotification)
             }
             
-            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: false, completion: nil)
+            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true, completion: nil)
         }
         
         synchronizedStoreManager.notificationPublisher.receive(subscriber: subscriber)

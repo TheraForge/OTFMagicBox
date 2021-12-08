@@ -12,10 +12,6 @@ import UIKit
 import SwiftUI
 import Combine
 
-class OTFContactsListViewController: OCKContactsListViewController {
-    
-}
-
 final class ContactsViewController: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIViewController

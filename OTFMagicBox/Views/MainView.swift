@@ -55,35 +55,3 @@ struct MainView: View {
         
     }
 }
-
-
-import OTFCareKitStore
-import OTFCareKit
-import Foundation
-import UIKit
-
-struct TasksViewController: UIViewControllerRepresentable {
-    
-    typealias UIViewControllerType = UIViewController
-    
-    var dataStore = OCKStore(name: "SampleAppStore", type: .inMemory)
-    
-    func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
-    
-    func makeUIViewController(context: Context) -> UIViewController {
-        var healthKitStore = OCKHealthKitPassthroughStore(store: dataStore)
-        let synchronizedStoreManager: OCKSynchronizedStoreManager = {
-            let coordinator = OCKStoreCoordinator()
-            #if HEALTH
-            coordinator.attach(eventStore: healthKitStore)
-            #endif
-            coordinator.attach(store: dataStore)
-            return OCKSynchronizedStoreManager(wrapping: coordinator)
-        }()
-        
-        let viewController = OCKContactsListViewController(storeManager: synchronizedStoreManager)
-        viewController.title = "Care Team"
-        // Create the SwiftUI view that provides the window contents.
-        return UINavigationController(rootViewController: viewController)
-    }
-}
