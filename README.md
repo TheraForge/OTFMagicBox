@@ -1,16 +1,19 @@
-# TheraForge MagicBox
+# TheraForge MagicBox 1.0.0-beta
 
 The Open TheraForge MagicBox app is a template for creating digital health solutions that help people better manage their health.
 This sample application leverages TheraForge frameworks such as [OTFTemplateBox](../../../OTFTemplateBox) to implement a zero-code solution that can be customized without requiring any code changes.
+
 For more details on the SDK, refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
 
 # Table of Contents
+
 * [Overview](#Overview)
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [License](#License)
 
 # Overview
+
 MagicBox app's source code represents an example of how to use the TheraForge SDK's frameworks.
 You can use MagicBox as a reference, or you can fork it and make it the starting point for your own app. This open template can help you to create your own digital health application prototype in just a few minutes, without investing a lot of time and money, and even with limited knowledge of coding.
 
@@ -18,74 +21,63 @@ These are its primary characteristics:
 
 + No-code configuration and setup for accelerated development.
 + Informed consent process and survey generation using Apple's ResearchKit framework.
-+ Care plan management using Apple's Carekit framework
++ Care plan management using Apple's Carekit framework.
 + Monitoring of health data with Apple's HealthKit framework.
-+ Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox framework.
++ Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
 + Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
 
-MagicBox includes following features:
+MagicBox includes the following features:
 
 
- Onboarding
- When a user launches your app for the first time, the onboarding process reinforces your app's value and provides instructions that highlight key benefits and features. 
+## Onboarding
 
+When a user launches an app for the first time, the onboarding process presents the app's goals and provides instructions that highlight key benefits and features. 
 
+## Consent
 
- 
- Consent
- Consent is the process of a user granting authorization to an application to access protected resources on their behalf. A user can be asked for consent to allow access to their organization/individual data. 
+The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for exammple, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
+## Consent Form and Signature
 
+The consent form contains the description of the items included in the application that require explicit user consent. The user can agree to the clauses by signing the form.
 
-Consent form and Signature
+## Simplified Registration and Login Process
 
- Consent form contains the description of the Consents included in the application. If the user agrees to the Consent form then the User has to Sign on the Consent form. 
+The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, fullname, last name, date Of birth and gender, etc. Date of birth can be used for example for minimum eligibility to the use of the app.
 
+## Login/Social Login
 
+MagicBox supports different login strategies: regular login using registration details, Sign in with Apple and Sign in with Google.
 
-A simplified Registration and Login  process
+User login credentials are securely stored in the device's keychain. 
 
-The workflow to get someone to sign up to your research project is already in place. Registration page of the application asks for the basic user details such as email, password, fullname, last name, Date Of Birth and Gender etc. 
+## Passcode
 
+In order to protect access, the app can optionally require a four- or six-digit user-selected passcode.
 
+## Activity
 
+There are a number of pre-defined task types that you can include in your project: for example, a two finger tap test, the 6 minute walk test, a special memory test and a short walk test to measure gait and balance. These tasks include the instructions for the steps to perform to complete them.
 
+## Surveys
 
- Login/Social Login
+A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole. 
 
+## Contacts
 
- OTFMagicBox supports different ways of login such as regular login using your registration details, Apple Login and Google Login.
+Contacts are cards that contain doctor and family member details, such as address, phone number, messaging number, email address, etc.
 
-User login credentials will be stored in the Keychain Services. 
+## User Profile
 
- Passcode
-  In order to protect the data, your app can use Passcode technology. With the Passcode, your users can provide a four or six-digit user-selected code for access.
+The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
 
+# Installation
 
-
- Activity
-Number of standard tasks that you can simply include in your sample project. This includes a two finger tap test, the 6 minute walk test, a special memory test and a short walk test to measure gait and balance. These tasks include all the steps the user will need to complete in order to complete the test, these are supplied as clear instructions to the user 
- 
-
-
-
-Survey
-A survey is a sequence of questions that you use to collect data from your users. Each step object handles a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole. 
-
- Contacts
-	Contacts include any kind of Patient’s contacts cards, which provides the basic details of Contacts like address, Phone number, messaging number,  email address etc.
-
- Profile
-	Profile includes the basic details of your organization such as Help, Report, Support address, Withdrawal from study and logout of a patient.
-
-
-
-Installation 
 Todo: Add Installation
 
-Usage
+# Usage
 
-After following the installation steps, go to the AppSysParameters.yml file in the root of your project. This yaml file contains the complete structure of your health application. You don't need to be any developer to edit this file and create your own application, just follow the simple instructions written in the AppSysParameters.yml file. Editing this yaml file you can completely customize your health application according to your requirements. Yaml file allows you to change the complete design and flow of the application.
+After following the installation steps, go to the AppSysParameters.yml file in the root folder of your project. This yaml file contains the complete structure of your health application. You don't need to be any developer to edit this file and create your own application, just follow the simple instructions written in the AppSysParameters.yml file. Editing this yaml file you can completely customize your health application according to your requirements. Yaml file allows you to change the complete design and flow of the application.
 
 Application Name: 
 You can modify the digital health application name to your desired application name. To do this follow the below given instructions:
