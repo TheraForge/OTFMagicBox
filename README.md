@@ -25,13 +25,14 @@ These are its primary characteristics:
 + Monitoring of health data with Apple's HealthKit framework.
 + Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
 + Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
++ SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases)
 
-MagicBox includes the following features:
 
+MagicBox includes the following customizable features:
 
 ## Onboarding
 
-When a user launches an app for the first time, the onboarding process presents the app's goals and provides instructions that highlight key benefits and features. 
+When a user launches an app for the first time, the onboarding process presents the app’s goals and provides instructions that highlight key benefits and features. 
 
 ## Consent
 
@@ -43,7 +44,7 @@ The consent form contains the description of the items included in the applicati
 
 ## Simplified Registration and Login Process
 
-The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, fullname, last name, date Of birth and gender, etc. Date of birth can be used for example for minimum eligibility to the use of the app.
+The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, fullname, last name, date of birth and gender, etc. For example, date of birth can be used for a minimum age eligibility check to limit the use of the app.
 
 ## Login/Social Login
 
@@ -77,18 +78,20 @@ Todo: Add Installation
 
 # Usage <a name="Usage"></a>
 
-After following the installation steps, go to the *AppSysParameters.yml* file in the root folder of your project. This yaml file contains a list of customizable parameters of your health application.
-You don't need to be a developer to edit this file and customize the application, just use a common editor (e.g., TextEdit or Xcode) and follow the simple instructions present in the AppSysParameters.yml file.
+After following the installation steps, go to the `AppSysParameters.yml` file in the root folder of your project. This yaml file contains a list of customizable parameters of your health application.
+You don’t need to be a developer to edit this file and customize the application, just use a common editor (e.g., TextEdit or Xcode) and follow the simple instructions present in the `AppSysParameters.yml` file.
 By editing this yaml file you can customize the health application according to your requirements, for example you can modify the app styling and flow.
 
-## Application Name: 
-You can modify the health application name to your desired application name. To do this follow the below given instructions:
+## App Name: 
+
+You can modify the app name. To do this follow the instructions given below:
+
 Go to the root of this project.
 
 
 
-Click on the  info.plist file 
-In the info.plist file you see the list of key-value pairs. Go to the row where key named as “Bundle name”. Change the Value column of that row with your application name. As shown in the pic below.
+Click on the `info.plist` file 
+In the info.plist file you see the list of settings (key-value pairs). Go to the row where key named as “Bundle name”. Change the Value column of that row with your application name. As shown in the pic below.
 
 Example: change $(PRODUCT_NAME) to “My Digital App”.  
 
@@ -96,7 +99,7 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 ## Design:
 
-Changing the tint color, label colors or font type and size of the font will give the complete new look to your application. 
+You can change the tint color, the label colors, font type and size to customize the look of your application. 
 
 // Link to the yaml design section.
 
@@ -109,48 +112,48 @@ Update the API key to access the TheraForge Secure Cloud.
 
 ## Onboarding:
 
-To make your Onboarding attractive go to the Onboarding section in the AppSysParameters.yml file and add as many Onboarding pages as you need. Add the image type of your choice such as Emoji, SF Symbols and Assets. In the description write the text which explains about that particular Onboarding page.
+To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page.
 
 // Link to the yaml Onboarding section.
 
  
 ## Consent:
 
- To add the Consent to your application go to the Consent section in the AppSysParameters.yml file and add required Consents to your application. Follow the instructions given in the yaml file to add the correct type of consent.
+To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections.
 
 // Link to the yaml Consent section.
 
  
 ## Registration and Login: 
 
- Go to the Registration section in AppSysParameters.yml file and change the values of Date Of Birth and Gender to true if you want to display those fields in your Registration form otherwise set it as false.
+Go to the Registration section in the `AppSysParameters.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`.
 
 // Link to the yaml Registration section.
 
 ## Login/Social Login:
 
-Go to the Login section in the AppSysParameters.yml file and change the values of title and messages of the login section.
+Go to the Login section in the `AppSysParameters.yml` file and customize the title and the description.
 
-If you want to use the Signup With Apple then set the value to true otherwise false.
+If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`.
 
 // Link to the yaml Login section.
 
 
 ## Passcode:
 
-Go to the Passcode section in the AppSysParameters.yml file and change the values of passcode text and passcode type to 4 or 6 digits.
+Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits.
 
 // Link to the yaml Passcode section.
 
 
 ## CareKit:
 
-If your application requires the tasks and contacts features then enable useCareKit key, which allows you to display the contacts and perform the tasks of the Patients.
+If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients.
 
 // Link to the yaml use carekit section.
 
 
-Go through the complete yaml file for all kinds of  key-value pairs and edit the values of the keys according to your application requirement, which will give you your own digital health application in just a few minutes.
+Review the complete yaml file to learn about the available settings (also called *key-value pairs*) and edit the values of the keys according to your application's requirements, which will allow you to customize your digital health application in just a few minutes.
 
 # License <a name="License"></a>
 
