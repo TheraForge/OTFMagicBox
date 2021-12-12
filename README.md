@@ -12,7 +12,7 @@ For more details on the SDK, refer to the [OTFToolBox](../../../OTFToolBox) Read
 * [Usage](#Usage)
 * [License](#License)
 
-# Overview
+# Overview <a name="Overview"></a>
 
 MagicBox app's source code represents an example of how to use the TheraForge SDK's frameworks.
 You can use MagicBox as a reference, or you can fork it and make it the starting point for your own app. This open template can help you to create your own digital health application prototype in just a few minutes, without investing a lot of time and money, and even with limited knowledge of coding.
@@ -71,16 +71,18 @@ Contacts are cards that contain doctor and family member details, such as addres
 
 The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
 
-# Installation
+# Installation <a name="Installation"></a>
 
 Todo: Add Installation
 
-# Usage
+# Usage <a name="Usage"></a>
 
-After following the installation steps, go to the AppSysParameters.yml file in the root folder of your project. This yaml file contains the complete structure of your health application. You don't need to be any developer to edit this file and create your own application, just follow the simple instructions written in the AppSysParameters.yml file. Editing this yaml file you can completely customize your health application according to your requirements. Yaml file allows you to change the complete design and flow of the application.
+After following the installation steps, go to the *AppSysParameters.yml* file in the root folder of your project. This yaml file contains a list of customizable parameters of your health application.
+You don't need to be a developer to edit this file and customize the application, just use a common editor (e.g., TextEdit or Xcode) and follow the simple instructions present in the AppSysParameters.yml file.
+By editing this yaml file you can customize the health application according to your requirements, for example you can modify the app styling and flow.
 
-Application Name: 
-You can modify the digital health application name to your desired application name. To do this follow the below given instructions:
+## Application Name: 
+You can modify the health application name to your desired application name. To do this follow the below given instructions:
 Go to the root of this project.
 
 
@@ -92,36 +94,40 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
   
 
- Design:
+## Design:
+
 Changing the tint color, label colors or font type and size of the font will give the complete new look to your application. 
 
 // Link to the yaml design section.
 
- API:
-Update the API token key to your own TheraForge ToolBox API token.
+## API Key:
+
+Update the API key to access the TheraForge Secure Cloud.
 
 // Link to the yaml API config section.
 
 
-Onboarding:
+## Onboarding:
+
 To make your Onboarding attractive go to the Onboarding section in the AppSysParameters.yml file and add as many Onboarding pages as you need. Add the image type of your choice such as Emoji, SF Symbols and Assets. In the description write the text which explains about that particular Onboarding page.
 
 // Link to the yaml Onboarding section.
 
  
- Consent:
+## Consent:
+
  To add the Consent to your application go to the Consent section in the AppSysParameters.yml file and add required Consents to your application. Follow the instructions given in the yaml file to add the correct type of consent.
 
 // Link to the yaml Consent section.
 
  
-Registration and Login: 
+## Registration and Login: 
 
  Go to the Registration section in AppSysParameters.yml file and change the values of Date Of Birth and Gender to true if you want to display those fields in your Registration form otherwise set it as false.
 
 // Link to the yaml Registration section.
 
- Login/Social Login:
+## Login/Social Login:
 
 Go to the Login section in the AppSysParameters.yml file and change the values of title and messages of the login section.
 
@@ -130,13 +136,15 @@ If you want to use the Signup With Apple then set the value to true otherwise fa
 // Link to the yaml Login section.
 
 
-Passcode:
+## Passcode:
+
 Go to the Passcode section in the AppSysParameters.yml file and change the values of passcode text and passcode type to 4 or 6 digits.
 
 // Link to the yaml Passcode section.
 
 
-CareKit:
+## CareKit:
+
 If your application requires the tasks and contacts features then enable useCareKit key, which allows you to display the contacts and perform the tasks of the Patients.
 
 // Link to the yaml use carekit section.
@@ -144,5 +152,6 @@ If your application requires the tasks and contacts features then enable useCare
 
 Go through the complete yaml file for all kinds of  key-value pairs and edit the values of the keys according to your application requirement, which will give you your own digital health application in just a few minutes.
 
-Licence 
-Todo: Add Licence
+# License <a name="License"></a>
+
+Todo: Add License
