@@ -106,6 +106,8 @@ After following the installation steps, go to the `AppSysParameters.yml` file in
 You don’t need to be a developer to edit this file and customize the application, just use a common editor (e.g., TextEdit or Xcode) and follow the simple instructions present in the `AppSysParameters.yml` file.
 By editing this yaml file you can customize the health application according to your requirements, for example you can modify the app styling and flow.
 
+Review the complete yaml file to learn about the available settings (also called *key-value pairs*) and edit the values of the keys according to your application's requirements, which will allow you to customize your digital health application in just a few minutes.
+
 ## Change the App's Name
 
 You can modify the app name. To do this follow the instructions given below:
@@ -125,34 +127,31 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 You can change the tint color, the label colors, font type and size to customize the look of your application. 
 
-// Link to the yaml design section.
+[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
 
 ## Set up the Cloud's API Key
 
 Update the API key to access the TheraForge Secure Cloud.
 
-// Link to the yaml API config section.
-
+[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L83-L104)
 
 ## Customize Onboarding
 
 To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page.
 
-// Link to the yaml Onboarding section.
+[Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L220-L228)
 
- 
 ## Customize Consent
 
 To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections.
 
-// Link to the yaml Consent section.
+[Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L230-L286)
 
- 
 ## Customize Registration and Login
 
 Go to the Registration section in the `AppSysParameters.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`.
 
-// Link to the yaml Registration section.
+[Registration Configuration Section](/OTFMagicBox/AppSysParameters.yml#L288-L293)
 
 ## Configure Regular Login/Social Login
 
@@ -160,24 +159,21 @@ Go to the Login section in the `AppSysParameters.yml` file and customize the tit
 
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`.
 
-// Link to the yaml Login section.
-
+[Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L295-L306)
 
 ## Configure the Passcode
 
 Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits.
 
-// Link to the yaml Passcode section.
+[Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L308-L316)
 
 
 ## Enable CareKit
 
 If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients.
 
-// Link to the yaml use carekit section.
+[Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
 
-
-Review the complete yaml file to learn about the available settings (also called *key-value pairs*) and edit the values of the keys according to your application's requirements, which will allow you to customize your digital health application in just a few minutes.
 
 # License <a name="License"></a>
 
