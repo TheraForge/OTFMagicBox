@@ -10,14 +10,20 @@ import OTFCareKitStore
 
 struct ProfileUIView: View {
     
-    @State private(set) var user: OCKPatient
+    @State private(set) var user: OCKPatient?
     
     var body: some View {
+        
         VStack {
             Text("Profile").font(.headerFontStyle)
+            
             List {
                 Section {
-                    UpdateUserProfileView(user: user)
+                    if let user = user {
+                        UpdateUserProfileView(user: user)
+                    } else {
+                        LoadingView(username: "")
+                    }
                 }
                 
                 Section {
@@ -58,16 +64,16 @@ struct ProfileUIView: View {
             }
             .listStyle(GroupedListStyle())
             .onAppear {
-                fetchFromDB()
+                fetchUserFromDB()
             }
             .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
-                fetchFromDB()
+                fetchUserFromDB()
             }
         }
     }
     
-    func fetchFromDB() {
-        CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
+    func fetchUserFromDB() {
+        CareKitManager.shared.cloudantStore?.getThisPatient({ result in
             if case .success(let patient) = result {
                 self.user = patient
             }

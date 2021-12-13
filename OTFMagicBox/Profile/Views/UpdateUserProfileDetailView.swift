@@ -112,7 +112,7 @@ struct UpdateUserProfileDetailView: View {
                 }
                 
                 Button(action: {
-                    
+                    presentationMode.wrappedValue.dismiss()
                     updatePatient()
                 }, label: {
                     Text("Save")
@@ -193,7 +193,7 @@ struct IconView: View {
     @State private var image: Image?
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
-    @State private var shouldPresentCamera = false
+    @State private var sourceType = UIImagePickerController.SourceType.photoLibrary
     
     var imageView: Image {
         image ?? Image.avatar
@@ -205,15 +205,15 @@ struct IconView: View {
             .aspectRatio(contentMode: .fill)
             .onTapGesture { self.shouldPresentActionScheet = true }
             .sheet(isPresented: $shouldPresentImagePicker) {
-                SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$image, isPresented: self.$shouldPresentImagePicker)
+                SUImagePickerView(sourceType: self.sourceType, image: self.$image, isPresented: self.$shouldPresentImagePicker)
             }
             .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
                 ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                     self.shouldPresentImagePicker = true
-                    self.shouldPresentCamera = true
+                    self.sourceType = .camera
                 }), ActionSheet.Button.default(Text("Photo Library"), action: {
                     self.shouldPresentImagePicker = true
-                    self.shouldPresentCamera = false
+                    self.sourceType = .photoLibrary
                 }), ActionSheet.Button.cancel()])
             }
     }

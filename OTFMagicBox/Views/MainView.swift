@@ -11,10 +11,8 @@ import OTFCareKitStore
 struct MainView: View {
     
     let color: Color
-    let user: OCKPatient
     
-    init(user: OCKPatient) {
-        self.user = user
+    init() {
         self.color = Color(YmlReader().primaryColor)
         OTFTheraforgeNetwork.shared.refreshToken { response in
             switch response {
@@ -46,7 +44,7 @@ struct MainView: View {
                 }
             }
             
-            ProfileUIView(user: user).tabItem {
+            ProfileUIView().tabItem {
                 UIImage.loadImage(named: "tab_profile").renderingMode(.template)
                 Text("Profile")
             }

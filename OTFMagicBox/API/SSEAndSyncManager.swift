@@ -35,7 +35,7 @@ class SSEAndSyncManager {
         TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)
     }
     
-    private func syncDatabase(postNotification: Bool = false) {
+    private func syncDatabase(postNotification: Bool = true) {
         CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: postNotification) { error in
             
         }
