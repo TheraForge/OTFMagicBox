@@ -126,13 +126,13 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 You can change the tint color, the label colors, font type and size to customize the look of your application. 
 
-[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
+[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L83-L177)
 
 ## Set up the Cloud's API Key
 
 Update the API key to access the TheraForge Secure Cloud.
 
-[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L83-L104)
+[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
 
 ## Customize Onboarding
 
