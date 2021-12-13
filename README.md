@@ -110,14 +110,13 @@ Review the complete yaml file to learn about the available settings (also called
 
 ## Change the App's Name
 
-You can modify the app name. To do this follow the instructions given below:
+You can modify the app's name by following the instructions given below.
 
-Go to the root of this project.
+Go to the root of your project in Xcode (sidebar shown in the figure below).
 
-![Alt text](Docs/13-Project.png)
+<img src="Docs/13-Project.png" width=35% height=35%>
 
-Click on the `info.plist` file 
-In the info.plist file you see the list of settings (key-value pairs). Go to the row where key named as “Bundle name”. Change the Value column of that row with your application name. As shown in the pic below.
+Click on the `info.plist` file. Xcode will show the contents of the `info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “Bundle name”. Click on the Value column of that row and change the value to your application name, as shown in the figure below.
 
 Example: change $(PRODUCT_NAME) to “My Digital App”.  
 
