@@ -30,33 +30,33 @@ These are its primary characteristics:
 
 MagicBox includes the following customizable features:
 
-![Alt text](Docs/1-Features.png)
+<img src="Docs/1-Features.png" width=75% height=75%>
 
 ## Onboarding
 
 When a user launches an app for the first time, the onboarding process presents the app’s goals and provides instructions that highlight key benefits and features.
 
-![Alt text](Docs/2-Onboarding.png)
+<img src="Docs/2-Onboarding.png" width=35% height=35%>
 
 ## Consent
 
 The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for exammple, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
-![Alt text](Docs/3-Consent.png)
+<img src="Docs/3-Consent.png" width=35% height=35%>
 
 ## Consent Form and Signature
 
 The consent form contains the description of the items included in the application that require explicit user consent. The user can agree to the clauses by signing the form.
 
-![Alt text](Docs/4-Form.png)
+<img src="Docs/4-Form.png" width=35% height=35%>
 
-![Alt text](Docs/5-Signature.png)
+<img src="Docs/5-Signature.png" width=35% height=35%>
 
 ## Simplified Registration and Login Process
 
 The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, fullname, last name, date of birth and gender, etc. For example, date of birth can be used for a minimum age eligibility check to limit the use of the app.
 
-![Alt text](Docs/6-Signup.png)
+<img src="Docs/6-Signup.png" width=35% height=35%>
 
 ## Login/Social Login
 
@@ -64,37 +64,37 @@ MagicBox supports different login strategies: regular login using registration d
 
 User login credentials are securely stored in the device's keychain.
 
-![Alt text](Docs/7-Login.png)
+<img src="Docs/7-Login.png" width=35% height=35%>
 
 ## Passcode
 
 In order to protect access, the app can optionally require a four- or six-digit user-selected passcode.
 
-![Alt text](Docs/8-Passcode.png)
+<img src="Docs/8-Passcode.png" width=35% height=35%>
 
 ## Activity
 
 There are a number of pre-defined task types that you can include in your project: for example, a two finger tap test, the 6 minute walk test, a special memory test and a short walk test to measure gait and balance. These tasks include the instructions for the steps to perform to complete them.
 
-![Alt text](Docs/9-Activity.png)
+<img src="Docs/9-Activity.png" width=35% height=35%>
 
 ## Surveys
 
 A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole.
 
-![Alt text](Docs/10-Survey.png)
+<img src="Docs/10-Survey.png" width=35% height=35%>
 
 ## Contacts
 
 Contacts are cards that contain doctor and family member details, such as address, phone number, messaging number, email address, etc.
 
-![Alt text](Docs/11-Contacts.png)
+<img src="Docs/11-Contacts.png" width=35% height=35%>
 
 ## User Profile
 
 The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
 
-![Alt text](Docs/12-Profile.png)
+<img src="Docs/12-Profile.png" width=35% height=35%>
 
 # Installation <a name="Installation"></a>
 
