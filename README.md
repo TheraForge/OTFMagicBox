@@ -116,7 +116,7 @@ Go to the root of your project in Xcode (sidebar shown in the figure below).
 
 <img src="Docs/13-Project.png" width=35% height=35%>
 
-Click on the `info.plist` file. Xcode will show the contents of the `info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “Bundle name”. Click on the Value column of that row and change the value to your application name, as shown in the figure below.
+Click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “Bundle name”. Click on the Value column of that row and change the value to your application name, as shown in the figure below.
 
 Example: change $(PRODUCT_NAME) to “My Digital App”.  
 
