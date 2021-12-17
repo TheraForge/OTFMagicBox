@@ -29,18 +29,12 @@ struct LaunchView: View {
         }.onAppear(perform: {
             didCompleteOnBoarding()
         }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
-            if let newValue = notification.object as? Bool {
-                self.onboardingCompleted = newValue
-            } else {
-                didCompleteOnBoarding()
-            }
+            didCompleteOnBoarding()
         }
     }
     
     func didCompleteOnBoarding() {
-        if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-            self.onboardingCompleted = completed
-        }
+        self.onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     }
 }
 

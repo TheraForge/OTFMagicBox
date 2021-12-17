@@ -33,8 +33,10 @@ struct ProfileUIView: View {
                     HelpView(site: YmlReader().teamWebsite)
                 }
                 
-                Section {
-                    ChangePasswordView()
+                if let email = user?.remoteID {
+                    Section {
+                        ChangePasswordView(email: email)
+                    }
                 }
                 
                 Section {
@@ -63,7 +65,7 @@ struct ProfileUIView: View {
                 
             }
             .listStyle(GroupedListStyle())
-            .onAppear {
+            .onLoad {
                 fetchUserFromDB()
             }
             .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in

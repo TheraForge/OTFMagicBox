@@ -185,6 +185,7 @@ struct OnboardingView: View {
                     .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                     .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
                     .sheet(isPresented: $showingLogin, onDismiss: {
+                        self.showingLogin = false
                         self.onComplete?()
                     }, content: {
                         LoginExistingUserViewController(authMethod: .email)
@@ -193,6 +194,10 @@ struct OnboardingView: View {
             }
             
             Spacer()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
+            self.showingLogin = false
+            self.showingOnboard = false
         }
     }
 }

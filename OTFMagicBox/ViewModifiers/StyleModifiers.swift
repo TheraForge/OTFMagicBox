@@ -14,23 +14,29 @@ enum CustomStyle {
 }
 
 extension View {
+    
+    var colorScheme: ColorScheme {
+        Environment(\.colorScheme).wrappedValue
+    }
+    
     @ViewBuilder func style(_ style: CustomStyle) -> some View {
+        let color = colorScheme == .dark ? Color.white : .black
         switch style {
         case .emailField:
             self.autocapitalization(.none)
                 .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
+                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
                 .padding()
             
         case .textField:
             self.autocapitalization(.none)
                 .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
+                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
                 .padding()
             
         case .secureField:
             self.padding()
-                .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
+                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
                 .padding()
         }
     }

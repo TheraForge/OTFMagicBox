@@ -11,6 +11,7 @@ import SwiftUI
 // This view creates the section in the Profile view, which navigates to the another page where we can reset the password.
 struct ChangePasswordView: View {
     
+    let email: String
     @State var showResetPassword = false
     
     var body: some View {
@@ -25,7 +26,7 @@ struct ChangePasswordView: View {
         }).sheet(isPresented: $showResetPassword, onDismiss: {
             
         }, content: {
-            ChangePasswordDeatilsView()
+            ChangePasswordDeatilsView(email: email)
         })
     }
 }
@@ -33,12 +34,17 @@ struct ChangePasswordView: View {
 // View where we can reset the password.
 struct ChangePasswordDeatilsView: View {
     
-    @State var email: String = UserDefaults.standard.object(forKey: Constants.patientEmail) as! String
+    @State var email: String
     @State var oldPassword: String = ""
     @State var newPassword: String = ""
     let color = Color(YmlReader().primaryColor)
     @State var showFailureAlert = false
+    @State var errorMessage = ""
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    init(email: String) {
+        _email = State(initialValue: email)
+    }
     
     var body: some View {
         VStack {
@@ -67,6 +73,7 @@ struct ChangePasswordDeatilsView: View {
                     switch results {
                     case .failure(let error):
                         showFailureAlert = true
+                        errorMessage = error.localizedDescription
                         print(error.localizedDescription)
                         
                     case .success:
@@ -81,12 +88,12 @@ struct ChangePasswordDeatilsView: View {
                     .foregroundColor(self.color)
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .overlay(
-                        RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                            .stroke(self.color, lineWidth: 2)
+                        Capsule().stroke(self.color, lineWidth: 2)
                     )
             })
+            .padding()
             .alert(isPresented: $showFailureAlert, content: ({
-                Alert(title: Text("Password Reset Error!"), message: Text(""), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Password Reset Error!"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }))
             
             Spacer()
