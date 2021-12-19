@@ -1,9 +1,10 @@
 # TheraForge MagicBox 1.0.0-beta
 
-The Open TheraForge MagicBox app is a template for creating digital health solutions that help people better manage their health.
-This sample application leverages TheraForge frameworks such as [OTFTemplateBox](../../../OTFTemplateBox) to implement a zero-code solution that can be customized without requiring any code changes.
+The Open TheraForge (OTF) MagicBox app is a template for creating digital health solutions that help people better manage their health.
 
-For more details on the SDK, refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
+This sample application leverages TheraForge frameworks such as [OTFTemplateBox](../../../OTFTemplateBox) to implement a no-code solution that can be customized without requiring any code changes.
+
+For more details on the composition of the SDK, refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
 
 # Table of Contents
 
@@ -14,18 +15,19 @@ For more details on the SDK, refer to the [OTFToolBox](../../../OTFToolBox) Read
 
 # Overview <a name="Overview"></a>
 
-MagicBox app's source code represents an example of how to use the TheraForge SDK's frameworks.
+MagicBox app’s source code represents an example of how to use the frameworks in the TheraForge SDK. It will constantly evolve to incorporate and showcase new features of the SDK.
+
 You can use MagicBox as a reference, or you can fork it and make it the starting point for your own app. This open template can help you to create your own digital health application prototype in just a few minutes, without investing a lot of time and money, and even with limited knowledge of coding.
 
 These are its primary characteristics:
 
-+ No-code configuration and setup for accelerated development.
-+ Informed consent process and survey generation using Apple's ResearchKit framework.
-+ Care plan management using Apple's Carekit framework.
-+ Monitoring of health data with Apple's HealthKit framework.
-+ Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
-+ Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
-+ SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases)
+* No-code configuration and setup for accelerated development.
+* Informed consent process and survey generation using Apple's ResearchKit framework.
+* Care plan management using Apple's Carekit framework.
+* Monitoring of health data with Apple's HealthKit framework.
+* Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
+* Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
+* SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases)
 
 
 MagicBox includes the following customizable features:
@@ -62,7 +64,7 @@ The app includes screens to get a user to sign up to use a medical intervention,
 
 MagicBox supports different login strategies: regular login using registration details, Sign in with Apple and Sign in with Google.
 
-User login credentials are securely stored in the device's keychain.
+User login credentials are securely stored in the device’s keychain.
 
 <img src="Docs/7-Login.png" width=35% height=35%>
 
@@ -98,7 +100,7 @@ The profile section includes the user account view as well as additional informa
 
 # Installation <a name="Installation"></a>
 
-Todo: Add Installation
+Todo: (Zeeshan) Add Installation
 
 # Usage <a name="Usage"></a>
 
