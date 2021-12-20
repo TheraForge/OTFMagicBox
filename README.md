@@ -103,43 +103,43 @@ The profile section includes the user account view as well as additional informa
 1. ### Create Developer Folder
 Create a new folder in your `Documents` folder (you may choose another location) and name it as `Developer`. Then open terminal application and change your directory to this newly created `Developer` folder.
 
-<img src="Docs/15-ChangeDirectoryToNewFolder.png" width=35% height=35%>
+<img src="Docs/15-ChangeDirectoryToNewFolder.png">
 
 2. ### Copy Repo URL
 Copy the URL of the repo to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repo URL.
 
-<img src="Docs/16-CopyRepoLink.png" width=35% height=35%>
+<img src="Docs/16-CopyRepoLink.png" width=80% height=80%>
 
 3. ### Clone the Repo
 Go back to the terminal and enter `git clone` followed by the repo URL you just copied in the previous step.
 
-<img src="Docs/17-GitClone.png" width=35% height=35%>
+<img src="Docs/17-GitClone.png">
 
 4. ### List the Files
 Now run the `ls` command in the terminal to see the files in the directory cloned from the repo.
 
-<img src="Docs/18-ListFiles.png" width=35% height=35%>
+<img src="Docs/18-ListFiles.png">
 
 Note the Podfile there in the list of files.
 
 5. ### Pod Install
 Run `pod install` command to install the dependencies. You should see something as shown in the image below when you run this command.
 
-<img src="Docs/19-PodInstall.png" width=35% height=35%>
+<img src="Docs/19-PodInstall.png">
 
 6. ### List the Files Again
 Now list the files again using `ls` command in the terminal. This time you'll see two extra files in the list as highlighted in the image.
 
-<img src="Docs/20-ListFiles.png" width=35% height=35%>
+<img src="Docs/20-ListFiles.png">
 
 7. ### Open Workspace
 `OTFMagicBox.xcworkspace` is the file we shall use from now onwards. To open this project in Xcode we may either double click on this file or open it using `open OTFMaicBox.xcworkspace` in the terminal.
 
-<img src="Docs/21-OpenWorkspace.png" width=35% height=35%>
+<img src="Docs/21-OpenWorkspace.png">
 
 When this project opens in Xcode you should see something like this.
 
-<img src="Docs/22-XcodeWorkspace.png" width=35% height=35%>
+<img src="Docs/22-XcodeWorkspace.png" width=70% height=70%>
 
 # Usage <a name="Usage"></a>
 
