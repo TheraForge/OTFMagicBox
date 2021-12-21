@@ -113,7 +113,7 @@ An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.a
 
 In order to develop iOS apps, make sure to download Xcode, Apple's Integrated Development Environment (IDE), from the Mac App Store.
 
-<p style="text-align:center;"><img src="Docs/29-Xcode.png" width=50% height=50%></p>
+<img src="Docs/29-Xcode.png" width=50% height=50%>
 
 If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
 
@@ -121,7 +121,7 @@ If you haven't done it yet, follow this [Xcode article](https://medium.nextlevel
 
 After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
 
-<p style="text-align:center;"><img src="Docs/27-cocoapods.png" width=80% height=80%></p>
+<img src="Docs/27-cocoapods.png" width=80% height=80%>
 
 If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guides.cocoapods.org/using/using-cocoapods.html) to learn more about it.
 
@@ -129,7 +129,7 @@ CocoaPods is built with the Ruby language and can be installed with the default 
 
 However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
 
-<p style="text-align:center;"><img src="Docs/28-homebrew.png" width=80% height=80%></p>
+<img src="Docs/28-homebrew.png" width=80% height=80%>
 
 To do that, open the Terminal application (you can type ⌘+spacebar to bring up the macOS Spotlight search, enter `Terminal` in it, and then press Return).
 
