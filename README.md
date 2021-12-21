@@ -32,7 +32,7 @@ These are its primary characteristics:
 
 MagicBox includes the following customizable features:
 
-<img src="Docs/1-Features.png" width=75% height=75%>
+<img src="Docs/1-Features.png" width=85% height=85%>
 
 ## Onboarding
 
@@ -137,7 +137,7 @@ as explained in the [Homebrew](https://brew.sh/) main page. (If you get an error
 
 Wait for the installation to end.
 
-![Alt text](Docs/0-homebrew.png)
+![Alt text](Docs/24-homebrew.png)
 
 OTFToolBox by default includes Apple's ResearchKit framework. Building it requires the installation of the `git-lfs` tool like so:
 
@@ -153,7 +153,7 @@ sudo gem install cocoapods
 
 as shown below:
 
-![Alt text](Docs/1-Terminal.png)
+![Alt text](Docs/25-Terminal.png)
 
 Refer to our [Cocoapods Installation](Docs/Cocoapods.md) page for prerequisites, caveats and troubleshooting suggestions.
 
@@ -161,7 +161,7 @@ After successful installation of `git-lfs` and Cocoapods, you can install the Ma
 
 ## App Setup <a name="App-Setup"></a>
 
-1. ### Create the Developer Directory and a Project Subdirectory 
+### 1. Create the Developer Directory and a Project Subdirectory 
 
 You need to create a project directory in your user directory.
 
@@ -176,7 +176,7 @@ In the Finder that corresponds to your home directory (the one with the home ico
 The canonical way to store software development projects is by creating a ~/Developer sub-directory.
 The Finder has a special "hammer" icon just for this sub-directory (that you can also add to the sidebar):
 
-![Alt text](Docs/11-Developer.png)
+![Alt text](Docs/26-Developer.png)
 
 So go ahead and create a “Developer” directory (if you haven’t done it already) in the Finder or in Terminal like so:
 
@@ -192,17 +192,17 @@ In the Terminal application change your directory to the `Developer` folder:
 cd ~/Developer
 ```
 
-2. ### Copy MagicBox's Repository URL
+### 2. Copy MagicBox's Repository URL
 
 Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repository URL:
 
-<img src="Docs/16-CopyRepoLink.png" width=80% height=80%>
+<img src="Docs/16-CopyRepoLink.png" width=100% height=100%>
 
 This is the URL that you should get:
 
 `https://github.com/HippocratesTech/OTFMagicBox.git`
 
-3. ### Clone MagicBox's Repository to Install the App
+### 3. Clone MagicBox's Repository to Install the App
 
 Then go back to the Terminal app in the `Developer` directory and enter `git clone` followed by the repository URL you just copied in the previous step:
 
@@ -212,7 +212,7 @@ Then change the directory to the newly-created OTFMagicBox subdirectory:
 
 `cd OTFMagicBox`
 
-4. ### List the Cloned Files
+### 4. List the Cloned Files
 
 Run the `ls` command in Terminal to see the files in the directory cloned from the GitHub repository.
 
@@ -220,26 +220,28 @@ Run the `ls` command in Terminal to see the files in the directory cloned from t
 
 Note the file called `Podfile` in the list.
 
-5. ### Installation of the ToolBox SDK
+### 5. Installation of the ToolBox SDK
 
 Run the `pod install` command to install the SDK and its dependencies. After you run this command, you should see something similar to what is shown in the image below:
 
 <img src="Docs/19-PodInstall.png">
 
-6. ### List the Files Again
+### 6. List the Files Again
 
 Now list the files again using `ls` command in Terminal. This time you'll see two extra files in the list as highlighted in the image:
 
 <img src="Docs/20-ListFiles.png">
 
-7. ### Open the Project Workspace
+### 7. Open the Project Workspace
 
 `OTFMagicBox.xcworkspace` is the Xcode workspace file you should use from now onwards.
 To open this workspace file in Xcode, you may either double click it in the Finder or open it using the `open OTFMagicBox.xcworkspace` command in Terminal:
 
 <img src="Docs/21-OpenWorkspace.png">
 
-(You can also launch Xcode first and open this file from the startup screen.)
+You can also launch Xcode first and open this file from the startup screen:
+
+![Alt text](Docs/23-Xcode-start.png)
 
 When this project opens in Xcode you should see something like this:
 
@@ -260,7 +262,7 @@ You can modify the app's name by following the instructions given below.
 
 Go to the root of your project in Xcode (sidebar shown in the figure below).
 
-<img src="Docs/13-Project.png" width=35% height=35%>
+<img src="Docs/13-Project.png" width=45% height=45%>
 
 Click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “Bundle name”. Click on the Value column of that row and change the value to your application name, as shown in the figure below.
 
