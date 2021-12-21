@@ -119,17 +119,17 @@ If you haven't done it yet, follow this [Xcode article](https://medium.nextlevel
 
 (Note that in case of Xcode 13.2 Apple recommends to download it directly from the Apple Developer web site https://developer.apple.com/download/all/?q=Xcode. Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
 
-After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
+<img src="Docs/27-cocoapods.png" width=50% height=50%>
 
-<img src="Docs/27-cocoapods.png" width=60% height=60%>
+After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
 
 If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guides.cocoapods.org/using/using-cocoapods.html) to learn more about it.
 
 CocoaPods is built with the Ruby language and can be installed with the default version of Ruby available with macOS.
 
-However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
+<img src="Docs/28-homebrew.png" width=20% height=20%>
 
-<img src="Docs/28-homebrew.png" width=25% height=25%>
+However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
 
 To do that, open the Terminal application (you can type ⌘+spacebar to bring up the macOS Spotlight search, enter `Terminal` in it, and then press Return).
 
