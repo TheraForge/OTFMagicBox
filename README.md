@@ -32,7 +32,7 @@ These are its primary characteristics:
 
 MagicBox includes the following customizable features:
 
-<img src="Docs/1-Features.png" width=85% height=85%>
+<p align="center"><img src="Docs/1-Features.png" width=85% height=85%></p>
 
 ## Onboarding
 
