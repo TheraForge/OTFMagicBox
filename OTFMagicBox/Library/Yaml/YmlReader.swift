@@ -66,7 +66,7 @@ public class YmlReader {
     
     var loginPasswordless: Bool {
         guard let passwordless = dataModel?.login.loginPasswordless else { return false }
-        return passwordless == "true"
+        return passwordless == Constants.true
     }
     
     var loginStepTitle: String {
@@ -134,7 +134,7 @@ public class YmlReader {
     
     var isPasscodeEnabled: Bool {
         guard let passcode = dataModel?.passcode.enable else { return true }
-        return passcode != "false"
+        return passcode != Constants.false
     }
     
     var passcodeOnReturnText: String {
@@ -145,14 +145,19 @@ public class YmlReader {
         return dataModel?.passcode.passcodeType ?? Constants.Passcode.lengthFour
     }
     
+    var showSocialLogin: Bool {
+        guard let showSocialLogin = dataModel?.showSocialLogin else { return false }
+        return showSocialLogin == Constants.true
+    }
+    
     var showGender: Bool {
         guard let showGender = dataModel?.registration.showGender else { return false }
-        return showGender == "true"
+        return showGender == Constants.true
     }
     
     var showDateOfBirth: Bool {
         guard let showDOB = dataModel?.registration.showDateOfBirth else { return false }
-        return showDOB == "true"
+        return showDOB == Constants.true
     }
     
     var failedLoginText: String? {
@@ -173,7 +178,7 @@ public class YmlReader {
     
     var useCareKit: Bool {
         guard let useCareKit = dataModel?.useCareKit else { return false }
-        return useCareKit == "true"
+        return useCareKit == Constants.true
     }
     
     var backgroundReadFrequency: String? {

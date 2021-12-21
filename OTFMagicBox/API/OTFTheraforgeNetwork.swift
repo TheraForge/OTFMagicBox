@@ -8,6 +8,9 @@
 import Foundation
 import OTFCloudClientAPI
 
+typealias AuthType = Request.SocialLogin.AuthType
+typealias SocialType = Request.SocialLogin.SocialType
+
 class OTFTheraforgeNetwork {
     
     static let shared = OTFTheraforgeNetwork()
@@ -33,7 +36,8 @@ class OTFTheraforgeNetwork {
     }
     
     // Login request
-    public func loginRequest(email: String, password: String, completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
+    public func loginRequest(email: String, password: String,
+                             completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
                                                                          password: password)) { (result) in
             switch result {
@@ -45,18 +49,28 @@ class OTFTheraforgeNetwork {
         
     }
     
+    public func socialLoginRequest(userType: UserType,
+                                   socialType: SocialType,
+                                   authType: AuthType,
+                                   idToken: String,
+                                   completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
+        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType,
+                                                                  socialType: socialType,
+                                                                  authType: authType,
+                                                                  identityToken: idToken)
+        otfNetworkService.socialLogin(request: socialRequest) { (result) in
+            completionHandler(result)
+        }
+    }
+    
+    
     // Registration request
     // swiftlint:disable all
     public func signUpRequest(firstName: String, lastName: String, type: String, email: String,
                               password: String, dob: String, gender: String,
-                              completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email,
-                                                                           password: password,
-                                                                           first_name: firstName,
-                                                                           last_name: lastName,
-                                                                           type: .patient, dob: dob,
-                                                                           gender: gender,
-                                                                           phoneNo: "")) { (result) in
+                              completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
+        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName,
+                                                                           last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
             
             completionHandler(result)
         }
@@ -80,16 +94,15 @@ class OTFTheraforgeNetwork {
     }
     
     // Signout request.
-    public func signOut() {
+    public func signOut(completionHandler: ((Result<Response.LogOut, ForgeError>) -> Void)?) {
         otfNetworkService.signOut(completionHandler: { (result) in
-            switch result {
-            case .success(_):
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: false)
-                    }
-            case .failure(_):
-                break
+            if case .success = result {
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
+                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
+                }
             }
+            completionHandler?(result)
         })
     }
     

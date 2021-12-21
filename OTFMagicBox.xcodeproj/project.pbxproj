@@ -44,7 +44,7 @@
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
 		5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD46264E89510069FEF7 /* ConsentDocument.swift */; };
 		5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */; };
-		5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */; };
+		5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */; };
 		5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4F264E9A880069FEF7 /* Constants.swift */; };
 		5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */; };
 		5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */; };
@@ -64,14 +64,18 @@
 		5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */; };
 		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
-		840682082731BEC9008339D5 /* Extension+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840682072731BEC9008339D5 /* Extension+URLRequest.swift */; };
-		8406820B2731BF3A008339D5 /* CloudantSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820A2731BF3A008339D5 /* CloudantSyncManager.swift */; };
-		8406820D2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820C2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift */; };
-		8406820F2732AF26008339D5 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406820E2732AF26008339D5 /* SSEAndSyncManager.swift */; };
+		5DB5231E3B9C63375C446A41 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */; };
+		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
+		841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */; };
+		841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */; };
+		841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */; };
+		841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */; };
+		84268455274770A3007C5D50 /* LoginSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268454274770A3007C5D50 /* LoginSteps.swift */; };
+		84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */; };
 		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
-		844270A8272C2076000F7D78 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A7272C2076000F7D78 /* UserDefaultsManager.swift */; };
 		84771FA9272974B700468E0E /* Extension+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84771FA8272974B700468E0E /* Extension+Image.swift */; };
 		848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */; };
+		84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1758A2750A035001587BD /* Extention+Notification.swift */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
 		CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */; };
 		CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */; };
@@ -79,7 +83,6 @@
 		CE482CFD262C954C00C0A2D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE482CFC262C954C00C0A2D5 /* Assets.xcassets */; };
 		CE482D00262C954C00C0A2D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */; };
 		CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */; };
-		DDBFA6F239E798C5CE5D3ED2 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE59BC9B1631B0E8BBD8560 /* Pods_OTFMagicBox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,7 +137,7 @@
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5AADFD46264E89510069FEF7 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
-		5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewCoordinator.swift; sourceTree = "<group>"; };
+		5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTaskCoordinator.swift; sourceTree = "<group>"; };
 		5AADFD4F264E9A880069FEF7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewControllerRepresentable.swift; sourceTree = "<group>"; };
@@ -154,16 +157,18 @@
 		5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
 		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
-		66C8F4C7AA17CDE8F58BF689 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
-		840682072731BEC9008339D5 /* Extension+URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLRequest.swift"; sourceTree = "<group>"; };
-		8406820A2731BF3A008339D5 /* CloudantSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudantSyncManager.swift; sourceTree = "<group>"; };
-		8406820C2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheraForgeHTTPInterceptor.swift; sourceTree = "<group>"; };
-		8406820E2732AF26008339D5 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
+		63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
+		841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudantSyncManager.swift; sourceTree = "<group>"; };
+		841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheraForgeHTTPInterceptor.swift; sourceTree = "<group>"; };
+		841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+URLRequest.swift"; sourceTree = "<group>"; };
+		84268454274770A3007C5D50 /* LoginSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSteps.swift; sourceTree = "<group>"; };
+		84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleStepViewController.swift; sourceTree = "<group>"; };
 		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
-		844270A7272C2076000F7D78 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
-		8EE59BC9B1631B0E8BBD8560 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C320F3366C045912484E1107 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		84A1758A2750A035001587BD /* Extention+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+Notification.swift"; sourceTree = "<group>"; };
+		CBC1ACABAA466D2B2A968279 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +178,7 @@
 		CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE482D02262C954C00C0A2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE482D04262C954C00C0A2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDA77B27BA1F900C2882CAE6 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
-				DDBFA6F239E798C5CE5D3ED2 /* Pods_OTFMagicBox.framework in Frameworks */,
+				5DB5231E3B9C63375C446A41 /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +258,8 @@
 				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
 				84771FA8272974B700468E0E /* Extension+Image.swift */,
 				5A43049B272ADF7900926584 /* Extension+Date.swift */,
-				840682072731BEC9008339D5 /* Extension+URLRequest.swift */,
+				841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */,
+				84A1758A2750A035001587BD /* Extention+Notification.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -261,7 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
-				8406820E2732AF26008339D5 /* SSEAndSyncManager.swift */,
+				841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -282,7 +289,7 @@
 				5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */,
 				5AADFD38264E86950069FEF7 /* OnboardingView.swift */,
 				5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */,
-				5AADFD4C264E98950069FEF7 /* OnboardingViewCoordinator.swift */,
+				5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */,
 				5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */,
 			);
 			path = Onboarding;
@@ -301,7 +308,7 @@
 				5A49627F26DF3EC900A4B4DF /* OTFLog.swift */,
 				5A49628C26E1BD5C00A4B4DF /* UIColor.swift */,
 				5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */,
-				844270A7272C2076000F7D78 /* UserDefaultsManager.swift */,
+				841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -312,6 +319,8 @@
 				5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */,
 				5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */,
 				5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */,
+				84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */,
+				84268454274770A3007C5D50 /* LoginSteps.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -371,11 +380,11 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
-		840682092731BF04008339D5 /* Datastore */ = {
+		841FEFBC274E5D8200698892 /* Datastore */ = {
 			isa = PBXGroup;
 			children = (
-				8406820A2731BF3A008339D5 /* CloudantSyncManager.swift */,
-				8406820C2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift */,
+				841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */,
+				841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */,
 			);
 			path = Datastore;
 			sourceTree = "<group>";
@@ -391,8 +400,8 @@
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				66C8F4C7AA17CDE8F58BF689 /* Pods-OTFMagicBox.debug.xcconfig */,
-				C320F3366C045912484E1107 /* Pods-OTFMagicBox.release.xcconfig */,
+				CBC1ACABAA466D2B2A968279 /* Pods-OTFMagicBox.debug.xcconfig */,
+				DDA77B27BA1F900C2882CAE6 /* Pods-OTFMagicBox.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -401,7 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
-				8EE59BC9B1631B0E8BBD8560 /* Pods_OTFMagicBox.framework */,
+				63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -429,10 +438,10 @@
 		CE482CF5262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXGroup;
 			children = (
+				841FEFBC274E5D8200698892 /* Datastore */,
 				5A4304A8272CB05400926584 /* Store */,
 				5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */,
 				5A7B6D8D26FA352000F872A1 /* API */,
-				840682092731BF04008339D5 /* Datastore */,
 				5AB1808B26BAADB1007AF766 /* Contacts */,
 				5AB1806D26B8849A007AF766 /* Profile */,
 				5AB1806426B87FCB007AF766 /* Schedule */,
@@ -490,11 +499,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
-				8149AC889A61B2B10432712A /* [CP] Check Pods Manifest.lock */,
+				BA9FB20E5DAE2422B8004429 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
-				124EF7F46E67AC98863AE7DC /* [CP] Embed Pods Frameworks */,
+				C113BD062869EDFDDE165C0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -565,24 +574,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		124EF7F46E67AC98863AE7DC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8149AC889A61B2B10432712A /* [CP] Check Pods Manifest.lock */ = {
+		BA9FB20E5DAE2422B8004429 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -602,6 +594,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C113BD062869EDFDDE165C0A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -625,25 +634,30 @@
 				5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */,
 				84771FA9272974B700468E0E /* Extension+Image.swift in Sources */,
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
+				84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */,
+				841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */,
 				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
 				5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
-				5AADFD4D264E98950069FEF7 /* OnboardingViewCoordinator.swift in Sources */,
+				5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */,
 				5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */,
 				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
 				5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */,
 				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
+				841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */,
 				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
+				84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */,
+				84268455274770A3007C5D50 /* LoginSteps.swift in Sources */,
 				5A4304AA272CB05400926584 /* OTFCloudantSync.swift in Sources */,
 				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
-				840682082731BEC9008339D5 /* Extension+URLRequest.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
+				841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
-				8406820B2731BF3A008339D5 /* CloudantSyncManager.swift in Sources */,
+				841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
@@ -659,13 +673,10 @@
 				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
 				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
-				8406820F2732AF26008339D5 /* SSEAndSyncManager.swift in Sources */,
-				8406820D2731C07F008339D5 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
 				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
 				848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */,
-				844270A8272C2076000F7D78 /* UserDefaultsManager.swift in Sources */,
 				5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */,
 				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
@@ -674,6 +685,7 @@
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
+				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
@@ -870,7 +882,7 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66C8F4C7AA17CDE8F58BF689 /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = CBC1ACABAA466D2B2A968279 /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -878,14 +890,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
+				DEVELOPMENT_TEAM = 2ACH4UKQKX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.OTFMagicBox;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -895,7 +907,7 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C320F3366C045912484E1107 /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = DDA77B27BA1F900C2882CAE6 /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -903,14 +915,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 8Y4GMKFGGA;
+				DEVELOPMENT_TEAM = 2ACH4UKQKX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.OTFMagicBox;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

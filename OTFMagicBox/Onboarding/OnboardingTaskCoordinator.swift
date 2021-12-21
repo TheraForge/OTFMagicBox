@@ -1,5 +1,5 @@
 //
-//  OnboardingViewCoordinator.swift
+//  OnboardingTaskCoordinator.swift
 //  CompletelyNewApp
 //
 //  Created by Spurti Benakatti on 14.05.21.
@@ -7,15 +7,24 @@
 
 import OTFResearchKit
 
-class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDelegate {
+final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    let authMethod: AuthMethod
+    let authType: AuthType
+    
+    init(authMethod: AuthMethod, authType: AuthType) {
+        self.authType = authType
+        self.authMethod = authMethod
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .completed:
             
             DispatchQueue.main.async {
-                UserDefaultsManager.setOnboardingCompleted(true)
-                NotificationCenter.default.post(name: NSNotification.Name(Constants.onboardingDidComplete), object: true)
+                UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
+                NotificationCenter.default.post(name: .onboardingDidComplete, object: true)
             }
             
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
@@ -48,13 +57,16 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
         }
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
         if stepViewController.step?.identifier == Constants.Login.Identifier {
             
-            let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: "Creating account...",
+                                          preferredStyle: .alert)
             
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5,
+                                                                         width: 50, height: 50))
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.style = UIActivityIndicatorView.Style.medium
             loadingIndicator.startAnimating()
@@ -108,18 +120,19 @@ class OnboardingTaskViewControllerDelegate: NSObject, ORKTaskViewControllerDeleg
                         alert.dismiss(animated: true, completion: nil)
                     }
                 }
-                
             }
-            
         }
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            viewControllerFor step: ORKStep) -> ORKStepViewController? {
         switch step {
         case is HealthDataStep:
             return HealthDataStepViewController(step: step)
         case is HealthRecordsStep:
             return HealthRecordsStepViewController(step: step)
+        case is SignInWithAppleStep:
+            return SignInWithAppleStepViewController(authType: authType, step: step)
         default:
             return nil
         }

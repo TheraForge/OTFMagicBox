@@ -14,7 +14,9 @@ class SSEAndSyncManager {
     // Subscribe to SSE
     public func subscribeToSSEWith(auth: Auth) {
         OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnOpen = {
-            print("Server sent event connection opened")
+            CloudantSyncManager.shared.syncCloudantStore { error in
+                print(error ?? "Synced successfully!")
+            }
         }
         
         OTFTheraforgeNetwork.shared.otfNetworkService.onReceivedMessage = { event in

@@ -35,12 +35,11 @@ class HealthKitManager: SyncDelegate {
     }
     
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(HealthKitManager.syncData), name: NSNotification.Name(rawValue: Constants.Notification.DataSyncRequest), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HealthKitManager.syncData), name: .dataSyncRequest, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Constants.Notification.DataSyncRequest),
-                                                  object: nil)
+        NotificationCenter.default.removeObserver(self, name: .dataSyncRequest, object: nil)
     }
     
     public func getHealthKitAuth(forTypes types: Set<HKQuantityType>, _ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {

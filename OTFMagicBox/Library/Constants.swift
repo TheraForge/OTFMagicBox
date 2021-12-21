@@ -32,6 +32,10 @@ enum Constants {
     
     static let onboardingDidComplete = "didCompleteOnboarding"
     
+    // String representation of Bool to compare with yaml file's booleans
+    static let `true` = "true"
+    static let `false` = "false"
+    
     struct UserDefaults {
         //Patient data
         static let patientEmail = "patientEmail"

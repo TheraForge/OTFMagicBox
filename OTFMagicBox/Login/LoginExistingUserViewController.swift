@@ -10,10 +10,36 @@ import SwiftUI
 import UIKit
 import OTFResearchKit
 
+enum AuthMethod: String, CaseIterable, Codable {
+    case email, apple
+    
+    var signinTitle: String {
+        switch self {
+        case .email:
+            return "Sign in with email"
+            
+        case .apple:
+            return "Sign in with Apple"
+        }
+    }
+    
+    var signupTitle: String {
+        switch self {
+        case .email:
+            return "Sign up with email"
+            
+        case .apple:
+            return "Sign up with Apple"
+        }
+    }
+}
+
 struct LoginExistingUserViewController: UIViewControllerRepresentable {
     
-    func makeCoordinator() -> OnboardingTaskViewControllerDelegate {
-        OnboardingTaskViewControllerDelegate()
+    let authMethod: AuthMethod
+    
+    func makeCoordinator() -> OnboardingTaskCoordinator {
+        OnboardingTaskCoordinator(authMethod: authMethod, authType: .login)
     }
     
     typealias UIViewControllerType = ORKTaskViewController
@@ -22,31 +48,9 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         
-        var loginSteps: [ORKStep]
-        
-        let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass:        LoginViewController.self)
-        
-        loginSteps = [loginStep]
-        
-        // use the `ORKPasscodeStep` from ResearchKit.
-        if YmlReader().isPasscodeEnabled {
-            let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
-            
-            let type = YmlReader().passcodeType
-            
-            if type == Constants.Passcode.lengthSix {
-                passcodeStep.passcodeType = .type6Digit
-            } else {
-                passcodeStep.passcodeType = .type4Digit
-            }
-            
-            passcodeStep.text = "Enter your passcode"
-            
-            loginSteps += [passcodeStep]
-        }
-        
+        let loginSteps: LoginSteps = authMethod == .apple ? AppleLoginSteps() : EmailLoginSteps()
         // create a task with each step
-        let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
+        let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps.steps)
         
         // wrap that task on a view controller
         let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)

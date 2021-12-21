@@ -17,7 +17,7 @@ struct TasksUIView: View {
     
     let color: Color
     
-    let listItems = TaskItem.allValues
+    let listItems = TaskItem.allCases
     var listItemsPerHeader = [String:[TaskItem]]()
     var listItemsSections = [String]()
     

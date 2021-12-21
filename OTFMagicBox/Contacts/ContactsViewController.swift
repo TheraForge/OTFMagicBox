@@ -15,6 +15,10 @@ struct ContactsViewController: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIViewController
     
+    init() {
+        CareKitManager.shared.synchronizedStoreManager.notificationPublisher.receive(subscriber: <#T##Subscriber#>)
+    }
+    
     func updateUIViewController(_ taskViewController: UIViewController, context: Context) {}
     func makeUIViewController(context: Context) -> UIViewController {
         let manager = CareKitManager.shared
