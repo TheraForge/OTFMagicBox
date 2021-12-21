@@ -65,6 +65,7 @@
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
 		5DB5231E3B9C63375C446A41 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */; };
 		841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA609275F719000C6861D /* ViewDidLoadModifier.swift */; };
+		841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA60B275F827300C6861D /* CareKitStoreManager.swift */; };
 		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
 		841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */; };
 		841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */; };
@@ -158,6 +159,7 @@
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
 		63156E718315E9930E05CA2F /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841CA609275F719000C6861D /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
+		841CA60B275F827300C6861D /* CareKitStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareKitStoreManager.swift; sourceTree = "<group>"; };
 		841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
 		841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudantSyncManager.swift; sourceTree = "<group>"; };
 		841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheraForgeHTTPInterceptor.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
+				841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */,
 				841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */,
 			);
 			path = API;
@@ -376,7 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */,
-				841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */,
+				841CA60B275F827300C6861D /* CareKitStoreManager.swift */,
 			);
 			path = Datastore;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				5A430489272884CB00926584 /* Extension+Font.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
+				841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,

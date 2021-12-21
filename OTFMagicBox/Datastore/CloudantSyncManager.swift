@@ -100,7 +100,9 @@ class CloudantSyncManager {
                             #endif
                             lastSynced = Date()
                             if notifyWhenDone {
-                                NotificationCenter.default.post(name: .databaseSuccessfllySynchronized, object: nil)
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: .databaseSuccessfllySynchronized, object: nil)
+                                }
                             }
                         }
                         didFinishSyncWith(error: error, completion: completion)

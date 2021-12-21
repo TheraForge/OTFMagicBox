@@ -82,17 +82,16 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
         regOption.insert( .includeGivenName)
         regOption.insert( .includeFamilyName)
         
-        let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier,
-                                               title: Constants.Registration.Title,
-                                               text: Constants.Registration.Text,
-                                               passcodeValidationRegularExpression: regexp,
-                                               passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage,
-                                               options: regOption)
-        
         if authMethod == .apple {
             let signInWithAppleStep = SignInWithAppleStep(identifier: "SignInWithApple")
             loginSteps = [signInWithAppleStep]
         } else {
+            let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier,
+                                                   title: Constants.Registration.Title,
+                                                   text: Constants.Registration.Text,
+                                                   passcodeValidationRegularExpression: regexp,
+                                                   passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage,
+                                                   options: regOption)
             let loginStep = ORKLoginStep(identifier: Constants.Login.Identifier, title: Constants.Login.Title, text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
             
             loginSteps = [registerStep, loginStep]

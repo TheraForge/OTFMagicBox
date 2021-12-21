@@ -12,7 +12,6 @@ import OTFCloudClientAPI
 struct LaunchView: View {
     
     @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
-    @State private var patient: OCKPatient?
     
     init() {
         didCompleteOnBoarding()
@@ -20,24 +19,8 @@ struct LaunchView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            if onboardingCompleted, let user = TheraForgeKeychainService.shared.loadUser() {
-                if let patient = patient {
-                    MainView(user: patient)
-                } else {
-                    LoadingView(username: "\(user.firstName ?? "") \(user.lastName ?? "")")
-                        .onLoad {
-                            CareKitManager.shared.cloudantStore?.getThisPatient({ result in
-                                switch result {
-                                case .success(let patient):
-                                    self.patient = patient
-                                    
-                                case .failure:
-                                    UserDefaultsManager.setOnboardingCompleted(false)
-                                    didCompleteOnBoarding()
-                                }
-                            })
-                        }
-                }
+            if onboardingCompleted, let _ = TheraForgeKeychainService.shared.loadUser() {
+                MainView()
             } else {
                 OnboardingView {
                     didCompleteOnBoarding()

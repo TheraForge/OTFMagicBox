@@ -218,15 +218,7 @@ extension OTFCloudantStore {
             return
         }
         CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
-            if case .failure(let error) = result, case .fetchFailed(let reason) = error, reason == "No patient with matching ID" {
-                guard let patient = self.convertUserToPatient(user: user) else {
-                    completion(result)
-                    return
-                }
-                completion(.success(patient))
-            } else {
-                completion(result)
-            }
+            completion(result)
         })
     }
 }
