@@ -113,17 +113,23 @@ An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.a
 
 In order to develop iOS apps, make sure to download Xcode, Apple's Integrated Development Environment (IDE), from the Mac App Store.
 
+![Alt text](Docs/29-Xcode.png)
+
 If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
 
 (Note that in case of Xcode 13.2 Apple recommends to download it directly from the Apple Developer web site https://developer.apple.com/download/all/?q=Xcode. Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
 
 After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
 
+![Alt text](Docs/27-cocoapods.png)
+
 If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guides.cocoapods.org/using/using-cocoapods.html) to learn more about it.
 
 CocoaPods is built with the Ruby language and can be installed with the default version of Ruby available with macOS.
 
 However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
+
+![Alt text](Docs/28-homebrew.png)
 
 To do that, open the Terminal application (you can type ⌘+spacebar to bring up the macOS Spotlight search, enter `Terminal` in it, and then press Return).
 
@@ -181,7 +187,7 @@ The Finder has a special "hammer" icon just for this sub-directory (that you can
 So go ahead and create a “Developer” directory (if you haven’t done it already) in the Finder or in Terminal like so:
 
 ```
-mkdir Developer
+mkdir ~/Developer
 ```
 
 This directory will be used to add projects to it.
@@ -194,11 +200,11 @@ cd ~/Developer
 
 ### 2. Copy MagicBox's Repository URL
 
-Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repository URL:
+Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repository URL (by clicking on the double square icon highlighted in red):
 
 <img src="Docs/16-CopyRepoLink.png" width=100% height=100%>
 
-This is the URL that you should get:
+This is the URL that you should get from GitHub:
 
 `https://github.com/HippocratesTech/OTFMagicBox.git`
 
