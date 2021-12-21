@@ -98,52 +98,157 @@ The profile section includes the user account view as well as additional informa
 
 <img src="Docs/12-Profile.png" width=35% height=35%>
 
-# Installation <a name="Installation"></a>
+# MagicBox Installation <a name="Installation"></a>
 
-1. ### Create Developer Folder
-Create a new folder in your `Documents` folder (you may choose another location) and name it as `Developer`. Then open terminal application and change your directory to this newly created `Developer` folder.
+The MagicBox app installation process requires the installation of the ToolBox SDK and so it is similar to the process described in the [OTFToolBox](../../../OTFToolBox) Readme file.
 
-<img src="Docs/15-ChangeDirectoryToNewFolder.png">
+* [Prerequisites](#Prerequisites)
+* [App Setup](#App-Setup)
 
-2. ### Copy Repo URL
-Copy the URL of the repo to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repo URL.
+## Prerequisites <a name="Prerequisites"></a>
+
+An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.apple.com/documentation/xcode-release-notes/xcode-12-release-notes) or a Mac with Apple's M1 Silicon running [macOS 11 Big Sur](https://developer.apple.com/documentation/xcode-release-notes/xcode-12_2-release-notes). macOS 12 Monterey and Xcode 13 are supported.
+
+### 1. Installation Prerequisites
+
+In order to develop iOS apps, make sure to download Xcode, Apple's Integrated Development Environment (IDE), from the Mac App Store.
+
+If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
+
+(Note that in case of Xcode 13.2 Apple recommends to download it directly from the Apple Developer web site https://developer.apple.com/download/all/?q=Xcode. Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
+
+After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
+
+If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guides.cocoapods.org/using/using-cocoapods.html) to learn more about it.
+
+CocoaPods is built with the Ruby language and can be installed with the default version of Ruby available with macOS.
+
+However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
+
+To do that, open the Terminal application (you can type ⌘+spacebar to bring up the macOS Spotlight search, enter `Terminal` in it, and then press Return).
+
+Then type the following command in Terminal:
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+as explained in the [Homebrew](https://brew.sh/) main page. (If you get an error, check out our [Homebrew Installation](Docs/Homebrew.md) page.)
+
+Wait for the installation to end.
+
+![Alt text](Docs/0-homebrew.png)
+
+OTFToolBox by default includes Apple's ResearchKit framework. Building it requires the installation of the `git-lfs` tool like so:
+
+```
+brew install git-lfs
+```
+
+Finally, to install Cocoapods in Terminal enter:
+
+```
+sudo gem install cocoapods
+```
+
+as shown below:
+
+![Alt text](Docs/1-Terminal.png)
+
+Refer to our [Cocoapods Installation](Docs/Cocoapods.md) page for prerequisites, caveats and troubleshooting suggestions.
+
+After successful installation of `git-lfs` and Cocoapods, you can install the MagicBox app.
+
+## App Setup <a name="App-Setup"></a>
+
+1. ### Create the Developer Directory and a Project Subdirectory 
+
+You need to create a project directory in your user directory.
+
+For example, in `Terminal` go to your personal directory by typing this command:
+
+```
+cd ~
+```
+
+In the Finder that corresponds to your home directory (the one with the home icon and your username).
+
+The canonical way to store software development projects is by creating a ~/Developer sub-directory.
+The Finder has a special "hammer" icon just for this sub-directory (that you can also add to the sidebar):
+
+![Alt text](Docs/11-Developer.png)
+
+So go ahead and create a “Developer” directory (if you haven’t done it already) in the Finder or in Terminal like so:
+
+```
+mkdir Developer
+```
+
+This directory will be used to add projects to it.
+
+In the Terminal application change your directory to the `Developer` folder:
+
+```
+cd ~/Developer
+```
+
+2. ### Copy MagicBox's Repository URL
+
+Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repository URL:
 
 <img src="Docs/16-CopyRepoLink.png" width=80% height=80%>
 
-3. ### Clone the Repo
-Go back to the terminal and enter `git clone` followed by the repo URL you just copied in the previous step.
+This is the URL that you should get:
+
+`https://github.com/HippocratesTech/OTFMagicBox.git`
+
+3. ### Clone MagicBox's Repository to Install the App
+
+Then go back to the Terminal app in the `Developer` directory and enter `git clone` followed by the repository URL you just copied in the previous step:
 
 <img src="Docs/17-GitClone.png">
 
-4. ### List the Files
-Now run the `ls` command in the terminal to see the files in the directory cloned from the repo.
+Then change the directory to the newly-created OTFMagicBox subdirectory:
+
+`cd OTFMagicBox`
+
+4. ### List the Cloned Files
+
+Run the `ls` command in Terminal to see the files in the directory cloned from the GitHub repository.
 
 <img src="Docs/18-ListFiles.png">
 
-Note the Podfile there in the list of files.
+Note the file called `Podfile` in the list.
 
-5. ### Pod Install
-Run `pod install` command to install the dependencies. You should see something as shown in the image below when you run this command.
+5. ### Installation of the ToolBox SDK
+
+Run the `pod install` command to install the SDK and its dependencies. After you run this command, you should see something similar to what is shown in the image below:
 
 <img src="Docs/19-PodInstall.png">
 
 6. ### List the Files Again
-Now list the files again using `ls` command in the terminal. This time you'll see two extra files in the list as highlighted in the image.
+
+Now list the files again using `ls` command in Terminal. This time you'll see two extra files in the list as highlighted in the image:
 
 <img src="Docs/20-ListFiles.png">
 
-7. ### Open Workspace
-`OTFMagicBox.xcworkspace` is the file we shall use from now onwards. To open this project in Xcode we may either double click on this file or open it using `open OTFMaicBox.xcworkspace` in the terminal.
+7. ### Open the Project Workspace
+
+`OTFMagicBox.xcworkspace` is the Xcode workspace file you should use from now onwards.
+To open this workspace file in Xcode, you may either double click it in the Finder or open it using the `open OTFMagicBox.xcworkspace` command in Terminal:
 
 <img src="Docs/21-OpenWorkspace.png">
 
-When this project opens in Xcode you should see something like this.
+(You can also launch Xcode first and open this file from the startup screen.)
 
-<img src="Docs/22-XcodeWorkspace.png" width=70% height=70%>
+When this project opens in Xcode you should see something like this:
 
-# Usage <a name="Usage"></a>
+<img src="Docs/22-XcodeWorkspace.png" width=100% height=100%>
 
-After following the installation steps, go to the `AppSysParameters.yml` file in the root folder of your project. This yaml file contains a list of customizable parameters of your health application.
+# App Usage <a name="Usage"></a>
+
+After following the above installation steps, go to the `AppSysParameters.yml` file in the root folder of your project.
+This yaml file contains the list of customizable parameters of your health application.
 You don’t need to be a developer to edit this file and customize the application, just use a common editor (e.g., TextEdit or Xcode) and follow the simple instructions present in the `AppSysParameters.yml` file.
 By editing this yaml file you can customize the health application according to your requirements, for example you can modify the app styling and flow.
 
@@ -217,4 +322,4 @@ If your application requires support for tasks (for example, for a care plan) an
 
 # License <a name="License"></a>
 
-Todo: Add License
+This project is made available under the terms of a modified BSD license. See the [LICENSE](LICENSE.md) file.
