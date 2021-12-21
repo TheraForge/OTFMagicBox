@@ -47,11 +47,13 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
                     if (ORKPasscodeViewController.isPasscodeStoredInKeychain()) {
                         ORKPasscodeViewController.removePasscodeFromKeychain()
                     }
-                    UserDefaults.standard.set(false, forKey: Constants.onboardingDidComplete)
+                    UserDefaultsManager.setOnboardingCompleted(false)
                     UserDefaults.standard.set(nil, forKey: Constants.prefCareKitDataInitDate)
                     UserDefaults.standard.set(nil, forKey: Constants.prefHealthRecordsLastUploaded)
                     
                     NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
+                    
+                    try? CareKitManager.shared.wipe()
                     
                     fallthrough
                 default:

@@ -13,7 +13,12 @@ import SwiftUI
  */
 struct TasksUIView: View {
     
-    var date = ""
+    var date: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM. d, YYYY"
+        let date = formatter.string(from: Date())
+        return date
+    }
     
     let color: Color
     
@@ -23,10 +28,6 @@ struct TasksUIView: View {
     
     init(color: Color) {
         self.color = color
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM. d, YYYY"
-        self.date = formatter.string(from: Date())
         
         if listItemsPerHeader.count <= 0 { // init
             for item in listItems {
@@ -53,7 +54,7 @@ struct TasksUIView: View {
                         ForEach(listItemsPerHeader[key]!, id: \.self) { item in
                             TaskItemView(item: item)
                         }
-                    }.listRowBackground(Color.white)
+                    }
                 }
             }.listStyle(GroupedListStyle())
         }

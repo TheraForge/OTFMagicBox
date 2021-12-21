@@ -23,7 +23,7 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
         case .completed:
             
             DispatchQueue.main.async {
-                UserDefaults.standard.set(true, forKey: Constants.onboardingDidComplete)
+                UserDefaultsManager.setOnboardingCompleted(true)
                 NotificationCenter.default.post(name: .onboardingDidComplete, object: true)
             }
             
@@ -95,7 +95,7 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 return
             }
             
-            guard let dob = dobResult?.dateAnswer?.toString() else {
+            guard let dob = dobResult?.dateAnswer?.toString else {
                 return
             }
             
@@ -103,20 +103,18 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
                                                       lastName: familyName?.textAnswer ?? Constants.patientLastName,
                                                       type: Constants.userType, email: email, password: pass,
                                                       dob: dob, gender: gender) { results in
-                switch results {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    switch results {
+                    case .failure(let error):
+                        print(error.localizedDescription)
                         alert.dismiss(animated: true) {
                             let alert = UIAlertController(title: "Login Error!", message: error.localizedDescription, preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
                             taskViewController.present(alert, animated: true)
                         }
-                    }
-                    
-                case .success(let result):
-                    print(result)
-                    DispatchQueue.main.async {
+                        
+                    case .success(let result):
+                        print(result)
                         alert.dismiss(animated: true, completion: nil)
                     }
                 }

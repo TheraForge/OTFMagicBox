@@ -41,6 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true) { _ in
+            //
+        }
+    }
 
     // MARK: UISceneSession Lifecycle
 

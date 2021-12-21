@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import OTFCloudClientAPI
+import OTFCareKitStore
 
 struct MainView: View {
     
     let color: Color
-    let user: Response.User
+    let user: OCKPatient
     
-    init(user: Response.User) {
+    init(user: OCKPatient) {
         self.user = user
         self.color = Color(YmlReader().primaryColor)
         OTFTheraforgeNetwork.shared.refreshToken { response in

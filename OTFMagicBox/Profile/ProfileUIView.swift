@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-import OTFCloudClientAPI
+import OTFCareKitStore
 
 struct ProfileUIView: View {
     
-    let user: Response.User
+    let user: OCKPatient
     
     var body: some View {
         VStack {

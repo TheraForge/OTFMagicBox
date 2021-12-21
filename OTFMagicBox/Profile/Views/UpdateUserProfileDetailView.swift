@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import OTFCloudClientAPI
+import OTFCareKitStore
 
 struct UpdateUserProfileDetailView: View {
     let color = Color(YmlReader().primaryColor)
@@ -22,7 +22,7 @@ struct UpdateUserProfileDetailView: View {
         })
     }
     
-    let user: OTFCloudClientAPI.Response.User
+    let user: OCKPatient
     @State var firstName: String
     @State var lastName:String
     @State var genderSelection: String
@@ -44,13 +44,13 @@ struct UpdateUserProfileDetailView: View {
         return formatter
     }()
     
-    init(user: Response.User) {
+    init(user: OCKPatient) {
         self.user = user
-        _firstName = State(initialValue: user.firstName ?? "")
-        _lastName = State(initialValue: user.lastName ?? "")
-        _genderSelection = State(initialValue: user.gender?.rawValue ?? "")
-        _dob = State(initialValue: user.dob ?? "")
-        _date = State(initialValue: user.dateOfBirth ?? Date())
+        _firstName = State(initialValue: user.name.givenName ?? "")
+        _lastName = State(initialValue: user.name.familyName ?? "")
+        _genderSelection = State(initialValue: user.sex?.rawValue ?? "")
+        _dob = State(initialValue: user.birthday?.toString ?? "")
+        _date = State(initialValue: user.birthday ?? Date())
     }
     
     var body: some View {
@@ -141,17 +141,7 @@ struct UpdateUserProfileDetailView: View {
     }
     
     func updatePatient() {
-        OTFCloudantSync.shared.updatePatient(patientID: user.id, firstName: firstName, lastName: lastName,
-                                             gender: genderSelection, dob: date) { results in
-            
-            switch results {
-            case .failure(let error):
-                OTFLog("Error updating patient data", error.localizedDescription)
-            case .success:
-                self.presentationMode.wrappedValue.dismiss()
-            }
-            
-        }
+        // TODO: - Update user's profile here
     }
 }
 

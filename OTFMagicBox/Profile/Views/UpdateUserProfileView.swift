@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import OTFCloudClientAPI
+import OTFCareKitStore
 
 struct UpdateUserProfileView: View {
     
     @State var showUserProfile = false
-    let user: Response.User
+    let user: OCKPatient
     
     var body: some View {
         VStack {
@@ -20,7 +20,7 @@ struct UpdateUserProfileView: View {
                 .frame(width: 40, height: 40, alignment: .center)
              
             HStack {
-                Text(user.email)
+                Text(user.remoteID ?? "")
                 Spacer()
                 Text("›")
             }
@@ -35,9 +35,11 @@ struct UpdateUserProfileView: View {
     }
 }
 
+/*
 struct UpdateUserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        let user = TheraForgeKeychainService.shared.loadUser()
+        let user = CareKitManager.shared.cloudantStore?.getThisPatient(<#T##completion: OCKResultClosure<OCKPatient>##OCKResultClosure<OCKPatient>##(Result<OCKPatient, OCKStoreError>) -> Void#>)
         UpdateUserProfileView(user: user!)
     }
 }
+ */
