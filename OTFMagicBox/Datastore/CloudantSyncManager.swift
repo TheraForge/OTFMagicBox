@@ -59,9 +59,8 @@ class CloudantSyncManager {
             return
         }
         
-//        guard shouldSyncAgain else {
-//            return
-//        }
+        // TODO: - Implement a check to avoid synchronisation for every little change.
+        // Perhaps use a timer and sync only if there are changes, perhaps.
         
         if auth.isValid() {
             startSync(notifyWhenDone: notifyWhenDone, completion: completion)
