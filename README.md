@@ -38,27 +38,27 @@ MagicBox includes the following customizable features:
 
 When a user launches an app for the first time, the onboarding process presents the app’s goals and provides instructions that highlight key benefits and features.
 
-<img src="Docs/2-Onboarding.png" width=35% height=35%>
+<p align="center"><img src="Docs/2-Onboarding.png" width=35% height=35%></p>
 
 ## Consent
 
 The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for exammple, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
-<img src="Docs/3-Consent.png" width=35% height=35%>
+<p align="center"><img src="Docs/3-Consent.png" width=35% height=35%></p>
 
 ## Consent Form and Signature
 
 The consent form contains the description of the items included in the application that require explicit user consent. The user can agree to the clauses by signing the form.
 
-<img src="Docs/4-Form.png" width=35% height=35%>
+<p align="center"><img src="Docs/4-Form.png" width=35% height=35%></p>
 
-<img src="Docs/5-Signature.png" width=35% height=35%>
+<p align="center"><img src="Docs/5-Signature.png" width=35% height=35%></p>
 
 ## Simplified Registration and Login Process
 
 The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, fullname, last name, date of birth and gender, etc. For example, date of birth can be used for a minimum age eligibility check to limit the use of the app.
 
-<img src="Docs/6-Signup.png" width=35% height=35%>
+<p align="center"><img src="Docs/6-Signup.png" width=35% height=35%></p>
 
 ## Login/Social Login
 
@@ -66,37 +66,37 @@ MagicBox supports different login strategies: regular login using registration d
 
 User login credentials are securely stored in the device’s keychain.
 
-<img src="Docs/7-Login.png" width=35% height=35%>
+<p align="center"><img src="Docs/7-Login.png" width=35% height=35%></p>
 
 ## Passcode
 
 In order to protect access, the app can optionally require a four- or six-digit user-selected passcode.
 
-<img src="Docs/8-Passcode.png" width=35% height=35%>
+<p align="center"><img src="Docs/8-Passcode.png" width=35% height=35%></p>
 
 ## Activity
 
 There are a number of pre-defined task types that you can include in your project: for example, a two finger tap test, the 6 minute walk test, a special memory test and a short walk test to measure gait and balance. These tasks include the instructions for the steps to perform to complete them.
 
-<img src="Docs/9-Activity.png" width=35% height=35%>
+<p align="center"><img src="Docs/9-Activity.png" width=35% height=35%></p>
 
 ## Surveys
 
 A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole.
 
-<img src="Docs/10-Survey.png" width=35% height=35%>
+<p align="center"><img src="Docs/10-Survey.png" width=35% height=35%></p>
 
 ## Contacts
 
 Contacts are cards that contain doctor and family member details, such as address, phone number, messaging number, email address, etc.
 
-<img src="Docs/11-Contacts.png" width=35% height=35%>
+<p align="center"><img src="Docs/11-Contacts.png" width=35% height=35%></p>
 
 ## User Profile
 
 The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
 
-<img src="Docs/12-Profile.png" width=35% height=35%>
+<p align="center"><img src="Docs/12-Profile.png" width=35% height=35%></p>
 
 # MagicBox Installation <a name="Installation"></a>
 
@@ -113,13 +113,13 @@ An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.a
 
 In order to develop iOS apps, make sure to download Xcode, Apple's Integrated Development Environment (IDE), from the Mac App Store.
 
-<img src="Docs/29-Xcode.png" width=25% height=25%>
+<p align="center"><img src="Docs/29-Xcode.png" width=25% height=25%></p>
 
 If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
 
 (Note that in case of Xcode 13.2 Apple recommends to download it directly from the Apple Developer web site https://developer.apple.com/download/all/?q=Xcode. Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
 
-<img src="Docs/27-cocoapods.png" width=50% height=50%>
+<p align="center"><img src="Docs/27-cocoapods.png" width=50% height=50%></p>
 
 After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
 
@@ -127,7 +127,7 @@ If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guid
 
 CocoaPods is built with the Ruby language and can be installed with the default version of Ruby available with macOS.
 
-<img src="Docs/28-homebrew.png" width=20% height=20%>
+<p align="center"><img src="Docs/28-homebrew.png" width=20% height=20%></p>
 
 However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
 
