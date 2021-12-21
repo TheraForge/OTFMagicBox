@@ -9,6 +9,7 @@ For more details on the composition of the SDK, refer to the [OTFToolBox](../../
 # Table of Contents
 
 * [Overview](#Overview)
+* [Features](#Features)
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [License](#License)
@@ -29,6 +30,8 @@ These are its primary characteristics:
 * Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
 * SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases)
 
+
+# MagicBox Features <a name="Features"></a>
 
 MagicBox includes the following customizable features:
 
@@ -97,6 +100,22 @@ Contacts are cards that contain doctor and family member details, such as addres
 The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
 
 <p align="center"><img src="Docs/12-Profile.png" width=35% height=35%></p>
+
+## TheraForge Secure Cloud with Sync Support
+
+MagicBox can be connected to the TheraForge Cloud service to implement offline-fist cloud synchronization.
+
+Below we show the app's user profile on multiple devices before the date of birth is changed:
+
+<p align="center"><img src="Docs/30-Profile-Before-Change.png" width=35% height=35%></p>
+
+When the date of birth is changed:
+
+<p align="center"><img src="Docs/31-Profile-With-Change.png" width=35% height=35%></p>
+
+And after the date of birth is automatically synchronized securely across the cloud:
+
+<p align="center"><img src="Docs/32-Profile-After-Sync.png" width=35% height=35%></p>
 
 # MagicBox Installation <a name="Installation"></a>
 
