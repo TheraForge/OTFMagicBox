@@ -105,7 +105,7 @@ The profile section includes the user account view as well as additional informa
 
 MagicBox can be connected to the TheraForge Cloud service to implement offline-fist cloud synchronization.
 
-Below we show the app's user profile on multiple devices before the date of birth is changed:
+For example, below we show the app's user profile on multiple devices before the date of birth is changed:
 
 <p align="center"><img src="Docs/30-Profile-Before-Change.png" width=100% height=100%></p>
 
@@ -116,6 +116,18 @@ When the date of birth is changed to 12-16-2001 on the second device from the le
 And after the date of birth is automatically synchronized securely across the cloud to all devices:
 
 <p align="center"><img src="Docs/32-Profile-After-Sync.png" width=100% height=100%></p>
+
+For patient adherence tracking, a patient's glucose level is checked and recorded, then it’s automatically synchronized to multiple devices:
+
+<p align="center"><img src="Docs/33-Before-Glucose-Check.png" width=100% height=100%></p>
+
+Glucose level check completed on the second device from the left:
+
+<p align="center"><img src="Docs/34-Glucose-Level-Checked.png" width=100% height=100%></p>
+
+Outcome is automatically synchronized securely across the cloud to all devices:
+
+<p align="center"><img src="Docs/35-Outcome-Synced.png" width=100% height=100%></p>
 
 # MagicBox Installation <a name="Installation"></a>
 
