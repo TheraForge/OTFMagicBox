@@ -284,6 +284,18 @@ When this project opens in Xcode you should see something like this:
 
 <img src="Docs/22-XcodeWorkspace.png" width=100% height=100%>
 
+### 8. Compile & Run
+
+Type `Cmd + B` or click on the **Product** -> **Build** menu item to build the project.
+
+You may want to select a specific iPhone model from the dropdown menu before building.
+
+Make sure that it's compiling without any errors.
+
+Then you are ready to rock!
+
+If you now wish to customize the app, refer to the sections below for detailed information.
+
 # App Usage <a name="Usage"></a>
 
 After following the above installation steps, go to the `AppSysParameters.yml` file in the root folder of your project.
