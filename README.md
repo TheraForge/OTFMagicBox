@@ -309,31 +309,31 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 ## Modify the Style/Design
 
-You can change the tint color, the label colors, font type and size to customize the look of your application. 
+You can change the tint color, the label colors, font type and size to customize the look of your application:
 
 [Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L83-L177)
 
-## Set up the Cloud's API Key
+## Set up the TheraForge Cloud API Key
 
-Update the API key to access the TheraForge Secure Cloud.
+Update the API key field to access the TheraForge Secure Cloud service for synchronization and communication with the web dashboards:
 
 [API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
 
 ## Customize Onboarding
 
-To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page.
+To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
 
 [Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L220-L228)
 
 ## Customize Consent
 
-To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections.
+To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
 
 [Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L230-L286)
 
 ## Customize Registration and Login
 
-Go to the Registration section in the `AppSysParameters.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`.
+Go to the Registration section in the `AppSysParameters.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`:
 
 [Registration Configuration Section](/OTFMagicBox/AppSysParameters.yml#L288-L293)
 
@@ -341,20 +341,20 @@ Go to the Registration section in the `AppSysParameters.yml` file and change the
 
 Go to the Login section in the `AppSysParameters.yml` file and customize the title and the description.
 
-If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`.
+If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
 [Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L295-L306)
 
 ## Configure the Passcode
 
-Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits.
+Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits:
 
 [Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L308-L316)
 
 
 ## Enable CareKit
 
-If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients.
+If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients:
 
 [Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
 
