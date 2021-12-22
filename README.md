@@ -109,11 +109,11 @@ Below we show the app's user profile on multiple devices before the date of birt
 
 <p align="center"><img src="Docs/30-Profile-Before-Change.png" width=100% height=100%></p>
 
-When the date of birth is changed:
+When the date of birth is changed to 12-16-2001 on the second device from the left:
 
 <p align="center"><img src="Docs/31-Profile-With-Change.png" width=100% height=100%></p>
 
-And after the date of birth is automatically synchronized securely across the cloud:
+And after the date of birth is automatically synchronized securely across the cloud to all devices:
 
 <p align="center"><img src="Docs/32-Profile-After-Sync.png" width=100% height=100%></p>
 
