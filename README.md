@@ -237,7 +237,7 @@ Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to s
 
 This is the URL that you should get from GitHub:
 
-`https://github.com/HippocratesTech/OTFMagicBox.git`
+`https://github.com/TheraForge/OTFMagicBox.git`
 
 ### 3. Clone MagicBox's Repository to Install the App
 
