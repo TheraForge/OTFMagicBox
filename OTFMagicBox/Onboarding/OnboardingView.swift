@@ -78,6 +78,7 @@ struct OnboardingView: View {
         }
         
         self.color = Color(YmlReader().primaryColor)
+        self.onComplete = onComplete
     }
     
     /// Onboarding  view.
@@ -105,122 +106,86 @@ struct OnboardingView: View {
             
             Spacer()
             
-            if includeSocialLogin {
-                HStack {
-                    Button(action: {
-                        self.showingOnboardOptions.toggle()
-                    }, label: {
-                        Text("Create New Account")
-                            .padding(Metrics.PADDING_BUTTON_LABEL)
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(.white)
-                            .background(self.color)
-                            .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
-                            .font(.subHeaderFontStyle)
-                    })
-                    .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .actionSheet(isPresented: $showingOnboardOptions) {
-                        ActionSheet(title: Text("Select sign up method"),
-                                    message: nil,
-                                    buttons: AuthMethod.allCases.map { method in
-                                        .default(Text(method.signupTitle)) {
-                                            self.selectedAuthMethod = method
-                                            self.showingOnboard = true
-                                            self.showingOnboardOptions = false
-                                        }
-                                    } + [.cancel(Text("Cancel"))]
-                        )
+            HStack {
+                Button(action: {
+                    if self.includeSocialLogin {
+                        self.showingOnboardOptions = true
+                    } else {
+                        self.showingOnboard = true
                     }
-                    .sheet(isPresented: $showingOnboard, onDismiss: {
-                        self.showingOnboard = false
-                    }) {
-                        ActivitiesViewController(authMethod: self.selectedAuthMethod)
-                    }
+                }, label: {
+                    Text("Create New Account")
+                        .padding(Metrics.PADDING_BUTTON_LABEL)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.white)
+                        .background(self.color)
+                        .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
+                        .font(.subHeaderFontStyle)
+                })
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                .actionSheet(isPresented: $showingOnboardOptions) {
+                    ActionSheet(title: Text("Select sign up method"),
+                                message: nil,
+                                buttons: AuthMethod.allCases.map { method in
+                                    .default(Text(method.signupTitle)) {
+                                        self.selectedAuthMethod = method
+                                        self.showingOnboard = true
+                                        self.showingOnboardOptions = false
+                                    }
+                                } + [.cancel(Text("Cancel"))]
+                    )
                 }
-                
-                HStack {
-                    Button(action: {
+            }
+            
+            HStack {
+                Button(action: {
+                    if self.includeSocialLogin {
                         self.showingLoginOptions = true
-                    }, label: {
-                        Text("I'm a Returning User")
-                            .padding(Metrics.PADDING_BUTTON_LABEL)
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(self.color)
-                            .font(.subHeaderFontStyle)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                    .stroke(self.color, lineWidth: 2)
-                            )
-                    })
-                    .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .actionSheet(isPresented: $showingLoginOptions) {
-                        ActionSheet(title: Text("Select sign in method"),
-                                    message: nil,
-                                    buttons: AuthMethod.allCases.map { method in
-                                        .default(Text(method.signinTitle)) {
-                                            self.selectedAuthMethod = method
-                                            self.showingLogin = true
-                                            self.showingLoginOptions = false
-                                        }
-                                    } + [.cancel(Text("Cancel"))]
+                    } else {
+                        self.showingLogin = true
+                    }
+                }, label: {
+                    Text("I'm a Returning User")
+                        .padding(Metrics.PADDING_BUTTON_LABEL)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(self.color)
+                        .font(.subHeaderFontStyle)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                .stroke(self.color, lineWidth: 2)
                         )
-                    }
-                    .sheet(isPresented: $showingLogin, onDismiss: {
-                        self.showingLogin = false
-                    }) {
-                        LoginExistingUserViewController(authMethod: self.selectedAuthMethod)
-                    }
-                }
-            } else {
-                HStack {
-                    Button(action: {
-                        self.showingOnboard.toggle()
-                    }, label: {
-                        Text("Create New Account")
-                            .padding(Metrics.PADDING_BUTTON_LABEL)
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(.white)
-                            .background(self.color)
-                            .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
-                            .font(.subHeaderFontStyle)
-                    })
-                    .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .sheet(isPresented: $showingOnboard, onDismiss: {
-                        self.onComplete?()
-                    }, content: {
-                        ActivitiesViewController(authMethod: .email)
-                    })
-                }
-                
-                HStack {
-                    Button(action: {
-                        self.showingLogin.toggle()
-                    }, label: {
-                        Text("I'm a Returning User")
-                            .padding(Metrics.PADDING_BUTTON_LABEL)
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(self.color)
-                            .font(.subHeaderFontStyle)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                    .stroke(self.color, lineWidth: 2)
-                            )
-                    })
-                    .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                    .sheet(isPresented: $showingLogin, onDismiss: {
-                        self.onComplete?()
-                    }, content: {
-                        LoginExistingUserViewController(authMethod: .email)
-                    })
+                })
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                .actionSheet(isPresented: $showingLoginOptions) {
+                    ActionSheet(title: Text("Select sign in method"),
+                                message: nil,
+                                buttons: AuthMethod.allCases.map { method in
+                                    .default(Text(method.signinTitle)) {
+                                        self.selectedAuthMethod = method
+                                        self.showingLogin = true
+                                        self.showingLoginOptions = false
+                                    }
+                                } + [.cancel(Text("Cancel"))]
+                    )
                 }
             }
             
             Spacer()
         }
+        .sheet(isPresented: $showingLogin, onDismiss: {
+            debugPrint("Login sheet dismissed")
+            onComplete?()
+        }, content: {
+            LoginExistingUserViewController(authMethod: self.selectedAuthMethod)
+        })
+        .sheet(isPresented: $showingOnboard, onDismiss: {
+            debugPrint("Onboard sheet dismissed")
+            onComplete?()
+        }, content: {
+            ActivitiesViewController(authMethod: self.selectedAuthMethod)
+        })
     }
 }
 

@@ -47,9 +47,7 @@ struct Configuration {
     static var `default`: Configuration {
         let remoteURLString = Constants.API.dbProxyURL
         let remoteURL = URL(string: remoteURLString)!
-        return Configuration(targetURL: remoteURL,
-                             username: Constants.API.dbProxyEmail,
-                             password: Constants.API.dbProxyPassword)
+        return Configuration(targetURL: remoteURL, username: "", password: "")
     }
 }
 

@@ -49,11 +49,6 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
         switch reason {
         case .completed:
             
-            DispatchQueue.main.async {
-                UserDefaultsManager.setOnboardingCompleted(true)
-                NotificationCenter.default.post(name: .onboardingDidComplete, object: true)
-            }
-            
             if let signatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.results?.first as? ORKConsentSignatureResult {
                 
                 let consentDocument = ConsentDocument()
@@ -75,6 +70,11 @@ final class OnboardingTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
                     }
                 }
             }
+            
+            DispatchQueue.main.async {
+                UserDefaultsManager.setOnboardingCompleted(true)
+            }
+            
             fallthrough
         default:
             // Dismiss onboarding without proceeding.
