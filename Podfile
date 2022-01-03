@@ -7,12 +7,12 @@ target 'OTFMagicBox' do
   source 'https://cdn.cocoapods.org'
   source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
-  pod 'OTFToolBoxCore'
-  pod 'OTFCloudantStore/CloudantCareHealth'
+  pod 'OTFToolBox', '1.0.0-alpha'
+  pod 'OTFCloudantStore/CloudantCareHealth', '1.0.0-alpha'
   pod 'OTFCDTDatastore'
   pod 'OTFCareKit/CareHealth'
   pod 'OTFResearchKit'
-  pod 'OTFTemplateBox'
-  pod 'OTFCloudClientAPI'
+  pod 'OTFTemplateBox', '1.0.0-alpha'
+  pod 'OTFCloudClientAPI', '1.0.0-alpha'
 
 end

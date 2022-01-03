@@ -64,6 +64,7 @@
 		5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */; };
 		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
+		621F3FE8FAD755B653EE88D6 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0DD67F0721E8B72E998CF2 /* Pods_OTFMagicBox.framework */; };
 		841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA609275F719000C6861D /* ViewDidLoadModifier.swift */; };
 		841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA60B275F827300C6861D /* CareKitStoreManager.swift */; };
 		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
@@ -434,9 +435,9 @@
 		CE482CF5262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXGroup;
 			children = (
-				841FEFBC274E5D8200698892 /* Datastore */,
 				5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */,
 				5A7B6D8D26FA352000F872A1 /* API */,
+				841FEFBC274E5D8200698892 /* Datastore */,
 				5AB1808B26BAADB1007AF766 /* Contacts */,
 				5AB1806D26B8849A007AF766 /* Profile */,
 				5AB1806426B87FCB007AF766 /* Schedule */,
@@ -606,6 +607,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D70756635B974495B1383EB6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
