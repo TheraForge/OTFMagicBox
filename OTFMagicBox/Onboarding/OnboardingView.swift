@@ -78,6 +78,8 @@ struct OnboardingView: View {
         }
         
         self.color = Color(YmlReader().primaryColor)
+        
+        self.onComplete = onComplete
     }
     
     /// Onboarding  view.
@@ -134,6 +136,7 @@ struct OnboardingView: View {
                     }
                     .sheet(isPresented: $showingOnboard, onDismiss: {
                         self.showingOnboard = false
+                        onComplete?()
                     }) {
                         ActivitiesViewController(authMethod: self.selectedAuthMethod)
                     }
@@ -169,6 +172,7 @@ struct OnboardingView: View {
                     }
                     .sheet(isPresented: $showingLogin, onDismiss: {
                         self.showingLogin = false
+                        onComplete?()
                     }) {
                         LoginExistingUserViewController(authMethod: self.selectedAuthMethod)
                     }

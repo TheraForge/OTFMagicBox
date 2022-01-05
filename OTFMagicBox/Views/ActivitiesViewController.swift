@@ -112,7 +112,7 @@ struct ActivitiesViewController: UIViewControllerRepresentable {
                                                    passcodeValidationRegularExpression: regexp,
                                                    passcodeInvalidMessage: Constants.Registration.PasscodeInvalidMessage,
                                                    options: regOption)
-            loginSteps = [registerStep]// + EmailLoginSteps().steps
+            loginSteps = [registerStep]
         }
         
         /* **************************************************************

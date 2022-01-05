@@ -33,40 +33,40 @@ OF SUCH DAMAGE.
  */
 
 import SwiftUI
-import OTFCareKitStore
-import OTFCloudClientAPI
 
-struct LaunchView: View {
+struct LoadingView: View {
     
-    @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
+    private let username: String
     
-    init() {
-        didCompleteOnBoarding()
+    init(username: String) {
+        self.username = username
     }
     
     var body: some View {
         VStack(spacing: 10) {
-            if onboardingCompleted, let _ = TheraForgeKeychainService.shared.loadUser() {
-                MainView()
+            if #available(iOS 14.0, *) {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
             } else {
-                OnboardingView {
-                    didCompleteOnBoarding()
+                // Fallback on earlier versions
+                ActivityIndicator(isAnimating: true) {
+                    $0.hidesWhenStopped = true
                 }
             }
-        }.onAppear(perform: {
-            didCompleteOnBoarding()
-        }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
-            didCompleteOnBoarding()
         }
-    }
-    
-    func didCompleteOnBoarding() {
-        self.onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     }
 }
 
-struct LaunchView_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchView()
+struct ActivityIndicator: UIViewRepresentable {
+    
+    typealias UIView = UIActivityIndicatorView
+    var isAnimating: Bool
+    fileprivate var configuration = { (indicator: UIView) in }
+
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIView { UIView() }
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<Self>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+        configuration(uiView)
     }
 }
+

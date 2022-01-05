@@ -51,7 +51,7 @@ final class OnboardingTaskCoordinator: NSObject {
 
 extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
     public func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
-        if authType == .signup, step.identifier == Constants.Identifier.HealthKitDataStep, navigationDirection == .forward, !registrationCompleted {
+        if step.identifier == Constants.Identifier.HealthKitDataStep, navigationDirection == .forward, !registrationCompleted {
             let alert = UIAlertController(title: nil, message: "Creating account...",
                                           preferredStyle: .alert)
             
