@@ -40,10 +40,6 @@ struct LaunchView: View {
     
     @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     
-    init() {
-        didCompleteOnBoarding()
-    }
-    
     var body: some View {
         VStack(spacing: 10) {
             if onboardingCompleted, let _ = TheraForgeKeychainService.shared.loadUser() {
