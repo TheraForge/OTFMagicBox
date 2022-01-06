@@ -39,6 +39,7 @@ import OTFCloudClientAPI
 struct LaunchView: View {
     
     @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
+    @State private var isDefaultAPIKey = false
     
     var body: some View {
         VStack(spacing: 10) {
@@ -50,9 +51,21 @@ struct LaunchView: View {
                 }
             }
         }.onAppear(perform: {
+            guard YmlReader().apiKey != Constants.YamlDefaults.APIKey else {
+                isDefaultAPIKey = true
+                return
+            }
+            
             didCompleteOnBoarding()
         }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
             didCompleteOnBoarding()
+        }.alert(isPresented: $isDefaultAPIKey) {
+            return Alert(title: Text("API Key Missing"),
+                         message: Text("Please set a valid API Key to use the app."),
+                         dismissButton: .cancel({
+                            UserDefaultsManager.setOnboardingCompleted(false)
+                            onboardingCompleted = false
+                         }))
         }
     }
     
