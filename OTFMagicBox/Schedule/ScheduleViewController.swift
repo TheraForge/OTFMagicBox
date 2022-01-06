@@ -79,15 +79,32 @@ class ScheduleViewController: OCKDailyPageViewController {
                 }
                  */
                 
-                tasks.filter({ $0.id.contains("buttonLog") }).forEach { task in
-                    let nauseaCard = OCKButtonLogTaskViewController(task: task, eventQuery: .init(for: date),
-                                                                    storeManager: self.storeManager)
-                    listViewController.appendViewController(nauseaCard, animated: false)
+                tasks.forEach { task in
+                    if task.id.contains("instruction") {
+                        let instructionCard = OCKInstructionsTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                                storeManager: self.storeManager)
+                        listViewController.appendViewController(instructionCard, animated: false)
+                    } else if task.id.contains("grid") {
+                        let gridCard = OCKGridTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                 storeManager: self.storeManager)
+                        listViewController.appendViewController(gridCard, animated: false)
+                    } else if task.id.contains("simple") {
+                        let simpleCard = OCKSimpleTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                     storeManager: self.storeManager)
+                        listViewController.appendViewController(simpleCard, animated: false)
+                    } else if task.id.contains("checklist") {
+                        let checklistCard = OCKChecklistTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                           storeManager: self.storeManager)
+                        listViewController.appendViewController(checklistCard, animated: false)
+                    } else {
+                        let buttonLogCard = OCKButtonLogTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                           storeManager: self.storeManager)
+                        listViewController.appendViewController(buttonLogCard, animated: false)
+                    }
                 }
             }
         }
     }
-    
 }
 
 private extension View {
