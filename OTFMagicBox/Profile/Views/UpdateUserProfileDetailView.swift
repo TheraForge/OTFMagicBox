@@ -43,6 +43,8 @@ struct UpdateUserProfileDetailView: View {
     @State var showGenderPicker = false
     @State var showDatePicker = false
     
+    @Environment(\.colorScheme) var colorScheme
+    
     private var selectedDate: Binding<Date> {
         Binding<Date>(get: { self.date}, set : {
             self.date = $0
@@ -105,8 +107,8 @@ struct UpdateUserProfileDetailView: View {
                         self.showGenderPicker.toggle()
                     }) {
                         Text(" \(genderSelection.rawValue)")
-                            .foregroundColor(.black)
-                            .font(.system(size: 20, weight:.regular))
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .font(.system(size: 20, weight: .regular))
                     }
                     if showGenderPicker {
                         
@@ -125,8 +127,8 @@ struct UpdateUserProfileDetailView: View {
                         self.showDatePicker.toggle()
                     }) {
                         Text(" \(dob)")
-                            .foregroundColor(.black)
-                            .font(.system(size: 20, weight:.regular))
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .font(.system(size: 20, weight: .regular))
                     }
                     if showDatePicker {
                         

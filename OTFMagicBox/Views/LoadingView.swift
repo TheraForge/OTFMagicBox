@@ -34,55 +34,39 @@ OF SUCH DAMAGE.
 
 import SwiftUI
 
-enum CustomStyle {
-    case emailField
-    case secureField
-    case textField
-}
-
-extension View {
+struct LoadingView: View {
     
-    var colorScheme: ColorScheme {
-        Environment(\.colorScheme).wrappedValue
+    private let username: String
+    
+    init(username: String) {
+        self.username = username
     }
     
-    @ViewBuilder func style(_ style: CustomStyle) -> some View {
-        let color = colorScheme == .dark ? Color.white : .black
-        switch style {
-        case .emailField:
-            self.autocapitalization(.none)
-                .padding()
-                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
-                .padding()
-            
-        case .textField:
-            self.autocapitalization(.none)
-                .padding()
-                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
-                .padding()
-            
-        case .secureField:
-            self.padding()
-                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
-                .padding()
+    var body: some View {
+        VStack(spacing: 10) {
+            if #available(iOS 14.0, *) {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            } else {
+                // Fallback on earlier versions
+                ActivityIndicator(isAnimating: true) {
+                    $0.hidesWhenStopped = true
+                }
+            }
         }
     }
 }
 
-
-extension Image {
-    func logoStyle() -> some View {
-        self.resizable()
-            .scaledToFit()
-            .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN * 4)
-            .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN * 4)
-    }
+struct ActivityIndicator: UIViewRepresentable {
     
-    func iconStyle() -> some View {
-        self.resizable()
-            .clipped()
-            .clipShape(Circle())
-            .overlay(Circle().stroke(Color.blue, lineWidth: 2.0))
+    typealias UIView = UIActivityIndicatorView
+    var isAnimating: Bool
+    fileprivate var configuration = { (indicator: UIView) in }
+
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIView { UIView() }
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<Self>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+        configuration(uiView)
     }
 }
 

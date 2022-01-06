@@ -45,9 +45,8 @@ struct EmailLoginSteps: LoginSteps {
     public init() {
         var loginSteps: [ORKStep]
         
-        let loginStep = ORKLoginStep(identifier: "LoginExistingStep", title: "Login",
-                                     text: "Log into the app",
-                                     loginViewControllerClass: LoginViewController.self)
+        let loginStep = ORKLoginStep(identifier: Constants.Login.Identifier, title: Constants.Login.Title,
+                                     text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
         
         loginSteps = [loginStep]
         

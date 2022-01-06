@@ -40,10 +40,6 @@ struct LaunchView: View {
     
     @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     
-    init() {
-        didCompleteOnBoarding()
-    }
-    
     var body: some View {
         VStack(spacing: 10) {
             if onboardingCompleted, let _ = TheraForgeKeychainService.shared.loadUser() {
@@ -56,39 +52,17 @@ struct LaunchView: View {
         }.onAppear(perform: {
             didCompleteOnBoarding()
         }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
-            if let newValue = notification.object as? Bool {
-                self.onboardingCompleted = newValue
-            } else {
-                didCompleteOnBoarding()
-            }
+            didCompleteOnBoarding()
         }
     }
     
     func didCompleteOnBoarding() {
-        if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-            self.onboardingCompleted = completed
-        }
+        self.onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     }
 }
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchView()
-    }
-}
-
-struct LoadingView: View {
-    
-    private let username: String
-    
-    init(username: String) {
-        self.username = username
-    }
-    
-    var body: some View {
-        VStack(spacing: 10) {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle())
-        }
     }
 }
