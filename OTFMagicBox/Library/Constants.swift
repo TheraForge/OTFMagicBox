@@ -122,7 +122,7 @@ enum Constants {
     }
     
     struct YamlDefaults {
-        static let APIKey = "SS9sfzWq4aWVIk0XdX4He3c2Fi9XPdcIBL0fPil7qd5t2CsWleIVvxs0tQpYTk6BeYM8zLmPCPCGZjfQ2SEt2hOFnDIv0TL0HnzT0tcp2332hgQ9BmlVaeOLWt8UrfpkJr3hf6iPngpAWaeV5Eiuljry7SxdDEhHIII6OMjSkMdykenx9fIok54HLQ8gt9pOYiyvN2gL"
+        static let APIKey = "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
         static let FileName = "AppSysParameters.yml"
         static let LoginStepTitle = "Default: login step title"
         static let LoginStepText = "Default: login step text"
