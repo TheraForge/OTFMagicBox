@@ -96,7 +96,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                         let checklistCard = OCKChecklistTaskViewController(task: task, eventQuery: .init(for: date),
                                                                            storeManager: self.storeManager)
                         listViewController.appendViewController(checklistCard, animated: false)
-                    } else if task.id.contains("buttonLog") {
+                    } else {
                         let buttonLogCard = OCKButtonLogTaskViewController(task: task, eventQuery: .init(for: date),
                                                                            storeManager: self.storeManager)
                         listViewController.appendViewController(buttonLogCard, animated: false)
