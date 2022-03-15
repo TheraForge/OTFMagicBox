@@ -36,6 +36,9 @@ import Foundation
 
 struct Onboarding: Codable, Equatable {
     let image: String
+    let icon: String
+    let title: String
+    let color: String
     let description: String
 }
 
@@ -116,10 +119,14 @@ struct DataModel: Codable {
     let teamPhone: String
     let copyright: String
     let teamWebsite: String
-    let showSocialLogin: String
+    let showAppleSignin: String
+    let showGoogleSignin: String
+    let googleClientID: String?
     let passcode: Passcode
     let completionStep: CompletionStep
     let useCareKit: String
+    let showCheckupScreen: String
+    let showStaticUIScreen: String
     let login: Login
     let registration: Registration
     let onboarding: [Onboarding]

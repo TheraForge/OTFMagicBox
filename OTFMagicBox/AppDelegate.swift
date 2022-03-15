@@ -64,6 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Default protection is not set")
         }
         
+        OCKStoreManager.shared.coreDataStore.populateSampleData()
+        
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = tintColor
         
         return true

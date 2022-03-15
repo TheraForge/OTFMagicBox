@@ -67,8 +67,8 @@ struct ProfileUIView: View {
                 }
                 
                 Section {
-                    ReportView(color: .blue, email: YmlReader().teamEmail)
-                    SupportView(color: .blue, phone: YmlReader().teamPhone)
+                    ReportView(color: Color(YmlReader().primaryColor), email: YmlReader().teamEmail)
+                    SupportView(color: Color(YmlReader().primaryColor), phone: YmlReader().teamPhone)
                 }
                 
                 if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
