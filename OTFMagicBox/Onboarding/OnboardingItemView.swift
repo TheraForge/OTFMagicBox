@@ -45,15 +45,23 @@ struct OnboardingItemView<OnboardingItem: View>: View {
     
     /// Creates the onboarding item view.
     init(_ views: [OnboardingItem]) {
-        self.viewControllers = views.map { UIHostingController(rootView: $0) }
+        self.viewControllers = views.map {
+            let controller = UIHostingController(rootView: $0)
+            controller.view.backgroundColor = .clear
+            return controller
+        }
     }
 
     /// The onboarding items view.
     var body: some View {
         ZStack(alignment: .bottom) {
             OnboardingItemViewController(controllers: viewControllers, currentPage: $currentOnboardingItem)
+                .background(Color.clear)
             OnboardingItemControl(numberOfOnboardingItems: viewControllers.count, currentOnboardingItem: $currentOnboardingItem)
+                .background(Color.clear)
+                .offset(x: 0, y: -80)
         }
+        .ignoresSafeArea()
     }
     
 }
@@ -74,18 +82,19 @@ struct OnboardingItemViewController: UIViewControllerRepresentable {
 
     /// Documentation is in UIViewControllerRepresentable.
     func makeUIViewController(context: Context) -> UIPageViewController {
-        let OnboardingItemViewController = UIPageViewController(
+        let onboardingItemViewController = UIPageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal)
-        OnboardingItemViewController.dataSource = context.coordinator
-        OnboardingItemViewController.delegate = context.coordinator
+        onboardingItemViewController.dataSource = context.coordinator
+        onboardingItemViewController.delegate = context.coordinator
+        onboardingItemViewController.view.backgroundColor = .clear
 
-        return OnboardingItemViewController
+        return onboardingItemViewController
     }
 
     /// Documentation is in UIViewControllerRepresentable.
-    func updateUIViewController(_ OnboardingItemViewController: UIPageViewController, context: Context) {
-        OnboardingItemViewController.setViewControllers(
+    func updateUIViewController(_ onboardingItemViewController: UIPageViewController, context: Context) {
+        onboardingItemViewController.setViewControllers(
         [self.controllers[self.currentPage]], direction: .forward, animated: true)
     }
 
@@ -156,6 +165,7 @@ struct OnboardingItemControl: UIViewRepresentable {
         control.numberOfPages = numberOfOnboardingItems
         control.pageIndicatorTintColor = UIColor.lightGray
         control.currentPageIndicatorTintColor = YmlReader().primaryColor
+        control.backgroundColor = .clear
         control.addTarget(
             context.coordinator,
             action: #selector(Coordinator.updateCurrentOnboardingItem(sender:)),

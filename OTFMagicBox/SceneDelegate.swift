@@ -38,6 +38,8 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private var isLaunched = true
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -67,6 +69,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        // We sync the DB when the user is already logged in and we show the `MainView`.
+        // This is to avoid multiple sync operations at launch time.
+        guard !isLaunched else {
+            isLaunched = false
+            return
+        }
+        
+        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true) { _ in
+            //
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

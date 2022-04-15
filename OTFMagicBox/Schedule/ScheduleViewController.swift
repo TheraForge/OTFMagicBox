@@ -57,49 +57,66 @@ class ScheduleViewController: OCKDailyPageViewController {
         var query = OCKTaskQuery(for: date)
         query.excludesTasksWithNoEvents = true
 
-        storeManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
-            switch result {
-            case .failure(let error):
-                print("Error: \(error)")
-                
-            case .success(let tasks):
+        DispatchQueue.global(qos: .default).async { [unowned self] in
+            storeManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
+                switch result {
+                case .failure(let error):
+                    print("Error: \(error)")
+                    
+                case .success(let tasks):
 
-                // Add a non-CareKit view into the list
-                /*
-                let tipTitle = "Customize your app!"
-                let tipText = ""
+                    // Add a non-CareKit view into the list
+                    /*
+                    let tipTitle = "Customize your app!"
+                    let tipText = ""
 
-                // Only show the tip view on the current date
-                if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                    let tipView = TipView()
-                    tipView.headerView.titleLabel.text = tipTitle
-                    tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
-                    listViewController.appendView(tipView, animated: false)
-                }
-                 */
-                
-                tasks.forEach { task in
-                    if task.id.contains("instruction") {
-                        let instructionCard = OCKInstructionsTaskViewController(task: task, eventQuery: .init(for: date),
-                                                                                storeManager: self.storeManager)
-                        listViewController.appendViewController(instructionCard, animated: false)
-                    } else if task.id.contains("grid") {
-                        let gridCard = OCKGridTaskViewController(task: task, eventQuery: .init(for: date),
-                                                                 storeManager: self.storeManager)
-                        listViewController.appendViewController(gridCard, animated: false)
-                    } else if task.id.contains("simple") {
-                        let simpleCard = OCKSimpleTaskViewController(task: task, eventQuery: .init(for: date),
+                    // Only show the tip view on the current date
+                    if Calendar.current.isDate(date, inSameDayAs: Date()) {
+                        let tipView = TipView()
+                        tipView.headerView.titleLabel.text = tipTitle
+                        tipView.headerView.detailLabel.text = tipText
+                        tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
+                        listViewController.appendView(tipView, animated: false)
+                    }
+                     */
+                    
+                    // Filter the tasks that exist on the given date
+                    let todayTasks = tasks.filter({ $0.schedule.exists(onDay: date) })
+                    
+                    // If there's no task on the given date then show no tasks card
+                    guard !todayTasks.isEmpty else {
+                        let tipTitle = "No Tasks"
+                        let tipText = "No tasks for this date."
+                        let tipView = TipView()
+                        tipView.headerView.titleLabel.text = tipTitle
+                        tipView.headerView.detailLabel.text = tipText
+                        listViewController.appendView(tipView, animated: false)
+                        return
+                    }
+                    
+                    todayTasks.forEach { task in
+                        guard task.schedule.exists(onDay: date) else { return }
+                        if task.viewType == .instruction {
+                            let instructionCard = OCKInstructionsTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                                    storeManager: self.storeManager)
+                            listViewController.appendViewController(instructionCard, animated: false)
+                        } else if task.viewType == .grid {
+                            let gridCard = OCKGridTaskViewController(task: task, eventQuery: .init(for: date),
                                                                      storeManager: self.storeManager)
-                        listViewController.appendViewController(simpleCard, animated: false)
-                    } else if task.id.contains("checklist") {
-                        let checklistCard = OCKChecklistTaskViewController(task: task, eventQuery: .init(for: date),
-                                                                           storeManager: self.storeManager)
-                        listViewController.appendViewController(checklistCard, animated: false)
-                    } else {
-                        let buttonLogCard = OCKButtonLogTaskViewController(task: task, eventQuery: .init(for: date),
-                                                                           storeManager: self.storeManager)
-                        listViewController.appendViewController(buttonLogCard, animated: false)
+                            listViewController.appendViewController(gridCard, animated: false)
+                        } else if task.viewType == .buttonLog {
+                            let buttonLogCard = OCKButtonLogTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                               storeManager: self.storeManager)
+                            listViewController.appendViewController(buttonLogCard, animated: false)
+                        } else if task.viewType == .checklist {
+                            let checklistCard = OCKChecklistTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                               storeManager: self.storeManager)
+                            listViewController.appendViewController(checklistCard, animated: false)
+                        } else {
+                            let simpleCard = OCKSimpleTaskViewController(task: task, eventQuery: .init(for: date),
+                                                                         storeManager: self.storeManager)
+                            listViewController.appendViewController(simpleCard, animated: false)
+                        }
                     }
                 }
             }

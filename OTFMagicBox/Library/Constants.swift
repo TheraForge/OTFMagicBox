@@ -135,6 +135,8 @@ enum Constants {
         static let ReviewConsentStepText = "Default: review consent step text"
         static let ReasonForConsentText = "Default: reason for consent step text"
         static let ConsentFileName = "Default: consent file name"
+        static let LoginOptionsText = "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
+        static let LoginOptionsIcon = "cloud"
         static let PasscodeText = "Default: passcode text"
         static let PasscodeOnReturnText = "Default: passcode on return text"
         static let CompletionStepTitle = "Default: completion step title"

@@ -64,17 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Default protection is not set")
         }
         
+        OCKStoreManager.shared.coreDataStore.populateSampleData()
+        
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = tintColor
         
         return true
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true) { _ in
-            //
-        }
-    }
-
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

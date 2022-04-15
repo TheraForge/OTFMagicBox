@@ -68,14 +68,15 @@ class LoginViewController: ORKLoginStepViewController {
                 case .failure(let error):
                     print(error.localizedDescription)
                     alert.dismiss(animated: true) {
-                        let alert = UIAlertController(title: "Login Error!", message: "Please check your credentials.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Login Error!", message: error.error.message, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
                         self.taskViewController?.present(alert, animated: true)
                     }
                     
                 case .success:
-                    alert.dismiss(animated: true, completion: nil)
-                    super.goForward()
+                    alert.dismiss(animated: false, completion: {
+                        super.goForward()
+                    })
                 }
             }
         }
@@ -98,7 +99,7 @@ class LoginViewController: ORKLoginStepViewController {
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
                         alert.dismiss(animated: true, completion: nil)
-                        let alert = UIAlertController(title: "Password Reset Error!", message: error.localizedDescription, preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Password Reset Error!", message: error.error.message, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                         
                         self.present(alert, animated: true)
@@ -149,7 +150,7 @@ class LoginViewController: ORKLoginStepViewController {
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
                         alert.dismiss(animated: true, completion: nil)
-                        let alert = UIAlertController(title: "Password Reset Error!", message: error.localizedDescription, preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Password Reset Error!", message: error.error.message, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                         self.present(alert, animated: true)
                     }

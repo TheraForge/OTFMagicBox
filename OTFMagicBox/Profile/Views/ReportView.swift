@@ -46,14 +46,27 @@ struct ReportView: View {
     var body: some View {
         HStack {
             Text("Report a Problem")
+                .minimumScaleFactor(0.5)
             Spacer()
             Text(self.email).foregroundColor(self.color)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
         }
         .frame(height: 60)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded({
             EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: self.email)
         }))
+    }
+}
+
+struct ReportView_Previews: PreviewProvider {
+    static var previews: some View {
+        Section {
+            ReportView(color: .blue,
+                       email: "zeeshan.ahmed@invozone.com")
+        }
+        .padding(.horizontal)
     }
 }
 

@@ -82,7 +82,7 @@ extension Image {
         self.resizable()
             .clipped()
             .clipShape(Circle())
-            .overlay(Circle().stroke(Color.blue, lineWidth: 2.0))
+            .overlay(Circle().stroke(Color(YmlReader().primaryColor), lineWidth: 2.0))
     }
 }
 

@@ -42,7 +42,7 @@ struct UpdateUserProfileView: View {
     
     var body: some View {
         VStack {
-            Image.avatar
+            Image(uiImage: UIImage(named: "user_profile")!)
                 .iconStyle()
                 .frame(width: 40, height: 40, alignment: .center)
              

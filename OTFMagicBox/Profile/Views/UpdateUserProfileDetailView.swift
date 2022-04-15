@@ -225,7 +225,10 @@ struct IconView: View {
     @State private var sourceType = UIImagePickerController.SourceType.photoLibrary
     
     var imageView: Image {
-        image ?? Image.avatar
+        if let userImage = UIImage(named: "user_profile") {
+            return Image(uiImage: userImage)
+        }
+        return Image.avatar
     }
     
     var body: some View {
