@@ -66,7 +66,7 @@ struct ProfileUIView: View {
                     }
                 }
                 
-                Section {
+                Section(header: Text("Report a problem")) {
                     ReportView(color: Color(YmlReader().primaryColor), email: YmlReader().teamEmail)
                     SupportView(color: Color(YmlReader().primaryColor), phone: YmlReader().teamPhone)
                 }
@@ -107,5 +107,11 @@ struct ProfileUIView: View {
                 self.user = patient
             }
         })
+    }
+}
+
+struct ProfileUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileUIView(user: nil)
     }
 }

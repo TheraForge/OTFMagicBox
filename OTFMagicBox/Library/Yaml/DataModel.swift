@@ -55,6 +55,11 @@ struct Login: Codable {
     let failedLoginText: String
 }
 
+struct LoginOptionsInfo: Codable {
+    let text: String
+    let icon: String
+}
+
 struct Consent: Codable {
      let reviewConsentStepText: String
      let reasonForConsentText: String
@@ -128,6 +133,7 @@ struct DataModel: Codable {
     let showCheckupScreen: String
     let showStaticUIScreen: String
     let login: Login
+    let loginOptionsInfo: LoginOptionsInfo
     let registration: Registration
     let onboarding: [Onboarding]
     let consent: Consent

@@ -80,9 +80,13 @@ class ScheduleViewController: OCKDailyPageViewController {
                     }
                      */
                     
-                    guard !tasks.isEmpty else {
+                    // Filter the tasks that exist on the given date
+                    let todayTasks = tasks.filter({ $0.schedule.exists(onDay: date) })
+                    
+                    // If there's no task on the given date then show no tasks card
+                    guard !todayTasks.isEmpty else {
                         let tipTitle = "No Tasks"
-                        let tipText = "No tasks for this day."
+                        let tipText = "No tasks for this date."
                         let tipView = TipView()
                         tipView.headerView.titleLabel.text = tipTitle
                         tipView.headerView.detailLabel.text = tipText
@@ -90,7 +94,7 @@ class ScheduleViewController: OCKDailyPageViewController {
                         return
                     }
                     
-                    tasks.forEach { task in
+                    todayTasks.forEach { task in
                         guard task.schedule.exists(onDay: date) else { return }
                         if task.viewType == .instruction {
                             let instructionCard = OCKInstructionsTaskViewController(task: task, eventQuery: .init(for: date),

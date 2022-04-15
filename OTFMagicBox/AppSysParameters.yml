@@ -256,7 +256,7 @@ DataModel:
   onboarding:
    - image: "Splash Image"
      icon: "stethoscope"
-     title: "Welcome to CardioBox"
+     title: "Welcome to MagicBox"
      color: "Black"
      description: "Your health care app"
      
@@ -363,6 +363,11 @@ DataModel:
   
  # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
     passcodeType: "4"
+  
+  # Login options screen configuration
+  loginOptionsInfo:
+    text: "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
+    icon: "cloud"
   
  # Health Records
  # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.

@@ -71,38 +71,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
     
     public override func viewDidLoad() {
         
-        ///Sign in label
-        let signInLabel = UILabel(frame: CGRect(x: 0, y: 100, width: 450, height: 50 ))
-        signInLabel.center.x = view.center.x
-        signInLabel.text = "Sign In"
-        signInLabel.textColor = .black
-        signInLabel.textAlignment = NSTextAlignment.center
-        self.view.addSubview(signInLabel)
-        
-        let config = YmlReader()
-        var button:UIButton? = nil
-        
-        let buttonUserPassWord = customButton(title: "Sign in with Email and Password", backGroundColor: .white, textColor: .black,
-                                              borderColor: .black, reference: button, action: #selector(loginEmailAndPaswwordAction))
-        self.view.addSubview(buttonUserPassWord)
-        button = buttonUserPassWord
-        
-        if config.showGoogleLogin == true {
-            let buttonGoogle = customButton(title: "Sign in with Google", backGroundColor: .white, textColor: .gray,
-                                            borderColor: UIColor(red: 66.0/255.0, green: 133.0/255.0, blue: 244.0/255.0, alpha: 1),
-                                            reference: button, action: #selector(loginGoogleAction), withAttachement: "google")
-            self.view.addSubview(buttonGoogle)
-            button = buttonGoogle
-        }
-        
-        if config.showAppleLogin == true {
-            let buttonApple = customButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil,
-                                           reference: button, action: #selector(loginAppleAction), withAttachement: "apple")
-            self.view.addSubview(buttonApple)
-            button = buttonApple
-        }
-        
-        self.view.backgroundColor = .white
+        setupViews()
     }
     
     public func customButton(
@@ -116,13 +85,6 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         imageOffset: CGFloat = 50
     ) -> UIButton {
         let button = UIButton(frame: CGRect(x: 200, y: 200, width: 350, height: 50))
-        button.center = view.center
-        if let reference = reference {
-            button.center.y = reference.center.y - 60
-        }
-        else {
-            button.center.y = CGFloat(Float(view.frame.maxY) - 200)
-        }
         button.setTitle(title, for: .normal)
         
         button.setTitleColor(textColor,for: .normal)
@@ -135,11 +97,98 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
             button.layer.borderColor =  borderColor.cgColor
         }
         
-        if(image != "") {
-            button.setImage(UIImage(named: image)!, for: .normal)
+        if (image != "") {
+            button.setImage(UIImage(named: image), for: .normal)
             button.imageEdgeInsets.left = -imageOffset
         }
+        
         return button
+    }
+    
+    private func setupViews() {
+        
+        let verticalStack = UIStackView()
+        verticalStack.translatesAutoresizingMaskIntoConstraints = false
+        verticalStack.spacing = 10
+        verticalStack.axis = .vertical
+        verticalStack.distribution = .fillEqually
+        verticalStack.backgroundColor = .clear
+        view.addSubview(verticalStack)
+        
+        var stackViewHeight = CGFloat(0)
+        
+        let config = YmlReader()
+        
+        if config.showAppleLogin {
+            stackViewHeight += 60
+            let buttonApple = customButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil,
+                                           reference: nil, action: #selector(loginAppleAction), withAttachement: "apple")
+            buttonApple.translatesAutoresizingMaskIntoConstraints = false
+            verticalStack.addArrangedSubview(buttonApple)
+        }
+        
+        if config.showGoogleLogin {
+            stackViewHeight += 60
+            let buttonGoogle = customButton(title: "Sign in with Google", backGroundColor: .white, textColor: .black,
+                                            borderColor: UIColor(red: 66.0/255.0, green: 133.0/255.0, blue: 244.0/255.0, alpha: 1),
+                                            reference: nil, action: #selector(loginGoogleAction), withAttachement: "google")
+            buttonGoogle.translatesAutoresizingMaskIntoConstraints = false
+            verticalStack.addArrangedSubview(buttonGoogle)
+        }
+        
+        stackViewHeight += 50
+        let buttonUserPassWord = customButton(title: "Sign in with Email and Password", backGroundColor: .white, textColor: .black,
+                                              borderColor: .black, reference: nil, action: #selector(loginEmailAndPaswwordAction))
+        buttonUserPassWord.translatesAutoresizingMaskIntoConstraints = false
+        verticalStack.addArrangedSubview(buttonUserPassWord)
+        
+        ///Sign in label
+        let signInLabel = UILabel(frame: CGRect(x: 0, y: 320, width: 450, height: 50 ))
+        signInLabel.translatesAutoresizingMaskIntoConstraints = false
+        signInLabel.center.x = view.center.x
+        signInLabel.text =  config.loginOptionsText
+        signInLabel.textColor = .black
+        signInLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        signInLabel.minimumScaleFactor = 0.75
+        signInLabel.textAlignment = NSTextAlignment.center
+        signInLabel.numberOfLines = 4
+        self.view.addSubview(signInLabel)
+        
+        var optionsIcon: UIImage?
+
+        if let image = UIImage(systemName: config.loginOptionsIcon) {
+            optionsIcon = image
+        }
+        else {
+            optionsIcon = UIImage(systemName: Constants.YamlDefaults.LoginOptionsIcon)
+        }
+
+        let iconImage = UIImageView(image: optionsIcon)
+        iconImage.translatesAutoresizingMaskIntoConstraints = false
+        iconImage.tintColor = .black
+        iconImage.frame = CGRect(x: 0, y: 100, width: 200, height: 200)
+        iconImage.contentMode = .scaleAspectFit
+        iconImage.center.x = view.center.x
+        view.addSubview(iconImage)
+        
+        NSLayoutConstraint.activate([
+            iconImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            iconImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            iconImage.heightAnchor.constraint(equalToConstant: 120),
+            iconImage.widthAnchor.constraint(equalToConstant: 120),
+            
+            signInLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInLabel.topAnchor.constraint(equalTo: iconImage.bottomAnchor),
+            signInLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            signInLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            verticalStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            verticalStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            verticalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            verticalStack.heightAnchor.constraint(equalToConstant: stackViewHeight)
+        ])
+        
+        self.view.backgroundColor = .white
     }
     
     @objc

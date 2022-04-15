@@ -159,6 +159,14 @@ public class YmlReader {
         return dataModel?.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
     }
     
+    var loginOptionsText: String {
+        return dataModel?.loginOptionsInfo.text ?? Constants.YamlDefaults.LoginOptionsText
+    }
+    
+    var loginOptionsIcon: String {
+        return dataModel?.loginOptionsInfo.icon ?? Constants.YamlDefaults.LoginOptionsIcon
+    }
+    
     var isPasscodeEnabled: Bool {
         guard let passcode = dataModel?.passcode.enable else { return true }
         return passcode != Constants.false

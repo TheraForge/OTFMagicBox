@@ -111,7 +111,7 @@ class CloudantSyncManager {
                 }
                 
                 do {
-                    try replicate(direction: .pull, completionBlock: { error in
+                    try replicate(direction: .pull, completionBlock: { [unowned self] error in
                         if let error = error {
                             print(error)
                         }
