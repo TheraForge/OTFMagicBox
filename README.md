@@ -1,10 +1,14 @@
-# TheraForge MagicBox 1.0.0-beta
+# TheraForge MagicBox 1.0.1-beta
 
 The Open TheraForge (OTF) MagicBox app is a template for creating digital health solutions that help people better manage their health.
 
 This sample application leverages TheraForge frameworks such as [OTFTemplateBox](../../../OTFTemplateBox) to implement a no-code solution that can be customized without requiring any code changes.
 
 For more details on the features of the SDK and on the TheraForge Cloud setup process (e.g., to obtain an API key), refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
+
+## Change Log
+* Release 1.0.0-beta: First beta release of the template app
+* Release 1.0.1-beta: Removed warnings, improved profile section, added UI samples and made various other improvements
 
 # Table of Contents
 
@@ -83,11 +87,152 @@ There are a number of pre-defined task types that you can include in your projec
 
 <p align="center"><img src="Docs/9-Activity.png" width=35% height=35%></p>
 
+Currently supported active tasks are (see also this [detailed document](https://github.com/TheraForge/OTFResearchKit/blob/main/docs/ActiveTasks/ActiveTasks-template.markdown)):
+
+<table>
+<caption>Table 1. Active Tasks</caption>
+<thead>
+    <tr>
+        <td>CATEGORY</td>
+        <td>TASK</td>
+        <td>SENSOR</td>
+        <td>DATA COLLECTED</td>
+    </tr>
+</thead>
+<tbody>
+ <tr><td rowspan = 3>Motor Activities</td> 
+      <td>Range of Motion</a></td>
+     <td>Accelerometer<br>
+  Gyroscope</td> 
+  <td>Device motion<br></td> 
+ </tr>
+<td>Gait and Balance</a></td>
+     <td>Accelerometer<br>
+  Gyroscope</td> 
+  <td>Device motion<br>Pedometer</td> 
+ </tr>
+<tr><td>Tapping Speed</a></td> 
+<td>Multi-Touch display <br>
+Accelerometer (optional)
+</td> 
+  <td>Touch activity<br/>
+  </td> 
+</tr>
+<tr><td rowspan = 2>Fitness</td>
+ <td>Fitness</a></td>
+ <td>GPS<br>Gyroscope</td>
+<td>Device motion<br>Pedometer<br>Location<br>Heart rate
+   </td> 
+</tr>
+<tr><td>Timed Walk</a></td>
+  <td>GPS<br>Gyroscope</td>
+<td>Device motion<br>Pedometer<br>Location
+   </td> 
+</tr>
+<tr><td rowspan = 6>Cognition</td>
+
+<td>Spatial Memory</a></td>
+<td>Multi-Touch display <br>
+Accelerometer (optional)</td>
+<td>
+Touch activity<br>Correct answer<br> Actual sequences
+</td>
+</tr>
+
+<tr><td>Stroop Test</a></td> 
+<td>Multi-Touch display</td> 
+  <td>Actual color<br>Actual text<br>User selection<br>Completion time </td> 
+</tr>
+<tr><td>Trail Making Test</a></td> 
+<td>Multi-Touch display</td> 
+  <td>Completion time<br>Touch activity</td> 
+</tr>
+
+<tr><td>Paced Serial Addition Test (PSAT)</a></td> 
+<td>Multi-Touch display</td> 
+  <td>Addition results from user</td> 
+</tr>
+
+<tr><td>Tower of Hanoi</a></td> 
+<td>Multi-Touch display
+</td> 
+  <td>Every move taken by the user
+  </td> 
+</tr>
+
+<tr><td>Reaction Time</a></td> 
+<td>Accelerometer<br>Gyroscope
+</td> 
+  <td>Device motion 
+  </td> 
+
+</tr>
+<tr><td rowspan=3>Speech</td>
+<td>Sustained Phonation</a></td>
+    <td>Microphone</td>
+    <td>Uncompressed audio</td>
+</tr>
+
+<tr><td>Speech Recognition</a></td> 
+<td>Microphone</td> 
+<td>Raw audio recording<br>Transcription in the form of an SFTranscription object.<br>Edited transcript (if any, by the user)</td> 
+</tr>
+
+<tr><td>Speech-in-Noise</a></td> 
+<td>Microphone</td> 
+<td>Raw audio recording<br>Transcription in the form of an SFTranscription object<br>Edited transcript (if any, by the user). This can be used to calculate the Speech Reception Threshold (SRT) for a user.</td> 
+</tr>
+
+<tr><td rowspan=3>Hearing</td>
+
+<td>Environment SPL</a></td>
+<td>Microphone</td>
+<td>Environment sound pressure level in dBA</td> 
+</tr>
+
+<td>Tone Audiometry</a></td>
+<td>AirPods<br>
+Headphones</td>
+<td>Minimum amplitude for the user 
+to recognize the sound</td> 
+</tr>
+
+<tr><td>dBHL Tone Audiometry</a></td>
+<td>AirPods<br>
+Headphones</td>
+<td>
+Hearing threshold in dB HL scale<br>
+User response timestamps
+</td>
+</tr>
+
+<tr><td>Hand Dexterity</td>
+ <td>9-Hole Peg</td>
+ <td>Multi-Touch display</td>
+<td>Completion time<br>Move distance
+   </td> 
+</tr>
+
+<tr><td>Vision</td>
+<td>Amsler Grid</a></td> 
+<td>Multi-Touch display</td> 
+<td>Touch activity<br>Eye side<br>Areas of distortions as annotated by the user</td> 
+</tr>
+
+</tbody>
+</table>
+
 ## Surveys
 
-A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole.
+A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”.
+You can collect results for the individual steps or for the task as a whole.
+
+Various survey types are available along with instructions and forms:
 
 <p align="center"><img src="Docs/10-Survey.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/36-FormStep.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/37-ValuePickerAnswerFormat.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/38-TextChoiceAnswerFormat_2.png" width=35% height=35%></p>
 
 ## Contacts
 

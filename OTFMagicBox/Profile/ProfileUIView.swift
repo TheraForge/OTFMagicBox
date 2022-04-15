@@ -60,13 +60,15 @@ struct ProfileUIView: View {
                     HelpView(site: YmlReader().teamWebsite)
                 }
                 
-                Section {
-                    ChangePasswordView()
+                if let email = user?.remoteID {
+                    Section {
+                        ChangePasswordView(email: email)
+                    }
                 }
                 
-                Section {
-                    ReportView(color: .blue, email: YmlReader().teamEmail)
-                    SupportView(color: .blue, phone: YmlReader().teamPhone)
+                Section(header: Text("Report a problem")) {
+                    ReportView(color: Color(YmlReader().primaryColor), email: YmlReader().teamEmail)
+                    SupportView(color: Color(YmlReader().primaryColor), phone: YmlReader().teamPhone)
                 }
                 
                 if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
@@ -90,7 +92,7 @@ struct ProfileUIView: View {
                 
             }
             .listStyle(GroupedListStyle())
-            .onAppear {
+            .onLoad {
                 fetchUserFromDB()
             }
             .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
@@ -105,5 +107,11 @@ struct ProfileUIView: View {
                 self.user = patient
             }
         })
+    }
+}
+
+struct ProfileUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileUIView(user: nil)
     }
 }

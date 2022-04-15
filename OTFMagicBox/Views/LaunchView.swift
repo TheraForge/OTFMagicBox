@@ -39,10 +39,7 @@ import OTFCloudClientAPI
 struct LaunchView: View {
     
     @State var onboardingCompleted = UserDefaultsManager.onboardingDidComplete
-    
-    init() {
-        didCompleteOnBoarding()
-    }
+    @State private var isDefaultAPIKey = false
     
     var body: some View {
         VStack(spacing: 10) {
@@ -54,41 +51,31 @@ struct LaunchView: View {
                 }
             }
         }.onAppear(perform: {
+            guard YmlReader().apiKey != Constants.YamlDefaults.APIKey else {
+                isDefaultAPIKey = true
+                return
+            }
+            
             didCompleteOnBoarding()
         }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
-            if let newValue = notification.object as? Bool {
-                self.onboardingCompleted = newValue
-            } else {
-                didCompleteOnBoarding()
-            }
+            didCompleteOnBoarding()
+        }.alert(isPresented: $isDefaultAPIKey) {
+            return Alert(title: Text("API Key Missing"),
+                         message: Text("Please set a valid API Key to use the app."),
+                         dismissButton: .cancel({
+                            UserDefaultsManager.setOnboardingCompleted(false)
+                            onboardingCompleted = false
+                         }))
         }
     }
     
     func didCompleteOnBoarding() {
-        if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
-            self.onboardingCompleted = completed
-        }
+        self.onboardingCompleted = UserDefaultsManager.onboardingDidComplete
     }
 }
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchView()
-    }
-}
-
-struct LoadingView: View {
-    
-    private let username: String
-    
-    init(username: String) {
-        self.username = username
-    }
-    
-    var body: some View {
-        VStack(spacing: 10) {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle())
-        }
     }
 }

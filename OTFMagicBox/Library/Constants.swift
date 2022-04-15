@@ -122,7 +122,7 @@ enum Constants {
     }
     
     struct YamlDefaults {
-        static let APIKey = "Enter the API KEY received during TheraForge registration"
+        static let APIKey = "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
         static let FileName = "AppSysParameters.yml"
         static let LoginStepTitle = "Default: login step title"
         static let LoginStepText = "Default: login step text"
@@ -135,6 +135,8 @@ enum Constants {
         static let ReviewConsentStepText = "Default: review consent step text"
         static let ReasonForConsentText = "Default: reason for consent step text"
         static let ConsentFileName = "Default: consent file name"
+        static let LoginOptionsText = "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
+        static let LoginOptionsIcon = "cloud"
         static let PasscodeText = "Default: passcode text"
         static let PasscodeOnReturnText = "Default: passcode on return text"
         static let CompletionStepTitle = "Default: completion step title"
@@ -186,8 +188,6 @@ enum Constants {
     struct API {
         static let developmentUrl = "https://theraforge.org/api"
         static let dbProxyURL = API.developmentUrl + "/v1/db/"
-        static let dbProxyEmail = "username@yourorg.com"
-        static let dbProxyPassword = "password"
     }
     
 }

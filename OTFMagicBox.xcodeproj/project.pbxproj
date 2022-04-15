@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B5AE289D75ABDE6C4F5E2D4 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83DFEB7A9272007D999BECD /* Pods_OTFMagicBox.framework */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
 		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
 		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
@@ -42,7 +43,6 @@
 		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
 		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
 		5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD46264E89510069FEF7 /* ConsentDocument.swift */; };
-		5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */; };
 		5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */; };
 		5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4F264E9A880069FEF7 /* Constants.swift */; };
 		5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */; };
@@ -63,7 +63,6 @@
 		5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */; };
 		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
-		621F3FE8FAD755B653EE88D6 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0DD67F0721E8B72E998CF2 /* Pods_OTFMagicBox.framework */; };
 		841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA609275F719000C6861D /* ViewDidLoadModifier.swift */; };
 		841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA60B275F827300C6861D /* CareKitStoreManager.swift */; };
 		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
@@ -74,7 +73,33 @@
 		84268455274770A3007C5D50 /* LoginSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268454274770A3007C5D50 /* LoginSteps.swift */; };
 		84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */; };
 		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
+		8467619527DF89DE00A3207E /* CountProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619027DF89DE00A3207E /* CountProgressRow.swift */; };
+		8467619727DF89DE00A3207E /* CheckUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619227DF89DE00A3207E /* CheckUpViewModel.swift */; };
+		8467619827DF89DE00A3207E /* PercentProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619327DF89DE00A3207E /* PercentProgressRow.swift */; };
+		8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619427DF89DE00A3207E /* CheckUpView.swift */; };
+		8467619B27DF8A1F00A3207E /* OCKStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */; };
+		8467619F27DF8A6900A3207E /* Environment+StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */; };
+		846761A027DF8A6900A3207E /* Extension+OCKAnyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */; };
+		846761A127DF8A6900A3207E /* OCKHealthKitStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */; };
+		846761A427DF8AB800A3207E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761A227DF8AB800A3207E /* OnboardingViewController.swift */; };
+		846761A527DF8AB800A3207E /* OnboardingOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761A327DF8AB800A3207E /* OnboardingOptionsViewController.swift */; };
+		846761A827DF8B0700A3207E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 846761A727DF8B0700A3207E /* Preview Assets.xcassets */; };
+		846761B927DF8BC300A3207E /* PlatformPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AA27DF8BC300A3207E /* PlatformPicker.swift */; };
+		846761BA27DF8BC300A3207E /* StaticUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AB27DF8BC300A3207E /* StaticUI.swift */; };
+		846761BB27DF8BC300A3207E /* SurveysList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AD27DF8BC300A3207E /* SurveysList.swift */; };
+		846761BC27DF8BC300A3207E /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = 846761AE27DF8BC300A3207E /* tap.aif */; };
+		846761BD27DF8BC300A3207E /* TaskViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */; };
+		846761BE27DF8BC300A3207E /* RKTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B027DF8BC300A3207E /* RKTasks.swift */; };
+		846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B127DF8BC300A3207E /* TaskListRow.swift */; };
+		846761C027DF8BC300A3207E /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B227DF8BC300A3207E /* TaskListViewController.swift */; };
+		846761C127DF8BC300A3207E /* CardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B327DF8BC300A3207E /* CardBackground.swift */; };
+		846761C227DF8BC300A3207E /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B527DF8BC300A3207E /* TasksViewModel.swift */; };
+		846761C327DF8BC300A3207E /* ContactsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B627DF8BC300A3207E /* ContactsSection.swift */; };
+		846761C427DF8BC300A3207E /* TasksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B727DF8BC300A3207E /* TasksSection.swift */; };
+		846761C527DF8BC300A3207E /* CareKitTaskViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B827DF8BC300A3207E /* CareKitTaskViews.swift */; };
+		846761C727DF8BEA00A3207E /* RingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761C627DF8BEA00A3207E /* RingProgressView.swift */; };
 		84771FA9272974B700468E0E /* Extension+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84771FA8272974B700468E0E /* Extension+Image.swift */; };
+		8486C8DD278482D70013B4E9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486C8DC278482D70013B4E9 /* LoadingView.swift */; };
 		848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */; };
 		84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1758A2750A035001587BD /* Extention+Notification.swift */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
@@ -82,7 +107,6 @@
 		CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */; };
 		CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CFA262C954A00C0A2D5 /* ContentView.swift */; };
 		CE482CFD262C954C00C0A2D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE482CFC262C954C00C0A2D5 /* Assets.xcassets */; };
-		CE482D00262C954C00C0A2D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */; };
 		CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -136,7 +160,6 @@
 		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5AADFD46264E89510069FEF7 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
-		5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTaskCoordinator.swift; sourceTree = "<group>"; };
 		5AADFD4F264E9A880069FEF7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
@@ -167,20 +190,45 @@
 		84268454274770A3007C5D50 /* LoginSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSteps.swift; sourceTree = "<group>"; };
 		84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleStepViewController.swift; sourceTree = "<group>"; };
 		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
+		8467619027DF89DE00A3207E /* CountProgressRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountProgressRow.swift; sourceTree = "<group>"; };
+		8467619227DF89DE00A3207E /* CheckUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUpViewModel.swift; sourceTree = "<group>"; };
+		8467619327DF89DE00A3207E /* PercentProgressRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentProgressRow.swift; sourceTree = "<group>"; };
+		8467619427DF89DE00A3207E /* CheckUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUpView.swift; sourceTree = "<group>"; };
+		8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKStoreManager.swift; sourceTree = "<group>"; };
+		8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Environment+StoreManager.swift"; sourceTree = "<group>"; };
+		8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+OCKAnyTask.swift"; sourceTree = "<group>"; };
+		8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OCKHealthKitStore+Extension.swift"; sourceTree = "<group>"; };
+		846761A227DF8AB800A3207E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		846761A327DF8AB800A3207E /* OnboardingOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingOptionsViewController.swift; sourceTree = "<group>"; };
+		846761A727DF8B0700A3207E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		846761AA27DF8BC300A3207E /* PlatformPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformPicker.swift; sourceTree = "<group>"; };
+		846761AB27DF8BC300A3207E /* StaticUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticUI.swift; sourceTree = "<group>"; };
+		846761AD27DF8BC300A3207E /* SurveysList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveysList.swift; sourceTree = "<group>"; };
+		846761AE27DF8BC300A3207E /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = tap.aif; sourceTree = "<group>"; };
+		846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewControllerRepresentable.swift; sourceTree = "<group>"; };
+		846761B027DF8BC300A3207E /* RKTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKTasks.swift; sourceTree = "<group>"; };
+		846761B127DF8BC300A3207E /* TaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListRow.swift; sourceTree = "<group>"; };
+		846761B227DF8BC300A3207E /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		846761B327DF8BC300A3207E /* CardBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBackground.swift; sourceTree = "<group>"; };
+		846761B527DF8BC300A3207E /* TasksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
+		846761B627DF8BC300A3207E /* ContactsSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsSection.swift; sourceTree = "<group>"; };
+		846761B727DF8BC300A3207E /* TasksSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksSection.swift; sourceTree = "<group>"; };
+		846761B827DF8BC300A3207E /* CareKitTaskViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareKitTaskViews.swift; sourceTree = "<group>"; };
+		846761C627DF8BEA00A3207E /* RingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingProgressView.swift; sourceTree = "<group>"; };
 		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
+		8486C8DC278482D70013B4E9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		84A1758A2750A035001587BD /* Extention+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+Notification.swift"; sourceTree = "<group>"; };
-		AC58CB12D4110075A425CBBA /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		9A0DBCE8AA0205E252D4CB1F /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		B83DFEB7A9272007D999BECD /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CE482CFA262C954A00C0A2D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE482CFC262C954C00C0A2D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE482D02262C954C00C0A2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE482D04262C954C00C0A2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE0DD67F0721E8B72E998CF2 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF4FAAD1A57C19ABD37121FF /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		F18D8A214495C36F81A55ACC /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
-				621F3FE8FAD755B653EE88D6 /* Pods_OTFMagicBox.framework in Frameworks */,
+				1B5AE289D75ABDE6C4F5E2D4 /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,9 +275,10 @@
 		5A41D164266CBA41007CCEB4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5AADFD49264E92690069FEF7 /* ActivitiesViewController.swift */,
 				5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */,
 				5A41D022266A9106007CCEB4 /* MainView.swift */,
+				8486C8DC278482D70013B4E9 /* LoadingView.swift */,
+				846761C627DF8BEA00A3207E /* RingProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +303,9 @@
 				5A43049B272ADF7900926584 /* Extension+Date.swift */,
 				841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */,
 				84A1758A2750A035001587BD /* Extention+Notification.swift */,
+				8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */,
+				8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */,
+				8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -286,6 +338,8 @@
 				5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */,
 				5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */,
 				5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */,
+				846761A327DF8AB800A3207E /* OnboardingOptionsViewController.swift */,
+				846761A227DF8AB800A3207E /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -380,6 +434,7 @@
 			children = (
 				841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */,
 				841CA60B275F827300C6861D /* CareKitStoreManager.swift */,
+				8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */,
 			);
 			path = Datastore;
 			sourceTree = "<group>";
@@ -393,11 +448,66 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
+		8467618F27DF89DE00A3207E /* CheckUp */ = {
+			isa = PBXGroup;
+			children = (
+				8467619027DF89DE00A3207E /* CountProgressRow.swift */,
+				8467619227DF89DE00A3207E /* CheckUpViewModel.swift */,
+				8467619327DF89DE00A3207E /* PercentProgressRow.swift */,
+				8467619427DF89DE00A3207E /* CheckUpView.swift */,
+			);
+			path = CheckUp;
+			sourceTree = "<group>";
+		};
+		846761A627DF8B0700A3207E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				846761A727DF8B0700A3207E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		846761A927DF8BC300A3207E /* StaticViews */ = {
+			isa = PBXGroup;
+			children = (
+				846761AA27DF8BC300A3207E /* PlatformPicker.swift */,
+				846761AB27DF8BC300A3207E /* StaticUI.swift */,
+				846761AC27DF8BC300A3207E /* RK UI */,
+				846761B327DF8BC300A3207E /* CardBackground.swift */,
+				846761B427DF8BC300A3207E /* CareKit */,
+			);
+			path = StaticViews;
+			sourceTree = "<group>";
+		};
+		846761AC27DF8BC300A3207E /* RK UI */ = {
+			isa = PBXGroup;
+			children = (
+				846761AD27DF8BC300A3207E /* SurveysList.swift */,
+				846761AE27DF8BC300A3207E /* tap.aif */,
+				846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */,
+				846761B027DF8BC300A3207E /* RKTasks.swift */,
+				846761B127DF8BC300A3207E /* TaskListRow.swift */,
+				846761B227DF8BC300A3207E /* TaskListViewController.swift */,
+			);
+			path = "RK UI";
+			sourceTree = "<group>";
+		};
+		846761B427DF8BC300A3207E /* CareKit */ = {
+			isa = PBXGroup;
+			children = (
+				846761B527DF8BC300A3207E /* TasksViewModel.swift */,
+				846761B627DF8BC300A3207E /* ContactsSection.swift */,
+				846761B727DF8BC300A3207E /* TasksSection.swift */,
+				846761B827DF8BC300A3207E /* CareKitTaskViews.swift */,
+			);
+			path = CareKit;
+			sourceTree = "<group>";
+		};
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FF4FAAD1A57C19ABD37121FF /* Pods-OTFMagicBox.debug.xcconfig */,
-				AC58CB12D4110075A425CBBA /* Pods-OTFMagicBox.release.xcconfig */,
+				F18D8A214495C36F81A55ACC /* Pods-OTFMagicBox.debug.xcconfig */,
+				9A0DBCE8AA0205E252D4CB1F /* Pods-OTFMagicBox.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -406,7 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
-				DE0DD67F0721E8B72E998CF2 /* Pods_OTFMagicBox.framework */,
+				B83DFEB7A9272007D999BECD /* Pods_OTFMagicBox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -438,6 +548,8 @@
 				5A7B6D8D26FA352000F872A1 /* API */,
 				841FEFBC274E5D8200698892 /* Datastore */,
 				5AB1808B26BAADB1007AF766 /* Contacts */,
+				8467618F27DF89DE00A3207E /* CheckUp */,
+				846761A927DF8BC300A3207E /* StaticViews */,
 				5AB1806D26B8849A007AF766 /* Profile */,
 				5AB1806426B87FCB007AF766 /* Schedule */,
 				5A41D164266CBA41007CCEB4 /* Views */,
@@ -456,17 +568,9 @@
 				CE482CFC262C954C00C0A2D5 /* Assets.xcassets */,
 				CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */,
 				CE482D04262C954C00C0A2D5 /* Info.plist */,
-				CE482CFE262C954C00C0A2D5 /* Preview Content */,
+				846761A627DF8B0700A3207E /* Preview Content */,
 			);
 			path = OTFMagicBox;
-			sourceTree = "<group>";
-		};
-		CE482CFE262C954C00C0A2D5 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				CE482CFF262C954C00C0A2D5 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -494,11 +598,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
-				9AEEAA2F3BAD8D21748F854B /* [CP] Check Pods Manifest.lock */,
+				8EAE1762F828E0A1CE95FB04 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
-				D70756635B974495B1383EB6 /* [CP] Embed Pods Frameworks */,
+				81F4E8AD0EE420ECC801A9AE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -561,7 +665,8 @@
 			files = (
 				CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */,
 				CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */,
-				CE482D00262C954C00C0A2D5 /* Preview Assets.xcassets in Resources */,
+				846761BC27DF8BC300A3207E /* tap.aif in Resources */,
+				846761A827DF8B0700A3207E /* Preview Assets.xcassets in Resources */,
 				CE482CFD262C954C00C0A2D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,7 +674,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9AEEAA2F3BAD8D21748F854B /* [CP] Check Pods Manifest.lock */ = {
+		81F4E8AD0EE420ECC801A9AE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EAE1762F828E0A1CE95FB04 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -591,23 +713,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D70756635B974495B1383EB6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -625,34 +730,46 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */,
+				846761BB27DF8BC300A3207E /* SurveysList.swift in Sources */,
 				5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */,
 				5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */,
+				846761A527DF8AB800A3207E /* OnboardingOptionsViewController.swift in Sources */,
 				84771FA9272974B700468E0E /* Extension+Image.swift in Sources */,
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
 				84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */,
 				841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */,
 				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
+				846761C327DF8BC300A3207E /* ContactsSection.swift in Sources */,
 				5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
 				5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */,
 				5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */,
 				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
+				846761C427DF8BC300A3207E /* TasksSection.swift in Sources */,
 				5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */,
 				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
 				841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */,
+				846761C127DF8BC300A3207E /* CardBackground.swift in Sources */,
 				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
+				846761BA27DF8BC300A3207E /* StaticUI.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
+				846761BE27DF8BC300A3207E /* RKTasks.swift in Sources */,
+				846761C527DF8BC300A3207E /* CareKitTaskViews.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
 				84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */,
 				84268455274770A3007C5D50 /* LoginSteps.swift in Sources */,
+				8467619F27DF8A6900A3207E /* Environment+StoreManager.swift in Sources */,
+				8467619B27DF8A1F00A3207E /* OCKStoreManager.swift in Sources */,
 				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
 				841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
+				846761A427DF8AB800A3207E /* OnboardingViewController.swift in Sources */,
 				841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */,
 				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
 				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
 				841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */,
+				8467619827DF89DE00A3207E /* PercentProgressRow.swift in Sources */,
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
@@ -661,36 +778,47 @@
 				5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */,
 				5A4F633D271F412D0080F0D7 /* LogoutView.swift in Sources */,
 				5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */,
+				846761C027DF8BC300A3207E /* TaskListViewController.swift in Sources */,
 				5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */,
 				5AB1807926B8849A007AF766 /* SupportView.swift in Sources */,
+				846761C727DF8BEA00A3207E /* RingProgressView.swift in Sources */,
+				846761C227DF8BC300A3207E /* TasksViewModel.swift in Sources */,
 				CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */,
 				5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */,
 				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
 				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
 				5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */,
+				8467619527DF89DE00A3207E /* CountProgressRow.swift in Sources */,
+				8467619727DF89DE00A3207E /* CheckUpViewModel.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
+				846761B927DF8BC300A3207E /* PlatformPicker.swift in Sources */,
 				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
 				848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */,
 				5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */,
 				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
+				8486C8DD278482D70013B4E9 /* LoadingView.swift in Sources */,
 				5A430489272884CB00926584 /* Extension+Font.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
 				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
+				846761BD27DF8BC300A3207E /* TaskViewControllerRepresentable.swift in Sources */,
 				841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
+				846761A127DF8A6900A3207E /* OCKHealthKitStore+Extension.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
+				846761A027DF8A6900A3207E /* Extension+OCKAnyTask.swift in Sources */,
 				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
 				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
 				5A4304AC272CB22600926584 /* UpdateUserProfileView.swift in Sources */,
 				5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
+				846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */,
+				8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */,
 				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
-				5AADFD4A264E92690069FEF7 /* ActivitiesViewController.swift in Sources */,
 				5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */,
 				5A41D023266A9106007CCEB4 /* MainView.swift in Sources */,
 			);
@@ -878,7 +1006,7 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF4FAAD1A57C19ABD37121FF /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = F18D8A214495C36F81A55ACC /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -903,7 +1031,7 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC58CB12D4110075A425CBBA /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = 9A0DBCE8AA0205E252D4CB1F /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

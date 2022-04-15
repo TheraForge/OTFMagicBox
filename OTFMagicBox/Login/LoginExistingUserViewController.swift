@@ -63,10 +63,8 @@ enum AuthMethod: String, CaseIterable, Codable {
 
 struct LoginExistingUserViewController: UIViewControllerRepresentable {
     
-    let authMethod: AuthMethod
-    
     func makeCoordinator() -> OnboardingTaskCoordinator {
-        OnboardingTaskCoordinator(authMethod: authMethod, authType: .login)
+        OnboardingTaskCoordinator(authType: .login)
     }
     
     typealias UIViewControllerType = ORKTaskViewController
@@ -75,12 +73,67 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         
-        let loginSteps: LoginSteps = authMethod == .apple ? AppleLoginSteps() : EmailLoginSteps()
+        var loginSteps: [ORKStep]
+        let signInButtons = OnboardingOptionsStep(identifier: "SignInButtons")
+        let loginUserPassword = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+        loginSteps = [signInButtons, loginUserPassword]
+        
+        //add consent if user dont have consent in cloud
+        let config = YmlReader()
+        let consentDocument = ConsentDocument()
+        /* **************************************************************
+        **************************************************************/
+        // use the `ORKConsentReviewStep` from ResearchKit
+        let signature = consentDocument.signatures?.first
+        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
+        reviewConsentStep.text = config.reviewConsentStepText
+        reviewConsentStep.reasonForConsent = config.reasonForConsentText
+        
         // create a task with each step
-        let orderedTask = ORKOrderedTask(identifier: "StudyLoginTask", steps: loginSteps.steps)
+        loginSteps += [reviewConsentStep]
+        
+        // use the `ORKPasscodeStep` from ResearchKit.
+        if config.isPasscodeEnabled {
+            let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
+            passcodeStep.text = "Enter your passcode"
+
+            let type = YmlReader().passcodeType
+            if type == Constants.Passcode.lengthSix {
+                passcodeStep.passcodeType = .type6Digit
+            } else {
+                passcodeStep.passcodeType = .type4Digit
+            }
+            
+            loginSteps += [passcodeStep]
+        }
+        
+        // set completion step
+        let completionStep = ORKCompletionStep(identifier: Constants.Identifier.CompletionStep)
+        completionStep.title = YmlReader().completionStepTitle
+        completionStep.text = YmlReader().completionStepText
+        loginSteps += [completionStep]
+        
+        let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
+        let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")
+        let booleanAnswerType = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
+        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [booleanAnswerType],
+                                                           destinationStepIdentifiers: ["LoginExistingStep"],
+                                                           defaultStepIdentifier: "ConsentReviewStep",
+                                                           validateArrays: true)
+        navigableTask.setNavigationRule(predicateRule, forTriggerStepIdentifier: "SignInButtons")
+        
+        // ADD New navigation Rule (if has or not consentDocument)
+        // Consent Rule
+        let resultConsent = ORKResultSelector(resultIdentifier: "ConsentReview")
+        let booleanAnswerConsent = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultConsent, expectedAnswer: true)
+        let predicateRuleConsent = ORKPredicateStepNavigationRule(resultPredicates: [booleanAnswerConsent],
+                                                           destinationStepIdentifiers: ["HealthKit"],
+                                                           defaultStepIdentifier: "ConsentReviewStep",
+                                                           validateArrays: true)
+        navigableTask.setNavigationRule(predicateRuleConsent, forTriggerStepIdentifier: "ConsentReview")
         
         // wrap that task on a view controller
-        let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
+        let taskViewController = ORKTaskViewController(task: navigableTask, taskRun: nil)
         taskViewController.delegate = context.coordinator // enables `ORKTaskViewControllerDelegate` below
         
         // & present the VC!
