@@ -1,10 +1,14 @@
-# TheraForge MagicBox 1.0.0-beta
+# TheraForge MagicBox 1.0.1-beta
 
 The Open TheraForge (OTF) MagicBox app is a template for creating digital health solutions that help people better manage their health.
 
 This sample application leverages TheraForge frameworks such as [OTFTemplateBox](../../../OTFTemplateBox) to implement a no-code solution that can be customized without requiring any code changes.
 
 For more details on the features of the SDK and on the TheraForge Cloud setup process (e.g., to obtain an API key), refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
+
+## Change Log
+* Release 1.0.0-beta: First beta release of the template app
+* Release 1.0.1-beta: Removed warnings, improved profile section, added UI samples and made various other improvements
 
 # Table of Contents
 
