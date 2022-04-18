@@ -468,25 +468,25 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 You can change the tint color, the label colors, font type and size to customize the look of your application:
 
-[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L83-L177)
+[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L116-L163)
 
 ## Set up the TheraForge Cloud API Key
 
 Update the API key field to access the TheraForge Secure Cloud service for synchronization and communication with the web dashboards:
 
-[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
+[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L227-L230)
 
 ## Customize Onboarding
 
 To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
 
-[Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L220-L228)
+[Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L247-L272)
 
 ## Customize Consent
 
 To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
 
-[Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L230-L286)
+[Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L274-L330)
 
 ## Customize Registration and Login
 
@@ -500,20 +500,20 @@ Go to the Login section in the `AppSysParameters.yml` file and customize the tit
 
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
-[Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L295-L306)
+[Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L332-L354)
 
 ## Configure the Passcode
 
 Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits:
 
-[Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L308-L316)
+[Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L356-L364)
 
 
 ## Enable CareKit
 
 If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients:
 
-[Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
+[Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L383-L386)
 
 
 # License <a name="License"></a>
