@@ -91,6 +91,28 @@ enum TaskStyle: String, CaseIterable, Codable {
     case grid, checklist
     case labeledValue = "labeled value", numericProgress = "Numeric Progress"
     
+    
+    var rawValue: String {
+         get {
+             switch self {
+             case .simple:
+                 return UIYmlReader().careKitModel?.simple ?? ""
+             case .instruction:
+                 return  UIYmlReader().careKitModel?.instruction ?? ""
+             case .buttonLog:
+                 return  UIYmlReader().careKitModel?.buttonLog ?? ""
+             case .grid:
+                 return  UIYmlReader().careKitModel?.grid ?? ""
+             case .checklist:
+                 return  UIYmlReader().careKitModel?.checklist ?? ""
+             case .labeledValue:
+                 return  UIYmlReader().careKitModel?.labeledValue ?? ""
+             case .numericProgress:
+                 return  UIYmlReader().careKitModel?.numericProgress ?? ""
+             }
+         }
+     }
+    
     var supportsSwiftUI: Bool {
         guard #available(iOS 14, *) else { return false }
         

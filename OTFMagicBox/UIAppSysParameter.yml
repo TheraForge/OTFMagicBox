@@ -310,6 +310,7 @@ DataModel:
     labeledValue: "labeled value"
     numericProgress: "Numeric Progress"
     taskHeader: "Task"
+    detailed: "detailed"
     
     
  # Link to ReadMe document

@@ -68,6 +68,17 @@ private struct ContactDestination: View {
 
 private enum ContactStyle: String, CaseIterable {
     case simple , detailed
+    
+    var rawValue: String {
+         get {
+             switch self {
+             case .simple:
+                 return UIYmlReader().careKitModel?.simple ?? ""
+             case .detailed:
+                 return  UIYmlReader().careKitModel?.detailed ?? ""
+             }
+         }
+     }
 }
 
 import OTFCareKit

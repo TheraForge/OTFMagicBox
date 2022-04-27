@@ -147,6 +147,7 @@ struct CarekitModel: Codable{
     let numericProgress: String
     let contactHeader: String
     let taskHeader: String
+    let detailed: String
 }
 
 
