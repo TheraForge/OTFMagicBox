@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SurveysList: View {
     var body: some View {
-        Section(header: Text("Surveys")) {
+        Section(header: Text(UIYmlReader().researchKitModel?.surveysHeaderTitle ?? "Surveys")) {
             ForEach(TaskListRow.sections[0].rows, id: \.rawValue) {
                 NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
             }
@@ -25,7 +25,7 @@ struct RKList_Previews: PreviewProvider {
 
 struct SurveyQuestionsList: View {
     var body: some View {
-        Section(header: Text("Survey Questions")) {
+        Section(header: Text(UIYmlReader().researchKitModel?.surveyQuestionHeaderTitle ?? "Survey Questions")) {
             ForEach(TaskListRow.sections[1].rows, id: \.rawValue) {
                 NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
             }
@@ -35,7 +35,7 @@ struct SurveyQuestionsList: View {
 
 struct OnboardingList: View {
     var body: some View {
-        Section(header: Text("Onboarding")) {
+        Section(header: Text(UIYmlReader().researchKitModel?.onBoardingHeaderTitle ?? "Onboarding")) {
             ForEach(TaskListRow.sections[2].rows, id: \.rawValue) {
                 NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
             }
@@ -45,7 +45,7 @@ struct OnboardingList: View {
 
 struct ActiveTasksList: View {
     var body: some View {
-        Section(header: Text("Active Tasks")) {
+        Section(header: Text(UIYmlReader().researchKitModel?.activeTasksHeaderTitle ?? "Active Tasks")) {
             ForEach(TaskListRow.sections[3].rows, id: \.rawValue) {
                 NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
             }
@@ -55,7 +55,7 @@ struct ActiveTasksList: View {
 
 struct MiscellaneousList: View {
     var body: some View {
-        Section(header: Text("Miscellaneous")) {
+        Section(header: Text(UIYmlReader().researchKitModel?.miscellaneousHeaderTitle ?? "Miscellaneous")) {
             ForEach(TaskListRow.sections[4].rows, id: \.rawValue) {
                 NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
             }

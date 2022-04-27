@@ -36,10 +36,15 @@ import SwiftUI
 
 struct WithdrawView: View {
     @State var showWithdraw = false
+    let title: String
+    
+    init(title: String) {
+        self.title = title
+    }
     
     var body: some View {
         HStack {
-            Text("Withdraw from Study")
+            Text(title)
             Spacer()
             Text("›")
         }.frame(height: 60)
@@ -56,6 +61,6 @@ struct WithdrawView: View {
 
 struct WithdrawView_Previews: PreviewProvider {
     static var previews: some View {
-        WithdrawView()
+        WithdrawView(title: "")
     }
 }

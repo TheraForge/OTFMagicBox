@@ -33,6 +33,7 @@
 import OTFResearchKit
 import AudioToolbox
 import HealthKit
+import UIKit
 
 /**
     Wraps a SystemSoundID.
@@ -212,25 +213,25 @@ enum TaskListRow: Int, CustomStringConvertible {
     var description: String {
         switch self {
         case .form:
-            return NSLocalizedString("Form Survey Example", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.formSurveyExample ?? "Form Survey Example", comment: "")
             
         case .groupedForm:
-            return NSLocalizedString("Grouped Form Survey Example", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.groupedFormSurveyExample ?? "Grouped Form Survey Example", comment: "")
 
         case .survey:
-            return NSLocalizedString("Simple Survey Example", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.simpleSurveyExample ?? "Simple Survey Example", comment: "")
             
         case .booleanQuestion:
-            return NSLocalizedString("Boolean Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.booleanQuestion ?? "Boolean Question", comment: "")
             
         case .customBooleanQuestion:
-            return NSLocalizedString("Custom Boolean Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.customBooleanQuestion ?? "Custom Boolean Question", comment: "")
             
         case .dateQuestion:
-            return NSLocalizedString("Date Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.dateQuestion ?? "Date Question", comment: "")
             
         case .dateTimeQuestion:
-            return NSLocalizedString("Date and Time Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.dateAndTimeQuestion ?? "Date and Time Question", comment: "")
             
 //        case .heightQuestion:
 //            return NSLocalizedString("Height Question", comment: "")
@@ -239,148 +240,148 @@ enum TaskListRow: Int, CustomStringConvertible {
 //            return NSLocalizedString("Weight Question", comment: "")
             
         case .imageChoiceQuestion:
-            return NSLocalizedString("Image Choice Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.imageChoiceQuestion ?? "Image Choice Question", comment: "")
             
         case .locationQuestion:
-            return NSLocalizedString("Location Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.locationQuestion ?? "Location Question", comment: "")
             
         case .numericQuestion:
-            return NSLocalizedString("Numeric Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.numericQuestion ?? "Numeric Question", comment: "")
             
         case .scaleQuestion:
-            return NSLocalizedString("Scale Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.scaleQuestion ?? "Scale Question", comment: "")
             
         case .textQuestion:
-            return NSLocalizedString("Text Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.textQuestion ?? "Text Question", comment: "")
             
         case .textChoiceQuestion:
-            return NSLocalizedString("Text Choice Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.textChoiceQuestion ?? "Text Choice Question", comment: "")
             
         case .timeIntervalQuestion:
-            return NSLocalizedString("Time Interval Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.timeIntervalQuestion ?? "Time Interval Question", comment: "")
             
         case .timeOfDayQuestion:
-            return NSLocalizedString("Time of Day Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.timeOfDayQuestion ?? "Time of Day Question", comment: "")
             
         case .valuePickerChoiceQuestion:
-            return NSLocalizedString("Value Picker Choice Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.valuePickerChoiceQuestion ?? "Value Picker Choice Question", comment: "")
             
         case .validatedTextQuestion:
-            return NSLocalizedString("Validated Text Question", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.validatedTextQuestion ?? "Validated Text Question", comment: "")
             
         case .imageCapture:
-            return NSLocalizedString("Image Capture Step", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.imageCaptureStep ?? "Image Capture Step", comment: "")
             
         case .videoCapture:
-            return NSLocalizedString("Video Capture Step", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.videoCaptureStep ?? "Video Capture Step", comment: "")
             
         case .frontFacingCamera:
-            return NSLocalizedString("Front Facing Camera Step", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.frontFacingCameraStep ?? "Front Facing Camera Step", comment: "")
             
         case .wait:
-            return NSLocalizedString("Wait Step", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.waitStep ?? "Wait Step", comment: "")
         
         case .PDFViewer:
-            return NSLocalizedString("PDF Viewer Step", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.pdfViewerStep ?? "PDF Viewer Step", comment: "")
             
 //        case .requestPermissions:
 //            return NSLocalizedString("Request Permissions Step", comment: "")
 
         case .eligibilityTask:
-            return NSLocalizedString("Eligibility Task Example", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.eligibilityTaskExample ?? "Eligibility Task Example", comment: "")
             
         case .consent:
-            return NSLocalizedString("Consent-Obtaining Example", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.consentObtainingExample ?? "Consent-Obtaining Example", comment: "")
 
         case .accountCreation:
-            return NSLocalizedString("Account Creation", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.accountCreation ?? "Account Creation", comment: "")
         
         case .login:
-            return NSLocalizedString("Login", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.login ?? "Login", comment: "")
 
         case .passcode:
-            return NSLocalizedString("Passcode Creation", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.passcodeCreation ?? "Passcode Creation", comment: "")
             
         case .audio:
-            return NSLocalizedString("Audio", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.audio ?? "Audio", comment: "")
         
         case .amslerGrid:
-            return NSLocalizedString("Amsler Grid", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.amslerGrid ?? "Amsler Grid", comment: "")
             
         case .fitness:
-            return NSLocalizedString("Fitness Check", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.fitnessCheck ?? "Fitness Check", comment: "")
         
         case .holePegTest:
-            return NSLocalizedString("Hole Peg Test", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.holePegTest ?? "Hole Peg Test", comment: "")
             
         case .psat:
-            return NSLocalizedString("PSAT", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.psat ?? "PSAT", comment: "")
             
         case .reactionTime:
-            return NSLocalizedString("Reaction Time", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.reactionTime ?? "Reaction Time", comment: "")
             
         case .shortWalk:
-            return NSLocalizedString("Short Walk", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.shortWalk ?? "Short Walk", comment: "")
             
         case .spatialSpanMemory:
-            return NSLocalizedString("Spatial Span Memory", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.spatialSpanMemory ?? "Spatial Span Memory", comment: "")
             
         case .speechRecognition:
-            return NSLocalizedString("Speech Recognition", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.speechRecognition ?? "Speech Recognition", comment: "")
             
         case .speechInNoise:
-            return NSLocalizedString("Speech in Noise", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.speechInNoise ?? "Speech in Noise", comment: "")
             
         case .stroop:
-            return NSLocalizedString("Stroop", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.stroop ?? "Stroop", comment: "")
             
         case .swiftStroop:
-            return NSLocalizedString("Swift Stroop", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.swiftStroop ?? "Swift Stroop", comment: "")
             
         case .timedWalkWithTurnAround:
-            return NSLocalizedString("Timed Walk with Turn Around", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.timedWalkWithTurnAround ?? "Timed Walk with Turn Around", comment: "")
             
         case .toneAudiometry:
-            return NSLocalizedString("Tone Audiometry", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.toneAudiometry ?? "Tone Audiometry", comment: "")
             
         case .dBHLToneAudiometry:
-            return NSLocalizedString("dBHL Tone Audiometry", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.dBHLToneAudiometry ?? "dBHL Tone Audiometry", comment: "")
             
         case .splMeter:
-            return NSLocalizedString("Environment SPL Meter", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.environmentSPLMeter ?? "Environment SPL Meter", comment: "")
             
         case .towerOfHanoi:
-            return NSLocalizedString("Tower of Hanoi", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.towerOfHanoi ?? "Tower of Hanoi", comment: "")
 
         case .twoFingerTappingInterval:
-            return NSLocalizedString("Two Finger Tapping Interval", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.twoFingerTappingInterval ?? "Two Finger Tapping Interval", comment: "")
             
         case .walkBackAndForth:
-            return NSLocalizedString("Walk Back and Forth", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.walkBackAndForth ?? "Walk Back and Forth", comment: "")
             
         case .tremorTest:
-            return NSLocalizedString("Tremor Test", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.tremorTest ?? "Tremor Test", comment: "")
             
         case .videoInstruction:
-            return NSLocalizedString("Video Instruction Task", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.videoInstructionTask ?? "Video Instruction Task", comment: "")
             
         case .kneeRangeOfMotion:
-            return NSLocalizedString("Knee Range of Motion", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.kneeRangeOfMotion ?? "Knee Range of Motion", comment: "")
             
         case .shoulderRangeOfMotion:
-            return NSLocalizedString("Shoulder Range of Motion", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.shoulderRangeOfMotion ?? "Shoulder Range of Motion", comment: "")
             
         case .trailMaking:
-            return NSLocalizedString("Trail Making Test", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.trailMakingTest ?? "Trail Making Test", comment: "")
             
         case .visualAcuityLandoltC:
-            return NSLocalizedString("Visual Acuity Landolt C", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.visualAcuityLandoltC ?? "Visual Acuity Landolt C", comment: "")
             
         case .contrastSensitivityPeakLandoltC:
-            return NSLocalizedString("Contrast Sensitivity Peak", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.contrastSensitivityPeak ?? "Contrast Sensitivity Peak", comment: "")
 
         case .webView:
-            return NSLocalizedString("Web View", comment: "")
+            return NSLocalizedString(UIYmlReader().researchKitModel?.webView ?? "Web View", comment: "")
         }
     }
     
@@ -770,19 +771,19 @@ enum TaskListRow: Int, CustomStringConvertible {
     diastolic values.
     */
     private var formTask: ORKTask {
-        let step = ORKFormStep(identifier: String(describing: Identifier.formStep), title: NSLocalizedString("Form Step", comment: ""), text: exampleDetailText)
+        let step = ORKFormStep(identifier: String(describing: Identifier.formStep), title: NSLocalizedString(UIYmlReader().surverysTaskModel?.title ?? "Form Step", comment: ""), text: UIYmlReader().surverysTaskModel?.additionalText ?? "Additional text can go here.")
 
         // A first field, for entering an integer.
         let formItem01Text = NSLocalizedString("Field01", comment: "")
         let formItem01 = ORKFormItem(identifier: String(describing: Identifier.formItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormat(withUnit: nil))
-        formItem01.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        formItem01.placeholder = NSLocalizedString(UIYmlReader().surverysTaskModel?.placeholder ?? Constants.YamlDefaults.placeholder, comment: "")
 
         // A second field, for entering a time interval.
         let formItem02Text = NSLocalizedString("Field02", comment: "")
         let formItem02 = ORKFormItem(identifier: String(describing: Identifier.formItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
-        formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        formItem02.placeholder = NSLocalizedString(UIYmlReader().surverysTaskModel?.placeholder ?? Constants.YamlDefaults.placeholder, comment: "")
 
-        let formItem03Text = NSLocalizedString(exampleQuestionText, comment: "")
+        let formItem03Text = NSLocalizedString(UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, comment: "")
         let scaleAnswerFormat = ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0, step: 1)//ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0, step: 1)
         scaleAnswerFormat.shouldHideRanges = true
         let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, answerFormat: scaleAnswerFormat)
@@ -799,13 +800,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         let textScaleAnswerFormat = ORKTextScaleAnswerFormat(textChoices: textChoices, defaultIndex: 10)
         textScaleAnswerFormat.shouldHideLabels = true
         textScaleAnswerFormat.shouldShowDontKnowButton = true
-        let formItem04 = ORKFormItem(identifier: String(describing: Identifier.formItem04), text: exampleQuestionText, answerFormat: textScaleAnswerFormat)
+        let formItem04 = ORKFormItem(identifier: String(describing: Identifier.formItem04), text: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answerFormat: textScaleAnswerFormat)
         
-        let appleChoices: [ORKTextChoice] = [ORKTextChoice(text: "Granny Smith", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Honeycrisp", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Fuji", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "McIntosh", value: 10 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Kanzi", value: 5 as NSCoding & NSCopying & NSObjectProtocol)]
+        let appleChoices: [ORKTextChoice] = [ORKTextChoice(text:UIYmlReader().surverysTaskModel?.grannySmith ?? "Granny Smith", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text:UIYmlReader().surverysTaskModel?.honeycrisp ?? "Honeycrisp", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text:UIYmlReader().surverysTaskModel?.fuji ?? "Fuji", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text:UIYmlReader().surverysTaskModel?.mcIntosh ?? "McIntosh", value: 10 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text:UIYmlReader().surverysTaskModel?.kanzi ?? "Kanzi", value: 5 as NSCoding & NSCopying & NSObjectProtocol)]
         
         let appleAnswerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: appleChoices)
         
-        let appleFormItem = ORKFormItem(identifier: "appleFormItemIdentifier", text: "Which is your favorite apple?", answerFormat: appleAnswerFormat)
+        let appleFormItem = ORKFormItem(identifier: "appleFormItemIdentifier", text:UIYmlReader().surverysTaskModel?.itemQuestion ?? Constants.YamlDefaults.favorite, answerFormat: appleAnswerFormat)
         
         
         step.formItems = [
@@ -822,32 +823,32 @@ enum TaskListRow: Int, CustomStringConvertible {
     }
     
     private var groupedFormTask: ORKTask {
-        let step = ORKFormStep(identifier: String(describing: Identifier.groupedFormStep), title: NSLocalizedString("Form Step", comment: ""), text: exampleDetailText)
+        let step = ORKFormStep(identifier: String(describing: Identifier.groupedFormStep), title: NSLocalizedString(UIYmlReader().surverysTaskModel?.groupServeyTitle ?? "Form Step", comment: ""), text: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.YourQuestion)
         
         //Start of first section
         let learnMoreInstructionStep01 = ORKLearnMoreInstructionStep(identifier: "LearnMoreInstructionStep01")
-        learnMoreInstructionStep01.title = NSLocalizedString("Learn more title", comment: "")
-        learnMoreInstructionStep01.text = NSLocalizedString("Learn more text", comment: "")
+        learnMoreInstructionStep01.title = NSLocalizedString(UIYmlReader().surverysTaskModel?.learnMoreTitle ?? Constants.YamlDefaults.learnMoreTitle, comment: "")
+        learnMoreInstructionStep01.text = NSLocalizedString(UIYmlReader().surverysTaskModel?.learnMoreText ?? Constants.YamlDefaults.learnMoreText, comment: "")
         let learnMoreItem01 = ORKLearnMoreItem(text: nil, learnMoreInstructionStep: learnMoreInstructionStep01)
-        let section01 = ORKFormItem(sectionTitle: NSLocalizedString("Section title", comment: ""), detailText: NSLocalizedString("Section detail text", comment: ""), learnMoreItem: learnMoreItem01, showsProgress: true)
+        let section01 = ORKFormItem(sectionTitle: NSLocalizedString(UIYmlReader().surverysTaskModel?.sectionTitle ?? "Section title", comment: ""), detailText: NSLocalizedString(UIYmlReader().surverysTaskModel?.sectionDetailText ?? "Section detail text", comment: ""), learnMoreItem: learnMoreItem01, showsProgress: true)
         
         // A first field, for entering an integer.
         let formItem01Text = NSLocalizedString("Field01", comment: "")
         let formItem01 = ORKFormItem(identifier: String(describing: Identifier.formItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormat(withUnit: nil))
-        formItem01.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        formItem01.placeholder = NSLocalizedString(UIYmlReader().surverysTaskModel?.placeholder ?? Constants.YamlDefaults.placeholder, comment: "")
         
         // A second field, for entering a time interval.
         let formItem02Text = NSLocalizedString("Field02", comment: "")
         let formItem02 = ORKFormItem(identifier: String(describing: Identifier.formItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
-        formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        formItem02.placeholder = NSLocalizedString(UIYmlReader().surverysTaskModel?.placeholder ?? Constants.YamlDefaults.placeholder, comment: "")
         
         
         let sesAnswerFormat = ORKSESAnswerFormat(topRungText: "Best Off", bottomRungText: "Worst Off")
-        let sesFormItem = ORKFormItem(identifier: "sesIdentifier", text: "Select where you are on the socioeconomic ladder.", answerFormat: sesAnswerFormat)
+        let sesFormItem = ORKFormItem(identifier: "sesIdentifier", text:UIYmlReader().surverysTaskModel?.socioeconomicLadder ?? "Select where you are on the socioeconomic ladder.", answerFormat: sesAnswerFormat)
         
         
         //Start of section for scale question
-        let formItem03Text = NSLocalizedString(exampleQuestionText, comment: "")
+        let formItem03Text = NSLocalizedString(UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, comment: "")
         let scaleAnswerFormat = ORKContinuousScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0.0, maximumFractionDigits: 1)//ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0, step: 1)
         let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, detailText: nil, learnMoreItem: nil, showsProgress: true, answerFormat: scaleAnswerFormat, tagText: nil, optional: true)
        
@@ -862,21 +863,21 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Add a question step.
         let question1StepAnswerFormat = ORKBooleanAnswerFormat()
         
-        let question1 = NSLocalizedString("Would you like to subscribe to our newsletter?", comment: "")
+        let question1 = NSLocalizedString(UIYmlReader().surverysTaskModel?.newsletter ?? Constants.YamlDefaults.newsletter, comment: "")
         
         let learnMoreInstructionStep = ORKLearnMoreInstructionStep(identifier: "LearnMoreInstructionStep01")
-        learnMoreInstructionStep.title = NSLocalizedString("Learn more title", comment: "")
-        learnMoreInstructionStep.text = NSLocalizedString("Learn more text", comment: "")
+        learnMoreInstructionStep.title = NSLocalizedString(UIYmlReader().surverysTaskModel?.learnMoreTitle ?? Constants.YamlDefaults.learnMoreTitle, comment: "")
+        learnMoreInstructionStep.text = NSLocalizedString(UIYmlReader().surverysTaskModel?.learnMoreText ?? Constants.YamlDefaults.learnMoreText, comment: "")
         let learnMoreItem = ORKLearnMoreItem(text: nil, learnMoreInstructionStep: learnMoreInstructionStep)
         
-        let question1Step = ORKQuestionStep(identifier: String(describing: Identifier.questionStep), title: "Questionnaire", question: question1, answer: question1StepAnswerFormat, learnMoreItem: learnMoreItem)
+        let question1Step = ORKQuestionStep(identifier: String(describing: Identifier.questionStep), title: UIYmlReader().surverysTaskModel?.questionnaire ?? Constants.YamlDefaults.Questionnaire, question: question1, answer: question1StepAnswerFormat, learnMoreItem: learnMoreItem)
         question1Step.text = exampleDetailText
         
         //Add a question step with different layout format.
         let question2StepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
         
-        let question2 = NSLocalizedString("When is your birthday?", comment: "")
-        let question2Step = ORKQuestionStep(identifier: String(describing: Identifier.birthdayQuestion), title: "Questionnaire", question: question2, answer: question2StepAnswerFormat)
+        let question2 = NSLocalizedString(UIYmlReader().surverysTaskModel?.birthdayText ?? Constants.YamlDefaults.birthdayText, comment: "")
+        let question2Step = ORKQuestionStep(identifier: String(describing: Identifier.birthdayQuestion), title: UIYmlReader().surverysTaskModel?.questionnaire ?? Constants.YamlDefaults.Questionnaire, question: question2, answer: question2StepAnswerFormat)
         question2Step.text = exampleDetailText
         
         
@@ -884,7 +885,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let appleAnswerFormat = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: appleChoices)
         
-        let appleFormItem = ORKFormItem(identifier: "appleFormItemIdentifier", text: "Which is your favorite apple?", answerFormat: appleAnswerFormat)
+        let appleFormItem = ORKFormItem(identifier: "appleFormItemIdentifier", text: UIYmlReader().surverysTaskModel?.itemQuestion ??  Constants.YamlDefaults.favorite, answerFormat: appleAnswerFormat)
         
         let appleFormStep = ORKFormStep(identifier: "appleFormStepIdentifier", title: "Fruit!", text: "Select the fruit you like.")
         
@@ -902,26 +903,26 @@ enum TaskListRow: Int, CustomStringConvertible {
         let instructionStep = ORKInstructionStep(identifier: String(describing: Identifier.introStep))
         instructionStep.title = NSLocalizedString("Simple Survey", comment: "")
         instructionStep.text = exampleDescription
-        instructionStep.detailText = NSLocalizedString("Please use this space to provide instructions for participants.  Please make sure to provide enough information so that users can progress through the survey and complete with ease.", comment: "")
+        instructionStep.detailText = NSLocalizedString("Please use this space to provide instructions for participants. Please make sure to provide enough information so that users can progress through the survey and complete with ease.", comment: "")
         
         // Add a question step.
         let question1StepAnswerFormat = ORKBooleanAnswerFormat()
         
-        let question1 = NSLocalizedString("Would you like to subscribe to our newsletter?", comment: "")
+        let question1 = NSLocalizedString(UIYmlReader().surverysTaskModel?.newsletter ?? Constants.YamlDefaults.newsletter, comment: "")
         
         let learnMoreInstructionStep = ORKLearnMoreInstructionStep(identifier: "LearnMoreInstructionStep01")
         learnMoreInstructionStep.title = NSLocalizedString("Learn more title", comment: "")
         learnMoreInstructionStep.text = NSLocalizedString("Learn more text", comment: "")
         let learnMoreItem = ORKLearnMoreItem(text: nil, learnMoreInstructionStep: learnMoreInstructionStep)
         
-        let question1Step = ORKQuestionStep(identifier: String(describing: Identifier.questionStep), title: "Questionnaire", question: question1, answer: question1StepAnswerFormat, learnMoreItem: learnMoreItem)
+        let question1Step = ORKQuestionStep(identifier: String(describing: Identifier.questionStep), title: UIYmlReader().surverysTaskModel?.questionnaire ?? Constants.YamlDefaults.Questionnaire, question: question1, answer: question1StepAnswerFormat, learnMoreItem: learnMoreItem)
         question1Step.text = exampleDetailText
         
         //Add a question step with different layout format.
         let question2StepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
         
-        let question2 = NSLocalizedString("When is your birthday?", comment: "")
-        let question2Step = ORKQuestionStep(identifier: String(describing: Identifier.birthdayQuestion), title: "Questionnaire", question: question2, answer: question2StepAnswerFormat)
+        let question2 = NSLocalizedString(UIYmlReader().surverysTaskModel?.birthdayText ?? Constants.YamlDefaults.birthdayText, comment: "")
+        let question2Step = ORKQuestionStep(identifier: String(describing: Identifier.birthdayQuestion), title: UIYmlReader().surverysTaskModel?.questionnaire ?? Constants.YamlDefaults.Questionnaire, question: question2, answer: question2StepAnswerFormat)
         question2Step.text = exampleDetailText
         
         // Add a summary step.
@@ -942,7 +943,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let answerFormat = ORKBooleanAnswerFormat()
         
         // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.booleanQuestionStep), title: NSLocalizedString("Boolean", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.booleanQuestionStep), title: NSLocalizedString("Boolean", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         // The detail text is shown in a small font below the title.
         questionStep.text = exampleDetailText
@@ -955,7 +956,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let answerFormat = ORKBooleanAnswerFormat(yesString: "Agree", noString: "Disagree")
         
         // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.booleanQuestionStep), title: NSLocalizedString("Custom Boolean", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.booleanQuestionStep), title: NSLocalizedString("Custom Boolean", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         // The detail text is shown in a small font below the title.
         questionStep.text = exampleDetailText
@@ -971,7 +972,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.dateAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: String(describing: Identifier.dateQuestionStep), title: NSLocalizedString("Date", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing: Identifier.dateQuestionStep), title: NSLocalizedString("Date", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -986,7 +987,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.dateTime()
         
-        let step = ORKQuestionStep(identifier: String(describing: Identifier.dateTimeQuestionStep), title: NSLocalizedString("Date and Time", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing: Identifier.dateTimeQuestionStep), title: NSLocalizedString("Date and Time", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -1088,13 +1089,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let answerFormat1 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
         
-        let questionStep1 = ORKQuestionStep(identifier: String(describing: Identifier.imageChoiceQuestionStep1), title: NSLocalizedString("Image Choice", comment: ""), question: exampleQuestionText, answer: answerFormat1)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing: Identifier.imageChoiceQuestionStep1), title: NSLocalizedString("Image Choice", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat1)
 
         questionStep1.text = exampleDetailText
 
         let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .singleChoice, vertical: true)
         
-        let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.imageChoiceQuestionStep2), title: NSLocalizedString("Image Choice", comment: ""), question: exampleQuestionText, answer: answerFormat2)
+        let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.imageChoiceQuestionStep2), title: NSLocalizedString("Image Choice", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat2)
 
         questionStep2.text = exampleDetailText
         
@@ -1106,7 +1107,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let answerFormat = ORKLocationAnswerFormat()
         
         // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.locationQuestionStep), title: NSLocalizedString("Location", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.locationQuestionStep), title: NSLocalizedString("Location", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         // The detail text is shown in a small font below the title.
         questionStep.text = exampleDetailText
         questionStep.placeholder = NSLocalizedString("Address", comment: "")
@@ -1124,13 +1125,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         let localizedQuestionStep1AnswerFormatUnit = NSLocalizedString("Your unit", comment: "")
         let questionStep1AnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStep1AnswerFormatUnit)
         
-        let questionStep1 = ORKQuestionStep(identifier: String(describing: Identifier.numericQuestionStep), title: NSLocalizedString("Numeric", comment: ""), question: exampleQuestionText, answer: questionStep1AnswerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing: Identifier.numericQuestionStep), title: NSLocalizedString("Numeric", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: questionStep1AnswerFormat)
         
         questionStep1.text = exampleDetailText
-        questionStep1.placeholder = NSLocalizedString("Your placeholder.", comment: "")
+        questionStep1.placeholder = NSLocalizedString(UIYmlReader().surverysTaskModel?.placeholder ?? Constants.YamlDefaults.placeholder, comment: "")
                 
         // This answer format is similar to the previous one, but this time without displaying a unit.
-        let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.numericNoUnitQuestionStep), title: NSLocalizedString("Numeric", comment: ""), question: exampleQuestionText, answer: ORKAnswerFormat.decimalAnswerFormat(withUnit: nil))
+        let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.numericNoUnitQuestionStep), title: NSLocalizedString("Numeric", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: ORKAnswerFormat.decimalAnswerFormat(withUnit: nil))
         
         questionStep2.text = exampleDetailText
         questionStep2.placeholder = NSLocalizedString("Placeholder without unit.", comment: "")
@@ -1148,7 +1149,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let step1AnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
-        let questionStep1 = ORKQuestionStep(identifier: String(describing: Identifier.discreteScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step1AnswerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing: Identifier.discreteScaleQuestionStep), title: stepTitle, question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: step1AnswerFormat)
         
         questionStep1.text = NSLocalizedString("Discrete Scale", comment: "")
         
@@ -1156,21 +1157,21 @@ enum TaskListRow: Int, CustomStringConvertible {
         let step2AnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: 1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
         step2AnswerFormat.numberStyle = .percent
         
-        let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.continuousScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step2AnswerFormat)
+        let questionStep2 = ORKQuestionStep(identifier: String(describing: Identifier.continuousScaleQuestionStep), title: stepTitle, question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: step2AnswerFormat)
         
         questionStep2.text = NSLocalizedString("Continuous Scale", comment: "")
         
         // The third step is a vertical scale control with 10 discrete ticks.
         let step3AnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
         
-        let questionStep3 = ORKQuestionStep(identifier: String(describing: Identifier.discreteVerticalScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step3AnswerFormat)
+        let questionStep3 = ORKQuestionStep(identifier: String(describing: Identifier.discreteVerticalScaleQuestionStep), title: stepTitle, question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: step3AnswerFormat)
         
         questionStep3.text = NSLocalizedString("Discrete Vertical Scale", comment: "")
         
         // The fourth step is a vertical scale control that allows continuous movement.
         let step4AnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: 5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
-        let questionStep4 = ORKQuestionStep(identifier: String(describing: Identifier.continuousVerticalScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step4AnswerFormat)
+        let questionStep4 = ORKQuestionStep(identifier: String(describing: Identifier.continuousVerticalScaleQuestionStep), title: stepTitle, question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: step4AnswerFormat)
         
         questionStep4.text = "Continuous Vertical Scale"
         
@@ -1179,14 +1180,14 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         let step5AnswerFormat = ORKAnswerFormat.textScale(with: textChoices, defaultIndex: NSIntegerMax, vertical: false)
         
-        let questionStep5 = ORKQuestionStep(identifier: String(describing: Identifier.textScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step5AnswerFormat)
+        let questionStep5 = ORKQuestionStep(identifier: String(describing: Identifier.textScaleQuestionStep), title: stepTitle, question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: step5AnswerFormat)
         
         questionStep5.text = "Text Scale"
         
         // The sixth step is a vertical scale control that allows text choices.
         let step6AnswerFormat = ORKAnswerFormat.textScale(with: textChoices, defaultIndex: NSIntegerMax, vertical: true)
         
-        let questionStep6 = ORKQuestionStep(identifier: String(describing: Identifier.textVerticalScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step6AnswerFormat)
+        let questionStep6 = ORKQuestionStep(identifier: String(describing: Identifier.textVerticalScaleQuestionStep), title: stepTitle, question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: step6AnswerFormat)
         
         questionStep6.text = "Text Vertical Scale"
         
@@ -1210,7 +1211,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         answerFormat.multipleLines = true
         answerFormat.maximumLength = 280
         
-        let step = ORKQuestionStep(identifier: String(describing: Identifier.textQuestionStep), title: NSLocalizedString("Text", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing: Identifier.textQuestionStep), title: NSLocalizedString("Text", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -1238,7 +1239,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
 
-        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.textChoiceQuestionStep), title: NSLocalizedString("Text Choice", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.textChoiceQuestionStep), title: NSLocalizedString("Text Choice", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         questionStep.text = exampleDetailText
         
@@ -1258,7 +1259,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.timeIntervalAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: String(describing: Identifier.timeIntervalQuestionStep), title: NSLocalizedString("Time Interval", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing: Identifier.timeIntervalQuestionStep), title: NSLocalizedString("Time Interval", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -1275,7 +1276,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.timeOfDayAnswerFormat()
         
-        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.timeOfDayQuestionStep), title: NSLocalizedString("Time", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.timeOfDayQuestionStep), title: NSLocalizedString("Time", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         questionStep.text = exampleDetailText
         
@@ -1301,7 +1302,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let answerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: textChoices)
         
-        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.valuePickerChoiceQuestionStep), title: NSLocalizedString("Value Picker", comment: ""), question: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing: Identifier.valuePickerChoiceQuestionStep), title: NSLocalizedString("Value Picker", comment: ""), question: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answer: answerFormat)
         
         questionStep.text = NSLocalizedString("Text Value picker", comment: "")
         
@@ -1454,7 +1455,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let introStep = ORKInstructionStep(identifier: String(describing: Identifier.eligibilityIntroStep))
         introStep.title = NSLocalizedString("Eligibility Task", comment: "")
         introStep.text = exampleDescription
-        introStep.detailText = NSLocalizedString("Please use this space to provide instructions for participants.  Please make sure to provide enough information so that users can progress through the survey and complete with ease.", comment: "")
+        introStep.detailText = NSLocalizedString("Please use this space to provide instructions for participants. Please make sure to provide enough information so that users can progress through the survey and complete with ease.", comment: "")
         
         // Form step
         let formStep = ORKFormStep(identifier: String(describing: Identifier.eligibilityFormStep))
@@ -1465,11 +1466,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         let textChoices: [ORKTextChoice] = [ORKTextChoice(text: "Yes", value: "Yes" as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "No", value: "No" as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "N/A", value: "N/A" as NSCoding & NSCopying & NSObjectProtocol)]
         let answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
         
-        let formItem01 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem01), text: exampleQuestionText, answerFormat: answerFormat)
+        let formItem01 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem01), text: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answerFormat: answerFormat)
         formItem01.isOptional = false
-        let formItem02 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem02), text: exampleQuestionText, answerFormat: answerFormat)
+        let formItem02 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem02), text: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answerFormat: answerFormat)
         formItem02.isOptional = false
-        let formItem03 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem03), text: exampleQuestionText, answerFormat: answerFormat)
+        let formItem03 = ORKFormItem(identifier: String(describing: Identifier.eligibilityFormItem03), text: UIYmlReader().surverysTaskModel?.questionText ?? Constants.YamlDefaults.questionText, answerFormat: answerFormat)
         formItem03.isOptional = false
         
         formStep.formItems = [

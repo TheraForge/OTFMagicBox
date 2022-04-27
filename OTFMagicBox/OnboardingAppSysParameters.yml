@@ -252,6 +252,24 @@ DataModel:
  # You can install SF Symbol 1.1 from https://developer.apple.com/sf-symbols/ and choose any symbol as per your requirement and write the exact spelling of that particular symbol in the value field of image.
  # Example: If the application requires a message symbol then, I look for a message symbol from the sf-symbols and check the exact name of that symbol and write the same value for the image property (image: "message").
  # If you would like to input your own image then save that image in the Assets folder of the project with a descriptive name and write the same name for the image property value field.
+  onboarding:
+   - image: "Splash Image"
+     icon: "stethoscope"
+     title: "Welcome to MagicBox"
+     color: "Black"
+     description: "Your health care app"
+     
+   - image: "Splash Image"
+     icon: "speedometer"
+     title: "Vitals"
+     color: "Black"
+     description: "Stay in tune with vital indicators of your health, including your heart rate, blood pressure, step count, weight, and mood."
+     
+   - image: "Splash Image"
+     icon: "doc.text.below.ecg"
+     title: "Activities"
+     color: "Black"
+     description: "Keep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities."
      
  # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.

@@ -1,0 +1,316 @@
+# Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+
+
+###################################################################################################################################
+#                                           Digital Health Application Customization Guide                                        #
+###################################################################################################################################
+# The AppSysParameters.yml file provides the structure to design your health application.
+# The structure contains the keys for which you can assign the value according to your application requirements.
+# Some of the keys are used for the design of the application, such as Fonts and Colors.
+# And some other keys are related to the application features, such as Onboarding, Consent etc.
+
+
+##############################################################################
+#                   IMPORTANT RULES TO USE THIS FILE                         #
+##############################################################################
+# 1. Kindly do not change the indentation of this file. Suppose if you change the indentation then this particular yaml file key - value will not be read.
+# 2. Do not delete any of the keys and lines from this file.
+# 3. Do not edit the Objects and keys names.
+# 4. Only the values of the keys within the quotes have to be edited.
+# 5. All the values should be mentioned within the quotes(""), otherwise that particular key's value will not be read and the default value will be displayed.
+
+
+# Key and Value:
+# Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
+# Example: teamEmail: "info@hippocratestech.com", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon "info@hippocratestech.com" is the value assigned for that Key.
+
+
+# Default Values:-
+# Default values will be displayed in your application in the format "Default: "
+# Example: Key teamName default value will be displayed like "Default: team name", you can see this on the screen where this key value will be displayed.
+
+
+# Edit Values:-
+# If you want to edit the basic details like title of the study, then go to key studyTitle and edit the value part which is under quotes("")
+# Example: studyTitle: "TheraForge" ---> studyTitle: "NewValue"
+
+
+# Edit List:-
+# If you have list of things, you can denote that sequence using hyphen ("-")
+# Object which has list of values, you can add and delete any number of key-values. While adding a new value to the list, all the keys within that list value should be declared.
+# Example: Consent which has a set of values like title, summary and content. So, while adding new value for that list all the three properties(title, summary and content) should be declared.
+# Example: currently Consent contains 4 values.
+# consent:
+#   - title: "Overview"
+#     summary: "Hi there"
+#     content: "Hi there"
+#
+#   - title: "Privacy"
+#     summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+#     content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
+#
+#   - title: "DataUse"
+#     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+#     content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment,# resulting in lower costs and enhanced patient care."
+#
+#   - title: "StudyTasks"
+#     summary: "Study tasks involve many aspects of daily functionalities."
+#     content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+     
+# Now you can add a new Consent value at any position in the list according to your requirements.
+# Most importantly new Consent value should maintain the correct indentation and must include all the three keys, as shown below:
+#
+#   - title: "New title"
+#     summary: "New summary."
+#     content: "New Content."
+
+
+# Edit Boolean Object:-
+# Some of the objects will have a Boolean value("true" or "false").
+# Example: "useCareKit", for this key if you assign a value "true" then Schedule and Contacts views will be displayed. Otherwise Schedule and Contacts views will not be displayed.
+
+
+##############################################################################
+#                      TheraForge Configurations                             #
+##############################################################################
+
+DataModel:
+  # Design Configurations
+  designConfig:
+        
+      # Offset value.
+      - name: "offset"
+        textValue: "20"
+        
+      # Color codes
+      # Colors will be used in the design of the application.
+      # Please choose the colors according to Human Interface Guidelines from Apple.
+      # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
+      - name: "tintColor"
+        textValue: "Blue"
+      - name: "label"
+        textValue: "Teal"
+      - name: "secondaryLabel"
+        textValue: "Brown"
+      - name: "tertiaryLabel"
+        textValue: "Cyan"
+      - name: "customBackground"
+        textValue: "Brown"
+      - name: "secondaryCustomBackground"
+        textValue: "Black"
+      - name: "customGroupedBackground"
+        textValue: "Brown"
+      - name: "secondaryCustomGroupedBackground"
+        textValue: "Brown"
+      - name: "tertiaryCustomGroupedBackground"
+        textValue: "Brown"
+      - name: "separator"
+        textValue: "Gray"
+      - name: "customFill"
+        textValue: "Blue"
+      - name: "secondaryCustomFill"
+        textValue: "Mint"
+      - name: "tertiaryCustomFill"
+        textValue: "Teal"
+      - name: "quaternaryCustomFill"
+        textValue: "Blue"
+      - name: "customBlue"
+        textValue: "blue"
+      - name: "customGray"
+        textValue: "Gray"
+      - name: "customGray2"
+        textValue: "Gray2"
+      - name: "customGray3"
+        textValue: "Gray3"
+      - name: "customGray4"
+        textValue: "Gray4"
+      - name: "customGray5"
+        textValue: "Gray5"
+      - name: "black"
+        textValue: "black"
+      - name: "white"
+        textValue: "white"
+        
+      # Fonts
+      # Fonts will be used in the design of the application.
+      - name: "largeTitleFontName"
+        textValue: "Gotham-Book"
+      - name: "largeTitleFontSize"
+        textValue: "20"
+      - name: "titleFontName"
+        textValue: "Gotham-Book"
+      - name: "titleFontSize"
+        textValue: "17"
+      - name: "title2FontName"
+        textValue: "Gotham-Book"
+      - name: "title2FontSize"
+        textValue: "18"
+      - name: "title3FontName"
+        textValue: "Gotham-Book"
+      - name: "title3FontSize"
+        textValue: "19"
+      - name: "headlineFontName"
+        textValue: "Gotham-Book"
+      - name: "headlineFontSize"
+        textValue: "22"
+      - name: "subheadlineFontName"
+        textValue: "Gotham-Bold"
+      - name: "subheadlineFontSize"
+        textValue: "20"
+      - name: "bodyFontName"
+        textValue: "Gotham-Book"
+      - name: "bodyFontSize"
+        textValue: "15"
+      - name: "calloutFontName"
+        textValue: "Gotham-Book"
+      - name: "calloutFontSize"
+        textValue: "9"
+      - name: "captionFontName"
+        textValue: "Gotham-Book"
+      - name: "captionFontSize"
+        textValue: "12"
+      - name: "caption2FontName"
+        textValue: "Gotham-Book"
+      - name: "caption2FontSize"
+        textValue: "20"
+      - name: "footnoteFontName"
+        textValue: "Gotham-Book"
+      - name: "footnoteFontSize"
+        textValue: "20"
+        
+        
+##############################################################################
+#                               App Customization                            #
+##############################################################################
+    
+  researchKitView:
+    surveysHeaderTitle: "SURVEYS"
+    formSurveyExample: "Form Survey Example"
+    groupedFormSurveyExample: "Grouped Form Survey Example"
+    simpleSurveyExample: "Simple Survey Example"
+    surveyQuestionHeaderTitle: "SURVEY QUESTIONS"
+    booleanQuestion: "Boolean Question"
+    customBooleanQuestion: "Custom Boolean Question"
+    dateQuestion: "Date Question"
+    dateAndTimeQuestion: "Date and Time Question"
+    heightQuestion: "Height Question"
+    weightQuestion: "Weight Question"
+    imageChoiceQuestion: "Image Choice Question"
+    locationQuestion: "Location Question"
+    numericQuestion: "Numeric Question"
+    scaleQuestion: "Scale Question"
+    textQuestion: "Text Question"
+    textChoiceQuestion: "Text Choice Question"
+    timeIntervalQuestion: "Time Interval Question"
+    timeOfDayQuestion: "Time of Day Question"
+    valuePickerChoiceQuestion: "Value Picker Choice Question"
+    validatedTextQuestion: "Validated Text Question"
+    imageCaptureStep: "Image Capture Step"
+    videoCaptureStep: "Video Capture Step"
+    frontFacingCameraStep: "Front Facing Camera Step"
+    waitStep: "Wait Step"
+    pdfViewerStep: "PDF Viewer Step"
+    onBoardingHeaderTitle: "ONBOARDING"
+    eligibilityTaskExample: "Eligibility Task Example"
+    consentObtainingExample: "Consent-Obtaining Example"
+    accountCreation: "Account Creation"
+    login: "Login"
+    passcodeCreation: "Passcode Creation"
+    activeTasksHeaderTitle: "Active Tasks"
+    audio: "Audio"
+    amslerGrid: "Amsler Grid"
+    fitnessCheck: "Fitness Check"
+    holePegTest: "Hole Peg Test"
+    psat: "PSAT"
+    reactionTime: "Reaction Time"
+    shortWalk: "Short Walk"
+    spatialSpanMemory: "Spatial Span Memory"
+    speechRecognition: "Speech Recognition"
+    speechInNoise: "Speech in Noise"
+    stroop: "Stroop"
+    swiftStroop: "Swift Stroop"
+    timedWalkWithTurnAround: "Timed Walk with Turn Around"
+    toneAudiometry: "Tone Audiometry"
+    dBHLToneAudiometry: "dBHL Tone Audiometry"
+    environmentSPLMeter: "Environment SPL Meter"
+    towerOfHanoi: "Tower of Hanoi"
+    twoFingerTappingInterval: "Two Finger Tapping Interval"
+    walkBackAndForth: "Walk Back and Forth"
+    tremorTest: "Tremor Test"
+    videoInstructionTask: "Video Instruction Task"
+    kneeRangeOfMotion: "Knee Range of Motion"
+    shoulderRangeOfMotion: "Shoulder Range of Motion"
+    trailMakingTest: "Trail Making Test"
+    visualAcuityLandoltC: "Visual Acuity Landolt C"
+    contrastSensitivityPeak: "Contrast Sensitivity Peak"
+    miscellaneousHeaderTitle: "Miscellaneous"
+    webView: "Web View"
+    
+    
+  surverysTask:
+    title: "Form Step"
+    additionalText: "Additional text can go here."
+    itemQuestion: "Which is your favorite apple?"
+    grannySmith: "Granny Smith"
+    honeycrisp: "Honeycrisp"
+    fuji: "Fuji"
+    mcIntosh: "McIntosh"
+    kanzi: "Kanzi"
+    questionText: "Your question goes here."
+    groupServeyTitle: "Form Step"
+    sectionTitle: "Section title"
+    sectionDetailText: "Section detail text"
+    placeholder: "Your placeholder here"
+    socioeconomicLadder: "Select where you are on the socioeconomic ladder."
+    questionnaire: "Questionnaire"
+    newsletter: "Would you like to subscribe to our newsletter?"
+    learnMoreTitle: "Learn more title"
+    learnMoreText: "Learn more text"
+    birthdayText: "When is your birthday?"
+    
+    
+  carekitView:
+    contactHeader: "Contact"
+    simple: "Simple"
+    instruction: "instruction"
+    buttonLog: "buttonLog"
+    grid: "grid"
+    checklist: "checklist"
+    labeledValue: "labeled value"
+    numericProgress: "Numeric Progress"
+    taskHeader: "Task"
+    
+    
+ # Link to ReadMe document
+

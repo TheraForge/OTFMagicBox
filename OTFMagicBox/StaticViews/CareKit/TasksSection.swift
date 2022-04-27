@@ -40,7 +40,7 @@ import OTFCareKitStore
 struct TaskSection: View {
     
     var body: some View {
-        Section(header: Text("Task")) {
+        Section(header: Text(UIYmlReader().careKitModel?.taskHeader ?? "Task")) {
             ForEach(TaskStyle.allCases, id: \.rawValue) { style in
                 if style.supportsSwiftUI || style.supportsUIKit {
                     NavigationLink(style.rawValue.capitalized, destination: TaskDestination(style: style))

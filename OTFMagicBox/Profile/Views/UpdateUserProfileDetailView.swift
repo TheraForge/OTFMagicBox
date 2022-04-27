@@ -88,21 +88,21 @@ struct UpdateUserProfileDetailView: View {
             Form {
                 IconView()
                     .frame(width: 100, height: 100)
-                Section(header: Text("Basic Information")) {
+                Section(header: Text(ProfileYmlReader().profileData?.profileInfoHeader ?? "BASIC INFORMATION")) {
                     HStack {
-                        Text("FirstName")
-                        TextField("FirstName", text: $firstName)
+                        Text(ProfileYmlReader().profileData?.firstName ?? "First Name")
+                        TextField(ProfileYmlReader().profileData?.firstName ?? "First Name", text: $firstName)
                             .style(.textField)
                     }
                     HStack {
-                        Text("LastName")
-                        TextField("LastName", text: $lastName)
+                        Text(ProfileYmlReader().profileData?.lastName ?? "Last Name")
+                        TextField(ProfileYmlReader().profileData?.lastName ?? "Last Name", text: $lastName)
                             .style(.textField)
                     }
                 }
                 
                 
-                Section(header: Text("Other Information")) {
+                Section(header: Text(ProfileYmlReader().profileData?.otherInfo ?? "Other Information")) {
                     Button(action: {
                         self.showGenderPicker.toggle()
                     }) {
@@ -155,7 +155,7 @@ struct UpdateUserProfileDetailView: View {
                         )
                 })
                 
-            }.navigationBarTitle(Text("Profile"))
+            }.navigationBarTitle(Text(ProfileYmlReader().profileData?.title ?? "Profile"))
         }
         .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
             CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
@@ -225,7 +225,7 @@ struct IconView: View {
     @State private var sourceType = UIImagePickerController.SourceType.photoLibrary
     
     var imageView: Image {
-        if let userImage = UIImage(named: "user_profile") {
+        if let userImage = UIImage(named: ProfileYmlReader().profileData?.profileImage ?? "user_profile") {
             return Image(uiImage: userImage)
         }
         return Image.avatar

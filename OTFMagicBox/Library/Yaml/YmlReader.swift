@@ -104,10 +104,6 @@ public class YmlReader {
         return dataModel?.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
     }
     
-    var onboardingData: [Onboarding]? {
-        return dataModel?.onboarding
-    }
-    
     var registration: Registration? {
         return dataModel?.registration
     }

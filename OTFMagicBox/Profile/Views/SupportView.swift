@@ -37,15 +37,16 @@ import SwiftUI
 struct SupportView: View {
     let color: Color
     var phone = ""
-    
-    init(color: Color, phone: String) {
+    var title = ""
+    init(color: Color, phone: String, title: String) {
         self.color = color
         self.phone = phone
+        self.title = title
     }
     
     var body: some View {
         HStack {
-            Text("Support")
+            Text(title)
             Spacer()
             Text(self.phone).foregroundColor(self.color)
         }
@@ -62,6 +63,6 @@ struct SupportView: View {
 
 struct SupportView_Previews: PreviewProvider {
     static var previews: some View {
-        SupportView(color: Color.red, phone: "+1 (650)-000-0000")
+        SupportView(color: Color.red, phone: "+1 (650)-000-0000", title: "")
     }
 }

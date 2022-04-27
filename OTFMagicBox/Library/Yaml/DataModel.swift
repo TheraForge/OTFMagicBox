@@ -34,13 +34,6 @@ OF SUCH DAMAGE.
 
 import Foundation
 
-struct Onboarding: Codable, Equatable {
-    let image: String
-    let icon: String
-    let title: String
-    let color: String
-    let description: String
-}
 
 struct Registration: Codable {
     let showDateOfBirth: String
@@ -135,7 +128,6 @@ struct DataModel: Codable {
     let login: Login
     let loginOptionsInfo: LoginOptionsInfo
     let registration: Registration
-    let onboarding: [Onboarding]
     let consent: Consent
     let healthRecords: HealthRecords
     let healthKitData: HealthKitData

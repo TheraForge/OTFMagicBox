@@ -37,15 +37,17 @@ import SwiftUI
 struct ReportView: View {
     let color: Color
     var email = ""
+    var title = ""
     
-    init(color: Color, email: String) {
+    init(color: Color, email: String, title: String) {
         self.color = color
         self.email = email
+        self.title = title
     }
     
     var body: some View {
         HStack {
-            Text("Report a Problem")
+            Text(title)
                 .minimumScaleFactor(0.5)
             Spacer()
             Text(self.email).foregroundColor(self.color)
@@ -64,7 +66,7 @@ struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         Section {
             ReportView(color: .blue,
-                       email: "zeeshan.ahmed@invozone.com")
+                       email: "zeeshan.ahmed@invozone.com", title: "")
         }
         .padding(.horizontal)
     }

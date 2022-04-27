@@ -36,7 +36,7 @@ import SwiftUI
 
 struct ContactsSection: View {
     var body: some View {
-        Section(header: Text("Contact")) {
+        Section(header: Text(UIYmlReader().careKitModel?.contactHeader ?? "Contact")) {
             ForEach(ContactStyle.allCases, id: \.rawValue) {
                 NavigationLink($0.rawValue.capitalized, destination: ContactDestination(style: $0))
             }
@@ -67,7 +67,7 @@ private struct ContactDestination: View {
 }
 
 private enum ContactStyle: String, CaseIterable {
-    case simple, detailed
+    case simple , detailed
 }
 
 import OTFCareKit

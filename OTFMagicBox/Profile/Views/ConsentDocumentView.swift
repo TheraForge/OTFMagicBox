@@ -38,15 +38,16 @@ struct ConsentDocumentView: View {
     
     @State private var showPreview = false
     let documentsURL: URL
-    
-    init(documentURL: URL) {
+    let title: String
+    init(documentURL: URL, title: String) {
         self.documentsURL = documentURL
+        self.title = title
         OTFLog("Opening document at:", self.documentsURL.path)
     }
     
     var body: some View {
         HStack {
-            Text("Consent Document")
+            Text(title)
             Spacer()
             Text("›")
         }.frame(height: 60)
@@ -62,6 +63,6 @@ struct ConsentDocumentView_Previews: PreviewProvider {
     static var previews: some View {
         let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String
         let url = URL(fileURLWithPath: documentsPath!, isDirectory: false)
-        ConsentDocumentView(documentURL: url)
+        ConsentDocumentView(documentURL: url, title: "")
     }
 }

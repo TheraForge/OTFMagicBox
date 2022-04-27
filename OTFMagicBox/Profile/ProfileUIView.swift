@@ -40,9 +40,8 @@ struct ProfileUIView: View {
     @State private(set) var user: OCKPatient?
     
     var body: some View {
-        
         VStack {
-            Text("Profile").font(.headerFontStyle)
+            Text(ProfileYmlReader().profileData?.title ?? "Profile").font(.headerFontStyle)
             
             List {
                 Section {
@@ -57,29 +56,29 @@ struct ProfileUIView: View {
                     if YmlReader().isPasscodeEnabled {
                         ChangePasscodeView()
                     }
-                    HelpView(site: YmlReader().teamWebsite)
+                    HelpView(site: YmlReader().teamWebsite, title: ProfileYmlReader().profileData?.help ?? "Help")
                 }
                 
                 if let email = user?.remoteID {
                     Section {
-                        ChangePasswordView(email: email)
+                        ChangePasswordView(email: email, resetPassword: ProfileYmlReader().profileData?.resetPasswordText ?? "Reset Password")
                     }
                 }
                 
-                Section(header: Text("Report a problem")) {
-                    ReportView(color: Color(YmlReader().primaryColor), email: YmlReader().teamEmail)
-                    SupportView(color: Color(YmlReader().primaryColor), phone: YmlReader().teamPhone)
+                Section(header: Text(ProfileYmlReader().profileData?.reportProblemHeader ?? "Report a Problem")) {
+                    ReportView(color: Color(YmlReader().primaryColor), email: YmlReader().teamEmail, title: ProfileYmlReader().profileData?.reportProblemText ?? "Report a Problem")
+                    SupportView(color: Color(YmlReader().primaryColor), phone: YmlReader().teamPhone, title: ProfileYmlReader().profileData?.supportText ?? "Support")
                 }
                 
                 if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
                     let url = URL(fileURLWithPath: documentsPath, isDirectory: false)
                     Section {
-                        ConsentDocumentView(documentURL: url)
+                        ConsentDocumentView(documentURL: url, title: ProfileYmlReader().profileData?.consentText ?? "Consent Document")
                     }
                 }
                 
                 Section {
-                    WithdrawView()
+                    WithdrawView(title: ProfileYmlReader().profileData?.WithdrawStudyText ?? "Withdraw from Study")
                 }
                 
                 Section {

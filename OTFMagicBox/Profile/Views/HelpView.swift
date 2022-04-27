@@ -36,14 +36,15 @@ import SwiftUI
 
 struct HelpView: View {
     var site = ""
-    
-    init(site: String) {
+    var title = ""
+    init(site: String, title: String) {
         self.site = site
+        self.title = title
     }
     
     var body: some View {
         HStack {
-            Text("Help")
+            Text(title)
             Spacer()
             Text("›")
         }.frame(height: 70).contentShape(Rectangle())
@@ -57,6 +58,6 @@ struct HelpView: View {
 
 struct HelpView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView(site: "")
+        HelpView(site: "", title: "")
     }
 }

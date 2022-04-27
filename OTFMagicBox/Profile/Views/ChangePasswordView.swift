@@ -39,11 +39,16 @@ import SwiftUI
 struct ChangePasswordView: View {
     
     let email: String
+    let resetPassword: String
     @State var showResetPassword = false
+    
+//    init(resetPassword: String) {
+//        self.resetPassword = resetPassword
+//    }
     
     var body: some View {
         HStack {
-            Text("Reset Passsword")
+            Text(resetPassword)
             Spacer()
             Text("›")
         }.frame(height: 60)
