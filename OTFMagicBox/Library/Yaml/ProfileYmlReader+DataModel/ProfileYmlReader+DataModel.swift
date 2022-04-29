@@ -15,7 +15,7 @@ public class ProfileYmlReader {
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.ProfileFileName
     
-    var profileDataModel : ProfileDataModel?
+    private var profileDataModel : ProfileDataModel?
     
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
@@ -34,7 +34,14 @@ public class ProfileYmlReader {
     }
     
     var profileData: ProfileModel? {
-        return profileDataModel?.profileScreen
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+        
+        switch langStr {
+        case "fr":
+            return profileDataModel?.fr
+        default:
+            return profileDataModel?.en
+        }
     }
 }
 
@@ -54,9 +61,13 @@ struct ProfileModel: Codable{
     let lastName: String
     let reportProblemHeader: String
     let otherInfo: String
+    let oldPassword: String
+    let newPassword: String
+    let resetPassword: String
 }
 
 
 struct ProfileDataModel: Codable{
-    let profileScreen: ProfileModel
+    let en: ProfileModel
+    let fr: ProfileModel
 }

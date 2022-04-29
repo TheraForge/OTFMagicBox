@@ -15,14 +15,14 @@ public class OnBoardingYmlReader {
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.onboardingFileName
     
-    var onBoardingDataModel : OnBoardingDataModel?
+    var onBoardingDataModel : OnBoardingScreen?
     
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String: OnBoardingDataModel].self, from: dataSet) else {
+                guard let data = try? YAMLDecoder().decode([String: OnBoardingScreen].self, from: dataSet) else {
                     OTFLog("Yaml decode error")
                     return
                 }
@@ -34,16 +34,32 @@ public class OnBoardingYmlReader {
     }
     
         var onboardingData: [Onboarding]? {
-            return onBoardingDataModel?.onboarding
+            guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+            
+            switch langStr {
+            case "fr":
+                return onBoardingDataModel?.fr.onboarding
+            default:
+                return onBoardingDataModel?.fr.onboarding
+            }
         }
     
     var primaryColor: UIColor {
-        let valueSet = (onBoardingDataModel?.designConfig ?? [])
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
         
-        for value in valueSet where value.name == "label" {
-            return value.textValue.color ?? UIColor.black
+        switch langStr {
+        case "fr":
+            let valueSet = (onBoardingDataModel?.fr.onboarding ?? [])
+            for item in valueSet{
+                return item.color.color ?? UIColor.black
+            }
+        default:
+            let valueSet = (onBoardingDataModel?.en.onboarding ?? [])
+            for item in valueSet{
+                return item.color.color ?? UIColor.black
+            }
         }
-        return .black
+        return UIColor.black
     }
 }
 
@@ -56,7 +72,12 @@ struct Onboarding: Codable, Equatable {
     let description: String
 }
 
+struct OnBoardingScreen: Codable{
+    let en: OnBoardingDataModel
+    let fr: OnBoardingDataModel
+}
+
 struct OnBoardingDataModel: Codable{
     let onboarding: [Onboarding]
-    let designConfig: [DesignConfig]
+//    let designConfig: [DesignConfig]
 }

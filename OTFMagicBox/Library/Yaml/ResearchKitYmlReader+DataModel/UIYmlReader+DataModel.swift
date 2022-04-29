@@ -17,14 +17,14 @@ public class UIYmlReader {
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.researchKitFileName
     
-    var researchKitDataModel : ResearchKitDataModel?
+    var researchKitDataModel : ResearchKitScreen?
     
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String: ResearchKitDataModel].self, from: dataSet) else {
+                guard let data = try? YAMLDecoder().decode([String: ResearchKitScreen].self, from: dataSet) else {
                     OTFLog("Yaml decode error")
                     return
                 }
@@ -35,16 +35,36 @@ public class UIYmlReader {
         }
     }
     
+    var defaultLanguage: String{
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+        return langStr
+    }
+    
     var researchKitModel: ResearchKitModel? {
-        return researchKitDataModel?.researchKitView
+        switch defaultLanguage {
+        case "fr":
+            return researchKitDataModel?.fr.researchKitView
+        default:
+            return researchKitDataModel?.en.researchKitView
+        }
     }
     
     var surverysTaskModel: SurverysTask? {
-        return researchKitDataModel?.surverysTask
+        switch defaultLanguage {
+        case "fr":
+            return researchKitDataModel?.fr.surverysTask
+        default:
+            return researchKitDataModel?.en.surverysTask
+        }
     }
     
     var careKitModel: CarekitModel? {
-        return researchKitDataModel?.carekitView
+        switch defaultLanguage {
+        case "fr":
+            return researchKitDataModel?.fr.carekitView
+        default:
+            return researchKitDataModel?.fr.carekitView
+        }
     }
 }
 
@@ -150,6 +170,10 @@ struct CarekitModel: Codable{
     let detailed: String
 }
 
+struct ResearchKitScreen: Codable{
+    let en: ResearchKitDataModel
+    let fr: ResearchKitDataModel
+}
 
 struct ResearchKitDataModel: Codable{
     let researchKitView: ResearchKitModel

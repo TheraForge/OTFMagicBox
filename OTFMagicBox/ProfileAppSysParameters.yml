@@ -64,38 +64,6 @@
 # Edit Values:-
 # If you want to edit the basic details like title of the study, then go to key studyTitle and edit the value part which is under quotes("")
 # Example: studyTitle: "TheraForge" ---> studyTitle: "NewValue"
-
-
-# Edit List:-
-# If you have list of things, you can denote that sequence using hyphen ("-")
-# Object which has list of values, you can add and delete any number of key-values. While adding a new value to the list, all the keys within that list value should be declared.
-# Example: Consent which has a set of values like title, summary and content. So, while adding new value for that list all the three properties(title, summary and content) should be declared.
-# Example: currently Consent contains 4 values.
-# consent:
-#   - title: "Overview"
-#     summary: "Hi there"
-#     content: "Hi there"
-#
-#   - title: "Privacy"
-#     summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-#     content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-#
-#   - title: "DataUse"
-#     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
-#     content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment,# resulting in lower costs and enhanced patient care."
-#
-#   - title: "StudyTasks"
-#     summary: "Study tasks involve many aspects of daily functionalities."
-#     content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
-     
-# Now you can add a new Consent value at any position in the list according to your requirements.
-# Most importantly new Consent value should maintain the correct indentation and must include all the three keys, as shown below:
-#
-#   - title: "New title"
-#     summary: "New summary."
-#     content: "New Content."
-
-
 # Edit Boolean Object:-
 # Some of the objects will have a Boolean value("true" or "false").
 # Example: "useCareKit", for this key if you assign a value "true" then Schedule and Contacts views will be displayed. Otherwise Schedule and Contacts views will not be displayed.
@@ -106,129 +74,8 @@
 ##############################################################################
 
 DataModel:
-  # Design Configurations
-  designConfig:
-        
-      # Offset value.
-      - name: "offset"
-        textValue: "20"
-        
-      # Color codes
-      # Colors will be used in the design of the application.
-      # Please choose the colors according to Human Interface Guidelines from Apple.
-      # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
-      - name: "tintColor"
-        textValue: "Blue"
-      - name: "label"
-        textValue: "Teal"
-      - name: "secondaryLabel"
-        textValue: "Brown"
-      - name: "tertiaryLabel"
-        textValue: "Cyan"
-      - name: "customBackground"
-        textValue: "Brown"
-      - name: "secondaryCustomBackground"
-        textValue: "Black"
-      - name: "customGroupedBackground"
-        textValue: "Brown"
-      - name: "secondaryCustomGroupedBackground"
-        textValue: "Brown"
-      - name: "tertiaryCustomGroupedBackground"
-        textValue: "Brown"
-      - name: "separator"
-        textValue: "Gray"
-      - name: "customFill"
-        textValue: "Blue"
-      - name: "secondaryCustomFill"
-        textValue: "Mint"
-      - name: "tertiaryCustomFill"
-        textValue: "Teal"
-      - name: "quaternaryCustomFill"
-        textValue: "Blue"
-      - name: "customBlue"
-        textValue: "blue"
-      - name: "customGray"
-        textValue: "Gray"
-      - name: "customGray2"
-        textValue: "Gray2"
-      - name: "customGray3"
-        textValue: "Gray3"
-      - name: "customGray4"
-        textValue: "Gray4"
-      - name: "customGray5"
-        textValue: "Gray5"
-      - name: "black"
-        textValue: "black"
-      - name: "white"
-        textValue: "white"
-        
-      # Fonts
-      # Fonts will be used in the design of the application.
-      - name: "largeTitleFontName"
-        textValue: "Gotham-Book"
-      - name: "largeTitleFontSize"
-        textValue: "20"
-      - name: "titleFontName"
-        textValue: "Gotham-Book"
-      - name: "titleFontSize"
-        textValue: "17"
-      - name: "title2FontName"
-        textValue: "Gotham-Book"
-      - name: "title2FontSize"
-        textValue: "18"
-      - name: "title3FontName"
-        textValue: "Gotham-Book"
-      - name: "title3FontSize"
-        textValue: "19"
-      - name: "headlineFontName"
-        textValue: "Gotham-Book"
-      - name: "headlineFontSize"
-        textValue: "22"
-      - name: "subheadlineFontName"
-        textValue: "Gotham-Bold"
-      - name: "subheadlineFontSize"
-        textValue: "20"
-      - name: "bodyFontName"
-        textValue: "Gotham-Book"
-      - name: "bodyFontSize"
-        textValue: "15"
-      - name: "calloutFontName"
-        textValue: "Gotham-Book"
-      - name: "calloutFontSize"
-        textValue: "9"
-      - name: "captionFontName"
-        textValue: "Gotham-Book"
-      - name: "captionFontSize"
-        textValue: "12"
-      - name: "caption2FontName"
-        textValue: "Gotham-Book"
-      - name: "caption2FontSize"
-        textValue: "20"
-      - name: "footnoteFontName"
-        textValue: "Gotham-Book"
-      - name: "footnoteFontSize"
-        textValue: "20"
-        
-  # Whether to import Database from file.
-  importDatabaseFromFile: "false"
-        
-  # OTF Protection level.
-  otfProtectionLevel: "runToCompletionWithIn10Seconds"
-    
-  # Setting Title.
-  settingTitle: "Settings"
-    
-  # Home Title.
-  homeTitle: "Home"
-    
-  # Start Date.
-  startDate: "30/08/2020"
-  
-  # API key for the server integration.
-  # You need to change the dummy key with a valid one to be able to
-  # connect to the cloud backend
-        
-        
+
+
 ##############################################################################
 #                               App Customization                            #
 ##############################################################################
@@ -239,7 +86,7 @@ DataModel:
     
  #ProfileScreenSetup
 
-  profileScreen:
+  en:
     title: "Profile"
     profileImage: "user_profile"
     help: "Help"
@@ -253,6 +100,27 @@ DataModel:
     firstName: "First Name"
     lastName: "Last Name"
     otherInfo: "OTHER INFORMATION"
+    oldPassword: "Old Password"
+    newPassword: "New Password"
+    resetPassword: "Reset Password"
+    
+  fr:
+    title: "Profil"
+    profileImage: "user_profile"
+    help: "Aider"
+    resetPasswordText: "réinitialiser le mot de passe"
+    reportProblemText: "Signaler un problème"
+    reportProblemHeader: "Signaler un problème"
+    supportText: "Soutien"
+    consentText: "Documents de consentement"
+    WithdrawStudyText: "Se retirer de l'étude"
+    profileInfoHeader: "INFORMATIONS DE BASE"
+    firstName: "Prénom"
+    lastName: "nom de famille"
+    otherInfo: "LES AUTRES INFORMATIONS"
+    oldPassword: "ancien mot de passe"
+    newPassword: "nouveau mot de passe"
+    resetPassword: "réinitialiser le mot de passe"
     
  # Link to ReadMe document
 

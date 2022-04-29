@@ -45,14 +45,14 @@ public class YmlReader {
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.FileName
     
-    var dataModel : DataModel?
+    var dataModel : defaultConfig?
     
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String: DataModel].self, from: dataSet) else {
+                guard let data = try? YAMLDecoder().decode([String: defaultConfig].self, from: dataSet) else {
                     OTFLog("Yaml decode error")
                     return
                 }
@@ -63,9 +63,14 @@ public class YmlReader {
         }
     }
     
+    var defaultLanguage: String{
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+        return langStr
+    }
+    
     // Returns primary color.
     var primaryColor: UIColor {
-        let valueSet = (dataModel?.designConfig ?? [])
+        let valueSet = (dataModel?.en.designConfig ?? [])
         
         for value in valueSet where value.name == "label" {
             return value.textValue.color ?? UIColor.black
@@ -76,7 +81,7 @@ public class YmlReader {
     
     // Returns tint color.
     var tintColor: UIColor {
-        let valueSet = (dataModel?.designConfig ?? [])
+        let valueSet = (dataModel?.en.designConfig ?? [])
         
         for value in valueSet where value.name == "tintColor" {
             return value.textValue.color ?? UIColor.black
@@ -85,177 +90,384 @@ public class YmlReader {
     }
     
     var apiKey: String {
-        guard let apiKey = dataModel?.apiKey else {
+        guard let apiKey = dataModel?.en.apiKey else {
             return Constants.YamlDefaults.APIKey
         }
         return apiKey
     }
     
     var loginPasswordless: Bool {
-        guard let passwordless = dataModel?.login.loginPasswordless else { return false }
-        return passwordless == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let passwordless = dataModel?.en.login.loginPasswordless else { return false }
+            return passwordless == Constants.true
+        default:
+            guard let passwordless = dataModel?.en.login.loginPasswordless else { return false }
+            return passwordless == Constants.true
+        }
     }
     
     var loginStepTitle: String {
-        return dataModel?.login.loginStepTitle ?? Constants.YamlDefaults.LoginStepTitle
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.login.loginStepTitle ?? Constants.YamlDefaults.LoginStepTitle
+        default:
+            return dataModel?.en.login.loginStepTitle ?? Constants.YamlDefaults.LoginStepTitle
+        }
     }
     
     var loginStepText: String {
-        return dataModel?.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
+        default:
+            return dataModel?.en.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
+        }
     }
     
     var registration: Registration? {
-        return dataModel?.registration
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.registration
+        default:
+            return dataModel?.en.registration
+        }
     }
     
     var studyTitle: String {
-        if let title = dataModel?.studyTitle {
-            return title
+    switch defaultLanguage {
+        case "fr":
+            if let title = dataModel?.fr.studyTitle {
+                return title
+            }
+        default:
+            if let title = dataModel?.en.studyTitle {
+                return title
+            }
         }
         return Constants.YamlDefaults.TeamName
     }
     
     var teamName: String {
-        return dataModel?.teamName ?? Constants.YamlDefaults.TeamName
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.teamName ?? Constants.YamlDefaults.TeamName
+        default:
+            return dataModel?.en.teamName ?? Constants.YamlDefaults.TeamName
+        }
     }
     
     var teamEmail: String {
-        return dataModel?.teamEmail ?? Constants.YamlDefaults.TeamEmail
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.teamEmail ?? Constants.YamlDefaults.TeamEmail
+        default:
+            return dataModel?.en.teamEmail ?? Constants.YamlDefaults.TeamEmail
+        }
     }
     
     var teamPhone: String {
-        return dataModel?.teamPhone ?? Constants.YamlDefaults.TeamPhone
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.teamPhone ?? Constants.YamlDefaults.TeamPhone
+        default:
+            return dataModel?.en.teamPhone ?? Constants.YamlDefaults.TeamPhone
+        }
     }
     
     var teamCopyright: String {
-        return dataModel?.copyright ?? Constants.YamlDefaults.TeamCopyright
+        
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.copyright ?? Constants.YamlDefaults.TeamCopyright
+        default:
+            return dataModel?.en.copyright ?? Constants.YamlDefaults.TeamCopyright
+        }
     }
     
     var teamWebsite: String {
-        return dataModel?.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
+        default:
+            return dataModel?.en.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
+        }
     }
     
     var reviewConsentStepText: String {
-        return dataModel?.consent.reviewConsentStepText ?? Constants.YamlDefaults.ReasonForConsentText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
+        default:
+            return dataModel?.en.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
+        }
     }
     
     var reasonForConsentText: String {
-        return dataModel?.consent.reasonForConsentText ?? Constants.YamlDefaults.TeamWebsite
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.en.consent.reasonForConsentText ?? Constants.YamlDefaults.TeamWebsite
+        default:
+            return dataModel?.en.consent.reasonForConsentText ?? Constants.YamlDefaults.TeamWebsite
+        }
     }
     
     var consentFileName: String {
-        return dataModel?.consent.fileName ?? Constants.YamlDefaults.ConsentFileName
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.en.consent.fileName ?? Constants.YamlDefaults.ConsentFileName
+        default:
+            return dataModel?.en.consent.fileName ?? Constants.YamlDefaults.ConsentFileName
+        }
     }
     
     var consentTitle: String? {
-        return dataModel?.consent.title ?? Constants.YamlDefaults.ConsentTitle
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.en.consent.title ?? Constants.YamlDefaults.ConsentTitle
+        default:
+            return dataModel?.en.consent.title ?? Constants.YamlDefaults.ConsentTitle
+        }
     }
     
     var passcodeText: String {
-        return dataModel?.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.en.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
+        default:
+            return dataModel?.en.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
+        }
     }
     
     var loginOptionsText: String {
-        return dataModel?.loginOptionsInfo.text ?? Constants.YamlDefaults.LoginOptionsText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.en.loginOptionsInfo.text ?? Constants.YamlDefaults.LoginOptionsText
+        default:
+            return dataModel?.en.loginOptionsInfo.text ?? Constants.YamlDefaults.LoginOptionsText
+        }
     }
     
     var loginOptionsIcon: String {
-        return dataModel?.loginOptionsInfo.icon ?? Constants.YamlDefaults.LoginOptionsIcon
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.en.loginOptionsInfo.icon ?? Constants.YamlDefaults.LoginOptionsIcon
+        default:
+            return dataModel?.en.loginOptionsInfo.icon ?? Constants.YamlDefaults.LoginOptionsIcon
+        }
     }
     
     var isPasscodeEnabled: Bool {
-        guard let passcode = dataModel?.passcode.enable else { return true }
-        return passcode != Constants.false
+        switch defaultLanguage {
+        case "fr":
+            guard let passcode = dataModel?.fr.passcode.enable else { return true }
+            return passcode != Constants.false
+        default:
+            guard let passcode = dataModel?.en.passcode.enable else { return true }
+            return passcode != Constants.false
+        }
     }
     
     var passcodeOnReturnText: String {
-        return dataModel?.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
+        default:
+            return dataModel?.en.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
+        }
     }
     
     var passcodeType: String {
-        return dataModel?.passcode.passcodeType ?? Constants.Passcode.lengthFour
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.passcode.passcodeType ?? Constants.Passcode.lengthFour
+        default:
+            return dataModel?.en.passcode.passcodeType ?? Constants.Passcode.lengthFour
+        }
     }
     
     var showAppleLogin: Bool {
-        guard let showSocialLogin = dataModel?.showAppleSignin else { return false }
-        return showSocialLogin == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let showSocialLogin = dataModel?.fr.showAppleSignin else { return false }
+            return showSocialLogin == Constants.true
+        default:
+            guard let showSocialLogin = dataModel?.en.showAppleSignin else { return false }
+            return showSocialLogin == Constants.true
+        }
     }
     
     var showGoogleLogin: Bool {
-        guard let showSocialLogin = dataModel?.showGoogleSignin else { return false }
-        return showSocialLogin == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let showSocialLogin = dataModel?.fr.showGoogleSignin else { return false }
+            return showSocialLogin == Constants.true
+        default:
+            guard let showSocialLogin = dataModel?.en.showGoogleSignin else { return false }
+            return showSocialLogin == Constants.true
+        }
     }
     
     var googleClientID: String? {
-        return dataModel?.googleClientID
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.googleClientID
+        default:
+            return dataModel?.en.googleClientID
+        }
     }
     
     var showGender: Bool {
-        guard let showGender = dataModel?.registration.showGender else { return false }
-        return showGender == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let showGender = dataModel?.fr.registration.showGender else { return false }
+            return showGender == Constants.true
+        default:
+            guard let showGender = dataModel?.en.registration.showGender else { return false }
+            return showGender == Constants.true
+        }
     }
     
     var showDateOfBirth: Bool {
-        guard let showDOB = dataModel?.registration.showDateOfBirth else { return false }
-        return showDOB == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let showDOB = dataModel?.fr.registration.showDateOfBirth else { return false }
+            return showDOB == Constants.true
+        default:
+            guard let showDOB = dataModel?.en.registration.showDateOfBirth else { return false }
+            return showDOB == Constants.true
+        }
     }
     
     var failedLoginText: String? {
-        return dataModel?.login.failedLoginText ?? Constants.YamlDefaults.FailedLoginText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.login.failedLoginText ?? Constants.YamlDefaults.FailedLoginText
+        default:
+            return dataModel?.en.login.failedLoginText ?? Constants.YamlDefaults.FailedLoginText
+        }
     }
     
     var failedLoginTitle: String? {
-        return dataModel?.login.failedLoginTitle ?? Constants.YamlDefaults.FailedLoginTitle
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.login.failedLoginTitle ?? Constants.YamlDefaults.FailedLoginTitle
+        default:
+            return dataModel?.en.login.failedLoginTitle ?? Constants.YamlDefaults.FailedLoginTitle
+        }
     }
     
     var healthPermissionsTitle: String? {
-        return dataModel?.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        default:
+            return dataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        }
     }
     
     var healthPermissionsText: String? {
-        return dataModel?.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        default:
+            return dataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        }
     }
     
     var useCareKit: Bool {
-        guard let useCareKit = dataModel?.useCareKit else { return false }
-        return useCareKit == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let useCareKit = dataModel?.fr.useCareKit else { return false }
+            return useCareKit == Constants.true
+        default:
+            guard let useCareKit = dataModel?.en.useCareKit else { return false }
+            return useCareKit == Constants.true
+        }
     }
     
     var showCheckupScreen: Bool {
-        guard let showCheckupScreen = dataModel?.showCheckupScreen else { return false }
-        return showCheckupScreen == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let showCheckupScreen = dataModel?.fr.showCheckupScreen else { return false }
+            return showCheckupScreen == Constants.true
+        default:
+            guard let showCheckupScreen = dataModel?.en.showCheckupScreen else { return false }
+            return showCheckupScreen == Constants.true
+        }
     }
     
     var showStaticUIScreen: Bool {
-        guard let showStaticUIScreen = dataModel?.showStaticUIScreen else { return false }
-        return showStaticUIScreen == Constants.true
+        switch defaultLanguage {
+        case "fr":
+            guard let showStaticUIScreen = dataModel?.fr.showStaticUIScreen else { return false }
+            return showStaticUIScreen == Constants.true
+        default:
+            guard let showStaticUIScreen = dataModel?.en.showStaticUIScreen else { return false }
+            return showStaticUIScreen == Constants.true
+        }
     }
     
     var backgroundReadFrequency: String? {
-        return dataModel?.healthKitData.backgroundReadFrequency ?? "immediate"
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
+        default:
+            return dataModel?.en.healthKitData.backgroundReadFrequency ?? "immediate"
+        }
     }
     
     var healthRecords: HealthRecords? {
-        return dataModel?.healthRecords
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.healthRecords
+        default:
+            return dataModel?.en.healthRecords
+        }
     }
     
     var consent: Consent? {
-        return dataModel?.consent
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.consent
+        default:
+            return dataModel?.en.consent
+        }
     }
     
     var withdrawl: Withdrawal? {
-        return dataModel?.withdrawal
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.withdrawal
+        default:
+            return dataModel?.en.withdrawal
+        }
     }
     
     var healthKitDataToRead: [HealthKitTypes] {
-        return dataModel?.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        default:
+            return dataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        }
     }
     
     var completionStepTitle: String? {
-        return dataModel?.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
+        default:
+            return dataModel?.en.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
+        }
     }
     
     var completionStepText: String? {
-        return dataModel?.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
+        switch defaultLanguage {
+        case "fr":
+            return dataModel?.fr.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
+        default:
+            return dataModel?.en.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
+        }
     }
 }

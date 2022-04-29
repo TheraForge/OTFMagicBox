@@ -108,6 +108,11 @@ struct DesignConfig: Codable {
     let textValue: String
 }
 
+struct defaultConfig: Codable{
+    let en: DataModel
+    let fr: DataModel
+}
+
 struct DataModel: Codable {
     let designConfig: [DesignConfig]
     let apiKey: String
