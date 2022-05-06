@@ -116,6 +116,97 @@ DataModel:
        title: "Activities"
        color: "Black"
        description: "Keep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities."
+       
+    consent:
+      reviewConsentStepText: "Review TheraForge Consent Form"
+      reasonForConsentText: "Consent to join the TheraForge Health Research Study."
+      fileName: "Consent Form Agreement File"
+      title: "TheraForge Consent"
+      
+      
+      data:
+ ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
+          content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
+        
+ ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
+          content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
+ 
+ ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+          content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+  
+ ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "false"
+          summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+          content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
+        
+ ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
+          content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
+ 
+ ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Study tasks involve many aspects of daily functionalities."
+          content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
+        
+ ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
+          content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+        
+ ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "You may withdraw your consent and discontinue participation at any time."
+          content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
+        
+ ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "This is custom section."
+          content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+          
+    registration:
+      showDateOfBirth: "true"
+      showGender: "true"
+  
+    showAppleSignin:  "true"
+    showGoogleSignin: "false"
+    googleClientID: "add_your_client_id_here"
+    
+    
+    login:
+      loginPasswordless: "true"
+  
+ # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
+      loginStepTitle: "Almost done!"
+      loginStepText: "We need to confirm your email address and send you a copy of the consent you just signed."
+  
+ # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
+      failedLoginTitle: "Unable to Login"
+      failedLoginText: "Please try again in five minutes"
+      
+    passcode:
+      enable: "false"
+      passcodeOnReturnText: "Welcome back!"
+      passcodeText: "Now you will create a passcode to identify yourself to the app and protect access to information you have entered."
+  
+ # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
+      passcodeType: "4"
+  
+  # Login options screen configuration
+    loginOptionsInfo:
+      text: "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
+      icon: "cloud"
+      
+      
+    completionStep:
+      title: "Welcome aboard."
+      text: "This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality."
      
  # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
@@ -174,6 +265,100 @@ DataModel:
        title: "Activités"
        color: "Black"
        description: "Suivez vos progrès en prenant des médicaments et effectuez d'autres activités importantes telles que l'apprentissage et la pratique d'activités physiques."
+       
+       
+    consent:
+      reviewConsentStepText: "Examiner le formulaire de consentement TheraForge"
+      reasonForConsentText: "Consentement à participer à l'étude de recherche en santé TheraForge."
+      fileName: "Fichier d'accord de formulaire de consentement"
+      title: "Consentement TheraForge"
+
+ # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
+      data:
+ ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Vous êtes invité à participer à une étude de recherche sur l'utilisation de l'application OTFMagic pour collecter et rechercher des données sur votre activité quotidienne, votre condition physique et votre état de santé. Il vous sera demandé de télécharger cette application sur votre smartphone et de passer par des écrans qui détermineront l'éligibilité, vous décriront l'étude et vous demanderont de fournir un consentement éclairé. Si vous donnez votre consentement, une copie de ce formulaire de consentement vous sera envoyée par courriel. Il vous sera ensuite demandé d'autoriser l'application OTFMagicBox à collecter des données sur la santé et l'activité de votre téléphone, suivies de questions sur votre préparation à l'activité physique."
+          content: "Votre participation à ce programme est entièrement volontaire. Vous pouvez décider de participer maintenant, retirer votre consentement plus tard et cesser de participer au programme sans aucune perte des prestations ou des soins médicaux auxquels vous avez droit."
+        
+ ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Les données recueillies peuvent vous permettre, ainsi qu'aux chercheurs, de comprendre les schémas et les détails de votre santé."
+          content: "Les données recueillies peuvent vous permettre, ainsi qu'aux chercheurs, de comprendre les schémas et les détails de votre santé."
+ 
+ ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Vos données seront cryptées et envoyées à une base de données sécurisée, votre nom étant remplacé par un code anonymisé. Vos données personnelles ne seront visibles que par les entités autorisées."
+          content: "Vos données seront cryptées et envoyées à une base de données sécurisée, votre nom étant remplacé par un code anonymisé. Vos données personnelles ne seront visibles que par les entités autorisées."
+  
+ ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "false"
+          summary: "La collecte de données de santé est utilisée pour rendre l'analyse numérique plus rapide et plus précise."
+          content: "Les données de santé permettent de prescrire des traitements et de prendre des décisions cliniques avec une plus grande précision, en éliminant les conjectures souvent impliquées dans le traitement, ce qui entraîne une réduction des coûts et une amélioration des soins aux patients."
+        
+ ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Il s'agit d'un programme entièrement à distance administré sur votre appareil mobile. Votre participation à ce programme durera 10 à 15 minutes par jour pendant une semaine."
+          content: "Il s'agit d'un programme entièrement à distance administré sur votre appareil mobile. Votre participation à ce programme durera 10 à 15 minutes par jour pendant une semaine."
+ 
+ ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Les tâches d'étude impliquent de nombreux aspects des fonctionnalités quotidiennes."
+          content: "Certaines des tâches de cette étude vous obligeront à répondre à des questions d'enquête sur des facteurs liés à la santé et au mode de vie. On vous demandera de répondre à un sondage sur votre capacité à augmenter votre activité physique et à tester votre condition physique."
+        
+ ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Nous vous demanderons d'effectuer des tâches actives pouvant nécessiter une activité physique. On vous demandera de remplir un questionnaire de préparation à l'activité physique, qui vous conseillera de parler à votre médecin avant d'augmenter l'activité physique ou d'évaluer votre forme physique."
+          content: "Les tâches liées à la santé impliquent de nombreux aspects de la fonction quotidienne, y compris l'hygiène personnelle et la nutrition, la sécurité et le confort, la forme physique, la qualité du sommeil, la gestion du stress, ainsi que la planification et la coordination pour accomplir ces tâches personnelles."
+        
+ ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Vous pouvez retirer votre consentement et interrompre votre participation à tout moment."
+          content: "Nous ne collecterons ni ne stockerons aucune nouvelle donnée si vous choisissez de vous retirer. Pour vous retirer de l'étude, sélectionnez simplement « Retrait » dans l'onglet de profil."
+        
+ ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Ceci est une section personnalisée."
+          content: "Section de consentement personnalisé. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Énée commodo ligula eget dolor. Masse énéenne. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nca, pellentesque eu, pretium quis, sem."
+    registration:
+      showDateOfBirth: "true"
+      showGender: "true"
+  
+    showAppleSignin:  "true"
+    showGoogleSignin: "false"
+    googleClientID: "add_your_client_id_here"
+
+    
+    login:
+      loginPasswordless: "true"
+  
+ # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
+      loginStepTitle: "Presque fini!"
+      loginStepText: "Nous devons confirmer votre adresse e-mail et vous envoyer une copie du consentement que vous venez de signer."
+  
+ # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
+      failedLoginTitle: "Connection impossible"
+      failedLoginText: "Veuillez réessayer dans cinq minutes"
+
+    passcode:
+      enable: "false"
+      passcodeOnReturnText: "Content de te revoir!"
+      passcodeText: "Vous allez maintenant créer un mot de passe pour vous identifier auprès de l'application et protéger l'accès aux informations que vous avez saisies."
+  
+ # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
+      passcodeType: "4"
+  
+  # Login options screen configuration
+    loginOptionsInfo:
+      text: "Vous pouvez vous connecter à votre compte cloud avec un nom d'utilisateur et un mot de passe. Vous pouvez également vous connecter avec votre identifiant Apple ou avec votre adresse Gmail."
+      icon: "cloud"
+      
+      
+    completionStep:
+      title: "Bienvenue à bord."
+      text: "Cette étape conclut le processus d'intégration et de consentement du framework TheraForge. Ensuite, vous verrez la fonctionnalité principale de l'application."
+     
      
  # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.

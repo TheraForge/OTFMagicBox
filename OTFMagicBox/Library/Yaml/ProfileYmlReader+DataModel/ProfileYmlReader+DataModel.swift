@@ -43,6 +43,18 @@ public class ProfileYmlReader {
             return profileDataModel?.en
         }
     }
+    
+    var backgroundColor: UIColor {
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+        
+        switch langStr {
+        case "fr":
+            return profileDataModel?.fr.backgroundColor.color ?? UIColor.black
+        default:
+            return profileDataModel?.en.backgroundColor.color ?? UIColor.black
+        }
+    }
+    
 }
 
 
@@ -64,6 +76,7 @@ struct ProfileModel: Codable{
     let oldPassword: String
     let newPassword: String
     let resetPassword: String
+    let backgroundColor: String
 }
 
 

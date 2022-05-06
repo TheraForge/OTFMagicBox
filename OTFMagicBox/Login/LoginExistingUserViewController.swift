@@ -79,14 +79,14 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         loginSteps = [signInButtons, loginUserPassword]
         
         //add consent if user dont have consent in cloud
-        let config = YmlReader()
+        let config = OnBoardingYmlReader()
         let consentDocument = ConsentDocument()
         /* **************************************************************
         **************************************************************/
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
-        reviewConsentStep.text = config.reviewConsentStepText
+        reviewConsentStep.text = YmlReader().teamWebsite
         reviewConsentStep.reasonForConsent = config.reasonForConsentText
         
         // create a task with each step
@@ -97,7 +97,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
             passcodeStep.text = "Enter your passcode"
 
-            let type = YmlReader().passcodeType
+            let type = OnBoardingYmlReader().passcodeType
             if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
             } else {
@@ -109,8 +109,8 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         
         // set completion step
         let completionStep = ORKCompletionStep(identifier: Constants.Identifier.CompletionStep)
-        completionStep.title = YmlReader().completionStepTitle
-        completionStep.text = YmlReader().completionStepText
+        completionStep.title = OnBoardingYmlReader().completionStepTitle
+        completionStep.text = OnBoardingYmlReader().completionStepText
         loginSteps += [completionStep]
         
         let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)

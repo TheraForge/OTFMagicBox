@@ -53,7 +53,7 @@ struct ProfileUIView: View {
                 }
                 
                 Section {
-                    if YmlReader().isPasscodeEnabled {
+                    if OnBoardingYmlReader().isPasscodeEnabled {
                         ChangePasscodeView()
                     }
                     HelpView(site: YmlReader().teamWebsite, title: ProfileYmlReader().profileData?.help ?? "Help")

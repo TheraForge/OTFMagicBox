@@ -34,12 +34,6 @@ OF SUCH DAMAGE.
 
 import Foundation
 
-
-struct Registration: Codable {
-    let showDateOfBirth: String
-    let showGender: String
-}
-
 struct Login: Codable {
     let loginPasswordless: String
     let loginStepTitle: String
@@ -47,25 +41,6 @@ struct Login: Codable {
     let failedLoginTitle: String
     let failedLoginText: String
 }
-
-struct LoginOptionsInfo: Codable {
-    let text: String
-    let icon: String
-}
-
-struct Consent: Codable {
-     let reviewConsentStepText: String
-     let reasonForConsentText: String
-     let fileName: String
-     let title: String
-     let data: [ConsentDescription]
- }
-
- struct ConsentDescription: Codable {
-     let show: String
-     let summary: String
-     let content: String
- }
  
 struct Passcode: Codable {
     let enable: String
@@ -98,42 +73,31 @@ struct HealthKitTypes: Codable, Equatable  {
     let type: String
 }
 
-struct CompletionStep: Codable {
-    let title: String
-    let text: String
-}
-
 struct DesignConfig: Codable {
     let name: String
     let textValue: String
 }
 
 struct defaultConfig: Codable{
+    let apiKey: String
     let en: DataModel
     let fr: DataModel
-}
-
-struct DataModel: Codable {
     let designConfig: [DesignConfig]
-    let apiKey: String
-    let studyTitle: String
-    let teamName: String
-    let teamEmail: String
-    let teamPhone: String
-    let copyright: String
     let teamWebsite: String
     let showAppleSignin: String
     let showGoogleSignin: String
     let googleClientID: String?
-    let passcode: Passcode
-    let completionStep: CompletionStep
-    let useCareKit: String
+    let teamEmail: String
+    let teamPhone: String
     let showCheckupScreen: String
     let showStaticUIScreen: String
-    let login: Login
-    let loginOptionsInfo: LoginOptionsInfo
-    let registration: Registration
-    let consent: Consent
+    let useCareKit: String
+}
+
+struct DataModel: Codable {
+    let studyTitle: String
+    let teamName: String
+    let copyright: String
     let healthRecords: HealthRecords
     let healthKitData: HealthKitData
     let withdrawal: Withdrawal

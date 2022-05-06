@@ -103,6 +103,7 @@ DataModel:
     oldPassword: "Old Password"
     newPassword: "New Password"
     resetPassword: "Reset Password"
+    backgroundColor: "White"
     
   fr:
     title: "Profil"
@@ -121,6 +122,7 @@ DataModel:
     oldPassword: "ancien mot de passe"
     newPassword: "nouveau mot de passe"
     resetPassword: "réinitialiser le mot de passe"
+    backgroundColor: "White"
     
  # Link to ReadMe document
 
