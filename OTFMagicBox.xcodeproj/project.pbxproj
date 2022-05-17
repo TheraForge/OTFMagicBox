@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1B5AE289D75ABDE6C4F5E2D4 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83DFEB7A9272007D999BECD /* Pods_OTFMagicBox.framework */; };
-		32840E1E28191CBC004299CD /* UIYmlReader+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32840E1D28191CBC004299CD /* UIYmlReader+DataModel.swift */; };
 		32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */ = {isa = PBXBuildFile; fileRef = 32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */; };
 		32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */; };
-		32FFCFEE2817DBED00737FA3 /* ProfileYmlReader+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FFCFED2817DBED00737FA3 /* ProfileYmlReader+DataModel.swift */; };
-		32FFCFFA28191A7800737FA3 /* UIAppSysParameter.yml in Resources */ = {isa = PBXBuildFile; fileRef = 32FFCFF928191A7800737FA3 /* UIAppSysParameter.yml */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
 		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
 		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
@@ -126,11 +123,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32840E1D28191CBC004299CD /* UIYmlReader+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIYmlReader+DataModel.swift"; sourceTree = "<group>"; };
 		32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ModuleAppSysParameter.yml; sourceTree = "<group>"; };
 		32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModuleAppYmlReader+DataModel.swift"; sourceTree = "<group>"; };
-		32FFCFED2817DBED00737FA3 /* ProfileYmlReader+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileYmlReader+DataModel.swift"; sourceTree = "<group>"; };
-		32FFCFF928191A7800737FA3 /* UIAppSysParameter.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = UIAppSysParameter.yml; sourceTree = "<group>"; };
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
 		5A41D036266A955C007CCEB4 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -261,28 +255,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		32FFCFEC2817DB9000737FA3 /* ProfileYmlReader+DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				32FFCFED2817DBED00737FA3 /* ProfileYmlReader+DataModel.swift */,
-			);
-			path = "ProfileYmlReader+DataModel";
-			sourceTree = "<group>";
-		};
 		32FFCFF128180A6800737FA3 /* ModuleAppYmlReader+DataModel */ = {
 			isa = PBXGroup;
 			children = (
 				32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */,
 			);
 			path = "ModuleAppYmlReader+DataModel";
-			sourceTree = "<group>";
-		};
-		32FFCFF62818106D00737FA3 /* ResearchKitYmlReader+DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				32840E1D28191CBC004299CD /* UIYmlReader+DataModel.swift */,
-			);
-			path = "ResearchKitYmlReader+DataModel";
 			sourceTree = "<group>";
 		};
 		5A41CD0D2664D729007CCEB4 /* HealthData */ = {
@@ -320,9 +298,7 @@
 		5A49626D26D4A2EA00A4B4DF /* Yaml */ = {
 			isa = PBXGroup;
 			children = (
-				32FFCFF62818106D00737FA3 /* ResearchKitYmlReader+DataModel */,
 				32FFCFF128180A6800737FA3 /* ModuleAppYmlReader+DataModel */,
-				32FFCFEC2817DB9000737FA3 /* ProfileYmlReader+DataModel */,
 				5A49626E26D4A2EA00A4B4DF /* DataModel.swift */,
 				5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */,
 			);
@@ -602,7 +578,6 @@
 				5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */,
 				32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */,
 				CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */,
-				32FFCFF928191A7800737FA3 /* UIAppSysParameter.yml */,
 				CE482CFA262C954A00C0A2D5 /* ContentView.swift */,
 				CE482CFC262C954C00C0A2D5 /* Assets.xcassets */,
 				CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */,
@@ -703,7 +678,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */,
-				32FFCFFA28191A7800737FA3 /* UIAppSysParameter.yml in Resources */,
 				CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */,
 				CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */,
 				846761BC27DF8BC300A3207E /* tap.aif in Resources */,
@@ -774,7 +748,6 @@
 				846761BB27DF8BC300A3207E /* SurveysList.swift in Sources */,
 				5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */,
 				5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */,
-				32FFCFEE2817DBED00737FA3 /* ProfileYmlReader+DataModel.swift in Sources */,
 				846761A527DF8AB800A3207E /* OnboardingOptionsViewController.swift in Sources */,
 				84771FA9272974B700468E0E /* Extension+Image.swift in Sources */,
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
@@ -816,7 +789,6 @@
 				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
 				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
 				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
-				32840E1E28191CBC004299CD /* UIYmlReader+DataModel.swift in Sources */,
 				5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */,
 				5AB1808226B88A2B007AF766 /* Metrics.swift in Sources */,
 				5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */,
