@@ -52,13 +52,13 @@ class OTFMagicBoxYamlTests: XCTestCase {
     }
     
     func testRegistrationIsDOB() {
-        let inputValue = YmlReader().registration?.showDateOfBirth
+        let inputValue = OnBoardingYmlReader().registration?.showDateOfBirth
         let expectedValue = Constants.true
         XCTAssertEqual(inputValue, expectedValue);
     }
     
     func testRegistrationIsGender() {
-        let inputValue = YmlReader().registration?.showGender
+        let inputValue = OnBoardingYmlReader().registration?.showGender
         let expectedValue = Constants.true
         XCTAssertEqual(inputValue, expectedValue);
     }
@@ -73,26 +73,26 @@ class OTFMagicBoxYamlTests: XCTestCase {
     
     
     func testLoginPasswordless() {
-        let inputValue = YmlReader().loginPasswordless
+        let inputValue = OnBoardingYmlReader().loginPasswordless
         let expectedValue = false
         XCTAssertEqual(inputValue, expectedValue);
     }
 
     func testLoginStepTitle() {
-        let inputValue = YmlReader().loginStepTitle
+        let inputValue = OnBoardingYmlReader().loginStepTitle
         let expectedValue = "Almost done!"
         XCTAssertEqual(inputValue, expectedValue);
     }
     
     func testLoginStepText() {
-        let inputValue = YmlReader().loginStepText
+        let inputValue = OnBoardingYmlReader().loginStepText
         let expectedValue = "We need to confirm your email address and send you a copy of the consent you just signed."
         XCTAssertEqual(inputValue, expectedValue);
     }
-    
+
     func testOnboardingData() {
-        let inputValue = YmlReader().onboardingData?.first
-        let expectedValue: Onboarding = Onboarding(image: "heart.circle", description: "Take PRIME care of your health")
+        let inputValue = OnBoardingYmlReader().onboardingData?.first
+        let expectedValue: Onboarding = Onboarding(image: "heart.circle", icon: "doc.text.below.ecg", title: "Activities", color: "Black", description: "Take PRIME care of your health")
         XCTAssertEqual(inputValue, expectedValue);
     }
     
@@ -103,19 +103,19 @@ class OTFMagicBoxYamlTests: XCTestCase {
     }
     
     func testConsentTitle() {
-        let inputValue = YmlReader().consentTitle
+        let inputValue = OnBoardingYmlReader().consentTitle
         let expectedValue = "TheraForge Consent"
         XCTAssertEqual(inputValue, expectedValue);
     }
     
     func testPasscodeType() {
-        let inputValue = YmlReader().passcodeType
+        let inputValue = OnBoardingYmlReader().passcodeType
         let expectedValue = "4"
         XCTAssertEqual(inputValue, expectedValue);
     }
     
     func testFailedLoginTitle() {
-        let inputValue = YmlReader().failedLoginTitle
+        let inputValue = OnBoardingYmlReader().failedLoginTitle
         let expectedValue = "Unable to Login"
         XCTAssertEqual(inputValue, expectedValue);
     }
@@ -145,7 +145,7 @@ class OTFMagicBoxYamlTests: XCTestCase {
     }
     
     func testCompletionStepTitle() {
-        let inputValue = YmlReader().completionStepTitle
+        let inputValue = OnBoardingYmlReader().completionStepTitle
         let expectedValue = "Welcome aboard."
         XCTAssertEqual(inputValue, expectedValue);
     }

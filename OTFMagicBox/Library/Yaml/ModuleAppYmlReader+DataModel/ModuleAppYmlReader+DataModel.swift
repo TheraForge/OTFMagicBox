@@ -1,8 +1,8 @@
 //
-//  OnBoardingYmlReader+DataModel.swift
+//  ModuleAppYmlReader+DataModel.swift
 //  OTFMagicBox
 //
-//  Created by Arsalan Raza on 26/04/2022.
+//  Created by Arsalan Raza on 17/05/2022.
 //
 
 import Foundation
@@ -10,10 +10,10 @@ import UIKit
 import SwiftUI
 import Yams
 
-public class OnBoardingYmlReader {
+public class ModuleAppYmlReader {
     
     /// Yaml file name.
-    private let fileName = Constants.YamlDefaults.onboardingFileName
+    private let fileName = Constants.YamlDefaults.moduleAppFileName
     
     var onBoardingDataModel : OnBoardingScreen?
     
@@ -34,13 +34,15 @@ public class OnBoardingYmlReader {
     }
     
     
-    var defaultLanguage: String{
-        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
-        return langStr
+    func getPreferredLocale() -> Locale {
+        guard let preferredIdentifier = Locale.preferredLanguages.first else {
+            return Locale.current
+        }
+        return Locale(identifier: preferredIdentifier)
     }
     
     var onboardingData: [Onboarding]? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.onboarding
         default:
@@ -49,7 +51,7 @@ public class OnBoardingYmlReader {
     }
     
     var primaryColor: UIColor {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             let valueSet = (onBoardingDataModel?.fr.onboarding ?? [])
             for item in valueSet{
@@ -65,7 +67,7 @@ public class OnBoardingYmlReader {
     }
     
     var reasonForConsentText: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.consent.reasonForConsentText ?? Constants.YamlDefaults.TeamWebsite
         default:
@@ -74,7 +76,7 @@ public class OnBoardingYmlReader {
     }
     
     var consentFileName: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.consent.fileName ?? Constants.YamlDefaults.ConsentFileName
         default:
@@ -83,7 +85,7 @@ public class OnBoardingYmlReader {
     }
     
     var consentTitle: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.consent.title ?? Constants.YamlDefaults.ConsentTitle
         default:
@@ -92,7 +94,7 @@ public class OnBoardingYmlReader {
     }
     
     var consent: Consent? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.consent
         default:
@@ -101,7 +103,7 @@ public class OnBoardingYmlReader {
     }
     
     var registration: Registration? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.registration
         default:
@@ -111,7 +113,7 @@ public class OnBoardingYmlReader {
     
     
     var showGender: Bool {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             guard let showGender = onBoardingDataModel?.fr.registration.showGender else { return false }
             return showGender == Constants.true
@@ -122,7 +124,7 @@ public class OnBoardingYmlReader {
     }
     
     var showDateOfBirth: Bool {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             guard let showDOB = onBoardingDataModel?.fr.registration.showDateOfBirth else { return false }
             return showDOB == Constants.true
@@ -133,7 +135,7 @@ public class OnBoardingYmlReader {
     }
     
     var completionStepTitle: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
         default:
@@ -142,7 +144,7 @@ public class OnBoardingYmlReader {
     }
     
     var completionStepText: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
         default:
@@ -151,7 +153,7 @@ public class OnBoardingYmlReader {
     }
     
     var isPasscodeEnabled: Bool {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             guard let passcode = onBoardingDataModel?.fr.passcode.enable else { return true }
             return passcode != Constants.false
@@ -162,7 +164,7 @@ public class OnBoardingYmlReader {
     }
     
     var failedLoginText: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.login.failedLoginText ?? Constants.YamlDefaults.FailedLoginText
         default:
@@ -171,7 +173,7 @@ public class OnBoardingYmlReader {
     }
     
     var failedLoginTitle: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.login.failedLoginTitle ?? Constants.YamlDefaults.FailedLoginTitle
         default:
@@ -181,7 +183,7 @@ public class OnBoardingYmlReader {
     
     
     var passcodeOnReturnText: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
         default:
@@ -190,7 +192,7 @@ public class OnBoardingYmlReader {
     }
     
     var passcodeType: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.passcode.passcodeType ?? Constants.Passcode.lengthFour
         default:
@@ -200,7 +202,7 @@ public class OnBoardingYmlReader {
     
     
     var loginPasswordless: Bool {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             guard let passwordless = onBoardingDataModel?.fr.login.loginPasswordless else { return false }
             return passwordless == Constants.true
@@ -211,7 +213,7 @@ public class OnBoardingYmlReader {
     }
     
     var loginStepTitle: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.login.loginStepTitle ?? Constants.YamlDefaults.LoginStepTitle
         default:
@@ -220,7 +222,7 @@ public class OnBoardingYmlReader {
     }
     
     var loginStepText: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
         default:
@@ -229,7 +231,7 @@ public class OnBoardingYmlReader {
     }
     
     var passcodeText: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
         default:
@@ -237,7 +239,7 @@ public class OnBoardingYmlReader {
         }
     }
     var loginOptionsText: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.loginOptionsInfo.text ?? Constants.YamlDefaults.LoginOptionsText
         default:
@@ -246,11 +248,58 @@ public class OnBoardingYmlReader {
     }
     
     var loginOptionsIcon: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return onBoardingDataModel?.fr.loginOptionsInfo.icon ?? Constants.YamlDefaults.LoginOptionsIcon
         default:
             return onBoardingDataModel?.en.loginOptionsInfo.icon ?? Constants.YamlDefaults.LoginOptionsIcon
+        }
+    }
+    
+    var profileData: ProfileModel? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.profileDataModel
+        default:
+            return onBoardingDataModel?.en.profileDataModel
+        }
+    }
+    
+    var backgroundColor: UIColor {
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+        
+        switch langStr {
+        case "fr":
+            return onBoardingDataModel?.fr.profileDataModel.backgroundColor.color ?? UIColor.black
+        default:
+            return onBoardingDataModel?.en.profileDataModel.backgroundColor.color ?? UIColor.black
+        }
+    }
+    
+    var researchKitModel: ResearchKitModel? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.researchKitView
+        default:
+            return onBoardingDataModel?.en.researchKitView
+        }
+    }
+    
+    var surverysTaskModel: SurverysTask? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.surverysTask
+        default:
+            return onBoardingDataModel?.en.surverysTask
+        }
+    }
+    
+    var careKitModel: CarekitModel? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.carekitView
+        default:
+            return onBoardingDataModel?.en.carekitView
         }
     }
 }
@@ -305,5 +354,134 @@ struct OnBoardingDataModel: Codable{
     let passcode: Passcode
     let login: Login
     let loginOptionsInfo: LoginOptionsInfo
-    //    let designConfig: [DesignConfig]
+    let profileDataModel: ProfileModel
+    let researchKitView: ResearchKitModel
+    let surverysTask: SurverysTask
+    let carekitView: CarekitModel
 }
+
+
+struct ProfileModel: Codable{
+    let title: String
+    let profileImage: String
+    let help: String
+    let resetPasswordText: String
+    let reportProblemText: String
+    let supportText: String
+    let consentText: String
+    let WithdrawStudyText: String
+    let profileInfoHeader: String
+    let firstName: String
+    let lastName: String
+    let reportProblemHeader: String
+    let otherInfo: String
+    let oldPassword: String
+    let newPassword: String
+    let resetPassword: String
+    let backgroundColor: String
+}
+
+struct ResearchKitModel: Codable{
+    let surveysHeaderTitle: String
+    let formSurveyExample: String
+    let groupedFormSurveyExample: String
+    let simpleSurveyExample: String
+    let surveyQuestionHeaderTitle: String
+    let booleanQuestion: String
+    let customBooleanQuestion: String
+    let dateQuestion: String
+    let dateAndTimeQuestion: String
+    let heightQuestion: String
+    let weightQuestion: String
+    let imageChoiceQuestion: String
+    let locationQuestion: String
+    let numericQuestion: String
+    let scaleQuestion: String
+    let textQuestion: String
+    let textChoiceQuestion: String
+    let timeIntervalQuestion: String
+    let timeOfDayQuestion: String
+    let valuePickerChoiceQuestion: String
+    let validatedTextQuestion: String
+    let imageCaptureStep: String
+    let videoCaptureStep: String
+    let frontFacingCameraStep: String
+    let waitStep: String
+    let pdfViewerStep: String
+    let onBoardingHeaderTitle: String
+    let eligibilityTaskExample: String
+    let consentObtainingExample: String
+    let accountCreation: String
+    let login: String
+    let passcodeCreation: String
+    let activeTasksHeaderTitle: String
+    let audio: String
+    let amslerGrid: String
+    let fitnessCheck: String
+    let holePegTest: String
+    let psat: String
+    let reactionTime: String
+    let shortWalk: String
+    let spatialSpanMemory: String
+    let speechRecognition: String
+    let speechInNoise: String
+    let stroop: String
+    let swiftStroop: String
+    let timedWalkWithTurnAround: String
+    let toneAudiometry: String
+    let dBHLToneAudiometry: String
+    let environmentSPLMeter: String
+    let towerOfHanoi: String
+    let twoFingerTappingInterval: String
+    let walkBackAndForth: String
+    let tremorTest: String
+    let videoInstructionTask: String
+    let kneeRangeOfMotion: String
+    let shoulderRangeOfMotion: String
+    let trailMakingTest: String
+    let visualAcuityLandoltC: String
+    let contrastSensitivityPeak: String
+    let miscellaneousHeaderTitle: String
+    let webView: String
+    let researchKit: String
+    
+}
+
+
+struct SurverysTask: Codable{
+    let title: String
+    let additionalText: String
+    let itemQuestion: String
+    let grannySmith: String
+    let honeycrisp: String
+    let fuji: String
+    let mcIntosh: String
+    let kanzi: String
+    let questionText: String
+    let groupServeyTitle: String
+    let sectionTitle: String
+    let sectionDetailText: String
+    let placeholder: String
+    let socioeconomicLadder: String
+    let questionnaire: String
+    let newsletter: String
+    let learnMoreTitle: String
+    let learnMoreText: String
+    let birthdayText: String
+    
+}
+
+struct CarekitModel: Codable{
+    let simple: String
+    let instruction: String
+    let buttonLog: String
+    let grid: String
+    let checklist: String
+    let labeledValue: String
+    let numericProgress: String
+    let contactHeader: String
+    let taskHeader: String
+    let detailed: String
+    let careKit: String
+}
+

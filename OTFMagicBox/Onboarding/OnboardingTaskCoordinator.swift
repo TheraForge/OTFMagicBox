@@ -53,7 +53,7 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
             return true
         }
         
-        let config = OnBoardingYmlReader()
+        let config = ModuleAppYmlReader()
         
         var checkRegistrationStatusFirst = false
         if config.isPasscodeEnabled, step.identifier == Constants.Identifier.PasscodeStep {
@@ -152,7 +152,7 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
                 consentDocument.makePDF { (data, error) -> Void in
                     
                     var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-                    docURL = docURL?.appendingPathComponent("\(OnBoardingYmlReader().consentFileName).pdf") as NSURL?
+                    docURL = docURL?.appendingPathComponent("\(ModuleAppYmlReader().consentFileName).pdf") as NSURL?
                     
                     do {
                         let url = docURL! as URL

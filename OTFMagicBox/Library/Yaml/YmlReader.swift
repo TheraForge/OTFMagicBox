@@ -63,9 +63,11 @@ public class YmlReader {
         }
     }
     
-    var defaultLanguage: String{
-        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
-        return langStr
+    func getPreferredLocale() -> Locale {
+        guard let preferredIdentifier = Locale.preferredLanguages.first else {
+            return Locale.current
+        }
+        return Locale(identifier: preferredIdentifier)
     }
     
     // Returns primary color.
@@ -98,7 +100,7 @@ public class YmlReader {
     
     
     var studyTitle: String {
-    switch defaultLanguage {
+    switch getPreferredLocale().languageCode {
         case "fr":
             if let title = dataModel?.fr.studyTitle {
                 return title
@@ -112,7 +114,7 @@ public class YmlReader {
     }
     
     var teamName: String {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.teamName ?? Constants.YamlDefaults.TeamName
         default:
@@ -130,7 +132,7 @@ public class YmlReader {
     
     var teamCopyright: String {
         
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.copyright ?? Constants.YamlDefaults.TeamCopyright
         default:
@@ -157,7 +159,7 @@ public class YmlReader {
     }
     
     var healthPermissionsTitle: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
         default:
@@ -166,7 +168,7 @@ public class YmlReader {
     }
     
     var healthPermissionsText: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
         default:
@@ -190,7 +192,7 @@ public class YmlReader {
     }
     
     var backgroundReadFrequency: String? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
         default:
@@ -199,7 +201,7 @@ public class YmlReader {
     }
     
     var healthRecords: HealthRecords? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.healthRecords
         default:
@@ -208,7 +210,7 @@ public class YmlReader {
     }
     
     var withdrawl: Withdrawal? {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.withdrawal
         default:
@@ -217,7 +219,7 @@ public class YmlReader {
     }
     
     var healthKitDataToRead: [HealthKitTypes] {
-        switch defaultLanguage {
+        switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
         default:

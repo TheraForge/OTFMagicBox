@@ -42,7 +42,7 @@ struct UpdateUserProfileView: View {
     
     var body: some View {
         VStack {
-            Image(uiImage: UIImage(named: ProfileYmlReader().profileData?.profileImage ?? "user_profile")!)
+            Image(uiImage: UIImage(named: ModuleAppYmlReader().profileData?.profileImage ?? "user_profile")!)
                 .iconStyle()
                 .frame(width: 40, height: 40, alignment: .center)
              

@@ -91,10 +91,10 @@ struct ChangePasswordDeatilsView: View {
                 .style(.emailField)
                 .disabled(true)
                 
-            SecureField(ProfileYmlReader().profileData?.oldPassword ?? "Old Password", text: $oldPassword)
+            SecureField(ModuleAppYmlReader().profileData?.oldPassword ?? "Old Password", text: $oldPassword)
                 .style(.secureField)
             
-            SecureField(ProfileYmlReader().profileData?.newPassword ?? "New Password", text: $newPassword)
+            SecureField(ModuleAppYmlReader().profileData?.newPassword ?? "New Password", text: $newPassword)
                 .style(.secureField)
             
             Spacer()
@@ -114,7 +114,7 @@ struct ChangePasswordDeatilsView: View {
                     
                 }))
             }, label: {
-                Text(ProfileYmlReader().profileData?.resetPassword ?? "Reset Password")
+                Text(ModuleAppYmlReader().profileData?.resetPassword ?? "Reset Password")
                     .padding(Metrics.PADDING_BUTTON_LABEL)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(self.color)

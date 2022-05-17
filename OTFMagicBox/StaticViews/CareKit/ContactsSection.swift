@@ -36,7 +36,7 @@ import SwiftUI
 
 struct ContactsSection: View {
     var body: some View {
-        Section(header: Text(UIYmlReader().careKitModel?.contactHeader ?? "Contact")) {
+        Section(header: Text(ModuleAppYmlReader().careKitModel?.contactHeader ?? "Contact")) {
             ForEach(ContactStyle.allCases, id: \.rawValue) {
                 NavigationLink($0.rawValue.capitalized, destination: ContactDestination(style: $0))
             }
@@ -73,9 +73,9 @@ private enum ContactStyle: String, CaseIterable {
          get {
              switch self {
              case .simple:
-                 return UIYmlReader().careKitModel?.simple ?? ""
+                 return ModuleAppYmlReader().careKitModel?.simple ?? ""
              case .detailed:
-                 return  UIYmlReader().careKitModel?.detailed ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.detailed ?? ""
              }
          }
      }

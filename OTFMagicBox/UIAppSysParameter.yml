@@ -145,6 +145,8 @@ DataModel:
       contrastSensitivityPeak: "Contrast Sensitivity Peak"
       miscellaneousHeaderTitle: "Miscellaneous"
       webView: "Web View"
+      researchKit: "ResearchKit"
+
     
     
     surverysTask:
@@ -180,6 +182,7 @@ DataModel:
       numericProgress: "Numeric Progress"
       taskHeader: "Task"
       detailed: "detailed"
+      careKit: "CareKit"
     
     
  # Link to ReadMe document
@@ -256,6 +259,7 @@ DataModel:
       contrastSensitivityPeak: "Pic de sensibilité au contraste"
       miscellaneousHeaderTitle: "Divers"
       webView: "Affichage Web"
+      researchKit: "Trousse de recherche"
     
     
     surverysTask:
@@ -291,3 +295,4 @@ DataModel:
       numericProgress: "Progression numérique"
       taskHeader: "Tâche"
       detailed: "détaillée"
+      careKit: "Kit de soins"

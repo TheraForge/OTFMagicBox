@@ -117,7 +117,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         
         var stackViewHeight = CGFloat(0)
         
-        let config = OnBoardingYmlReader()
+        let config = ModuleAppYmlReader()
         
         if YmlReader().showAppleLogin {
             stackViewHeight += 60

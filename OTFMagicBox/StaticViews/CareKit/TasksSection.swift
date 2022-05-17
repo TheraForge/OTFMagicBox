@@ -40,7 +40,7 @@ import OTFCareKitStore
 struct TaskSection: View {
     
     var body: some View {
-        Section(header: Text(UIYmlReader().careKitModel?.taskHeader ?? "Task")) {
+        Section(header: Text(ModuleAppYmlReader().careKitModel?.taskHeader ?? "Task")) {
             ForEach(TaskStyle.allCases, id: \.rawValue) { style in
                 if style.supportsSwiftUI || style.supportsUIKit {
                     NavigationLink(style.rawValue.capitalized, destination: TaskDestination(style: style))
@@ -96,19 +96,19 @@ enum TaskStyle: String, CaseIterable, Codable {
          get {
              switch self {
              case .simple:
-                 return UIYmlReader().careKitModel?.simple ?? ""
+                 return ModuleAppYmlReader().careKitModel?.simple ?? ""
              case .instruction:
-                 return  UIYmlReader().careKitModel?.instruction ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.instruction ?? ""
              case .buttonLog:
-                 return  UIYmlReader().careKitModel?.buttonLog ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.buttonLog ?? ""
              case .grid:
-                 return  UIYmlReader().careKitModel?.grid ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.grid ?? ""
              case .checklist:
-                 return  UIYmlReader().careKitModel?.checklist ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.checklist ?? ""
              case .labeledValue:
-                 return  UIYmlReader().careKitModel?.labeledValue ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.labeledValue ?? ""
              case .numericProgress:
-                 return  UIYmlReader().careKitModel?.numericProgress ?? ""
+                 return  ModuleAppYmlReader().careKitModel?.numericProgress ?? ""
              }
          }
      }

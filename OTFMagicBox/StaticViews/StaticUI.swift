@@ -66,10 +66,10 @@ struct StaticUI: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink("CareKit",
+                NavigationLink(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit",
                                destination: CareKitViews())
                 
-                NavigationLink("ResearchKit",
+                NavigationLink(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit",
                                destination: ResearchKitViews())
             }
             .listStyle(GroupedListStyle())

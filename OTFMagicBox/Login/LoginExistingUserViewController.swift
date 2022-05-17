@@ -79,7 +79,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         loginSteps = [signInButtons, loginUserPassword]
         
         //add consent if user dont have consent in cloud
-        let config = OnBoardingYmlReader()
+        let config = ModuleAppYmlReader()
         let consentDocument = ConsentDocument()
         /* **************************************************************
         **************************************************************/
@@ -97,7 +97,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
             passcodeStep.text = "Enter your passcode"
 
-            let type = OnBoardingYmlReader().passcodeType
+            let type = ModuleAppYmlReader().passcodeType
             if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
             } else {
@@ -109,8 +109,8 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         
         // set completion step
         let completionStep = ORKCompletionStep(identifier: Constants.Identifier.CompletionStep)
-        completionStep.title = OnBoardingYmlReader().completionStepTitle
-        completionStep.text = OnBoardingYmlReader().completionStepText
+        completionStep.title = ModuleAppYmlReader().completionStepTitle
+        completionStep.text = ModuleAppYmlReader().completionStepText
         loginSteps += [completionStep]
         
         let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)

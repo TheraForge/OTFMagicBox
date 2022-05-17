@@ -52,7 +52,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ taskViewController: ORKTaskViewController, context: Context) {}
     
     func makeUIViewController(context: Context) -> ORKTaskViewController {
-        let config = OnBoardingYmlReader()
+        let config = ModuleAppYmlReader()
             
         // *  STEP (1): get user consent
         // use the `ORKVisualConsentStep` from ResearchKit

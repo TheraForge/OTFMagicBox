@@ -52,7 +52,7 @@ struct OnboardingView: View {
     init(onComplete: (() -> Void)? = nil) {
         
         // TODO: Add the actual default image, if the user doesnt enter any image.
-        let config = OnBoardingYmlReader()
+        let config = ModuleAppYmlReader()
         let onboardingdata: [Onboarding] = {
             config.onboardingData ?? [Onboarding(image: "Splash Image", icon: "stethoscope", title: "Welcome", color: "black", description: "Default: This is the description.")]
         }()

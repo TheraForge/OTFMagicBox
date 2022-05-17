@@ -128,7 +128,7 @@ enum Constants {
         static let APIKey = "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
         static let FileName = "AppSysParameters.yml"
         static let ProfileFileName = "ProfileAppSysParameters.yml"
-        static let onboardingFileName = "OnboardingAppSysParameters.yml"
+        static let moduleAppFileName = "ModuleAppSysParameter.yml"
         static let researchKitFileName = "UIAppSysParameter.yml"
         static let LoginStepTitle = "Default: login step title"
         static let LoginStepText = "Default: login step text"

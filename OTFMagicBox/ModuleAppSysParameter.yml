@@ -117,6 +117,12 @@ DataModel:
        color: "Black"
        description: "Keep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities."
        
+       
+    # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
+       
+       
     consent:
       reviewConsentStepText: "Review TheraForge Consent Form"
       reasonForConsentText: "Consent to join the TheraForge Health Research Study."
@@ -207,6 +213,128 @@ DataModel:
     completionStep:
       title: "Welcome aboard."
       text: "This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality."
+      
+      
+    profileDataModel:
+      title: "Profile"
+      profileImage: "user_profile"
+      help: "Help"
+      resetPasswordText: "Reset Password"
+      reportProblemText: "Report a Problem"
+      reportProblemHeader: "Report a Problem"
+      supportText: "Support"
+      consentText: "Consent Documents"
+      WithdrawStudyText: "Withdraw from Study"
+      profileInfoHeader: "BASIC INFORMATION"
+      firstName: "First Name"
+      lastName: "Last Name"
+      otherInfo: "OTHER INFORMATION"
+      oldPassword: "Old Password"
+      newPassword: "New Password"
+      resetPassword: "Reset Password"
+      backgroundColor: "White"
+      
+      
+    researchKitView:
+      surveysHeaderTitle: "SURVEYS"
+      formSurveyExample: "Form Survey Example"
+      groupedFormSurveyExample: "Grouped Form Survey Example"
+      simpleSurveyExample: "Simple Survey Example"
+      surveyQuestionHeaderTitle: "SURVEY QUESTIONS"
+      booleanQuestion: "Boolean Question"
+      customBooleanQuestion: "Custom Boolean Question"
+      dateQuestion: "Date Question"
+      dateAndTimeQuestion: "Date and Time Question"
+      heightQuestion: "Height Question"
+      weightQuestion: "Weight Question"
+      imageChoiceQuestion: "Image Choice Question"
+      locationQuestion: "Location Question"
+      numericQuestion: "Numeric Question"
+      scaleQuestion: "Scale Question"
+      textQuestion: "Text Question"
+      textChoiceQuestion: "Text Choice Question"
+      timeIntervalQuestion: "Time Interval Question"
+      timeOfDayQuestion: "Time of Day Question"
+      valuePickerChoiceQuestion: "Value Picker Choice Question"
+      validatedTextQuestion: "Validated Text Question"
+      imageCaptureStep: "Image Capture Step"
+      videoCaptureStep: "Video Capture Step"
+      frontFacingCameraStep: "Front Facing Camera Step"
+      waitStep: "Wait Step"
+      pdfViewerStep: "PDF Viewer Step"
+      onBoardingHeaderTitle: "ONBOARDING"
+      eligibilityTaskExample: "Eligibility Task Example"
+      consentObtainingExample: "Consent-Obtaining Example"
+      accountCreation: "Account Creation"
+      login: "Login"
+      passcodeCreation: "Passcode Creation"
+      activeTasksHeaderTitle: "Active Tasks"
+      audio: "Audio"
+      amslerGrid: "Amsler Grid"
+      fitnessCheck: "Fitness Check"
+      holePegTest: "Hole Peg Test"
+      psat: "PSAT"
+      reactionTime: "Reaction Time"
+      shortWalk: "Short Walk"
+      spatialSpanMemory: "Spatial Span Memory"
+      speechRecognition: "Speech Recognition"
+      speechInNoise: "Speech in Noise"
+      stroop: "Stroop"
+      swiftStroop: "Swift Stroop"
+      timedWalkWithTurnAround: "Timed Walk with Turn Around"
+      toneAudiometry: "Tone Audiometry"
+      dBHLToneAudiometry: "dBHL Tone Audiometry"
+      environmentSPLMeter: "Environment SPL Meter"
+      towerOfHanoi: "Tower of Hanoi"
+      twoFingerTappingInterval: "Two Finger Tapping Interval"
+      walkBackAndForth: "Walk Back and Forth"
+      tremorTest: "Tremor Test"
+      videoInstructionTask: "Video Instruction Task"
+      kneeRangeOfMotion: "Knee Range of Motion"
+      shoulderRangeOfMotion: "Shoulder Range of Motion"
+      trailMakingTest: "Trail Making Test"
+      visualAcuityLandoltC: "Visual Acuity Landolt C"
+      contrastSensitivityPeak: "Contrast Sensitivity Peak"
+      miscellaneousHeaderTitle: "Miscellaneous"
+      webView: "Web View"
+      researchKit: "ResearchKit"
+
+    
+    
+    surverysTask:
+      title: "Form Step"
+      additionalText: "Additional text can go here."
+      itemQuestion: "Which is your favorite apple?"
+      grannySmith: "Granny Smith"
+      honeycrisp: "Honeycrisp"
+      fuji: "Fuji"
+      mcIntosh: "McIntosh"
+      kanzi: "Kanzi"
+      questionText: "Your question goes here."
+      groupServeyTitle: "Form Step"
+      sectionTitle: "Section title"
+      sectionDetailText: "Section detail text"
+      placeholder: "Your placeholder here"
+      socioeconomicLadder: "Select where you are on the socioeconomic ladder."
+      questionnaire: "Questionnaire"
+      newsletter: "Would you like to subscribe to our newsletter?"
+      learnMoreTitle: "Learn more title"
+      learnMoreText: "Learn more text"
+      birthdayText: "When is your birthday?"
+    
+    
+    carekitView:
+      contactHeader: "Contact"
+      simple: "Simple"
+      instruction: "instruction"
+      buttonLog: "buttonLog"
+      grid: "grid"
+      checklist: "checklist"
+      labeledValue: "labeled value"
+      numericProgress: "Numeric Progress"
+      taskHeader: "Task"
+      detailed: "detailed"
+      careKit: "CareKit"
      
  # Consent
  # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
@@ -266,6 +394,10 @@ DataModel:
        color: "Black"
        description: "Suivez vos progrès en prenant des médicaments et effectuez d'autres activités importantes telles que l'apprentissage et la pratique d'activités physiques."
        
+       
+ # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
        
     consent:
       reviewConsentStepText: "Examiner le formulaire de consentement TheraForge"
@@ -358,15 +490,131 @@ DataModel:
     completionStep:
       title: "Bienvenue à bord."
       text: "Cette étape conclut le processus d'intégration et de consentement du framework TheraForge. Ensuite, vous verrez la fonctionnalité principale de l'application."
+      
+    profileDataModel:
+      title: "Profil"
+      profileImage: "user_profile"
+      help: "Aider"
+      resetPasswordText: "réinitialiser le mot de passe"
+      reportProblemText: "Signaler un problème"
+      reportProblemHeader: "Signaler un problème"
+      supportText: "Soutien"
+      consentText: "Documents de consentement"
+      WithdrawStudyText: "Se retirer de l'étude"
+      profileInfoHeader: "INFORMATIONS DE BASE"
+      firstName: "Prénom"
+      lastName: "nom de famille"
+      otherInfo: "LES AUTRES INFORMATIONS"
+      oldPassword: "ancien mot de passe"
+      newPassword: "nouveau mot de passe"
+      resetPassword: "réinitialiser le mot de passe"
+      backgroundColor: "White"
      
      
- # Consent
- # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
- # Property consentFileName is the name by which your consent file is created.
-
- # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
- # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
- # Summary and content value can be same or different.
+    researchKitView:
+      surveysHeaderTitle: "ENQUÊTES"
+      formSurveyExample: "Formulaire d'exemple d'enquête"
+      groupedFormSurveyExample: "Exemple d'enquête de formulaire groupé"
+      simpleSurveyExample: "Exemple d'enquête simple"
+      surveyQuestionHeaderTitle: "QUESTIONS DU SONDAGE"
+      booleanQuestion: "Question booléenne"
+      customBooleanQuestion: "Question booléenne personnalisée"
+      dateQuestion: "Date Question"
+      dateAndTimeQuestion: "Question sur la date et l'heure"
+      heightQuestion: "Question sur la taille"
+      weightQuestion: "Question de poids"
+      imageChoiceQuestion: "Question de choix d'image"
+      locationQuestion: "Question de lieu"
+      numericQuestion: "Question numérique"
+      scaleQuestion: "Échelle Question"
+      textQuestion: "Question textuelle"
+      textChoiceQuestion: "Question de choix de texte"
+      timeIntervalQuestion: "Intervalle de temps"
+      timeOfDayQuestion: "Question sur l'heure du jour"
+      valuePickerChoiceQuestion: "Question de choix du sélecteur de valeur"
+      validatedTextQuestion: "Question textuelle validée"
+      imageCaptureStep: "Étape de capture d'image"
+      videoCaptureStep: "Étape de capture vidéo"
+      frontFacingCameraStep: "Étape de la caméra frontale"
+      waitStep: "Étape d'attente"
+      pdfViewerStep: "Étape de la visionneuse PDF"
+      onBoardingHeaderTitle: "INTÉGRATION"
+      eligibilityTaskExample: "Exemple de tâche d'éligibilité"
+      consentObtainingExample: "Exemple d'obtention du consentement"
+      accountCreation: "Création de compte"
+      login: "Connexion"
+      passcodeCreation: "Création de code d'accès"
+      activeTasksHeaderTitle: "Tâches actives"
+      audio: "l'audio"
+      amslerGrid: "Grille d'Amsler"
+      fitnessCheck: "Bilan de condition physique"
+      holePegTest: "Test de cheville de trou"
+      psat: "SPAT"
+      reactionTime: "Temps de réaction"
+      shortWalk: "Petite marche"
+      spatialSpanMemory: "Mémoire d'étendue spatiale"
+      speechRecognition: "Reconnaissance de la parole"
+      speechInNoise: "Discours dans le bruit"
+      stroop: "Stroop"
+      swiftStroop: "Stroop rapide"
+      timedWalkWithTurnAround: "Marche chronométrée avec demi-tour"
+      toneAudiometry: "Audiométrie tonale"
+      dBHLToneAudiometry: "Audiométrie tonale dBHL"
+      environmentSPLMeter: "Compteur SPL d'environnement"
+      towerOfHanoi: "La tour de Hanoi"
+      twoFingerTappingInterval: "Intervalle de tapotement à deux doigts"
+      walkBackAndForth: "Aller et retour"
+      tremorTest: "Test de tremblement"
+      videoInstructionTask: "Tâche d'instruction vidéo"
+      kneeRangeOfMotion: "Gamme de mouvement du genou"
+      shoulderRangeOfMotion: "Amplitude de mouvement des épaules"
+      trailMakingTest: "Test de création de sentiers"
+      visualAcuityLandoltC: "Acuité visuelle Landolt C"
+      contrastSensitivityPeak: "Pic de sensibilité au contraste"
+      miscellaneousHeaderTitle: "Divers"
+      webView: "Affichage Web"
+      researchKit: "Trousse de recherche"
     
- # Link to ReadMe document
+    
+    surverysTask:
+      title: "Étape du formulaire"
+      additionalText: "Le texte supplémentaire peut aller ici."
+      itemQuestion: "Quelle est votre pomme préférée ?"
+      grannySmith: "Granny Smith"
+      honeycrisp: "Honeycrisp"
+      fuji: "Fuji"
+      mcIntosh: "McIntosh"
+      kanzi: "Kanzi"
+      questionText: "Votre question va ici."
+      groupServeyTitle: "Étape du formulaire"
+      sectionTitle: "Section titre"
+      sectionDetailText: "Texte de détail de section"
+      placeholder: "Votre espace réservé ici"
+      socioeconomicLadder: "Sélectionnez où vous vous situez sur l'échelle socio-économique."
+      questionnaire: "Questionnaire"
+      newsletter: "Souhaitez-vous vous inscrire à notre newsletter?"
+      learnMoreTitle: "En savoir plus titre"
+      learnMoreText: "En savoir plus texte"
+      birthdayText: "C'est quand votre anniversaire?"
+    
+    
+    carekitView:
+      contactHeader: "Contacter"
+      simple: "Simple"
+      instruction: "instruction"
+      buttonLog: "boutonJournal"
+      grid: "la grille"
+      checklist: "liste de contrôle"
+      labeledValue: "valeur étiquetée"
+      numericProgress: "Progression numérique"
+      taskHeader: "Tâche"
+      detailed: "détaillée"
+      careKit: "Kit de soins"
+
+     
+   #ProfileScreenSetup
+    
+
+    
+
 
