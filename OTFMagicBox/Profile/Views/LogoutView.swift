@@ -38,7 +38,7 @@ import SwiftUI
 struct LogoutView: View {
     @State private var showingOptions = false
     @State private var showingAlert = false
-    
+    let textColor: UIColor
     var body: some View {
         HStack {
             Spacer()
@@ -48,6 +48,7 @@ struct LogoutView: View {
             }, label: {
                  Text("Logout")
                     .font(.basicFontStyle)
+                    .foregroundColor(Color(textColor))
             })
             .actionSheet(isPresented: $showingOptions) {
                 ActionSheet(
@@ -77,6 +78,6 @@ struct LogoutView: View {
 
 struct LogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        LogoutView()
+        LogoutView(textColor: UIColor())
     }
 }

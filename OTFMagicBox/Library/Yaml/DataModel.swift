@@ -92,6 +92,7 @@ struct defaultConfig: Codable{
     let showCheckupScreen: String
     let showStaticUIScreen: String
     let useCareKit: String
+    let appTheme: ThemeCustomization
 }
 
 struct DataModel: Codable {
@@ -101,4 +102,15 @@ struct DataModel: Codable {
     let healthRecords: HealthRecords
     let healthKitData: HealthKitData
     let withdrawal: Withdrawal
+}
+
+struct ThemeCustomization: Codable{
+    let backgroundColor: String
+    let textColor: String
+    let separatorColor: String
+    let cellbackgroundColor: String
+    let buttonTextColor: String
+    let borderColor: String
+    let headerColor: String
+    
 }

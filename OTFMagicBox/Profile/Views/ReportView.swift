@@ -49,6 +49,7 @@ struct ReportView: View {
         HStack {
             Text(title)
                 .minimumScaleFactor(0.5)
+                .foregroundColor(self.color)
             Spacer()
             Text(self.email).foregroundColor(self.color)
                 .lineLimit(1)

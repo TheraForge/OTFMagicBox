@@ -47,6 +47,7 @@ struct SupportView: View {
     var body: some View {
         HStack {
             Text(title)
+                .foregroundColor(self.color)
             Spacer()
             Text(self.phone).foregroundColor(self.color)
         }

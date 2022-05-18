@@ -104,6 +104,18 @@ DataModel:
  # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
   useCareKit: "true"
   
+
+  appTheme:
+    backgroundColor: "Gray6"
+    textColor: "Black"
+    separatorColor: "Gray"
+    cellbackgroundColor: "White"
+    buttonTextColor: "Blue"
+    borderColor: "Black"
+    headerColor: "Gray"
+  
+  
+  
   designConfig:
       # Offset value.
       - name: "offset"

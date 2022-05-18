@@ -209,6 +209,10 @@ public class YmlReader {
         }
     }
     
+    var appTheme: ThemeCustomization? {
+        return dataModel?.appTheme
+    }
+    
     var withdrawl: Withdrawal? {
         switch getPreferredLocale().languageCode {
         case "fr":

@@ -42,62 +42,73 @@ struct ProfileUIView: View {
     var body: some View {
         VStack {
             Text(ModuleAppYmlReader().profileData?.title ?? "Profile").font(.headerFontStyle)
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
             
             List {
                 Section {
                     if let user = user {
-                        UpdateUserProfileView(user: user)
+                        UpdateUserProfileView(user: user, backgroudColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black, cellBackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, buttonColor: YmlReader().appTheme?.buttonTextColor.color ?? .black, borderColor: YmlReader().appTheme?.borderColor.color ?? .black, sepratorColor: YmlReader().appTheme?.separatorColor.color ?? .black)
                     } else {
                         LoadingView(username: "")
                     }
                 }
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 Section {
                     if ModuleAppYmlReader().isPasscodeEnabled {
                         ChangePasscodeView()
                     }
-                    HelpView(site: YmlReader().teamWebsite, title: ModuleAppYmlReader().profileData?.help ?? "Help")
+                    HelpView(site: YmlReader().teamWebsite, title: ModuleAppYmlReader().profileData?.help ?? "Help", textColor: YmlReader().appTheme?.textColor.color ?? .black)
                 }
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 if let email = user?.remoteID {
                     Section {
-                        ChangePasswordView(email: email, resetPassword: ModuleAppYmlReader().profileData?.resetPasswordText ?? "Reset Password")
+                        ChangePasswordView(email: email, resetPassword: ModuleAppYmlReader().profileData?.resetPasswordText ?? "Reset Password", textColor: YmlReader().appTheme?.textColor.color ?? UIColor.black, backgroudColor: YmlReader().appTheme?.backgroundColor.color ?? UIColor.black, buttonColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black, borderColor: YmlReader().appTheme?.borderColor.color ?? UIColor.black)
                     }
+                    .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 }
                 
-                Section(header: Text(ModuleAppYmlReader().profileData?.reportProblemHeader ?? "Report a Problem")) {
-                    ReportView(color: Color(YmlReader().primaryColor), email: YmlReader().teamEmail, title: ModuleAppYmlReader().profileData?.reportProblemText ?? "Report a Problem")
-                    SupportView(color: Color(YmlReader().primaryColor), phone: YmlReader().teamPhone, title: ModuleAppYmlReader().profileData?.supportText ?? "Support")
+                Section(header: Text(ModuleAppYmlReader().profileData?.reportProblemHeader ?? "Report a Problem").foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? UIColor.black))) {
+                    ReportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), email: YmlReader().teamEmail, title: ModuleAppYmlReader().profileData?.reportProblemText ?? "Report a Problem")
+                    SupportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), phone: YmlReader().teamPhone, title: ModuleAppYmlReader().profileData?.supportText ?? "Support")
                 }
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
                     let url = URL(fileURLWithPath: documentsPath, isDirectory: false)
                     Section {
-                        ConsentDocumentView(documentURL: url, title: ModuleAppYmlReader().profileData?.consentText ?? "Consent Document")
+                        ConsentDocumentView(documentURL: url, title: ModuleAppYmlReader().profileData?.consentText ?? "Consent Document", color: YmlReader().appTheme?.textColor.color ?? .black)
                     }
+                    .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 }
                 
                 Section {
-                    WithdrawView(title: ModuleAppYmlReader().profileData?.WithdrawStudyText ?? "Withdraw from Study")
+                    WithdrawView(title: ModuleAppYmlReader().profileData?.WithdrawStudyText ?? "Withdraw from Study", textColor: YmlReader().appTheme?.textColor.color ?? UIColor.black)
                 }
-                
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 Section {
                     Text(YmlReader().teamCopyright)
+                        .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
                 }
-                
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 Section {
-                    LogoutView()
+                    LogoutView(textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black)
                 }
-                
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
             }
             .listStyle(GroupedListStyle())
             .onLoad {
                 fetchUserFromDB()
+                UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+                UITableViewCell.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+                UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
             }
             .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
                 fetchUserFromDB()
             }
         }
+        .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
     }
     
     func fetchUserFromDB() {

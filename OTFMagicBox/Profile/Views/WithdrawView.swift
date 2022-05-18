@@ -37,14 +37,17 @@ import SwiftUI
 struct WithdrawView: View {
     @State var showWithdraw = false
     let title: String
+    let textColor: UIColor
     
-    init(title: String) {
+    init(title: String, textColor: UIColor) {
         self.title = title
+        self.textColor = textColor
     }
     
     var body: some View {
         HStack {
             Text(title)
+                .foregroundColor(Color(textColor))
             Spacer()
             Text("›")
         }.frame(height: 60)
@@ -61,6 +64,6 @@ struct WithdrawView: View {
 
 struct WithdrawView_Previews: PreviewProvider {
     static var previews: some View {
-        WithdrawView(title: "")
+        WithdrawView(title: "", textColor: UIColor())
     }
 }
