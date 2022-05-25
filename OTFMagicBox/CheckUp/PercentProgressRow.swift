@@ -58,9 +58,14 @@ struct PercentProgressRow: View {
     var body: some View {
         HStack {
             Text(title)
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text(String(format: "%.1f", progress*100) + "%")
                 .foregroundColor(color)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             RingProgressView(progress: progress,
                         color: color,
                         lineWidth: lineWidth)

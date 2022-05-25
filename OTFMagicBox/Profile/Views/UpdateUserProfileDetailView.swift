@@ -102,33 +102,44 @@ struct UpdateUserProfileDetailView: View {
                 IconView()
                     .frame(width: 100, height: 100)
                 Section(header: Text(ModuleAppYmlReader().profileData?.profileInfoHeader ?? "BASIC INFORMATION")
+                    .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
                     .foregroundColor(Color(headerColor))) {
                         HStack {
                             Text(ModuleAppYmlReader().profileData?.firstName ?? "First Name")
                                 .foregroundColor(Color(textColor))
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                             TextField(ModuleAppYmlReader().profileData?.firstName ?? "First Name", text: $firstName)
                                 .style(.textField)
                                 .foregroundColor(Color(textColor))
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         }
                         HStack {
                             Text(ModuleAppYmlReader().profileData?.lastName ?? "Last Name")
+                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                                 .foregroundColor(Color(textColor))
                             TextField(ModuleAppYmlReader().profileData?.lastName ?? "Last Name", text: $lastName)
                                 .style(.textField)
                                 .foregroundColor(Color(textColor))
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         }
                     }
                     .listRowBackground(Color(cellBackgroundColor))
                 
                 Section(header: Text(ModuleAppYmlReader().profileData?.otherInfo ?? "Other Information")
-                    .foregroundColor(Color(headerColor))) {
+                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                    .foregroundColor(Color(headerColor))
+                    .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))) {
                         Button(action: {
                             self.showGenderPicker.toggle()
                         }) {
                             Text(" \(genderSelection.rawValue)")
                                 .foregroundColor(Color(textColor))
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
-                                .font(.system(size: 20, weight: .regular))
+                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                         }
                         if showGenderPicker {
                             
@@ -136,6 +147,8 @@ struct UpdateUserProfileDetailView: View {
                                 Picker("Select a gender", selection: $genderSelection) {
                                     ForEach(genderValues, id: \.self) {
                                         Text($0.rawValue)
+                                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                                     }
                                 }
                                 .pickerStyle(WheelPickerStyle())
@@ -149,7 +162,8 @@ struct UpdateUserProfileDetailView: View {
                             Text(" \(dob)")
                                 .foregroundColor(Color(textColor))
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
-                                .font(.system(size: 20, weight: .regular))
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                         }
                         if showDatePicker {
                             
@@ -263,7 +277,12 @@ struct IconView: View {
                 SUImagePickerView(sourceType: self.sourceType, image: self.$image, isPresented: self.$shouldPresentImagePicker)
             }
             .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-                ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+                ActionSheet(title: Text("Choose mode")
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                            message: Text("Please choose your preferred mode to set your profile image")
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                     self.shouldPresentImagePicker = true
                     self.sourceType = .camera
                 }), ActionSheet.Button.default(Text("Photo Library"), action: {

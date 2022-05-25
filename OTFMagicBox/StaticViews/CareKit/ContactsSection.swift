@@ -35,18 +35,26 @@
 import SwiftUI
 
 struct ContactsSection: View {
+    let cellbackgroundColor: UIColor
+    let headerColor: UIColor
+    let textColor: UIColor
     var body: some View {
-        Section(header: Text(ModuleAppYmlReader().careKitModel?.contactHeader ?? "Contact")) {
+        Section(header: Text(ModuleAppYmlReader().careKitModel?.contactHeader ?? "Contact")
+            .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+            .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+            .foregroundColor(Color(headerColor))) {
             ForEach(ContactStyle.allCases, id: \.rawValue) {
                 NavigationLink($0.rawValue.capitalized, destination: ContactDestination(style: $0))
             }
+            .listRowBackground(Color(cellbackgroundColor))
+            .foregroundColor(Color(textColor))
         }
     }
 }
 
 struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
-        ContactsSection()
+        ContactsSection(cellbackgroundColor: UIColor(), headerColor: UIColor(), textColor: UIColor())
     }
 }
 

@@ -47,11 +47,15 @@ struct ReportView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(title).fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 .minimumScaleFactor(0.5)
                 .foregroundColor(self.color)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
             Spacer()
             Text(self.email).foregroundColor(self.color)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
         }

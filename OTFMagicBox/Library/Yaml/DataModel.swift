@@ -49,30 +49,6 @@ struct Passcode: Codable {
     let passcodeType: String
 }
 
-struct HealthKitData: Codable {
-    let healthPermissionsTitle: String
-    let healthPermissionsText: String
-    let backgroundReadFrequency: String
-    let healthKitTypes: [HealthKitTypes]
-}
-
-struct HealthRecords: Codable {
-    let enabled: String
-    let permissionsText: String
-    let permissionsTitle: String
-}
-
-struct Withdrawal: Codable {
-    let withdrawTitle: String
-    let withdrawText: String
-    let withdrawalInstructionTitle: String
-    let withdrawalInstructionText: String
-}
-
-struct HealthKitTypes: Codable, Equatable  {
-    let type: String
-}
-
 struct DesignConfig: Codable {
     let name: String
     let textValue: String
@@ -99,9 +75,6 @@ struct DataModel: Codable {
     let studyTitle: String
     let teamName: String
     let copyright: String
-    let healthRecords: HealthRecords
-    let healthKitData: HealthKitData
-    let withdrawal: Withdrawal
 }
 
 struct ThemeCustomization: Codable{
@@ -112,5 +85,10 @@ struct ThemeCustomization: Codable{
     let buttonTextColor: String
     let borderColor: String
     let headerColor: String
-    
+    let textWeight: String
+    let textFont: String
+    let screenTitleFont: String
+    let screenTitleWeight: String
+    let headerTitleFont: String
+    let headerTitleWeight: String
 }

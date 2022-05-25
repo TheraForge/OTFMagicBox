@@ -58,6 +58,8 @@ struct MainView: View {
                 ScheduleViewControllerRepresentable().tabItem {
                     UIImage.loadImage(named: "tab_schedule").renderingMode(.template)
                     Text("Tasks")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
                 
                 NavigationView {
@@ -67,6 +69,8 @@ struct MainView: View {
                 .tabItem {
                     UIImage.loadImage(named: "tab_care").renderingMode(.template)
                     Text("Contacts")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
             }
             
@@ -74,6 +78,8 @@ struct MainView: View {
                 CheckUpView().tabItem {
                     UIImage.loadImage(named: "tab_tasks").renderingMode(.template)
                     Text("Check Up")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
             }
             
@@ -81,12 +87,16 @@ struct MainView: View {
                 StaticUI().tabItem {
                     Image(systemName: "uiwindow.split.2x1")
                     Text("UI")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
             }
             
             ProfileUIView().tabItem {
                 UIImage.loadImage(named: "tab_profile").renderingMode(.template)
                 Text("Profile")
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             }
         }
         .accentColor(self.color)

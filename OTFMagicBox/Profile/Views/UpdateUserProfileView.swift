@@ -54,6 +54,9 @@ struct UpdateUserProfileView: View {
              
             HStack {
                 Text(user.remoteID ?? "")
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                     .foregroundColor(Color(textColor))
                 Spacer()
                 Text("›")

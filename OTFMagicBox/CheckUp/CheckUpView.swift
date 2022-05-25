@@ -40,8 +40,12 @@ struct CheckUpView: View {
     var body: some View {
         VStack {
             Text("Check Up").font(.headerFontStyle)
+                .foregroundColor(Color(YmlReader().appTheme?.headerTitleFont.color ?? .black))
+                .font(YmlReader().appTheme?.headerTitleWeight.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             List {
-                Section(header: Text("OVERALL ADHERENCE")) {
+                Section(header: Text("OVERALL ADHERENCE")
+                    .foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? .black))) {
                     CountProgressRow(title: "Physical Activities",
                                      completed: viewmodel.activityTasksAndEvents.completedTasks.count,
                                      total: viewmodel.activityTasksAndEvents.eventsOfTasks.count,
@@ -65,9 +69,12 @@ struct CheckUpView: View {
                                      lineWidth: 4.0)
                         .padding(.vertical, 10)
                 }
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
             .listStyle(GroupedListStyle())
             .onAppear {
+                UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+                UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
                 viewmodel.fetchTasks()
             }
         }

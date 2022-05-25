@@ -48,6 +48,8 @@ struct HelpView: View {
         HStack {
             Text(title)
                 .foregroundColor(Color(textColor))
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text("›")
         }.frame(height: 70).contentShape(Rectangle())

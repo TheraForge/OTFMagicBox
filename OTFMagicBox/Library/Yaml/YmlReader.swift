@@ -158,23 +158,23 @@ public class YmlReader {
         return dataModel?.googleClientID
     }
     
-    var healthPermissionsTitle: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return dataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
-        default:
-            return dataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
-        }
-    }
-    
-    var healthPermissionsText: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return dataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
-        default:
-            return dataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
-        }
-    }
+//    var healthPermissionsTitle: String? {
+//        switch getPreferredLocale().languageCode {
+//        case "fr":
+//            return dataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+//        default:
+//            return dataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+//        }
+//    }
+//    
+//    var healthPermissionsText: String? {
+//        switch getPreferredLocale().languageCode {
+//        case "fr":
+//            return dataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+//        default:
+//            return dataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+//        }
+//    }
     
     var useCareKit: Bool {
         guard let useCareKit = dataModel?.useCareKit else { return false }
@@ -190,44 +190,44 @@ public class YmlReader {
         guard let showStaticUIScreen = dataModel?.showStaticUIScreen else { return false }
         return showStaticUIScreen == Constants.true
     }
+//    
+//    var backgroundReadFrequency: String? {
+//        switch getPreferredLocale().languageCode {
+//        case "fr":
+//            return dataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
+//        default:
+//            return dataModel?.en.healthKitData.backgroundReadFrequency ?? "immediate"
+//        }
+//    }
     
-    var backgroundReadFrequency: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return dataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
-        default:
-            return dataModel?.en.healthKitData.backgroundReadFrequency ?? "immediate"
-        }
-    }
-    
-    var healthRecords: HealthRecords? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return dataModel?.fr.healthRecords
-        default:
-            return dataModel?.en.healthRecords
-        }
-    }
+//    var healthRecords: HealthRecords? {
+//        switch getPreferredLocale().languageCode {
+//        case "fr":
+//            return dataModel?.fr.healthRecords
+//        default:
+//            return dataModel?.en.healthRecords
+//        }
+//    }
     
     var appTheme: ThemeCustomization? {
         return dataModel?.appTheme
     }
     
-    var withdrawl: Withdrawal? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return dataModel?.fr.withdrawal
-        default:
-            return dataModel?.en.withdrawal
-        }
-    }
+//    var withdrawl: Withdrawal? {
+//        switch getPreferredLocale().languageCode {
+//        case "fr":
+//            return dataModel?.fr.withdrawal
+//        default:
+//            return dataModel?.en.withdrawal
+//        }
+//    }
     
-    var healthKitDataToRead: [HealthKitTypes] {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return dataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
-        default:
-            return dataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
-        }
-    }
+//    var healthKitDataToRead: [HealthKitTypes] {
+//        switch getPreferredLocale().languageCode {
+//        case "fr":
+//            return dataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+//        default:
+//            return dataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+//        }
+//    }
 }

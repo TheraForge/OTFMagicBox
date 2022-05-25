@@ -58,8 +58,13 @@ struct CountProgressRow: View {
     var body: some View {
         HStack {
             Text(title)
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
             Spacer()
             Text("\(completed) of \(total)")
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 .foregroundColor(color)
             RingProgressView(progress: total < 1 ? 0 : Float(completed) / Float(total),
                         color: color,

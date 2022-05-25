@@ -54,6 +54,8 @@ struct ChangePasswordView: View {
         HStack {
             Text(resetPassword)
                 .foregroundColor(Color(textColor))
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text("›")
         }.frame(height: 60)
@@ -104,6 +106,7 @@ struct ChangePasswordDeatilsView: View {
                 .style(.emailField)
                 .foregroundColor(Color(textColor))
                 .disabled(true)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
 
                 
             SecureField(ModuleAppYmlReader().profileData?.oldPassword ?? "Old Password", text: $oldPassword)
@@ -142,7 +145,8 @@ struct ChangePasswordDeatilsView: View {
             })
             .padding()
             .alert(isPresented: $showFailureAlert, content: ({
-                Alert(title: Text("Password Reset Error!"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Password Reset Error!").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }))
             
             Spacer()

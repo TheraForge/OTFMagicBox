@@ -88,6 +88,7 @@ struct OnboardingView: View {
                                 .foregroundColor(.white)
                                 .background(self.color)
                                 .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         })
                         .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
                         .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN / 2)
@@ -96,6 +97,8 @@ struct OnboardingView: View {
                             self.showingLogin = true
                         }, label: {
                             Text("Sign In")
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
                                 .foregroundColor(.white)

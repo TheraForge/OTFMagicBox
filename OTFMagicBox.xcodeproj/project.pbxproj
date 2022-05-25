@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B5AE289D75ABDE6C4F5E2D4 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83DFEB7A9272007D999BECD /* Pods_OTFMagicBox.framework */; };
+		326086F7283E48A300888678 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326086F6283E48A300888678 /* DeleteAccountView.swift */; };
 		32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */ = {isa = PBXBuildFile; fileRef = 32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */; };
 		32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
@@ -123,6 +124,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		326086F6283E48A300888678 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ModuleAppSysParameter.yml; sourceTree = "<group>"; };
 		32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModuleAppYmlReader+DataModel.swift"; sourceTree = "<group>"; };
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */,
 				5A43049D272AE84A00926584 /* ConsentDocumentView.swift */,
 				5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */,
+				326086F6283E48A300888678 /* DeleteAccountView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
 				5A4304AC272CB22600926584 /* UpdateUserProfileView.swift in Sources */,
 				5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */,
+				326086F7283E48A300888678 /* DeleteAccountView.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
 				846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */,
 				8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */,

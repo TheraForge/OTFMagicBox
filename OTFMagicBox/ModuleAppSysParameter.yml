@@ -182,7 +182,6 @@ DataModel:
   
     showAppleSignin:  "true"
     showGoogleSignin: "false"
-    googleClientID: "add_your_client_id_here"
     
     
     login:
@@ -213,6 +212,48 @@ DataModel:
     completionStep:
       title: "Welcome aboard."
       text: "This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality."
+      
+      
+ # Health Records
+ # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
+    healthRecords:
+      enabled: "false"
+      permissionsText: "Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted)."
+      permissionsTitle: "Permission to read Health Records 🏥"
+      
+      
+      
+ # Withdrawal
+ # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
+ # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
+    withdrawal:
+      withdrawalInstructionTitle: "Are you sure you want to withdraw?"
+      withdrawalInstructionText: "Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study."
+      withdrawTitle: "Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study."
+      withdrawText: "Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close."
+      
+ # HealthKitData
+ # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
+ # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
+ # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
+    healthKitData:
+      healthPermissionsTitle: "Permission to Read Activity Data 🏃🏽‍♀️"
+      healthPermissionsText: "Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data."
+      backgroundReadFrequency: "immediate"
+      
+      
+ # HealthKit types
+ # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
+ # You can add any number of HK types.
+ # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
+      healthKitTypes:
+        - type: "StepCount"
+    
+        - type: "DistanceWalkingRunning"
+    
+        - type: "FlightsClimbed"
       
       
     profileDataModel:
@@ -490,6 +531,48 @@ DataModel:
     completionStep:
       title: "Bienvenue à bord."
       text: "Cette étape conclut le processus d'intégration et de consentement du framework TheraForge. Ensuite, vous verrez la fonctionnalité principale de l'application."
+      
+ # Health Records
+ # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
+    healthRecords:
+      enabled: "false"
+      permissionsText: "Utilisez ce texte pour fournir une explication aux participants de votre application sur les dossiers de santé électroniques (DSE) que vous avez l'intention de collecter à partir de l'application Santé et pourquoi. Cet exemple lira tous les enregistrements disponibles (pour lesquels l'autorisation est accordée)."
+      permissionsTitle: "Autorisation de lire les dossiers de santé 🏥"
+      
+      
+ # Withdrawal
+ # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
+ # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
+    withdrawal:
+      withdrawalInstructionTitle: "Êtes-vous sûr de vouloir vous retirer ?"
+      withdrawalInstructionText: "Le retrait de l'étude réinitialisera l'application à l'état dans lequel elle se trouvait avant que vous ne rejoigniez l'étude."
+      withdrawTitle: "Le retrait de l'étude réinitialisera l'application à l'état dans lequel elle se trouvait avant que vous ne rejoigniez l'étude."
+      withdrawText: "Merci pour votre contribution à cette étude. Nous sommes désolés que vous n'ayez pas pu continuer. L'application va maintenant se fermer."
+      
+      
+      
+ # HealthKitData
+ # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
+ # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
+ # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
+    healthKitData:
+      healthPermissionsTitle: "Autorisation de lire les données d'activité 🏃🏽‍♀️"
+      healthPermissionsText: "Utilisez ce texte pour fournir une explication aux participants de votre application sur les données d'activité que vous avez l'intention de lire à partir de l'application Santé et pourquoi. Cet échantillon lira les données sur le nombre de pas, la distance, la fréquence cardiaque et les vols montés."
+      backgroundReadFrequency: "immediate"
+      
+      
+ # HealthKit types
+ # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
+ # You can add any number of HK types.
+ # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
+      healthKitTypes:
+        - type: "StepCount"
+    
+        - type: "DistanceWalkingRunning"
+    
+        - type: "FlightsClimbed"
       
     profileDataModel:
       title: "Profil"

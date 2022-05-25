@@ -302,6 +302,62 @@ public class ModuleAppYmlReader {
             return onBoardingDataModel?.en.carekitView
         }
     }
+    
+    var healthRecords: HealthRecords? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthRecords
+        default:
+            return onBoardingDataModel?.en.healthRecords
+        }
+    }
+    
+    var healthPermissionsTitle: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        default:
+            return onBoardingDataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        }
+    }
+    
+    var healthPermissionsText: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        default:
+            return onBoardingDataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        }
+    }
+    
+    
+    var backgroundReadFrequency: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
+        default:
+            return onBoardingDataModel?.en.healthKitData.backgroundReadFrequency ?? "immediate"
+        }
+    }
+    
+    var healthKitDataToRead: [HealthKitTypes] {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        default:
+            return onBoardingDataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        }
+    }
+    
+    var withdrawl: Withdrawal? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.withdrawal
+        default:
+            return onBoardingDataModel?.en.withdrawal
+        }
+    }
+
 }
 
 struct Consent: Codable {
@@ -358,8 +414,34 @@ struct OnBoardingDataModel: Codable{
     let researchKitView: ResearchKitModel
     let surverysTask: SurverysTask
     let carekitView: CarekitModel
+    let healthRecords: HealthRecords
+    let healthKitData: HealthKitData
+    let withdrawal: Withdrawal
 }
 
+struct HealthRecords: Codable {
+    let enabled: String
+    let permissionsText: String
+    let permissionsTitle: String
+}
+
+struct Withdrawal: Codable {
+    let withdrawTitle: String
+    let withdrawText: String
+    let withdrawalInstructionTitle: String
+    let withdrawalInstructionText: String
+}
+
+struct HealthKitData: Codable {
+    let healthPermissionsTitle: String
+    let healthPermissionsText: String
+    let backgroundReadFrequency: String
+    let healthKitTypes: [HealthKitTypes]
+}
+
+struct HealthKitTypes: Codable, Equatable  {
+    let type: String
+}
 
 struct ProfileModel: Codable{
     let title: String

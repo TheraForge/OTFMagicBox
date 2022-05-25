@@ -41,8 +41,10 @@ struct ProfileUIView: View {
     
     var body: some View {
         VStack {
-            Text(ModuleAppYmlReader().profileData?.title ?? "Profile").font(.headerFontStyle)
+            Text(ModuleAppYmlReader().profileData?.title ?? "Profile")
                 .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
+                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             
             List {
                 Section {
@@ -69,7 +71,10 @@ struct ProfileUIView: View {
                     .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 }
                 
-                Section(header: Text(ModuleAppYmlReader().profileData?.reportProblemHeader ?? "Report a Problem").foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? UIColor.black))) {
+                Section(header: Text(ModuleAppYmlReader().profileData?.reportProblemHeader ?? "Report a Problem")
+                    .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                    .foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? UIColor.black))) {
                     ReportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), email: YmlReader().teamEmail, title: ModuleAppYmlReader().profileData?.reportProblemText ?? "Report a Problem")
                     SupportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), phone: YmlReader().teamPhone, title: ModuleAppYmlReader().profileData?.supportText ?? "Support")
                 }
@@ -90,8 +95,15 @@ struct ProfileUIView: View {
                 Section {
                     Text(YmlReader().teamCopyright)
                         .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
+                Section {
+                    LogoutView(textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black)
+                }
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
+                
                 Section {
                     LogoutView(textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black)
                 }

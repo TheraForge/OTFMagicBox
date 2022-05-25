@@ -38,8 +38,8 @@ import OTFCareKit
 struct CareKitViews: View {
     var body: some View {
         List {
-            ContactsSection()
-            TaskSection()
+            ContactsSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            TaskSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("CareKit Views"), displayMode: .inline)
@@ -50,11 +50,11 @@ struct CareKitViews: View {
 struct ResearchKitViews: View {
     var body: some View {
         List {
-            SurveysList()
-            SurveyQuestionsList()
-            OnboardingList()
-            ActiveTasksList()
-            MiscellaneousList()
+            SurveysList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            SurveyQuestionsList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            OnboardingList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            ActiveTasksList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            MiscellaneousList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("ResearchKit Views"), displayMode: .inline)
@@ -63,18 +63,27 @@ struct ResearchKitViews: View {
 }
 
 struct StaticUI: View {
+    init() {
+        UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+        UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+    }
     var body: some View {
         NavigationView {
             List {
                 NavigationLink(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit",
                                destination: CareKitViews())
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
                 
                 NavigationLink(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit",
                                destination: ResearchKitViews())
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Sample Views"), displayMode: .inline)
         }
+        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
     }
 }
 

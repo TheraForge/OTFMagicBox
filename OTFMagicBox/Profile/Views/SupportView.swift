@@ -48,8 +48,12 @@ struct SupportView: View {
         HStack {
             Text(title)
                 .foregroundColor(self.color)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text(self.phone).foregroundColor(self.color)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
         }
         .frame(height: 60)
         .contentShape(Rectangle())
