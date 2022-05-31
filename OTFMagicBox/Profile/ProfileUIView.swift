@@ -38,7 +38,7 @@ import OTFCareKitStore
 struct ProfileUIView: View {
     
     @State private(set) var user: OCKPatient?
-    
+    @State var isLoading = true
     var body: some View {
         VStack {
             Text(ModuleAppYmlReader().profileData?.title ?? "Profile")
@@ -47,6 +47,12 @@ struct ProfileUIView: View {
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             
             List {
+                
+                HStack(alignment: .bottom, spacing: 10){
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                }
+                
                 Section {
                     if let user = user {
                         UpdateUserProfileView(user: user, backgroudColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black, cellBackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, buttonColor: YmlReader().appTheme?.buttonTextColor.color ?? .black, borderColor: YmlReader().appTheme?.borderColor.color ?? .black, sepratorColor: YmlReader().appTheme?.separatorColor.color ?? .black)
@@ -105,7 +111,11 @@ struct ProfileUIView: View {
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 Section {
-                    LogoutView(textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black)
+                    if let user = user{
+                        DeleteAccountView(user: user, textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black, deleteUserHandler: { value in
+                            isLoading = false
+                        })
+                    }
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
             }

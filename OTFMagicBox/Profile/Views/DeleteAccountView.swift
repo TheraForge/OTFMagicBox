@@ -7,37 +7,45 @@
 
 import Foundation
 import SwiftUI
+import OTFCareKitStore
 
 struct DeleteAccountView: View {
     @State private var showingOptions = false
     @State private var showingAlert = false
+    @State private(set) var user: OCKPatient?
     let textColor: UIColor
+    var deleteUserHandler: ((Bool?) -> Void)?
+
+    
     var body: some View {
         HStack {
             Spacer()
-            
             Button(action: {
                 self.showingOptions.toggle()
             }, label: {
                 Text("Delete Account")
                     .font(.basicFontStyle)
-                    .foregroundColor(Color(textColor))
+                    .foregroundColor(Color.red)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             })
             .actionSheet(isPresented: $showingOptions) {
                 ActionSheet(
-                    title: Text("Are you sure?")
+                    title: Text("Are you sure? This will remove all your information.")
                         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     buttons: [
                         .destructive(Text("Delete account"), action: {
-                            OTFTheraforgeNetwork.shared.signOut { result in
-                                if case .failure(let error) = result {
-                                    print(error.localizedDescription)
-                                    self.showingAlert = true
-                                }
-                            }
+                            deleteUserHandler?(false)
+//                            OTFTheraforgeNetwork.shared.deleteUser(userId: user?.id ?? "") { result in
+//                                switch result {
+//                                case .failure(let error):
+//                                    print(error.localizedDescription)
+//                                    self.showingAlert = true
+//                                case .success:
+//                                    deleteUserHandler?(true)
+//                                }
+//                            }
                         }),
                         .cancel(Text("Cancel")
                             .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
@@ -59,6 +67,6 @@ struct DeleteAccountView: View {
 
 struct DeleteAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteAccountView(textColor: UIColor())
+        DeleteAccountView(user: nil, textColor: UIColor())
     }
 }

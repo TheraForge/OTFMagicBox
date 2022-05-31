@@ -18,10 +18,10 @@ struct SurveysList: View {
             .foregroundColor(Color(headerColor))) {
             ForEach(TaskListRow.sections[0].rows, id: \.rawValue) {
                 
-                NavigationLink(destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
-                    Label("Work Folder", systemImage: "folder")
-                        .font(YmlReader().appTheme?.headerTitleFont.appFont?.weight(YmlReader().appTheme?.headerTitleWeight.fontWeight ?? Font.Weight.regular))
-                }
+//                NavigationLink(destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
+//                    Label("Work Folder", systemImage: "folder")
+//                        .font(YmlReader().appTheme?.headerTitleFont.appFont?.weight(YmlReader().appTheme?.headerTitleWeight.fontWeight ?? Font.Weight.regular))
+//                }
                 NavigationLink((String(describing: $0)), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
             }
             .listRowBackground(Color(cellbackgroundColor))

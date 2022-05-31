@@ -103,6 +103,23 @@ class OTFTheraforgeNetwork {
         }
     }
     
+    
+    // delete user account
+    public func deleteUser(userId: String,
+                           completionHandler:  @escaping (Result<Response.DeleteAccount, ForgeError>) -> Void) {
+        otfNetworkService.deleteAccount(request: Request.DeleteAccount(userId: userId)) { result in
+            if case .success = result {
+                DispatchQueue.main.async {
+                    UserDefaultsManager.setOnboardingCompleted(false)
+                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
+                    try? CareKitManager.shared.wipe()
+                    self.disconnectFromSSE()
+                }
+            }
+            completionHandler(result)
+        }
+    }
+    
     // Forgot password request
     public func forgotPassword(email: String, completionHandler:  @escaping (Result<Response.ForgotPassword, ForgeError>) -> Void) {
         otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email), completionHandler: { (result) in

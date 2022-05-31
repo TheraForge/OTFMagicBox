@@ -7,8 +7,8 @@ target 'OTFMagicBox' do
   source 'https://cdn.cocoapods.org'
   source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
-  pod 'OTFToolBox', '1.0.1-alpha'
-  pod 'OTFCloudantStore/CloudantCareHealth', '1.0.1-alpha'
+  pod 'OTFToolBox', '1.0.2-alpha'
+  pod 'OTFCloudantStore/CloudantCareHealth', '1.0.2-alpha'
   pod 'OTFCareKit/CareHealth', '2.0.2-alpha.1'
   pod 'OTFResearchKit', '2.0.0-alpha.1'
   pod 'GoogleSignIn'
