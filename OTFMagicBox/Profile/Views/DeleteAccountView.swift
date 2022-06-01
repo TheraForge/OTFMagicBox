@@ -37,15 +37,15 @@ struct DeleteAccountView: View {
                     buttons: [
                         .destructive(Text("Delete account"), action: {
                             deleteUserHandler?(false)
-//                            OTFTheraforgeNetwork.shared.deleteUser(userId: user?.id ?? "") { result in
-//                                switch result {
-//                                case .failure(let error):
-//                                    print(error.localizedDescription)
-//                                    self.showingAlert = true
-//                                case .success:
-//                                    deleteUserHandler?(true)
-//                                }
-//                            }
+                            OTFTheraforgeNetwork.shared.deleteUser(userId: user?.id ?? "") { result in
+                                switch result {
+                                case .failure(let error):
+                                    print(error.localizedDescription)
+                                    self.showingAlert = true
+                                case .success:
+                                    deleteUserHandler?(true)
+                                }
+                            }
                         }),
                         .cancel(Text("Cancel")
                             .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)

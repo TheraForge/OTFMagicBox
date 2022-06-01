@@ -75,6 +75,13 @@ struct StaticUI: View {
                 .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
                 
+//                NavigationLink(destination: ResearchKitViews()) {
+//                    Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
+//                        .fontWeight(.light)
+//                }
+//                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+//                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                
                 NavigationLink(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit",
                                destination: ResearchKitViews())
                 .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
