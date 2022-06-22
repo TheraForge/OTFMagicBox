@@ -63,6 +63,9 @@ struct ResearchKitViews: View {
 }
 
 struct StaticUI: View {
+    
+    @State private var isPresenting = false
+    
     init() {
         UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
         UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
@@ -70,25 +73,39 @@ struct StaticUI: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit",
-                               destination: CareKitViews())
+                
+                NavigationLink(destination: CareKitViews()) {
+                    Text(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit")
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                }
                 .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
                 
-//                NavigationLink(destination: ResearchKitViews()) {
-//                    Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
-//                        .fontWeight(.light)
-//                }
-//                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
-//                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
-                
-                NavigationLink(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit",
-                               destination: ResearchKitViews())
+                NavigationLink(destination: ResearchKitViews()) {
+                    Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                }
                 .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Sample Views"), displayMode: .inline)
+            .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                isPresenting = true
+            }
+            .alert(isPresented: $isPresenting) {
+                
+                Alert(
+                    title: Text("Account Deleted")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    message: Text(Constants.deleteAccount),
+                    dismissButton: .default(Text("Okay"), action: {
+                        SSEAndSyncManager().moveToOnboardingView()
+                    })
+                )
+            }
+            .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
         }
         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
     }

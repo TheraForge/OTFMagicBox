@@ -43,8 +43,15 @@ struct ContactsSection: View {
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {
-            ForEach(ContactStyle.allCases, id: \.rawValue) {
-                NavigationLink($0.rawValue.capitalized, destination: ContactDestination(style: $0))
+            ForEach(ContactStyle.allCases, id: \.rawValue) { row in
+                
+                NavigationLink(destination: ContactDestination(style: row)) {
+                    Text(String(row.rawValue.capitalized))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                }
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
             .listRowBackground(Color(cellbackgroundColor))
             .foregroundColor(Color(textColor))

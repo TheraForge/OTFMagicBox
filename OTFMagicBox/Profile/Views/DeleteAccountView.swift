@@ -13,7 +13,7 @@ struct DeleteAccountView: View {
     @State private var showingOptions = false
     @State private var showingAlert = false
     @State private(set) var user: OCKPatient?
-    let textColor: UIColor
+    let textColor: Color
     var deleteUserHandler: ((Bool?) -> Void)?
 
     
@@ -54,7 +54,7 @@ struct DeleteAccountView: View {
                 )
             }
             .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Failed to logout.")
+                Alert(title: Text("Failed to delete account.")
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text("Okay")))
             }
@@ -67,6 +67,6 @@ struct DeleteAccountView: View {
 
 struct DeleteAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteAccountView(user: nil, textColor: UIColor())
+        DeleteAccountView(user: nil, textColor: Color.red)
     }
 }

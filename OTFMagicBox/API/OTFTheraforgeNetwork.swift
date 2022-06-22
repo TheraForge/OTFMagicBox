@@ -120,6 +120,7 @@ class OTFTheraforgeNetwork {
         }
     }
     
+    
     // Forgot password request
     public func forgotPassword(email: String, completionHandler:  @escaping (Result<Response.ForgotPassword, ForgeError>) -> Void) {
         otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email), completionHandler: { (result) in

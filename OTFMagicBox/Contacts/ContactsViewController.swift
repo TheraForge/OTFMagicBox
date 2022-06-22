@@ -53,6 +53,8 @@ final class ContactsViewController: UIViewControllerRepresentable {
         contactsListViewController = viewController
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification(_:)),
                                                name: .databaseSuccessfllySynchronized, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteProfileEventNotification(_:)),
+                                               name: .deleteUserAccount, object: nil)
     }
     
     deinit {
@@ -68,6 +70,13 @@ final class ContactsViewController: UIViewControllerRepresentable {
     @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
         contactsListViewController.fetchContacts()
     }
+    
+    @objc private func deleteProfileEventNotification(_ notification: Notification) {
+        
+        contactsListViewController.alertView(title: "Account Deleted", message: Constants.deleteAccount) { action in
+            SSEAndSyncManager().moveToOnboardingView()
+        }
+    }
 }
 
 struct ContactsNavigationView: View {
@@ -78,5 +87,15 @@ struct ContactsNavigationView: View {
             ContactsViewController(storeManager: syncStoreManager)
                 .navigationTitle(Text("Care Team"))
         }
+    }
+}
+
+extension UIViewController{
+    
+    func alertView(title: String , message: String, completionYes: @escaping ((UIAlertAction) -> Void)) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "Okay", style: .default, handler: completionYes)
+        alertController.addAction(okayAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

@@ -38,7 +38,7 @@ import SwiftUI
 struct LogoutView: View {
     @State private var showingOptions = false
     @State private var showingAlert = false
-    let textColor: UIColor
+    let textColor: Color
     var body: some View {
         HStack {
             Spacer()
@@ -48,7 +48,7 @@ struct LogoutView: View {
             }, label: {
                  Text("Logout")
                     .font(.basicFontStyle)
-                    .foregroundColor(Color(textColor))
+                    .foregroundColor(textColor)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             })
@@ -86,6 +86,6 @@ struct LogoutView: View {
 
 struct LogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        LogoutView(textColor: UIColor())
+        LogoutView(textColor: Color.black)
     }
 }

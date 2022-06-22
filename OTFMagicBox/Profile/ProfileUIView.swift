@@ -39,6 +39,8 @@ struct ProfileUIView: View {
     
     @State private(set) var user: OCKPatient?
     @State var isLoading = true
+    @State private var isPresenting = false
+    
     var body: some View {
         VStack {
             Text(ModuleAppYmlReader().profileData?.title ?? "Profile")
@@ -47,12 +49,6 @@ struct ProfileUIView: View {
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             
             List {
-                
-                HStack(alignment: .bottom, spacing: 10){
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                }
-                
                 Section {
                     if let user = user {
                         UpdateUserProfileView(user: user, backgroudColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black, cellBackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, buttonColor: YmlReader().appTheme?.buttonTextColor.color ?? .black, borderColor: YmlReader().appTheme?.borderColor.color ?? .black, sepratorColor: YmlReader().appTheme?.separatorColor.color ?? .black)
@@ -66,7 +62,7 @@ struct ProfileUIView: View {
                     if ModuleAppYmlReader().isPasscodeEnabled {
                         ChangePasscodeView()
                     }
-                    HelpView(site: YmlReader().teamWebsite, title: ModuleAppYmlReader().profileData?.help ?? "Help", textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                    HelpView(site: YmlReader().teamWebsite, title: ModuleAppYmlReader().profileData?.help ?? "Help", textColor: Color(YmlReader().appTheme?.textColor.color ?? .black))
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
@@ -95,7 +91,7 @@ struct ProfileUIView: View {
                 }
                 
                 Section {
-                    WithdrawView(title: ModuleAppYmlReader().profileData?.WithdrawStudyText ?? "Withdraw from Study", textColor: YmlReader().appTheme?.textColor.color ?? UIColor.black)
+                    WithdrawView(title: ModuleAppYmlReader().profileData?.WithdrawStudyText ?? "Withdraw from Study", textColor: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 Section {
@@ -106,13 +102,13 @@ struct ProfileUIView: View {
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 Section {
-                    LogoutView(textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black)
+                    LogoutView(textColor: Color(YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black))
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 Section {
                     if let user = user{
-                        DeleteAccountView(user: user, textColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black, deleteUserHandler: { value in
+                        DeleteAccountView(user: user, textColor: Color(YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black), deleteUserHandler: { value in
                             isLoading = false
                         })
                     }
@@ -121,7 +117,9 @@ struct ProfileUIView: View {
             }
             .listStyle(GroupedListStyle())
             .onLoad {
-                fetchUserFromDB()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    fetchUserFromDB()
+                }
                 UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
                 UITableViewCell.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
                 UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
@@ -129,6 +127,21 @@ struct ProfileUIView: View {
             .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
                 fetchUserFromDB()
             }
+            .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                isPresenting = true
+            }
+        }
+        .alert(isPresented: $isPresenting) {
+
+            Alert(
+                title: Text("Account Deleted")
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                message: Text(Constants.deleteAccount),
+                dismissButton: .default(Text("Okay"), action: {
+                    SSEAndSyncManager().moveToOnboardingView()
+                })
+            )
         }
         .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
     }
