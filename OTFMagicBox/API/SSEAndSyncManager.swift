@@ -70,8 +70,4 @@ class SSEAndSyncManager {
             
         }
     }
-    
-    func disconnectFromSSE() {
-        NetworkingLayer.shared.eventSource?.disconnect()
-    }
 }
