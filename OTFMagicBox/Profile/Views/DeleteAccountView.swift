@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import OTFCloudClientAPI
 import OTFCareKitStore
 
 struct DeleteAccountView: View {

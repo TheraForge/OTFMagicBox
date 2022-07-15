@@ -74,7 +74,7 @@ final class ContactsViewController: UIViewControllerRepresentable {
     @objc private func deleteProfileEventNotification(_ notification: Notification) {
         
         contactsListViewController.alertView(title: "Account Deleted", message: Constants.deleteAccount) { action in
-            SSEAndSyncManager().moveToOnboardingView()
+            OTFTheraforgeNetwork.shared.moveToOnboardingView()
         }
     }
 }

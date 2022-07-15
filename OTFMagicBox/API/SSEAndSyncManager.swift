@@ -71,15 +71,6 @@ class SSEAndSyncManager {
         }
     }
     
-    public func moveToOnboardingView() {
-        DispatchQueue.main.async {
-            UserDefaultsManager.setOnboardingCompleted(false)
-            NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
-            try? CareKitManager.shared.wipe()
-            self.disconnectFromSSE()
-        }
-    }
-    
     func disconnectFromSSE() {
         NetworkingLayer.shared.eventSource?.disconnect()
     }

@@ -108,15 +108,21 @@ class OTFTheraforgeNetwork {
     public func deleteUser(userId: String,
                            completionHandler:  @escaping (Result<Response.DeleteAccount, ForgeError>) -> Void) {
         otfNetworkService.deleteAccount(request: Request.DeleteAccount(userId: userId)) { result in
-            if case .success = result {
+            
+            switch result {
+            case .success(let response):
+                print(response)
                 DispatchQueue.main.async {
-                    UserDefaultsManager.setOnboardingCompleted(false)
-                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
-                    try? CareKitManager.shared.wipe()
-                    self.disconnectFromSSE()
+                    OTFTheraforgeNetwork().moveToOnboardingView()
+                    completionHandler(result)
+                }
+            case .failure(let error):
+                if error.error.statusCode == 410 {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .deleteUserAccount, object: nil)
+                    }
                 }
             }
-            completionHandler(result)
         }
     }
     
@@ -133,23 +139,27 @@ class OTFTheraforgeNetwork {
     public func resetPassword(email: String, code: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
         otfNetworkService.resetPassword(request: OTFCloudClientAPI.Request.ResetPassword(email: email, code: code,
                                                                                          newPassword: newPassword), completionHandler: { (result) in
-                                                                                            
-                                                                                            completionHandler(result)
-                                                                                         })
+            completionHandler(result)
+        })
     }
     
     // Signout request.
     public func signOut(completionHandler: ((Result<Response.LogOut, ForgeError>) -> Void)?) {
         otfNetworkService.signOut(completionHandler: { (result) in
-            if case .success = result {
+            switch result {
+            case .success(let response):
                 DispatchQueue.main.async {
-                    UserDefaultsManager.setOnboardingCompleted(false)
-                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
-                    try? CareKitManager.shared.wipe()
-                    self.disconnectFromSSE()
+                    OTFTheraforgeNetwork().moveToOnboardingView()
+                    completionHandler?(result)
+                }
+                print(response)
+            case .failure(let error):
+                if error.error.statusCode == 410 {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .deleteUserAccount, object: nil)
+                    }
                 }
             }
-            completionHandler?(result)
         })
     }
     
@@ -177,5 +187,14 @@ class OTFTheraforgeNetwork {
     
     func disconnectFromSSE() {
         NetworkingLayer.shared.eventSource?.disconnect()
+    }
+    
+    public func moveToOnboardingView() {
+        DispatchQueue.main.async {
+            UserDefaultsManager.setOnboardingCompleted(false)
+            NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
+            try? CareKitManager.shared.wipe()
+            self.disconnectFromSSE()
+        }
     }
 }

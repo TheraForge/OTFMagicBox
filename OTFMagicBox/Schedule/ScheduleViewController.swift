@@ -58,7 +58,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     @objc private func deleteProfileEventNotification(_ notification: Notification) {
         
         self.alertView(title: "Account Deleted", message: Constants.deleteAccount) { action in
-            SSEAndSyncManager().moveToOnboardingView()
+            OTFTheraforgeNetwork.shared.moveToOnboardingView()
         }
         
     }

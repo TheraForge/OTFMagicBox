@@ -101,7 +101,7 @@ struct StaticUI: View {
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     message: Text(Constants.deleteAccount),
                     dismissButton: .default(Text("Okay"), action: {
-                        SSEAndSyncManager().moveToOnboardingView()
+                        OTFTheraforgeNetwork.shared.moveToOnboardingView()
                     })
                 )
             }

@@ -82,7 +82,7 @@ struct CheckUpView: View {
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     message: Text("Your account is deleted from one of your device"),
                     dismissButton: .default(Text("Okay"), action: {
-                        SSEAndSyncManager().moveToOnboardingView()
+                        OTFTheraforgeNetwork.shared.moveToOnboardingView()
                     })
                 )
             }

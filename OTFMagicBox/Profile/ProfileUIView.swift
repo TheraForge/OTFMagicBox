@@ -132,14 +132,13 @@ struct ProfileUIView: View {
             }
         }
         .alert(isPresented: $isPresenting) {
-
             Alert(
                 title: Text("Account Deleted")
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                 message: Text(Constants.deleteAccount),
                 dismissButton: .default(Text("Okay"), action: {
-                    SSEAndSyncManager().moveToOnboardingView()
+                    OTFTheraforgeNetwork.shared.moveToOnboardingView()
                 })
             )
         }
