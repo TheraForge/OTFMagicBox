@@ -51,6 +51,10 @@ class ScheduleViewController: OCKDailyPageViewController {
 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
+    }
+    
     @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
         reload()
     }

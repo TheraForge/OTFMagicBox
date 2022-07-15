@@ -94,6 +94,9 @@ struct CheckUpView: View {
                     viewmodel.fetchTasks()
                 }
             }
+            .onDisappear {
+                NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
+            }
         }
     }
 }

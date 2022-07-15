@@ -142,6 +142,9 @@ struct ProfileUIView: View {
                 })
             )
         }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
+        }
         .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
     }
     

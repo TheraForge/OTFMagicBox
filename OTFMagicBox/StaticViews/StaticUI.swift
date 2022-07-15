@@ -105,6 +105,9 @@ struct StaticUI: View {
                     })
                 )
             }
+            .onDisappear {
+                NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
+            }
             .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
         }
         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
