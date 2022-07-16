@@ -1,0 +1,35 @@
+name: Testing
+on:
+  push:
+    branches:
+    - development
+jobs:
+  test:
+    name: Testing iOS app
+    runs-on: macOS-latest
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '13.2.1'
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: setup-cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          version: 1.11.3
+      - name: Install pods
+        run: pod install
+      - name: Setup keychain
+        env:
+          SIGNING_CERTIFICATE_DATA_DEBUG: ${{ secrets.SIGNING_CERTIFICATE_DATA_DEBUG }}
+          SIGNING_CERTIFICATE_DATA_RELEASE: ${{ secrets.SIGNING_CERTIFICATE_DATA_RELEASE }}
+          SIGNING_CERTIFICATES_PASSWORD: ${{ secrets.SIGNING_CERTIFICATES_PASSWORD }}
+        run: .github/secrets/decrypt_secrets.sh
+      - name: Import provisioning profile
+        env:
+          PROVISIONING_PROFILE_DATA_DEBUG: ${{ secrets.PROVISIONING_PROFILE_DATA_DEBUG }}
+          PROVISIONING_PROFILE_DATA_RELEASE: ${{ secrets.PROVISIONING_PROFILE_DATA_RELEASE }}
+        run: |
+          exec .github/secrets/import_profile.sh
+      - name: Testing iOS app
+        run: exec ./.github/scripts/test_app.sh
