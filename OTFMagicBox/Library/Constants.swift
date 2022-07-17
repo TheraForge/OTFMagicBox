@@ -64,6 +64,8 @@ enum Constants {
     static let `true` = "true"
     static let `false` = "false"
     
+    static let deleteAccount = "Your account is deleted from one of your device"
+    
     struct UserDefaults {
         //Patient data
         static let patientEmail = "patientEmail"
@@ -109,6 +111,7 @@ enum Constants {
         static let APIUserErrorNotification = "APIUserErrorNotification"
         static let DataSyncRequest = "DataSyncRequest"
         static let DatabaseSynchronizedSuccessfully = "DatabaseSynchronizedSuccessfully"
+        static let deleteUserAccount = "DeleteUserAccount"
         
         //Reset tab navigation badges
         static let BadgeReset = "BadgeReset"

@@ -66,12 +66,8 @@ class OTFTheraforgeNetwork {
     public func loginRequest(email: String, password: String,
                              completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
-                                                                         password: password)) { (result) in
-            switch result {
-            default:
-                break
-            }
-            completionHandler(result)
+                                                                         password: password)) { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
         }
         
     }
@@ -85,8 +81,8 @@ class OTFTheraforgeNetwork {
                                                                   socialType: socialType,
                                                                   authType: authType,
                                                                   identityToken: idToken)
-        otfNetworkService.socialLogin(request: socialRequest) { (result) in
-            completionHandler(result)
+        otfNetworkService.socialLogin(request: socialRequest) { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
         }
     }
     
@@ -97,67 +93,96 @@ class OTFTheraforgeNetwork {
                               password: String, dob: String, gender: String,
                               completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
         otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName,
-                                                                           last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { (result) in
-            
-            completionHandler(result)
+                                                                           last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
         }
     }
     
+    
+    // delete user account
+    public func deleteUser(userId: String,
+                           completionHandler:  @escaping (Result<Response.DeleteAccount, ForgeError>) -> Void) {
+        otfNetworkService.deleteAccount(request: Request.DeleteAccount(userId: userId)) { [weak self] result in
+            
+            switch result {
+            case .success(_):
+                self?.moveToOnboardingView()
+            case .failure(let error):
+                if error.error.statusCode == 410 {
+                    self?.moveToOnboardingView()
+                }
+            }
+        }
+    }
+    
+    
     // Forgot password request
     public func forgotPassword(email: String, completionHandler:  @escaping (Result<Response.ForgotPassword, ForgeError>) -> Void) {
-        otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email), completionHandler: { (result) in
-            
-            completionHandler(result)
-        })
+        otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email)) { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
+        }
     }
     
     // Reset password request
     public func resetPassword(email: String, code: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
-        otfNetworkService.resetPassword(request: OTFCloudClientAPI.Request.ResetPassword(email: email, code: code,
-                                                                                         newPassword: newPassword), completionHandler: { (result) in
-                                                                                            
-                                                                                            completionHandler(result)
-                                                                                         })
+        otfNetworkService.resetPassword(request: OTFCloudClientAPI.Request.ResetPassword(email: email,
+                                                                                         code: code,
+                                                                                         newPassword: newPassword)) { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
+        }
     }
     
     // Signout request.
     public func signOut(completionHandler: ((Result<Response.LogOut, ForgeError>) -> Void)?) {
-        otfNetworkService.signOut(completionHandler: { (result) in
-            if case .success = result {
-                DispatchQueue.main.async {
-                    UserDefaultsManager.setOnboardingCompleted(false)
-                    NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
-                    try? CareKitManager.shared.wipe()
-                    self.disconnectFromSSE()
-                }
-            }
-            completionHandler?(result)
+        otfNetworkService.signOut(completionHandler: { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
         })
     }
     
     // Change password request.
     public func changePassword(email: String, oldPassword: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
-        otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword), completionHandler: { (result) in
-            switch result {
-            case .success(let response):
-                print(response)
-            case .failure(let error):
-                print(error)
-            }
-            completionHandler(result)
+        otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword), completionHandler: { [weak self] result in
+            self?.handleResponse(result, completion: completionHandler)
         })
     }
     
     func refreshToken(_ completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        guard let auth = TheraForgeKeychainService.shared.loadAuth() else {
+        guard (TheraForgeKeychainService.shared.loadAuth() != nil) else {
             completionHandler(.failure(.missingCredential))
             return
         }
-        print(auth)
-        otfNetworkService.refreshToken(completionHandler: completionHandler)
+        
+        otfNetworkService.refreshToken { [weak self] response in
+            self?.handleResponse(response, completion: completionHandler)
+        }
     }
     
     func disconnectFromSSE() {
         NetworkingLayer.shared.eventSource?.disconnect()
+    }
+    
+    func handleResponse<T: Decodable>(_ response: Result<T, ForgeError>, completion: ((Result<T, ForgeError>) -> Void)?) {
+        switch response {
+        case .success(_):
+            break
+        case .failure(let error):
+            if error.error.statusCode == 410 {
+                DispatchQueue.main.async {
+                    self.moveToOnboardingView()
+                }
+                return
+            }
+        }
+        
+        completion?(response)
+    }
+    
+    public func moveToOnboardingView() {
+        DispatchQueue.main.async {
+            UserDefaultsManager.setOnboardingCompleted(false)
+            try? CareKitManager.shared.wipe()
+            self.disconnectFromSSE()
+            NotificationCenter.default.post(name: .onboardingDidComplete, object: false)
+        }
     }
 }

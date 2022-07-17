@@ -47,8 +47,14 @@ struct TaskSection: View {
             .foregroundColor(Color(headerColor))) {
             ForEach(TaskStyle.allCases, id: \.rawValue) { style in
                 if style.supportsSwiftUI || style.supportsUIKit {
-                    NavigationLink(style.rawValue.capitalized, destination: TaskDestination(style: style))
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    
+                    NavigationLink(destination: TaskDestination(style: style)) {
+                        Text(style.rawValue.capitalized)
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                    .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 }
             }
             .listRowBackground(Color(cellbackgroundColor))
