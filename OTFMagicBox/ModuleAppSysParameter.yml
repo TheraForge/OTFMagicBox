@@ -239,7 +239,7 @@ DataModel:
  # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
  # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
     healthKitData:
-      healthPermissionsTitle: "Permission to Read Activity Data 🏃🏽‍♀️"
+      healthPermissionsTitle: "Permission to read activity data 🏃🏽‍♀️"
       healthPermissionsText: "Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data."
       backgroundReadFrequency: "immediate"
       

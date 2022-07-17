@@ -36,6 +36,7 @@ import SwiftUI
 
 struct CheckUpView: View {
     @StateObject var viewmodel = CheckUpViewModel()
+    @State private var isPresenting = false
     
     var body: some View {
         VStack {
@@ -71,11 +72,30 @@ struct CheckUpView: View {
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
+            .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                isPresenting = true
+            }.alert(isPresented: $isPresenting) {
+                
+                Alert(
+                    title: Text("Account Deleted")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    message: Text("Your account is deleted from one of your device"),
+                    dismissButton: .default(Text("Okay"), action: {
+                        OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                    })
+                )
+            }
             .listStyle(GroupedListStyle())
             .onAppear {
                 UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
                 UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-                viewmodel.fetchTasks()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    viewmodel.fetchTasks()
+                }
+            }
+            .onDisappear {
+                NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
             }
         }
     }

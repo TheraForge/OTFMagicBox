@@ -46,10 +46,13 @@ class SSEAndSyncManager {
         
         OTFTheraforgeNetwork.shared.otfNetworkService.onReceivedMessage = { [unowned self] event in
             print(event)
-            guard event.message.count > 0 else {
-                return
+            if event.type.rawValue == EventType.dbUpdate.rawValue {
+                syncDatabase(postNotification: true)
+            } else if event.type.rawValue == EventType.userDeleted.rawValue {
+                
+                NotificationCenter.default.post(name: .deleteUserAccount, object: nil)
+                
             }
-            syncDatabase(postNotification: true)
         }
         
         OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnComplete = { code, reconnect, error in

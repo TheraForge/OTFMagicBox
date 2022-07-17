@@ -45,14 +45,14 @@ public class YmlReader {
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.FileName
     
-    var dataModel : defaultConfig?
+    var dataModel : DefaultConfig?
     
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String: defaultConfig].self, from: dataSet) else {
+                guard let data = try? YAMLDecoder().decode([String: DefaultConfig].self, from: dataSet) else {
                     OTFLog("Yaml decode error")
                     return
                 }

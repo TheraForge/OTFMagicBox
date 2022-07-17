@@ -16,13 +16,12 @@ struct SurveysList: View {
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {
-            ForEach(TaskListRow.sections[0].rows, id: \.rawValue) {
-                
-                NavigationLink(destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
-                    Label("Work Folder", systemImage: "folder")
-                        .font(YmlReader().appTheme?.headerTitleFont.appFont?.weight(YmlReader().appTheme?.headerTitleWeight.fontWeight ?? Font.Weight.regular))
+            ForEach(TaskListRow.sections[0].rows, id: \.rawValue) { row in
+                NavigationLink(destination: TaskViewControllerRepresentable(task: row.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
+                    Text(String(describing: row))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
-                NavigationLink((String(describing: $0)), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
             }
             .listRowBackground(Color(cellbackgroundColor))
             .foregroundColor(Color(textColor))
@@ -45,12 +44,17 @@ struct SurveyQuestionsList: View {
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 13.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {
-            ForEach(TaskListRow.sections[1].rows, id: \.rawValue) {
-                NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
+                ForEach(TaskListRow.sections[1].rows, id: \.rawValue) { row in
+                    
+                    NavigationLink(destination: (TaskViewControllerRepresentable(task: row.representedTask).navigationBarHidden(true).ignoresSafeArea())) {
+                        Text(String(describing: row))
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                }
+                .listRowBackground(Color(cellbackgroundColor))
+                .foregroundColor(Color(textColor))
             }
-            .listRowBackground(Color(cellbackgroundColor))
-            .foregroundColor(Color(textColor))
-        }
     }
 }
 
@@ -63,12 +67,16 @@ struct OnboardingList: View {
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {
-            ForEach(TaskListRow.sections[2].rows, id: \.rawValue) {
-                NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
+                ForEach(TaskListRow.sections[2].rows, id: \.rawValue) { row in
+                    NavigationLink(destination: TaskViewControllerRepresentable(task: row.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
+                        Text(String(describing: row))
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                }
+                .listRowBackground(Color(cellbackgroundColor))
+                .foregroundColor(Color(textColor))
             }
-            .listRowBackground(Color(cellbackgroundColor))
-            .foregroundColor(Color(textColor))
-        }
     }
 }
 
@@ -81,12 +89,17 @@ struct ActiveTasksList: View {
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {
-            ForEach(TaskListRow.sections[3].rows, id: \.rawValue) {
-                NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
+                ForEach(TaskListRow.sections[3].rows, id: \.rawValue) { row in
+                    NavigationLink(destination: TaskViewControllerRepresentable(task: row.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
+                        Text(String(describing: row))
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                }
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                
+                .listRowBackground(Color(cellbackgroundColor))
+                .foregroundColor(Color(textColor))
             }
-            .listRowBackground(Color(cellbackgroundColor))
-            .foregroundColor(Color(textColor))
-        }
     }
 }
 
@@ -99,11 +112,15 @@ struct MiscellaneousList: View {
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {
-            ForEach(TaskListRow.sections[4].rows, id: \.rawValue) {
-                NavigationLink(String(describing: $0), destination: TaskViewControllerRepresentable(task: $0.representedTask).navigationBarHidden(true).ignoresSafeArea())
+                ForEach(TaskListRow.sections[4].rows, id: \.rawValue) { row in
+                    NavigationLink(destination: TaskViewControllerRepresentable(task: row.representedTask).navigationBarHidden(true).ignoresSafeArea()) {
+                        Text(String(describing: row))
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                }
+                .listRowBackground(Color(cellbackgroundColor))
+                .foregroundColor(Color(textColor))
             }
-            .listRowBackground(Color(cellbackgroundColor))
-            .foregroundColor(Color(textColor))
-        }
     }
 }

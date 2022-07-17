@@ -54,7 +54,7 @@ struct DesignConfig: Codable {
     let textValue: String
 }
 
-struct defaultConfig: Codable{
+struct DefaultConfig: Codable{
     let apiKey: String
     let en: DataModel
     let fr: DataModel

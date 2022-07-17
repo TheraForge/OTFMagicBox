@@ -45,9 +45,10 @@ struct MainView: View {
             switch response {
             case .success(let data):
                 SSEAndSyncManager.shared.subscribeToSSEWith(auth: data.accessToken)
-                
-            default:
-                break
+            case .failure(let error):
+                if error.error.statusCode == 410 {
+                    OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                }
             }
         }
     }

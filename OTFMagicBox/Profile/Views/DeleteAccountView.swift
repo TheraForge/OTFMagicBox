@@ -7,35 +7,44 @@
 
 import Foundation
 import SwiftUI
+import OTFCloudClientAPI
+import OTFCareKitStore
 
 struct DeleteAccountView: View {
     @State private var showingOptions = false
     @State private var showingAlert = false
-    let textColor: UIColor
+    @State private(set) var user: OCKPatient?
+    let textColor: Color
+    var deleteUserHandler: ((Bool?) -> Void)?
+
+    
     var body: some View {
         HStack {
             Spacer()
-            
             Button(action: {
                 self.showingOptions.toggle()
             }, label: {
                 Text("Delete Account")
                     .font(.basicFontStyle)
-                    .foregroundColor(Color(textColor))
+                    .foregroundColor(Color.red)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             })
             .actionSheet(isPresented: $showingOptions) {
                 ActionSheet(
-                    title: Text("Are you sure?")
+                    title: Text("Are you sure? This will remove all your information.")
                         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     buttons: [
                         .destructive(Text("Delete account"), action: {
-                            OTFTheraforgeNetwork.shared.signOut { result in
-                                if case .failure(let error) = result {
+                            deleteUserHandler?(false)
+                            OTFTheraforgeNetwork.shared.deleteUser(userId: user?.id ?? "") { result in
+                                switch result {
+                                case .failure(let error):
                                     print(error.localizedDescription)
                                     self.showingAlert = true
+                                case .success:
+                                    deleteUserHandler?(true)
                                 }
                             }
                         }),
@@ -46,7 +55,7 @@ struct DeleteAccountView: View {
                 )
             }
             .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Failed to logout.")
+                Alert(title: Text("Failed to delete account.")
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text("Okay")))
             }
@@ -59,6 +68,6 @@ struct DeleteAccountView: View {
 
 struct DeleteAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteAccountView(textColor: UIColor())
+        DeleteAccountView(user: nil, textColor: Color.red)
     }
 }
