@@ -1092,7 +1092,7 @@
 				5A7B6DB126FD282C00F872A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CE482CEE262C954A00C0A2D5 /* Build configuration list for PBXProject "OTFMagicBox" */ = {
 			isa = XCConfigurationList;
@@ -1101,7 +1101,7 @@
 				CE482D06262C954C00C0A2D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */ = {
 			isa = XCConfigurationList;
@@ -1110,7 +1110,7 @@
 				CE482D09262C954C00C0A2D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

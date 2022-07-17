@@ -23,17 +23,5 @@ jobs:
           echo "https://${{ secrets.REPO_USERNAME }}:${{ secrets.ACCESS_TOKEN }}@github.com" > ~/.git-credentials
       - name: Install pods
         run: pod install
-      - name: Setup keychain
-        env:
-          SIGNING_CERTIFICATE_DATA_DEBUG: ${{ secrets.SIGNING_CERTIFICATE_DATA_DEBUG }}
-          SIGNING_CERTIFICATE_DATA_RELEASE: ${{ secrets.SIGNING_CERTIFICATE_DATA_RELEASE }}
-          SIGNING_CERTIFICATES_PASSWORD: ${{ secrets.SIGNING_CERTIFICATES_PASSWORD }}
-        run: .github/secrets/decrypt_secrets.sh
-      - name: Import provisioning profile
-        env:
-          PROVISIONING_PROFILE_DATA_DEBUG: ${{ secrets.PROVISIONING_PROFILE_DATA_DEBUG }}
-          PROVISIONING_PROFILE_DATA_RELEASE: ${{ secrets.PROVISIONING_PROFILE_DATA_RELEASE }}
-        run: |
-          exec .github/secrets/import_profile.sh
       - name: Testing iOS app
         run: exec ./.github/scripts/test_app.sh
