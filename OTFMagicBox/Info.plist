@@ -36,8 +36,16 @@
 	<string>Used for sensor collection demo tasks.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Used for sensor collection demo tasks.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow photos access to select image for profile picture.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Used for sensor collection demo tasks.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
