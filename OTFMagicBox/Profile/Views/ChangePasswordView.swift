@@ -39,11 +39,23 @@ import SwiftUI
 struct ChangePasswordView: View {
     
     let email: String
+    let resetPassword: String
+    let textColor: UIColor
+    let backgroudColor: UIColor
+    let buttonColor: UIColor
+    let borderColor: UIColor
     @State var showResetPassword = false
+    
+//    init(resetPassword: String) {
+//        self.resetPassword = resetPassword
+//    }
     
     var body: some View {
         HStack {
-            Text("Reset Passsword")
+            Text(resetPassword)
+                .foregroundColor(Color(textColor))
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text("›")
         }.frame(height: 60)
@@ -53,7 +65,7 @@ struct ChangePasswordView: View {
         }).sheet(isPresented: $showResetPassword, onDismiss: {
             
         }, content: {
-            ChangePasswordDeatilsView(email: email)
+            ChangePasswordDeatilsView(email: email, textColor: textColor, backgroudColor: backgroudColor, buttonColor: buttonColor, borderColor: borderColor)
         })
     }
 }
@@ -61,6 +73,10 @@ struct ChangePasswordView: View {
 // View where we can reset the password.
 struct ChangePasswordDeatilsView: View {
     
+    let textColor: UIColor
+    let backgroudColor: UIColor
+    let buttonColor: UIColor
+    let borderColor: UIColor
     @State var email: String
     @State var oldPassword: String = ""
     @State var newPassword: String = ""
@@ -69,7 +85,11 @@ struct ChangePasswordDeatilsView: View {
     @State var errorMessage = ""
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    init(email: String) {
+    init(email: String, textColor: UIColor, backgroudColor: UIColor, buttonColor: UIColor, borderColor: UIColor) {
+        self.backgroudColor = backgroudColor
+        self.buttonColor = buttonColor
+        self.borderColor = borderColor
+        self.textColor = textColor
         _email = State(initialValue: email)
     }
     
@@ -84,13 +104,18 @@ struct ChangePasswordDeatilsView: View {
             
             TextField("Email", text: $email)
                 .style(.emailField)
+                .foregroundColor(Color(textColor))
                 .disabled(true)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+
                 
-            SecureField("Old Password", text: $oldPassword)
+            SecureField(ModuleAppYmlReader().profileData?.oldPassword ?? "Old Password", text: $oldPassword)
                 .style(.secureField)
+                .foregroundColor(Color(textColor))
             
-            SecureField("New Password", text: $newPassword)
+            SecureField(ModuleAppYmlReader().profileData?.newPassword ?? "New Password", text: $newPassword)
                 .style(.secureField)
+                .foregroundColor(Color(textColor))
             
             Spacer()
             
@@ -109,22 +134,23 @@ struct ChangePasswordDeatilsView: View {
                     
                 }))
             }, label: {
-                Text("Reset Password")
+                Text(ModuleAppYmlReader().profileData?.resetPassword ?? "Reset Password")
                     .padding(Metrics.PADDING_BUTTON_LABEL)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(self.color)
+                    .foregroundColor(Color(buttonColor))
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .overlay(
-                        Capsule().stroke(self.color, lineWidth: 2)
+                        Capsule().stroke(Color(buttonColor), lineWidth: 2)
                     )
             })
             .padding()
             .alert(isPresented: $showFailureAlert, content: ({
-                Alert(title: Text("Password Reset Error!"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Password Reset Error!").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }))
             
             Spacer()
         }
-        
+        .background(Color(backgroudColor))
     }
 }

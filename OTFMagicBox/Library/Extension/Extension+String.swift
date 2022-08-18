@@ -34,6 +34,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 /**
  Extension of String to check the Emoji string.
@@ -92,6 +93,75 @@ extension String {
             return UIColor.black
         case "White":
             return UIColor.white
+        default:
+            return nil
+        }
+    }
+    
+    var fontWeight: Font.Weight? {
+        
+        switch self {
+        case "Thin":
+            return Font.Weight.thin
+        case "Heavy":
+            return Font.Weight.heavy
+        case "Light":
+            return Font.Weight.light
+        case "Bold":
+            return Font.Weight.bold
+        case "Medium":
+            return Font.Weight.medium
+        case "Regular":
+            return Font.Weight.regular
+        case "SemiBold":
+            return Font.Weight.semibold
+        case "UltraLight":
+            return Font.Weight.ultraLight
+        case "Black":
+            return Font.Weight.black
+        default:
+            return nil
+        }
+    }
+    
+    
+    var appFont: Font? {
+        
+        switch self {
+        case "Basic":
+            return Font.basicFontStyle
+        case "Header":
+            return Font.headerFontStyle
+        case "SubHeader":
+            return Font.subHeaderFontStyle
+        case "TitleStyle":
+            return Font.titleFontStyle
+        case "Body":
+            return Font.body
+        case "Callout":
+            return Font.callout
+        case "Caption":
+            return Font.caption
+        case "Caption2":
+            return Font.caption2
+        case "Footnote":
+            return Font.footnote
+        case "Headline":
+            return Font.headline
+        case "LargeTitle":
+            return Font.largeTitle
+        case "Subheadline":
+            return Font.subheadline
+        case "Title":
+            return Font.title
+        case "Title2":
+            return Font.title2
+        case "Title3":
+            return Font.title3
+        case "Inherited":
+            return Font.system(size: 17.0)
+        case "HeaderInherited":
+            return Font.system(size: 14.0)
         default:
             return nil
         }

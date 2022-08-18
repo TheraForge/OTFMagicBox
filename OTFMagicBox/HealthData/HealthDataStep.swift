@@ -43,8 +43,8 @@ class HealthDataStep: ORKInstructionStep {
     override init(identifier: String) {
         super.init(identifier: identifier)
         
-        title = YmlReader().healthPermissionsTitle
-        text = YmlReader().healthPermissionsText
+        title = ModuleAppYmlReader().healthPermissionsTitle
+        text = ModuleAppYmlReader().healthPermissionsText
     }
     
     required init(coder aDecoder: NSCoder) {

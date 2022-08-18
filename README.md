@@ -9,6 +9,13 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 ## Change Log
 * Release 1.0.0-beta: First beta release of the template app
 * Release 1.0.1-beta: Removed warnings, improved profile section, added UI samples and made various other improvements
+* Release 1.0.2-beta:
+  * Made the application more configurable by adding color, font, font weight, background color in the yaml file.
+  * Added app localization capabilities in the yaml file.
+  * Consolidated multiple yaml files into two.
+  * Added support for user account deletion to make the app more GDPR compliant.
+  * Added CI/CD workflow to automate testing and deployment in TestFlight using GitHub Actions. Updated documentation with the required configuration steps.
+  * Various fixes and improvements.
 
 # Table of Contents
 
@@ -16,6 +23,9 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 * [Features](#Features)
 * [Installation](#Installation)
 * [Usage](#Usage)
+* [Registration on Apple Developer Portal](#Registration)
+* [Xcode Setup](#XcodeSetup)
+* [CI/CD Setup](#CICDSetup)
 * [License](#License)
 
 # Overview <a name="Overview"></a>
@@ -32,7 +42,8 @@ These are its primary characteristics:
 * Monitoring of health data with Apple's HealthKit framework.
 * Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
 * Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
-* SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases)
+* SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
+* CI/CD support via GitHub Actions.
 
 
 # MagicBox Features <a name="Features"></a>
@@ -87,152 +98,11 @@ There are a number of pre-defined task types that you can include in your projec
 
 <p align="center"><img src="Docs/9-Activity.png" width=35% height=35%></p>
 
-Currently supported active tasks are (see also this [detailed document](https://github.com/TheraForge/OTFResearchKit/blob/main/docs/ActiveTasks/ActiveTasks-template.markdown)):
-
-<table>
-<caption>Table 1. Active Tasks</caption>
-<thead>
-    <tr>
-        <td>CATEGORY</td>
-        <td>TASK</td>
-        <td>SENSOR</td>
-        <td>DATA COLLECTED</td>
-    </tr>
-</thead>
-<tbody>
- <tr><td rowspan = 3>Motor Activities</td> 
-      <td>Range of Motion</a></td>
-     <td>Accelerometer<br>
-  Gyroscope</td> 
-  <td>Device motion<br></td> 
- </tr>
-<td>Gait and Balance</a></td>
-     <td>Accelerometer<br>
-  Gyroscope</td> 
-  <td>Device motion<br>Pedometer</td> 
- </tr>
-<tr><td>Tapping Speed</a></td> 
-<td>Multi-Touch display <br>
-Accelerometer (optional)
-</td> 
-  <td>Touch activity<br/>
-  </td> 
-</tr>
-<tr><td rowspan = 2>Fitness</td>
- <td>Fitness</a></td>
- <td>GPS<br>Gyroscope</td>
-<td>Device motion<br>Pedometer<br>Location<br>Heart rate
-   </td> 
-</tr>
-<tr><td>Timed Walk</a></td>
-  <td>GPS<br>Gyroscope</td>
-<td>Device motion<br>Pedometer<br>Location
-   </td> 
-</tr>
-<tr><td rowspan = 6>Cognition</td>
-
-<td>Spatial Memory</a></td>
-<td>Multi-Touch display <br>
-Accelerometer (optional)</td>
-<td>
-Touch activity<br>Correct answer<br> Actual sequences
-</td>
-</tr>
-
-<tr><td>Stroop Test</a></td> 
-<td>Multi-Touch display</td> 
-  <td>Actual color<br>Actual text<br>User selection<br>Completion time </td> 
-</tr>
-<tr><td>Trail Making Test</a></td> 
-<td>Multi-Touch display</td> 
-  <td>Completion time<br>Touch activity</td> 
-</tr>
-
-<tr><td>Paced Serial Addition Test (PSAT)</a></td> 
-<td>Multi-Touch display</td> 
-  <td>Addition results from user</td> 
-</tr>
-
-<tr><td>Tower of Hanoi</a></td> 
-<td>Multi-Touch display
-</td> 
-  <td>Every move taken by the user
-  </td> 
-</tr>
-
-<tr><td>Reaction Time</a></td> 
-<td>Accelerometer<br>Gyroscope
-</td> 
-  <td>Device motion 
-  </td> 
-
-</tr>
-<tr><td rowspan=3>Speech</td>
-<td>Sustained Phonation</a></td>
-    <td>Microphone</td>
-    <td>Uncompressed audio</td>
-</tr>
-
-<tr><td>Speech Recognition</a></td> 
-<td>Microphone</td> 
-<td>Raw audio recording<br>Transcription in the form of an SFTranscription object.<br>Edited transcript (if any, by the user)</td> 
-</tr>
-
-<tr><td>Speech-in-Noise</a></td> 
-<td>Microphone</td> 
-<td>Raw audio recording<br>Transcription in the form of an SFTranscription object<br>Edited transcript (if any, by the user). This can be used to calculate the Speech Reception Threshold (SRT) for a user.</td> 
-</tr>
-
-<tr><td rowspan=3>Hearing</td>
-
-<td>Environment SPL</a></td>
-<td>Microphone</td>
-<td>Environment sound pressure level in dBA</td> 
-</tr>
-
-<td>Tone Audiometry</a></td>
-<td>AirPods<br>
-Headphones</td>
-<td>Minimum amplitude for the user 
-to recognize the sound</td> 
-</tr>
-
-<tr><td>dBHL Tone Audiometry</a></td>
-<td>AirPods<br>
-Headphones</td>
-<td>
-Hearing threshold in dB HL scale<br>
-User response timestamps
-</td>
-</tr>
-
-<tr><td>Hand Dexterity</td>
- <td>9-Hole Peg</td>
- <td>Multi-Touch display</td>
-<td>Completion time<br>Move distance
-   </td> 
-</tr>
-
-<tr><td>Vision</td>
-<td>Amsler Grid</a></td> 
-<td>Multi-Touch display</td> 
-<td>Touch activity<br>Eye side<br>Areas of distortions as annotated by the user</td> 
-</tr>
-
-</tbody>
-</table>
-
 ## Surveys
 
-A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”.
-You can collect results for the individual steps or for the task as a whole.
-
-Various survey types are available along with instructions and forms:
+A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole.
 
 <p align="center"><img src="Docs/10-Survey.png" width=35% height=35%></p>
-<p align="center"><img src="Docs/36-FormStep.png" width=35% height=35%></p>
-<p align="center"><img src="Docs/37-ValuePickerAnswerFormat.png" width=35% height=35%></p>
-<p align="center"><img src="Docs/38-TextChoiceAnswerFormat_2.png" width=35% height=35%></p>
 
 ## Contacts
 
@@ -441,6 +311,20 @@ Then you are ready to rock!
 
 If you now wish to customize the app, refer to the sections below for detailed information.
 
+### 9. Xcode Troubleshooting
+
+After installing the pods and trying to run the application, the following error may sometimes occur:
+
+`error: Entitlements file "OTFMagicBox.entitlements" was modified during the build, which is not supported. You can disable this error by setting 'CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION' to 'YES', however this may cause the built product's code signature or provisioning profile to contain incorrect entitlements. (in target 'OTFMagicBox' from project 'OTFMagicBox')`
+
+The [recommended solution](https://stackoverflow.com/questions/55456335/entitlements-file-was-modified-during-the-build-which-is-not-supported) to this problem is to click the following menu item in Xcode:
+
+Product > Clean Build Folder
+
+For general troubleshooting tips to solve potential unexpected errors or crashes in Xcode, refer to this useful article:
+
+**[Xcode Quick Fix](https://developerinsider.co/clean-xcode-cache-quick-fix/)**
+
 # App Usage <a name="Usage"></a>
 
 After following the above installation steps, go to the `AppSysParameters.yml` file in the root folder of your project.
@@ -468,25 +352,25 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 You can change the tint color, the label colors, font type and size to customize the look of your application:
 
-[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L116-L163)
+[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L83-L177)
 
 ## Set up the TheraForge Cloud API Key
 
 Update the API key field to access the TheraForge Secure Cloud service for synchronization and communication with the web dashboards:
 
-[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L227-L230)
+[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
 
 ## Customize Onboarding
 
 To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
 
-[Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L247-L272)
+[Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L220-L228)
 
 ## Customize Consent
 
 To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
 
-[Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L274-L330)
+[Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L230-L286)
 
 ## Customize Registration and Login
 
@@ -500,22 +384,39 @@ Go to the Login section in the `AppSysParameters.yml` file and customize the tit
 
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
-[Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L332-L354)
+[Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L295-L306)
 
 ## Configure the Passcode
 
 Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits:
 
-[Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L356-L364)
+[Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L308-L316)
 
 
 ## Enable CareKit
 
 If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients:
 
-[Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L383-L386)
+[Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
+
+
+# Registration on Apple Developer Portal <a name="Registration"></a>
+
+If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
+
+Register your project in your Apple developer account by following [these steps](APP-REGISTRATION.md).
+
+# Xcode Setup <a name="XcodeSetup"></a>
+
+Set up the Xcode application with your Apple developer account information as [described here](XCODE-SETUP.md).
+
+# CI/CD Setup <a name="CICDSetup"></a>
+
+Configure your project using a CI and CD pipeline via GitHub Actions as [described here](/.github/CICD.md).
 
 
 # License <a name="License"></a>
 
 This project is made available under the terms of a modified BSD license. See the [LICENSE](LICENSE.md) file.
+
+

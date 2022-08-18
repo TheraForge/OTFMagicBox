@@ -42,6 +42,7 @@ enum Constants {
     static let patientLastName = "patientLastName"
     
     static let yamlFile = "AppSysParameters.yml"
+    static let moduleAppFileName = "ModuleAppSysParameter.yml"
     
     static let prefConfirmedLogin = "PREF_CONFIRMED_LOGIN"
     static let prefFirstRunWasMarked = "PREF_FIRST_RUN"
@@ -62,6 +63,8 @@ enum Constants {
     // String representation of Bool to compare with yaml file's booleans
     static let `true` = "true"
     static let `false` = "false"
+    
+    static let deleteAccount = "Your account is deleted from one of your device"
     
     struct UserDefaults {
         //Patient data
@@ -108,6 +111,7 @@ enum Constants {
         static let APIUserErrorNotification = "APIUserErrorNotification"
         static let DataSyncRequest = "DataSyncRequest"
         static let DatabaseSynchronizedSuccessfully = "DatabaseSynchronizedSuccessfully"
+        static let deleteUserAccount = "DeleteUserAccount"
         
         //Reset tab navigation badges
         static let BadgeReset = "BadgeReset"
@@ -124,6 +128,7 @@ enum Constants {
     struct YamlDefaults {
         static let APIKey = "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
         static let FileName = "AppSysParameters.yml"
+        static let moduleAppFileName = "ModuleAppSysParameter.yml"
         static let LoginStepTitle = "Default: login step title"
         static let LoginStepText = "Default: login step text"
         static let StudyTitle = "Default: study Title"
@@ -151,6 +156,16 @@ enum Constants {
         static let ConsentSummary = "Default: consent summary"
         static let ConsentContent = "Default: consent content"
         static let ConsentShow = true
+        static let placeholder = "Your placeholder here"
+        static let questionText = "Your question goes here."
+        static let Questionnaire = "Questionnaire"
+        static let newsletter = "Would you like to subscribe to our newsletter?"
+        static let learnMoreText = "Learn more text"
+        static let learnMoreTitle = "Learn more title"
+        static let birthdayText = "When is your birthday?"
+        static let favorite = "Which is your favorite apple?"
+        static let participantsText = "Please use this space to provide instructions for participants. Please make sure to provide enough information so that users can progress through the survey and complete with ease."
+        static let YourQuestion = "Your question goes here"
     }
     
     struct Images {

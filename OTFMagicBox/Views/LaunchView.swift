@@ -60,8 +60,13 @@ struct LaunchView: View {
         }).onReceive(NotificationCenter.default.publisher(for: .onboardingDidComplete)) { notification in
             didCompleteOnBoarding()
         }.alert(isPresented: $isDefaultAPIKey) {
-            return Alert(title: Text("API Key Missing"),
-                         message: Text("Please set a valid API Key to use the app."),
+            return Alert(title: Text("API Key Missing")
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                ,
+                         message: Text("Please set a valid API Key to use the app.")
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                ,
                          dismissButton: .cancel({
                             UserDefaultsManager.setOnboardingCompleted(false)
                             onboardingCompleted = false

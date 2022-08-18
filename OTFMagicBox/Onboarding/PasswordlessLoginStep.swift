@@ -44,8 +44,8 @@ class PasswordlessLoginStep: ORKFormStep {
     override init(identifier: String) {
         super.init(identifier: identifier)
         
-        title = YmlReader().loginStepTitle
-        text = YmlReader().loginStepText
+        title = ModuleAppYmlReader().loginStepTitle
+        text = ModuleAppYmlReader().loginStepText
         
         formItems = createFormItems()
         isOptional = false

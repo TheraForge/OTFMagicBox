@@ -35,18 +35,33 @@
 import SwiftUI
 
 struct ContactsSection: View {
+    let cellbackgroundColor: UIColor
+    let headerColor: UIColor
+    let textColor: UIColor
     var body: some View {
-        Section(header: Text("Contact")) {
-            ForEach(ContactStyle.allCases, id: \.rawValue) {
-                NavigationLink($0.rawValue.capitalized, destination: ContactDestination(style: $0))
+        Section(header: Text(ModuleAppYmlReader().careKitModel?.contactHeader ?? "Contact")
+            .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+            .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+            .foregroundColor(Color(headerColor))) {
+            ForEach(ContactStyle.allCases, id: \.rawValue) { row in
+                
+                NavigationLink(destination: ContactDestination(style: row)) {
+                    Text(String(row.rawValue.capitalized))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                }
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
+            .listRowBackground(Color(cellbackgroundColor))
+            .foregroundColor(Color(textColor))
         }
     }
 }
 
 struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
-        ContactsSection()
+        ContactsSection(cellbackgroundColor: UIColor(), headerColor: UIColor(), textColor: UIColor())
     }
 }
 
@@ -67,7 +82,18 @@ private struct ContactDestination: View {
 }
 
 private enum ContactStyle: String, CaseIterable {
-    case simple, detailed
+    case simple , detailed
+    
+    var rawValue: String {
+         get {
+             switch self {
+             case .simple:
+                 return ModuleAppYmlReader().careKitModel?.simple ?? ""
+             case .detailed:
+                 return  ModuleAppYmlReader().careKitModel?.detailed ?? ""
+             }
+         }
+     }
 }
 
 import OTFCareKit

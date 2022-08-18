@@ -71,29 +71,6 @@
 # Object which has list of values, you can add and delete any number of key-values. While adding a new value to the list, all the keys within that list value should be declared.
 # Example: Consent which has a set of values like title, summary and content. So, while adding new value for that list all the three properties(title, summary and content) should be declared.
 # Example: currently Consent contains 4 values.
-# consent:
-#   - title: "Overview"
-#     summary: "Hi there"
-#     content: "Hi there"
-#
-#   - title: "Privacy"
-#     summary: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-#     content: "Patient data provides an invaluable resource for improving operational and clinical efficiencies."
-#
-#   - title: "DataUse"
-#     summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
-#     content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment,# resulting in lower costs and enhanced patient care."
-#
-#   - title: "StudyTasks"
-#     summary: "Study tasks involve many aspects of daily functionalities."
-#     content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
-     
-# Now you can add a new Consent value at any position in the list according to your requirements.
-# Most importantly new Consent value should maintain the correct indentation and must include all the three keys, as shown below:
-#
-#   - title: "New title"
-#     summary: "New summary."
-#     content: "New Content."
 
 
 # Edit Boolean Object:-
@@ -106,13 +83,51 @@
 ##############################################################################
 
 DataModel:
-  # Design Configurations
+  # API key for the server integration.
+  # You need to change the dummy key with a valid one to be able to
+  # connect to the cloud backend
+  apiKey: "<insert-your-api-key>"
+  teamWebsite: "<insert-your-web-site-url>"
+  showAppleSignin:  "true"
+  showGoogleSignin: "false"
+  googleClientID: "<add-your-client-id-here>"
+  teamEmail: "<insert-your-team-email>"
+  teamPhone: "<insert-your-team-phone>"
+  # Start Date.
+  startDate: "30/08/2020"
+  importDatabaseFromFile: "false"
+  showCheckupScreen:  "true"
+  showStaticUIScreen: "true"
+  # OTF Protection level.
+  otfProtectionLevel: "runToCompletionWithIn10Seconds"
+  
+   # CareKit
+ # Boolean value will be used to mention whether you want to display the carekit features Schedule and Contacts.
+ # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
+  useCareKit: "true"
+  
+
+  appTheme:
+    backgroundColor: "Gray6"
+    textColor: "Black"
+    separatorColor: "Gray"
+    cellbackgroundColor: "White"
+    buttonTextColor: "Blue"
+    borderColor: "Black"
+    headerColor: "Gray"
+    screenTitleFont: "Header"
+    screenTitleWeight: ""
+    headerTitleFont: "HeaderInherited"
+    headerTitleWeight: ""
+    textWeight: ""
+    textFont: "Inherited"
+  
+  
+  
   designConfig:
-        
       # Offset value.
       - name: "offset"
         textValue: "20"
-        
       # Color codes
       # Colors will be used in the design of the application.
       # Please choose the colors according to Human Interface Guidelines from Apple.
@@ -208,26 +223,28 @@ DataModel:
         textValue: "Gotham-Book"
       - name: "footnoteFontSize"
         textValue: "20"
-        
-  # Whether to import Database from file.
-  importDatabaseFromFile: "false"
-        
-  # OTF Protection level.
-  otfProtectionLevel: "runToCompletionWithIn10Seconds"
-    
+
+  en:
   # Setting Title.
-  settingTitle: "Settings"
+    settingTitle: "Settings"
+  # Home Title.
+    homeTitle: "Home"
+    
+##############################################################################
+#                               App Customization                            #
+##############################################################################
+
+ # Application Specifications.
+    studyTitle: "Health Study"
+    teamName: "by Hippocrates Technologies"
+    copyright: "Made by Hippocrates Technologies"
+
+  fr:
+   # Setting Title.
+    settingTitle: "Réglages"
     
   # Home Title.
-  homeTitle: "Home"
-    
-  # Start Date.
-  startDate: "30/08/2020"
-  
-  # API key for the server integration.
-  # You need to change the dummy key with a valid one to be able to
-  # connect to the cloud backend
-  apiKey: "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
+    homeTitle: "Domicile"
         
         
 ##############################################################################
@@ -235,190 +252,9 @@ DataModel:
 ##############################################################################
 
  # Application Specifications.
-  studyTitle: "Health Study"
-  teamName: "by Hippocrates Technologies"
-  teamEmail: "info@hippocratestech.com"
-  teamPhone: "123-456-7890"
-  copyright: "Made by Hippocrates Technologies"
-  teamWebsite: "https://www.hippocratestech.com/"
-  
- # CareKit and ResearchKit Specifications.
- 
- # Onboarding
- # Onboarding contains number of pages of image and description values. You can add any number of values.
- # Image can be any SF Symbols(version 1.1), Emoji Symbols or any other images from Assets.
- # It is mandatory to write the exact spelling for the image value, if the image is not found then the default string will be displayed.
- # If you are new to SF Symbols then read this apple document: https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/
- # You can install SF Symbol 1.1 from https://developer.apple.com/sf-symbols/ and choose any symbol as per your requirement and write the exact spelling of that particular symbol in the value field of image.
- # Example: If the application requires a message symbol then, I look for a message symbol from the sf-symbols and check the exact name of that symbol and write the same value for the image property (image: "message").
- # If you would like to input your own image then save that image in the Assets folder of the project with a descriptive name and write the same name for the image property value field.
-  onboarding:
-   - image: "Splash Image"
-     icon: "stethoscope"
-     title: "Welcome to MagicBox"
-     color: "Black"
-     description: "Your health care app"
-     
-   - image: "Splash Image"
-     icon: "speedometer"
-     title: "Vitals"
-     color: "Black"
-     description: "Stay in tune with vital indicators of your health, including your heart rate, blood pressure, step count, weight, and mood."
-     
-   - image: "Splash Image"
-     icon: "doc.text.below.ecg"
-     title: "Activities"
-     color: "Black"
-     description: "Keep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities."
-     
- # Consent
- # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
- # Property consentFileName is the name by which your consent file is created.
-  consent:
-    reviewConsentStepText: "Review TheraForge Consent Form"
-    reasonForConsentText: "Consent to join the TheraForge Health Research Study."
-    fileName: "Consent Form Agreement File"
-    title: "TheraForge Consent"
+    studyTitle: "Étude de santé"
+    teamName: "par Hippocrate Technologies"
+    copyright: "Fabriqué par Hippocrate Technologies"
 
- # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
- # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
- # Summary and content value can be same or different.
-    data:
- ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
-        content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
-        
- ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
-        content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
- 
- ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
-        content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
-  
- ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "false"
-        summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
-        content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
-        
- ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
-        content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
- 
- ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "Study tasks involve many aspects of daily functionalities."
-        content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
-        
- ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
-        content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
-        
- ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "You may withdraw your consent and discontinue participation at any time."
-        content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
-        
- ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-      - show: "true"
-        summary: "This is custom section."
-        content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
-     
- # Registration
- # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
- # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
-  registration:
-    showDateOfBirth: "true"
-    showGender: "true"
-  
-  showAppleSignin:  "true"
-  showGoogleSignin: "true"
-  googleClientID: "add_your_client_id_here"
-
- # Login
- # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either "true" or "false".
-  login:
-    loginPasswordless: "true"
-  
- # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
-    loginStepTitle: "Almost done!"
-    loginStepText: "We need to confirm your email address and send you a copy of the consent you just signed."
-  
- # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
-    failedLoginTitle: "Unable to Login"
-    failedLoginText: "Please try again in five minutes"
-  
- # Passcode
- # Properties passcodeOnReturnText and passcodeText are displayed on a passcode generation screen.
-  passcode:
-    enable: "false"
-    passcodeOnReturnText: "Welcome back!"
-    passcodeText: "Now you will create a passcode to identify yourself to the app and protect access to information you have entered."
-  
- # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
-    passcodeType: "4"
-  
-  # Login options screen configuration
-  loginOptionsInfo:
-    text: "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
-    icon: "cloud"
-  
- # Health Records
- # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
- # To enable health Records you need to enroll in the Apple developer program.
- # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
-  healthRecords:
-    enabled: "false"
-    permissionsText: "Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted)."
-    permissionsTitle: "Permission to read Health Records 🏥"
-    
-  showCheckupScreen:  "true"
-  showStaticUIScreen: "true"
-  
- # CareKit
- # Boolean value will be used to mention whether you want to display the carekit features Schedule and Contacts.
- # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
-  useCareKit: "true"
-    
- # Withdrawal
- # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
- # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
-  withdrawal:
-    withdrawalInstructionTitle: "Are you sure you want to withdraw?"
-    withdrawalInstructionText: "Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study."
-    withdrawTitle: "Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study."
-    withdrawText: "Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close."
-    
- # HealthKitData
- # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
- # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
- # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
-  healthKitData:
-    healthPermissionsTitle: "Permission to Read Activity Data 🏃🏽‍♀️"
-    healthPermissionsText: "Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data."
-    backgroundReadFrequency: "immediate"
- 
- # HealthKit types
- # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
- # You can add any number of HK types.
- # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
-    healthKitTypes:
-      - type: "StepCount"
-    
-      - type: "DistanceWalkingRunning"
-    
-      - type: "FlightsClimbed"
     
     
- # CompletionStep
- # Properties completionStepTitle and completionStepText are displayed after successful authorization of a new user.
-  completionStep:
-    title: "Welcome aboard."
-    text: "This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality."
-    
- # Link to ReadMe document
