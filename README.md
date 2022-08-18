@@ -1,4 +1,4 @@
-# TheraForge MagicBox 1.0.1-beta
+# TheraForge MagicBox
 
 The Open TheraForge (OTF) MagicBox app is a template for creating digital health solutions that help people better manage their health.
 
