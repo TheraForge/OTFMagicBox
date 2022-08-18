@@ -36,14 +36,20 @@ import SwiftUI
 
 struct HelpView: View {
     var site = ""
-    
-    init(site: String) {
+    var title = ""
+    var textColor: Color
+    init(site: String, title: String, textColor: Color) {
         self.site = site
+        self.title = title
+        self.textColor = textColor
     }
     
     var body: some View {
         HStack {
-            Text("Help")
+            Text(title)
+                .foregroundColor(textColor)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text("›")
         }.frame(height: 70).contentShape(Rectangle())
@@ -57,6 +63,6 @@ struct HelpView: View {
 
 struct HelpView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView(site: "")
+        HelpView(site: "", title: "", textColor: Color.black)
     }
 }

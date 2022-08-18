@@ -1,0 +1,703 @@
+# Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+
+
+###################################################################################################################################
+#                                           Digital Health Application Customization Guide                                        #
+###################################################################################################################################
+# The AppSysParameters.yml file provides the structure to design your health application.
+# The structure contains the keys for which you can assign the value according to your application requirements.
+# Some of the keys are used for the design of the application, such as Fonts and Colors.
+# And some other keys are related to the application features, such as Onboarding, Consent etc.
+
+
+##############################################################################
+#                   IMPORTANT RULES TO USE THIS FILE                         #
+##############################################################################
+# 1. Kindly do not change the indentation of this file. Suppose if you change the indentation then this particular yaml file key - value will not be read.
+# 2. Do not delete any of the keys and lines from this file.
+# 3. Do not edit the Objects and keys names.
+# 4. Only the values of the keys within the quotes have to be edited.
+# 5. All the values should be mentioned within the quotes(""), otherwise that particular key's value will not be read and the default value will be displayed.
+
+
+# Key and Value:
+# Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
+# Example: teamEmail: "info@hippocratestech.com", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon "info@hippocratestech.com" is the value assigned for that Key.
+
+
+# Default Values:-
+# Default values will be displayed in your application in the format "Default: "
+# Example: Key teamName default value will be displayed like "Default: team name", you can see this on the screen where this key value will be displayed.
+
+
+# Edit Values:-
+# If you want to edit the basic details like title of the study, then go to key studyTitle and edit the value part which is under quotes("")
+# Example: studyTitle: "TheraForge" ---> studyTitle: "NewValue"
+
+
+# Edit List:-
+# If you have list of things, you can denote that sequence using hyphen ("-")
+# Object which has list of values, you can add and delete any number of key-values. While adding a new value to the list, all the keys within that list value should be declared.
+# Example: Consent which has a set of values like title, summary and content. So, while adding new value for that list all the three properties(title, summary and content) should be declared.
+# Example: currently Consent contains 4 values.
+
+# Edit Boolean Object:-
+# Some of the objects will have a Boolean value("true" or "false").
+# Example: "useCareKit", for this key if you assign a value "true" then Schedule and Contacts views will be displayed. Otherwise Schedule and Contacts views will not be displayed.
+
+
+##############################################################################
+#                      TheraForge Configurations                             #
+##############################################################################
+
+DataModel:
+  en:
+        
+##############################################################################
+#                               App Customization                            #
+##############################################################################
+  
+ # CareKit and ResearchKit Specifications.
+ 
+ # Onboarding
+ # Onboarding contains number of pages of image and description values. You can add any number of values.
+ # Image can be any SF Symbols(version 1.1), Emoji Symbols or any other images from Assets.
+ # It is mandatory to write the exact spelling for the image value, if the image is not found then the default string will be displayed.
+ # If you are new to SF Symbols then read this apple document: https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/
+ # You can install SF Symbol 1.1 from https://developer.apple.com/sf-symbols/ and choose any symbol as per your requirement and write the exact spelling of that particular symbol in the value field of image.
+ # Example: If the application requires a message symbol then, I look for a message symbol from the sf-symbols and check the exact name of that symbol and write the same value for the image property (image: "message").
+ # If you would like to input your own image then save that image in the Assets folder of the project with a descriptive name and write the same name for the image property value field.
+    onboarding:
+     - image: "Splash Image"
+       icon: "stethoscope"
+       title: "Welcome to MagicBox"
+       color: "Black"
+       description: "Your health care app"
+     
+     - image: "Splash Image"
+       icon: "speedometer"
+       title: "Vitals"
+       color: "Black"
+       description: "Stay in tune with vital indicators of your health, including your heart rate, blood pressure, step count, weight, and mood."
+     
+     - image: "Splash Image"
+       icon: "doc.text.below.ecg"
+       title: "Activities"
+       color: "Black"
+       description: "Keep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities."
+       
+       
+    # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
+       
+       
+    consent:
+      reviewConsentStepText: "Review TheraForge Consent Form"
+      reasonForConsentText: "Consent to join the TheraForge Health Research Study."
+      fileName: "Consent Form Agreement File"
+      title: "TheraForge Consent"
+      
+      
+      data:
+ ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
+          content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
+        
+ ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
+          content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
+ 
+ ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+          content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+  
+ ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "false"
+          summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
+          content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
+        
+ ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
+          content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
+ 
+ ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Study tasks involve many aspects of daily functionalities."
+          content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
+        
+ ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
+          content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+        
+ ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "You may withdraw your consent and discontinue participation at any time."
+          content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
+        
+ ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "This is custom section."
+          content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+          
+    registration:
+      showDateOfBirth: "true"
+      showGender: "true"
+  
+    showAppleSignin:  "true"
+    showGoogleSignin: "false"
+    
+    
+    login:
+      loginPasswordless: "true"
+  
+ # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
+      loginStepTitle: "Almost done!"
+      loginStepText: "We need to confirm your email address and send you a copy of the consent you just signed."
+  
+ # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
+      failedLoginTitle: "Unable to Login"
+      failedLoginText: "Please try again in five minutes"
+      
+    passcode:
+      enable: "false"
+      passcodeOnReturnText: "Welcome back!"
+      passcodeText: "Now you will create a passcode to identify yourself to the app and protect access to information you have entered."
+  
+ # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
+      passcodeType: "4"
+  
+  # Login options screen configuration
+    loginOptionsInfo:
+      text: "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
+      icon: "cloud"
+      
+      
+    completionStep:
+      title: "Welcome aboard."
+      text: "This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality."
+      
+      
+ # Health Records
+ # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
+    healthRecords:
+      enabled: "false"
+      permissionsText: "Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted)."
+      permissionsTitle: "Permission to read Health Records 🏥"
+      
+      
+      
+ # Withdrawal
+ # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
+ # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
+    withdrawal:
+      withdrawalInstructionTitle: "Are you sure you want to withdraw?"
+      withdrawalInstructionText: "Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study."
+      withdrawTitle: "Withdrawing from the study will reset the app to the state it was in prior to you originally joining the study."
+      withdrawText: "Thank you for your contribution to this study. We are sorry that you could not continue. The app will now close."
+      
+ # HealthKitData
+ # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
+ # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
+ # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
+    healthKitData:
+      healthPermissionsTitle: "Permission to read activity data 🏃🏽‍♀️"
+      healthPermissionsText: "Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data."
+      backgroundReadFrequency: "immediate"
+      
+      
+ # HealthKit types
+ # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
+ # You can add any number of HK types.
+ # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
+      healthKitTypes:
+        - type: "StepCount"
+    
+        - type: "DistanceWalkingRunning"
+    
+        - type: "FlightsClimbed"
+      
+      
+    profileDataModel:
+      title: "Profile"
+      profileImage: "user_profile"
+      help: "Help"
+      resetPasswordText: "Reset Password"
+      reportProblemText: "Report a Problem"
+      reportProblemHeader: "Report a Problem"
+      supportText: "Support"
+      consentText: "Consent Documents"
+      WithdrawStudyText: "Withdraw from Study"
+      profileInfoHeader: "BASIC INFORMATION"
+      firstName: "First Name"
+      lastName: "Last Name"
+      otherInfo: "OTHER INFORMATION"
+      oldPassword: "Old Password"
+      newPassword: "New Password"
+      resetPassword: "Reset Password"
+      backgroundColor: "White"
+      
+      
+    researchKitView:
+      surveysHeaderTitle: "SURVEYS"
+      formSurveyExample: "Form Survey Example"
+      groupedFormSurveyExample: "Grouped Form Survey Example"
+      simpleSurveyExample: "Simple Survey Example"
+      surveyQuestionHeaderTitle: "SURVEY QUESTIONS"
+      booleanQuestion: "Boolean Question"
+      customBooleanQuestion: "Custom Boolean Question"
+      dateQuestion: "Date Question"
+      dateAndTimeQuestion: "Date and Time Question"
+      heightQuestion: "Height Question"
+      weightQuestion: "Weight Question"
+      imageChoiceQuestion: "Image Choice Question"
+      locationQuestion: "Location Question"
+      numericQuestion: "Numeric Question"
+      scaleQuestion: "Scale Question"
+      textQuestion: "Text Question"
+      textChoiceQuestion: "Text Choice Question"
+      timeIntervalQuestion: "Time Interval Question"
+      timeOfDayQuestion: "Time of Day Question"
+      valuePickerChoiceQuestion: "Value Picker Choice Question"
+      validatedTextQuestion: "Validated Text Question"
+      imageCaptureStep: "Image Capture Step"
+      videoCaptureStep: "Video Capture Step"
+      frontFacingCameraStep: "Front Facing Camera Step"
+      waitStep: "Wait Step"
+      pdfViewerStep: "PDF Viewer Step"
+      onBoardingHeaderTitle: "ONBOARDING"
+      eligibilityTaskExample: "Eligibility Task Example"
+      consentObtainingExample: "Consent-Obtaining Example"
+      accountCreation: "Account Creation"
+      login: "Login"
+      passcodeCreation: "Passcode Creation"
+      activeTasksHeaderTitle: "Active Tasks"
+      audio: "Audio"
+      amslerGrid: "Amsler Grid"
+      fitnessCheck: "Fitness Check"
+      holePegTest: "Hole Peg Test"
+      psat: "PSAT"
+      reactionTime: "Reaction Time"
+      shortWalk: "Short Walk"
+      spatialSpanMemory: "Spatial Span Memory"
+      speechRecognition: "Speech Recognition"
+      speechInNoise: "Speech in Noise"
+      stroop: "Stroop"
+      swiftStroop: "Swift Stroop"
+      timedWalkWithTurnAround: "Timed Walk with Turn Around"
+      toneAudiometry: "Tone Audiometry"
+      dBHLToneAudiometry: "dBHL Tone Audiometry"
+      environmentSPLMeter: "Environment SPL Meter"
+      towerOfHanoi: "Tower of Hanoi"
+      twoFingerTappingInterval: "Two Finger Tapping Interval"
+      walkBackAndForth: "Walk Back and Forth"
+      tremorTest: "Tremor Test"
+      videoInstructionTask: "Video Instruction Task"
+      kneeRangeOfMotion: "Knee Range of Motion"
+      shoulderRangeOfMotion: "Shoulder Range of Motion"
+      trailMakingTest: "Trail Making Test"
+      visualAcuityLandoltC: "Visual Acuity Landolt C"
+      contrastSensitivityPeak: "Contrast Sensitivity Peak"
+      miscellaneousHeaderTitle: "Miscellaneous"
+      webView: "Web View"
+      researchKit: "ResearchKit"
+
+    
+    
+    surverysTask:
+      title: "Form Step"
+      additionalText: "Additional text can go here."
+      itemQuestion: "Which is your favorite apple?"
+      grannySmith: "Granny Smith"
+      honeycrisp: "Honeycrisp"
+      fuji: "Fuji"
+      mcIntosh: "McIntosh"
+      kanzi: "Kanzi"
+      questionText: "Your question goes here."
+      groupServeyTitle: "Form Step"
+      sectionTitle: "Section title"
+      sectionDetailText: "Section detail text"
+      placeholder: "Your placeholder here"
+      socioeconomicLadder: "Select where you are on the socioeconomic ladder."
+      questionnaire: "Questionnaire"
+      newsletter: "Would you like to subscribe to our newsletter?"
+      learnMoreTitle: "Learn more title"
+      learnMoreText: "Learn more text"
+      birthdayText: "When is your birthday?"
+    
+    
+    carekitView:
+      contactHeader: "Contact"
+      simple: "Simple"
+      instruction: "instruction"
+      buttonLog: "buttonLog"
+      grid: "grid"
+      checklist: "checklist"
+      labeledValue: "labeled value"
+      numericProgress: "Numeric Progress"
+      taskHeader: "Task"
+      detailed: "detailed"
+      careKit: "CareKit"
+     
+ # Consent
+ # Properties reviewConsentStepText, reasonForConsentText and consentTitle are displayed on the consent form.
+ # Property consentFileName is the name by which your consent file is created.
+
+ # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
+     
+ # Registration
+ # Date of Birth and Gender are the two optional values for the Registration form, you can display them if required in your application.
+ # For example: If the isDOB value is false then the Date of Birth field will not be displayed on the Registration form, if the value is true then only it will be displayed on the form.
+
+ # Login
+ # Property loginPasswordless is a boolean value to mention whether you want to enable passwordless login in your application. Value can be either "true" or "false".
+  
+ # Health Records
+ # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
+  
+ # CareKit
+ # Boolean value will be used to mention whether you want to display the carekit features Schedule and Contacts.
+ # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
+    
+ # HealthKitData
+ # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
+ # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
+ # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
+
+ 
+ # HealthKit types
+ # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
+ # You can add any number of HK types.
+ # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
+ # CompletionStep
+ # Properties completionStepTitle and completionStepText are displayed after successful authorization of a new user.
+      
+  fr:
+  
+    onboarding:
+     - image: "Splash Image"
+       icon: "stethoscope"
+       title: "Bienvenue sur Magic Box"
+       color: "Black"
+       description: "Votre application de soins de santé"
+     
+     - image: "Splash Image"
+       icon: "speedometer"
+       title: "Vitals"
+       color: "Black"
+       description: "Restez à l'écoute des indicateurs vitaux de votre santé, notamment votre fréquence cardiaque, votre tension artérielle, votre nombre de pas, votre poids et votre humeur."
+     
+     - image: "Splash Image"
+       icon: "doc.text.below.ecg"
+       title: "Activités"
+       color: "Black"
+       description: "Suivez vos progrès en prenant des médicaments et effectuez d'autres activités importantes telles que l'apprentissage et la pratique d'activités physiques."
+       
+       
+ # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
+       
+    consent:
+      reviewConsentStepText: "Examiner le formulaire de consentement TheraForge"
+      reasonForConsentText: "Consentement à participer à l'étude de recherche en santé TheraForge."
+      fileName: "Fichier d'accord de formulaire de consentement"
+      title: "Consentement TheraForge"
+
+ # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
+ # It is mandatory to write the exact spelling for the title value, you can check the list of consents from the ConsentDocument.swift file and choose the required consent.
+ # Summary and content value can be same or different.
+      data:
+ ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Vous êtes invité à participer à une étude de recherche sur l'utilisation de l'application OTFMagic pour collecter et rechercher des données sur votre activité quotidienne, votre condition physique et votre état de santé. Il vous sera demandé de télécharger cette application sur votre smartphone et de passer par des écrans qui détermineront l'éligibilité, vous décriront l'étude et vous demanderont de fournir un consentement éclairé. Si vous donnez votre consentement, une copie de ce formulaire de consentement vous sera envoyée par courriel. Il vous sera ensuite demandé d'autoriser l'application OTFMagicBox à collecter des données sur la santé et l'activité de votre téléphone, suivies de questions sur votre préparation à l'activité physique."
+          content: "Votre participation à ce programme est entièrement volontaire. Vous pouvez décider de participer maintenant, retirer votre consentement plus tard et cesser de participer au programme sans aucune perte des prestations ou des soins médicaux auxquels vous avez droit."
+        
+ ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Les données recueillies peuvent vous permettre, ainsi qu'aux chercheurs, de comprendre les schémas et les détails de votre santé."
+          content: "Les données recueillies peuvent vous permettre, ainsi qu'aux chercheurs, de comprendre les schémas et les détails de votre santé."
+ 
+ ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Vos données seront cryptées et envoyées à une base de données sécurisée, votre nom étant remplacé par un code anonymisé. Vos données personnelles ne seront visibles que par les entités autorisées."
+          content: "Vos données seront cryptées et envoyées à une base de données sécurisée, votre nom étant remplacé par un code anonymisé. Vos données personnelles ne seront visibles que par les entités autorisées."
+  
+ ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "false"
+          summary: "La collecte de données de santé est utilisée pour rendre l'analyse numérique plus rapide et plus précise."
+          content: "Les données de santé permettent de prescrire des traitements et de prendre des décisions cliniques avec une plus grande précision, en éliminant les conjectures souvent impliquées dans le traitement, ce qui entraîne une réduction des coûts et une amélioration des soins aux patients."
+        
+ ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Il s'agit d'un programme entièrement à distance administré sur votre appareil mobile. Votre participation à ce programme durera 10 à 15 minutes par jour pendant une semaine."
+          content: "Il s'agit d'un programme entièrement à distance administré sur votre appareil mobile. Votre participation à ce programme durera 10 à 15 minutes par jour pendant une semaine."
+ 
+ ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Les tâches d'étude impliquent de nombreux aspects des fonctionnalités quotidiennes."
+          content: "Certaines des tâches de cette étude vous obligeront à répondre à des questions d'enquête sur des facteurs liés à la santé et au mode de vie. On vous demandera de répondre à un sondage sur votre capacité à augmenter votre activité physique et à tester votre condition physique."
+        
+ ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Nous vous demanderons d'effectuer des tâches actives pouvant nécessiter une activité physique. On vous demandera de remplir un questionnaire de préparation à l'activité physique, qui vous conseillera de parler à votre médecin avant d'augmenter l'activité physique ou d'évaluer votre forme physique."
+          content: "Les tâches liées à la santé impliquent de nombreux aspects de la fonction quotidienne, y compris l'hygiène personnelle et la nutrition, la sécurité et le confort, la forme physique, la qualité du sommeil, la gestion du stress, ainsi que la planification et la coordination pour accomplir ces tâches personnelles."
+        
+ ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Vous pouvez retirer votre consentement et interrompre votre participation à tout moment."
+          content: "Nous ne collecterons ni ne stockerons aucune nouvelle donnée si vous choisissez de vous retirer. Pour vous retirer de l'étude, sélectionnez simplement « Retrait » dans l'onglet de profil."
+        
+ ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
+        - show: "true"
+          summary: "Ceci est une section personnalisée."
+          content: "Section de consentement personnalisé. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Énée commodo ligula eget dolor. Masse énéenne. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nca, pellentesque eu, pretium quis, sem."
+    registration:
+      showDateOfBirth: "true"
+      showGender: "true"
+  
+    showAppleSignin:  "true"
+    showGoogleSignin: "false"
+    googleClientID: "add_your_client_id_here"
+
+    
+    login:
+      loginPasswordless: "true"
+  
+ # Properties loginStepTitle and loginStepText are displayed on the passwordless login form.
+      loginStepTitle: "Presque fini!"
+      loginStepText: "Nous devons confirmer votre adresse e-mail et vous envoyer une copie du consentement que vous venez de signer."
+  
+ # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
+      failedLoginTitle: "Connection impossible"
+      failedLoginText: "Veuillez réessayer dans cinq minutes"
+
+    passcode:
+      enable: "false"
+      passcodeOnReturnText: "Content de te revoir!"
+      passcodeText: "Vous allez maintenant créer un mot de passe pour vous identifier auprès de l'application et protéger l'accès aux informations que vous avez saisies."
+  
+ # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
+      passcodeType: "4"
+  
+  # Login options screen configuration
+    loginOptionsInfo:
+      text: "Vous pouvez vous connecter à votre compte cloud avec un nom d'utilisateur et un mot de passe. Vous pouvez également vous connecter avec votre identifiant Apple ou avec votre adresse Gmail."
+      icon: "cloud"
+      
+      
+    completionStep:
+      title: "Bienvenue à bord."
+      text: "Cette étape conclut le processus d'intégration et de consentement du framework TheraForge. Ensuite, vous verrez la fonctionnalité principale de l'application."
+      
+ # Health Records
+ # The following permissionsText and permissionsTitle properties are displayed on the health records authorization screen.
+ # To enable health Records you need to enroll in the Apple developer program.
+ # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
+    healthRecords:
+      enabled: "false"
+      permissionsText: "Utilisez ce texte pour fournir une explication aux participants de votre application sur les dossiers de santé électroniques (DSE) que vous avez l'intention de collecter à partir de l'application Santé et pourquoi. Cet exemple lira tous les enregistrements disponibles (pour lesquels l'autorisation est accordée)."
+      permissionsTitle: "Autorisation de lire les dossiers de santé 🏥"
+      
+      
+ # Withdrawal
+ # Properties withdrawalInstructionTitle and withdrawalInstructionText are displayed on the screen asking for Withdrawal.
+ # Properties withdrawTitle and withdrawText are displayed on the final screen of Withdrawal.
+    withdrawal:
+      withdrawalInstructionTitle: "Êtes-vous sûr de vouloir vous retirer ?"
+      withdrawalInstructionText: "Le retrait de l'étude réinitialisera l'application à l'état dans lequel elle se trouvait avant que vous ne rejoigniez l'étude."
+      withdrawTitle: "Le retrait de l'étude réinitialisera l'application à l'état dans lequel elle se trouvait avant que vous ne rejoigniez l'étude."
+      withdrawText: "Merci pour votre contribution à cette étude. Nous sommes désolés que vous n'ayez pas pu continuer. L'application va maintenant se fermer."
+      
+      
+      
+ # HealthKitData
+ # HealthPermissionsTitle and healthPermissionsText value are displayed on the permission screen, which gives authorization to read the user data.
+ # Depending on the backgroundReadFrequency value HealthKit data collection will be read in the background.
+ # BackgroundReadFrequency value can be: "daily", "weekly", "hourly" or "immediate".
+    healthKitData:
+      healthPermissionsTitle: "Autorisation de lire les données d'activité 🏃🏽‍♀️"
+      healthPermissionsText: "Utilisez ce texte pour fournir une explication aux participants de votre application sur les données d'activité que vous avez l'intention de lire à partir de l'application Santé et pourquoi. Cet échantillon lira les données sur le nombre de pas, la distance, la fréquence cardiaque et les vols montés."
+      backgroundReadFrequency: "immediate"
+      
+      
+ # HealthKit types
+ # HealthKitTypes object contains only the HK types, whose authorization will be asked for.
+ # You can add any number of HK types.
+ # It is mandatory to write the exact spelling for the type value. You can check the list of HK types from  https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier and choose the required type.
+      healthKitTypes:
+        - type: "StepCount"
+    
+        - type: "DistanceWalkingRunning"
+    
+        - type: "FlightsClimbed"
+      
+    profileDataModel:
+      title: "Profil"
+      profileImage: "user_profile"
+      help: "Aider"
+      resetPasswordText: "réinitialiser le mot de passe"
+      reportProblemText: "Signaler un problème"
+      reportProblemHeader: "Signaler un problème"
+      supportText: "Soutien"
+      consentText: "Documents de consentement"
+      WithdrawStudyText: "Se retirer de l'étude"
+      profileInfoHeader: "INFORMATIONS DE BASE"
+      firstName: "Prénom"
+      lastName: "nom de famille"
+      otherInfo: "LES AUTRES INFORMATIONS"
+      oldPassword: "ancien mot de passe"
+      newPassword: "nouveau mot de passe"
+      resetPassword: "réinitialiser le mot de passe"
+      backgroundColor: "White"
+     
+     
+    researchKitView:
+      surveysHeaderTitle: "ENQUÊTES"
+      formSurveyExample: "Formulaire d'exemple d'enquête"
+      groupedFormSurveyExample: "Exemple d'enquête de formulaire groupé"
+      simpleSurveyExample: "Exemple d'enquête simple"
+      surveyQuestionHeaderTitle: "QUESTIONS DU SONDAGE"
+      booleanQuestion: "Question booléenne"
+      customBooleanQuestion: "Question booléenne personnalisée"
+      dateQuestion: "Date Question"
+      dateAndTimeQuestion: "Question sur la date et l'heure"
+      heightQuestion: "Question sur la taille"
+      weightQuestion: "Question de poids"
+      imageChoiceQuestion: "Question de choix d'image"
+      locationQuestion: "Question de lieu"
+      numericQuestion: "Question numérique"
+      scaleQuestion: "Échelle Question"
+      textQuestion: "Question textuelle"
+      textChoiceQuestion: "Question de choix de texte"
+      timeIntervalQuestion: "Intervalle de temps"
+      timeOfDayQuestion: "Question sur l'heure du jour"
+      valuePickerChoiceQuestion: "Question de choix du sélecteur de valeur"
+      validatedTextQuestion: "Question textuelle validée"
+      imageCaptureStep: "Étape de capture d'image"
+      videoCaptureStep: "Étape de capture vidéo"
+      frontFacingCameraStep: "Étape de la caméra frontale"
+      waitStep: "Étape d'attente"
+      pdfViewerStep: "Étape de la visionneuse PDF"
+      onBoardingHeaderTitle: "INTÉGRATION"
+      eligibilityTaskExample: "Exemple de tâche d'éligibilité"
+      consentObtainingExample: "Exemple d'obtention du consentement"
+      accountCreation: "Création de compte"
+      login: "Connexion"
+      passcodeCreation: "Création de code d'accès"
+      activeTasksHeaderTitle: "Tâches actives"
+      audio: "l'audio"
+      amslerGrid: "Grille d'Amsler"
+      fitnessCheck: "Bilan de condition physique"
+      holePegTest: "Test de cheville de trou"
+      psat: "SPAT"
+      reactionTime: "Temps de réaction"
+      shortWalk: "Petite marche"
+      spatialSpanMemory: "Mémoire d'étendue spatiale"
+      speechRecognition: "Reconnaissance de la parole"
+      speechInNoise: "Discours dans le bruit"
+      stroop: "Stroop"
+      swiftStroop: "Stroop rapide"
+      timedWalkWithTurnAround: "Marche chronométrée avec demi-tour"
+      toneAudiometry: "Audiométrie tonale"
+      dBHLToneAudiometry: "Audiométrie tonale dBHL"
+      environmentSPLMeter: "Compteur SPL d'environnement"
+      towerOfHanoi: "La tour de Hanoi"
+      twoFingerTappingInterval: "Intervalle de tapotement à deux doigts"
+      walkBackAndForth: "Aller et retour"
+      tremorTest: "Test de tremblement"
+      videoInstructionTask: "Tâche d'instruction vidéo"
+      kneeRangeOfMotion: "Gamme de mouvement du genou"
+      shoulderRangeOfMotion: "Amplitude de mouvement des épaules"
+      trailMakingTest: "Test de création de sentiers"
+      visualAcuityLandoltC: "Acuité visuelle Landolt C"
+      contrastSensitivityPeak: "Pic de sensibilité au contraste"
+      miscellaneousHeaderTitle: "Divers"
+      webView: "Affichage Web"
+      researchKit: "Trousse de recherche"
+    
+    
+    surverysTask:
+      title: "Étape du formulaire"
+      additionalText: "Le texte supplémentaire peut aller ici."
+      itemQuestion: "Quelle est votre pomme préférée ?"
+      grannySmith: "Granny Smith"
+      honeycrisp: "Honeycrisp"
+      fuji: "Fuji"
+      mcIntosh: "McIntosh"
+      kanzi: "Kanzi"
+      questionText: "Votre question va ici."
+      groupServeyTitle: "Étape du formulaire"
+      sectionTitle: "Section titre"
+      sectionDetailText: "Texte de détail de section"
+      placeholder: "Votre espace réservé ici"
+      socioeconomicLadder: "Sélectionnez où vous vous situez sur l'échelle socio-économique."
+      questionnaire: "Questionnaire"
+      newsletter: "Souhaitez-vous vous inscrire à notre newsletter?"
+      learnMoreTitle: "En savoir plus titre"
+      learnMoreText: "En savoir plus texte"
+      birthdayText: "C'est quand votre anniversaire?"
+    
+    
+    carekitView:
+      contactHeader: "Contacter"
+      simple: "Simple"
+      instruction: "instruction"
+      buttonLog: "boutonJournal"
+      grid: "la grille"
+      checklist: "liste de contrôle"
+      labeledValue: "valeur étiquetée"
+      numericProgress: "Progression numérique"
+      taskHeader: "Tâche"
+      detailed: "détaillée"
+      careKit: "Kit de soins"
+
+     
+   #ProfileScreenSetup
+    
+
+    
+
+

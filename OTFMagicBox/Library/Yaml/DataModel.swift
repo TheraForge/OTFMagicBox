@@ -34,19 +34,6 @@ OF SUCH DAMAGE.
 
 import Foundation
 
-struct Onboarding: Codable, Equatable {
-    let image: String
-    let icon: String
-    let title: String
-    let color: String
-    let description: String
-}
-
-struct Registration: Codable {
-    let showDateOfBirth: String
-    let showGender: String
-}
-
 struct Login: Codable {
     let loginPasswordless: String
     let loginStepTitle: String
@@ -54,25 +41,6 @@ struct Login: Codable {
     let failedLoginTitle: String
     let failedLoginText: String
 }
-
-struct LoginOptionsInfo: Codable {
-    let text: String
-    let icon: String
-}
-
-struct Consent: Codable {
-     let reviewConsentStepText: String
-     let reasonForConsentText: String
-     let fileName: String
-     let title: String
-     let data: [ConsentDescription]
- }
-
- struct ConsentDescription: Codable {
-     let show: String
-     let summary: String
-     let content: String
- }
  
 struct Passcode: Codable {
     let enable: String
@@ -81,63 +49,46 @@ struct Passcode: Codable {
     let passcodeType: String
 }
 
-struct HealthKitData: Codable {
-    let healthPermissionsTitle: String
-    let healthPermissionsText: String
-    let backgroundReadFrequency: String
-    let healthKitTypes: [HealthKitTypes]
-}
-
-struct HealthRecords: Codable {
-    let enabled: String
-    let permissionsText: String
-    let permissionsTitle: String
-}
-
-struct Withdrawal: Codable {
-    let withdrawTitle: String
-    let withdrawText: String
-    let withdrawalInstructionTitle: String
-    let withdrawalInstructionText: String
-}
-
-struct HealthKitTypes: Codable, Equatable  {
-    let type: String
-}
-
-struct CompletionStep: Codable {
-    let title: String
-    let text: String
-}
-
 struct DesignConfig: Codable {
     let name: String
     let textValue: String
 }
 
-struct DataModel: Codable {
-    let designConfig: [DesignConfig]
+struct DefaultConfig: Codable{
     let apiKey: String
-    let studyTitle: String
-    let teamName: String
-    let teamEmail: String
-    let teamPhone: String
-    let copyright: String
+    let en: DataModel
+    let fr: DataModel
+    let designConfig: [DesignConfig]
     let teamWebsite: String
     let showAppleSignin: String
     let showGoogleSignin: String
     let googleClientID: String?
-    let passcode: Passcode
-    let completionStep: CompletionStep
-    let useCareKit: String
+    let teamEmail: String
+    let teamPhone: String
     let showCheckupScreen: String
     let showStaticUIScreen: String
-    let login: Login
-    let loginOptionsInfo: LoginOptionsInfo
-    let registration: Registration
-    let onboarding: [Onboarding]
-    let consent: Consent
-    let healthRecords: HealthRecords
-    let healthKitData: HealthKitData
-    let withdrawal: Withdrawal
+    let useCareKit: String
+    let appTheme: ThemeCustomization
+}
+
+struct DataModel: Codable {
+    let studyTitle: String
+    let teamName: String
+    let copyright: String
+}
+
+struct ThemeCustomization: Codable{
+    let backgroundColor: String
+    let textColor: String
+    let separatorColor: String
+    let cellbackgroundColor: String
+    let buttonTextColor: String
+    let borderColor: String
+    let headerColor: String
+    let textWeight: String
+    let textFont: String
+    let screenTitleFont: String
+    let screenTitleWeight: String
+    let headerTitleFont: String
+    let headerTitleWeight: String
 }

@@ -38,7 +38,7 @@ import SwiftUI
 struct LogoutView: View {
     @State private var showingOptions = false
     @State private var showingAlert = false
-    
+    let textColor: Color
     var body: some View {
         HStack {
             Spacer()
@@ -48,10 +48,15 @@ struct LogoutView: View {
             }, label: {
                  Text("Logout")
                     .font(.basicFontStyle)
+                    .foregroundColor(textColor)
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             })
             .actionSheet(isPresented: $showingOptions) {
                 ActionSheet(
-                    title: Text("Are you sure?"),
+                    title: Text("Are you sure?")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     buttons: [
                         .destructive(Text("Logout"), action: {
                             OTFTheraforgeNetwork.shared.signOut { result in
@@ -61,12 +66,16 @@ struct LogoutView: View {
                                 }
                             }
                         }),
-                        .cancel(Text("Cancel"))
+                        .cancel(Text("Cancel")
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)))
                     ]
                 )
             }
             .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Failed to logout."), message: nil, dismissButton: .default(Text("Okay")))
+                Alert(title: Text("Failed to logout.")
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text("Okay")))
             }
             
             Spacer()
@@ -77,6 +86,6 @@ struct LogoutView: View {
 
 struct LogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        LogoutView()
+        LogoutView(textColor: Color.black)
     }
 }

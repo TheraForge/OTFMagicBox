@@ -51,10 +51,10 @@ struct EmailLoginSteps: LoginSteps {
         loginSteps = [loginStep]
         
         // use the `ORKPasscodeStep` from ResearchKit.
-        if YmlReader().isPasscodeEnabled {
+        if ModuleAppYmlReader().isPasscodeEnabled {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
             
-            let type = YmlReader().passcodeType
+            let type = ModuleAppYmlReader().passcodeType
             
             if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
@@ -82,10 +82,10 @@ struct AppleLoginSteps: LoginSteps {
         loginSteps = [appleLoginStep]
         
         // use the `ORKPasscodeStep` from ResearchKit.
-        if YmlReader().isPasscodeEnabled {
+        if ModuleAppYmlReader().isPasscodeEnabled {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
             
-            let type = YmlReader().passcodeType
+            let type = ModuleAppYmlReader().passcodeType
             
             if type == Constants.Passcode.lengthSix {
                 passcodeStep.passcodeType = .type6Digit
