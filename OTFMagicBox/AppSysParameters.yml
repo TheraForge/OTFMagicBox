@@ -86,7 +86,7 @@ DataModel:
   # API key for the server integration.
   # You need to change the dummy key with a valid one to be able to
   # connect to the cloud backend
-  apiKey: "<insert-your-api-key>"
+  apiKey: "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
   teamWebsite: "<insert-your-web-site-url>"
   showAppleSignin:  "true"
   showGoogleSignin: "false"
