@@ -39,15 +39,25 @@ struct UpdateUserProfileView: View {
     
     @State var showUserProfile = false
     let user: OCKPatient
-    
+    let backgroudColor: UIColor
+    let textColor: UIColor
+    let cellBackgroundColor: UIColor
+    let headerColor: UIColor
+    let buttonColor: UIColor
+    let borderColor: UIColor
+    let sepratorColor: UIColor
     var body: some View {
         VStack {
-            Image(uiImage: UIImage(named: "user_profile")!)
+            Image(uiImage: UIImage(named: ModuleAppYmlReader().profileData?.profileImage ?? "user_profile")!)
                 .iconStyle()
                 .frame(width: 40, height: 40, alignment: .center)
              
             HStack {
                 Text(user.remoteID ?? "")
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .foregroundColor(Color(textColor))
                 Spacer()
                 Text("›")
             }
@@ -57,7 +67,8 @@ struct UpdateUserProfileView: View {
         })).sheet(isPresented: $showUserProfile, onDismiss: {
             
         }, content: {
-            UpdateUserProfileDetailView(user: user)
+            UpdateUserProfileDetailView(user: user, backgroudColor: backgroudColor, textColor: textColor, cellBackgroundColor: cellBackgroundColor, headerColor: headerColor, buttonColor: buttonColor, borderColor: borderColor, sepratorColor: sepratorColor)
         })
+        .background(Color(backgroudColor))
     }
 }

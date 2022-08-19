@@ -38,8 +38,8 @@ import OTFCareKit
 struct CareKitViews: View {
     var body: some View {
         List {
-            ContactsSection()
-            TaskSection()
+            ContactsSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            TaskSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("CareKit Views"), displayMode: .inline)
@@ -50,11 +50,11 @@ struct CareKitViews: View {
 struct ResearchKitViews: View {
     var body: some View {
         List {
-            SurveysList()
-            SurveyQuestionsList()
-            OnboardingList()
-            ActiveTasksList()
-            MiscellaneousList()
+            SurveysList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            SurveyQuestionsList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            OnboardingList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            ActiveTasksList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            MiscellaneousList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("ResearchKit Views"), displayMode: .inline)
@@ -63,18 +63,54 @@ struct ResearchKitViews: View {
 }
 
 struct StaticUI: View {
+    
+    @State private var isPresenting = false
+    
+    init() {
+        UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+        UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+    }
     var body: some View {
         NavigationView {
             List {
-                NavigationLink("CareKit",
-                               destination: CareKitViews())
                 
-                NavigationLink("ResearchKit",
-                               destination: ResearchKitViews())
+                NavigationLink(destination: CareKitViews()) {
+                    Text(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit")
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                }
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                
+                NavigationLink(destination: ResearchKitViews()) {
+                    Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                }
+                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Sample Views"), displayMode: .inline)
+            .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                isPresenting = true
+            }
+            .alert(isPresented: $isPresenting) {
+                
+                Alert(
+                    title: Text("Account Deleted")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    message: Text(Constants.deleteAccount),
+                    dismissButton: .default(Text("Okay"), action: {
+                        OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                    })
+                )
+            }
+            .onDisappear {
+                NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
+            }
+            .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
         }
+        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
     }
 }
 

@@ -36,12 +36,17 @@ import SwiftUI
 
 struct CheckUpView: View {
     @StateObject var viewmodel = CheckUpViewModel()
+    @State private var isPresenting = false
     
     var body: some View {
         VStack {
             Text("Check Up").font(.headerFontStyle)
+                .foregroundColor(Color(YmlReader().appTheme?.headerTitleFont.color ?? .black))
+                .font(YmlReader().appTheme?.headerTitleWeight.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             List {
-                Section(header: Text("OVERALL ADHERENCE")) {
+                Section(header: Text("OVERALL ADHERENCE")
+                    .foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? .black))) {
                     CountProgressRow(title: "Physical Activities",
                                      completed: viewmodel.activityTasksAndEvents.completedTasks.count,
                                      total: viewmodel.activityTasksAndEvents.eventsOfTasks.count,
@@ -65,10 +70,32 @@ struct CheckUpView: View {
                                      lineWidth: 4.0)
                         .padding(.vertical, 10)
                 }
+                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                isPresenting = true
+            }.alert(isPresented: $isPresenting) {
+                
+                Alert(
+                    title: Text("Account Deleted")
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    message: Text("Your account is deleted from one of your device"),
+                    dismissButton: .default(Text("Okay"), action: {
+                        OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                    })
+                )
             }
             .listStyle(GroupedListStyle())
             .onAppear {
-                viewmodel.fetchTasks()
+                UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+                UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    viewmodel.fetchTasks()
+                }
+            }
+            .onDisappear {
+                NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
             }
         }
     }

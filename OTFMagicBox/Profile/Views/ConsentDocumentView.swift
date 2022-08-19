@@ -38,15 +38,21 @@ struct ConsentDocumentView: View {
     
     @State private var showPreview = false
     let documentsURL: URL
-    
-    init(documentURL: URL) {
+    let title: String
+    let color: UIColor
+    init(documentURL: URL, title: String, color: UIColor) {
         self.documentsURL = documentURL
+        self.title = title
+        self.color = color
         OTFLog("Opening document at:", self.documentsURL.path)
     }
     
     var body: some View {
         HStack {
-            Text("Consent Document")
+            Text(title)
+                .foregroundColor(Color(color))
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
             Text("›")
         }.frame(height: 60)
@@ -62,6 +68,6 @@ struct ConsentDocumentView_Previews: PreviewProvider {
     static var previews: some View {
         let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String
         let url = URL(fileURLWithPath: documentsPath!, isDirectory: false)
-        ConsentDocumentView(documentURL: url)
+        ConsentDocumentView(documentURL: url, title: "", color: UIColor())
     }
 }

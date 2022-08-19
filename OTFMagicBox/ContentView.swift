@@ -38,6 +38,8 @@ import OTFResearchKit
 struct ContentView: View {
     var body: some View {
         Text("Hello, world!")
+            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             .padding()
     }
 }

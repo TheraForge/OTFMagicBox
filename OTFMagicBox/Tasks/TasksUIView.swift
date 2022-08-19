@@ -89,6 +89,6 @@ struct TasksUIView: View {
 
 struct TasksUIView_Previews: PreviewProvider {
     static var previews: some View {
-        TasksUIView(color: Color.red)
+        TasksUIView(color: Color.black)
     }
 }

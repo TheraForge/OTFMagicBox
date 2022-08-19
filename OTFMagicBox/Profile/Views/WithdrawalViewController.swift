@@ -48,12 +48,12 @@ struct WithdrawalViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ORKTaskViewController {
         
         let instructionStep = ORKInstructionStep(identifier: "WithdrawlInstruction")
-        instructionStep.title = YmlReader().withdrawl?.withdrawalInstructionTitle
-        instructionStep.text = YmlReader().withdrawl?.withdrawalInstructionText
+        instructionStep.title = ModuleAppYmlReader().withdrawl?.withdrawalInstructionTitle
+        instructionStep.text = ModuleAppYmlReader().withdrawl?.withdrawalInstructionText
         
         let completionStep = ORKCompletionStep(identifier: "Withdraw")
-        completionStep.title = YmlReader().withdrawl?.withdrawTitle
-        completionStep.text = YmlReader().withdrawl?.withdrawText
+        completionStep.title = ModuleAppYmlReader().withdrawl?.withdrawTitle
+        completionStep.text = ModuleAppYmlReader().withdrawl?.withdrawText
         
         let withdrawTask = ORKOrderedTask(identifier: "Withdraw", steps: [instructionStep, completionStep])
         

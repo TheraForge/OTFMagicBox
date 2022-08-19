@@ -53,7 +53,9 @@ struct PlatformPicker<UIKitView: View, SwiftUIView: View>: View {
 
             VStack {
 
-                Picker(selection: $selectedPlatform, label: Text("Platform")) {
+                Picker(selection: $selectedPlatform, label: Text("Platform")
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                     ForEach(0..<platforms.count) { index in
                         Text(self.platforms[index])
                             .tag(index)
