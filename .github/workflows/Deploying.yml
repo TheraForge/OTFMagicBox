@@ -1,0 +1,40 @@
+name: Deploying
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Deploying to Testflight
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: setup-cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          version: 1.11.3
+      - name: Install pods
+        run: pod install
+      - name: Setup keychain
+        env:
+          SIGNING_CERTIFICATE_DATA_RELEASE: ${{ secrets.SIGNING_CERTIFICATE_DATA_RELEASE }}
+          SIGNING_CERTIFICATES_PASSWORD: ${{ secrets.SIGNING_CERTIFICATES_PASSWORD }}
+        run: .github/secrets/decrypt_secrets.sh
+      - name: Import provisioning profile
+        env:
+          PROVISIONING_PROFILE_DATA_RELEASE: ${{ secrets.PROVISIONING_PROFILE_DATA_RELEASE }}
+        run: |
+          exec .github/secrets/import_profile.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: .github/scripts/archive_app.sh
+      - name: Exporting .ipa
+        run: .github/scripts/export_ipa.sh
+      - name: Publishing app
+        if: success()
+        env:
+          APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
+          APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD}}
+        run: .github/scripts/publish_testflight.sh

@@ -38,14 +38,27 @@ import OTFCareKitUI
 import OTFCareKitStore
 
 struct TaskSection: View {
-    
+    let cellbackgroundColor: UIColor
+    let headerColor: UIColor
+    let textColor: UIColor
     var body: some View {
-        Section(header: Text("Task")) {
+        Section(header: Text(ModuleAppYmlReader().careKitModel?.taskHeader ?? "Task").font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+            .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+            .foregroundColor(Color(headerColor))) {
             ForEach(TaskStyle.allCases, id: \.rawValue) { style in
                 if style.supportsSwiftUI || style.supportsUIKit {
-                    NavigationLink(style.rawValue.capitalized, destination: TaskDestination(style: style))
+                    
+                    NavigationLink(destination: TaskDestination(style: style)) {
+                        Text(style.rawValue.capitalized)
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                    .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 }
             }
+            .listRowBackground(Color(cellbackgroundColor))
+            .foregroundColor(Color(textColor))
         }
     }
 }
@@ -77,7 +90,8 @@ struct TaskDestination: View {
                 }
             }
         }
-        .navigationBarTitle(Text(style.rawValue.capitalized), displayMode: .inline)
+        .navigationBarTitle(Text(style.rawValue.capitalized).font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), displayMode: .inline)
     }
 }
 
@@ -90,6 +104,28 @@ enum TaskStyle: String, CaseIterable, Codable {
     case simple, instruction, buttonLog
     case grid, checklist
     case labeledValue = "labeled value", numericProgress = "Numeric Progress"
+    
+    
+    var rawValue: String {
+         get {
+             switch self {
+             case .simple:
+                 return ModuleAppYmlReader().careKitModel?.simple ?? ""
+             case .instruction:
+                 return  ModuleAppYmlReader().careKitModel?.instruction ?? ""
+             case .buttonLog:
+                 return  ModuleAppYmlReader().careKitModel?.buttonLog ?? ""
+             case .grid:
+                 return  ModuleAppYmlReader().careKitModel?.grid ?? ""
+             case .checklist:
+                 return  ModuleAppYmlReader().careKitModel?.checklist ?? ""
+             case .labeledValue:
+                 return  ModuleAppYmlReader().careKitModel?.labeledValue ?? ""
+             case .numericProgress:
+                 return  ModuleAppYmlReader().careKitModel?.numericProgress ?? ""
+             }
+         }
+     }
     
     var supportsSwiftUI: Bool {
         guard #available(iOS 14, *) else { return false }
@@ -138,13 +174,15 @@ struct TaskView: View {
                     }
                     
                     // Static view
-                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)"),
+                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                                                          progress: Text("0"),
                                                          goal: Text("100"),
                                                          isComplete: false)
                     
                     // Static view
-                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)"),
+                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                                                          progress: Text("0"),
                                                          goal: Text("100"),
                                                          isComplete: true)
@@ -161,14 +199,19 @@ struct TaskView: View {
                     }
                     
                     // Static view
-                    LabeledValueTaskView(title: Text("Heart Rate (Static)"),
-                                         detail: Text("Anytime"),
+                    LabeledValueTaskView(title: Text("Heart Rate (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)),
+                                         detail: Text("Anytime").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                                          state: .complete(Text("62"), Text("BPM")))
                     
                     // Static view
-                    LabeledValueTaskView(title: Text("Heart Rate (Static)"),
-                                         detail: Text("Anytime"),
-                                         state: .incomplete(Text("NO DATA")))
+                    LabeledValueTaskView(title: Text("Heart Rate (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                                         detail: Text("Anytime").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                                         state: .incomplete(Text("NO DATA")
+                                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))))
                 }
             default:
                 EmptyView()
@@ -238,35 +281,45 @@ struct TasksSection: View {
     
     var body: some View {
         List {
-            Section(header: Text("Simple Task")) {
+            Section(header: Text("Simple Task")
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                 if let simpleTask = self.viewModel.simpleTask {
                     SimpleTaskView(task: simpleTask, date: Date(),
                                    storeManager: viewModel.syncStoreManager)
                 }
             }
             
-            Section(header: Text("Instruction Task")) {
+            Section(header: Text("Instruction Task")
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                 if let instructionTask = self.viewModel.simpleTask {
                     InstructionTaskView(task: instructionTask, date: Date(),
                                         storeManager: viewModel.syncStoreManager)
                 }
             }
             
-            Section(header: Text("Button Log Task")) {
+            Section(header: Text("Button Log Task")
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                 if let buttonLogTask = self.viewModel.buttonLogTask {
                     ButtonLogTaskView(task: buttonLogTask, date: Date(),
                                       storeManager: viewModel.syncStoreManager)
                 }
             }
             
-            Section(header: Text("Grid Task")) {
+            Section(header: Text("Grid Task")
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                 if let gridTask = self.viewModel.checklistTask {
                     GridTaskView(task: gridTask, date: Date(),
                                  storeManager: viewModel.syncStoreManager)
                 }
             }
             
-            Section(header: Text("Checklist Task")) {
+            Section(header: Text("Checklist Task")
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                 if let checklistTask = self.viewModel.checklistTask {
                     ChecklistTaskView(task: checklistTask, date: Date(),
                                       storeManager: viewModel.syncStoreManager)
@@ -274,6 +327,11 @@ struct TasksSection: View {
             }
         }
         .listStyle(GroupedListStyle())
+//        .onLoad {
+//            UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+//            UITableViewCell.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+//            UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+//        }
     }
 }
 

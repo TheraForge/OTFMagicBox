@@ -45,10 +45,26 @@ class ScheduleViewController: OCKDailyPageViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification(_:)),
                                                name: .databaseSuccessfllySynchronized, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteProfileEventNotification(_:)),
+                                               name: .deleteUserAccount, object: nil)
+
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
     }
     
     @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
         reload()
+    }
+    
+    @objc private func deleteProfileEventNotification(_ notification: Notification) {
+        
+        self.alertView(title: "Account Deleted", message: Constants.deleteAccount) { action in
+            OTFTheraforgeNetwork.shared.moveToOnboardingView()
+        }
+        
     }
     
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController,

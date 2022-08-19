@@ -53,7 +53,11 @@ struct TaskItemView: View {
             }
             VStack(alignment: .leading) {
                 Text(item.title).font(.system(size: 18, weight: .semibold, design: .default))
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 Text(item.subtitle).font(.system(size: 14, weight: .light, design: .default))
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             }
             Spacer()
         }

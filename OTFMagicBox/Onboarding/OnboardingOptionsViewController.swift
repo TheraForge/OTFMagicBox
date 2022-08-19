@@ -117,9 +117,9 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         
         var stackViewHeight = CGFloat(0)
         
-        let config = YmlReader()
+        let config = ModuleAppYmlReader()
         
-        if config.showAppleLogin {
+        if YmlReader().showAppleLogin {
             stackViewHeight += 60
             let buttonApple = customButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil,
                                            reference: nil, action: #selector(loginAppleAction), withAttachement: "apple")
@@ -127,7 +127,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
             verticalStack.addArrangedSubview(buttonApple)
         }
         
-        if config.showGoogleLogin {
+        if YmlReader().showGoogleLogin {
             stackViewHeight += 60
             let buttonGoogle = customButton(title: "Sign in with Google", backGroundColor: .white, textColor: .black,
                                             borderColor: UIColor(red: 66.0/255.0, green: 133.0/255.0, blue: 244.0/255.0, alpha: 1),
