@@ -88,8 +88,8 @@ struct CheckUpView: View {
             }
             .listStyle(GroupedListStyle())
             .onAppear {
-                UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
-                UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+                UITableView.appearance().separatorColor = YmlReader.shared.appTheme?.separatorColor.color
+                UITableView.appearance().backgroundColor = YmlReader.shared.appTheme?.backgroundColor.color
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     viewmodel.fetchTasks()
                 }

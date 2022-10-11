@@ -46,4 +46,15 @@ extension Date {
         // Convert Date to String
         return dateFormatter.string(from: self)
     }
+    
+    var toDateTimeString: String {
+        // Create Date Formatter
+        let dateFormatter = DateFormatter()
+
+        // Set Date Format
+        dateFormatter.dateFormat = "MM/dd/YYYY hh:mm"
+
+        // Convert Date to String
+        return dateFormatter.string(from: self)
+    }
 }

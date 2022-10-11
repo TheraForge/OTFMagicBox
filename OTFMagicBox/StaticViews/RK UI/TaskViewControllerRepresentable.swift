@@ -17,6 +17,7 @@ struct TaskViewControllerRepresentable: UIViewControllerRepresentable {
     var waitStepProgress: CGFloat = 0.0
     
     var taskResultFinishedCompletionHandler: ((ORKResult) -> Void)?
+    var taskDidFinishWithResultCompletionHandler: ((ORKResult, [ORKResult]?) -> Void)?
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -57,6 +58,7 @@ struct TaskViewControllerRepresentable: UIViewControllerRepresentable {
                 view controller.
             */
             parent.taskResultFinishedCompletionHandler?(taskViewController.result)
+            parent.taskDidFinishWithResultCompletionHandler?(taskViewController.result, taskViewController.result.results)
 
             //taskViewController.dismiss(animated: true, completion: nil)
             parent.presentationMode.wrappedValue.dismiss()

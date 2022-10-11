@@ -99,23 +99,11 @@ DataModel:
  # Example: If the application requires a message symbol then, I look for a message symbol from the sf-symbols and check the exact name of that symbol and write the same value for the image property (image: "message").
  # If you would like to input your own image then save that image in the Assets folder of the project with a descriptive name and write the same name for the image property value field.
     onboarding:
-     - image: "Splash Image"
-       icon: "stethoscope"
-       title: "Welcome to MagicBox"
+     - image: ""
+       icon: "shield.lefthalf.fill"
+       title: "Stop FOG"
        color: "Black"
-       description: "Your health care app"
-     
-     - image: "Splash Image"
-       icon: "speedometer"
-       title: "Vitals"
-       color: "Black"
-       description: "Stay in tune with vital indicators of your health, including your heart rate, blood pressure, step count, weight, and mood."
-     
-     - image: "Splash Image"
-       icon: "doc.text.below.ecg"
-       title: "Activities"
-       color: "Black"
-       description: "Keep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities."
+       description: ""
        
        
     # Consent data contains the title, summary and content. Title and summary will be displayed on the respective consent screen and content will be displayed on the Consent form.
@@ -124,25 +112,25 @@ DataModel:
        
        
     consent:
-      reviewConsentStepText: "Review TheraForge Consent Form"
-      reasonForConsentText: "Consent to join the TheraForge Health Research Study."
+      reviewConsentStepText: "Review the STOP FOG Consent Form"
+      reasonForConsentText: "I agree to give my consent to the Stop FOG app to use, distribtue over my personal data and to use it for any purpose they need in order to achieve our goals and improve."
       fileName: "Consent Form Agreement File"
-      title: "TheraForge Consent"
+      title: "STOP FOG Consent"
       
       
       data:
  ## Consent Welcome, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
           content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
         
  ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
           content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
  
  ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
           content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
   
@@ -152,29 +140,44 @@ DataModel:
           content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
         
  ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
           content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
  
  ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "Study tasks involve many aspects of daily functionalities."
           content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
         
  ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
           content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
         
  ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
-        - show: "true"
+        - show: "false"
           summary: "You may withdraw your consent and discontinue participation at any time."
           content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
         
  ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
-          summary: "This is custom section."
-          content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+          title: "Get Started"
+          imageDisplayed: "false"
+          image: ""
+          summary: "By staying with us, you unlock full potential of stopping your bad fog experience and turning it into something you can easily overcome and live with. \n\nStay in tune with vital indicators of your health, including your heart rate, blood pressure, step count, weight, and mood. \n\nKeep track of your progress taking medications and complete other important activities such as learning and engaging in physical activities. \n\nHealthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment,# resulting in lower costs and enhanced patient care. \n\nHealth-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+          content: "I give my consent to the Stop FOG app to use, distribtue over my personal data and to use it for any purpose they need in order to achieve our goals and improve. \n\nYour participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to. \n\nYou can always disable it in your iPhone settings."
+        
+        - show: "true"
+          title: "Data Processing"
+          image: "dataGear"
+          summary: "In order to help you, and all other people with Parkinson’s Disease, We will need your consent to use your data and your feedback.\n\nYour participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
+          content: "In order to help you, and all other people with Parkinson’s Disease, We will need your consent to use your data and your feedback.\n\nYour participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to. \n\nYou can always disable it in your iPhone settings."
+        
+        - show: "true"
+          title: "Allow us to use Siri"
+          image: "siri"
+          summary: "In order to help you, and all other people with Parkinson’s Disease, We will need your consent in order to use siri voice activation in order to help you stop your FoG with an ease. \n\nBy giving us allowance to use the Siri, we are able to bring our helper screen directly to you, without any other interaction needed. \n\nThank You!"
+          content: "In order to help you, and all other people with Parkinson’s Disease, We will need your consent in order to use siri voice activation in order to help you stop your FoG with an ease. \n\nBy giving us allowance to use the Siri, we are able to bring our helper screen directly to you, without any other interaction needed. \n\nYou can always disable it in your iPhone settings."
           
     registration:
       showDateOfBirth: "true"
@@ -219,7 +222,7 @@ DataModel:
  # To enable health Records you need to enroll in the Apple developer program.
  # To build more advanced capabilities and distribute your apps on the App Store, enroll in the Apple Developer Program. The cost is 99 USD per membership year.
     healthRecords:
-      enabled: "false"
+      enabled: "true"
       permissionsText: "Use this text to provide an explanation to your app participants about what electronic health records (EHR) you intend to collect from the Health app and why. This sample will read all available records (for which permission is granted)."
       permissionsTitle: "Permission to read Health Records 🏥"
       

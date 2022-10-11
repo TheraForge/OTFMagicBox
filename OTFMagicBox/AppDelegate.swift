@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
-        let tintColor = YmlReader().tintColor
+        let tintColor = UIColor(Colors.primary) //YmlReader.shared.tintColor
 
         let defaultProtection = OTFConfigManager.shared.defaultOTFProtectionLevel()
 
@@ -68,6 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = tintColor
         
+        if YmlReader.shared.shouldListAvailableFonts {
+            listAvailableFonts()
+        }
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
     
@@ -85,6 +92,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func listAvailableFonts() {
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+    }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(UNNotificationPresentationOptions.banner)
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        completionHandler()
+    }
+}

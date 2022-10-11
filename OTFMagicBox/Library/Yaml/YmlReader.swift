@@ -42,6 +42,7 @@ import Yams
  */
 public class YmlReader {
     
+    public static let shared = YmlReader()
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.FileName
     
@@ -53,7 +54,7 @@ public class YmlReader {
         do {
             if let dataSet = try? Data(contentsOf: fileUrl) {
                 guard let data = try? YAMLDecoder().decode([String: DefaultConfig].self, from: dataSet) else {
-                    OTFLog("Yaml decode error")
+                    OTFLog("***  [ERROR]: Unable to decode Yaml file. Make sure to remove any typing errors inside it! ***")
                     return
                 }
                 if data["DataModel"] != nil {
@@ -96,6 +97,21 @@ public class YmlReader {
             return Constants.YamlDefaults.APIKey
         }
         return apiKey
+    }
+    
+    
+    // Font Family Name used in app.
+    var fontFamilyName: String {
+        guard let familyName = dataModel?.fonts.fontFamilyName else {
+            return "HelveticaNeue"
+        }
+        return familyName
+    }
+    
+    // List Available Fonts in Console with exact name.
+    var shouldListAvailableFonts: Bool {
+        guard let listAvailableFonts = dataModel?.fonts.listAvailableFonts else { return false }
+        return listAvailableFonts == Constants.true
     }
     
     

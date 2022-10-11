@@ -38,8 +38,8 @@ import OTFCareKit
 struct CareKitViews: View {
     var body: some View {
         List {
-            ContactsSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            TaskSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            ContactsSection(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
+            TaskSection(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("CareKit Views"), displayMode: .inline)
@@ -50,11 +50,11 @@ struct CareKitViews: View {
 struct ResearchKitViews: View {
     var body: some View {
         List {
-            SurveysList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            SurveyQuestionsList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            OnboardingList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            ActiveTasksList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            MiscellaneousList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            SurveysList(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
+            SurveyQuestionsList(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
+            OnboardingList(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
+            ActiveTasksList(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
+            MiscellaneousList(cellbackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("ResearchKit Views"), displayMode: .inline)
@@ -67,8 +67,8 @@ struct StaticUI: View {
     @State private var isPresenting = false
     
     init() {
-        UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
-        UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+        UITableView.appearance().separatorColor = YmlReader.shared.appTheme?.separatorColor.color
+        UITableView.appearance().backgroundColor = YmlReader.shared.appTheme?.backgroundColor.color
     }
     var body: some View {
         NavigationView {

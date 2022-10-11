@@ -328,9 +328,9 @@ struct TasksSection: View {
         }
         .listStyle(GroupedListStyle())
 //        .onLoad {
-//            UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-//            UITableViewCell.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-//            UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+//            UITableView.appearance().backgroundColor = YmlReader.shared.appTheme?.backgroundColor.color
+//            UITableViewCell.appearance().backgroundColor = YmlReader.shared.appTheme?.backgroundColor.color
+//            UITableView.appearance().separatorColor = YmlReader.shared.appTheme?.separatorColor.color
 //        }
     }
 }

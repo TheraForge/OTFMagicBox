@@ -37,21 +37,27 @@ import OTFCareKitStore
 
 struct ProfileUIView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @State private(set) var user: OCKPatient?
     @State var isLoading = true
     @State private var isPresenting = false
     
     var body: some View {
         VStack {
-            Text(ModuleAppYmlReader().profileData?.title ?? "Profile")
-                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
-                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-            
+//            Text(ModuleAppYmlReader().profileData?.title ?? "Profile")
+//                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
+//                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
+//                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+            HStack {
+                Spacer()
+                Text("Done").regular(size: 17).foregroundColor(Colors.primary).padding(16).onTapGesture {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
             List {
                 Section {
                     if let user = user {
-                        UpdateUserProfileView(user: user, backgroudColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black, cellBackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, buttonColor: YmlReader().appTheme?.buttonTextColor.color ?? .black, borderColor: YmlReader().appTheme?.borderColor.color ?? .black, sepratorColor: YmlReader().appTheme?.separatorColor.color ?? .black)
+                        UpdateUserProfileView(user: user, backgroudColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, textColor: YmlReader.shared.appTheme?.textColor.color ?? .black, cellBackgroundColor: YmlReader.shared.appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader.shared.appTheme?.headerColor.color ?? .black, buttonColor: YmlReader.shared.appTheme?.buttonTextColor.color ?? .black, borderColor: YmlReader.shared.appTheme?.borderColor.color ?? .black, sepratorColor: YmlReader.shared.appTheme?.separatorColor.color ?? .black)
                     } else {
                         LoadingView(username: "")
                     }
@@ -62,13 +68,13 @@ struct ProfileUIView: View {
                     if ModuleAppYmlReader().isPasscodeEnabled {
                         ChangePasscodeView()
                     }
-                    HelpView(site: YmlReader().teamWebsite, title: ModuleAppYmlReader().profileData?.help ?? "Help", textColor: Color(YmlReader().appTheme?.textColor.color ?? .black))
+                    HelpView(site: YmlReader.shared.teamWebsite, title: ModuleAppYmlReader().profileData?.help ?? "Help", textColor: Color(YmlReader().appTheme?.textColor.color ?? .black))
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 if let email = user?.remoteID {
                     Section {
-                        ChangePasswordView(email: email, resetPassword: ModuleAppYmlReader().profileData?.resetPasswordText ?? "Reset Password", textColor: YmlReader().appTheme?.textColor.color ?? UIColor.black, backgroudColor: YmlReader().appTheme?.backgroundColor.color ?? UIColor.black, buttonColor: YmlReader().appTheme?.buttonTextColor.color ?? UIColor.black, borderColor: YmlReader().appTheme?.borderColor.color ?? UIColor.black)
+                        ChangePasswordView(email: email, resetPassword: ModuleAppYmlReader().profileData?.resetPasswordText ?? "Reset Password", textColor: YmlReader.shared.appTheme?.textColor.color ?? UIColor.black, backgroudColor: YmlReader.shared.appTheme?.backgroundColor.color ?? UIColor.black, buttonColor: YmlReader.shared.appTheme?.buttonTextColor.color ?? UIColor.black, borderColor: YmlReader.shared.appTheme?.borderColor.color ?? UIColor.black)
                     }
                     .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 }
@@ -77,15 +83,15 @@ struct ProfileUIView: View {
                     .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
                     .foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? UIColor.black))) {
-                    ReportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), email: YmlReader().teamEmail, title: ModuleAppYmlReader().profileData?.reportProblemText ?? "Report a Problem")
-                    SupportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), phone: YmlReader().teamPhone, title: ModuleAppYmlReader().profileData?.supportText ?? "Support")
+                    ReportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), email: YmlReader.shared.teamEmail, title: ModuleAppYmlReader().profileData?.reportProblemText ?? "Report a Problem")
+                    SupportView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black), phone: YmlReader.shared.teamPhone, title: ModuleAppYmlReader().profileData?.supportText ?? "Support")
                 }
                 .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 
                 if let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String {
                     let url = URL(fileURLWithPath: documentsPath, isDirectory: false)
                     Section {
-                        ConsentDocumentView(documentURL: url, title: ModuleAppYmlReader().profileData?.consentText ?? "Consent Document", color: YmlReader().appTheme?.textColor.color ?? .black)
+                        ConsentDocumentView(documentURL: url, title: ModuleAppYmlReader().profileData?.consentText ?? "Consent Document", color: YmlReader.shared.appTheme?.textColor.color ?? .black)
                     }
                     .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
                 }
@@ -120,9 +126,10 @@ struct ProfileUIView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     fetchUserFromDB()
                 }
-                UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-                UITableViewCell.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-                UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
+                UITableView.appearance().backgroundColor = YmlReader.shared.appTheme?.backgroundColor.color
+                UITableViewCell.appearance().backgroundColor = YmlReader.shared.appTheme?.backgroundColor.color
+                UITableView.appearance().separatorColor = .clear
+//                YmlReader.shared.appTheme?.separatorColor.color
             }
             .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
                 fetchUserFromDB()

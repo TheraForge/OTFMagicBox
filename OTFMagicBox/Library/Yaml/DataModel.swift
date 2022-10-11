@@ -69,6 +69,7 @@ struct DefaultConfig: Codable{
     let showStaticUIScreen: String
     let useCareKit: String
     let appTheme: ThemeCustomization
+    let fonts: Fonts
 }
 
 struct DataModel: Codable {
@@ -91,4 +92,9 @@ struct ThemeCustomization: Codable{
     let screenTitleWeight: String
     let headerTitleFont: String
     let headerTitleWeight: String
+}
+
+struct Fonts: Codable{
+    let listAvailableFonts: String
+    let fontFamilyName: String
 }

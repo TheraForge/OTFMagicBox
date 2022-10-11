@@ -51,7 +51,7 @@ struct LaunchView: View {
                 }
             }
         }.onAppear(perform: {
-            guard YmlReader().apiKey != Constants.YamlDefaults.APIKey else {
+            guard YmlReader.shared.apiKey != Constants.YamlDefaults.APIKey else {
                 isDefaultAPIKey = true
                 return
             }

@@ -164,7 +164,7 @@ struct OnboardingItemControl: UIViewRepresentable {
         let control = UIPageControl()
         control.numberOfPages = numberOfOnboardingItems
         control.pageIndicatorTintColor = UIColor.lightGray
-        control.currentPageIndicatorTintColor = YmlReader().primaryColor
+        control.currentPageIndicatorTintColor = YmlReader.shared.primaryColor
         control.backgroundColor = .clear
         control.addTarget(
             context.coordinator,

@@ -57,7 +57,7 @@ class OTFTheraforgeNetwork {
             return
         }
         
-        let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: YmlReader().apiKey)
+        let configurations = NetworkingLayer.Configurations(APIBaseURL: url, apiKey: YmlReader.shared.apiKey)
         TheraForgeNetwork.configureNetwork(configurations)
         otfNetworkService = TheraForgeNetwork.shared
     }

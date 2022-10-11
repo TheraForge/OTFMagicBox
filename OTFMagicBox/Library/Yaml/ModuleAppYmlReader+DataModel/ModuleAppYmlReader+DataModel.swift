@@ -370,6 +370,8 @@ struct Consent: Codable {
 
 struct ConsentDescription: Codable {
     let show: String
+    var title: String?
+    var image: String?
     let summary: String
     let content: String
 }

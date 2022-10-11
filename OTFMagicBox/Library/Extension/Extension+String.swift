@@ -166,4 +166,26 @@ extension String {
             return nil
         }
     }
+    
+    var toDate: Date {
+        // Create Date Formatter
+        let dateFormatter = DateFormatter()
+
+        // Set Date Format
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+
+        // Convert Date to String
+        return dateFormatter.date(from: self) ?? Date()
+    }
+    
+    var toDateTime: Date {
+        // Create Date Formatter
+        let dateFormatter = DateFormatter()
+
+        // Set Date Format
+        dateFormatter.dateFormat = "MM/dd/YYYY hh:mm"
+
+        // Convert Date to String
+        return dateFormatter.date(from: self) ?? Date()
+    }
 }

@@ -5,7 +5,7 @@ target 'OTFMagicBox' do
   use_frameworks!
   
   source 'https://cdn.cocoapods.org'
-  source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
+  source 'git@github-hipocrates:HippocratesTech/OTFCocoapodSpecs'
 
   pod 'OTFToolBox/CareHealth', '1.0.2-alpha'
   pod 'GoogleSignIn'

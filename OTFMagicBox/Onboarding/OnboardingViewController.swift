@@ -63,7 +63,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         // use the `ORKConsentReviewStep` from ResearchKit
         let signature = consentDocument.signatures?.first
         let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
-        reviewConsentStep.text = YmlReader().teamWebsite
+        reviewConsentStep.text = YmlReader.shared.teamWebsite
         reviewConsentStep.reasonForConsent = config.reasonForConsentText
         
         // *  STEP (3): ask user to enter their email address for login

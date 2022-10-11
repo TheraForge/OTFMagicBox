@@ -46,22 +46,38 @@ struct UpdateUserProfileView: View {
     let buttonColor: UIColor
     let borderColor: UIColor
     let sepratorColor: UIColor
+    
+    var userFullName: String {
+        if let givenName = user.name.givenName, let familyName = user.name.familyName {
+            return givenName + " " + familyName
+        }
+        if let userName = user.remoteID {
+            return userName
+        }
+        return ""
+    }
     var body: some View {
         VStack {
-            Image(uiImage: UIImage(named: ModuleAppYmlReader().profileData?.profileImage ?? "user_profile")!)
-                .iconStyle()
-                .frame(width: 40, height: 40, alignment: .center)
+//            Image(uiImage: UIImage(named:
+//                                    ModuleAppYmlReader().profileData?.profileImage ?? "person.circle")!)
+            UIImage.loadImage(named: "person.circle")
+                .resizable()
+                .clipped()
+                .clipShape(Circle())
+                .frame(width: 100, height: 100, alignment: .center).padding(20)
              
             HStack {
-                Text(user.remoteID ?? "")
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                Spacer()
+                Text(userFullName)
+//                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+//                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.regular(size: 24))
+//                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .regular(size: 24)
                     .foregroundColor(Color(textColor))
                 Spacer()
                 Text("›")
             }
-        }.frame(height: 80).contentShape(Rectangle())
+        }.frame(height: 200).contentShape(Rectangle())
         .gesture(TapGesture().onEnded({
             self.showUserProfile.toggle()
         })).sheet(isPresented: $showUserProfile, onDismiss: {

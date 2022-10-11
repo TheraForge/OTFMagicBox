@@ -119,7 +119,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         
         let config = ModuleAppYmlReader()
         
-        if YmlReader().showAppleLogin {
+        if YmlReader.shared.showAppleLogin {
             stackViewHeight += 60
             let buttonApple = customButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil,
                                            reference: nil, action: #selector(loginAppleAction), withAttachement: "apple")
@@ -127,7 +127,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
             verticalStack.addArrangedSubview(buttonApple)
         }
         
-        if YmlReader().showGoogleLogin {
+        if YmlReader.shared.showGoogleLogin {
             stackViewHeight += 60
             let buttonGoogle = customButton(title: "Sign in with Google", backGroundColor: .white, textColor: .black,
                                             borderColor: UIColor(red: 66.0/255.0, green: 133.0/255.0, blue: 244.0/255.0, alpha: 1),
@@ -272,7 +272,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
     
     @objc
     func loginGoogleAction() {
-        guard let clientID = YmlReader().googleClientID else {
+        guard let clientID = YmlReader.shared.googleClientID else {
             showError(ForgeError(error: .init(statusCode: 401, name: "Missing Credentials",
                                               message: "You have not provided Google Client ID in the YAML file.", code: nil)))
             return

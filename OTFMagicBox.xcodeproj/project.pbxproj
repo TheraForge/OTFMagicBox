@@ -105,6 +105,43 @@
 		8486C8DD278482D70013B4E9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486C8DC278482D70013B4E9 /* LoadingView.swift */; };
 		848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */; };
 		84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1758A2750A035001587BD /* Extention+Notification.swift */; };
+		AD00261628CCA51200A02C13 /* SetupFogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00261528CCA51200A02C13 /* SetupFogView.swift */; };
+		AD00261828CCA52600A02C13 /* SetupFogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00261728CCA52600A02C13 /* SetupFogViewModel.swift */; };
+		AD00261A28CCA5FA00A02C13 /* FogTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00261928CCA5FA00A02C13 /* FogTimerViewModel.swift */; };
+		AD00261C28CCA60900A02C13 /* FogTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00261B28CCA60900A02C13 /* FogTimerView.swift */; };
+		AD00261E28CD335400A02C13 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00261D28CD335400A02C13 /* AlertModel.swift */; };
+		AD00262028CD337400A02C13 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00261F28CD337400A02C13 /* AlertAction.swift */; };
+		AD00262228CD33F100A02C13 /* Extension+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00262128CD33F100A02C13 /* Extension+Alert.swift */; };
+		AD00262428CD347500A02C13 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00262328CD347500A02C13 /* ErrorModel.swift */; };
+		AD00262B28CE000800A02C13 /* metronome120.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD00262A28CE000800A02C13 /* metronome120.mp3 */; };
+		AD00262D28CE04CC00A02C13 /* CalmnessSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD00262C28CE04CB00A02C13 /* CalmnessSound.mp3 */; };
+		AD00262F28CE119600A02C13 /* SoothingVoice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD00262E28CE119600A02C13 /* SoothingVoice.mp3 */; };
+		AD218BE928BA43A50086ADEB /* MedicationSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD218BE828BA43A50086ADEB /* MedicationSetupView.swift */; };
+		AD218BEB28BA43B50086ADEB /* MedicationSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD218BEA28BA43B50086ADEB /* MedicationSetupViewModel.swift */; };
+		AD218BEF28BC9C900086ADEB /* MedicationSetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD218BEE28BC9C900086ADEB /* MedicationSetupCell.swift */; };
+		AD218BF128BCA6B20086ADEB /* MedicationSetupEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD218BF028BCA6B20086ADEB /* MedicationSetupEntryView.swift */; };
+		AD218BF328BCA6C00086ADEB /* MedicationSetupEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD218BF228BCA6C00086ADEB /* MedicationSetupEntryViewModel.swift */; };
+		AD6B973128AF6557003080EB /* StopFogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B973028AF6557003080EB /* StopFogView.swift */; };
+		AD6B973328AF6586003080EB /* StopFogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B973228AF6586003080EB /* StopFogViewModel.swift */; };
+		AD6B973528AF6CCB003080EB /* StopFogCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B973428AF6CCB003080EB /* StopFogCellItem.swift */; };
+		AD6B973728AF715F003080EB /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B973628AF715F003080EB /* MainHeaderView.swift */; };
+		AD6B973928B0E4E9003080EB /* Extension+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B973828B0E4E9003080EB /* Extension+Text.swift */; };
+		AD6B973B28B0EEE0003080EB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B973A28B0EEE0003080EB /* Colors.swift */; };
+		AD7337E028C54F6A00318821 /* MedicationNotificationSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337DF28C54F6A00318821 /* MedicationNotificationSetupView.swift */; };
+		AD7337E228C54FC100318821 /* MedicationNotificationSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337E128C54FC100318821 /* MedicationNotificationSetupViewModel.swift */; };
+		AD7337E428C5E83C00318821 /* MedicationNotificationSetupEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337E328C5E83C00318821 /* MedicationNotificationSetupEntryView.swift */; };
+		AD7337E628C5E84600318821 /* MedicationNotificationSetupEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337E528C5E84600318821 /* MedicationNotificationSetupEntryViewModel.swift */; };
+		AD7337E828C612FC00318821 /* Extension+Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337E728C612FC00318821 /* Extension+Screen.swift */; };
+		AD7337EC28C6142600318821 /* SurveyReminderSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337EB28C6142600318821 /* SurveyReminderSetupView.swift */; };
+		AD7337EE28C6143A00318821 /* SurveyReminderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7337ED28C6143A00318821 /* SurveyReminderSetupViewModel.swift */; };
+		AD81158028B6CA2A0019E394 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81157F28B6CA2A0019E394 /* SettingsView.swift */; };
+		AD81158228B6CA390019E394 /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81158128B6CA390019E394 /* SurveyView.swift */; };
+		AD81158428B6CA480019E394 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81158328B6CA480019E394 /* SettingsViewModel.swift */; };
+		AD81158628B6CA550019E394 /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81158528B6CA550019E394 /* SurveyViewModel.swift */; };
+		AD81158B28B6CC320019E394 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81158A28B6CC320019E394 /* SettingCell.swift */; };
+		AD81158D28B831F00019E394 /* SurveyCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81158C28B831F00019E394 /* SurveyCardCell.swift */; };
+		AD81158F28BA2BC50019E394 /* StopFogActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81158E28BA2BC50019E394 /* StopFogActionView.swift */; };
+		AD81159128BA2DEE0019E394 /* StopFogActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81159028BA2DEE0019E394 /* StopFogActionViewModel.swift */; };
 		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
 		CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */; };
 		CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */; };
@@ -228,6 +265,43 @@
 		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
 		8486C8DC278482D70013B4E9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		84A1758A2750A035001587BD /* Extention+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+Notification.swift"; sourceTree = "<group>"; };
+		AD00261528CCA51200A02C13 /* SetupFogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFogView.swift; sourceTree = "<group>"; };
+		AD00261728CCA52600A02C13 /* SetupFogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFogViewModel.swift; sourceTree = "<group>"; };
+		AD00261928CCA5FA00A02C13 /* FogTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FogTimerViewModel.swift; sourceTree = "<group>"; };
+		AD00261B28CCA60900A02C13 /* FogTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FogTimerView.swift; sourceTree = "<group>"; };
+		AD00261D28CD335400A02C13 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		AD00261F28CD337400A02C13 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
+		AD00262128CD33F100A02C13 /* Extension+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Alert.swift"; sourceTree = "<group>"; };
+		AD00262328CD347500A02C13 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		AD00262A28CE000800A02C13 /* metronome120.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = metronome120.mp3; sourceTree = "<group>"; };
+		AD00262C28CE04CB00A02C13 /* CalmnessSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CalmnessSound.mp3; sourceTree = "<group>"; };
+		AD00262E28CE119600A02C13 /* SoothingVoice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SoothingVoice.mp3; sourceTree = "<group>"; };
+		AD218BE828BA43A50086ADEB /* MedicationSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationSetupView.swift; sourceTree = "<group>"; };
+		AD218BEA28BA43B50086ADEB /* MedicationSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationSetupViewModel.swift; sourceTree = "<group>"; };
+		AD218BEE28BC9C900086ADEB /* MedicationSetupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationSetupCell.swift; sourceTree = "<group>"; };
+		AD218BF028BCA6B20086ADEB /* MedicationSetupEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationSetupEntryView.swift; sourceTree = "<group>"; };
+		AD218BF228BCA6C00086ADEB /* MedicationSetupEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationSetupEntryViewModel.swift; sourceTree = "<group>"; };
+		AD6B973028AF6557003080EB /* StopFogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopFogView.swift; sourceTree = "<group>"; };
+		AD6B973228AF6586003080EB /* StopFogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopFogViewModel.swift; sourceTree = "<group>"; };
+		AD6B973428AF6CCB003080EB /* StopFogCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopFogCellItem.swift; sourceTree = "<group>"; };
+		AD6B973628AF715F003080EB /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		AD6B973828B0E4E9003080EB /* Extension+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Text.swift"; sourceTree = "<group>"; };
+		AD6B973A28B0EEE0003080EB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		AD7337DF28C54F6A00318821 /* MedicationNotificationSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationNotificationSetupView.swift; sourceTree = "<group>"; };
+		AD7337E128C54FC100318821 /* MedicationNotificationSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationNotificationSetupViewModel.swift; sourceTree = "<group>"; };
+		AD7337E328C5E83C00318821 /* MedicationNotificationSetupEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationNotificationSetupEntryView.swift; sourceTree = "<group>"; };
+		AD7337E528C5E84600318821 /* MedicationNotificationSetupEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationNotificationSetupEntryViewModel.swift; sourceTree = "<group>"; };
+		AD7337E728C612FC00318821 /* Extension+Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Screen.swift"; sourceTree = "<group>"; };
+		AD7337EB28C6142600318821 /* SurveyReminderSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReminderSetupView.swift; sourceTree = "<group>"; };
+		AD7337ED28C6143A00318821 /* SurveyReminderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReminderSetupViewModel.swift; sourceTree = "<group>"; };
+		AD81157F28B6CA2A0019E394 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AD81158128B6CA390019E394 /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		AD81158328B6CA480019E394 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		AD81158528B6CA550019E394 /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
+		AD81158A28B6CC320019E394 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		AD81158C28B831F00019E394 /* SurveyCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCardCell.swift; sourceTree = "<group>"; };
+		AD81158E28BA2BC50019E394 /* StopFogActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopFogActionView.swift; sourceTree = "<group>"; };
+		AD81159028BA2DEE0019E394 /* StopFogActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopFogActionViewModel.swift; sourceTree = "<group>"; };
 		C5CFAC70131F8AB6B0208512 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,6 +397,9 @@
 				8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */,
 				8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */,
 				8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */,
+				AD6B973828B0E4E9003080EB /* Extension+Text.swift */,
+				AD7337E728C612FC00318821 /* Extension+Screen.swift */,
+				AD00262128CD33F100A02C13 /* Extension+Alert.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -375,6 +452,10 @@
 				5A49628C26E1BD5C00A4B4DF /* UIColor.swift */,
 				5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */,
 				841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */,
+				AD6B973A28B0EEE0003080EB /* Colors.swift */,
+				AD00261D28CD335400A02C13 /* AlertModel.swift */,
+				AD00261F28CD337400A02C13 /* AlertAction.swift */,
+				AD00262328CD347500A02C13 /* ErrorModel.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -530,6 +611,93 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AD00261428CCA4A000A02C13 /* Survey Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				AD7337EB28C6142600318821 /* SurveyReminderSetupView.swift */,
+				AD7337ED28C6143A00318821 /* SurveyReminderSetupViewModel.swift */,
+			);
+			path = "Survey Reminder";
+			sourceTree = "<group>";
+		};
+		AD00262528CD38EC00A02C13 /* FoG Setup */ = {
+			isa = PBXGroup;
+			children = (
+				AD00261528CCA51200A02C13 /* SetupFogView.swift */,
+				AD00261728CCA52600A02C13 /* SetupFogViewModel.swift */,
+				AD00261B28CCA60900A02C13 /* FogTimerView.swift */,
+				AD00261928CCA5FA00A02C13 /* FogTimerViewModel.swift */,
+			);
+			path = "FoG Setup";
+			sourceTree = "<group>";
+		};
+		AD7337E928C613DD00318821 /* Medication Notification */ = {
+			isa = PBXGroup;
+			children = (
+				AD7337DF28C54F6A00318821 /* MedicationNotificationSetupView.swift */,
+				AD7337E128C54FC100318821 /* MedicationNotificationSetupViewModel.swift */,
+				AD7337E328C5E83C00318821 /* MedicationNotificationSetupEntryView.swift */,
+				AD7337E528C5E84600318821 /* MedicationNotificationSetupEntryViewModel.swift */,
+			);
+			path = "Medication Notification";
+			sourceTree = "<group>";
+		};
+		AD7337EA28C613FC00318821 /* Medication  */ = {
+			isa = PBXGroup;
+			children = (
+				AD218BE828BA43A50086ADEB /* MedicationSetupView.swift */,
+				AD218BEA28BA43B50086ADEB /* MedicationSetupViewModel.swift */,
+				AD218BF028BCA6B20086ADEB /* MedicationSetupEntryView.swift */,
+				AD218BF228BCA6C00086ADEB /* MedicationSetupEntryViewModel.swift */,
+			);
+			path = "Medication ";
+			sourceTree = "<group>";
+		};
+		AD81157E28B6CA160019E394 /* StopFogScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AD6B973028AF6557003080EB /* StopFogView.swift */,
+				AD6B973228AF6586003080EB /* StopFogViewModel.swift */,
+				AD6B973428AF6CCB003080EB /* StopFogCellItem.swift */,
+				AD81158E28BA2BC50019E394 /* StopFogActionView.swift */,
+				AD81159028BA2DEE0019E394 /* StopFogActionViewModel.swift */,
+			);
+			path = StopFogScreen;
+			sourceTree = "<group>";
+		};
+		AD81158728B6CA5F0019E394 /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AD81157F28B6CA2A0019E394 /* SettingsView.swift */,
+				AD81158328B6CA480019E394 /* SettingsViewModel.swift */,
+				AD81158A28B6CC320019E394 /* SettingCell.swift */,
+				AD218BEE28BC9C900086ADEB /* MedicationSetupCell.swift */,
+				AD7337EA28C613FC00318821 /* Medication  */,
+				AD7337E928C613DD00318821 /* Medication Notification */,
+				AD00261428CCA4A000A02C13 /* Survey Reminder */,
+				AD00262528CD38EC00A02C13 /* FoG Setup */,
+			);
+			path = SettingsScreen;
+			sourceTree = "<group>";
+		};
+		AD81158828B6CA6C0019E394 /* HelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				AD6B973628AF715F003080EB /* MainHeaderView.swift */,
+			);
+			path = HelperViews;
+			sourceTree = "<group>";
+		};
+		AD81158928B6CA780019E394 /* SurveyView */ = {
+			isa = PBXGroup;
+			children = (
+				AD81158128B6CA390019E394 /* SurveyView.swift */,
+				AD81158528B6CA550019E394 /* SurveyViewModel.swift */,
+				AD81158C28B831F00019E394 /* SurveyCardCell.swift */,
+			);
+			path = SurveyView;
+			sourceTree = "<group>";
+		};
 		C9D92AAC7DE27C25427A4DB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,7 +756,14 @@
 				CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */,
 				CE482D04262C954C00C0A2D5 /* Info.plist */,
 				8465002E287F11A8008007B0 /* exportOptions.plist */,
+				AD00262A28CE000800A02C13 /* metronome120.mp3 */,
+				AD00262C28CE04CB00A02C13 /* CalmnessSound.mp3 */,
+				AD00262E28CE119600A02C13 /* SoothingVoice.mp3 */,
 				846761A627DF8B0700A3207E /* Preview Content */,
+				AD81157E28B6CA160019E394 /* StopFogScreen */,
+				AD81158928B6CA780019E394 /* SurveyView */,
+				AD81158728B6CA5F0019E394 /* SettingsScreen */,
+				AD81158828B6CA6C0019E394 /* HelperViews */,
 			);
 			path = OTFMagicBox;
 			sourceTree = "<group>";
@@ -684,7 +859,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */,
+				AD00262D28CE04CC00A02C13 /* CalmnessSound.mp3 in Resources */,
+				AD00262B28CE000800A02C13 /* metronome120.mp3 in Resources */,
 				CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */,
+				AD00262F28CE119600A02C13 /* SoothingVoice.mp3 in Resources */,
 				8465002F287F11A8008007B0 /* exportOptions.plist in Resources */,
 				CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */,
 				846761BC27DF8BC300A3207E /* tap.aif in Resources */,
@@ -753,39 +931,54 @@
 			files = (
 				CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */,
 				846761BB27DF8BC300A3207E /* SurveysList.swift in Sources */,
+				AD6B973728AF715F003080EB /* MainHeaderView.swift in Sources */,
+				AD81159128BA2DEE0019E394 /* StopFogActionViewModel.swift in Sources */,
 				5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */,
 				5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */,
 				846761A527DF8AB800A3207E /* OnboardingOptionsViewController.swift in Sources */,
 				84771FA9272974B700468E0E /* Extension+Image.swift in Sources */,
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
+				AD00261A28CCA5FA00A02C13 /* FogTimerViewModel.swift in Sources */,
 				84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */,
 				841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */,
 				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
+				AD81158428B6CA480019E394 /* SettingsViewModel.swift in Sources */,
 				846761C327DF8BC300A3207E /* ContactsSection.swift in Sources */,
 				5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */,
+				AD6B973528AF6CCB003080EB /* StopFogCellItem.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
 				5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */,
+				AD00262228CD33F100A02C13 /* Extension+Alert.swift in Sources */,
 				5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */,
 				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
+				AD7337EC28C6142600318821 /* SurveyReminderSetupView.swift in Sources */,
+				AD218BF128BCA6B20086ADEB /* MedicationSetupEntryView.swift in Sources */,
 				846761C427DF8BC300A3207E /* TasksSection.swift in Sources */,
 				5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */,
+				AD00261628CCA51200A02C13 /* SetupFogView.swift in Sources */,
 				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
 				841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */,
 				846761C127DF8BC300A3207E /* CardBackground.swift in Sources */,
 				5A49628026DF3EC900A4B4DF /* OTFLog.swift in Sources */,
+				AD7337E828C612FC00318821 /* Extension+Screen.swift in Sources */,
 				846761BA27DF8BC300A3207E /* StaticUI.swift in Sources */,
 				5AB1807A26B8849A007AF766 /* HelpView.swift in Sources */,
 				846761BE27DF8BC300A3207E /* RKTasks.swift in Sources */,
 				32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */,
 				846761C527DF8BC300A3207E /* CareKitTaskViews.swift in Sources */,
+				AD7337E228C54FC100318821 /* MedicationNotificationSetupViewModel.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
 				84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */,
 				84268455274770A3007C5D50 /* LoginSteps.swift in Sources */,
 				8467619F27DF8A6900A3207E /* Environment+StoreManager.swift in Sources */,
+				AD6B973328AF6586003080EB /* StopFogViewModel.swift in Sources */,
 				8467619B27DF8A1F00A3207E /* OCKStoreManager.swift in Sources */,
+				AD81158028B6CA2A0019E394 /* SettingsView.swift in Sources */,
 				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
+				AD218BEB28BA43B50086ADEB /* MedicationSetupViewModel.swift in Sources */,
 				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
 				841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */,
+				AD7337EE28C6143A00318821 /* SurveyReminderSetupViewModel.swift in Sources */,
 				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
 				846761A427DF8AB800A3207E /* OnboardingViewController.swift in Sources */,
 				841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */,
@@ -799,7 +992,10 @@
 				5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */,
 				5AB1808226B88A2B007AF766 /* Metrics.swift in Sources */,
 				5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */,
+				AD7337E028C54F6A00318821 /* MedicationNotificationSetupView.swift in Sources */,
+				AD81158B28B6CC320019E394 /* SettingCell.swift in Sources */,
 				5A4F633D271F412D0080F0D7 /* LogoutView.swift in Sources */,
+				AD7337E628C5E84600318821 /* MedicationNotificationSetupEntryViewModel.swift in Sources */,
 				5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */,
 				846761C027DF8BC300A3207E /* TaskListViewController.swift in Sources */,
 				5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */,
@@ -812,6 +1008,10 @@
 				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
 				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
 				5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */,
+				AD81158D28B831F00019E394 /* SurveyCardCell.swift in Sources */,
+				AD81158628B6CA550019E394 /* SurveyViewModel.swift in Sources */,
+				AD218BEF28BC9C900086ADEB /* MedicationSetupCell.swift in Sources */,
+				AD6B973128AF6557003080EB /* StopFogView.swift in Sources */,
 				8467619527DF89DE00A3207E /* CountProgressRow.swift in Sources */,
 				8467619727DF89DE00A3207E /* CheckUpViewModel.swift in Sources */,
 				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
@@ -819,18 +1019,28 @@
 				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
 				848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */,
 				5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */,
+				AD00261C28CCA60900A02C13 /* FogTimerView.swift in Sources */,
+				AD00262028CD337400A02C13 /* AlertAction.swift in Sources */,
 				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
+				AD81158F28BA2BC50019E394 /* StopFogActionView.swift in Sources */,
+				AD81158228B6CA390019E394 /* SurveyView.swift in Sources */,
 				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
 				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
+				AD00261828CCA52600A02C13 /* SetupFogViewModel.swift in Sources */,
 				8486C8DD278482D70013B4E9 /* LoadingView.swift in Sources */,
 				5A430489272884CB00926584 /* Extension+Font.swift in Sources */,
+				AD218BE928BA43A50086ADEB /* MedicationSetupView.swift in Sources */,
 				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
+				AD00262428CD347500A02C13 /* ErrorModel.swift in Sources */,
 				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
 				846761BD27DF8BC300A3207E /* TaskViewControllerRepresentable.swift in Sources */,
 				841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */,
+				AD6B973B28B0EEE0003080EB /* Colors.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				846761A127DF8A6900A3207E /* OCKHealthKitStore+Extension.swift in Sources */,
+				AD7337E428C5E83C00318821 /* MedicationNotificationSetupEntryView.swift in Sources */,
+				AD00261E28CD335400A02C13 /* AlertModel.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				846761A027DF8A6900A3207E /* Extension+OCKAnyTask.swift in Sources */,
@@ -839,12 +1049,14 @@
 				5A4304AC272CB22600926584 /* UpdateUserProfileView.swift in Sources */,
 				5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */,
 				326086F7283E48A300888678 /* DeleteAccountView.swift in Sources */,
+				AD6B973928B0E4E9003080EB /* Extension+Text.swift in Sources */,
 				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
 				846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */,
 				8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */,
 				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
 				5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */,
 				5A41D023266A9106007CCEB4 /* MainView.swift in Sources */,
+				AD218BF328BCA6C00086ADEB /* MedicationSetupEntryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

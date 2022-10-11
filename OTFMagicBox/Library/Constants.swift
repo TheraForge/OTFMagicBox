@@ -205,4 +205,8 @@ enum Constants {
         static let dbProxyURL = API.developmentUrl + "/v1/db/"
     }
     
+    struct TaskCarePlanUUID {
+        static let medication: UUID = UUID(uuidString: "2B4F4750-0F45-4F4A-B111-7476DE7CC8D7")!
+        static let userInfoKey: String = "TaskCarePlanUUID"
+    }
 }

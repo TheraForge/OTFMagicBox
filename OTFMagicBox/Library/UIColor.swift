@@ -74,3 +74,8 @@ extension UIColor {
     
     
 }
+
+extension UIColor {
+    /// The SwiftUI color associated with the receiver.
+    var suiColor: Color { Color(self) }
+}

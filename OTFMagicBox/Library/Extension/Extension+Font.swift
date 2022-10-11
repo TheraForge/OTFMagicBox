@@ -54,3 +54,24 @@ extension Font {
 
 }
 
+extension Font {
+    static func regular(size: CGFloat) -> Font {
+        custom("\(YmlReader.shared.fontFamilyName)-Regular", size: size)
+    }
+    
+    static func light(size: CGFloat) -> Font {
+        custom("\(YmlReader.shared.fontFamilyName)-Light", size: size)
+    }
+    
+    static func medium(size: CGFloat) -> Font {
+        custom("\(YmlReader.shared.fontFamilyName)-Medium", size: size)
+    }
+    
+    static func semiBold(size: CGFloat) -> Font {
+        custom("\(YmlReader.shared.fontFamilyName)-SemiBold", size: size)
+    }
+    
+    static func bold(size: CGFloat) -> Font {
+        custom("\(YmlReader.shared.fontFamilyName)-Bold", size: size)
+    }
+}

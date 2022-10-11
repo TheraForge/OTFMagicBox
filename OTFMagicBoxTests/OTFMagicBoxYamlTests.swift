@@ -40,13 +40,13 @@ class OTFMagicBoxYamlTests: XCTestCase {
     /*************************************************   THERAFORGE CONFIGURATIONS TESTS        *******************************************************************************/
     
     func testPrimaryColor() {
-        let inputValue = YmlReader().primaryColor
+        let inputValue = YmlReader.shared.primaryColor
         let expectedValue = UIColor.systemTeal
         XCTAssertEqual(inputValue, expectedValue)
     }
     
     func testTintColor() {
-        let inputValue = YmlReader().tintColor
+        let inputValue = YmlReader.shared.tintColor
         let expectedValue = UIColor.blue
         XCTAssertEqual(inputValue, expectedValue)
     }
@@ -66,7 +66,7 @@ class OTFMagicBoxYamlTests: XCTestCase {
     /*************************************************   CARDINALKIT CONFIGURATIONS TESTS        *******************************************************************************/
    
     func testStudyTitle() {
-        let inputValue = YmlReader().studyTitle
+        let inputValue = YmlReader.shared.studyTitle
         let expectedValue = "Health Study"
         XCTAssertEqual(inputValue, expectedValue)
     }
@@ -101,7 +101,7 @@ class OTFMagicBoxYamlTests: XCTestCase {
     }
     
     func testTeamEmail() {
-        let inputValue = YmlReader().teamEmail
+        let inputValue = YmlReader.shared.teamEmail
         let expectedValue = "info@hippocratestech.com"
         XCTAssertEqual(inputValue, expectedValue);
     }
@@ -131,7 +131,7 @@ class OTFMagicBoxYamlTests: XCTestCase {
     }
     
     func testUseCareKit() {
-        let inputValue = YmlReader().useCareKit
+        let inputValue = YmlReader.shared.useCareKit
         let expectedValue = true
         XCTAssertEqual(inputValue, expectedValue);
     }

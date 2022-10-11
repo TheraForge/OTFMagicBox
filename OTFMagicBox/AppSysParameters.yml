@@ -86,7 +86,7 @@ DataModel:
   # API key for the server integration.
   # You need to change the dummy key with a valid one to be able to
   # connect to the cloud backend
-  apiKey: "SS9sfzWq4aWVIk0XdX4He3c2Fi9XPdcIBL0fPil7qd5t2CsWleIVvxs0tQpYTk6BeYM8zLmPCPCGZjfQ2SEt2hOFnDIv0TL0HnzT0tcp2332hgQ9BmlVaeOLWt8UrfpkJr3hf6iPngpAWaeV5Eiuljry7SxdDEhHIII6OMjSkMdykenx9fIok54HLQ8gt9pOYiyvN2gL"
+  apiKey: "JyGkoCEptbFO4KOGm5XQA8wRzb7GG5KZkVdpK4y4gi3YFy0LZ8rUGUWX5sUw2NBNbTJQaIWUgy864qxVXOr5NOsfDIQzARRoMlDfhNmS0Z92wRkg6XLRobDIHxYEga4DbmWLF5Y43P6suVlvp18Nl7hP7taEjBRG79ODaF4HRXyXQ7yQojxve7Foa0GJ9h14hsNjnQqU"
   teamWebsite: "https://www.hippocratestech.com/"
   showAppleSignin:  "true"
   showGoogleSignin: "false"
@@ -94,7 +94,7 @@ DataModel:
   teamEmail: "info@hippocratestech.com"
   teamPhone: "123-456-7890"
     # Start Date.
-  startDate: "30/08/2020"
+  startDate: "30/05/2022"
   importDatabaseFromFile: "false"
   showCheckupScreen:  "true"
   showStaticUIScreen: "true"
@@ -122,7 +122,9 @@ DataModel:
     textWeight: ""
     textFont: "Inherited"
   
-  
+  fonts:
+    listAvailableFonts: "false"
+    fontFamilyName: "HelveticaNeue"
   
   designConfig:
       # Offset value.
@@ -235,7 +237,7 @@ DataModel:
 ##############################################################################
 
  # Application Specifications.
-    studyTitle: "Health Study"
+    studyTitle: "STOP FOG"
     teamName: "by Hippocrates Technologies"
     copyright: "Made by Hippocrates Technologies"
 
@@ -252,7 +254,7 @@ DataModel:
 ##############################################################################
 
  # Application Specifications.
-    studyTitle: "Étude de santé"
+    studyTitle: "STOP FOG"
     teamName: "par Hippocrate Technologies"
     copyright: "Fabriqué par Hippocrate Technologies"
 

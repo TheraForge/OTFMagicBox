@@ -33,6 +33,7 @@ OF SUCH DAMAGE.
  */
 
 import OTFResearchKit
+import UIKit
 
 /**
  The Consent document of the patient.
@@ -58,7 +59,9 @@ class ConsentDocument: ORKConsentDocument {
             .studySurvey,
             .studyTasks,
             .withdrawing,
-            .custom
+            .custom, // ADD COMENTS FOR SCREENS EG. this is Exactly this screen with screen name
+            .custom,
+            .custom // SIRI CONSENT SCREEN
         ]
         
         let consentData = (ModuleAppYmlReader().consent?.data ?? [ConsentDescription(show: Constants.YamlDefaults.ConsentShow ? Constants.true : Constants.false, summary: Constants.YamlDefaults.ConsentSummary, content: Constants.YamlDefaults.ConsentContent)])
@@ -67,15 +70,13 @@ class ConsentDocument: ORKConsentDocument {
             let section = ORKConsentSection(type: sectionType)
            
             if sectionType == .custom {
-                section.customImage = UIImage(named: Constants.Images.ConsentCustomImg)
-                section.summary = consentData.summary
-                section.content = consentData.content
+                section.customImage = UIImage(named: consentData.image ?? "")
             }
-                
-                section.title = sectionType.description
-                section.summary = consentData.summary
-                section.content = consentData.content
-                sections?.append(section)
+            
+            section.title = consentData.title != nil ? consentData.title! : sectionType.description
+            section.summary = consentData.summary
+            section.content = consentData.content
+            sections?.append(section)
         }
         
         let signature = ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: Constants.UserDefaults.ConsentDocumentSignature)

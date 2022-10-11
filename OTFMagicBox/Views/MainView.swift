@@ -55,52 +55,50 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            if YmlReader().useCareKit {
-                ScheduleViewControllerRepresentable().tabItem {
-                    UIImage.loadImage(named: "tab_schedule").renderingMode(.template)
-                    Text("Tasks")
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+            if YmlReader.shared.useCareKit {
+                NavigationView {
+//                                        ContactsViewController(storeManager: CareKitManager.shared.synchronizedStoreManager)
+                    StopFogView(viewModel: StopFogViewModel())
+                        .navigationTitle("")
+                        .navigationBarHidden(true)
+                }.tabItem {
+                    UIImage.loadImage(named: "metronome").renderingMode(.template)
                 }
                 
+                
                 NavigationView {
-                    ContactsViewController(storeManager: CareKitManager.shared.synchronizedStoreManager)
-                        .navigationBarTitle(Text("Care Team"), displayMode: .inline)
+                    ScheduleViewControllerRepresentable()
+                        .navigationTitle("")
+                        .navigationBarHidden(true)
                 }
                 .tabItem {
-                    UIImage.loadImage(named: "tab_care").renderingMode(.template)
-                    Text("Contacts")
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    UIImage.loadImage(named: "calendar").renderingMode(.template)
                 }
             }
             
-            if YmlReader().showCheckupScreen {
-                CheckUpView().tabItem {
-                    UIImage.loadImage(named: "tab_tasks").renderingMode(.template)
-                    Text("Check Up")
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+            if YmlReader.shared.showCheckupScreen {
+                NavigationView {
+                    SurveyView(viewModel: SurveyViewModel())
+                        .navigationTitle("")
+                        .navigationBarHidden(true)
+                }
+                .tabItem {
+                    UIImage.loadImage(named: "questionmark.diamond").renderingMode(.template)
                 }
             }
             
-            if YmlReader().showStaticUIScreen {
-                StaticUI().tabItem {
-                    Image(systemName: "uiwindow.split.2x1")
-                    Text("UI")
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+            if YmlReader.shared.showStaticUIScreen {
+                NavigationView {
+                    SettingsView(viewModel: SettingsViewModel())
+                        .navigationTitle("")
+                        .navigationBarHidden(true)
                 }
-            }
-            
-            ProfileUIView().tabItem {
-                UIImage.loadImage(named: "tab_profile").renderingMode(.template)
-                Text("Profile")
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .tabItem {
+                    UIImage.loadImage(named: "gear").renderingMode(.template)
+                }
             }
         }
-        .accentColor(self.color)
+        .accentColor(Colors.primary)
         
     }
 }
