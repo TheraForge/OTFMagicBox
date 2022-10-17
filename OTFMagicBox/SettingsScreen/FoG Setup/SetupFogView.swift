@@ -47,7 +47,7 @@ struct SetupFogView: View {
                 }.onTapGesture {
                     viewModel.askForReset()
                 }
-            }.frame(height: 42).padding(16)
+            }.frame(height: 42).padding(16).background(Color.clear)
         }.alert(item: $viewModel.alertToPresent) { alertModel in
             Alert(alertModel: alertModel)
         }

@@ -25,6 +25,7 @@ struct SurveyView: View {
                         .foregroundColor(Colors.primary)
                         .scaledToFit()
                         .frame(width: UIScreen.main.bounds.width/2)
+                        .background(Color.clear)
                     Text("We are All done for Today!").medium(size: 27)
                 }
                 .padding([.top, .bottom], 30)
