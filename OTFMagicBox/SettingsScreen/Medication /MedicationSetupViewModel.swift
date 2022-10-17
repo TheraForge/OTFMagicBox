@@ -10,17 +10,24 @@ import OTFCareKitStore
 
 class MedicationSetupViewModel: ObservableObject {
     @Published var cells: [MedicationSetupCellModel] = []
-    var storeManager: OCKStoreManager = OCKStoreManager.shared
+    var storeManager: OCKAnyStoreProtocol = OCKStoreManager.shared.synchronizedStoreManager.store
     
     func loadItems() {
-        storeManager.coreDataStore.fetchTasks(completion: { [weak self] result in
+        let fromDate = Calendar.current.date(byAdding: .year, value: -2, to: Date())
+        let toDate = Calendar.current.date(byAdding: .day, value: 14, to: Date())
+        let interval = DateInterval(start: fromDate!, end: toDate!)
+        let query = OCKTaskQuery(dateInterval: interval)
+        
+        storeManager.fetchAnyTasks(query: query, callbackQueue: .main) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let tasks):
+                print("success: ", tasks.debugDescription)
                 let filteredTask = tasks.filter({
-                    $0.userInfo?.contains(where: {$0.key == Constants.TaskCarePlanUUID.userInfoKey}) ?? false})
+                    print(($0 as? OCKTask)?.userInfo)
+                    return ($0 as? OCKTask)?.userInfo?.contains(where: {$0.key == Constants.TaskCarePlanUUID.userInfoKey}) ?? false})
                 for task in filteredTask {
-                    let medicationCell = MedicationSetupCellModel(with: task.userInfo!)
+                    let medicationCell = MedicationSetupCellModel(with: (task as! OCKTask).userInfo!)
                     if !self.cells.contains(where: {
                         $0.id == medicationCell.id
                     }) {
@@ -35,7 +42,7 @@ class MedicationSetupViewModel: ObservableObject {
                     MedicationSetupCellModel(name: "Anticholinergics", dosage: 1, dosageFrequency: .biweekly, isLastCell: true)
                 ]
             }
-        })
+        }
     }
 }
 
@@ -87,7 +94,9 @@ extension MedicationSetupCellModel {
     func toUserInfoDict() -> [String: String] {
         var dict = [String: String]()
         let otherSelf = Mirror(reflecting: self)
+        print("toUserInfoDict: ")
         for child in otherSelf.children {
+            print(child.label ?? "", ": ", child.value ?? "")
             if let key = child.label {
                 if let writtenValue = child.value as? String {
                     dict[key] = writtenValue
@@ -99,6 +108,8 @@ extension MedicationSetupCellModel {
                     dict[key] = writtenValue.description
                 } else if let writtenValue = child.value as? DosageFrequency {
                     dict[key] = String(writtenValue.rawValue)
+                } else if let writtenValue = child.value as? UUID {
+                    dict[key] = String(writtenValue.uuidString)
                 }
             }
         }
@@ -107,6 +118,7 @@ extension MedicationSetupCellModel {
     }
     
     init(with dict: [String: String]) {
+        print("init with dict: ", dict.debugDescription)
         id = UUID()
         name = ""
         dosage = 0
@@ -114,16 +126,20 @@ extension MedicationSetupCellModel {
         for keyValue in dict {
             switch keyValue.key {
             case "id":
+                print("id init: ", keyValue.value)
                 id = UUID(uuidString: keyValue.value)!
             case "name":
                 name = keyValue.value
             case "dosage" :
+                print("dosage init: ", keyValue.value)
                 dosage = Int(keyValue.value)!
             case "hours" :
                 hours = Int(keyValue.value)!
             case "dosageFrequency" :
+                print("dosageFrequency init: ", keyValue.value)
                 dosageFrequency = DosageFrequency(rawValue: Int(keyValue.value)!)!
             case "notificationFrequency" :
+                print("notificationFrequency init: ", keyValue.value)
                 notificationFrequency = DosageFrequency(rawValue:  Int(keyValue.value)!)!
             case "startDate" :
                 startDate = keyValue.value.toDateTime

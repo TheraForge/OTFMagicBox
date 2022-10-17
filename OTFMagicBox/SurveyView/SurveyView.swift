@@ -17,8 +17,8 @@ struct SurveyView: View {
         VStack(spacing: 0) {
             MainHeaderView(title: "Daily Checkup")
                 .frame(height: 90)
-            VStack(spacing: 20) {
-                if $viewModel.allSurveysTaken.wrappedValue {
+            if $viewModel.allSurveysTaken.wrappedValue {
+                VStack(spacing: 20) {
                     UIImage.loadImage(named: "checkmark.circle.fill")
                         .renderingMode(.template)
                         .resizable()
@@ -27,16 +27,16 @@ struct SurveyView: View {
                         .frame(width: UIScreen.main.bounds.width/2)
                     Text("We are All done for Today!").medium(size: 27)
                 }
+                .padding([.top, .bottom], 30)
+                .background((UITableView.appearance().backgroundColor ?? .white).suiColor)
             }
-            .padding([.top, .bottom], 30)
-            .background((UITableView.appearance().backgroundColor ?? .white).suiColor)
             List(viewModel.cards) { card in
                 Section(header: EmptyView(), footer: EmptyView()) {
                     SurveyCardCell(card: card, action: {
                         $viewModel.cardToPresent.wrappedValue = card
                         shouldPresentSurvey = true
                     })
-                    .buttonStyle(.plain)
+                        .buttonStyle(.plain)
                 }
             }.listStyle(.insetGrouped)
             Spacer()

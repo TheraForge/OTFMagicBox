@@ -13,7 +13,7 @@ class MedicationSetupEntryViewModel: ObservableObject {
     @Published var isEditing: Bool
     @Published var cellModel: MedicationSetupCellModel
     
-    var storeManager: OCKStoreManager = OCKStoreManager.shared
+    var storeManager: OCKAnyStoreProtocol = OCKStoreManager.shared.synchronizedStoreManager.store
     
     
     init(isEditing: Bool, cellModel: MedicationSetupCellModel?) {
@@ -28,9 +28,9 @@ class MedicationSetupEntryViewModel: ObservableObject {
     
     func save() {
         if isEditing {
-            storeManager.coreDataStore.updateTask(makeTask())
+            storeManager.updateAnyTask(makeTask(), callbackQueue: .main, completion: {result in switch result { case .failure(let error): print("Error happened Updating task: ", error.localizedDescription) case .success(_): print("success Edit")}})
         } else {
-            storeManager.coreDataStore.addTask(makeTask())
+            storeManager.addAnyTask(makeTask(), callbackQueue: .main, completion: {result in switch result { case .failure(let error): print("Error happened Updating task: ", error.localizedDescription) case .success(_): print("success Save")}})
         }
     }
     
@@ -58,7 +58,9 @@ class MedicationSetupEntryViewModel: ObservableObject {
                 duration: .allDay
             )
         ])
-        var stepsTask = OCKTask(id: UUID().uuidString, title: "Take \(cellModel.dosage) of \(cellModel.name)", carePlanUUID: Constants.TaskCarePlanUUID.medication, schedule: schedule)
+        print("*** MAKING TASK ***")
+        print("id: ", cellModel.id.uuidString)
+        var stepsTask = OCKTask(id: cellModel.id.uuidString, title: "Take \(cellModel.dosage) of \(cellModel.name)", carePlanUUID: Constants.TaskCarePlanUUID.medication, schedule: schedule)
         stepsTask.instructions = cellModel.description
         stepsTask.userInfo = cellModel.toUserInfoDict()
         

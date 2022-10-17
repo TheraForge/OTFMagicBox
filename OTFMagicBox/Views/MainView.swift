@@ -67,9 +67,13 @@ struct MainView: View {
                 
                 
                 NavigationView {
-                    ScheduleViewControllerRepresentable()
-                        .navigationTitle("")
-                        .navigationBarHidden(true)
+                    VStack {
+                        MainHeaderView(title: "Medications")
+                            .frame(height: 90)
+                        ScheduleViewControllerRepresentable()
+                            .navigationTitle("")
+                            .navigationBarHidden(true)
+                    }
                 }
                 .tabItem {
                     UIImage.loadImage(named: "calendar").renderingMode(.template)

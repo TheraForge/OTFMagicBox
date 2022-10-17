@@ -17,7 +17,7 @@ struct SetupFogView: View {
                 UIImage.loadImage(named: "chevron.left").resizable().renderingMode(.template).foregroundColor(Colors.primary).scaledToFit().frame(width: 16).onTapGesture {
                     presentationMode.wrappedValue.dismiss()
                 }
-                Text("FoG Timer Setup").medium(size: 24)
+                Text("FoG Setup").medium(size: 24)
                 Spacer()
             }.frame(height: 90)
             .padding([.leading, .trailing], 24)
@@ -43,7 +43,7 @@ struct SetupFogView: View {
             HStack(spacing: 16) {
                 ZStack {
                     Rectangle().foregroundColor(Colors.primary).cornerRadius(8)
-                    Text("Reset").medium(size: 24).foregroundColor(Colors.secondary)
+                    Text("Reset").medium(size: 24).foregroundColor(Colors.tertiary)
                 }.onTapGesture {
                     viewModel.askForReset()
                 }

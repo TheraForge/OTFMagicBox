@@ -21,6 +21,9 @@ struct MedicationNotificationSetupEntryView: View {
                 Spacer()
                 if viewModel.isEditing {
                     Text(isEditOn ? "Done" : "Edit").medium(size: 22).foregroundColor(Colors.primary).padding(.trailing, 16).onTapGesture {
+                        if isEditOn {
+                            viewModel.save()
+                        }
                         isEditOn.toggle()
                     }
                 }
@@ -124,8 +127,10 @@ struct MedicationNotificationSetupEntryView: View {
                     }
                     ZStack {
                         Rectangle().foregroundColor(Colors.primary).cornerRadius(8)
-                        Text("Delete").medium(size: 24).foregroundColor(Colors.secondary)
+                        Text("Delete").medium(size: 24).foregroundColor(Colors.tertiary)
                     }.onTapGesture {
+                        viewModel.deleteSelected()
+                        presentationMode.wrappedValue.dismiss()
                         isEditOn.toggle()
                     }
                 }

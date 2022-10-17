@@ -29,10 +29,12 @@ struct SettingsView: View {
                     }
                 }
             }.listStyle(.grouped)
+            .listRowBackground(Color.clear)
         }
         Spacer()
         .onAppear() {
             viewModel.loadItems()
+            UITableViewCell.appearance().selectionStyle = .none
             UITableView.appearance().separatorColor = .clear
         }
     }

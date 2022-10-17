@@ -102,7 +102,7 @@ struct MedicationSetupEntryView: View {
                     }
                     ZStack {
                         Rectangle().foregroundColor(Colors.primary).cornerRadius(8)
-                        Text("Delete").medium(size: 24).foregroundColor(Colors.secondary)
+                        Text("Delete").medium(size: 24).foregroundColor(Colors.tertiary)
                     }.onTapGesture {
                         isEditOn.toggle()
                     }

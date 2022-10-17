@@ -40,6 +40,7 @@ struct MedicationNotificationSetupView: View {
             
         }.onAppear {
             viewModel.loadItems()
+            UITableViewCell.appearance().selectionStyle = .none
             UITableView.appearance().separatorColor = .clear
         }.navigationTitle("")
         .navigationBarHidden(true)
