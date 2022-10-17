@@ -10,6 +10,8 @@ import OTFCareKitStore
 
 class MedicationNotificationSetupViewModel: ObservableObject {
     @Published var cells: [MedicationSetupCellModel] = []
+    @Published var medications: [MedicationSetupCellModel] = []
+    @Published var isNavigationEnabled: Bool = true
     var storeManager: OCKAnyStoreProtocol = OCKStoreManager.shared.synchronizedStoreManager.store
     
     
@@ -25,15 +27,11 @@ class MedicationNotificationSetupViewModel: ObservableObject {
             switch result {
             case .success(let tasks):
                 print("success: ", tasks.debugDescription)
-                let filteredTask = tasks.filter({($0 as? OCKTask)?.userInfo?.contains(where: {$0.value == Constants.TaskCarePlanUUID.medication.uuidString }) ?? false })
-                for task in filteredTask {
-                    let medicationCell = MedicationSetupCellModel(with: (task as! OCKTask).userInfo!)
-                    if let index = self.cells.firstIndex(where: {$0.id == medicationCell.id}) {
-                        self.cells[index] = medicationCell
-                    } else {
-                        self.cells.append(medicationCell)
-                    }
+                if self.medications.isEmpty {
+                    self.setupMedications(with: tasks)
                 }
+                self.isNavigationEnabled = self.medications.isEmpty
+                self.setupCells(with: tasks)
             case .failure(let error):
                 print("Error fetching tasks: ", error.errorDescription)
                 self.cells = [
@@ -41,6 +39,25 @@ class MedicationNotificationSetupViewModel: ObservableObject {
                     MedicationSetupCellModel(name: "Amantadine", dosage: 1,  dosageFrequency: .weekly),
                     MedicationSetupCellModel(name: "Anticholinergic", dosage: 1, dosageFrequency: .biweekly, isLastCell: true) ]
             }
+        }
+    }
+    func setupCells(with tasks: [OCKAnyTask]) {
+        let filteredTask = tasks.filter({($0 as? OCKTask)?.userInfo?.contains(where: {$0.value == Constants.TaskCarePlanUUID.medicationNotification.uuidString }) ?? false })
+        for task in filteredTask {
+            let medicationCell = MedicationSetupCellModel(with: (task as! OCKTask).userInfo!)
+            if let index = self.cells.firstIndex(where: {$0.id == medicationCell.id}) {
+                self.cells[index] = medicationCell
+            } else {
+                self.cells.append(medicationCell)
+            }
+        }
+    }
+    
+    func setupMedications(with tasks: [OCKAnyTask]) {
+        let filteredTask = tasks.filter({($0 as? OCKTask)?.userInfo?.contains(where: {$0.value == Constants.TaskCarePlanUUID.medication.uuidString }) ?? false })
+        for task in filteredTask {
+            let medicationCell = MedicationSetupCellModel(with: (task as! OCKTask).userInfo!)
+            medications.append(medicationCell)
         }
     }
 }

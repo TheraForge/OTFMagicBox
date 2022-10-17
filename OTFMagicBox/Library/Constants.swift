@@ -207,6 +207,7 @@ enum Constants {
     
     struct TaskCarePlanUUID {
         static let medication: UUID = UUID(uuidString: "2B4F4750-0F45-4F4A-B111-7476DE7CC8D7")!
+        static let medicationNotification: UUID = UUID(uuidString: "BAA81592-1AEB-4221-A077-7EF4233756B9")!
         static let userInfoKey: String = "TaskCarePlanUUID"
     }
 }

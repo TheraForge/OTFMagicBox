@@ -23,14 +23,12 @@ class MedicationSetupViewModel: ObservableObject {
             switch result {
             case .success(let tasks):
                 print("success: ", tasks.debugDescription)
-                let filteredTask = tasks.filter({
-                    print(($0 as? OCKTask)?.userInfo)
-                    return ($0 as? OCKTask)?.userInfo?.contains(where: {$0.key == Constants.TaskCarePlanUUID.userInfoKey}) ?? false})
+                let filteredTask = tasks.filter({($0 as? OCKTask)?.userInfo?.contains(where: {$0.value == Constants.TaskCarePlanUUID.medication.uuidString }) ?? false })
                 for task in filteredTask {
                     let medicationCell = MedicationSetupCellModel(with: (task as! OCKTask).userInfo!)
-                    if !self.cells.contains(where: {
-                        $0.id == medicationCell.id
-                    }) {
+                    if let index = self.cells.firstIndex(where: {$0.id == medicationCell.id}) {
+                        self.cells[index] = medicationCell
+                    } else {
                         self.cells.append(medicationCell)
                     }
                 }
@@ -46,7 +44,7 @@ class MedicationSetupViewModel: ObservableObject {
     }
 }
 
-struct MedicationSetupCellModel: Identifiable {
+struct MedicationSetupCellModel: Identifiable, Hashable {
     var id: UUID = UUID()
     var name: String
     var dosage: Int
@@ -113,7 +111,6 @@ extension MedicationSetupCellModel {
                 }
             }
         }
-        dict[Constants.TaskCarePlanUUID.userInfoKey] = Constants.TaskCarePlanUUID.medication.uuidString
         return dict
     }
     

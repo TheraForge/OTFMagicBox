@@ -62,7 +62,9 @@ class MedicationSetupEntryViewModel: ObservableObject {
         print("id: ", cellModel.id.uuidString)
         var stepsTask = OCKTask(id: cellModel.id.uuidString, title: "Take \(cellModel.dosage) of \(cellModel.name)", carePlanUUID: Constants.TaskCarePlanUUID.medication, schedule: schedule)
         stepsTask.instructions = cellModel.description
-        stepsTask.userInfo = cellModel.toUserInfoDict()
+        var userInfoDict = cellModel.toUserInfoDict()
+        userInfoDict[Constants.TaskCarePlanUUID.userInfoKey] = Constants.TaskCarePlanUUID.medication.uuidString
+        stepsTask.userInfo = userInfoDict
         
         return stepsTask
     }

@@ -41,9 +41,9 @@ struct MedicationNotificationSetupEntryView: View {
                         if $isEditOn.wrappedValue {
                             Divider()
                             HStack {
-                                Picker("", selection: $viewModel.cellModel.name) {
-                                    ForEach(viewModel.medics, id: \.self) { med in
-                                        Text(med).tag(med)
+                                Picker("", selection: $viewModel.selectedMedication) {
+                                    ForEach(viewModel.medications, id: \.self) { med in
+                                        Text(med.name).tag(med.id)
                                     }
                                 }.pickerStyle(.wheel).frame(height: 100)
                                     .clipped()
@@ -58,7 +58,7 @@ struct MedicationNotificationSetupEntryView: View {
                             Spacer()
                             if !$isEditOn.wrappedValue {
                                 Text(String($viewModel.cellModel.wrappedValue.hours)).regular(size: 18)
-                                Text($viewModel.cellModel.wrappedValue.dosageFrequency.title).regular(size: 18).padding([.leading, .trailing], 16)
+                                Text($viewModel.cellModel.wrappedValue.notificationFrequency.title).regular(size: 18).padding([.leading, .trailing], 16)
                             }
                         }
                         if $isEditOn.wrappedValue {
@@ -142,6 +142,6 @@ struct MedicationNotificationSetupEntryView: View {
 
 struct MedicationNotificationSetupEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        MedicationNotificationSetupEntryView(viewModel: MedicationNotificationSetupEntryViewModel(isEditing: false, cellModel: nil), isEditOn: true)
+        MedicationNotificationSetupEntryView(viewModel: MedicationNotificationSetupEntryViewModel(isEditing: false, cellModel: nil, medications: [MedicationSetupCellModel(name: "Dopamine", dosage: 0, dosageFrequency: .daily), MedicationSetupCellModel(name: "Amantadline", dosage: 0, dosageFrequency: .daily), MedicationSetupCellModel(name: "Anticholigenerics", dosage: 0, dosageFrequency: .daily)]), isEditOn: true)
     }
 }

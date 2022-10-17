@@ -12,11 +12,12 @@ import OTFCareKitStore
 class MedicationNotificationSetupEntryViewModel: ObservableObject {
     @Published var isEditing: Bool
     @Published var cellModel: MedicationSetupCellModel
-    @Published var medics: [String]
+    @Published var medications: [MedicationSetupCellModel]
+    var selectedMedication: MedicationSetupCellModel?
     
     var storeManager: OCKAnyStoreProtocol = OCKStoreManager.shared.synchronizedStoreManager.store
     
-    init(isEditing: Bool, cellModel: MedicationSetupCellModel?) {
+    init(isEditing: Bool, cellModel: MedicationSetupCellModel?, medications: [MedicationSetupCellModel]) {
         self.isEditing = isEditing
         if let cellModel = cellModel {
             self.cellModel = cellModel
@@ -24,7 +25,8 @@ class MedicationNotificationSetupEntryViewModel: ObservableObject {
             let newCellModel = MedicationSetupCellModel(name: "", dosage: 0, dosageFrequency: .daily)
             self.cellModel = newCellModel
         }
-        medics = ["Dopamine", "Amantadline", "Anticholigenerics"]
+        self.medications = medications
+        self.selectedMedication = medications.first
     }
     
     func save() {
@@ -65,9 +67,19 @@ class MedicationNotificationSetupEntryViewModel: ObservableObject {
             )
         ])
         print("id: ", cellModel.id.uuidString)
-        var stepsTask = OCKTask(id: cellModel.id.uuidString, title: "Take \(cellModel.dosage) of \(cellModel.name)", carePlanUUID: Constants.TaskCarePlanUUID.medication, schedule: schedule)
+        if let selectedMedication = selectedMedication {
+            print("SELECTED MEDICATION: ", selectedMedication.description)
+            cellModel.name = selectedMedication.name
+            cellModel.dosage = selectedMedication.dosage
+            cellModel.dosageFrequency = selectedMedication.dosageFrequency
+            cellModel.description = selectedMedication.description
+            cellModel.subtitle = selectedMedication.subtitle
+        }
+        var stepsTask = OCKTask(id: cellModel.id.uuidString, title: "Take \(cellModel.dosage) of \(cellModel.name)", carePlanUUID: Constants.TaskCarePlanUUID.medicationNotification, schedule: schedule)
         stepsTask.instructions = cellModel.description
-        stepsTask.userInfo = cellModel.toUserInfoDict()
+        var userInfoDict = cellModel.toUserInfoDict()
+        userInfoDict[Constants.TaskCarePlanUUID.userInfoKey] = Constants.TaskCarePlanUUID.medicationNotification.uuidString
+        stepsTask.userInfo = userInfoDict
         
         return stepsTask
     }
