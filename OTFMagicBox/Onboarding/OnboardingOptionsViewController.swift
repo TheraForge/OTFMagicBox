@@ -286,6 +286,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
                 return
             }
             
+            // If sign in succeeded, display the app's main content View.
             guard let signInResult,
                   let idToken = signInResult.user.idToken?.tokenString else {
                 showError(ForgeError.empty)
