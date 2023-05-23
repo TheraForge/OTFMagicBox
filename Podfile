@@ -8,6 +8,6 @@ target 'OTFMagicBox' do
   source 'https://github.com/TheraForge/OTFCocoapodSpecs'
 
   pod 'OTFToolBox/CareHealth', '1.0.2-beta'
-  pod 'GoogleSignIn'
+  pod 'GoogleSignIn', '6.2.2'
 
 end
