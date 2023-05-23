@@ -279,16 +279,14 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         }
         
         let signInConfig = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = signInConfig
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] signInResult, error in
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { [unowned self] user, error in
             if let error {
                 showError(error)
                 return
             }
             
             // If sign in succeeded, display the app's main content View.
-            guard let signInResult,
-                  let idToken = signInResult.user.idToken?.tokenString else {
+            guard let user = user, let idToken = user.authentication.idToken else {
                 showError(ForgeError.empty)
                 return
             }
