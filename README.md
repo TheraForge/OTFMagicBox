@@ -161,7 +161,9 @@ The MagicBox app installation process requires the installation of the ToolBox S
 
 ## Prerequisites <a name="Prerequisites"></a>
 
-An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.apple.com/documentation/xcode-release-notes/xcode-12-release-notes) or a Mac with Apple's M1 Silicon running [macOS 11 Big Sur](https://developer.apple.com/documentation/xcode-release-notes/xcode-12_2-release-notes). macOS 12 Monterey and Xcode 13 are supported.
+- macOS Cataline 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
+- Xcode 13.0 or later
+- iOS 14.0 or later
 
 ### 1. Installation Prerequisites
 
@@ -171,7 +173,7 @@ In order to develop iOS apps, make sure to download Xcode, Apple's Integrated De
 
 If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
 
-(Note that in case of Xcode 13.2 Apple recommends to download it directly from the Apple Developer web site https://developer.apple.com/download/all/?q=Xcode. Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
+(Note that in case of Xcode 13.2 Apple recommends to [download it directly from the Apple Developer web site](https://developer.apple.com/download/all/?q=Xcode). Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
 
 <p align="center"><img src="Docs/27-cocoapods.png" width=50% height=50%></p>
 
