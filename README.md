@@ -23,8 +23,8 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 * [Features](#magicbox-features)
 * [Installation](#magicbox-installation)
 * [Usage](#app-usage)
-* [Registration on Apple Developer Portal](##registration-on-apple-developer-portal)
-* [Xcode Setup](##xcode-setup)
+* [Registration on Apple Developer Portal](#registration-on-apple-developer-portal)
+* [Xcode Setup](#xcode-setup)
 * [CI/CD Setup](#cicd-setup)
 * [License](#license)
 
