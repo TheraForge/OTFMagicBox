@@ -360,46 +360,105 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 You can change the tint color, the label colors, font type and size to customize the look of your application:
 
-[Color Codes in designConfig Section](/OTFMagicBox/AppSysParameters.yml#L83-L177)
+```yml
+designConfig:
+    # Offset value.
+    - name: "offset"
+      textValue: "20"
+      
+    # Color codes
+    
+    # Please choose the colors according to Human Interface Guidelines from Apple.
+    # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
+    
+    - name: "tintColor"
+      textValue: "Blue"
+    - name: "label"
+      textValue: "Teal"
+    - name: "secondaryLabel"
+      textValue: "Brown"
+    # ...
+    
+    # Fonts
+    - name: "largeTitleFontSize"
+      textValue: "20"
+    - name: "titleFontName"
+      textValue: "Gotham-Book"
+    - name: "titleFontSize"
+      textValue: "17"
+    # ...    
+```
 
 ## Set up the TheraForge Cloud API Key
 
 Update the API key field to access the TheraForge Secure Cloud service for synchronization and communication with the web dashboards:
 
-```yaml
+```yml
 # AppSysParameters.yml
 DataModel:
    # ...
    apiKey: "<set_your_api_key_here>"
 ```
 
-[API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
-
 ## Customize Onboarding
 
-To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
+To customize the onboarding process, go to the onboarding section in the `ModuleAppSysParameter.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
 
-[Onbarding Configuration Section](/OTFMagicBox/AppSysParameters.yml#L220-L228)
+```yml
+# ModuleAppSysParameter.yml
+
+onboarding:
+ - image: "Splash Image"
+   icon: "stethoscope"
+   title: "Welcome to MagicBox"
+   color: "Black"
+   description: "Your health care app"
+ 
+ - image: "Splash Image"
+   icon: "speedometer"
+   title: "This is another custom onboarding step"
+   color: "Black"
+   description: "MagicBox allows you to customize the onboarding experience with custom steps"
+```
 
 ## Customize Consent
 
-To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
+To customize the Consent process of your application go to the Consent section in the `ModuleAppSysParameter.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
 
-[Consent Configuration Section](/OTFMagicBox/AppSysParameters.yml#L230-L286)
+```yml
+# ModuleAppSysParameter.yml
+ 
+## Custom Consent Section, if you want to display this in your application then assign true value otherwise false for the "show" key.
+- show: "true"
+  summary: "This is custom section."
+  content: "Describe here what the user is consenting to in this step of the onboarding"
+```
 
 ## Customize Registration and Login
 
-Go to the Registration section in the `AppSysParameters.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`:
+Go to the Registration section in the `ModuleAppSysParameter.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`:
 
-[Registration Configuration Section](/OTFMagicBox/AppSysParameters.yml#L288-L293)
+```yml
+# ModuleAppSysParameter.yml
+
+registration:
+  showDateOfBirth: "true"
+  showGender: "true"
+```
 
 ## Configure Regular Login/Social Login
 
-Go to the Login section in the `AppSysParameters.yml` file and customize the title and the description.
+Go to the Login section in the `ModuleAppSysParameter.yml` file and customize the title and the description.
 
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
-[Login Configuration Section](/OTFMagicBox/AppSysParameters.yml#L295-L306)
+```yml
+# ModuleAppSysParameter.yml
+
+showAppleSignin:  "true"
+showGoogleSignin: "false"
+googleClientID: "add_your_client_id_here"
+```
 
 ## Configure the Passcode
 
@@ -417,8 +476,6 @@ Go to the Passcode section in the `ModuleAppSysParameter.yml` file and change th
    passcodeType: "4"
 ```
 
-[Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L308-L316)
-
 
 ## Enable CareKit
 
@@ -429,8 +486,6 @@ If your application requires support for tasks (for example, for a care plan) an
 
 useCareKit: "true"
 ```
-
-[Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
 
 
 # Registration on Apple Developer Portal
