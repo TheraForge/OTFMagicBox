@@ -163,6 +163,7 @@ The MagicBox app installation process requires the installation of the ToolBox S
 
 - macOS Cataline 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
 - Xcode 13.0 or later
+- CocoaPods
 - iOS 14.0 or later
 
 ### 1. Installation Prerequisites
@@ -262,17 +263,25 @@ Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to s
 
 This is the URL that you should get from GitHub:
 
-`https://github.com/TheraForge/OTFMagicBox.git`
+```
+https://github.com/TheraForge/OTFMagicBox.git
+```
 
 ### 3. Clone MagicBox's Repository to Install the App
 
 Then go back to the Terminal app in the `Developer` directory and enter `git clone` followed by the repository URL you just copied in the previous step:
 
+```
+git clone https://github.com/TheraForge/OTFMagicBox.git
+```
+
 <img src="Docs/17-GitClone.png">
 
 Then change the directory to the newly-created OTFMagicBox subdirectory:
 
-`cd OTFMagicBox`
+```
+cd OTFMagicBox
+```
 
 ### 4. List the Cloned Files
 
