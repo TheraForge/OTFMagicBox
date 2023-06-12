@@ -19,16 +19,16 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 
 # Table of Contents
 
-* [Overview](#overview)
-* [Features](#magicbox-features)
-* [Installation](#magicbox-installation)
-* [Usage](#app-usage)
-* [Registration on Apple Developer Portal](#registration-on-apple-developer-portal)
-* [Xcode Setup](#xcode-setup)
-* [CI/CD Setup](#ci-cd-setup)
-* [License](#license)
+* [Overview](#Overview)
+* [Features](#Features)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Registration on Apple Developer Portal](#Registration)
+* [Xcode Setup](#XcodeSetup)
+* [CI/CD Setup](#CICDSetup)
+* [License](#License)
 
-# Overview
+# Overview <a name="Overview"></a>
 
 MagicBox app’s source code represents an example of how to use the frameworks in the TheraForge SDK. It will constantly evolve to incorporate and showcase new features of the SDK.
 
@@ -46,7 +46,7 @@ These are its primary characteristics:
 * CI/CD support via GitHub Actions.
 
 
-# MagicBox Features
+# MagicBox Features <a name="Features"></a>
 
 MagicBox includes the following customizable features:
 
@@ -144,14 +144,14 @@ Outcome is automatically synchronized securely across the cloud to all devices:
 
 <p align="center"><img src="Docs/35-Outcome-Synced.png" width=100% height=100%></p>
 
-# MagicBox Installation
+# MagicBox Installation <a name="Installation"></a>
 
 The MagicBox app installation process requires the installation of the ToolBox SDK and so it is similar to the process described in the [OTFToolBox](../../../OTFToolBox) Readme file.
 
-* [Prerequisites](#prerequisites)
-* [App Setup](#app-setup)
+* [Prerequisites](#Prerequisites)
+* [App Setup](#App-Setup)
 
-## Prerequisites
+## Prerequisites <a name="Prerequisites"></a>
 
 An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.apple.com/documentation/xcode-release-notes/xcode-12-release-notes) or a Mac with Apple's M1 Silicon running [macOS 11 Big Sur](https://developer.apple.com/documentation/xcode-release-notes/xcode-12_2-release-notes). macOS 12 Monterey and Xcode 13 are supported.
 
@@ -211,7 +211,7 @@ Refer to our [Cocoapods Installation](Docs/Cocoapods.md) page for prerequisites,
 
 After successful installation of `git-lfs` and Cocoapods, you can install the MagicBox app.
 
-## App Setup
+## App Setup <a name="App-Setup"></a>
 
 ### 1. Create the Developer Directory and a Project Subdirectory 
 
@@ -325,7 +325,7 @@ For general troubleshooting tips to solve potential unexpected errors or crashes
 
 **[Xcode Quick Fix](https://developerinsider.co/clean-xcode-cache-quick-fix/)**
 
-# App Usage
+# App Usage <a name="Usage"></a>
 
 After following the above installation steps, go to the `AppSysParameters.yml` file in the root folder of your project.
 This yaml file contains the list of customizable parameters of your health application.
@@ -358,6 +358,13 @@ You can change the tint color, the label colors, font type and size to customize
 
 Update the API key field to access the TheraForge Secure Cloud service for synchronization and communication with the web dashboards:
 
+```yaml
+# AppSysParameters.yml
+DataModel:
+   # ...
+   apiKey: "<set_your_api_key_here>"
+```
+
 [API Key Configuration Section](/OTFMagicBox/AppSysParameters.yml#L194-L195)
 
 ## Customize Onboarding
@@ -388,7 +395,19 @@ If you want to use the *Sign up With Apple* feature, then change the correspondi
 
 ## Configure the Passcode
 
-Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits:
+Go to the Passcode section in the `ModuleAppSysParameter.yml` file and change the settings of passcode text and passcode type to either 4 or 6 digits:
+
+```yaml
+# ModuleAppSysParameter.yml
+
+ passcode:
+   enable: "false"
+   passcodeOnReturnText: "Welcome back!"
+   passcodeText: "Now you will create a passcode to identify yourself to the app and protect access to information you have entered."
+  
+   # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
+   passcodeType: "4"
+```
 
 [Passcode Configuration Section](/OTFMagicBox/AppSysParameters.yml#L308-L316)
 
@@ -397,25 +416,31 @@ Go to the Passcode section in the `AppSysParameters.yml` file and change the set
 
 If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients:
 
+```yml
+# AppSysParameters.yml
+
+useCareKit: "true"
+```
+
 [Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
 
 
-# Registration on Apple Developer Portal
+# Registration on Apple Developer Portal <a name="Registration"></a>
 
 If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
 
 Register your project in your Apple developer account by following [these steps](APP-REGISTRATION.md).
 
-# Xcode Setup
+# Xcode Setup <a name="XcodeSetup"></a>
 
 Set up the Xcode application with your Apple developer account information as [described here](XCODE-SETUP.md).
 
-# CI CD Setup
+# CI/CD Setup <a name="CICDSetup"></a>
 
 Configure your project using a CI and CD pipeline via GitHub Actions as [described here](/.github/CICD.md).
 
 
-# License
+# License <a name="License"></a>
 
 This project is made available under the terms of a modified BSD license. See the [LICENSE](LICENSE.md) file.
 
