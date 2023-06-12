@@ -19,16 +19,16 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 
 # Table of Contents
 
-* [Overview](#Overview)
-* [Features](#Features)
-* [Installation](#Installation)
-* [Usage](#Usage)
-* [Registration on Apple Developer Portal](#Registration)
-* [Xcode Setup](#XcodeSetup)
-* [CI/CD Setup](#CICDSetup)
-* [License](#License)
+* [Overview](#overview)
+* [Features](#magicbox-features)
+* [Installation](#magicbox-installation)
+* [Usage](#app-usage)
+* [Registration on Apple Developer Portal](##registration-on-apple-developer-portal)
+* [Xcode Setup](##xcode-setup)
+* [CI/CD Setup](#cicd-setup)
+* [License](#license)
 
-# Overview <a name="Overview"></a>
+# Overview
 
 MagicBox app’s source code represents an example of how to use the frameworks in the TheraForge SDK. It will constantly evolve to incorporate and showcase new features of the SDK.
 
@@ -46,7 +46,7 @@ These are its primary characteristics:
 * CI/CD support via GitHub Actions.
 
 
-# MagicBox Features <a name="Features"></a>
+# MagicBox Features
 
 MagicBox includes the following customizable features:
 
@@ -144,7 +144,7 @@ Outcome is automatically synchronized securely across the cloud to all devices:
 
 <p align="center"><img src="Docs/35-Outcome-Synced.png" width=100% height=100%></p>
 
-# MagicBox Installation <a name="Installation"></a>
+# MagicBox Installation
 
 The MagicBox app installation process requires the installation of the ToolBox SDK and so it is similar to the process described in the [OTFToolBox](../../../OTFToolBox) Readme file.
 
@@ -325,7 +325,7 @@ For general troubleshooting tips to solve potential unexpected errors or crashes
 
 **[Xcode Quick Fix](https://developerinsider.co/clean-xcode-cache-quick-fix/)**
 
-# App Usage <a name="Usage"></a>
+# App Usage
 
 After following the above installation steps, go to the `AppSysParameters.yml` file in the root folder of your project.
 This yaml file contains the list of customizable parameters of your health application.
@@ -425,22 +425,22 @@ useCareKit: "true"
 [Carekit Configuration Section](/OTFMagicBox/AppSysParameters.yml#L327-L330)
 
 
-# Registration on Apple Developer Portal <a name="Registration"></a>
+# Registration on Apple Developer Portal
 
 If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
 
 Register your project in your Apple developer account by following [these steps](APP-REGISTRATION.md).
 
-# Xcode Setup <a name="XcodeSetup"></a>
+# Xcode Setup
 
 Set up the Xcode application with your Apple developer account information as [described here](XCODE-SETUP.md).
 
-# CI/CD Setup <a name="CICDSetup"></a>
+# CI/CD Setup
 
 Configure your project using a CI and CD pipeline via GitHub Actions as [described here](/.github/CICD.md).
 
 
-# License <a name="License"></a>
+# License
 
 This project is made available under the terms of a modified BSD license. See the [LICENSE](LICENSE.md) file.
 
