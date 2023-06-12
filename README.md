@@ -7,8 +7,6 @@ This sample application leverages TheraForge frameworks such as [OTFTemplateBox]
 For more details on the features of the SDK and on the TheraForge Cloud setup process (e.g., to obtain an API key), refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
 
 ## Change Log
-* Release 1.0.0-beta: First beta release of the template app
-* Release 1.0.1-beta: Removed warnings, improved profile section, added UI samples and made various other improvements
 * Release 1.0.2-beta:
   * Made the application more configurable by adding color, font, font weight, background color in the yaml file.
   * Added app localization capabilities in the yaml file.
@@ -16,6 +14,16 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
   * Added support for user account deletion to make the app more GDPR compliant.
   * Added CI/CD workflow to automate testing and deployment in TestFlight using GitHub Actions. Updated documentation with the required configuration steps.
   * Various fixes and improvements.
+<details>
+  <summary>Release 1.0.1-beta</summary>
+  Removed warnings, improved profile section, added UI samples and made various other improvements
+  
+</details>
+
+<details>
+  <summary>Release 1.0.0-beta</summary>
+  First beta release of the template app
+</details>
 
 # Table of Contents
 
