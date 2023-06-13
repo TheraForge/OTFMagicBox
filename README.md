@@ -161,7 +161,7 @@ The MagicBox app installation process requires the installation of the ToolBox S
 
 ## Prerequisites <a name="Prerequisites"></a>
 
-- macOS Cataline 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
+- macOS Catalina 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
 - Xcode 13.0 or later
 - CocoaPods
 - iOS 14.0 or later
