@@ -25,7 +25,7 @@
             
             const imageNameWithExtension = item.substring(item.lastIndexOf('/') + 1);
             const imageNameWithoutExtension = imageNameWithExtension.split('.').slice(0, -1).join('.');
-            const imageName = imageNameWithoutExtension.replace('@3x', '');
+            const imageName = imageNameWithoutExtension.replace('@2x', '');
             
             image.title = imageName;
             images.appendChild(image);
