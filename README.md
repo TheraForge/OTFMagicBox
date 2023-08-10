@@ -120,9 +120,11 @@ Contacts are cards that contain doctor and family member details, such as addres
 
 ## User Profile
 
-The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
+In the profile section, the user can manage his current session, edit their profile, contact support and withdraw from the study.
 
 <p align="center"><img src="Docs/12-Profile.png" width=35% height=35%></p>
+
+There's also a Networking Indicator on top of the user's profile picture, indicating whether the user currently has an connection to our servers and it even indicates if it's connected via cellular or though a wi-fi hotspot. 
 
 ## TheraForge Secure Cloud with Sync Support
 
@@ -152,6 +154,73 @@ Outcome is automatically synchronized securely across the cloud to all devices:
 
 <p align="center"><img src="Docs/35-Outcome-Synced.png" width=100% height=100%></p>
 
+## Accessibility
+
+MagicBox app is designed to be compatible with the iOS accessibility features, ensuring that users with disabilities can access and use the app effectively. The app incorporates various accessibility features provided by iOS:
+
+- Voice Over
+- Voice Control
+- Bold Text
+- Dynamic Type
+- High Contrast
+- Color Invert
+- Differentiate Without Color
+
+| ![VoiceOver](Docs/84-voice-over.png) | ![Voice Control](Docs/85-voice-control.png) | ![Bold Text](Docs/86-bold-text.PNG) |
+|:----------:|:----------:|:----------:|
+|   **Voice Over**  |   **Voice Control**  |   **Bold Text**  |
+
+## Assets
+
+MagicBox includes a variety of assets, such as illustrations, icons, and glyphs, that are available for customization within the app. You can preview all the available assets on our [asset gallery](https://tfmart.github.io/OTFMagicBox/).
+
+You can also check the available assets locally on your machine by opening your Terminal in the project directory and running the following command:
+
+```
+./openImagesPreview.sh
+```
+
+To use any of these assets in your project, simply follow these steps:
+
+1. Hover your mouse pointer over the desired image in the gallery to reveal its name.
+<p align="center"><img src="Docs/89-custom-image-name.png" width=100% height=100%></p>
+2. In your code, utilize the [Image view](https://developer.apple.com/documentation/swiftui/image) and pass the image's name as an argument, like this:
+
+```swift
+Image("doctor4")
+```
+
+The assets can also be used on the YAML customization files. For exameple, if we want to use this image on a custom section on the onboarding:
+
+```yaml
+summary: "This is custom section."
+content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+title: "Custom consent section"
+image: "doctor4"
+```
+
+<p align="center">
+  <img src="Docs/90-custom-consent-image.png" width="320" />
+</p> 
+
+MagicBox also includes preinstalled icon packs from [SF Feathers](https://nielsx.gumroad.com/l/sf-feathers) and [Icons8](https://icons8.com/l/sf/#use), providing you with even more design options to enhance your app. Similar to other graphical assets, you can utilize these packs by identifying the image name and employing it within an Image component or a YAML configuration file:
+
+```swift
+// Slack icon from SF Feather
+Image("slack")
+
+// Instagram icon from Icons8
+Image("instagram")
+```
+
+```yml
+# Slack icon from SF Feather
+image: "slack"
+
+# Instagram icon from Icons8
+image: "instagram"
+```
+
 # MagicBox Installation
 
 The MagicBox app installation process requires the installation of the ToolBox SDK and so it is similar to the process described in the [OTFToolBox](../../../OTFToolBox) Readme file.
@@ -164,7 +233,7 @@ The MagicBox app installation process requires the installation of the ToolBox S
 - macOS Catalina 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
 - Xcode 13.0 or later
 - CocoaPods
-- iOS 14.0 or later
+- iOS 14.5 or later
 
 ### 1. Installation Prerequisites
 
@@ -369,19 +438,21 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 ## Modify the Style/Design
 
-You can change the tint color, the label colors, font type and size to customize the look of your application:
+You can change the tint color, label colors, font type, and size to customize the look of your application.
+
+### Colors
+
+To customize the colors, please choose the appropriate color codes according to the Human Interface Guidelines from Apple. Refer to [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color) for more information.
 
 ```yml
+# AppSysParameters.yml
+
 designConfig:
     # Offset value.
     - name: "offset"
       textValue: "20"
       
     # Color codes
-    
-    # Please choose the colors according to Human Interface Guidelines from Apple.
-    # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
-    
     - name: "tintColor"
       textValue: "Blue"
     - name: "label"
@@ -389,16 +460,70 @@ designConfig:
     - name: "secondaryLabel"
       textValue: "Brown"
     # ...
+   
+```
+
+### Fonts
+
+You can customize the fonts used in your application, including support for the Bold Text accessibility feature.
+
+**Preinstalled Apple Fonts**
+
+Choose from a variety of [preinstalled fonts](https://developer.apple.com/fonts/system-fonts/) that come with iOS, such as:
+
+- Helvetica Neue: A widely used sans-serif font.
+- Arial: A popular sans-serif font.
+- Times New Roman: A classic serif font.
+
+```
+# AppSysParameters.yml
+
+designConfig:
+    # ...
     
     # Fonts
     - name: "largeTitleFontSize"
       textValue: "20"
     - name: "titleFontName"
-      textValue: "Gotham-Book"
+      textValue: "Arial"  # Replace with the desired preinstalled font name
     - name: "titleFontSize"
       textValue: "17"
-    # ...    
+    # ...
 ```
+
+| <p align="center"><img src="Docs/88-custom-font-demo.jpeg" width="320" /></p> |
+|:----------:|
+|   In this example, we used the `Kohinoor Telugu` font  |
+
+**Custom Fonts**
+
+If you want to use custom fonts in your application, follow these steps:
+
+1. Add the font files (usually in .ttf or .otf format) to your Xcode project.
+2. Ensure your custom font includes both regular and bold variants (e.g., "CustomFont-Regular" and "CustomFont-Bold"). If your custom font file includes bold variants in a single file, it will automatically adapt to the user's Bold Text accessibility setting.
+3. Open your application's Info.plist file and add a new key called "Fonts provided by application." Add an item for each custom font file.
+
+![VoiceOver](Docs/87-custom-font.png)
+
+4. Specify the font name in the YAML configuration file:
+
+```
+# AppSysParameters.yml
+
+designConfig:
+    # ...
+    
+    # Fonts
+    - name: "largeTitleFontSize"
+      textValue: "20"
+    - name: "titleFontName"
+      textValue: "Nurito Sans"  # Replace with the name of your custom font
+    - name: "titleFontSize"
+      textValue: "17"
+    # ...
+
+```
+For a more detailed guide on working with custom fonts in iOS, refer to Apple's documentation on [Using Custom Fonts](https://developer.apple.com/documentation/uikit/text_display_and_fonts/adding_a_custom_font_to_your_app).
 
 ## Set up the TheraForge Cloud API Key
 
@@ -413,7 +538,7 @@ DataModel:
 
 ## Customize Onboarding
 
-To customize the onboarding process, go to the onboarding section in the `ModuleAppSysParameter.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
+To customize the onboarding process, go to the onboarding section in the `AppSysParameters.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
 
 ```yml
 # ModuleAppSysParameter.yml
@@ -434,7 +559,7 @@ onboarding:
 
 ## Customize Consent
 
-To customize the Consent process of your application go to the Consent section in the `ModuleAppSysParameter.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
+To customize the Consent process of your application go to the Consent section in the `AppSysParameters.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
 
 ```yml
 # ModuleAppSysParameter.yml
@@ -447,7 +572,7 @@ To customize the Consent process of your application go to the Consent section i
 
 ## Customize Registration and Login
 
-Go to the Registration section in the `ModuleAppSysParameter.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`:
+Go to the Registration section in the `AppSysParameters.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`:
 
 ```yml
 # ModuleAppSysParameter.yml
@@ -459,7 +584,11 @@ registration:
 
 ## Configure Regular Login/Social Login
 
-Go to the Login section in the `ModuleAppSysParameter.yml` file and customize the title and the description.
+Go to the Login section in the `AppSysParameters.yml` file and customize the title and the description.
+
+If you want to use the *Sign up With Google* feature, then change the **showGoogleSignin** key to `true`. Then click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “GIDClientID” Click on the Value column of that row and change the value to your application which you get from the google developer portal. Find the "CFBundleURLSchemes" key in Info.plist file and add the URLSchemes in value you can also get this value from google developer portal. Also add the URLSchemes in URL Types as shown in the figure below.
+
+<img src="Docs/84-urlScheme.png" width=45% height=45%>
 
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
@@ -473,7 +602,7 @@ googleClientID: "add_your_client_id_here"
 
 ## Configure the Passcode
 
-Go to the Passcode section in the `ModuleAppSysParameter.yml` file and change the settings of passcode text and passcode type to either 4 or 6 digits:
+Go to the Passcode section in the `AppSysParameters.yml` file and change the settings of passcode text and passcode type to 4 or 6 digits:
 
 ```yaml
 # ModuleAppSysParameter.yml
@@ -499,22 +628,22 @@ useCareKit: "true"
 ```
 
 
-# Registration on Apple Developer Portal
+# Registration on Apple Developer Portal <a name="Registration"></a>
 
 If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
 
 Register your project in your Apple developer account by following [these steps](APP-REGISTRATION.md).
 
-# Xcode Setup
+# Xcode Setup <a name="XcodeSetup"></a>
 
 Set up the Xcode application with your Apple developer account information as [described here](XCODE-SETUP.md).
 
-# CI/CD Setup
+# CI/CD Setup <a name="CICDSetup"></a>
 
 Configure your project using a CI and CD pipeline via GitHub Actions as [described here](/.github/CICD.md).
 
 
-# License
+# License <a name="License"></a>
 
 This project is made available under the terms of a modified BSD license. See the [LICENSE](LICENSE.md) file.
 
