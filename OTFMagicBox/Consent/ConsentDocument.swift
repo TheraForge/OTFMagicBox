@@ -61,18 +61,17 @@ class ConsentDocument: ORKConsentDocument {
             .custom
         ]
         
-        let consentData = (ModuleAppYmlReader().consent?.data ?? [ConsentDescription(show: Constants.YamlDefaults.ConsentShow ? Constants.true : Constants.false, summary: Constants.YamlDefaults.ConsentSummary, content: Constants.YamlDefaults.ConsentContent)])
+        let consentData = (ModuleAppYmlReader().consent?.data ?? [ConsentDescription(show: Constants.YamlDefaults.ConsentShow ? Constants.true : Constants.false, summary: Constants.YamlDefaults.ConsentSummary, content: Constants.YamlDefaults.ConsentContent, title: Constants.YamlDefaults.defaultTitleForRK, image: Constants.Images.ConsentCustomImg)])
         
         for (sectionType, consentData) in zip(sectionTypes, consentData) where consentData.show == Constants.true {
             let section = ORKConsentSection(type: sectionType)
            
             if sectionType == .custom {
-                section.customImage = UIImage(named: Constants.Images.ConsentCustomImg)
-                section.summary = consentData.summary
-                section.content = consentData.content
+                section.customImage = UIImage(named: consentData.image)?.crop(to: Constants.sizeToCropImage)
+                section.title = consentData.title
+            } else {
+                section.title = consentData.title
             }
-                
-                section.title = sectionType.description
                 section.summary = consentData.summary
                 section.content = consentData.content
                 sections?.append(section)

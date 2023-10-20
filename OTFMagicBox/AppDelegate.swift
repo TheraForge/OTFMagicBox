@@ -35,6 +35,7 @@ OF SUCH DAMAGE.
 import UIKit
 import OTFTemplateBox
 import OTFResearchKit
+import OTFUtilities
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try OTFConfigManager.shared.loadDataFromFile(nil)
         } catch {
-            print(error)
+            OTFLog("error while loading data from file %{public}@", error.localizedDescription)
         }
         let tintColor = YmlReader().tintColor
 
@@ -55,13 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         switch defaultProtection {
         case .runToCompletionWithIn10Seconds:
-            print("Default protection is set runToCompletionWithIn10Seconds")
+            OTFLog("Default protection is set runToCompletionWithIn10Seconds")
         case .runToCompletionBeyond10Seconds:
-            print("Default protection is set runToCompletionBeyond10Seconds")
+            OTFLog("Default protection is set runToCompletionBeyond10Seconds")
         case .backgroundMode:
-            print("Default protection is set background Mode")
+            OTFLog("Default protection is set background Mode")
         case .none:
-            print("Default protection is not set")
+            OTFLog("Default protection is not set")
         }
         
         OCKStoreManager.shared.coreDataStore.populateSampleData()

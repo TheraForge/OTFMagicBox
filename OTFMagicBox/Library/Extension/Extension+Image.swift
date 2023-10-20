@@ -40,6 +40,6 @@ extension Image {
     }
     
     static var avatar: Image {
-        UIImage.loadImage(named: "avatar")
+        UIImage.loadImage(named: "user_profile")
     }
 }

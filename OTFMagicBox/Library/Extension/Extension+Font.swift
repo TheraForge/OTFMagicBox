@@ -35,21 +35,45 @@ OF SUCH DAMAGE.
 import SwiftUI
 
 extension Font {
+    static func fontExists(_ fontName: String?, size: CGFloat) -> Bool {
+        guard let fontName else { return false }
+        return UIFont(name: fontName, size: size) != nil
+    }
 
     static var basicFontStyle: Font {
-        return .system(size: 20, weight: .regular, design: .default)
+        let fontSize: CGFloat = 20.0
+        guard let fontName = YmlReader().appTheme?.screenTitleFont,
+              fontExists(fontName, size: fontSize) else {
+            return (.system(size: fontSize))
+        }
+        return Font.custom(fontName, size: fontSize)
     }
     
     static var subHeaderFontStyle: Font {
-        return .system(size: 20, weight: .bold, design: .default)
+        let fontSize: CGFloat = 20.0
+        guard let fontName = YmlReader().appTheme?.screenTitleFont,
+              fontExists(fontName, size: fontSize) else {
+            return (.system(size: fontSize))
+        }
+        return Font.custom(fontName, size: fontSize)
     }
     
     static var headerFontStyle: Font {
-        return .system(size: 25, weight: .bold, design: .default)
+        let fontSize: CGFloat = 24.0
+        guard let fontName = YmlReader().appTheme?.screenTitleFont,
+              fontExists(fontName, size: fontSize) else {
+            return (.system(size: fontSize))
+        }
+        return Font.custom(fontName, size: fontSize)
     }
     
     static var titleFontStyle: Font {
-        return .system(size: 35, weight: .bold, design: .default)
+        let fontSize: CGFloat = 35.0
+        guard let fontName = YmlReader().appTheme?.screenTitleFont,
+              fontExists(fontName, size: fontSize) else {
+            return (.system(size: fontSize))
+        }
+        return Font.custom(fontName, size: fontSize)
     }
 
 }

@@ -57,9 +57,8 @@ internal extension OCKStore {
     func populateSampleData() {
         
         let thisMorning = Calendar.current.startOfDay(for: Date())
-        let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -4, to: thisMorning)!
-        let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: aFewDaysAgo)!
-        let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: aFewDaysAgo)!
+        let beforeBreakfast = Calendar.current.date(byAdding: .hour, value: 8, to: thisMorning)!
+        let afterLunch = Calendar.current.date(byAdding: .hour, value: 14, to: thisMorning)!
         
         let schedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil,
@@ -149,8 +148,10 @@ extension OCKHealthKitPassthroughStore {
         
         addTasks([steps]) { result in
             switch result {
-            case .success: print("Added tasks into HealthKitPassthroughStore!")
-            case .failure(let error): print("Error: \(error)")
+            case .success:
+                OTFLog("Added tasks into HealthKitPassthroughStore!")
+            case .failure(let error):
+                OTFError("Error:", error.errorDescription)
             }
         }
     }
@@ -298,6 +299,19 @@ extension OTFCloudantStore {
         patient.sex = (user.gender == .male) ? .male : .female
         addPatient(patient)
         return patient
+    }
+}
+
+extension CareKitManager {
+    func populateSampleData() {
+        OCKStoreManager.shared.coreDataStore.fetchTasks { result in
+            switch result {
+            case .success(let success):
+                storeManager.store.addAnyTasks(success, callbackQueue: .main, completion: nil)
+            case .failure(_):
+                break
+            }
+        }
     }
 }
 #endif

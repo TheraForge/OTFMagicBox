@@ -37,28 +37,30 @@ import OTFCareKit
 import Foundation
 import UIKit
 import SwiftUI
-import Combine
 
-final class ContactsViewController: UIViewControllerRepresentable {
-    
+struct ContactsViewController: UIViewControllerRepresentable {
     typealias UIViewControllerType = OCKContactsListViewController
-    
     @State private var contactsListViewController: OCKContactsListViewController
     var syncStoreManager: OCKSynchronizedStoreManager
+    let queue = OperationQueue()
     
     init(storeManager: OCKSynchronizedStoreManager) {
         self.syncStoreManager = storeManager
         let viewController = OCKContactsListViewController(storeManager: storeManager)
-        viewController.title = "Care Team"
         contactsListViewController = viewController
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification(_:)),
-                                               name: .databaseSuccessfllySynchronized, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteProfileEventNotification(_:)),
-                                               name: .deleteUserAccount, object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        viewController.title = Constants.CustomiseStrings.careTeam
+        
+        NotificationCenter.default.addObserver(forName: .deleteUserAccount, object: nil, queue: queue) { _ in
+            DispatchQueue.main.async {
+                viewController.alertWithAction(title: Constants.CustomiseStrings.accountDeleted, message: Constants.deleteAccount) { action in
+                    OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                }
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: .databaseSuccessfllySynchronized, object: nil, queue: queue) { _ in
+            viewController.fetchContacts()
+        }
     }
     
     func updateUIViewController(_ taskViewController: OCKContactsListViewController, context: Context) {}
@@ -66,36 +68,16 @@ final class ContactsViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> OCKContactsListViewController {
         return contactsListViewController
     }
-    
-    @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
-        contactsListViewController.fetchContacts()
-    }
-    
-    @objc private func deleteProfileEventNotification(_ notification: Notification) {
-        
-        contactsListViewController.alertView(title: "Account Deleted", message: Constants.deleteAccount) { action in
-            OTFTheraforgeNetwork.shared.moveToOnboardingView()
-        }
-    }
 }
 
 struct ContactsNavigationView: View {
     let syncStoreManager: OCKSynchronizedStoreManager
+    @State private var isPresenting = false
     
     var body: some View {
         NavigationView {
             ContactsViewController(storeManager: syncStoreManager)
-                .navigationTitle(Text("Care Team"))
+                .navigationTitle(Text(Constants.CustomiseStrings.careTeam))
         }
-    }
-}
-
-extension UIViewController{
-    
-    func alertView(title: String , message: String, completionYes: @escaping ((UIAlertAction) -> Void)) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "Okay", style: .default, handler: completionYes)
-        alertController.addAction(okayAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 }

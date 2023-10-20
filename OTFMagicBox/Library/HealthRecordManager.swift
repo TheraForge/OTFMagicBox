@@ -36,6 +36,7 @@ import Foundation
 import HealthKit
 import OTFCareKit
 import OTFCareKitStore
+import OTFUtilities
 
 class HealthRecordsManager: NSObject {
     
@@ -58,7 +59,6 @@ class HealthRecordsManager: NSObject {
     override init() {
         super.init()
         for id in typesById {
-            print(id.rawValue)
             guard let record = HKObjectType.clinicalType(forIdentifier: id) else { continue }
             types.insert(record)
         }
@@ -75,12 +75,11 @@ class HealthRecordsManager: NSObject {
             let query = HKSampleQuery(sampleType: type, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
                 
                 guard let samples = samples as? [HKClinicalRecord] else {
-                    print("*** An error occurred: \(error?.localizedDescription ?? "nil") ***")
+                    OTFError("An error occurred in uploading health record: %{public}@", error?.localizedDescription ?? "")
                     onCompletion?(false, error)
                     return
                 }
-                
-                print("[HealthRecordsManager] upload() - sending \(samples.count) sample(s)")
+                OTFLog("[HealthRecordsManager] upload() - sending %{public}@  sample(s)", samples.count)
                 for sample in samples {
                     guard let resource = sample.fhirResource else { continue }
                         _ = resource.data

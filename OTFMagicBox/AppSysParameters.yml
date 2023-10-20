@@ -53,7 +53,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: "info@hippocratestech.com", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon "info@hippocratestech.com" is the value assigned for that Key.
+# Example: teamEmail: "<your-team-email>", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the quotes is the value assigned for that Key.
 
 
 # Default Values:-
@@ -86,19 +86,18 @@ DataModel:
   # API key for the server integration.
   # You need to change the dummy key with a valid one to be able to
   # connect to the cloud backend
-  apiKey: "this_is_a_dummy_key_to_be_replaced_by_a_valid_one"
-  teamWebsite: "<insert-your-web-site-url>"
+  apiKey: "<this_is_a_dummy_key_to_be_replaced_by_a_valid_one>"
+  teamWebsite: "<your-web-site-url>"
   showAppleSignin:  "true"
-  showGoogleSignin: "false"
-  googleClientID: "<add-your-client-id-here>"
-  teamEmail: "<insert-your-team-email>"
-  teamPhone: "<insert-your-team-phone>"
-  # Start Date.
+  showGoogleSignin: "true"
+  teamEmail: "<your-team-email>"
+  teamPhone: "<your-team-phone>"
+    # Start Date.
   startDate: "30/08/2020"
   importDatabaseFromFile: "false"
   showCheckupScreen:  "true"
   showStaticUIScreen: "true"
-  # OTF Protection level.
+    # OTF Protection level.
   otfProtectionLevel: "runToCompletionWithIn10Seconds"
   
    # CareKit
@@ -106,21 +105,86 @@ DataModel:
  # For example: If the useCareKit value is false then the Schedule and Contacts screen will not be displayed, if value is true then only Schedule and Contacts screen will be displayed.
   useCareKit: "true"
   
+##############################################################################
+#                      TheraForge system                             #
+##############################################################################
+
+#Fixed colors
+
+# Usually don't use fixed colors because they don't adapt to dark mode and accessibility mode.
+
+#    black
+#    blue
+#    brown
+#    cyan
+#    darkGray
+#    gray
+#    lightGray
+#    green
+#    magenta
+#    orange
+#    purple
+#    purple
+#    red
+#    white
+#    yellow
+
+
+# Its recommened to use Adaptable colors because they adapt to dark mode and accessibility mode.
+#Adaptable gray colors
+
+#    systemGray
+#    systemGray1
+#    systemGray2
+#    systemGray3
+#    systemGray4
+#    systemGray5
+#    systemGray6
+
+#Adaptable colors
+
+#   systemBlue
+#   systemBrown
+#   systemOrange
+#   systemPink
+#   systemPurple
+#   systemRed
+#   systemTeal
+#   systemYellow
+#   label
+#   secondaryLabel
+#   tertiaryLabel
+#   quaternaryLabel
+#   placeholderText
+#   separator
+#   opaqueSeparator
+#   link
+#   systemCyan
+#   systemGreen
+#   systemIndigo
+#   systemMint
+#   systemBackground
+#   systemGroupedBackground
+#   secondarySystemGroupedBackground
+#   tertiarySystemGroupedBackground
+#   secondarySystemBackground
+#   tertiarySystemBackground
 
   appTheme:
-    backgroundColor: "Gray6"
-    textColor: "Black"
-    separatorColor: "Gray"
-    cellbackgroundColor: "White"
-    buttonTextColor: "Blue"
+    backgroundColor: "systemBackground"
+    textColor: "label"
+    separatorColor: "separator"
+    cellbackgroundColor: "secondarySystemGroupedBackground"
+    buttonTextColor: "systemBlue"
     borderColor: "Black"
-    headerColor: "Gray"
+    headerColor: "label"
     screenTitleFont: "Header"
     screenTitleWeight: ""
     headerTitleFont: "HeaderInherited"
-    headerTitleWeight: ""
+    headerTitleWeight: "Bold"
     textWeight: ""
     textFont: "Inherited"
+    appTitleSize: "Large Title"
   
   
   
@@ -235,7 +299,7 @@ DataModel:
 ##############################################################################
 
  # Application Specifications.
-    studyTitle: "Health Study"
+    appTitle: "Health Study"
     teamName: "by Hippocrates Technologies"
     copyright: "Made by Hippocrates Technologies"
 
@@ -252,7 +316,7 @@ DataModel:
 ##############################################################################
 
  # Application Specifications.
-    studyTitle: "Étude de santé"
+    appTitle: "Étude de santé"
     teamName: "par Hippocrate Technologies"
     copyright: "Fabriqué par Hippocrate Technologies"
 

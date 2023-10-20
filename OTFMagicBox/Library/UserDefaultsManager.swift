@@ -42,4 +42,13 @@ class UserDefaultsManager {
     static func setOnboardingCompleted(_ completed: Bool) {
         UserDefaults.standard.setValue(completed, forKey: Constants.onboardingDidComplete)
     }
+    
+    static func setIsConsentDocumentViewed(_ completed: Bool) {
+        UserDefaults.standard.setValue(completed, forKey: Constants.isConsentDocumentViewed)
+    }
+    
+    static var isConsentDocumentViewed: Bool {
+        return UserDefaults.standard.bool(forKey: Constants.isConsentDocumentViewed)
+    }
+    
 }

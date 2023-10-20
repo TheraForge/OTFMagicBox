@@ -40,12 +40,14 @@ struct ChangePasscodeView: View {
     
     var body: some View {
         HStack {
-            Text("Change Passcode")
+            Text(Constants.CustomiseStrings.changePasscode)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
-            Text("›")
-        }.frame(height: 70).contentShape(Rectangle())
+            Image(systemName: "chevron.right")
+                            .foregroundColor(Color(UIColor.tertiaryLabel))
+                            .font(.footnote.weight(.semibold))
+        }.frame(height: Metrics.MAIN_VIEW_HEIGHT).contentShape(Rectangle())
             .gesture(TapGesture().onEnded({
                 if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
                     self.showPasscode.toggle()

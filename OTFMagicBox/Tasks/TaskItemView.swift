@@ -49,19 +49,19 @@ struct TaskItemView: View {
     var body: some View {
         HStack {
             if item.image != nil {
-                Image(uiImage: item.image!).resizable().frame(width: 32, height: 32)
+                Image(uiImage: item.image!).resizable().frame(width: Metrics.TASK_ITEM_WIDTH, height: Metrics.TASK_ITEM_HEIGHT)
             }
             VStack(alignment: .leading) {
-                Text(item.title).font(.system(size: 18, weight: .semibold, design: .default))
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                Text(item.title)
+                    .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                Text(item.subtitle).font(.system(size: 14, weight: .light, design: .default))
+                Text(item.subtitle)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             }
             Spacer()
         }
-        .frame(height: 65)
+        .frame(height: Metrics.TASK_VIEW_HEIGHT)
         .contentShape(Rectangle()).gesture(TapGesture().onEnded({
             self.showingDetail.toggle()
         }))

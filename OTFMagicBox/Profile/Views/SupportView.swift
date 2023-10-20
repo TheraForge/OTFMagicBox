@@ -35,11 +35,9 @@ OF SUCH DAMAGE.
 import SwiftUI
 
 struct SupportView: View {
-    let color: Color
     var phone = ""
     var title = ""
-    init(color: Color, phone: String, title: String) {
-        self.color = color
+    init(phone: String, title: String) {
         self.phone = phone
         self.title = title
     }
@@ -47,15 +45,15 @@ struct SupportView: View {
     var body: some View {
         HStack {
             Text(title)
-                .foregroundColor(self.color)
+                .foregroundColor(.otfTextColor)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
-            Text(self.phone).foregroundColor(self.color)
+            Text(self.phone).foregroundColor(.otfTextColor)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
         }
-        .frame(height: 60)
+        .frame(maxWidth: .infinity, minHeight: Metrics.TITLE_VIEW_HEIGHT)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded({
             let telephone = "tel://"
@@ -63,11 +61,15 @@ struct SupportView: View {
             guard let url = URL(string: formattedString) else { return }
             UIApplication.shared.open(url)
         }))
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel("Call support number \(self.phone)")
+        .accessibilityInputLabels([ModuleAppYmlReader().profileData?.supportText ?? Constants.CustomiseStrings.support])
     }
 }
 
 struct SupportView_Previews: PreviewProvider {
     static var previews: some View {
-        SupportView(color: Color.red, phone: "+1 (650)-000-0000", title: "")
+        SupportView(phone: "+1 (650)-000-0000", title: "")
     }
 }

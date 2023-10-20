@@ -34,58 +34,53 @@ OF SUCH DAMAGE.
 
 import Foundation
 import SwiftUI
+import OTFUtilities
 
 struct LogoutView: View {
-    @State private var showingOptions = false
-    @State private var showingAlert = false
-    let textColor: Color
+    
+    //    MARK: - PROPERTY
+   @StateObject private var viewModel = LogoutViewModel()
+    
+    //    MARK: - BODY
     var body: some View {
         HStack {
             Spacer()
-            
             Button(action: {
-                self.showingOptions.toggle()
+                viewModel.showingOptions.toggle()
             }, label: {
-                 Text("Logout")
+                Text(Constants.CustomiseStrings.logout)
                     .font(.basicFontStyle)
-                    .foregroundColor(textColor)
+                    .foregroundColor(.otfButtonColor)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             })
-            .actionSheet(isPresented: $showingOptions) {
+            .actionSheet(isPresented: $viewModel.showingOptions) {
                 ActionSheet(
-                    title: Text("Are you sure?")
+                    title: Text(Constants.CustomiseStrings.areYouSure)
                         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     buttons: [
-                        .destructive(Text("Logout"), action: {
-                            OTFTheraforgeNetwork.shared.signOut { result in
-                                if case .failure(let error) = result {
-                                    print(error.localizedDescription)
-                                    self.showingAlert = true
-                                }
-                            }
+                        .destructive(Text(Constants.CustomiseStrings.logout), action: {
+                            viewModel.signout()
                         }),
-                        .cancel(Text("Cancel")
+                        .cancel(Text(Constants.CustomiseStrings.cancel)
                             .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                             .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)))
                     ]
                 )
             }
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Failed to logout.")
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text(Constants.CustomiseStrings.failedToLogout)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text("Okay")))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
             }
-            
             Spacer()
         }
-
     }
 }
 
 struct LogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        LogoutView(textColor: Color.black)
+        LogoutView()
     }
 }

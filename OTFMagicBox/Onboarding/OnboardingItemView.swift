@@ -57,9 +57,12 @@ struct OnboardingItemView<OnboardingItem: View>: View {
         ZStack(alignment: .bottom) {
             OnboardingItemViewController(controllers: viewControllers, currentPage: $currentOnboardingItem)
                 .background(Color.clear)
-            OnboardingItemControl(numberOfOnboardingItems: viewControllers.count, currentOnboardingItem: $currentOnboardingItem)
-                .background(Color.clear)
-                .offset(x: 0, y: -80)
+            if viewControllers.count > 1 {
+                OnboardingItemControl(numberOfOnboardingItems: viewControllers.count, currentOnboardingItem: $currentOnboardingItem)
+                    .background(Color.clear)
+                    .offset(x: 0, y: -80)
+                
+            }
         }
         .ignoresSafeArea()
     }
@@ -85,8 +88,10 @@ struct OnboardingItemViewController: UIViewControllerRepresentable {
         let onboardingItemViewController = UIPageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal)
-        onboardingItemViewController.dataSource = context.coordinator
-        onboardingItemViewController.delegate = context.coordinator
+        if controllers.count > 1 {
+            onboardingItemViewController.dataSource = context.coordinator
+            onboardingItemViewController.delegate = context.coordinator
+        }
         onboardingItemViewController.view.backgroundColor = .clear
 
         return onboardingItemViewController

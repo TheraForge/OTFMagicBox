@@ -87,13 +87,9 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         
         let regexp = try! NSRegularExpression(pattern: "^.{10,}$")
         
-        let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier, title: "Registration",
-                                               text: "Sign up for this study.", passcodeValidationRegularExpression: regexp,
-                                               passcodeInvalidMessage: """
-                                                                        Your password does not meet the following criteria: minimum 8
-                                                                        characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet,
-                                                                        1 Number and 1 Special Character
-                                                                        """, options: regOption)
+        let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier, title: Constants.CustomiseStrings.registration,
+                                               text: Constants.CustomiseStrings.studySignup, passcodeValidationRegularExpression: regexp,
+                                               passcodeInvalidMessage: Constants.CustomiseStrings.notMeetCriteria, options: regOption)
         loginSteps = [signInButtons, registerStep]
         
         // *  STEP (4): ask the user to create a security passcode
@@ -101,7 +97,7 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         // use the `ORKPasscodeStep` from ResearchKit.
         if config.isPasscodeEnabled {
             let passcodeStep = ORKPasscodeStep(identifier: Constants.Identifier.PasscodeStep)
-            passcodeStep.text = "Enter your passcode"
+            passcodeStep.text = Constants.CustomiseStrings.enterPasscode
 
             let type = config.passcodeType
             if type == Constants.Passcode.lengthSix {
@@ -137,7 +133,13 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let introSteps: [ORKStep] = [consentStep, reviewConsentStep]
         
         // guide the user through ALL steps
-        let fullSteps = introSteps + loginSteps
+        let fullSteps: [ORKStep]
+        if UserDefaultsManager.isConsentDocumentViewed {
+            fullSteps = loginSteps
+        } else {
+            UserDefaultsManager.setIsConsentDocumentViewed(true)
+            fullSteps = introSteps + loginSteps
+        }
         
         // * and SHOW the user these steps!
         // create a task with each step

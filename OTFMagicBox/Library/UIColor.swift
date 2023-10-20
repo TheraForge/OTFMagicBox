@@ -71,6 +71,55 @@ extension UIColor {
             alpha: CGFloat(1.0)
         )
     }
+}
+
+
+public extension Color {
     
+    private typealias PlatformColor = UIColor
     
+    static var systemBlue: Color { Color(PlatformColor.systemBlue) }
+    static var systemBrown: Color { Color(PlatformColor.systemBrown) }
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, *)
+    static var systemCyan: Color { Color(PlatformColor.systemCyan) }
+    static var systemGreen: Color { Color(PlatformColor.systemGreen) }
+    static var systemIndigo: Color { Color(PlatformColor.systemIndigo) }
+    @available(iOS 15.0, macOS 10.15, tvOS 15.0, *)
+    static var systemMint: Color { Color(PlatformColor.systemMint) }
+    static var systemOrange: Color { Color(PlatformColor.systemOrange) }
+    static var systemPink: Color { Color(PlatformColor.systemPink) }
+    static var systemPurple: Color { Color(PlatformColor.systemPurple) }
+    static var systemRed: Color { Color(PlatformColor.systemRed) }
+    static var systemTeal: Color { Color(PlatformColor.systemTeal) }
+    static var systemYellow: Color { Color(PlatformColor.systemYellow) }
+    
+    static var systemGray2: Color { Color(PlatformColor.systemGray2) }
+    static var systemGray3: Color { Color(PlatformColor.systemGray3) }
+    static var systemGray4: Color { Color(PlatformColor.systemGray4) }
+    static var systemGray5: Color { Color(PlatformColor.systemGray5) }
+    static var systemGray6: Color { Color(PlatformColor.systemGray6) }
+    
+    static var darkGray: Color { Color(PlatformColor.darkGray) }
+    static var lightGray: Color { Color(PlatformColor.lightGray) }
+    static var magenta: Color { Color(PlatformColor.magenta) }
+    
+    static var systemFill: Color { Color(PlatformColor.systemFill) }
+    static var secondarySystemFill: Color { Color(PlatformColor.secondarySystemFill) }
+    static var tertiarySystemFill: Color { Color(PlatformColor.tertiarySystemFill) }
+    static var quaternarySystemFill: Color { Color(PlatformColor.quaternarySystemFill) }
+    
+    static var placeholderText: Color { Color(PlatformColor.placeholderText) }
+    static var systemBackground: Color { Color(PlatformColor.systemBackground) }
+    static var secondarySystemBackground: Color { Color(PlatformColor.secondarySystemBackground) }
+    static var tertiarySystemBackground: Color { Color(PlatformColor.tertiarySystemBackground) }
+    
+    static var systemGroupedBackground: Color { Color(PlatformColor.systemGroupedBackground) }
+    static var secondarySystemGroupedBackground: Color { Color(PlatformColor.secondarySystemGroupedBackground) }
+    static var tertiarySystemGroupedBackground: Color { Color(PlatformColor.tertiarySystemGroupedBackground) }
+    static var separator: Color { Color(PlatformColor.separator) }
+    static var opaqueSeparator: Color { Color(PlatformColor.opaqueSeparator) }
+    static var link: Color { Color(PlatformColor.link) }
+    static var darkText: Color { Color(PlatformColor.darkText) }
+    static var lightText: Color { Color(PlatformColor.lightText) }
+
 }

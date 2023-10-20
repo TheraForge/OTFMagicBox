@@ -35,6 +35,7 @@
 import OTFCareKit
 import OTFCareKitStore
 import Foundation
+import OTFUtilities
 
 extension OCKHealthKitPassthroughStore {
     
@@ -48,7 +49,8 @@ extension OCKHealthKitPassthroughStore {
         let aFewDaysAgo = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: -10, to: Date())!)
         addAnyTasks(makeTasks(on: aFewDaysAgo), callbackQueue: .main) { result in
             switch result {
-            case .failure(let error): print("[ERROR] \(error.localizedDescription)")
+            case .failure(let error):
+                OTFLog("error in addAnyTasks %{public}@", error.localizedDescription)
             case .success: break
             }
         }

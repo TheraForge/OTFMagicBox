@@ -43,20 +43,20 @@ enum AuthMethod: String, CaseIterable, Codable {
     var signinTitle: String {
         switch self {
         case .email:
-            return "Sign in with email"
+            return Constants.CustomiseStrings.signinWithEmail
             
         case .apple:
-            return "Sign in with Apple"
+            return Constants.CustomiseStrings.signinWithApple
         }
     }
     
     var signupTitle: String {
         switch self {
         case .email:
-            return "Sign up with email"
+            return Constants.CustomiseStrings.signUpWithEmail
             
         case .apple:
-            return "Sign up with Apple"
+            return Constants.CustomiseStrings.signUpWithApple
         }
     }
 }
@@ -75,7 +75,7 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         
         var loginSteps: [ORKStep]
         let signInButtons = OnboardingOptionsStep(identifier: "SignInButtons")
-        let loginUserPassword = ORKLoginStep(identifier: "LoginExistingStep", title: "Login", text: "Log into this study.", loginViewControllerClass: LoginViewController.self)
+        let loginUserPassword = ORKLoginStep(identifier: "LoginExistingStep", title: Constants.CustomiseStrings.login, text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
         loginSteps = [signInButtons, loginUserPassword]
         
         //add consent if user dont have consent in cloud
@@ -90,12 +90,16 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         reviewConsentStep.reasonForConsent = config.reasonForConsentText
         
         // create a task with each step
-        loginSteps += [reviewConsentStep]
+        if !UserDefaultsManager.isConsentDocumentViewed {
+            UserDefaultsManager.setIsConsentDocumentViewed(true)
+            loginSteps += [reviewConsentStep]
+        }
+        
         
         // use the `ORKPasscodeStep` from ResearchKit.
         if config.isPasscodeEnabled {
             let passcodeStep = ORKPasscodeStep(identifier: "Passcode")
-            passcodeStep.text = "Enter your passcode"
+            passcodeStep.text = Constants.CustomiseStrings.enterPasscode
 
             let type = ModuleAppYmlReader().passcodeType
             if type == Constants.Passcode.lengthSix {

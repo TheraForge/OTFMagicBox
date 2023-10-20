@@ -35,6 +35,7 @@
 import Foundation
 import OTFCareKit
 import OTFCareKitStore
+import OTFUtilities
 
 class TasksViewModel: ObservableObject {
     let syncStoreManager: OCKSynchronizedStoreManager
@@ -56,7 +57,7 @@ class TasksViewModel: ObservableObject {
         syncStoreManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
             switch result {
             case .failure(let error):
-                print("Error: \(error)")
+                OTFError("error while fetching tasks %{public}@", error.localizedDescription)
                 
             case .success(let tasks):
                 if let kegelsTask = tasks.first(where: { $0.id == "kegels" }) {

@@ -47,11 +47,35 @@ extension UIImage {
      
     Remark:- Use this method to display any of the images in your application. This method supports all kind of images like SF Symbols or any images saved from          Assets.
      */
-    static func loadImage (named: String) -> Image {
+    static func loadImage(named: String) -> Image {
         if let sfImage = UIImage(systemName: named){
             return Image(uiImage: sfImage)
         }
         return Image(named)
     }
-
+    
+    func crop(to size: CGSize) -> UIImage? {
+        guard let cgImage = self.cgImage else {
+            return nil
+        }
+        
+        let widthRatio = size.width / CGFloat(cgImage.width)
+        let heightRatio = size.height / CGFloat(cgImage.height)
+        let scale = max(widthRatio, heightRatio)
+        
+        let scaledWidth = CGFloat(cgImage.width) * scale
+        let scaledHeight = CGFloat(cgImage.height) * scale
+        
+        let xOffset = (scaledWidth - size.width) / 2
+        let yOffset = (scaledHeight - size.height) / 2
+        
+        let targetRect = CGRect(x: -xOffset, y: -yOffset, width: scaledWidth, height: scaledHeight)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        draw(in: targetRect)
+        let croppedAndFilledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return croppedAndFilledImage
+    }
 }

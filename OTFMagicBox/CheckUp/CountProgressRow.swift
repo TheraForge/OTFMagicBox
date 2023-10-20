@@ -58,7 +58,7 @@ struct CountProgressRow: View {
     var body: some View {
         HStack {
             Text(title)
-                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
+                .foregroundColor(.otfTextColor)
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
             Spacer()
@@ -69,7 +69,7 @@ struct CountProgressRow: View {
             RingProgressView(progress: total < 1 ? 0 : Float(completed) / Float(total),
                         color: color,
                         lineWidth: lineWidth)
-                .frame(width: 30, height: 30)
+            .frame(width: Metrics.FRAME_ROW_WIDTH, height: Metrics.FRAME_ROW_HEIGHT)
         }
     }
 }

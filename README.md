@@ -7,13 +7,51 @@ This sample application leverages TheraForge frameworks such as [OTFTemplateBox]
 For more details on the features of the SDK and on the TheraForge Cloud setup process (e.g., to obtain an API key), refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
 
 ## Change Log
-* Release 1.0.2-beta:
-  * Made the application more configurable by adding color, font, font weight, background color in the yaml file.
-  * Added app localization capabilities in the yaml file.
-  * Consolidated multiple yaml files into two.
-  * Added support for user account deletion to make the app more GDPR compliant.
-  * Added CI/CD workflow to automate testing and deployment in TestFlight using GitHub Actions. Updated documentation with the required configuration steps.
-  * Various fixes and improvements.
+<details open>
+  <summary>Release 1.0.3-beta</summary>
+  
+  - **End-to-End File Encryption (TheraForge CryptoBox)**
+    Added class-based end-to-end encryption (E2EE) and integrity verification technology to protect sensitive user data at rest or in transit with the XChaCha20Poly1305 algorithm, which is independent from and in addition to TLS and native storage crypto. This creates two independent layers of highly secure data cryptography.
+  - **Biometric Authentications**
+    The app supports biometric authentication (FaceID or TouchID), which provides a secure and user-friendly way to authenticate users.
+  - **Sign in Using Password AutoFill**
+    With just a few taps users can create and save new passwords or log in to an existing account
+  - **Manage Documents**
+    MagicBox allows you to upload, download, re-name and delete different documents. User profile pictures and consent forms are saved as documents.
+  - **Improved Theme Customization Using YAML File**
+    - Font
+    - Font size
+    - Font weight
+    - Background color
+    - Foreground color
+  - **Apple Watch Demo App**
+    - Added a companion WatchOS app for MagicBox
+    - Allow users to check and manage tasks for the current day from their Apple Watch
+  - **Enhanced Styling of the Profile Screen**
+  - **New Network Indicator**
+    - Implemented a networking indicator to provide a visual representation of the connection status to TheraForge CloudBox servers
+  - **New Consent Documents Layout Section in Profile Screen**
+  - **Accessibility Enhancements**
+    - Enhanced VoiceOver support for the Bold Text and Invert Colors system options for enhanced accessibility
+    - Added support for Bold Text and Invert Colors for enhanced accessibility options
+  - **Design and Assets**
+    - Incorporated new assets, including more than 360 images and dozens of additional icons/non-Apple SF Symbols (such as social icons), ready to be used inside the iOS app
+  - **Compatibility Updates**
+    - Increased the iOS target version to iOS 14.5 for broader device compatibility and feature support, including all SF Symbols 2.2
+</details>
+
+<details>
+    <summary>Release 1.0.2-beta</summary>
+    <ul>
+        <li>Made the application more configurable by adding color, font, font weight, background color in the yaml file.</li>
+        <li>Added app localization capabilities in the yaml file.</li>
+        <li>Consolidated multiple yaml files into two.</li>
+        <li>Added support for user account deletion to make the app more GDPR compliant.</li>
+        <li>Added CI/CD workflow to automate testing and deployment in TestFlight using GitHub Actions. Updated documentation with the required configuration steps.</li>
+        <li>Various fixes and improvements.</li>
+    </ul>
+</details>
+
 <details>
   <summary>Release 1.0.1-beta</summary>
   Removed warnings, improved profile section, added UI samples and made various other improvements
@@ -32,6 +70,7 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 * [Installation](#magicbox-installation)
 * [Usage](#app-usage)
 * [Registration on Apple Developer Portal](#registration-on-apple-developer-portal)
+* [Register a new API key](#register-a-new-api-key)
 * [Xcode Setup](#xcode-setup)
 * [CI/CD Setup](#cicd-setup)
 * [License](#license)
@@ -49,8 +88,8 @@ These are its primary characteristics:
 * Care plan management using Apple's Carekit framework.
 * Monitoring of health data with Apple's HealthKit framework.
 * Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
-* Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
-* SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
+* Support for various popular and innovative technologies out of the box: manual and biometric user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- and GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), real-time app notifications using HTTP2 Server-Sent Events (SSE), end-to-end file cryptography and integrity verification, etc.
+* SF Symbols 2.2 support (available in iOS 14.5 and watchOS 7.4, and later releases)
 * CI/CD support via GitHub Actions.
 
 
@@ -68,7 +107,7 @@ When a user launches an app for the first time, the onboarding process presents 
 
 ## Consent
 
-The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for exammple, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
+The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for example, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
 <p align="center"><img src="Docs/3-Consent.png" width=35% height=35%></p>
 
@@ -80,19 +119,44 @@ The consent form contains the description of the items included in the applicati
 
 <p align="center"><img src="Docs/5-Signature.png" width=35% height=35%></p>
 
+## Consent Document in the Profile Section
+In MagicBox users can check out their consent form in the profile screen by tapping on the Consent Documents section, as shown in the figure below.
+
+<p align="center"><img src="Docs/consent_02.png" width=35% height=35%></p>
+
 ## Simplified Registration and Login Process
 
-The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, fullname, last name, date of birth and gender, etc. For example, date of birth can be used for a minimum age eligibility check to limit the use of the app.
+The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, first name, last name, date of birth and gender, etc. For example, date of birth can be used for a minimum age eligibility check to limit the use of the app.
 
 <p align="center"><img src="Docs/6-Signup.png" width=35% height=35%></p>
 
-## Login/Social Login
+## Regular Login/Social Login
 
 MagicBox supports different login strategies: regular login using registration details, Sign in with Apple and Sign in with Google.
 
 User login credentials are securely stored in the device’s keychain.
 
+
+
 <p align="center"><img src="Docs/7-Login.png" width=35% height=35%></p>
+
+If you want to enable support for Google Sign-in, in Xcode add the GIDClientID parameter string in the info.plist file as shown in the figure.
+
+<p align="center"><img src="Docs/gmail_login_info.png" width=75% height=35%></p>
+
+
+## Biometric Authentication
+MagicBox supports biometric authentication: a secure and user-friendly way to authenticate users in iOS by using Face ID or Touch ID, as shown in the figure below.
+
+Users can authenticate by using Face ID or Touch ID.
+
+<p align="center"><img src="Docs/biometric_authentication.png" width=35% height=35%></p>
+
+## Sign in Using Password AutoFill
+MagicBox supports iOS Password AutoFill. With just a few taps, users can create and save new passwords or log in to an existing account. Users don’t need to enter their password, the system handles everything. It also encourages user to select strong passwords hence making user accounts more secure.
+
+<p align="center"><img src="Docs/password_less_01.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/password_less_02.png" width=35% height=35%></p>
 
 ## Passcode
 
@@ -118,11 +182,15 @@ Contacts are cards that contain doctor and family member details, such as addres
 
 <p align="center"><img src="Docs/11-Contacts.png" width=35% height=35%></p>
 
-## User Profile
+## End-to-end File Encryption (TheraForge CryptoBox)
+MagicBox supports class-based end-to-end file encryption using the secure and robust XChaCha20Poly1305 algorithm. It provides an additional layer of secure storage and additional security for communication that prevents third parties from accessing confidential data. Different classes can be used to provide selective access privileges to documents (the default class provides access to all the contacts explicitly approved by the user). Class-based encrypted files can only be decrypted by the intended receiver(s).
 
-The profile section includes the user account view as well as additional information, actions and links such as help, report, customer support address, withdrawal from study, and logout.
+## User Profile
+In the profile section, users can manage their current session, edit their profile, contact support or withdraw from a study/project.
 
 <p align="center"><img src="Docs/12-Profile.png" width=35% height=35%></p>
+
+There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or Wi-Fi. 
 
 ## TheraForge Secure Cloud with Sync Support
 
@@ -132,7 +200,7 @@ For example, below we show the app's user profile on multiple devices before the
 
 <p align="center"><img src="Docs/30-Profile-Before-Change.png" width=100% height=100%></p>
 
-When the date of birth is changed to 12-16-2001 on the second device from the left:
+When the date of birth is changed to Dec 11, 2006 on the second device from the left:
 
 <p align="center"><img src="Docs/31-Profile-With-Change.png" width=100% height=100%></p>
 
@@ -152,6 +220,97 @@ Outcome is automatically synchronized securely across the cloud to all devices:
 
 <p align="center"><img src="Docs/35-Outcome-Synced.png" width=100% height=100%></p>
 
+## Accessibility
+
+MagicBox app is designed to be compatible with the iOS accessibility features, ensuring that users with disabilities can access and use the app effectively. The app incorporates various accessibility features provided by iOS:
+
+- Voice Over
+- Voice Control
+- Bold Text
+- Dynamic Type
+- High Contrast
+- Color Invert
+- Differentiate Without Color
+
+| ![VoiceOver](Docs/84-voice-over.png) | ![Voice Control](Docs/85-voice-control.png) | ![Bold Text](Docs/86-bold-text.PNG) |
+|:----------:|:----------:|:----------:|
+|   **Voice Over**  |   **Voice Control**  |   **Bold Text**  |
+
+## Apple Watch Demo App
+
+The MagicBox Demo Apple Watch App is designed as a companion app for the iPhone MagicBox application. This app is intended for users to quickly glance through their tasks and activities for the day conveniently on their Apple Watch.
+
+![Apple Watch Demo App](Docs/91-apple-watch-demo.png)
+
+To get started with the MagicBox Watch App, follow these steps:
+
+1. Ensure you have the MagicBox app installed on your iPhone.
+2. Pair your Apple Watch with your device, if you haven't already.
+3. Run the `OTFMagicBox Watch App` target on your Apple Watch
+
+The app leverages [OTFCareKit](https://github.com/TheraForge/OTFCareKit) to fetch and display a list of tasks for the current day on the Watch, on a glanceable and easy-to-use interface.
+
+The Apple Watch app also supports Accessibility features, such as VoiceOver, Bold and Dynamic Text, ensuring that all users, regardless of their abilities, can use our app comfortably. 
+
+## Assets
+
+MagicBox includes a variety of assets, such as illustrations, icons, and glyphs, that are available for customization within the app. You can preview all the available assets on our [asset gallery](https://tfmart.github.io/OTFMagicBox/).
+
+You can also check the available assets locally on your machine by opening your Terminal in the project directory and running the following command:
+
+```
+./openImagesPreview.sh
+```
+
+To use any of these assets in your project, simply follow these steps:
+1. Locate the Images resource in Xcode's sidebar as shown in the figure below
+<p align="center"><img src="Docs/92-image-assets.png" width=100% height=100%></p>
+
+2. Choose an image that you want to use in your application
+3. Control-click on it and select `Show in Finder`
+4. From the Finder select the imageset folder corresponding to the desired image
+5. Select the `Assets` resource of OTFMagicBox in Xcode and drag the imageset folder from the Finder to Xcode. That will install the imageset in MagicBox and you can now start using it.
+
+To review any of the optional assets to select and use them in the code, follow these steps:
+1. Hover your mouse pointer over the desired image in the aforementioned gallery (or in the Assets resource) to reveal its name
+<p align="center"><img src="Docs/89-custom-image-name.png" width=100% height=100%></p>
+2. In your code, utilize the [Image view](https://developer.apple.com/documentation/swiftui/image) and pass the installed image's name as an argument, like this:
+
+```swift
+Image("doctor4")
+```
+
+Any installed assets can also be used in the YAML customization files. For example, if we want to use this image on a custom section in the onboarding section of the app:
+
+```yaml
+summary: "This is custom section."
+content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+title: "Custom consent section"
+image: "doctor4"
+```
+
+<p align="center">
+  <img src="Docs/90-custom-consent-image.png" width="320" />
+</p> 
+
+MagicBox also includes preinstalled icon packs from [SF Feathers](https://nielsx.gumroad.com/l/sf-feathers) and [Icons8](https://icons8.com/l/sf/#use), providing you with even more design options to enhance your app. Similar to other graphical assets, you can utilize these packs by identifying the image name and employing it within an Image component or a YAML configuration file:
+
+```swift
+// Slack icon from SF Feather
+Image("slack")
+
+// Instagram icon from Icons8
+Image("instagram")
+```
+
+```yml
+# Slack icon from SF Feather
+image: "slack"
+
+# Instagram icon from Icons8
+image: "instagram"
+```
+
 # MagicBox Installation
 
 The MagicBox app installation process requires the installation of the ToolBox SDK and so it is similar to the process described in the [OTFToolBox](../../../OTFToolBox) Readme file.
@@ -164,7 +323,7 @@ The MagicBox app installation process requires the installation of the ToolBox S
 - macOS Catalina 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
 - Xcode 13.0 or later
 - CocoaPods
-- iOS 14.0 or later
+- iOS 14.5 or later
 
 ### 1. Installation Prerequisites
 
@@ -277,7 +436,7 @@ git clone https://github.com/TheraForge/OTFMagicBox.git
 
 <img src="Docs/17-GitClone.png">
 
-Then change the directory to the newly-created OTFMagicBox subdirectory:
+Then change the directory to the newly created OTFMagicBox subdirectory:
 
 ```
 cd OTFMagicBox
@@ -369,9 +528,15 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 ## Modify the Style/Design
 
-You can change the tint color, the label colors, font type and size to customize the look of your application:
+You can change the tint color, label colors, font type, and size to customize the look of your application.
+
+### Colors
+
+To customize the colors, please choose the appropriate color codes according to the Human Interface Guidelines from Apple. Refer to [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color) for more information.
 
 ```yml
+# AppSysParameters.yml
+
 designConfig:
     # Offset value.
     - name: "offset"
@@ -389,16 +554,70 @@ designConfig:
     - name: "secondaryLabel"
       textValue: "Brown"
     # ...
+   
+```
+
+### Fonts
+
+You can customize the fonts used in your application, including support for the Bold Text accessibility feature.
+
+**Preinstalled Apple Fonts**
+
+Choose from a variety of [preinstalled fonts](https://developer.apple.com/fonts/system-fonts/) that come with iOS, such as:
+
+- Helvetica Neue: A widely used sans-serif font.
+- Arial: A popular sans-serif font.
+- Times New Roman: A classic serif font.
+
+```
+# AppSysParameters.yml
+
+designConfig:
+    # ...
     
     # Fonts
     - name: "largeTitleFontSize"
       textValue: "20"
     - name: "titleFontName"
-      textValue: "Gotham-Book"
+      textValue: "Arial"  # Replace with the desired preinstalled font name
     - name: "titleFontSize"
       textValue: "17"
-    # ...    
+    # ...
 ```
+
+| <p align="center"><img src="Docs/88-custom-font-demo.jpeg" width="320" /></p> |
+|:----------:|
+|   In this example, we used the `Kohinoor Telugu` font  |
+
+**Custom Fonts**
+
+If you want to use custom fonts in your application, follow these steps:
+
+1. Add the font files (usually in .ttf or .otf format) to your Xcode project.
+2. Ensure your custom font includes both regular and bold variants (e.g., "CustomFont-Regular" and "CustomFont-Bold"). If your custom font file includes bold variants in a single file, it will automatically adapt to the user's Bold Text accessibility setting.
+3. Open your application's Info.plist file and add a new key called "Fonts provided by application." Add an item for each custom font file.
+
+![VoiceOver](Docs/87-custom-font.png)
+
+4. Specify the font name in the YAML configuration file:
+
+```
+# AppSysParameters.yml
+
+designConfig:
+    # ...
+    
+    # Fonts
+    - name: "largeTitleFontSize"
+      textValue: "20"
+    - name: "titleFontName"
+      textValue: "Nurito Sans"  # Replace with the name of your custom font
+    - name: "titleFontSize"
+      textValue: "17"
+    # ...
+
+```
+For a more detailed guide on working with custom fonts in iOS, refer to Apple's documentation on [Using Custom Fonts](https://developer.apple.com/documentation/uikit/text_display_and_fonts/adding_a_custom_font_to_your_app).
 
 ## Set up the TheraForge Cloud API Key
 
@@ -461,6 +680,11 @@ registration:
 
 Go to the Login section in the `ModuleAppSysParameter.yml` file and customize the title and the description.
 
+If you want to use the *Sign up With Google* feature, then change the **showGoogleSignin** key to `true`. Then click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). 
+Go to the row with the key named “GIDClientID”. Click on the Value column of that row and change the value to the one required by your application which you get from the Google developer portal. Then find the "CFBundleURLSchemes" key in the Info.plist file and add the URLSchemes value, which you can also get from the Google developer portal. Also add the URLSchemes value in the URL Types row as shown in the figure below.
+
+<img src="Docs/84-urlScheme.png" width=45% height=45%>
+
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
 ```yml
@@ -504,6 +728,26 @@ useCareKit: "true"
 If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
 
 Register your project in your Apple developer account by following [these steps](APP-REGISTRATION.md).
+
+# Register a new API key
+
+- You can register a new API key using this [portal](https://theraforge.org/admin/register). 
+- You need to add valid details into the given form. After a successful submission, you will be presented with a popup window that will show your registered API key.
+- Make sure to copy that API key and keep it in safe place.
+- Once you have registered your API key, our support team will contact you for further assistance. 
+- A dashboard (called AdminBox) is used to help clients to access and modify their API keys
+- AdminBox can be accessed using the [portal](https://theraforge.org/admin/login). 
+- Once you log in to the dashboard (as admin), you will be able to see the API key details.
+- Here are the screenshots for better understanding.
+<br>
+<br>
+You can register a new API key using this portal:
+<p align="center"><img src="Docs/register-api-key.png" width=85% height=85%></p>
+When a new API key is registered, you can review it and copy it in this popup window:
+<p align="center"><img src="Docs/show-api-key.png" width=85% height=85%></p>
+Display API key details:
+<p align="center"><img src="Docs/show-api-key-details.png" width=85% height=85%></p>
+
 
 # Xcode Setup
 

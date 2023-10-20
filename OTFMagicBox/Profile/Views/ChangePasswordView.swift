@@ -34,64 +34,43 @@ OF SUCH DAMAGE.
 
 import Foundation
 import SwiftUI
+import OTFUtilities
 
 // This view creates the section in the Profile view, which navigates to the another page where we can reset the password.
 struct ChangePasswordView: View {
     
     let email: String
     let resetPassword: String
-    let textColor: UIColor
-    let backgroudColor: UIColor
-    let buttonColor: UIColor
-    let borderColor: UIColor
     @State var showResetPassword = false
-    
-//    init(resetPassword: String) {
-//        self.resetPassword = resetPassword
-//    }
     
     var body: some View {
         HStack {
             Text(resetPassword)
-                .foregroundColor(Color(textColor))
+                .foregroundColor(.otfTextColor)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
-            Text("›")
-        }.frame(height: 60)
+            Image(systemName: "chevron.right")
+                            .foregroundColor(Color(UIColor.tertiaryLabel))
+                            .font(.footnote.weight(.semibold))
+        }.frame(height: Metrics.TITLE_VIEW_HEIGHT)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded {
             self.showResetPassword.toggle()
-        }).sheet(isPresented: $showResetPassword, onDismiss: {
-            
-        }, content: {
-            ChangePasswordDeatilsView(email: email, textColor: textColor, backgroudColor: backgroudColor, buttonColor: buttonColor, borderColor: borderColor)
+        }).sheet(isPresented: $showResetPassword, content: {
+            ChangePasswordDeatilsView(viewModel: ChangePasswordViewModel(email: email))
         })
+        .accessibilityAddTraits(.isButton)
+        .accessibilityElement(children: .combine)
     }
 }
 
 // View where we can reset the password.
 struct ChangePasswordDeatilsView: View {
     
-    let textColor: UIColor
-    let backgroudColor: UIColor
-    let buttonColor: UIColor
-    let borderColor: UIColor
-    @State var email: String
-    @State var oldPassword: String = ""
-    @State var newPassword: String = ""
-    let color = Color(YmlReader().primaryColor)
-    @State var showFailureAlert = false
-    @State var errorMessage = ""
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    init(email: String, textColor: UIColor, backgroudColor: UIColor, buttonColor: UIColor, borderColor: UIColor) {
-        self.backgroudColor = backgroudColor
-        self.buttonColor = buttonColor
-        self.borderColor = borderColor
-        self.textColor = textColor
-        _email = State(initialValue: email)
-    }
+    @StateObject var viewModel: ChangePasswordViewModel
+
     
     var body: some View {
         VStack {
@@ -102,55 +81,48 @@ struct ChangePasswordDeatilsView: View {
             
             Spacer()
             
-            TextField("Email", text: $email)
+            TextField(Constants.CustomiseStrings.email, text: $viewModel.email)
                 .style(.emailField)
-                .foregroundColor(Color(textColor))
+                .foregroundColor(.otfTextColor)
                 .disabled(true)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
 
                 
-            SecureField(ModuleAppYmlReader().profileData?.oldPassword ?? "Old Password", text: $oldPassword)
+            SecureField(ModuleAppYmlReader().profileData?.oldPassword ?? Constants.CustomiseStrings.oldPassword, text: $viewModel.oldPassword)
                 .style(.secureField)
-                .foregroundColor(Color(textColor))
+                .foregroundColor(.otfTextColor)
             
-            SecureField(ModuleAppYmlReader().profileData?.newPassword ?? "New Password", text: $newPassword)
+            SecureField(ModuleAppYmlReader().profileData?.newPassword ?? Constants.CustomiseStrings.newPassword, text: $viewModel.newPassword)
                 .style(.secureField)
-                .foregroundColor(Color(textColor))
+                .foregroundColor(.otfTextColor)
             
             Spacer()
             
             Button(action: {
-                OTFTheraforgeNetwork.shared.changePassword(email: email, oldPassword: oldPassword, newPassword: newPassword, completionHandler: ({ results in
-                    
-                    switch results {
-                    case .failure(let error):
-                        showFailureAlert = true
-                        errorMessage = error.localizedDescription
-                        print(error.localizedDescription)
-                        
-                    case .success:
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                    
-                }))
+                viewModel.changePassword()
             }, label: {
-                Text(ModuleAppYmlReader().profileData?.resetPassword ?? "Reset Password")
+                Text(ModuleAppYmlReader().profileData?.resetPassword ?? Constants.CustomiseStrings.resetPassword)
                     .padding(Metrics.PADDING_BUTTON_LABEL)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(Color(buttonColor))
+                    .foregroundColor(.otfButtonColor)
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .overlay(
-                        Capsule().stroke(Color(buttonColor), lineWidth: 2)
+                        Capsule().stroke(Color.otfButtonColor, lineWidth: 2)
                     )
             })
             .padding()
-            .alert(isPresented: $showFailureAlert, content: ({
-                Alert(title: Text("Password Reset Error!").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+            .alert(isPresented: $viewModel.showFailureAlert, content: ({
+                Alert(title: Text(Constants.CustomiseStrings.passwordResetError).font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: Text(viewModel.errorMessage), dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
             }))
             
             Spacer()
         }
-        .background(Color(backgroudColor))
+        .background(Color.otfCellBackground)
+        .onReceive(viewModel.viewDismissModePublisher) { shouldDismiss in
+            if shouldDismiss{
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }

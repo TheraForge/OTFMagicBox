@@ -36,6 +36,7 @@ import Combine
 import OTFCareKit
 import OTFCareKitStore
 import OTFCloudantStore
+import OTFUtilities
 
 class CareKitManager: NSObject {
     
@@ -83,15 +84,7 @@ class CareKitManager: NSObject {
     
     private func subscribeToNotifications() {
         let subscriber = Subscribers.Sink<OCKStoreNotification, Never> { completion in
-            debugPrint(completion)
         } receiveValue: { storeNotification in
-            if let outcomeStoreNotification = storeNotification as? OCKOutcomeNotification {
-                print(outcomeStoreNotification)
-            }
-            else if let taskStoreNotification = storeNotification as? OCKTaskNotification {
-                print(taskStoreNotification)
-            }
-            
             CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true, completion: nil)
         }
         

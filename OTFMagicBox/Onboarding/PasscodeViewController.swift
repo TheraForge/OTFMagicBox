@@ -66,7 +66,7 @@ struct PasscodeViewController: UIViewControllerRepresentable {
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
             viewController.dismiss(animated: true, completion: nil)
             
-            Alerts.showInfo(title: "Wrong passcode entered", message: "Okay")
+            Alerts.showInfo(title: Constants.CustomiseStrings.wrongPasscode, message: Constants.CustomiseStrings.okay)
         }
     }
     
@@ -80,7 +80,7 @@ public class Alerts {
     public class func showInfo(_ vc: UIViewController? = .none, title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: Constants.CustomiseStrings.okay, style: .default, handler: nil)
         alert.addAction(cancelAction)
         
         vc?.present(alert, animated: true, completion: nil)

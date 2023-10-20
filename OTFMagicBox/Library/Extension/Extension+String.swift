@@ -79,20 +79,82 @@ extension String {
             return UIColor.systemPink
         case "Gray":
             return UIColor.gray
-        case "Gray2":
-            return UIColor.systemGray2
-        case "Gray3":
-            return UIColor.systemGray3
-        case "Gray4":
-            return UIColor.systemGray4
-        case "Gray5":
-            return UIColor.systemGray5
-        case "Gray6":
-            return UIColor.systemGray6
         case "Black":
             return UIColor.black
         case "White":
             return UIColor.white
+        case "systemRed":
+            return UIColor.systemRed
+        case "systemOrange":
+            return UIColor.systemOrange
+        case "systemYellow":
+            return UIColor.systemYellow
+        case "systemGreen":
+            return UIColor.systemGreen
+        case "systemMint":
+            if #available(iOS 15.0, *) {
+                return UIColor.systemMint
+            } else {
+                return UIColor.label
+            }
+        case "systemTeal":
+            return UIColor.systemTeal
+        case "systemCyan":
+            if #available(iOS 15.0, *) {
+                return UIColor.systemCyan
+            } else {
+                return UIColor.label
+            }
+        case "systemBlue":
+            return UIColor.systemBlue
+        case "systemIndigo":
+            return UIColor.systemIndigo
+        case "systemPurple":
+            return UIColor.systemPurple
+        case "systemPink":
+            return UIColor.systemPink
+        case "systemBrown":
+            return UIColor.systemBrown
+        case "systemGray":
+            return UIColor.systemGray
+        case "systemGray2":
+            return UIColor.systemGray2
+        case "systemGray3":
+            return UIColor.systemGray3
+        case "systemGray4":
+            return UIColor.systemGray4
+        case "systemGray5":
+            return UIColor.systemGray5
+        case "systemGray6":
+            return UIColor.systemGray6
+        case "label":
+            return UIColor.label
+        case "secondaryLabel":
+            return UIColor.secondaryLabel
+        case "tertiaryLabel":
+            return UIColor.tertiaryLabel
+        case "quaternaryLabel":
+            return UIColor.quaternaryLabel
+        case "placeholderText":
+            return UIColor.placeholderText
+        case "separator":
+            return UIColor.separator
+        case "opaqueSeparator":
+            return UIColor.opaqueSeparator
+        case "link":
+            return UIColor.link
+        case "systemGroupedBackground":
+            return UIColor.systemGroupedBackground
+        case "secondarySystemGroupedBackground":
+            return UIColor.secondarySystemGroupedBackground
+        case "tertiarySystemGroupedBackground":
+            return UIColor.tertiarySystemGroupedBackground
+        case "systemBackground":
+            return UIColor.systemBackground
+        case "secondarySystemBackground":
+            return UIColor.secondarySystemBackground
+        case "tertiarySystemBackground":
+            return UIColor.tertiarySystemBackground
         default:
             return nil
         }
@@ -159,11 +221,15 @@ extension String {
         case "Title3":
             return Font.title3
         case "Inherited":
-            return Font.system(size: 17.0)
+            return Font.basicFontStyle
         case "HeaderInherited":
-            return Font.system(size: 14.0)
+            return Font.title3
         default:
             return nil
         }
+    }
+    
+    var isValidEmail: Bool {
+        NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").evaluate(with: self)
     }
 }

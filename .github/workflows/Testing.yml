@@ -17,6 +17,10 @@ jobs:
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
           version: 1.11.3
+      - name: Github Credentials Store Setup
+        run: |
+          git config --global credential.helper store
+          echo "https://${{ secrets.REPO_USERNAME }}:${{ secrets.ACCESS_TOKEN }}@github.com" > ~/.git-credentials
       - name: Install pods
         run: pod install
       - name: Testing iOS app

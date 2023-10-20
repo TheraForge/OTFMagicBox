@@ -35,43 +35,44 @@ OF SUCH DAMAGE.
 import SwiftUI
 
 struct ReportView: View {
-    let color: Color
     var email = ""
     var title = ""
     
-    init(color: Color, email: String, title: String) {
-        self.color = color
+    init(email: String, title: String) {
         self.email = email
         self.title = title
     }
     
     var body: some View {
         HStack {
-            Text(title).fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .minimumScaleFactor(0.5)
-                .foregroundColor(self.color)
+            Text(title)
+                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .foregroundColor(.otfTextColor)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
             Spacer()
-            Text(self.email).foregroundColor(self.color)
+            Text(self.email)
+                .foregroundColor(.otfTextColor)
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 .lineLimit(1)
-                .minimumScaleFactor(0.5)
         }
-        .frame(height: 60)
+        .frame(maxWidth: .infinity, minHeight: Metrics.TITLE_VIEW_HEIGHT)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded({
-            EmailHelper.shared.sendEmail(subject: "App Support Request", body: "Enter your support request here.", to: self.email)
+            EmailHelper.shared.sendEmail(subject: Constants.CustomiseStrings.appSupportRequest, body: Constants.CustomiseStrings.appSupportRequest, to: self.email)
         }))
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel("Report a problem to \(email)")
+        .accessibilityInputLabels([ModuleAppYmlReader().profileData?.reportProblemText ?? Constants.CustomiseStrings.reportProblem])
+        
     }
 }
 
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         Section {
-            ReportView(color: .blue,
-                       email: "zeeshan.ahmed@invozone.com", title: "")
+            ReportView(email: "zeeshan.ahmed@invozone.com", title: "")
         }
         .padding(.horizontal)
     }

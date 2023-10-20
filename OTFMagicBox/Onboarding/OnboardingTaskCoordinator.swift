@@ -33,10 +33,16 @@
  */
 
 import OTFResearchKit
+import OTFUtilities
+import Combine
+import Sodium
 
 final class OnboardingTaskCoordinator: NSObject {
     
     let authType: AuthType
+    var disposeables: AnyCancellable?
+    let documentManager = UploadDocumentManager()
+    let swiftSodium = SwiftSodium()
     
     /// Change this value to true when registration step completes successfully
     private var registrationCompleted = false
@@ -89,7 +95,30 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
                 return false
             }
             
-            let alert = UIAlertController(title: nil, message: "Creating account...", preferredStyle: .alert)
+            let masterKey = swiftSodium.generateMasterKey(password: pass, email: email)
+            
+            guard let keyPair = swiftSodium.sodium.box.keyPair(seed: masterKey) else {
+                return false
+            }
+            
+            let encryptkey : Bytes? = swiftSodium.encryptKey(bytes: masterKey, publicKey: keyPair.publicKey)
+            
+            guard let encryptedMasterKey = encryptkey  else {
+                return false
+            }
+            
+            let defaultStorageKey = swiftSodium.generateDefaultStorageKey(masterKey: masterKey)
+            let confidentialStorageKey = swiftSodium.generateConfidentialStorageKey(masterKey: masterKey)
+            
+            let encryptedDefaultStorageKey = swiftSodium.encryptKey(bytes: defaultStorageKey, publicKey: keyPair.publicKey)
+            let encryptedconfidentialStorageKey = swiftSodium.encryptKey(bytes: confidentialStorageKey, publicKey: keyPair.publicKey)
+            
+            let encryptedDefaultStorageKeyHex = encryptedDefaultStorageKey.bytesToHex(spacing: "").lowercased()
+            let encryptedconfidentialStorageKeyHex = encryptedconfidentialStorageKey.bytesToHex(spacing: "").lowercased()
+            let encryptedMasterKeyHex = encryptedMasterKey.bytesToHex(spacing: "").lowercased()
+            let publicKeyHex = keyPair.publicKey.bytesToHex(spacing: "").lowercased()
+            
+            let alert = UIAlertController(title: nil, message: Constants.CustomiseStrings.creatingAccount, preferredStyle: .alert)
             let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.style = UIActivityIndicatorView.Style.medium
@@ -98,34 +127,37 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
             alert.view.addSubview(loadingIndicator)
             taskViewController.present(alert, animated: false, completion: nil)
             
-            OTFTheraforgeNetwork.shared.signUpRequest(firstName: givenName?.textAnswer ?? Constants.patientFirstName,
-                                                      lastName: familyName?.textAnswer ?? Constants.patientLastName,
-                                                      type: Constants.userType, email: email, password: pass,
-                                                      dob: dob, gender: gender) { result in
-                DispatchQueue.main.async {
-                    switch result {
+            disposeables = OTFTheraforgeNetwork.shared.signUpRequest(firstName: givenName?.textAnswer ?? Constants.patientFirstName, lastName: familyName?.textAnswer ?? Constants.patientLastName, type: Constants.userType, email: email, password: pass, dob: dob, gender: gender, encryptedMasterKey: encryptedMasterKeyHex, publicKey: publicKeyHex, encryptedDefaultStorageKey: encryptedDefaultStorageKeyHex, encryptedConfidentialStorageKey: encryptedconfidentialStorageKeyHex)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { response in
+                    switch response {
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        OTFError("error in signup request", error.error.message)
                         alert.dismiss(animated: false) {
-                            let alert = UIAlertController(title: "Error", message: error.error.message, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                            let alert = UIAlertController(title: Constants.CustomiseStrings.error, message: error.error.message, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: Constants.CustomiseStrings.okay, style: .cancel))
                             taskViewController.present(alert, animated: false)
                         }
-                        
-                    case .success(let result):
-                        print(result)
-                        alert.dismiss(animated: false) {
-                            self.registrationCompleted = true
-                            taskViewController.goForward()
-                        }
+                    default: break;
                     }
-                }
-            }
+                }, receiveValue: { result in
+                    OTFLog("Successfully revrived", result.message ?? "")
+                    alert.dismiss(animated: false) {
+                        KeychainCloudManager.saveValuesInKeychain(email: email, password: pass, masterKey: masterKey, publicKey: keyPair.publicKey, secretKey: keyPair.secretKey, defaultStorageKey: defaultStorageKey, confidentialStorageKey: confidentialStorageKey)
+                        self.registrationCompleted = true
+                        taskViewController.goForward()
+                    }
+                })
             
             return false
         }
         
         return true
+    }
+    
+    func generateMasterKey(email: String, password: String) -> Array<UInt8>  {
+        let masterKey = swiftSodium.generateMasterKey(password: KeychainCloudManager.getPassword, email: KeychainCloudManager.getEmailAddress)
+        return masterKey
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController,
@@ -156,12 +188,15 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
                     
                     do {
                         let url = docURL! as URL
+                        
+                        self.documentManager.encryptDocument(document: data!, fileName: "\(ModuleAppYmlReader().consentFileName).pdf")
+                        
                         try data?.write(to: url)
+                        
                         UserDefaults.standard.set(url.path, forKey: Constants.UserDefaults.ConsentDocumentURL)
                         
                     } catch let error {
-                        
-                        print(error.localizedDescription)
+                        OTFError("error in writting data in pdf %{public}@", error.localizedDescription)
                     }
                 }
             }

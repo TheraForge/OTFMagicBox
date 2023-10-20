@@ -41,7 +41,7 @@ struct TaskSamples {
 
     // Sample walking task.
     static let sampleWalkingTask: ORKOrderedTask = {
-        let intendedUseDescription = "Tests ability to walk"
+        let intendedUseDescription = Constants.CustomiseStrings.intendedDescription
         
         return ORKOrderedTask.shortWalk(withIdentifier: "ShortWalkTask", intendedUseDescription: intendedUseDescription, numberOfStepsPerLeg: 20, restDuration: 30, options: ORKPredefinedTaskOption())
     }()
@@ -54,14 +54,14 @@ struct TaskSamples {
         
         // Instruction step
         let instructionStep = ORKInstructionStep(identifier: "IntroStep")
-        instructionStep.title = "Patient Questionnaire"
-        instructionStep.text = "This information will help your doctors keep track of how you feel and how well you are able to do your usual activities. If you are unsure about how to answer a question, please give the best answer you can and make a written comment beside your answer."
+        instructionStep.title = Constants.CustomiseStrings.instructionStepTitle
+        instructionStep.text = Constants.CustomiseStrings.instructionStepText
         
         steps += [instructionStep]
         
         //In general, would you say your health is:
         let healthScaleAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 5, minimumValue: 1, defaultValue: 3, step: 1, vertical: false, maximumValueDescription: "Excellent", minimumValueDescription: "Poor")
-        let healthScaleQuestionStep = ORKQuestionStep(identifier: "HealthScaleQuestionStep", title: "Question #1", question: "In general, would you say your health is:", answer: healthScaleAnswerFormat)
+        let healthScaleQuestionStep = ORKQuestionStep(identifier: "HealthScaleQuestionStep", title: Constants.CustomiseStrings.healthScaleTitle, question: Constants.CustomiseStrings.healthScaleQuestion, answer: healthScaleAnswerFormat)
         
         steps += [healthScaleQuestionStep]
         

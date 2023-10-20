@@ -37,27 +37,37 @@ import OTFCareKit
 
 struct CareKitViews: View {
     var body: some View {
-        List {
-            ContactsSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            TaskSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+        VStack {
+            Text("ResearchKit Views")
+                .foregroundColor(.otfTextColor)
+                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+            List {
+                ContactsSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                TaskSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            }
+            .listStyle(GroupedListStyle())
         }
-        .listStyle(GroupedListStyle())
-        .navigationBarTitle(Text("CareKit Views"), displayMode: .inline)
         
     }
 }
 
 struct ResearchKitViews: View {
     var body: some View {
-        List {
-            SurveysList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            SurveyQuestionsList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            OnboardingList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            ActiveTasksList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-            MiscellaneousList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+        VStack {
+            Text("ResearchKit Views")
+                .foregroundColor(.otfTextColor)
+                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.screenTitleFont.fontWeight)
+            List {
+                SurveysList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                SurveyQuestionsList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                OnboardingList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                ActiveTasksList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                MiscellaneousList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+            }
+            .listStyle(GroupedListStyle())
         }
-        .listStyle(GroupedListStyle())
-        .navigationBarTitle(Text("ResearchKit Views"), displayMode: .inline)
         
     }
 }
@@ -72,43 +82,48 @@ struct StaticUI: View {
     }
     var body: some View {
         NavigationView {
-            List {
-                
-                NavigationLink(destination: CareKitViews()) {
-                    Text(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit")
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+            VStack {
+                Text("Sample Views")
+                    .foregroundColor(.otfTextColor)
+                    .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
+                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                List {
+                    
+                    NavigationLink(destination: CareKitViews()) {
+                        Text(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit")
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .foregroundColor(.otfTextColor)
+                    .listRowBackground(Color.otfCellBackground)
+                    
+                    NavigationLink(destination: ResearchKitViews()) {
+                        Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    }
+                    .foregroundColor(.otfTextColor)
+                    .listRowBackground(Color.otfCellBackground)
                 }
-                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
-                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
-                
-                NavigationLink(destination: ResearchKitViews()) {
-                    Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                .listStyle(GroupedListStyle())
+                .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                    isPresenting = true
                 }
-                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
-                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                .alert(isPresented: $isPresenting) {
+                    
+                    Alert(
+                        title: Text(Constants.CustomiseStrings.accountDeleted)
+                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                        message: Text(Constants.deleteAccount),
+                        dismissButton: .default(Text(Constants.CustomiseStrings.okay), action: {
+                            OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                        })
+                    )
+                }
+                .onDisappear {
+                    NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
+                }
+                .background(Color.otfCellBackground)
             }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle(Text("Sample Views"), displayMode: .inline)
-            .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
-                isPresenting = true
-            }
-            .alert(isPresented: $isPresenting) {
-                
-                Alert(
-                    title: Text("Account Deleted")
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
-                    message: Text(Constants.deleteAccount),
-                    dismissButton: .default(Text("Okay"), action: {
-                        OTFTheraforgeNetwork.shared.moveToOnboardingView()
-                    })
-                )
-            }
-            .onDisappear {
-                NotificationCenter.default.removeObserver(self, name: .deleteUserAccount, object: nil)
-            }
-            .background(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? UIColor.black))
         }
         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
     }

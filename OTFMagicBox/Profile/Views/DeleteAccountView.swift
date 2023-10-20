@@ -7,57 +7,45 @@
 
 import Foundation
 import SwiftUI
-import OTFCloudClientAPI
 import OTFCareKitStore
+import OTFUtilities
 
 struct DeleteAccountView: View {
-    @State private var showingOptions = false
-    @State private var showingAlert = false
+    @StateObject private var viewModel = DeleteAccountViewModel()
     @State private(set) var user: OCKPatient?
     let textColor: Color
-    var deleteUserHandler: ((Bool?) -> Void)?
-
     
     var body: some View {
         HStack {
             Spacer()
             Button(action: {
-                self.showingOptions.toggle()
+                viewModel.showingOptions.toggle()
             }, label: {
-                Text("Delete Account")
+                Text(Constants.CustomiseStrings.deleteAccount)
                     .font(.basicFontStyle)
                     .foregroundColor(Color.red)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             })
-            .actionSheet(isPresented: $showingOptions) {
+            .actionSheet(isPresented: $viewModel.showingOptions) {
                 ActionSheet(
-                    title: Text("Are you sure? This will remove all your information.")
+                    title: Text(Constants.CustomiseStrings.removeInformation)
                         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
                     buttons: [
-                        .destructive(Text("Delete account"), action: {
-                            deleteUserHandler?(false)
-                            OTFTheraforgeNetwork.shared.deleteUser(userId: user?.id ?? "") { result in
-                                switch result {
-                                case .failure(let error):
-                                    print(error.localizedDescription)
-                                    self.showingAlert = true
-                                case .success:
-                                    deleteUserHandler?(true)
-                                }
-                            }
+                        .destructive(Text(Constants.CustomiseStrings.deleteAccount), action: {
+                            viewModel.deleteUserAccount(userId: user?.id ?? "")
                         }),
-                        .cancel(Text("Cancel")
+                        .cancel(Text(Constants.CustomiseStrings.cancel)
                             .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                             .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)))
                     ]
                 )
             }
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Failed to delete account.")
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text(Constants.CustomiseStrings.faliedToDeleteAccount)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text("Okay")))
+                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
             }
             
             Spacer()

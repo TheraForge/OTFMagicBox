@@ -51,8 +51,10 @@ struct WithdrawView: View {
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
-            Text("›")
-        }.frame(height: 60)
+            Image(systemName: "chevron.right")
+                            .foregroundColor(Color(UIColor.tertiaryLabel))
+                            .font(.footnote.weight(.semibold))
+        }.frame(maxWidth: .infinity, minHeight: Metrics.TITLE_VIEW_HEIGHT)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded({
             self.showWithdraw.toggle()
@@ -61,11 +63,13 @@ struct WithdrawView: View {
         }, content: {
             WithdrawalViewController()
         })
+        .accessibilityAddTraits(.isButton)
+        .accessibilityElement(children: .combine)
     }
 }
 
 struct WithdrawView_Previews: PreviewProvider {
     static var previews: some View {
-        WithdrawView(title: "", textColor: Color.black)
+        WithdrawView(title: "Withdraw from Study", textColor: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
     }
 }

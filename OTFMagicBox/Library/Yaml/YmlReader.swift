@@ -36,6 +36,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import Yams
+import OTFUtilities
 
 /**
  YmlReader decodes the Yaml values from the given file.
@@ -99,14 +100,14 @@ public class YmlReader {
     }
     
     
-    var studyTitle: String {
+    var appTitle: String {
     switch getPreferredLocale().languageCode {
         case "fr":
-            if let title = dataModel?.fr.studyTitle {
+            if let title = dataModel?.fr.appTitle {
                 return title
             }
         default:
-            if let title = dataModel?.en.studyTitle {
+            if let title = dataModel?.en.appTitle {
                 return title
             }
         }
@@ -152,10 +153,6 @@ public class YmlReader {
     var showGoogleLogin: Bool {
         guard let showSocialLogin = dataModel?.showGoogleSignin else { return false }
         return showSocialLogin == Constants.true
-    }
-    
-    var googleClientID: String? {
-        return dataModel?.googleClientID
     }
     
 //    var healthPermissionsTitle: String? {

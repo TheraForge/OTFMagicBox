@@ -51,8 +51,10 @@ struct HelpView: View {
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             Spacer()
-            Text("›")
-        }.frame(height: 70).contentShape(Rectangle())
+            Image(systemName: "chevron.right")
+                            .foregroundColor(Color(UIColor.tertiaryLabel))
+                            .font(.footnote.weight(.semibold))
+        }.frame(height: Metrics.MAIN_VIEW_HEIGHT).contentShape(Rectangle())
             .gesture(TapGesture().onEnded({
                 if let url = URL(string: self.site) {
                 UIApplication.shared.open(url)
@@ -63,6 +65,6 @@ struct HelpView: View {
 
 struct HelpView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView(site: "", title: "", textColor: Color.black)
+        HelpView(site: "", title: "Help", textColor: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
     }
 }

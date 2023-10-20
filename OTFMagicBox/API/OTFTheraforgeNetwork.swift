@@ -34,6 +34,8 @@ OF SUCH DAMAGE.
 
 import Foundation
 import OTFCloudClientAPI
+import Combine
+import OTFUtilities
 
 typealias AuthType = Request.SocialLogin.AuthType
 typealias SocialType = Request.SocialLogin.SocialType
@@ -63,92 +65,149 @@ class OTFTheraforgeNetwork {
     }
     
     // Login request
-    public func loginRequest(email: String, password: String,
-                             completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
-                                                                         password: password)) { [weak self] result in
-            self?.handleResponse(result, completion: completionHandler)
+    public func loginRequest(email: String, password: String) -> AnyPublisher<Response.Login, ForgeError> {
+        return Future<Response.Login, ForgeError> { promise in
+            self.otfNetworkService.login(request: OTFCloudClientAPI.Request.Login(email: email,
+                                                                             password: password)) { [weak self] result in
+                self?.handleResponse(result, completion: promise)
+            }
         }
-        
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     public func socialLoginRequest(userType: UserType,
                                    socialType: SocialType,
                                    authType: AuthType,
-                                   idToken: String,
-                                   completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType,
-                                                                  socialType: socialType,
-                                                                  authType: authType,
-                                                                  identityToken: idToken)
-        otfNetworkService.socialLogin(request: socialRequest) { [weak self] result in
-            self?.handleResponse(result, completion: completionHandler)
+                                   idToken: String) -> AnyPublisher<Response.Login, ForgeError>{
+        return Future<Response.Login, ForgeError> {  promise in
+            let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType,
+                                                                      socialType: socialType,
+                                                                      authType: authType,
+                                                                      identityToken: idToken)
+            self.otfNetworkService.socialLogin(request: socialRequest) { [weak self] result in
+                self?.handleResponse(result, completion: promise)
+            }
         }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     
     // Registration request
     // swiftlint:disable all
     public func signUpRequest(firstName: String, lastName: String, type: String, email: String,
-                              password: String, dob: String, gender: String,
-                              completionHandler:  @escaping (Result<Response.Login, ForgeError>) -> Void) {
-        otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName,
-                                                                           last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "")) { [weak self] result in
-            self?.handleResponse(result, completion: completionHandler)
+                              password: String, dob: String, gender: String, encryptedMasterKey: String, publicKey: String, encryptedDefaultStorageKey: String, encryptedConfidentialStorageKey: String) -> AnyPublisher<Response.Login, ForgeError> {
+        
+        return Future<Response.Login, ForgeError> { promise in
+            self.otfNetworkService.signup(request: OTFCloudClientAPI.Request.SignUp(email: email, password: password, first_name: firstName, last_name: lastName, type: .patient, dob: dob, gender: gender, phoneNo: "", encryptedMasterKey: encryptedMasterKey, publicKey: publicKey, encryptedDefaultStorageKey: encryptedDefaultStorageKey, encryptedConfidentialStorageKey: encryptedConfidentialStorageKey)) { [weak self] result in
+                self?.handleResponse(result, completion: promise)
+            }
         }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     
     // delete user account
-    public func deleteUser(userId: String,
-                           completionHandler:  @escaping (Result<Response.DeleteAccount, ForgeError>) -> Void) {
-        otfNetworkService.deleteAccount(request: Request.DeleteAccount(userId: userId)) { [weak self] result in
-            
-            switch result {
-            case .success(_):
-                self?.moveToOnboardingView()
-            case .failure(let error):
-                if error.error.statusCode == 410 {
-                    self?.moveToOnboardingView()
+    public func deleteUser(userId: String) -> AnyPublisher<Response.DeleteAccount, ForgeError> {
+        return Future<Response.DeleteAccount, ForgeError> { promise in
+            self.otfNetworkService.deleteAccount(request: Request.DeleteAccount(userId: userId)) { result in
+                switch result {
+                case .failure(_):
+                    self.handleResponse(result, promise: promise)
+                case .success(_):
+                    self.moveToOnboardingView()
                 }
             }
         }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     
     // Forgot password request
-    public func forgotPassword(email: String, completionHandler:  @escaping (Result<Response.ForgotPassword, ForgeError>) -> Void) {
-        otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email)) { [weak self] result in
-            self?.handleResponse(result, completion: completionHandler)
+    public func forgotPassword(email: String) -> AnyPublisher<Response.ForgotPassword, ForgeError>{
+        return Future<Response.ForgotPassword, ForgeError> { promise in
+            self.otfNetworkService.forgotPassword(request: OTFCloudClientAPI.Request.ForgotPassword(email: email)) { [weak self] result in
+                self?.handleResponse(result, completion: promise)
+            }
         }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     // Reset password request
-    public func resetPassword(email: String, code: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
-        otfNetworkService.resetPassword(request: OTFCloudClientAPI.Request.ResetPassword(email: email,
-                                                                                         code: code,
-                                                                                         newPassword: newPassword)) { [weak self] result in
-            self?.handleResponse(result, completion: completionHandler)
+    public func resetPassword(email: String, code: String, newPassword: String) -> AnyPublisher<Response.ChangePassword, ForgeError> {
+        return Future<Response.ChangePassword, ForgeError> { promise in
+            self.otfNetworkService.resetPassword(request: OTFCloudClientAPI.Request.ResetPassword(email: email,
+                                                                                             code: code,
+                                                                                             newPassword: newPassword)) { [weak self] result in
+                self?.handleResponse(result, completion: promise)
+            }
         }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     // Signout request.
-    public func signOut(completionHandler: ((Result<Response.LogOut, ForgeError>) -> Void)?) {
-        otfNetworkService.signOut(completionHandler: { [weak self] result in
-            switch result {
-            case .success(_):
-                self?.moveToOnboardingView()
-            case .failure(_):
-                self?.handleResponse(result, completion: completionHandler)
+    public func signOut() -> AnyPublisher<Response.LogOut, ForgeError> {
+        return Future<Response.LogOut, ForgeError> { promise in
+            self.otfNetworkService.signOut { [weak self] result in
+                switch result {
+                case .failure(_):
+                    self?.handleResponse(result, promise: promise)
+                case .success(_):
+                    self?.moveToOnboardingView()
+                }
             }
-        })
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     // Change password request.
-    public func changePassword(email: String, oldPassword: String, newPassword: String, completionHandler:  @escaping (Result<Response.ChangePassword, ForgeError>) -> Void) {
-        otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword), completionHandler: { [weak self] result in
-            self?.handleResponse(result, completion: completionHandler)
-        })
+    public func changePassword(email: String, oldPassword: String, newPassword: String) -> AnyPublisher<Response.ChangePassword, ForgeError> {
+        return Future<Response.ChangePassword, ForgeError> { promise in
+            self.otfNetworkService.changePassword(request: OTFCloudClientAPI.Request.ChangePassword(email: email, password: oldPassword, newPassword: newPassword)) { [weak self] result in
+                self?.handleResponse(result, promise: promise)
+            }
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
+    
+    // Upload file request.
+    public func uploadFile(data: Data, fileName: String, type: Request.AttachmentLocation,encryptedFileKey: String? = nil, hashFileKey: String ) -> AnyPublisher<Response.FileResponse, ForgeError> {
+        return Future<Response.FileResponse, ForgeError> { promise in
+            self.otfNetworkService.uploadFile(request: OTFCloudClientAPI.Request.UploadFiles(data: data, fileName: fileName, type: type, meta: "true", encryptedFileKey: encryptedFileKey, hashFileKey: hashFileKey)) { [weak self] result in
+                self?.handleResponse(result, promise: promise)
+            }
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
+    
+    // Download file request.
+    public func downloadFile(attachmentID: String, type: Request.AttachmentLocation) -> AnyPublisher<Response.FileResponse, ForgeError> {
+        return Future<Response.FileResponse, ForgeError> { promise in
+            self.otfNetworkService.downloadProfilePicture(request: OTFCloudClientAPI.Request.DownloadFile(attachmentID: attachmentID, meta: "true")) { [weak self] result in
+                self?.handleResponse(result, promise: promise)
+            }
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
+    
+    // Delete file request.
+    public func deleteFile(attachmentID: String) -> AnyPublisher<Response.DeleteFile, ForgeError> {
+        return Future<Response.DeleteFile, ForgeError> { promise in
+            self.otfNetworkService.deleteFile(request: OTFCloudClientAPI.Request.FileAttachmentId(attachmentID: attachmentID)) { [weak self] result in
+                self?.handleResponse(result, promise: promise)
+            }
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
     
     func refreshToken(_ completionHandler: @escaping (Result<Response.Login, ForgeError>) -> Void) {
@@ -158,7 +217,7 @@ class OTFTheraforgeNetwork {
         }
         
         otfNetworkService.refreshToken { [weak self] response in
-            self?.handleResponse(response, completion: completionHandler)
+            self?.handleResponse(response, promise: completionHandler)
         }
     }
     
@@ -180,6 +239,22 @@ class OTFTheraforgeNetwork {
         }
         
         completion?(response)
+    }
+    
+    
+    func handleResponse<T: Decodable>(_ response: Result<T, ForgeError>, promise: (Result<T, ForgeError>) -> Void) {
+        switch response {
+        case .success(_):
+            break
+        case .failure(let error):
+            if error.error.statusCode == 410 {
+                DispatchQueue.main.async {
+                    self.moveToOnboardingView()
+                }
+                return
+            }
+        }
+       return promise(response)
     }
     
     public func moveToOnboardingView() {

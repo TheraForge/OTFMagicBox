@@ -40,48 +40,48 @@ struct CheckUpView: View {
     
     var body: some View {
         VStack {
-            Text("Check Up").font(.headerFontStyle)
-                .foregroundColor(Color(YmlReader().appTheme?.headerTitleFont.color ?? .black))
-                .font(YmlReader().appTheme?.headerTitleWeight.appFont ?? Font.system(size: 17.0))
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+            Text(Constants.CustomiseStrings.checkUp).font(.headerFontStyle)
+                .foregroundColor(.otfTextColor)
+                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
+                .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             List {
-                Section(header: Text("OVERALL ADHERENCE")
-                    .foregroundColor(Color(YmlReader().appTheme?.headerColor.color ?? .black))) {
-                    CountProgressRow(title: "Physical Activities",
+                Section(header: Text(Constants.CustomiseStrings.checkupListHeader)
+                    .foregroundColor(.otfHeaderColor)) {
+                        CountProgressRow(title: Constants.CustomiseStrings.progressRowTitle1,
                                      completed: viewmodel.activityTasksAndEvents.completedTasks.count,
                                      total: viewmodel.activityTasksAndEvents.eventsOfTasks.count,
                                      color: .blue,
                                      lineWidth: 4.0)
-                        .padding(.vertical, 10.0)
-                    PercentProgressRow(title: "Medications Taken",
+                        .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
+                    PercentProgressRow(title:Constants.CustomiseStrings.progressRowTitle2,
                                        progress: Float(viewmodel.medicationTasksAndEvents.progress),
                                        color: .green,
                                        lineWidth: 4.0)
-                        .padding(.vertical, 10.0)
-                    PercentProgressRow(title: "Checkups",
+                        .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
+                    PercentProgressRow(title:Constants.CustomiseStrings.progressRowTitle3,
                                        progress: Float(viewmodel.checkupTasksAndEvents.progress),
                                        color: .green,
                                        lineWidth: 4.0)
-                        .padding(.vertical, 10)
-                    CountProgressRow(title: "Appointments",
+                        .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
+                    CountProgressRow(title: Constants.CustomiseStrings.progressRowTitle4,
                                      completed: viewmodel.appointmentTasksAndEvents.completedTasks.count,
                                      total: viewmodel.appointmentTasksAndEvents.eventsOfTasks.count,
                                      color: .green,
                                      lineWidth: 4.0)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
                 }
-                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                    .listRowBackground(Color.otfCellBackground)
             }
             .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
                 isPresenting = true
             }.alert(isPresented: $isPresenting) {
                 
                 Alert(
-                    title: Text("Account Deleted")
+                    title: Text(Constants.CustomiseStrings.accountDeleted)
                         .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
-                    message: Text("Your account is deleted from one of your device"),
-                    dismissButton: .default(Text("Okay"), action: {
+                    message: Text(Constants.deleteAccount),
+                    dismissButton: .default(Text(Constants.CustomiseStrings.okay), action: {
                         OTFTheraforgeNetwork.shared.moveToOnboardingView()
                     })
                 )
@@ -109,42 +109,42 @@ struct CheckUpView_Previews: PreviewProvider {
 
 struct ViewProvider: LibraryContentProvider {
     @LibraryContentBuilder var views: [LibraryItem] {
-        LibraryItem(PercentProgressRow(title: "Row Title",
+        LibraryItem(PercentProgressRow(title: Constants.CustomiseStrings.rowTitle1,
                                        progress: 0.5,
                                        color: .red,
                                        lineWidth: 4.0),
-                    title: "Percent Progress Row",
+                    title: Constants.CustomiseStrings.rowTitle2,
                     category: .control)
         
-        LibraryItem(CountProgressRow(title: "Row Title",
+        LibraryItem(CountProgressRow(title: Constants.CustomiseStrings.rowTitle3,
                                      completed: 3,
                                      total: 5,
                                      color: .red,
                                      lineWidth: 4.0),
-                    title: "Count Progress Row",
+                    title: Constants.CustomiseStrings.rowTitle4,
                     category: .control)
         
         LibraryItem(InstructionTaskView(task: dummyTask,
                                         date: Date(),
                                         storeManager: storeManager),
-                    title: "Instruction Task View",
+                    title: Constants.CustomiseStrings.rowTitle5,
                     category: .control)
         
         LibraryItem(GridTaskView(task: dummyTask, date: Date(),
                                  storeManager: storeManager),
-                    title: "Grid Task View", category: .control)
+                    title: Constants.CustomiseStrings.rowTitle6, category: .control)
         
         LibraryItem(SimpleTaskView(task: dummyTask, date: Date(),
                                    storeManager: storeManager),
-                    title: "Simple Task View", category: .control)
+                    title: Constants.CustomiseStrings.rowTitle7, category: .control)
         
         LibraryItem(ChecklistTaskView(task: dummyTask, date: Date(),
                                       storeManager: storeManager),
-                    title: "Checklist Task View", category: .control)
+                    title: Constants.CustomiseStrings.rowTitle8, category: .control)
         
         LibraryItem(ButtonLogTaskView(task: dummyTask, date: Date(),
                                       storeManager: storeManager),
-                    title: "Button Log Task View",
+                    title: Constants.CustomiseStrings.rowTitle9,
                     category: .control)
     }
 }

@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "symbols" : [
+    {
+      "filename" : "snapchat-square-fill.svg",
+      "idiom" : "universal"
+    }
+  ]
+}
