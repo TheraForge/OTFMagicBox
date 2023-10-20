@@ -69,14 +69,16 @@ struct TasksUIView: View {
     
     var body: some View {
         VStack {
-            Text(YmlReader().studyTitle)
-                .font(.system(size: 28, weight:.bold))
+            Text(YmlReader().appTitle)
+                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
                 .foregroundColor(self.color)
                 .padding(.top, 20)
-            Text(self.date).font(.system(size: 18, weight: .regular)).padding()
+            Text(self.date)
+                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .padding()
             List {
                 ForEach(listItemsSections, id: \.self) { key in
-                    Section(header: Text(key)) {
+                    Section(header: Text(key).font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
                         ForEach(listItemsPerHeader[key]!, id: \.self) { item in
                             TaskItemView(item: item)
                         }
@@ -89,6 +91,6 @@ struct TasksUIView: View {
 
 struct TasksUIView_Previews: PreviewProvider {
     static var previews: some View {
-        TasksUIView(color: Color.black)
+        TasksUIView(color: Color(YmlReader().appTheme?.textColor.color ?? UIColor.black))
     }
 }

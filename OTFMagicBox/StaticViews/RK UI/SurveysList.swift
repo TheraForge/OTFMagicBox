@@ -12,7 +12,7 @@ struct SurveysList: View {
     let headerColor: UIColor
     let textColor: UIColor
     var body: some View {
-        Section(header: Text(ModuleAppYmlReader().researchKitModel?.surveysHeaderTitle ?? "Surveys")
+        Section(header: Text(ModuleAppYmlReader().researchKitModel?.surveysHeaderTitle ?? Constants.dataBucketSurveys)
             .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
             .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
             .foregroundColor(Color(headerColor))) {

@@ -62,7 +62,6 @@ struct DefaultConfig: Codable{
     let teamWebsite: String
     let showAppleSignin: String
     let showGoogleSignin: String
-    let googleClientID: String?
     let teamEmail: String
     let teamPhone: String
     let showCheckupScreen: String
@@ -72,7 +71,7 @@ struct DefaultConfig: Codable{
 }
 
 struct DataModel: Codable {
-    let studyTitle: String
+    let appTitle: String
     let teamName: String
     let copyright: String
 }
@@ -91,4 +90,5 @@ struct ThemeCustomization: Codable{
     let screenTitleWeight: String
     let headerTitleFont: String
     let headerTitleWeight: String
+    let appTitleSize: String
 }

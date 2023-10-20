@@ -33,6 +33,7 @@ OF SUCH DAMAGE.
  */
 
 import HealthKit
+import OTFUtilities
 
 @objc protocol SyncDelegate : AnyObject {
     @objc optional func didSyncWalkTests()
@@ -87,7 +88,7 @@ class HealthKitManager: SyncDelegate {
     public func disableHealthKit(_ completion: ((_ success: Bool, _ error: Error?) -> Void)? = nil) {
         healthStore.disableAllBackgroundDelivery { (success, error) in
             if let error = error {
-                OTFError("Unable to disable HK background delivery %@", error.localizedDescription)
+                OTFError("Unable to disable HK background delivery %{public}@", error.localizedDescription)
             }
             completion?(success, error)
         }
@@ -120,7 +121,7 @@ extension HealthKitManager {
             healthStore.execute(query)
             healthStore.enableBackgroundDelivery(for: type, frequency: frequency, withCompletion: { (success, error) in
                 if let error = error {
-                    OTFError("%@", error.localizedDescription)
+                    OTFError("%{public}@", error.localizedDescription)
                 }
                 completion?(success, error)
             })
@@ -128,7 +129,7 @@ extension HealthKitManager {
         }
         
         dispatchGroup.notify(queue: .main) {
-            print("Task finished.")
+            OTFLog("Task finished.")
         }
 
     }

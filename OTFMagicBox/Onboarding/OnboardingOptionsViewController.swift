@@ -36,6 +36,8 @@ import OTFResearchKit
 import AuthenticationServices
 import GoogleSignIn
 import OTFCloudClientAPI
+import OTFUtilities
+import Combine
 
 public class OnboardingOptionsStep: ORKQuestionStep {
     public override init(
@@ -54,6 +56,7 @@ public class OnboardingOptionsStep: ORKQuestionStep {
 
 public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASAuthorizationControllerDelegate {
     let authType: AuthType
+    var disposables: AnyCancellable?
     
     public var CKMultipleSignInStep: OnboardingOptionsStep!{
         return step as? OnboardingOptionsStep
@@ -121,15 +124,15 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         
         if YmlReader().showAppleLogin {
             stackViewHeight += 60
-            let buttonApple = customButton(title: "Sign in with Apple", backGroundColor: .black, textColor: .white, borderColor: nil,
-                                           reference: nil, action: #selector(loginAppleAction), withAttachement: "apple")
+            let buttonApple = customButton(title: Constants.CustomiseStrings.signinWithApple, backGroundColor: .black, textColor: .white, borderColor: nil,
+                                           reference: nil, action: #selector(loginAppleAction), withAttachement: "apple-login")
             buttonApple.translatesAutoresizingMaskIntoConstraints = false
             verticalStack.addArrangedSubview(buttonApple)
         }
         
         if YmlReader().showGoogleLogin {
             stackViewHeight += 60
-            let buttonGoogle = customButton(title: "Sign in with Google", backGroundColor: .white, textColor: .black,
+            let buttonGoogle = customButton(title: Constants.CustomiseStrings.signinWithGoogle, backGroundColor: .white, textColor: .black,
                                             borderColor: UIColor(red: 66.0/255.0, green: 133.0/255.0, blue: 244.0/255.0, alpha: 1),
                                             reference: nil, action: #selector(loginGoogleAction), withAttachement: "google")
             buttonGoogle.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +140,7 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         }
         
         stackViewHeight += 50
-        let buttonUserPassWord = customButton(title: "Sign in with Email and Password", backGroundColor: .white, textColor: .black,
+        let buttonUserPassWord = customButton(title: Constants.CustomiseStrings.signinWithEmail, backGroundColor: .white, textColor: .black,
                                               borderColor: .black, reference: nil, action: #selector(loginEmailAndPaswwordAction))
         buttonUserPassWord.translatesAutoresizingMaskIntoConstraints = false
         verticalStack.addArrangedSubview(buttonUserPassWord)
@@ -215,11 +218,11 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
     public func authorizationController(controller: ASAuthorizationController,
                                         didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            print("Unable to obtain AppleID credentials")
+            OTFLog("Unable to obtain AppleID credentials")
             return
         }
         guard let appleIDToken = appleIDCredential.identityToken else {
-            print("Unable to fetch identity token")
+            OTFLog("Unable to fetch identity token")
             return
         }
         
@@ -227,12 +230,12 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         // The JWT token's payload is decided by Apple itself. We should be cautious that Apple
         // may change the format/composition of the token in the future.
         guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-            print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            OTFLog("Unable to serialize token string from data:", appleIDToken.debugDescription)
             return
         }
         
         let alert = UIAlertController(title: nil,
-                                      message: authType == .login ? "Signing in..." : "Signing up...",
+                                      message: authType == .login ? Constants.CustomiseStrings.signingIn : Constants.CustomiseStrings.signingUp,
                                       preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -243,61 +246,50 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         
         taskViewController?.present(alert, animated: true)
         
-        OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient,
-                                                       socialType: .apple,
-                                                       authType: authType,
-                                                       idToken: idTokenString) { result in
-            DispatchQueue.main.async {
-                print(result)
-                switch result {
+        
+        disposables = OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient, socialType: .apple, authType: authType, idToken: idTokenString)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { response in
+                switch response {
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    OTFError("error in social login %{public}@", error.localizedDescription)
                     alert.dismiss(animated: true) {
-                        let alert = UIAlertController(title: nil,
-                                                      message: error.error.message,
-                                                      preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                        self.taskViewController?.present(alert, animated: true)
+                        self.showAlert(title: "Ok", message: error.error.message)
                         self.showError(error)
                     }
-                    
-                case .success:
-                    alert.dismiss(animated: true, completion: nil)
-                    self.setAnswer(false)
-                    super.goForward()
+                default: break;
                 }
-            }
-        }
+            }, receiveValue: { result in
+                alert.dismiss(animated: true, completion: nil)
+                self.setAnswer(false)
+                super.goForward()
+            })
     }
     
     @objc
     func loginGoogleAction() {
-        guard let clientID = YmlReader().googleClientID else {
-            showError(ForgeError(error: .init(statusCode: 401, name: "Missing Credentials",
-                                              message: "You have not provided Google Client ID in the YAML file.", code: nil)))
-            return
-        }
         
-        let signInConfig = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { [unowned self] user, error in
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { user, error in
+            
             if let error = error {
-                showError(error)
+                self.showError(error)
                 return
             }
             
             // If sign in succeeded, display the app's main content View.
-            guard let user = user, let idToken = user.authentication.idToken else {
-                showError(ForgeError.empty)
+            
+            guard let user = user?.user, let idToken = user.idToken?.tokenString else {
+                self.showError(ForgeError.empty)
                 return
             }
             
-            signInToTheraForgeWith(idToken: idToken)
+            self.signInToTheraForgeWith(idToken: idToken)
         }
     }
     
     func signInToTheraForgeWith(idToken: String) {
         let alert = UIAlertController(title: nil,
-                                      message: authType == .login ? "Signing in..." : "Signing up...",
+                                      message: authType == .login ?  Constants.CustomiseStrings.signingIn : Constants.CustomiseStrings.signingUp,
                                       preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -308,38 +300,31 @@ public class OnboardingOptionsViewController: ORKQuestionStepViewController, ASA
         
         taskViewController?.present(alert, animated: true)
         
-        OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient,
-                                                       socialType: .gmail,
-                                                       authType: authType,
-                                                       idToken: idToken) { result in
-            DispatchQueue.main.async {
-                print(result)
-                switch result {
+        
+        
+        disposables = OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient, socialType: .gmail, authType: authType, idToken: idToken)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { response in
+                switch response {
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    OTFError("error in social login %{public}@", error.localizedDescription)
                     alert.dismiss(animated: true) {
-                        let alert = UIAlertController(title: nil,
-                                                      message: error.error.message,
-                                                      preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                        self.taskViewController?.present(alert, animated: true)
+                        self.showAlert(title: Constants.CustomiseStrings.okay, message: error.error.message)
                         self.showError(error)
                     }
-                    
-                case .success:
-                    alert.dismiss(animated: true, completion: nil)
-                    self.setAnswer(false)
-                    super.goForward()
+                default: break;
                 }
-            }
-        }
+            }, receiveValue: { result in
+                alert.dismiss(animated: true, completion: nil)
+                self.setAnswer(false)
+                super.goForward()
+            })
     }
     
     private func showError(_ error: Error) {
         // with your request to Google.
-        print("Sign in with Google errored: \(error)")
         Alerts.showInfo(
-            title: NSLocalizedString("Failed to Sign in with Google", comment: ""),
+            title: NSLocalizedString("Failed to Sign in with Google ", comment: ""),
             message: error.localizedDescription
         )
     }

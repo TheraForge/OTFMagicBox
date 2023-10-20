@@ -34,24 +34,121 @@ OF SUCH DAMAGE.
 
 import Foundation
 import OTFResearchKit
-
+import OTFUtilities
+import Combine
 /**
  The LoginViewController provides the default login view from ResearchKit.
  */
 
 class LoginViewController: ORKLoginStepViewController {
     
+    var subscriptions = Set<AnyCancellable>()
+    var disposables: AnyCancellable?
+    
+    lazy var authButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 10.0
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        if LocalAuthentication.shared.hasFaceId() {
+            button.setTitle(Constants.CustomiseStrings.faceId, for: .normal)
+        } else {
+            button.setTitle(Constants.CustomiseStrings.touchId, for: .normal)
+        }
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        authButton.addTarget(self, action: #selector(customButtonTapped), for: .touchUpInside)
+        view.addSubview(authButton)
+        addAuthButtonConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        authButton.removeFromSuperview()
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        view.addSubview(authButton)
+        addAuthButtonConstraints()
+    }
+    
+    func getSubviewsOfView<T: UIView>(view: UIView) -> [T] {
+        var subviewArray = [T]()
+        if view.subviews.count == 0 {
+            return subviewArray
+        }
+        for subview in view.subviews {
+            subviewArray += self.getSubviewsOfView(view: subview) as [T]
+            if let subview = subview as? T {
+                subviewArray.append(subview)
+            }
+        }
+        return subviewArray
+    }
+    
+    @objc func customButtonTapped() {
+        LocalAuthentication.shared.authenticationWithTouchID { success in
+            if success {
+                let emailFromKeychain = KeychainCloudManager.getEmailAddress
+                let passwordFromKeychain = KeychainCloudManager.getPassword
+                if !emailFromKeychain.isEmpty {
+                    DispatchQueue.main.async {
+                        let textFields: [UITextField] = self.getSubviewsOfView(view: self.view)
+                        for item in textFields {
+                            if item.isSecureTextEntry {
+                                item.text = passwordFromKeychain
+                            } else {
+                                item.text = emailFromKeychain
+                            }
+                        }
+                        
+                        let button: [UIButton] = self.getSubviewsOfView(view: self.view)
+                        for item in button {
+                            if item.currentTitle == "Login" {
+                                item.isEnabled = true
+                                item.isUserInteractionEnabled = true
+                            }
+                        }
+                    }
+                } else {
+                    if LocalAuthentication.shared.hasFaceId() {
+                        self.showAlert(title: "Alert", message: Constants.CustomiseStrings.faceIdAlertMessage)
+                    } else {
+                        self.showAlert(title: "Alert", message: Constants.CustomiseStrings.touchIdAlertMessage)
+                    }
+                }
+            } else {
+                print("error")
+            }
+        }
+    }
+    
     override func goForward() {
-        let emailRes = result?.results?.first as? ORKTextQuestionResult
-        guard let email = emailRes?.textAnswer else {
-            return
+        
+        var emailAddress = String()
+        var password = String()
+        let textFields: [UITextField] = self.getSubviewsOfView(view: self.view)
+        for item in textFields {
+            if item.isSecureTextEntry {
+                password = item.text ?? ""
+            } else {
+                emailAddress = item.text ?? ""
+            }
         }
         
-        let passwordRes = result?.results?[1] as? ORKTextQuestionResult
-        guard let pass = passwordRes?.textAnswer else {
-            return
-        }
-        let alert = UIAlertController(title: nil, message: "Logging in...", preferredStyle: .alert)
+        loginRequest(email: emailAddress, password: password)
+    }
+    
+    func loginRequest(email: String, password: String) {
+        
+        let alert = UIAlertController(title: nil, message: Constants.CustomiseStrings.loginingIn, preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
@@ -60,80 +157,109 @@ class LoginViewController: ORKLoginStepViewController {
         alert.view.addSubview(loadingIndicator)
         
         taskViewController?.present(alert, animated: true, completion: nil)
-        
-        OTFTheraforgeNetwork.shared.loginRequest(email: email, password: pass) { (result) in
-            
-            DispatchQueue.main.async {
-                switch result {
+        disposables = OTFTheraforgeNetwork.shared.loginRequest(email: email, password: password)
+            .receive(on: DispatchQueue.main)
+            .sink { response in
+                switch response {
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    OTFError("error in login request -> %{public}@.", error.error.message)
                     alert.dismiss(animated: true) {
-                        let alert = UIAlertController(title: "Login Error!", message: error.error.message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                        self.taskViewController?.present(alert, animated: true)
+                        self.showAlert(title: Constants.CustomiseStrings.loginInError, message: error.error.message )
                     }
-                    
-                case .success:
-                    alert.dismiss(animated: false, completion: {
-                        super.goForward()
-                    })
+                default: break;
                 }
+            } receiveValue: { result in
+                self.saveValuesToLocal(email: email, password: password, encryptedDefaultStorageKeyHex: result.data.encryptedDefaultStorageKey, encryptedconfidentialStorageKeyHex: result.data.encryptedConfidentialStorageKey)
+                self.synchronizedDatabase { _ in
+                alert.dismiss(animated: false, completion: {
+                        super.goForward()
+                })
+                }
+                
             }
-        }
     }
     
-    // Forgot password.
-    override func forgotPasswordButtonTapped() {
-        let alert = UIAlertController(title: "Reset Password", message: "Enter your email to get a link for password reset.", preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Enter your email"
+    func synchronizedDatabase(completion: ((Error?) -> Void)?){
+        DispatchQueue.main.async {
+            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true) {
+                result in
+                completion?(result)
+            }
         }
         
-        alert.addAction(UIAlertAction(title: "Submit", style: .default) { (_) in
-            let email = alert.textFields![0]
-            OTFTheraforgeNetwork.shared.forgotPassword(email: email.text ?? "") { results in
+        
+    }
+    
+    func saveValuesToLocal(email: String, password: String, encryptedDefaultStorageKeyHex: String, encryptedconfidentialStorageKeyHex: String){
+        let swiftSodium = SwiftSodium()
+        let masterKey = swiftSodium.generateMasterKey(password: password, email: email)
+        let keyPair = swiftSodium.sodium.box.keyPair(seed: masterKey)
+        
+        
+        
+        if let keyPair = keyPair {
+            let encryptedDefaultStorageKey = swiftSodium.getArrayOfBytesFromData(FileData: swiftSodium.hexStringToData(string: encryptedDefaultStorageKeyHex) as NSData)
+            let defaultStorageKey = swiftSodium.decryptKey(bytes: encryptedDefaultStorageKey, publicKey: keyPair.publicKey, secretKey: keyPair.secretKey)
+            
+            let encryptedconfidentialStorageKey = swiftSodium.getArrayOfBytesFromData(FileData: swiftSodium.hexStringToData(string: encryptedconfidentialStorageKeyHex) as NSData)
+            let confidentialStorageKey = swiftSodium.decryptKey(bytes: encryptedconfidentialStorageKey, publicKey: keyPair.publicKey, secretKey: keyPair.secretKey)
+            
+            KeychainCloudManager.saveValuesInKeychain(email: email, password: password, masterKey: masterKey, publicKey: keyPair.publicKey, secretKey: keyPair.secretKey, defaultStorageKey: defaultStorageKey, confidentialStorageKey: confidentialStorageKey)
+        }
+    }
+    // Forgot password.
+    override func forgotPasswordButtonTapped() {
+        let alert = UIAlertController(title: Constants.CustomiseStrings.resetPassword, message: Constants.CustomiseStrings.enterYourEmailToGetLink, preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = Constants.CustomiseStrings.enterYourEmail
+        }
+        
+        alert.addAction(UIAlertAction(title: Constants.CustomiseStrings.submit, style: .default) { (_) in
+            guard let email = alert.textFields![0].text else{ return }
+            if email.isValidEmail {
                 
-                switch results {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        alert.dismiss(animated: true, completion: nil)
-                        let alert = UIAlertController(title: "Password Reset Error!", message: error.error.message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                        
-                        self.present(alert, animated: true)
-                    }
-                    
-                case .success:
-                    DispatchQueue.main.async {
-                        self.resetPassword(email: email.text ?? "")
-                    }
-                }
+                self.disposables = OTFTheraforgeNetwork.shared.forgotPassword(email: email)
+                    .receive(on: DispatchQueue.main)
+                    .sink(receiveCompletion: { response in
+                        switch response {
+                        case .failure(let error):
+                            OTFError("error in forgot request -> %{public}@.", error.error.message)
+                            DispatchQueue.main.async {
+                                self.showAlert(title: Constants.CustomiseStrings.forgotPassword, message: error.error.message)
+                            }
+                        default: break;
+                        }
+                    }, receiveValue: { result in
+                        DispatchQueue.main.async {
+                            self.resetPassword(email: email)
+                        }
+                    })
                 
+            }else {
+                self.showAlert(title: Constants.CustomiseStrings.resetPassword, message: Constants.CustomiseStrings.enterValidEmail)
             }
         })
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Constants.CustomiseStrings.cancel, style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
     }
     
     // Reset password for the givem email.
     func resetPassword(email: String) {
-        let alert = UIAlertController(title: "Reset Password", message: "Please enter the code sent to your email and new password", preferredStyle: .alert)
+        let alert = UIAlertController(title: Constants.CustomiseStrings.resetPassword, message: Constants.CustomiseStrings.enterTheCode, preferredStyle: .alert)
         
         alert.addTextField { (textField) in
             textField.placeholder = "Code "
         }
         
         alert.addTextField { (textField) in
-            textField.placeholder = "New Password "
+            textField.placeholder = Constants.CustomiseStrings.newPassword
             textField.isSecureTextEntry = true
             
         }
-        
-        alert.addAction(UIAlertAction(title: "Submit", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: Constants.CustomiseStrings.submit, style: .default) { _ in
             guard let code = alert.textFields![0].text else {
                 fatalError("Invalid code")
             }
@@ -141,35 +267,37 @@ class LoginViewController: ORKLoginStepViewController {
                 fatalError("Invalid password")
             }
             
-            OTFTheraforgeNetwork.shared.resetPassword(email: email,
-                                                      code: code,
-                                                      newPassword: newPassword) { results in
-                
-                switch results {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        alert.dismiss(animated: true, completion: nil)
-                        let alert = UIAlertController(title: "Password Reset Error!", message: error.error.message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
+            self.disposables = OTFTheraforgeNetwork.shared.resetPassword(email: email, code: code, newPassword: newPassword)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { response in
+                    switch response {
+                    case .failure(let error):
+                        OTFError("error in reset request -> %{public}@.", error.error.message)
+                        DispatchQueue.main.async {
+                            self.showAlert(title: Constants.CustomiseStrings.passwordResetError, message: error.error.message)
+                        }
+                    default: break;
                     }
-                    
-                case .success:
+                }, receiveValue: { result in
                     DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Password has been updated", message: "", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                        
-                        alert.dismiss(animated: true, completion: nil)
-                        self.present(alert, animated: true)
+                        self.showAlert(title: Constants.CustomiseStrings.passwordUpdated, message: "")
                     }
-                }
-                
-            }
+                })
         })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Constants.CustomiseStrings.cancel, style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
     }
     
+    func addAuthButtonConstraints() {
+        
+        NSLayoutConstraint.activate([
+            authButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            authButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
+            authButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            authButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            authButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
 }
+ 

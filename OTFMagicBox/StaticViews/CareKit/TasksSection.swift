@@ -52,8 +52,8 @@ struct TaskSection: View {
                         Text(style.rawValue.capitalized)
                             .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                     }
-                    .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
-                    .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                    .foregroundColor(.otfTextColor)
+                    .listRowBackground(Color.otfCellBackground)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                 }
             }

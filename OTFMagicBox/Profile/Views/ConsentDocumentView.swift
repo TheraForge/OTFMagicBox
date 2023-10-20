@@ -33,41 +33,34 @@ OF SUCH DAMAGE.
  */
 
 import SwiftUI
+import OTFUtilities
 
 struct ConsentDocumentView: View {
     
-    @State private var showPreview = false
-    let documentsURL: URL
     let title: String
-    let color: UIColor
-    init(documentURL: URL, title: String, color: UIColor) {
-        self.documentsURL = documentURL
+    init(title: String) {
         self.title = title
-        self.color = color
-        OTFLog("Opening document at:", self.documentsURL.path)
     }
     
     var body: some View {
         HStack {
-            Text(title)
-                .foregroundColor(Color(color))
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-            Spacer()
-            Text("›")
-        }.frame(height: 60)
-            .contentShape(Rectangle())
-            .gesture(TapGesture().onEnded({
-                self.showPreview = true
-            }))
-            .background(DocumentPreviewViewController(self.$showPreview, url: self.documentsURL))
+                    Text(title)
+                        .foregroundColor(.otfTextColor)
+                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                                    .font(.footnote.weight(.semibold))
+                }
+                .frame(height: Metrics.TITLE_VIEW_HEIGHT)
+                .contentShape(Rectangle())
+                        
     }
 }
 
 struct ConsentDocumentView_Previews: PreviewProvider {
     static var previews: some View {
-        let documentsPath = UserDefaults.standard.object(forKey: Constants.UserDefaults.ConsentDocumentURL) as? String
-        let url = URL(fileURLWithPath: documentsPath!, isDirectory: false)
-        ConsentDocumentView(documentURL: url, title: "", color: UIColor())
+        ConsentDocumentView( title: "")
     }
 }

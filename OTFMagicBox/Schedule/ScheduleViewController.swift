@@ -35,13 +35,14 @@ OF SUCH DAMAGE.
 import OTFCareKit
 import OTFCareKitStore
 import UIKit
+import OTFUtilities
 import SwiftUI
 
 class ScheduleViewController: OCKDailyPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Schedule"
+        title = Constants.CustomiseStrings.schedule
         
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification(_:)),
                                                name: .databaseSuccessfllySynchronized, object: nil)
@@ -61,7 +62,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     
     @objc private func deleteProfileEventNotification(_ notification: Notification) {
         
-        self.alertView(title: "Account Deleted", message: Constants.deleteAccount) { action in
+        self.alertWithAction(title: Constants.CustomiseStrings.accountDeleted, message: Constants.deleteAccount) { action in
             OTFTheraforgeNetwork.shared.moveToOnboardingView()
         }
         
@@ -77,7 +78,7 @@ class ScheduleViewController: OCKDailyPageViewController {
             storeManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
                 switch result {
                 case .failure(let error):
-                    print("Error: \(error)")
+                    OTFError("error in fetching fetchAnyTasks %{public}@", error.localizedDescription)
                     
                 case .success(let tasks):
 
@@ -101,8 +102,8 @@ class ScheduleViewController: OCKDailyPageViewController {
                     
                     // If there's no task on the given date then show no tasks card
                     guard !todayTasks.isEmpty else {
-                        let tipTitle = "No Tasks"
-                        let tipText = "No tasks for this date."
+                        let tipTitle = Constants.CustomiseStrings.noTasks
+                        let tipText = Constants.CustomiseStrings.noTasksForThisDate
                         let tipView = TipView()
                         tipView.headerView.titleLabel.text = tipTitle
                         tipView.headerView.detailLabel.text = tipText

@@ -38,6 +38,7 @@ import OTFCloudantStore
 import OTFCloudClientAPI
 import OTFCDTDatastore
 import OTFTemplateBox
+import OTFUtilities
 
 struct Configuration {
     let targetURL: URL
@@ -113,11 +114,11 @@ class CloudantSyncManager {
                 do {
                     try replicate(direction: .pull, completionBlock: { [unowned self] error in
                         if let error = error {
-                            print(error)
+                            OTFError("error in cloudent manager %{public}@", error.localizedDescription)
                         }
                         else {
 #if DEBUG
-                            print("Synced successfully!")
+                            OTFLog("Synced successfully!")
 #endif
                             lastSynced = Date()
                             if notifyWhenDone {
@@ -176,10 +177,10 @@ class CloudantSyncManager {
         case .push:
             dataStore.push(to: configuration.targetURL, replicator: replicator, username: configuration.username, password: configuration.password) { (error: Error?) in
                 if let error = error {
-                    print(error)
+                    OTFError("error while pushing dataStore %{public}@", error.localizedDescription)
                     completionBlock(error)
                 } else {
-                    print("PUSH SUCCEEDED")
+                    OTFLog("Pushed Successfully")
                     completionBlock(nil)
                 }
             }
