@@ -41,21 +41,10 @@ enum CustomStyle {
 }
 
 extension View {
-    
-    var colorScheme: ColorScheme {
-        Environment(\.colorScheme).wrappedValue
-    }
-    
     @ViewBuilder func style(_ style: CustomStyle) -> some View {
-        let color = colorScheme == .dark ? Color.white : .black
+        let color = Color(UIColor.label)
         switch style {
-        case .emailField:
-            self.autocapitalization(.none)
-                .padding()
-                .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
-                .padding()
-            
-        case .textField:
+        case .emailField, .textField:
             self.autocapitalization(.none)
                 .padding()
                 .overlay(Capsule().strokeBorder(color, style: StrokeStyle(lineWidth: 1.0)))
@@ -74,8 +63,8 @@ extension Image {
     func logoStyle() -> some View {
         self.resizable()
             .scaledToFit()
-            .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN * 4)
-            .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN * 4)
+            .padding(.leading, Metrics.PADDING_HORIZONTAL_BUTTON * 4)
+            .padding(.trailing, Metrics.PADDING_HORIZONTAL_BUTTON * 4)
     }
     
     func iconStyle() -> some View {

@@ -53,7 +53,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: "info@hippocratestech.com", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon "info@hippocratestech.com" is the value assigned for that Key.
+# Example: teamEmail: "<your-team-email>", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the quotes is the value assigned for that Key.
 
 
 # Default Values:-
@@ -135,46 +135,64 @@ DataModel:
         - show: "true"
           summary: "You are invited to participate in a research study on the use of the OTFMagic application to collect and research data on your daily activity, fitness and health status. You will be asked to download this app on your smartphone and go through screens that will determine eligibility, describe the study to you, and ask you to provide informed consent. If you provide consent, a copy of this consent form will be emailed to you. You will then be asked to allow the OTFMagicBox app to collect health and activity data from your phone, followed by questions about your physical activity readiness."
           content: "Your participation in this program is entirely voluntary. You can decide to participate now, and withdraw your consent later and stop being in the program without any loss of benefits or medical care you are entitled to."
+          title: "Welcome"
+          image: ""
         
  ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Collected data may allow yourself and researchers to understand patterns and details about your health. "
           content: "Collected data may allow yourself and researchers to understand patterns and details about your health."
+          title: "Data Processing"
+          image: ""
  
  ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
           content: "Your data will be encrypted and sent to a secure database, with your name replaced by an anonymized code. Your personal data will be visible only to authorized entities."
+          title: "Protecting your Data"
+          image: ""
   
  ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "false"
           summary: "Healthcare data collection is used to make digital analysis faster and more accurate."
           content: "Healthcare data allows to prescribe treatments and make clinical decisions with greater accuracy, eliminating the guesswork often involved in treatment, resulting in lower costs and enhanced patient care."
+          title: ""
+          image: ""
         
  ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week. "
           content: "This is a fully remote program administered on your mobile device. Your participation in this program will last for 10 - 15 minutes per day for a week."
+          title: "Time Commitment"
+          image: ""
  
  ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Study tasks involve many aspects of daily functionalities."
           content: "Some of the tasks in this study will require you to answer survey questions about health and lifestyle factors. You will be asked to complete a survey on your readiness to increase physical activity and test fitness."
+          title: "Surveys"
+          image: ""
         
  ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "We will ask you to complete active tasks that may require physical activity. You will be asked to do a Physical Activity Readiness questionnaire, which will advise you about talking to your doctor before increasing physical activity or assessing fitness."
           content: "Health-related tasks involve many aspects of daily function, including personal hygiene and nutrition, safety and comfort, physical fitness, sleep quality, stress management, as well as the planning and coordination to accomplish these personal tasks."
+          title: "Study Tasks"
+          image: ""
         
  ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "You may withdraw your consent and discontinue participation at any time."
           content: "We will not collect or store any new data if you choose to withdraw. To withdraw from the study, simply select “Withdrawal” on the profile tab."
+          title: "Withdrawing"
+          image: ""
         
  ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "This is custom section."
           content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+          title: "Custom consent section"
+          image: "online-agreement1"
           
     registration:
       showDateOfBirth: "true"
@@ -266,10 +284,10 @@ DataModel:
       supportText: "Support"
       consentText: "Consent Documents"
       WithdrawStudyText: "Withdraw from Study"
-      profileInfoHeader: "BASIC INFORMATION"
+      profileInfoHeader: "Basic Information"
       firstName: "First Name"
       lastName: "Last Name"
-      otherInfo: "OTHER INFORMATION"
+      otherInfo: "Other Information"
       oldPassword: "Old Password"
       newPassword: "New Password"
       resetPassword: "Reset Password"
@@ -454,53 +472,71 @@ DataModel:
         - show: "true"
           summary: "Vous êtes invité à participer à une étude de recherche sur l'utilisation de l'application OTFMagic pour collecter et rechercher des données sur votre activité quotidienne, votre condition physique et votre état de santé. Il vous sera demandé de télécharger cette application sur votre smartphone et de passer par des écrans qui détermineront l'éligibilité, vous décriront l'étude et vous demanderont de fournir un consentement éclairé. Si vous donnez votre consentement, une copie de ce formulaire de consentement vous sera envoyée par courriel. Il vous sera ensuite demandé d'autoriser l'application OTFMagicBox à collecter des données sur la santé et l'activité de votre téléphone, suivies de questions sur votre préparation à l'activité physique."
           content: "Votre participation à ce programme est entièrement volontaire. Vous pouvez décider de participer maintenant, retirer votre consentement plus tard et cesser de participer au programme sans aucune perte des prestations ou des soins médicaux auxquels vous avez droit."
+          title: ""
+          image: ""
         
  ## Consent Data Processing, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Les données recueillies peuvent vous permettre, ainsi qu'aux chercheurs, de comprendre les schémas et les détails de votre santé."
           content: "Les données recueillies peuvent vous permettre, ainsi qu'aux chercheurs, de comprendre les schémas et les détails de votre santé."
+          title: ""
+          image: ""
  
  ## Consent Protecting your Data, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Vos données seront cryptées et envoyées à une base de données sécurisée, votre nom étant remplacé par un code anonymisé. Vos données personnelles ne seront visibles que par les entités autorisées."
           content: "Vos données seront cryptées et envoyées à une base de données sécurisée, votre nom étant remplacé par un code anonymisé. Vos données personnelles ne seront visibles que par les entités autorisées."
+          title: ""
+          image: ""
   
  ## Consent Data Use, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "false"
           summary: "La collecte de données de santé est utilisée pour rendre l'analyse numérique plus rapide et plus précise."
           content: "Les données de santé permettent de prescrire des traitements et de prendre des décisions cliniques avec une plus grande précision, en éliminant les conjectures souvent impliquées dans le traitement, ce qui entraîne une réduction des coûts et une amélioration des soins aux patients."
+          title: ""
+          image: ""
         
  ## Consent Time Commitment, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Il s'agit d'un programme entièrement à distance administré sur votre appareil mobile. Votre participation à ce programme durera 10 à 15 minutes par jour pendant une semaine."
           content: "Il s'agit d'un programme entièrement à distance administré sur votre appareil mobile. Votre participation à ce programme durera 10 à 15 minutes par jour pendant une semaine."
+          title: ""
+          image: ""
  
  ## Consent Study Survey, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Les tâches d'étude impliquent de nombreux aspects des fonctionnalités quotidiennes."
           content: "Certaines des tâches de cette étude vous obligeront à répondre à des questions d'enquête sur des facteurs liés à la santé et au mode de vie. On vous demandera de répondre à un sondage sur votre capacité à augmenter votre activité physique et à tester votre condition physique."
+          title: ""
+          image: ""
         
  ## Consent Study Tasks, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Nous vous demanderons d'effectuer des tâches actives pouvant nécessiter une activité physique. On vous demandera de remplir un questionnaire de préparation à l'activité physique, qui vous conseillera de parler à votre médecin avant d'augmenter l'activité physique ou d'évaluer votre forme physique."
           content: "Les tâches liées à la santé impliquent de nombreux aspects de la fonction quotidienne, y compris l'hygiène personnelle et la nutrition, la sécurité et le confort, la forme physique, la qualité du sommeil, la gestion du stress, ainsi que la planification et la coordination pour accomplir ces tâches personnelles."
+          title: ""
+          image: ""
         
  ## Consent Withdraw, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Vous pouvez retirer votre consentement et interrompre votre participation à tout moment."
           content: "Nous ne collecterons ni ne stockerons aucune nouvelle donnée si vous choisissez de vous retirer. Pour vous retirer de l'étude, sélectionnez simplement « Retrait » dans l'onglet de profil."
+          title: ""
+          image: ""
         
  ## Custom Consent Section, if you want to dsiplay this in your application then assign true value otherwise false for the "show" key.
         - show: "true"
           summary: "Ceci est une section personnalisée."
           content: "Section de consentement personnalisé. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Énée commodo ligula eget dolor. Masse énéenne. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nca, pellentesque eu, pretium quis, sem."
+          title: ""
+          image: ""
+          
     registration:
       showDateOfBirth: "true"
       showGender: "true"
   
     showAppleSignin:  "true"
     showGoogleSignin: "false"
-    googleClientID: "add_your_client_id_here"
 
     
     login:
@@ -584,10 +620,10 @@ DataModel:
       supportText: "Soutien"
       consentText: "Documents de consentement"
       WithdrawStudyText: "Se retirer de l'étude"
-      profileInfoHeader: "INFORMATIONS DE BASE"
+      profileInfoHeader: "Informations De Base"
       firstName: "Prénom"
       lastName: "nom de famille"
-      otherInfo: "LES AUTRES INFORMATIONS"
+      otherInfo: "Les Autres Informations"
       oldPassword: "ancien mot de passe"
       newPassword: "nouveau mot de passe"
       resetPassword: "réinitialiser le mot de passe"

@@ -95,7 +95,7 @@ struct MainView: View {
             
             ProfileUIView().tabItem {
                 UIImage.loadImage(named: "tab_profile").renderingMode(.template)
-                Text("Profile")
+                Text(Constants.CustomiseStrings.profile)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
             }

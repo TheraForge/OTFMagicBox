@@ -62,7 +62,7 @@ struct EmailLoginSteps: LoginSteps {
                 passcodeStep.passcodeType = .type4Digit
             }
             
-            passcodeStep.text = "Enter your passcode"
+            passcodeStep.text = Constants.CustomiseStrings.enterPasscode
             
             loginSteps += [passcodeStep]
         }
@@ -93,7 +93,7 @@ struct AppleLoginSteps: LoginSteps {
                 passcodeStep.passcodeType = .type4Digit
             }
             
-            passcodeStep.text = "Enter your passcode"
+            passcodeStep.text = Constants.CustomiseStrings.enterPasscode
             
             loginSteps += [passcodeStep]
         }

@@ -35,6 +35,8 @@ OF SUCH DAMAGE.
 import AuthenticationServices
 import Foundation
 import OTFResearchKit
+import OTFUtilities
+import Combine
 
 public class SignInWithAppleStep: ORKInstructionStep {
     /// The contact information to be requested from the user during authentication.
@@ -47,8 +49,8 @@ public class SignInWithAppleStep: ORKInstructionStep {
         
         self.requestedScopes = requestedScopes
         super.init(identifier: identifier)
-        self.title = "Sign in with Apple"
-        self.text = "Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities."
+        self.title = Constants.CustomiseStrings.signinWithApple
+        self.text = Constants.CustomiseStrings.signAppleIdFastWay
     }
 
     @available(*, unavailable)
@@ -61,6 +63,7 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
                                                 ASAuthorizationControllerDelegate {
     
     let authType: AuthType
+    var disposables: AnyCancellable?
     
     /// The step presented by the step view controller.
     public var signInWithAppleStep: SignInWithAppleStep! {
@@ -81,7 +84,7 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         super.viewDidLoad()
    
         continueButtonTitle  = NSLocalizedString(
-            "Sign in with Apple",
+            Constants.CustomiseStrings.signinWithApple,
             comment: "Please use Apple's official translations"
         )
         
@@ -100,11 +103,11 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
     public func authorizationController(controller: ASAuthorizationController,
                                         didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            print("Unable to obtain AppleID credentials")
+            OTFLog("Unable to obtain AppleID credentials")
             return
         }
         guard let appleIDToken = appleIDCredential.identityToken else {
-            print("Unable to fetch identity token")
+            OTFLog("Unable to fetch identity token")
             return
         }
         
@@ -112,12 +115,12 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         // The JWT token's payload is decided by Apple itself. We should be cautious that Apple
         // may change the format/composition of the token in the future.
         guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-            print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            OTFLog("Unable to serialize token string from data:", appleIDToken.debugDescription)
             return
         }
 
         let alert = UIAlertController(title: nil,
-                                      message: authType == .login ? "Signing in..." : "Signing up...",
+                                      message: authType == .login ? Constants.CustomiseStrings.signingIn : Constants.CustomiseStrings.signingUp,
                                       preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -127,31 +130,24 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         alert.view.addSubview(loadingIndicator)
         
         taskViewController?.present(alert, animated: true)
-
-        OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient,
-                                                       socialType: .apple,
-                                                       authType: authType,
-                                                       idToken: idTokenString) { result in
-            DispatchQueue.main.async {
-                print(result)
-                switch result {
+        
+        disposables = OTFTheraforgeNetwork.shared.socialLoginRequest(userType: .patient, socialType: .apple, authType: authType, idToken: idTokenString)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { response in
+                switch response {
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    OTFError("error in reset request -> %{public}@.", error.error.message)
                     alert.dismiss(animated: true) {
-                        let alert = UIAlertController(title: nil,
-                                                      message: error.localizedDescription,
-                                                      preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                        self.showAlert(title: Constants.CustomiseStrings.okay, message: error.error.message)
                         self.taskViewController?.present(alert, animated: true)
                         self.showError(error)
                     }
-                    
-                case .success:
-                    alert.dismiss(animated: true, completion: nil)
-                    super.goForward()
+                default: break;
                 }
-            }
-        }
+            }, receiveValue: { result in
+                alert.dismiss(animated: true, completion: nil)
+                super.goForward()
+            })
     }
 
     public func authorizationController(controller: ASAuthorizationController,
@@ -160,7 +156,6 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
     }
 
     private func showError(_ error: Error) {
-        print("Sign in with Apple errored: \(error)")
         Alerts.showInfo(
             self,
             title: "Error",// NSLocalizedString("Failed to Sign in with Apple", comment: ""),
@@ -168,3 +163,4 @@ public class SignInWithAppleStepViewController: ORKInstructionStepViewController
         )
     }
 }
+

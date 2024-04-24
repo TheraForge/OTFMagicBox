@@ -36,6 +36,7 @@ import Foundation
 import SwiftUI
 import OTFCareKitStore
 import OTFCloudClientAPI
+import OTFUtilities
 
 struct UpdateUserProfileDetailView: View {
     let backgroudColor: UIColor
@@ -46,47 +47,36 @@ struct UpdateUserProfileDetailView: View {
     let borderColor: UIColor
     let sepratorColor: UIColor
     let genderValues = GenderType.allCases
-    @State var showGenderPicker = false
-    @State var showDatePicker = false
-    
+    @StateObject private var viewModel = UpdateUserViewModel()
     @Environment(\.colorScheme) var colorScheme
     
     private var selectedDate: Binding<Date> {
-        Binding<Date>(get: { self.date}, set : {
-            self.date = $0
-            self.setDateString()
-        })
+        Binding<Date>(
+            get: { self.birthday},
+            set : {
+                self.birthday = $0
+                self.setDateString()
+            })
     }
     
     @State private(set) var user: OCKPatient
     @State var firstName: String
     @State var lastName:String
-    @State var genderSelection: GenderType
-    @State var date: Date
     @State var dob: String
+    @State private var image: UIImage?
+    @State var profileImageData = Data()
+    @State var isHideLoader: Bool = true
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    private func setDateString() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
-        
-        dob = formatter.string(from: self.date)
-    }
+    @State var birthday: Date
+    @State var gender: GenderType
     
-    static let taskDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        
-        return formatter
-    }()
     
     init(user: OCKPatient, backgroudColor: UIColor, textColor: UIColor, cellBackgroundColor: UIColor, headerColor: UIColor, buttonColor: UIColor, borderColor: UIColor, sepratorColor: UIColor) {
         _user = State(initialValue: user)
         _firstName = State(initialValue: user.name.givenName ?? "")
         _lastName = State(initialValue: user.name.familyName ?? "")
-        _genderSelection = State(initialValue: user.sex?.genderType ?? .other)
         _dob = State(initialValue: user.birthday?.toString ?? "")
-        _date = State(initialValue: user.birthday ?? Date())
         self.backgroudColor = backgroudColor
         self.buttonColor = buttonColor
         self.borderColor = borderColor
@@ -94,123 +84,157 @@ struct UpdateUserProfileDetailView: View {
         self.cellBackgroundColor = cellBackgroundColor
         self.headerColor = headerColor
         self.sepratorColor = sepratorColor
+        
+        self._birthday = State(initialValue: user.birthday ?? Date())
+        self._gender = State(initialValue: user.sex?.genderType ?? .other)
+        
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: YmlReader().appTheme?.textColor.color ?? UIColor.black]
     }
     
     var body: some View {
         NavigationView {
             Form {
-                IconView()
-                    .frame(width: 100, height: 100)
-                Section(header: Text(ModuleAppYmlReader().profileData?.profileInfoHeader ?? "BASIC INFORMATION")
-                    .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
-                    .foregroundColor(Color(headerColor))) {
-                        HStack {
-                            Text(ModuleAppYmlReader().profileData?.firstName ?? "First Name")
-                                .foregroundColor(Color(textColor))
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                            TextField(ModuleAppYmlReader().profileData?.firstName ?? "First Name", text: $firstName)
-                                .style(.textField)
-                                .foregroundColor(Color(textColor))
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        }
-                        HStack {
-                            Text(ModuleAppYmlReader().profileData?.lastName ?? "Last Name")
-                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                                .foregroundColor(Color(textColor))
-                            TextField(ModuleAppYmlReader().profileData?.lastName ?? "Last Name", text: $lastName)
-                                .style(.textField)
-                                .foregroundColor(Color(textColor))
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        }
-                    }
-                    .listRowBackground(Color(cellBackgroundColor))
+                VStack {
+                    IconView(image: $image,  hashFileKey: user.attachments?.Profile?.hashFileKey ?? "", fileName: user.attachments?.Profile?.attachmentID ?? "", viewModel: viewModel)
+                        .frame(width: Metrics.PROFILE_IMAGE_WIDTH, height: Metrics.PROFILE_IMAGE_HEIGHT )
+                    Text(name)
+                        .font(.title.weight(.bold))
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+                .accessibilityElement(children: .ignore)
                 
-                Section(header: Text(ModuleAppYmlReader().profileData?.otherInfo ?? "Other Information")
-                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
-                    .foregroundColor(Color(headerColor))
-                    .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))) {
-                        Button(action: {
-                            self.showGenderPicker.toggle()
-                        }) {
-                            Text(" \(genderSelection.rawValue)")
-                                .foregroundColor(Color(textColor))
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
-                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                        }
-                        if showGenderPicker {
-                            
-                            VStack(alignment:.trailing){
-                                Picker("Select a gender", selection: $genderSelection) {
-                                    ForEach(genderValues, id: \.self) {
-                                        Text($0.rawValue)
-                                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                                    }
-                                }
-                                .pickerStyle(WheelPickerStyle())
-                            }
-                        }
-                        
-                        
-                        Button(action: {
-                            self.showDatePicker.toggle()
-                        }) {
-                            Text(" \(dob)")
-                                .foregroundColor(Color(textColor))
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                        }
-                        if showDatePicker {
-                            
-                            VStack(alignment:.trailing){
-                                DatePicker("", selection: selectedDate, displayedComponents: .date)
-                                    .datePickerStyle(WheelDatePickerStyle())
-                            }
-                        }
-                        
+                Section {
+                    HStack {
+                        Text(firstNameTitle)
+                            .foregroundColor(.otfTextColor)
+                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                            .accessibilityHidden(true)
+                        TextField(firstNameTitle, text: $firstName)
+                            .style(.textField)
+                            .foregroundColor(.otfTextColor)
+                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                            .accessibilityLabel("First Name")
                     }
-                    .listRowBackground(Color(cellBackgroundColor))
+                    HStack {
+                        Text(ModuleAppYmlReader().profileData?.lastName ?? Constants.CustomiseStrings.lastName)
+                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                            .foregroundColor(.otfTextColor)
+                            .accessibilityHidden(true)
+                        TextField(lastNameTitle, text: $lastName)
+                            .style(.textField)
+                            .foregroundColor(.otfTextColor)
+                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                            .accessibilityLabel("Last Name")
+                    }
+                } header: {
+                    Text(infoHeader)
+                        .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+                        .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                        .foregroundColor(.otfHeaderColor)
+                        .textCase(nil)
+                }
+                
+                Section {
+                    Picker(Constants.CustomiseStrings.selectGender, selection: $gender) {
+                        ForEach(GenderType.allCases, id: \.self) {
+                            Text($0.rawValue)
+                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                        }
+                        .accessibilityLabel("Edit the gender set on your profile")
+                        .accessibilityInputLabels(["Edit Gender"])
+                    }
+                    
+                    DatePicker("Birthdate", selection: $birthday, displayedComponents: .date)
+                        .accessibilityLabel("Edit the birthdate set on your profile")
+                        .accessibilityInputLabels(["Edit Birthdate"])
+                } header: {
+                    Text(otherInfoHeader)
+                        .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                        .foregroundColor(.otfHeaderColor)
+                        .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
+                        .textCase(nil)
+                }
                 
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
                     updatePatient()
+                    if let image = image {
+                        isHideLoader = false
+                        if let imageData = image.pngData() {
+                            let bytesImage = viewModel.swiftSodium.getArrayOfBytesFromData(FileData: imageData as NSData)
+                            let hashKeyFile = viewModel.swiftSodium.generateGenericHashWithoutKey(message: bytesImage)
+                            let hashKeyFileHex = hashKeyFile.bytesToHex(spacing: "").lowercased()
+                            let uuid = UUID().uuidString + ".png"
+                            viewModel.uploadFile(data: imageData, fileName: uuid , hashFileKey: hashKeyFileHex)
+                            
+                        }
+                    }
                 }, label: {
-                    Text("Save")
+                    Text(Constants.CustomiseStrings.save)
                         .padding(Metrics.PADDING_BUTTON_LABEL)
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(Color(buttonColor))
+                        .foregroundColor(.otfButtonColor)
                         .font(.system(size: 20, weight: .bold, design: .default))
                         .overlay(
                             RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                .stroke(Color(buttonColor), lineWidth: 2)
+                                .stroke(Color.otfButtonColor, lineWidth: 2)
                         )
                 })
                 
-            }.navigationBarTitle(Text(ModuleAppYmlReader().profileData?.title ?? "Profile"))
-                .background(Color.red)
+            }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
-            CareKitManager.shared.cloudantStore?.fetchPatient(withID: user.id, completion: { result in
-                if case .success(let patient) = result {
-                    self.user = patient
-                    self.firstName = patient.name.givenName ?? ""
-                    self.lastName = patient.name.familyName ?? ""
-                    self.genderSelection = patient.sex?.genderType ?? .other
-                    self.date = patient.birthday ?? Date()
-                    setDateString()
+                        .listRowBackground(Color.otfCellBackground)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarTitle(Text(ModuleAppYmlReader().profileData?.title ?? "Profile"))
+                        .overlay(LoaderView(tintColor: .black, scaleSize: 2.0).padding(.bottom,50).hidden(isHideLoader))
+            
+            .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { notification in
+                viewModel.fetchPatient(userId: user.id)
+            }
+            .onReceive(viewModel.patientPublisher) { patient in
+                patientData(patient: patient)
+            }
+            .onReceive(viewModel.profileImageData) { data in
+                let dataDict:[String: Data] = ["imageData": data]
+                NotificationCenter.default.post(name: .imageUploaded, object: dataDict)
+                presentationMode.wrappedValue.dismiss()
+            }
+            
+            .onReceive(NotificationCenter.default.publisher(for: .deleteProfile)) { notification in
+                if let fileName = user.attachments?.Profile?.attachmentID {
+                    isHideLoader = false
+                    viewModel.deleteAttachment(attachmentID: fileName)
+                    viewModel.deleteFileFromDocument(fileName: fileName)
                 }
-            })
+            }
+            .onReceive(viewModel.hideLoader) { value in
+                isHideLoader  = true
+                NotificationCenter.default.post(name: .imageUploaded, object: nil)
+                presentationMode.wrappedValue.dismiss()
+            }
+            .onAppear {
+                if let attachmentID = user.attachments?.Profile?.attachmentID {
+                    if profileImageData.retriveFile(fileName: attachmentID) != nil  {} else  {
+                        viewModel.downloadFile(attachmentID: attachmentID)
+                    }
+                }
+            }
         }
-    }
     
-    func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
-                                        to: nil, from: nil, for: nil)
+    
+    
+    func patientData(patient: OCKPatient) {
+        self.user = patient
+        self.firstName = patient.name.givenName ?? ""
+        self.lastName = patient.name.familyName ?? ""
+        self.gender = patient.sex?.genderType ?? .other
+        self.birthday = patient.birthday ?? Date()
+        setDateString()
     }
     
     func updatePatient() {
@@ -219,9 +243,43 @@ struct UpdateUserProfileDetailView: View {
         name.givenName = firstName
         name.familyName = lastName
         user.name = name
-        user.birthday = date
-        user.sex = genderSelection.carekitGender
-        CareKitManager.shared.cloudantStore?.updatePatient(user)
+        user.birthday = birthday
+        user.sex = gender.carekitGender
+        viewModel.updatePatient(user: user)
+    }
+    
+    private func setDateString() {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM-dd-yyyy"
+            dob = formatter.string(from: self.birthday)
+        }
+}
+
+
+// MARK: - Labels
+extension UpdateUserProfileDetailView {
+    var name: String {
+        guard let givenName = user.name.givenName,
+              let familyName = user.name.familyName else {
+            return ""
+        }
+        return "\(givenName) \(familyName)"
+    }
+    
+    var infoHeader: String {
+        ModuleAppYmlReader().profileData?.profileInfoHeader ?? Constants.CustomiseStrings.basicInformation
+    }
+    
+    var firstNameTitle: String {
+        ModuleAppYmlReader().profileData?.firstName ?? Constants.CustomiseStrings.firstName
+    }
+    
+    var lastNameTitle: String {
+        ModuleAppYmlReader().profileData?.lastName ?? Constants.CustomiseStrings.lastName
+    }
+    
+    var otherInfoHeader: String {
+        ModuleAppYmlReader().profileData?.otherInfo ?? Constants.CustomiseStrings.otherInformation
     }
 }
 
@@ -256,16 +314,26 @@ extension OCKBiologicalSex {
 }
 
 struct IconView: View {
-    @State private var image: Image?
+    @Binding var image: UIImage?
+    @State var hashFileKey : String
+    @State var fileName: String
+    @State var imageViews = Data()
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
     @State private var sourceType = UIImagePickerController.SourceType.photoLibrary
+    @StateObject var viewModel: UpdateUserViewModel
+    @State var imageUI : UIImage? = nil
     
     var imageView: Image {
-        if let userImage = UIImage(named: ModuleAppYmlReader().profileData?.profileImage ?? "user_profile") {
-            return Image(uiImage: userImage)
+        
+        if let image = image {
+            return Image(uiImage: image)
+        } else if let imageUI = imageUI {
+            return Image(uiImage: imageUI)
+        } else {
+            return Image.avatar
         }
-        return Image.avatar
+       
     }
     
     var body: some View {
@@ -276,20 +344,33 @@ struct IconView: View {
             .sheet(isPresented: $shouldPresentImagePicker) {
                 SUImagePickerView(sourceType: self.sourceType, image: self.$image, isPresented: self.$shouldPresentImagePicker)
             }
+            .onLoad {
+                DispatchQueue.main.async {
+                    if let retriveImageData = imageViews.retriveFile(fileName: fileName)  {
+                        imageUI = viewModel.dataToImageWithoutDecryption(data: retriveImageData, key: hashFileKey)
+                    }
+                }
+            }
             .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-                ActionSheet(title: Text("Choose mode")
+                ActionSheet(title: Text(Constants.CustomiseStrings.chooseMode)
                     .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
-                            message: Text("Please choose your preferred mode to set your profile image")
+                            message: Text(Constants.CustomiseStrings.chooseProfileImage)
                     .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                    self.shouldPresentImagePicker = true
-                    self.sourceType = .camera
-                }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                    self.shouldPresentImagePicker = true
-                    self.sourceType = .photoLibrary
-                }), ActionSheet.Button.cancel()])
+                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)), buttons: [ActionSheet.Button.default(Text(Constants.CustomiseStrings.camera), action: {
+                        self.shouldPresentImagePicker = true
+                        self.sourceType = .camera
+                    }), ActionSheet.Button.default(Text(Constants.CustomiseStrings.photoLibrary), action: {
+                        self.shouldPresentImagePicker = true
+                        self.sourceType = .photoLibrary
+                    }), ActionSheet.Button.destructive(Text(Constants.CustomiseStrings.deleteProfile), action: {
+                        NotificationCenter.default.post(name: .deleteProfile, object: nil)
+                    }), ActionSheet.Button.cancel()])
             }
+            .accessibilityLabel("Profile image")
+            .accessibilityAddTraits(.isButton)
+            .accessibilityHint("Double tap to update your profile image")
+            .accessibilityIgnoresInvertColors(true)
     }
 }
 
@@ -297,7 +378,7 @@ struct IconView: View {
 struct SUImagePickerView: UIViewControllerRepresentable {
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var image: Image?
+    @Binding var image: UIImage?
     @Binding var isPresented: Bool
     
     func makeCoordinator() -> ImagePickerViewCoordinator {
@@ -319,22 +400,39 @@ struct SUImagePickerView: UIViewControllerRepresentable {
 class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate,
                                   UIImagePickerControllerDelegate {
     
-    @Binding var image: Image?
+    @Binding var image: UIImage?
     @Binding var isPresented: Bool
     
-    init(image: Binding<Image?>, isPresented: Binding<Bool>) {
+    init(image: Binding<UIImage?>, isPresented: Binding<Bool>) {
         self._image = image
         self._isPresented = isPresented
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.image = Image(uiImage: image)
+            self.image = image
         }
         self.isPresented = false
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.isPresented = false
+    }
+}
+
+extension Array where Element == UInt8 {
+    func bytesToHex(spacing: String) -> String {
+        var hexString: String = ""
+        var count = self.count
+        for byte in self
+        {
+            hexString.append(String(format:"%02X", byte))
+            count = count - 1
+            if count > 0
+            {
+                hexString.append(spacing)
+            }
+        }
+        return hexString
     }
 }

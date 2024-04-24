@@ -50,8 +50,8 @@ struct ContactsSection: View {
                         .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                 }
                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                .foregroundColor(Color(YmlReader().appTheme?.textColor.color ?? .black))
-                .listRowBackground(Color(YmlReader().appTheme?.cellbackgroundColor.color ?? .black))
+                .foregroundColor(.otfTextColor)
+                .listRowBackground(Color.otfCellBackground)
             }
             .listRowBackground(Color(cellbackgroundColor))
             .foregroundColor(Color(textColor))

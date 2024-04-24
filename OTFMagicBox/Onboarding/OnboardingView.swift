@@ -34,6 +34,7 @@
 
 import SwiftUI
 import UIKit
+import OTFUtilities
 
 /// The onboarding view.
 struct OnboardingView: View {
@@ -54,7 +55,7 @@ struct OnboardingView: View {
         // TODO: Add the actual default image, if the user doesnt enter any image.
         let config = ModuleAppYmlReader()
         let onboardingdata: [Onboarding] = {
-            config.onboardingData ?? [Onboarding(image: "Splash Image", icon: "stethoscope", title: "Welcome", color: "black", description: "Default: This is the description.")]
+            config.onboardingData ?? [Onboarding(image: Constants.CustomiseStrings.splashImage, icon: Constants.CustomiseStrings.splashIcon, title: Constants.CustomiseStrings.welcome, color: "black", description: Constants.CustomiseStrings.defaultDescription)]
         }()
         
         onboardingElements = onboardingdata
@@ -69,7 +70,7 @@ struct OnboardingView: View {
         ZStack {
             OnboardingItemView(self.onboardingElements.map {
                 OnboardingDetailsView(icon: $0.icon, image: $0.image,
-                                      title: $0.title,
+                                      title: $0.title ?? Constants.YamlDefaults.AppTitle,
                                       description: $0.description,
                                       color: Color($0.color.color ?? .black))
             })
@@ -82,49 +83,51 @@ struct OnboardingView: View {
                         Button(action: {
                             self.showingOnboard = true
                         }, label: {
-                            Text("Sign Up")
+                            Text(Constants.CustomiseStrings.signUp)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
+                                .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
                                 .foregroundColor(.white)
                                 .background(self.color)
                                 .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
                                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                         })
-                        .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN / 2)
+                        .padding(.leading, Metrics.PADDING_HORIZONTAL_BUTTON)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_BUTTON / 2)
                         
                         Button(action: {
                             self.showingLogin = true
                         }, label: {
-                            Text("Sign In")
+                            Text(Constants.CustomiseStrings.signIn)
                                 .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
                                 .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
+                                .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
                                 .foregroundColor(.white)
                                 .background(Color.blue)
                                 .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
                         })
-                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-                        .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN / 2)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_BUTTON)
+                        .padding(.leading, Metrics.PADDING_HORIZONTAL_BUTTON / 2)
                     }
                     
                     Spacer()
-                        .frame(height: geometry.safeAreaInsets.bottom > 0 ? 0 : 20)
+                        .frame(height: geometry.safeAreaInsets.bottom > 0 ? 0 : Metrics.BOTTOM_SPACER)
                 }
             }
         }
         .sheet(isPresented: $showingLogin, onDismiss: {
-            debugPrint("Login sheet dismissed")
+            OTFLog("Login sheet dismissed")
             onComplete?()
         }, content: {
             LoginExistingUserViewController()
+                .ignoresSafeArea(.container)
         })
         .sheet(isPresented: $showingOnboard, onDismiss: {
-            debugPrint("Onboard sheet dismissed")
+            OTFLog("Onboard sheet dismissed")
             onComplete?()
         }, content: {
             OnboardingViewController()
+                .ignoresSafeArea(.container)
         })
     }
 }
@@ -153,22 +156,24 @@ struct OnboardingDetailsView: View {
             Image(image)
                 .resizable()
                 .ignoresSafeArea()
+                .accessibilityHidden(true)
             
             VStack {
                 Image(systemName: icon)
                     .imageScale(.large)
                     .foregroundColor(color)
                     .font(.system(size: 60.0).bold())
-                    .padding(.top, Metrics.PADDING_VERTICAL_MAIN * 2)
-                    .padding(.bottom, Metrics.PADDING_VERTICAL_MAIN)
+                    .padding(.top, Metrics.PADDING_VERTICAL_BUTTON * 2)
+                    .padding(.bottom, Metrics.PADDING_VERTICAL_BUTTON)
+                    .accessibilityHidden(true)
                 
                 Text(title)
                     .multilineTextAlignment(.center)
-                    .font(.headline)
+                    .font(YmlReader().appTheme?.appTitleSize.appFont ?? Constants.YamlDefaults.AppTitleSize.appFont)
                     .foregroundColor(color)
                     .shadow(color: .black, radius: 15)
                     .padding([.horizontal, .bottom],
-                             Metrics.PADDING_VERTICAL_MAIN)
+                             Metrics.PADDING_VERTICAL_BUTTON)
                 
                 Text(description)
                     .multilineTextAlignment(.center)
@@ -176,7 +181,7 @@ struct OnboardingDetailsView: View {
                     .foregroundColor(color)
                     .shadow(radius: 5)
                     .padding(.horizontal,
-                             Metrics.PADDING_HORIZONTAL_MAIN)
+                             Metrics.PADDING_HORIZONTAL_BUTTON)
                 
                 Spacer()
             }

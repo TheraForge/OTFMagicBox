@@ -38,5 +38,9 @@ extension NSNotification.Name {
     static let onboardingDidComplete = NSNotification.Name(Constants.onboardingDidComplete)
     static let dataSyncRequest = NSNotification.Name(rawValue: Constants.Notification.DataSyncRequest)
     static let databaseSuccessfllySynchronized = NSNotification.Name(rawValue: Constants.Notification.DatabaseSynchronizedSuccessfully)
+    static let imageUploaded = NSNotification.Name(rawValue: Constants.Notification.ImageUploadedSuccessfully)
+    static let imageDownloaded = NSNotification.Name(rawValue: Constants.Notification.ImageDownloadedSuccessfully)
     static let deleteUserAccount = Notification.Name(rawValue: Constants.Notification.deleteUserAccount)
+    static let deleteProfile = Notification.Name(rawValue: Constants.Notification.deleteProfile)
+    static let fetchImage = Notification.Name(rawValue: Constants.Notification.fetchImage)
 }

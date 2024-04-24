@@ -34,6 +34,7 @@
 
 import Foundation
 import OTFCloudClientAPI
+import OTFUtilities
 
 class SSEAndSyncManager {
     static let shared = SSEAndSyncManager()
@@ -45,7 +46,7 @@ class SSEAndSyncManager {
         }
         
         OTFTheraforgeNetwork.shared.otfNetworkService.onReceivedMessage = { [unowned self] event in
-            print(event)
+            OTFLog("event type %{public}@.", event.type.rawValue)
             if event.type.rawValue == EventType.dbUpdate.rawValue {
                 syncDatabase(postNotification: true)
             } else if event.type.rawValue == EventType.userDeleted.rawValue {
@@ -56,7 +57,7 @@ class SSEAndSyncManager {
         }
         
         OTFTheraforgeNetwork.shared.otfNetworkService.eventSourceOnComplete = { code, reconnect, error in
-            print(error?.localizedDescription ?? "")
+            OTFError("error on receiving event in SSEAndSyncManager %{public}@.", error?.localizedDescription ?? "")
             if reconnect == true {
                 TheraForgeNetwork.shared.observeOnServerSentEvents(auth: auth)
             }

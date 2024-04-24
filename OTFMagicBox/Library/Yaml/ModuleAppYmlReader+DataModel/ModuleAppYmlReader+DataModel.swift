@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import Yams
+import OTFUtilities
 
 public class ModuleAppYmlReader {
     
@@ -372,12 +373,14 @@ struct ConsentDescription: Codable {
     let show: String
     let summary: String
     let content: String
+    let title: String
+    let image: String
 }
 
 struct Onboarding: Codable, Equatable {
     let image: String
     let icon: String
-    let title: String
+    let title: String?
     let color: String
     let description: String
 }
