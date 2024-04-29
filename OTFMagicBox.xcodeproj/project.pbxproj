@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04CDFE9A4C5C79E8EACA8709 /* Pods_OTFMagicBox_Watch_Watch_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44835E788FC7C51DB58219C2 /* Pods_OTFMagicBox_Watch_Watch_App.framework */; };
-		06540FA342BE7267771D8AF4 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55AC9A6EAEB0412B5C7F5D6C /* Pods_OTFMagicBox.framework */; };
 		326086F7283E48A300888678 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326086F6283E48A300888678 /* DeleteAccountView.swift */; };
 		32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */ = {isa = PBXBuildFile; fileRef = 32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */; };
 		32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */; };
@@ -16,6 +14,7 @@
 		32C6DD9828D8A04700E453A4 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9728D8A04700E453A4 /* LogoutViewModel.swift */; };
 		32C6DD9A28D8A06F00E453A4 /* UpdateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9928D8A06F00E453A4 /* UpdateUserViewModel.swift */; };
 		32C6DD9C28D8A08700E453A4 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9B28D8A08700E453A4 /* ChangePasswordViewModel.swift */; };
+		4CF07F71CAF10A608704FCFF /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E86A26F2DE6C8AB4A0B19344 /* Pods_OTFMagicBox.framework */; };
 		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
 		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
 		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
@@ -71,18 +70,7 @@
 		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
 		7C7EC6792A65912C003B0FFB /* OTFNetworkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7EC6782A65912C003B0FFB /* OTFNetworkObserver.swift */; };
 		7C979A602A5731C200EBCE2F /* OTFColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C979A5F2A5731C200EBCE2F /* OTFColor.swift */; };
-		7CA3D2F32A8A43C300FCB048 /* OTFMagicBox_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3D2F22A8A43C300FCB048 /* OTFMagicBox_WatchApp.swift */; };
-		7CA3D2F52A8A43C300FCB048 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3D2F42A8A43C300FCB048 /* ContentView.swift */; };
-		7CA3D2F72A8A43C400FCB048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CA3D2F62A8A43C400FCB048 /* Assets.xcassets */; };
-		7CA3D2FA2A8A43C400FCB048 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CA3D2F92A8A43C400FCB048 /* Preview Assets.xcassets */; };
-		7CA3D3042A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3D3032A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppTests.swift */; };
-		7CA3D30E2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3D30D2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITests.swift */; };
-		7CA3D3102A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3D30F2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITestsLaunchTests.swift */; };
-		7CA3D3132A8A43C400FCB048 /* OTFMagicBox Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 7CA3D2F02A8A43C300FCB048 /* OTFMagicBox Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7CA403032AB20C0F00A3D022 /* CareKitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA403022AB20C0F00A3D022 /* CareKitListView.swift */; };
-		7CD965022AB6AA5E003E9394 /* OCKStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */; };
-		7CD965032AB6B784003E9394 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4F264E9A880069FEF7 /* Constants.swift */; };
-		7CEB1FC52A8A5A83002918FE /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84146ED82BD14F4B007D768C /* TaskListRow+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146ED72BD14F4B007D768C /* TaskListRow+Extras.swift */; };
 		841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA609275F719000C6861D /* ViewDidLoadModifier.swift */; };
 		841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA60B275F827300C6861D /* CareKitStoreManager.swift */; };
 		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
@@ -126,10 +114,26 @@
 		849989DE2AD7CB1C009CBA41 /* PDFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989DD2AD7CB1B009CBA41 /* PDFViewer.swift */; };
 		849989E02AD7CB25009CBA41 /* PDFKitRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989DF2AD7CB25009CBA41 /* PDFKitRepresentedView.swift */; };
 		849989E22AD7CC67009CBA41 /* UploadDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E12AD7CC67009CBA41 /* UploadDocumentManager.swift */; };
-		849989E42AD7CD53009CBA41 /* ActivityLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E32AD7CD53009CBA41 /* ActivityLoader.swift */; };
+		849989E42AD7CD53009CBA41 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E32AD7CD53009CBA41 /* LoaderView.swift */; };
 		849989E62AD7D182009CBA41 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E52AD7D182009CBA41 /* Extension+Array.swift */; };
 		84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1758A2750A035001587BD /* Extention+Notification.swift */; };
+		84EEAD042BBCA6D100414955 /* OTFStyleColorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEAD012BBCA6D100414955 /* OTFStyleColorStyler.swift */; };
+		84EEAD052BBCA6D100414955 /* OTFStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEAD022BBCA6D100414955 /* OTFStyle.swift */; };
+		84EEAD062BBCA6D100414955 /* OTFYamlStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEAD032BBCA6D100414955 /* OTFYamlStyle.swift */; };
+		84F43F502B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F43F4F2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift */; };
+		84F43F542B4D6A4C009DFFF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F43F532B4D6A4C009DFFF8 /* Assets.xcassets */; };
+		84F43F572B4D6A4C009DFFF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F43F562B4D6A4C009DFFF8 /* Preview Assets.xcassets */; };
+		84F43F5A2B4D6A4C009DFFF8 /* OTFMagicBoxWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9004A9222AD7DD390084622A /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004A9212AD7DD390084622A /* HelpView.swift */; };
+		901700F42B63B856006C611C /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901700F32B63B856006C611C /* ActivityIndicatorView.swift */; };
+		902E18A62AE8F0A000F694F2 /* OTFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902E18A52AE8F0A000F694F2 /* OTFFont.swift */; };
+		90C79E452B4DCE120020D20F /* OTFCareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E3F2B4DCE110020D20F /* OTFCareKitStoreManager.swift */; };
+		90C79E462B4DCE120020D20F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E402B4DCE110020D20F /* ContentView.swift */; };
+		90C79E472B4DCE120020D20F /* CareKitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E412B4DCE120020D20F /* CareKitListView.swift */; };
+		90C79E482B4DCE120020D20F /* Extension+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E422B4DCE120020D20F /* Extension+Notification.swift */; };
+		90C79E492B4DCE120020D20F /* Extension+OCKTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E432B4DCE120020D20F /* Extension+OCKTask.swift */; };
+		90C79E4A2B4DCE120020D20F /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E442B4DCE120020D20F /* SessionManager.swift */; };
+		90C79E4C2B4E862A0020D20F /* WatchStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E4B2B4E862A0020D20F /* WatchStoreService.swift */; };
 		A8C0556B296D61770098D1FB /* Extention+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C0556A296D61770098D1FB /* Extention+ViewController.swift */; };
 		A8FCD2AA2A4C6EF7006E0B6E /* KeychainCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCD2A92A4C6EF7006E0B6E /* KeychainCloudManager.swift */; };
 		A8FCD2AC2A4C6F0D006E0B6E /* LocalAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCD2AB2A4C6F0D006E0B6E /* LocalAuthentication.swift */; };
@@ -139,6 +143,7 @@
 		CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CFA262C954A00C0A2D5 /* ContentView.swift */; };
 		CE482CFD262C954C00C0A2D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE482CFC262C954C00C0A2D5 /* Assets.xcassets */; };
 		CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */; };
+		FFB3790929612305437E0E08 /* Pods_OTFMagicBoxWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DC70EC922D0E3C888B7C474 /* Pods_OTFMagicBoxWatch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,26 +154,12 @@
 			remoteGlobalIDString = CE482CF2262C954A00C0A2D5;
 			remoteInfo = OTFMagicBox;
 		};
-		7CA3D3002A8A43C400FCB048 /* PBXContainerItemProxy */ = {
+		84F43F582B4D6A4C009DFFF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE482CEB262C954A00C0A2D5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7CA3D2EF2A8A43C300FCB048;
-			remoteInfo = "OTFMagicBox Watch Watch App";
-		};
-		7CA3D30A2A8A43C400FCB048 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE482CEB262C954A00C0A2D5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7CA3D2EF2A8A43C300FCB048;
-			remoteInfo = "OTFMagicBox Watch Watch App";
-		};
-		7CA3D3112A8A43C400FCB048 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE482CEB262C954A00C0A2D5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7CA3D2EF2A8A43C300FCB048;
-			remoteInfo = "OTFMagicBox Watch Watch App";
+			remoteGlobalIDString = 84F43F4C2B4D6A4A009DFFF8;
+			remoteInfo = "OTFMagicBoxWatch Watch App";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -179,26 +170,15 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				7CA3D3132A8A43C400FCB048 /* OTFMagicBox Watch Watch App.app in Embed Watch Content */,
+				84F43F5A2B4D6A4C009DFFF8 /* OTFMagicBoxWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CEB1FC62A8A5A83002918FE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7CEB1FC52A8A5A83002918FE /* (null) in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		23661129E1AA02D9A3410FC7 /* Pods-OTFMagicBox Watch Watch App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox Watch Watch App.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox Watch Watch App/Pods-OTFMagicBox Watch Watch App.debug.xcconfig"; sourceTree = "<group>"; };
+		2DC70EC922D0E3C888B7C474 /* Pods_OTFMagicBoxWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBoxWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32100A2B28AE5BB500035F5E /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
 		326086F6283E48A300888678 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ModuleAppSysParameter.yml; sourceTree = "<group>"; };
@@ -208,8 +188,7 @@
 		32C6DD9928D8A06F00E453A4 /* UpdateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserViewModel.swift; sourceTree = "<group>"; };
 		32C6DD9B28D8A08700E453A4 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		32E5138C28EC68F100A16FA5 /* Extention+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+ViewController.swift"; sourceTree = "<group>"; };
-		44835E788FC7C51DB58219C2 /* Pods_OTFMagicBox_Watch_Watch_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox_Watch_Watch_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55AC9A6EAEB0412B5C7F5D6C /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58ADE8FC0AF041D6DF78CE64 /* Pods-OTFMagicBoxWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.release.xcconfig"; sourceTree = "<group>"; };
 		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
 		5A41D036266A955C007CCEB4 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -267,20 +246,10 @@
 		5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
 		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
+		62EB2116D692E7C5E54E80E1 /* Pods-OTFMagicBoxWatch.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.care.xcconfig"; sourceTree = "<group>"; };
 		7C7EC6782A65912C003B0FFB /* OTFNetworkObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFNetworkObserver.swift; sourceTree = "<group>"; };
 		7C979A5F2A5731C200EBCE2F /* OTFColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFColor.swift; sourceTree = "<group>"; };
-		7CA3D2F02A8A43C300FCB048 /* OTFMagicBox Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OTFMagicBox Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7CA3D2F22A8A43C300FCB048 /* OTFMagicBox_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBox_WatchApp.swift; sourceTree = "<group>"; };
-		7CA3D2F42A8A43C300FCB048 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7CA3D2F62A8A43C400FCB048 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7CA3D2F92A8A43C400FCB048 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7CA3D2FF2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OTFMagicBox Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7CA3D3032A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBox_Watch_Watch_AppTests.swift; sourceTree = "<group>"; };
-		7CA3D3092A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OTFMagicBox Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7CA3D30D2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBox_Watch_Watch_AppUITests.swift; sourceTree = "<group>"; };
-		7CA3D30F2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBox_Watch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7CA403022AB20C0F00A3D022 /* CareKitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareKitListView.swift; sourceTree = "<group>"; };
-		7CD965012AB660E8003E9394 /* OTFMagicBox Watch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OTFMagicBox Watch Watch App.entitlements"; sourceTree = "<group>"; };
+		84146ED72BD14F4B007D768C /* TaskListRow+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskListRow+Extras.swift"; sourceTree = "<group>"; };
 		841CA609275F719000C6861D /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		841CA60B275F827300C6861D /* CareKitStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareKitStoreManager.swift; sourceTree = "<group>"; };
 		841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
@@ -323,15 +292,34 @@
 		849989DD2AD7CB1B009CBA41 /* PDFViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewer.swift; sourceTree = "<group>"; };
 		849989DF2AD7CB25009CBA41 /* PDFKitRepresentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFKitRepresentedView.swift; sourceTree = "<group>"; };
 		849989E12AD7CC67009CBA41 /* UploadDocumentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadDocumentManager.swift; sourceTree = "<group>"; };
-		849989E32AD7CD53009CBA41 /* ActivityLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityLoader.swift; sourceTree = "<group>"; };
+		849989E32AD7CD53009CBA41 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		849989E52AD7D182009CBA41 /* Extension+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		84A1758A2750A035001587BD /* Extention+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+Notification.swift"; sourceTree = "<group>"; };
+		84EEAD012BBCA6D100414955 /* OTFStyleColorStyler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFStyleColorStyler.swift; sourceTree = "<group>"; };
+		84EEAD022BBCA6D100414955 /* OTFStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFStyle.swift; sourceTree = "<group>"; };
+		84EEAD032BBCA6D100414955 /* OTFYamlStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFYamlStyle.swift; sourceTree = "<group>"; };
+		84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBoxWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84F43F4F2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxWatch.swift; sourceTree = "<group>"; };
+		84F43F532B4D6A4C009DFFF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84F43F562B4D6A4C009DFFF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9004A9212AD7DD390084622A /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
-		A5576C00FEC63C6798D1DB53 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		901700F32B63B856006C611C /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		902E18A52AE8F0A000F694F2 /* OTFFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFFont.swift; sourceTree = "<group>"; };
+		90C79E3E2B4DCD9D0020D20F /* OTFMagicBoxWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBoxWatch.entitlements; sourceTree = "<group>"; };
+		90C79E3F2B4DCE110020D20F /* OTFCareKitStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFCareKitStoreManager.swift; sourceTree = "<group>"; };
+		90C79E402B4DCE110020D20F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		90C79E412B4DCE120020D20F /* CareKitListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareKitListView.swift; sourceTree = "<group>"; };
+		90C79E422B4DCE120020D20F /* Extension+Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Notification.swift"; sourceTree = "<group>"; };
+		90C79E432B4DCE120020D20F /* Extension+OCKTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+OCKTask.swift"; sourceTree = "<group>"; };
+		90C79E442B4DCE120020D20F /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		90C79E4B2B4E862A0020D20F /* WatchStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStoreService.swift; sourceTree = "<group>"; };
+		9BC94C5B492FDF7370667F8A /* Pods-OTFMagicBox.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.care.xcconfig"; sourceTree = "<group>"; };
+		A49F6F1563A78034A9EBE56C /* Pods-OTFMagicBoxWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.debug.xcconfig"; sourceTree = "<group>"; };
 		A8C0556A296D61770098D1FB /* Extention+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+ViewController.swift"; sourceTree = "<group>"; };
 		A8FCD2A92A4C6EF7006E0B6E /* KeychainCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainCloudManager.swift; sourceTree = "<group>"; };
 		A8FCD2AB2A4C6F0D006E0B6E /* LocalAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthentication.swift; sourceTree = "<group>"; };
-		C68B1F7051EF9581BEEB32BF /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		BE0B0929EFF0E25E87CF3B71 /* Pods-OTFMagicBox.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.carehealth.xcconfig"; sourceTree = "<group>"; };
+		C786F095D5BBC2634543074F /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -340,7 +328,9 @@
 		CE482CFC262C954C00C0A2D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE482D02262C954C00C0A2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE482D04262C954C00C0A2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5CF7B6203990ECA79E1B177 /* Pods-OTFMagicBox Watch Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox Watch Watch App.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox Watch Watch App/Pods-OTFMagicBox Watch Watch App.release.xcconfig"; sourceTree = "<group>"; };
+		E86A26F2DE6C8AB4A0B19344 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F07B7C39F5B74DE968EFEDC4 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		F2F96CA14BB557FB216784C9 /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.carehealth.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,25 +341,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7CA3D2ED2A8A43C300FCB048 /* Frameworks */ = {
+		84F43F4A2B4D6A4A009DFFF8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CDFE9A4C5C79E8EACA8709 /* Pods_OTFMagicBox_Watch_Watch_App.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CA3D2FC2A8A43C400FCB048 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CA3D3062A8A43C400FCB048 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				FFB3790929612305437E0E08 /* Pods_OTFMagicBoxWatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
-				06540FA342BE7267771D8AF4 /* Pods_OTFMagicBox.framework in Frameworks */,
+				4CF07F71CAF10A608704FCFF /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +483,7 @@
 				5A49632926EB5E2E00A4B4DF /* Extension */,
 				5A49626D26D4A2EA00A4B4DF /* Yaml */,
 				5AADFD4F264E9A880069FEF7 /* Constants.swift */,
-				849989E32AD7CD53009CBA41 /* ActivityLoader.swift */,
+				849989E32AD7CD53009CBA41 /* LoaderView.swift */,
 				5AB1808126B88A2B007AF766 /* Metrics.swift */,
 				5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */,
 				5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */,
@@ -519,6 +495,7 @@
 				A8FCD2A92A4C6EF7006E0B6E /* KeychainCloudManager.swift */,
 				849989E12AD7CC67009CBA41 /* UploadDocumentManager.swift */,
 				A8FCD2AB2A4C6F0D006E0B6E /* LocalAuthentication.swift */,
+				902E18A52AE8F0A000F694F2 /* OTFFont.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -595,44 +572,6 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
-		7CA3D2F12A8A43C300FCB048 /* OTFMagicBox Watch Watch App */ = {
-			isa = PBXGroup;
-			children = (
-				7CD965012AB660E8003E9394 /* OTFMagicBox Watch Watch App.entitlements */,
-				7CA3D2F22A8A43C300FCB048 /* OTFMagicBox_WatchApp.swift */,
-				7CA3D2F42A8A43C300FCB048 /* ContentView.swift */,
-				7CA403022AB20C0F00A3D022 /* CareKitListView.swift */,
-				7CA3D2F62A8A43C400FCB048 /* Assets.xcassets */,
-				7CA3D2F82A8A43C400FCB048 /* Preview Content */,
-			);
-			path = "OTFMagicBox Watch Watch App";
-			sourceTree = "<group>";
-		};
-		7CA3D2F82A8A43C400FCB048 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				7CA3D2F92A8A43C400FCB048 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		7CA3D3022A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests */ = {
-			isa = PBXGroup;
-			children = (
-				7CA3D3032A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppTests.swift */,
-			);
-			path = "OTFMagicBox Watch Watch AppTests";
-			sourceTree = "<group>";
-		};
-		7CA3D30C2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7CA3D30D2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITests.swift */,
-				7CA3D30F2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITestsLaunchTests.swift */,
-			);
-			path = "OTFMagicBox Watch Watch AppUITests";
-			sourceTree = "<group>";
-		};
 		841FEFBC274E5D8200698892 /* Datastore */ = {
 			isa = PBXGroup;
 			children = (
@@ -674,11 +613,11 @@
 		846761A927DF8BC300A3207E /* StaticViews */ = {
 			isa = PBXGroup;
 			children = (
-				846761AA27DF8BC300A3207E /* PlatformPicker.swift */,
-				846761AB27DF8BC300A3207E /* StaticUI.swift */,
+				846761B427DF8BC300A3207E /* CareKit */,
 				846761AC27DF8BC300A3207E /* RK UI */,
 				846761B327DF8BC300A3207E /* CardBackground.swift */,
-				846761B427DF8BC300A3207E /* CareKit */,
+				846761AA27DF8BC300A3207E /* PlatformPicker.swift */,
+				846761AB27DF8BC300A3207E /* StaticUI.swift */,
 			);
 			path = StaticViews;
 			sourceTree = "<group>";
@@ -691,6 +630,7 @@
 				846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */,
 				846761B027DF8BC300A3207E /* RKTasks.swift */,
 				846761B127DF8BC300A3207E /* TaskListRow.swift */,
+				84146ED72BD14F4B007D768C /* TaskListRow+Extras.swift */,
 				846761B227DF8BC300A3207E /* TaskListViewController.swift */,
 			);
 			path = "RK UI";
@@ -707,15 +647,88 @@
 			path = CareKit;
 			sourceTree = "<group>";
 		};
+		84847E4A2BA1C42300B2B016 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				901700F32B63B856006C611C /* ActivityIndicatorView.swift */,
+				90C79E412B4DCE120020D20F /* CareKitListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		84847E4B2BA1C51600B2B016 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				90C79E4B2B4E862A0020D20F /* WatchStoreService.swift */,
+				90C79E3F2B4DCE110020D20F /* OTFCareKitStoreManager.swift */,
+			);
+			path = DataStore;
+			sourceTree = "<group>";
+		};
+		84847E4C2BA1C58100B2B016 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				90C79E442B4DCE120020D20F /* SessionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		84EEAD002BBCA6D100414955 /* Styling */ = {
+			isa = PBXGroup;
+			children = (
+				84EEAD012BBCA6D100414955 /* OTFStyleColorStyler.swift */,
+				84EEAD022BBCA6D100414955 /* OTFStyle.swift */,
+				84EEAD032BBCA6D100414955 /* OTFYamlStyle.swift */,
+			);
+			path = Styling;
+			sourceTree = "<group>";
+		};
+		84F43F4E2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */ = {
+			isa = PBXGroup;
+			children = (
+				84F43F4F2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift */,
+				90C79E402B4DCE110020D20F /* ContentView.swift */,
+				84847E4C2BA1C58100B2B016 /* Managers */,
+				84847E4B2BA1C51600B2B016 /* DataStore */,
+				901700EF2B5A701F006C611C /* Extensions */,
+				84847E4A2BA1C42300B2B016 /* Views */,
+				84F43F552B4D6A4C009DFFF8 /* Preview Content */,
+				84F43F532B4D6A4C009DFFF8 /* Assets.xcassets */,
+				90C79E3E2B4DCD9D0020D20F /* OTFMagicBoxWatch.entitlements */,
+			);
+			path = OTFMagicBoxWatch;
+			sourceTree = "<group>";
+		};
+		84F43F552B4D6A4C009DFFF8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				84F43F562B4D6A4C009DFFF8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C68B1F7051EF9581BEEB32BF /* Pods-OTFMagicBox.debug.xcconfig */,
-				A5576C00FEC63C6798D1DB53 /* Pods-OTFMagicBox.release.xcconfig */,
-				23661129E1AA02D9A3410FC7 /* Pods-OTFMagicBox Watch Watch App.debug.xcconfig */,
-				E5CF7B6203990ECA79E1B177 /* Pods-OTFMagicBox Watch Watch App.release.xcconfig */,
+				C786F095D5BBC2634543074F /* Pods-OTFMagicBox.debug.xcconfig */,
+				BE0B0929EFF0E25E87CF3B71 /* Pods-OTFMagicBox.carehealth.xcconfig */,
+				9BC94C5B492FDF7370667F8A /* Pods-OTFMagicBox.care.xcconfig */,
+				F07B7C39F5B74DE968EFEDC4 /* Pods-OTFMagicBox.release.xcconfig */,
+				A49F6F1563A78034A9EBE56C /* Pods-OTFMagicBoxWatch.debug.xcconfig */,
+				F2F96CA14BB557FB216784C9 /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */,
+				62EB2116D692E7C5E54E80E1 /* Pods-OTFMagicBoxWatch.care.xcconfig */,
+				58ADE8FC0AF041D6DF78CE64 /* Pods-OTFMagicBoxWatch.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		901700EF2B5A701F006C611C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				90C79E432B4DCE120020D20F /* Extension+OCKTask.swift */,
+				90C79E422B4DCE120020D20F /* Extension+Notification.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A8705D29296E8E85003AFC0B /* Recovered References */ = {
@@ -730,8 +743,8 @@
 			isa = PBXGroup;
 			children = (
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
-				55AC9A6EAEB0412B5C7F5D6C /* Pods_OTFMagicBox.framework */,
-				44835E788FC7C51DB58219C2 /* Pods_OTFMagicBox_Watch_Watch_App.framework */,
+				E86A26F2DE6C8AB4A0B19344 /* Pods_OTFMagicBox.framework */,
+				2DC70EC922D0E3C888B7C474 /* Pods_OTFMagicBoxWatch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -742,9 +755,7 @@
 				32100A2B28AE5BB500035F5E /* .github */,
 				CE482CF5262C954A00C0A2D5 /* OTFMagicBox */,
 				5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */,
-				7CA3D2F12A8A43C300FCB048 /* OTFMagicBox Watch Watch App */,
-				7CA3D3022A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests */,
-				7CA3D30C2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests */,
+				84F43F4E2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */,
 				CE482CF4262C954A00C0A2D5 /* Products */,
 				8C979D2203D122CC68BA93F2 /* Pods */,
 				C9D92AAC7DE27C25427A4DB9 /* Frameworks */,
@@ -757,9 +768,7 @@
 			children = (
 				CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */,
 				5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */,
-				7CA3D2F02A8A43C300FCB048 /* OTFMagicBox Watch Watch App.app */,
-				7CA3D2FF2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests.xctest */,
-				7CA3D3092A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests.xctest */,
+				84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -783,6 +792,7 @@
 				5AADFD43264E86B00069FEF7 /* Login */,
 				5AADFD3D264E86A20069FEF7 /* Library */,
 				5AADFD35264E86950069FEF7 /* Onboarding */,
+				84EEAD002BBCA6D100414955 /* Styling */,
 				CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */,
 				CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */,
 				5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */,
@@ -819,77 +829,42 @@
 			productReference = 5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7CA3D2EF2A8A43C300FCB048 /* OTFMagicBox Watch Watch App */ = {
+		84F43F4C2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7CA3D31B2A8A43C400FCB048 /* Build configuration list for PBXNativeTarget "OTFMagicBox Watch Watch App" */;
+			buildConfigurationList = 84F43F5D2B4D6A4C009DFFF8 /* Build configuration list for PBXNativeTarget "OTFMagicBoxWatch" */;
 			buildPhases = (
-				05EB063AD94BCC1191F92DD8 /* [CP] Check Pods Manifest.lock */,
-				7CA3D2EC2A8A43C300FCB048 /* Sources */,
-				7CA3D2ED2A8A43C300FCB048 /* Frameworks */,
-				7CA3D2EE2A8A43C300FCB048 /* Resources */,
-				7CEB1FC62A8A5A83002918FE /* Embed Frameworks */,
-				9333C6CAA54ADF6700EA8400 /* [CP] Embed Pods Frameworks */,
+				FFD91FC98245B864E873D8DF /* [CP] Check Pods Manifest.lock */,
+				84F43F492B4D6A4A009DFFF8 /* Sources */,
+				84F43F4A2B4D6A4A009DFFF8 /* Frameworks */,
+				84F43F4B2B4D6A4A009DFFF8 /* Resources */,
+				901EEAFD2BDA2A10004EC8B5 /* ShellScript */,
+				CA4E7853B35A745B8BED7B95 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "OTFMagicBox Watch Watch App";
-			productName = "OTFMagicBox Watch Watch App";
-			productReference = 7CA3D2F02A8A43C300FCB048 /* OTFMagicBox Watch Watch App.app */;
+			name = OTFMagicBoxWatch;
+			productName = "OTFMagicBoxWatch Watch App";
+			productReference = 84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */;
 			productType = "com.apple.product-type.application";
-		};
-		7CA3D2FE2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7CA3D31C2A8A43C400FCB048 /* Build configuration list for PBXNativeTarget "OTFMagicBox Watch Watch AppTests" */;
-			buildPhases = (
-				7CA3D2FB2A8A43C400FCB048 /* Sources */,
-				7CA3D2FC2A8A43C400FCB048 /* Frameworks */,
-				7CA3D2FD2A8A43C400FCB048 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7CA3D3012A8A43C400FCB048 /* PBXTargetDependency */,
-			);
-			name = "OTFMagicBox Watch Watch AppTests";
-			productName = "OTFMagicBox Watch Watch AppTests";
-			productReference = 7CA3D2FF2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		7CA3D3082A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7CA3D31D2A8A43C400FCB048 /* Build configuration list for PBXNativeTarget "OTFMagicBox Watch Watch AppUITests" */;
-			buildPhases = (
-				7CA3D3052A8A43C400FCB048 /* Sources */,
-				7CA3D3062A8A43C400FCB048 /* Frameworks */,
-				7CA3D3072A8A43C400FCB048 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7CA3D30B2A8A43C400FCB048 /* PBXTargetDependency */,
-			);
-			name = "OTFMagicBox Watch Watch AppUITests";
-			productName = "OTFMagicBox Watch Watch AppUITests";
-			productReference = 7CA3D3092A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		CE482CF2262C954A00C0A2D5 /* OTFMagicBox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
-				DC173994E8AF983CB6A1D9DA /* [CP] Check Pods Manifest.lock */,
+				C6C3FF89D47613EA5AA1A900 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
 				7CA3D3142A8A43C400FCB048 /* Embed Watch Content */,
-				A2C2909005B20CD8C57AFCCC /* [CP] Embed Pods Frameworks */,
+				902E18A92AEA869B00F694F2 /* ShellScript */,
+				93B66E92271BF6A28C38EA90 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7CA3D3122A8A43C400FCB048 /* PBXTargetDependency */,
+				84F43F592B4D6A4C009DFFF8 /* PBXTargetDependency */,
 			);
 			name = OTFMagicBox;
 			productName = CompletelyNewApp;
@@ -903,23 +878,15 @@
 			isa = PBXProject;
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Original;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					5A7B6DA826FD282C00F872A1 = {
 						CreatedOnToolsVersion = 12.5.1;
 						TestTargetID = CE482CF2262C954A00C0A2D5;
 					};
-					7CA3D2EF2A8A43C300FCB048 = {
-						CreatedOnToolsVersion = 14.3.1;
-					};
-					7CA3D2FE2A8A43C400FCB048 = {
-						CreatedOnToolsVersion = 14.3.1;
-						TestTargetID = 7CA3D2EF2A8A43C300FCB048;
-					};
-					7CA3D3082A8A43C400FCB048 = {
-						CreatedOnToolsVersion = 14.3.1;
-						TestTargetID = 7CA3D2EF2A8A43C300FCB048;
+					84F43F4C2B4D6A4A009DFFF8 = {
+						CreatedOnToolsVersion = 15.0.1;
 					};
 					CE482CF2262C954A00C0A2D5 = {
 						CreatedOnToolsVersion = 12.4;
@@ -941,9 +908,7 @@
 			targets = (
 				CE482CF2262C954A00C0A2D5 /* OTFMagicBox */,
 				5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */,
-				7CA3D2EF2A8A43C300FCB048 /* OTFMagicBox Watch Watch App */,
-				7CA3D2FE2A8A43C400FCB048 /* OTFMagicBox Watch Watch AppTests */,
-				7CA3D3082A8A43C400FCB048 /* OTFMagicBox Watch Watch AppUITests */,
+				84F43F4C2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -956,26 +921,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7CA3D2EE2A8A43C300FCB048 /* Resources */ = {
+		84F43F4B2B4D6A4A009DFFF8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CA3D2FA2A8A43C400FCB048 /* Preview Assets.xcassets in Resources */,
-				7CA3D2F72A8A43C400FCB048 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CA3D2FD2A8A43C400FCB048 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CA3D3072A8A43C400FCB048 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				84F43F572B4D6A4C009DFFF8 /* Preview Assets.xcassets in Resources */,
+				84F43F542B4D6A4C009DFFF8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,7 +947,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05EB063AD94BCC1191F92DD8 /* [CP] Check Pods Manifest.lock */ = {
+		901EEAFD2BDA2A10004EC8B5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1004,38 +955,34 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OTFMagicBox Watch Watch App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		9333C6CAA54ADF6700EA8400 /* [CP] Embed Pods Frameworks */ = {
+		902E18A92AEA869B00F694F2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox Watch Watch App/Pods-OTFMagicBox Watch Watch App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox Watch Watch App/Pods-OTFMagicBox Watch Watch App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox Watch Watch App/Pods-OTFMagicBox Watch Watch App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		A2C2909005B20CD8C57AFCCC /* [CP] Embed Pods Frameworks */ = {
+		93B66E92271BF6A28C38EA90 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1052,7 +999,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC173994E8AF983CB6A1D9DA /* [CP] Check Pods Manifest.lock */ = {
+		C6C3FF89D47613EA5AA1A900 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1074,6 +1021,45 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CA4E7853B35A745B8BED7B95 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFD91FC98245B864E873D8DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OTFMagicBoxWatch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1086,32 +1072,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7CA3D2EC2A8A43C300FCB048 /* Sources */ = {
+		84F43F492B4D6A4A009DFFF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CD965032AB6B784003E9394 /* Constants.swift in Sources */,
-				7CA403032AB20C0F00A3D022 /* CareKitListView.swift in Sources */,
-				7CD965022AB6AA5E003E9394 /* OCKStoreManager.swift in Sources */,
-				7CA3D2F52A8A43C300FCB048 /* ContentView.swift in Sources */,
-				7CA3D2F32A8A43C300FCB048 /* OTFMagicBox_WatchApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CA3D2FB2A8A43C400FCB048 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7CA3D3042A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7CA3D3052A8A43C400FCB048 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7CA3D3102A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITestsLaunchTests.swift in Sources */,
-				7CA3D30E2A8A43C400FCB048 /* OTFMagicBox_Watch_Watch_AppUITests.swift in Sources */,
+				84F43F502B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift in Sources */,
+				90C79E492B4DCE120020D20F /* Extension+OCKTask.swift in Sources */,
+				90C79E452B4DCE120020D20F /* OTFCareKitStoreManager.swift in Sources */,
+				90C79E472B4DCE120020D20F /* CareKitListView.swift in Sources */,
+				90C79E482B4DCE120020D20F /* Extension+Notification.swift in Sources */,
+				901700F42B63B856006C611C /* ActivityIndicatorView.swift in Sources */,
+				90C79E462B4DCE120020D20F /* ContentView.swift in Sources */,
+				90C79E4A2B4DCE120020D20F /* SessionManager.swift in Sources */,
+				90C79E4C2B4E862A0020D20F /* WatchStoreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,8 +1102,10 @@
 				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
 				84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */,
 				841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */,
+				84EEAD062BBCA6D100414955 /* OTFYamlStyle.swift in Sources */,
 				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
 				846761C327DF8BC300A3207E /* ContactsSection.swift in Sources */,
+				84EEAD042BBCA6D100414955 /* OTFStyleColorStyler.swift in Sources */,
 				849989E62AD7D182009CBA41 /* Extension+Array.swift in Sources */,
 				5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */,
 				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
@@ -1149,6 +1124,7 @@
 				32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */,
 				846761C527DF8BC300A3207E /* CareKitTaskViews.swift in Sources */,
 				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
+				84146ED82BD14F4B007D768C /* TaskListRow+Extras.swift in Sources */,
 				84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */,
 				A8C0556B296D61770098D1FB /* Extention+ViewController.swift in Sources */,
 				849989E22AD7CC67009CBA41 /* UploadDocumentManager.swift in Sources */,
@@ -1206,10 +1182,11 @@
 				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
 				846761BD27DF8BC300A3207E /* TaskViewControllerRepresentable.swift in Sources */,
 				841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */,
-				849989E42AD7CD53009CBA41 /* ActivityLoader.swift in Sources */,
+				849989E42AD7CD53009CBA41 /* LoaderView.swift in Sources */,
 				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
 				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
 				846761A127DF8A6900A3207E /* OCKHealthKitStore+Extension.swift in Sources */,
+				84EEAD052BBCA6D100414955 /* OTFStyle.swift in Sources */,
 				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
 				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
 				846761A027DF8A6900A3207E /* Extension+OCKAnyTask.swift in Sources */,
@@ -1223,6 +1200,7 @@
 				846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */,
 				7C7EC6792A65912C003B0FFB /* OTFNetworkObserver.swift in Sources */,
 				8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */,
+				902E18A62AE8F0A000F694F2 /* OTFFont.swift in Sources */,
 				849989E02AD7CB25009CBA41 /* PDFKitRepresentedView.swift in Sources */,
 				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
 				5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */,
@@ -1238,20 +1216,10 @@
 			target = CE482CF2262C954A00C0A2D5 /* OTFMagicBox */;
 			targetProxy = 5A7B6DAE26FD282C00F872A1 /* PBXContainerItemProxy */;
 		};
-		7CA3D3012A8A43C400FCB048 /* PBXTargetDependency */ = {
+		84F43F592B4D6A4C009DFFF8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7CA3D2EF2A8A43C300FCB048 /* OTFMagicBox Watch Watch App */;
-			targetProxy = 7CA3D3002A8A43C400FCB048 /* PBXContainerItemProxy */;
-		};
-		7CA3D30B2A8A43C400FCB048 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7CA3D2EF2A8A43C300FCB048 /* OTFMagicBox Watch Watch App */;
-			targetProxy = 7CA3D30A2A8A43C400FCB048 /* PBXContainerItemProxy */;
-		};
-		7CA3D3122A8A43C400FCB048 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7CA3D2EF2A8A43C300FCB048 /* OTFMagicBox Watch Watch App */;
-			targetProxy = 7CA3D3112A8A43C400FCB048 /* PBXContainerItemProxy */;
+			target = 84F43F4C2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */;
+			targetProxy = 84F43F582B4D6A4C009DFFF8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1309,161 +1277,384 @@
 			};
 			name = Release;
 		};
-		7CA3D3152A8A43C400FCB048 /* Debug */ = {
+		84F43F5B2B4D6A4C009DFFF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23661129E1AA02D9A3410FC7 /* Pods-OTFMagicBox Watch Watch App.debug.xcconfig */;
+			baseConfigurationReference = A49F6F1563A78034A9EBE56C /* Pods-OTFMagicBoxWatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = "OTFMagicBox Watch Watch App/OTFMagicBox Watch Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OTFMagicBoxWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = org.theraforge.magicbox.ios;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+			};
+			name = Debug;
+		};
+		84F43F5C2B4D6A4C009DFFF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58ADE8FC0AF041D6DF78CE64 /* Pods-OTFMagicBoxWatch.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OTFMagicBoxWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = org.theraforge.magicbox.ios;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+			};
+			name = Release;
+		};
+		90C79E4D2B4E9ED00020D20F /* Care */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Care;
+		};
+		90C79E4E2B4E9ED00020D20F /* Care */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BC94C5B492FDF7370667F8A /* Pods-OTFMagicBox.care.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBox Watch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "OTFMagicBox Watch";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = org.theraforge.magicbox.ios;
+				EXCLUDED_ARCHS = "";
+				INFOPLIST_FILE = OTFMagicBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkitapp;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				PROVISIONING_PROFILE_SPECIFIER = OTFMagicBox_debug;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Care;
 		};
-		7CA3D3162A8A43C400FCB048 /* Release */ = {
+		90C79E4F2B4E9ED00020D20F /* Care */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5CF7B6203990ECA79E1B177 /* Pods-OTFMagicBox Watch Watch App.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D25537G8CD;
+				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = MyCompany.OTFMagicBoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox.app/OTFMagicBox";
+			};
+			name = Care;
+		};
+		90C79E502B4E9ED00020D20F /* Care */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62EB2116D692E7C5E54E80E1 /* Pods-OTFMagicBoxWatch.care.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = "OTFMagicBox Watch Watch App/OTFMagicBox Watch Watch App.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBox Watch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "OTFMagicBox Watch";
+				INFOPLIST_KEY_CFBundleDisplayName = OTFMagicBoxWatch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = org.theraforge.magicbox.ios;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
-			name = Release;
+			name = Care;
 		};
-		7CA3D3172A8A43C400FCB048 /* Debug */ = {
+		90C79E512B4E9F070020D20F /* CareHealth */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = CareHealth;
+		};
+		90C79E522B4E9F070020D20F /* CareHealth */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE0B0929EFF0E25E87CF3B71 /* Pods-OTFMagicBox.carehealth.xcconfig */;
+			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
+				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				INFOPLIST_FILE = OTFMagicBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = OTFMagicBox_debug;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = CareHealth;
+		};
+		90C79E532B4E9F070020D20F /* CareHealth */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZTGHLM6H83;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "tfmartins.OTFMagicBox-Watch-Watch-AppTests";
+				DEVELOPMENT_TEAM = D25537G8CD;
+				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = MyCompany.OTFMagicBoxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OTFMagicBox Watch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox.app/OTFMagicBox";
 			};
-			name = Debug;
+			name = CareHealth;
 		};
-		7CA3D3182A8A43C400FCB048 /* Release */ = {
+		90C79E542B4E9F070020D20F /* CareHealth */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2F96CA14BB557FB216784C9 /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZTGHLM6H83;
+				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OTFMagicBoxWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = org.theraforge.magicbox.ios;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "tfmartins.OTFMagicBox-Watch-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OTFMagicBox Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OTFMagicBox Watch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
-			name = Release;
-		};
-		7CA3D3192A8A43C400FCB048 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZTGHLM6H83;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "tfmartins.OTFMagicBox-Watch-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "OTFMagicBox Watch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.4;
-			};
-			name = Debug;
-		};
-		7CA3D31A2A8A43C400FCB048 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZTGHLM6H83;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "tfmartins.OTFMagicBox-Watch-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "OTFMagicBox Watch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.4;
-			};
-			name = Release;
+			name = CareHealth;
 		};
 		CE482D05262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1583,7 +1774,7 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C68B1F7051EF9581BEEB32BF /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = C786F095D5BBC2634543074F /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1595,6 +1786,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1612,7 +1804,7 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5576C00FEC63C6798D1DB53 /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = F07B7C39F5B74DE968EFEDC4 /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1646,34 +1838,20 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A7B6DB026FD282C00F872A1 /* Debug */,
+				90C79E532B4E9F070020D20F /* CareHealth */,
+				90C79E4F2B4E9ED00020D20F /* Care */,
 				5A7B6DB126FD282C00F872A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7CA3D31B2A8A43C400FCB048 /* Build configuration list for PBXNativeTarget "OTFMagicBox Watch Watch App" */ = {
+		84F43F5D2B4D6A4C009DFFF8 /* Build configuration list for PBXNativeTarget "OTFMagicBoxWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7CA3D3152A8A43C400FCB048 /* Debug */,
-				7CA3D3162A8A43C400FCB048 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7CA3D31C2A8A43C400FCB048 /* Build configuration list for PBXNativeTarget "OTFMagicBox Watch Watch AppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7CA3D3172A8A43C400FCB048 /* Debug */,
-				7CA3D3182A8A43C400FCB048 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7CA3D31D2A8A43C400FCB048 /* Build configuration list for PBXNativeTarget "OTFMagicBox Watch Watch AppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7CA3D3192A8A43C400FCB048 /* Debug */,
-				7CA3D31A2A8A43C400FCB048 /* Release */,
+				84F43F5B2B4D6A4C009DFFF8 /* Debug */,
+				90C79E542B4E9F070020D20F /* CareHealth */,
+				90C79E502B4E9ED00020D20F /* Care */,
+				84F43F5C2B4D6A4C009DFFF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1682,6 +1860,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE482D05262C954C00C0A2D5 /* Debug */,
+				90C79E512B4E9F070020D20F /* CareHealth */,
+				90C79E4D2B4E9ED00020D20F /* Care */,
 				CE482D06262C954C00C0A2D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1691,6 +1871,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE482D08262C954C00C0A2D5 /* Debug */,
+				90C79E522B4E9F070020D20F /* CareHealth */,
+				90C79E4E2B4E9ED00020D20F /* Care */,
 				CE482D09262C954C00C0A2D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

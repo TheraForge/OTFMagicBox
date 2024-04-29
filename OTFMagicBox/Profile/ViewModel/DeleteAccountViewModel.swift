@@ -11,13 +11,13 @@ import OTFUtilities
 import Combine
 
 final class DeleteAccountViewModel: ObservableObject {
-    
+
     @Published var showingAlert = false
     @Published var showingOptions = false
-    
+
     private var disposables = Set<AnyCancellable>()
-    
-//    MARK: delete account request
+
+    // MARK: delete account request
     func deleteUserAccount(userId: String) {
         OTFTheraforgeNetwork.shared.deleteUser(userId: userId)
             .receive(on: DispatchQueue.main)

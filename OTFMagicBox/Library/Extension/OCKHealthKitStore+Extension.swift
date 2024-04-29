@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -38,11 +38,11 @@ import Foundation
 import OTFUtilities
 
 extension OCKHealthKitPassthroughStore {
-    
+
     enum Tasks: String, CaseIterable {
         case steps
     }
-    
+
     func fillWithDummyData() {
         // Note: If the tasks and contacts already exist in the store, these methods will fail. If you have modified the data and would like the
         // changes to be reflected in the app, delete and reinstall the catalog app.
@@ -55,7 +55,7 @@ extension OCKHealthKitPassthroughStore {
             }
         }
     }
-    
+
     private func makeTasks(on start: Date) -> [OCKAnyTask] {
         // Steps task
         let stepsScheduleElement = OCKScheduleElement(start: start, end: nil, interval: .init(day: 1),
@@ -64,7 +64,7 @@ extension OCKHealthKitPassthroughStore {
         var stepsTask = OCKHealthKitTask(id: Tasks.steps.rawValue, title: "Steps", carePlanUUID: nil,
                                          schedule: .init(composing: [stepsScheduleElement]), healthKitLinkage: hkLinkage)
         stepsTask.instructions = "A walk a day keeps the doctor away."
-        
+
         return [stepsTask]
     }
 }

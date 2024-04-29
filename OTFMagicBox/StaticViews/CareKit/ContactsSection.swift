@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -35,42 +35,39 @@
 import SwiftUI
 
 struct ContactsSection: View {
-    let cellbackgroundColor: UIColor
-    let headerColor: UIColor
-    let textColor: UIColor
     var body: some View {
         Section(header: Text(ModuleAppYmlReader().careKitModel?.contactHeader ?? "Contact")
-            .font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
-            .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
-            .foregroundColor(Color(headerColor))) {
+                    .font(Font.otfheaderTitleFont)
+                    .fontWeight(Font.otfheaderTitleWeight)
+                    .foregroundColor(Color.otfHeaderColor)) {
             ForEach(ContactStyle.allCases, id: \.rawValue) { row in
-                
+
                 NavigationLink(destination: ContactDestination(style: row)) {
                     Text(String(row.rawValue.capitalized))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                        .fontWeight(Font.otfFontWeight)
                 }
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                .font(Font.otfAppFont)
                 .foregroundColor(.otfTextColor)
                 .listRowBackground(Color.otfCellBackground)
             }
-            .listRowBackground(Color(cellbackgroundColor))
-            .foregroundColor(Color(textColor))
+            .listRowBackground(Color.otfCellBackground)
+            .foregroundColor(.otfTextColor)
         }
     }
 }
 
 struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
-        ContactsSection(cellbackgroundColor: UIColor(), headerColor: UIColor(), textColor: UIColor())
+        ContactsSection()
     }
 }
 
 private struct ContactDestination: View {
-    
+
     @Environment(\.storeManager) private var storeManager
-    
+
     let style: ContactStyle
-    
+
     var body: some View {
         ZStack {
             Color(UIColor.systemGroupedBackground)
@@ -82,34 +79,33 @@ private struct ContactDestination: View {
 }
 
 private enum ContactStyle: String, CaseIterable {
-    case simple , detailed
-    
+    case simple, detailed
+
     var rawValue: String {
-         get {
-             switch self {
-             case .simple:
-                 return ModuleAppYmlReader().careKitModel?.simple ?? ""
-             case .detailed:
-                 return  ModuleAppYmlReader().careKitModel?.detailed ?? ""
-             }
-         }
-     }
+        switch self {
+        case .simple:
+            return ModuleAppYmlReader().careKitModel?.simple ?? ""
+        case .detailed:
+            return  ModuleAppYmlReader().careKitModel?.detailed ?? ""
+        }
+    }
 }
 
 import OTFCareKit
+import OTFCareKitUI
 import OTFCareKitStore
 
 private struct AdaptedContactView: UIViewControllerRepresentable {
-    
+
     let style: ContactStyle
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIViewController(context: Context) -> UIViewController {
         let listViewController = OCKListViewController()
-        
+
         let spacer = UIView(frame: .init(origin: .zero, size: .init(width: 0, height: 32)))
         listViewController.appendView(spacer, animated: false)
-        
+
         let viewController: UIViewController?
         switch style {
         case .simple:
@@ -117,10 +113,13 @@ private struct AdaptedContactView: UIViewControllerRepresentable {
         case .detailed:
             viewController = OCKDetailedContactViewController(contactID: OCKStore.Contacts.matthew.rawValue, storeManager: storeManager)
         }
-        
+
         viewController.map { listViewController.appendViewController($0, animated: false) }
+        if let ockView = listViewController.view as? OCKView {
+            ockView.customStyle = OTFStyle(from: OTFYamlStyle(style: YmlReader().appStyle))
+        }
         return listViewController
     }
-    
+
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }

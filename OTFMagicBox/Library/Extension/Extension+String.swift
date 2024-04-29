@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -40,10 +40,10 @@ import SwiftUI
  Extension of String to check the Emoji string.
  */
 extension String {
-    
+
     // Returns true if the given string contains Emoji.
     var containsEmojis: Bool {
-        if count == 0 {
+        if isEmpty {
             return false
         }
         for character in self where character.isEmoji {
@@ -51,8 +51,7 @@ extension String {
         }
         return false
     }
-    
-    // swiftlint:disable all
+
     var color: UIColor? {
         switch self {
         case "Red":
@@ -159,9 +158,9 @@ extension String {
             return nil
         }
     }
-    
+
     var fontWeight: Font.Weight? {
-        
+
         switch self {
         case "Thin":
             return Font.Weight.thin
@@ -185,10 +184,8 @@ extension String {
             return nil
         }
     }
-    
-    
     var appFont: Font? {
-        
+
         switch self {
         case "Basic":
             return Font.basicFontStyle
@@ -228,7 +225,7 @@ extension String {
             return nil
         }
     }
-    
+
     var isValidEmail: Bool {
         NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").evaluate(with: self)
     }

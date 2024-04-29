@@ -9,20 +9,15 @@ import Foundation
 import OTFCloudClientAPI
 import OTFUtilities
 import Combine
-
-
 final class ChangePasswordViewModel: ObservableObject {
-    
     @Published var showFailureAlert = false
     @Published var errorMessage = String()
     @Published var oldPassword: String = ""
     @Published var newPassword: String = ""
     @Published var email: String
-    
     init(email: String) {
         self.email = email
     }
-    
     var error: ForgeError?
     var viewDismissModePublisher = PassthroughSubject<Bool, Never>()
     private var disposables = Set<AnyCancellable>()
@@ -31,8 +26,7 @@ final class ChangePasswordViewModel: ObservableObject {
             viewDismissModePublisher.send(shouldDismissView)
         }
     }
-    
-//    MARK: chnage password request
+    // MARK: chnage password request
     func changePassword() {
         OTFTheraforgeNetwork.shared.changePassword(email: email, oldPassword: oldPassword, newPassword: newPassword)
             .receive(on: DispatchQueue.main)
@@ -51,4 +45,3 @@ final class ChangePasswordViewModel: ObservableObject {
             .store(in: &disposables)
     }
 }
-

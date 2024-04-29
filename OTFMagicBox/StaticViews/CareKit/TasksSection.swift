@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -38,42 +38,39 @@ import OTFCareKitUI
 import OTFCareKitStore
 
 struct TaskSection: View {
-    let cellbackgroundColor: UIColor
-    let headerColor: UIColor
-    let textColor: UIColor
     var body: some View {
-        Section(header: Text(ModuleAppYmlReader().careKitModel?.taskHeader ?? "Task").font(YmlReader().appTheme?.headerTitleFont.appFont ?? Font.system(size: 17.0))
-            .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
-            .foregroundColor(Color(headerColor))) {
+        Section(header: Text(ModuleAppYmlReader().careKitModel?.taskHeader ?? "Task").font(.otfheaderTitleFont)
+                    .fontWeight(Font.otfheaderTitleWeight)
+                    .foregroundColor(.otfHeaderColor)) {
             ForEach(TaskStyle.allCases, id: \.rawValue) { style in
                 if style.supportsSwiftUI || style.supportsUIKit {
-                    
+
                     NavigationLink(destination: TaskDestination(style: style)) {
                         Text(style.rawValue.capitalized)
-                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                            .fontWeight(Font.otfFontWeight)
                     }
                     .foregroundColor(.otfTextColor)
                     .listRowBackground(Color.otfCellBackground)
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                    .font(Font.otfAppFont)
                 }
             }
-            .listRowBackground(Color(cellbackgroundColor))
-            .foregroundColor(Color(textColor))
+            .listRowBackground(Color.otfCellBackground)
+            .foregroundColor(.otfTextColor)
         }
     }
 }
 
 struct TaskDestination: View {
-    
+
     @Environment(\.storeManager) private var storeManager
-    
+
     let style: TaskStyle
-    
+
     var body: some View {
         ZStack {
             Color(UIColor.systemGroupedBackground)
                 .edgesIgnoringSafeArea(.all)
-            
+
             if style.supportsSwiftUI && style.supportsUIKit {
                 PlatformPicker {
                     AdaptedTaskView(style: style, storeManager: storeManager)
@@ -90,8 +87,8 @@ struct TaskDestination: View {
                 }
             }
         }
-        .navigationBarTitle(Text(style.rawValue.capitalized).font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), displayMode: .inline)
+        .navigationBarTitle(Text(style.rawValue.capitalized).font(Font.otfAppFont)
+                                .fontWeight(Font.otfFontWeight), displayMode: .inline)
     }
 }
 
@@ -100,42 +97,38 @@ enum TaskCategory: String, Codable {
 }
 
 enum TaskStyle: String, CaseIterable, Codable {
-    
+
     case simple, instruction, buttonLog
     case grid, checklist
     case labeledValue = "labeled value", numericProgress = "Numeric Progress"
-    
-    
     var rawValue: String {
-         get {
-             switch self {
-             case .simple:
-                 return ModuleAppYmlReader().careKitModel?.simple ?? ""
-             case .instruction:
-                 return  ModuleAppYmlReader().careKitModel?.instruction ?? ""
-             case .buttonLog:
-                 return  ModuleAppYmlReader().careKitModel?.buttonLog ?? ""
-             case .grid:
-                 return  ModuleAppYmlReader().careKitModel?.grid ?? ""
-             case .checklist:
-                 return  ModuleAppYmlReader().careKitModel?.checklist ?? ""
-             case .labeledValue:
-                 return  ModuleAppYmlReader().careKitModel?.labeledValue ?? ""
-             case .numericProgress:
-                 return  ModuleAppYmlReader().careKitModel?.numericProgress ?? ""
-             }
-         }
-     }
-    
+        switch self {
+        case .simple:
+            return ModuleAppYmlReader().careKitModel?.simple ?? ""
+        case .instruction:
+            return  ModuleAppYmlReader().careKitModel?.instruction ?? ""
+        case .buttonLog:
+            return  ModuleAppYmlReader().careKitModel?.buttonLog ?? ""
+        case .grid:
+            return  ModuleAppYmlReader().careKitModel?.grid ?? ""
+        case .checklist:
+            return  ModuleAppYmlReader().careKitModel?.checklist ?? ""
+        case .labeledValue:
+            return  ModuleAppYmlReader().careKitModel?.labeledValue ?? ""
+        case .numericProgress:
+            return  ModuleAppYmlReader().careKitModel?.numericProgress ?? ""
+        }
+    }
+
     var supportsSwiftUI: Bool {
         guard #available(iOS 14, *) else { return false }
-        
+
         switch self {
         case .simple, .instruction, .labeledValue, .numericProgress: return true
         case .grid, .checklist, .buttonLog: return false
         }
     }
-    
+
     var supportsUIKit: Bool {
         switch self {
         case .simple, .instruction, .grid, .checklist, .buttonLog: return true
@@ -146,11 +139,11 @@ enum TaskStyle: String, CaseIterable, Codable {
 
 @available(iOS 14.0, *)
 struct TaskView: View {
-    
+
     @Environment(\.storeManager) private var storeManager
-    
+
     let style: TaskStyle
-    
+
     var body: some View {
         CardBackground {
             switch style {
@@ -172,24 +165,25 @@ struct TaskView: View {
                                                              instructions: controller.viewModel?.instructions.map(Text.init),
                                                              isComplete: controller.viewModel?.isComplete ?? false)
                     }
-                    
+
                     // Static view
-                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)").font(Font.otfAppFont)
+                                                            .fontWeight(Font.otfFontWeight),
                                                          progress: Text("0"),
                                                          goal: Text("100"),
                                                          isComplete: false)
-                    
+
                     // Static view
-                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    OTFCareKitUI.NumericProgressTaskView(title: Text("Steps (Static)")
+                                                            .font(Font.otfAppFont)
+                                                            .fontWeight(Font.otfFontWeight),
                                                          progress: Text("0"),
                                                          goal: Text("100"),
                                                          isComplete: true)
                 }
             case .labeledValue:
                 VStack(spacing: 16) {
-                    
+
                     // HealthKit linked view
                     OTFCareKit.LabeledValueTaskView(taskID: OCKHealthKitPassthroughStore.Tasks.steps.rawValue,
                                                     eventQuery: .init(for: Date()), storeManager: storeManager) { controller in
@@ -197,21 +191,22 @@ struct TaskView: View {
                                                           detail: controller.viewModel?.detail.map(Text.init),
                                                           state: .fromViewModel(state: controller.viewModel?.state))
                     }
-                    
+
                     // Static view
-                    LabeledValueTaskView(title: Text("Heart Rate (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)),
-                                         detail: Text("Anytime").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    LabeledValueTaskView(title: Text("Heart Rate (Static)").font(Font.otfAppFont),
+                                         detail: Text("Anytime").font(Font.otfAppFont)
+                        .fontWeight(YmlReader().appStyle.textWeight.fontWeight),
                                          state: .complete(Text("62"), Text("BPM")))
-                    
+
                     // Static view
-                    LabeledValueTaskView(title: Text("Heart Rate (Static)").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
-                                         detail: Text("Anytime").font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                    LabeledValueTaskView(title: Text("Heart Rate (Static)")
+                                            .font(Font.otfAppFont)
+                                            .fontWeight(Font.otfFontWeight),
+                                         detail: Text("Anytime").font(Font.otfAppFont)
+                                            .fontWeight(Font.otfFontWeight),
                                          state: .incomplete(Text("NO DATA")
-                                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))))
+                                                                .fontWeight(Font.otfFontWeight)
+                                                                .font(Font.otfAppFont)))
                 }
             default:
                 EmptyView()
@@ -221,16 +216,16 @@ struct TaskView: View {
 }
 
 struct AdaptedTaskView: UIViewControllerRepresentable {
-    
+
     let style: TaskStyle
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIViewController(context: Context) -> UIViewController {
         let listViewController = OCKListViewController()
-        
+
         let spacer = UIView(frame: .init(origin: .zero, size: .init(width: 0, height: 32)))
         listViewController.appendView(spacer, animated: false)
-        
+
         let taskViewController: UIViewController?
         switch style {
         case .simple:
@@ -251,21 +246,24 @@ struct AdaptedTaskView: UIViewControllerRepresentable {
         case .labeledValue, .numericProgress:
             taskViewController = nil
         }
-        
+
         taskViewController.map { listViewController.appendViewController($0, animated: false) }
+        if let ockView = listViewController.view as? OCKView {
+            ockView.customStyle = OTFStyle(from: OTFYamlStyle(style: YmlReader().appStyle))
+        }
         return listViewController
     }
-    
+
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
 private extension LabeledValueTaskViewState {
-    
+
     static func fromViewModel(state: LabeledValueTaskViewModel.State?) -> Self {
         guard let state = state else {
             return .incomplete(Text(""))
         }
-        
+
         switch state {
         case let .complete(value, label):
             return .complete(Text(value), label.map(Text.init))
@@ -274,52 +272,50 @@ private extension LabeledValueTaskViewState {
         }
     }
 }
-
-
 struct TasksSection: View {
     @StateObject var viewModel: TasksViewModel
-    
+
     var body: some View {
         List {
             Section(header: Text("Simple Task")
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
+                        .fontWeight(Font.otfFontWeight)
+                        .font(Font.otfAppFont)) {
                 if let simpleTask = self.viewModel.simpleTask {
                     SimpleTaskView(task: simpleTask, date: Date(),
                                    storeManager: viewModel.syncStoreManager)
                 }
             }
-            
+
             Section(header: Text("Instruction Task")
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
+                        .fontWeight(Font.otfFontWeight)
+                        .font(Font.otfAppFont)) {
                 if let instructionTask = self.viewModel.simpleTask {
                     InstructionTaskView(task: instructionTask, date: Date(),
                                         storeManager: viewModel.syncStoreManager)
                 }
             }
-            
+
             Section(header: Text("Button Log Task")
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
+                        .fontWeight(Font.otfFontWeight)
+                        .font(Font.otfAppFont)) {
                 if let buttonLogTask = self.viewModel.buttonLogTask {
                     ButtonLogTaskView(task: buttonLogTask, date: Date(),
                                       storeManager: viewModel.syncStoreManager)
                 }
             }
-            
+
             Section(header: Text("Grid Task")
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
+                        .fontWeight(Font.otfFontWeight)
+                        .font(Font.otfAppFont)) {
                 if let gridTask = self.viewModel.checklistTask {
                     GridTaskView(task: gridTask, date: Date(),
                                  storeManager: viewModel.syncStoreManager)
                 }
             }
-            
+
             Section(header: Text("Checklist Task")
-                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))) {
+                        .fontWeight(Font.otfFontWeight)
+                        .font(Font.otfAppFont)) {
                 if let checklistTask = self.viewModel.checklistTask {
                     ChecklistTaskView(task: checklistTask, date: Date(),
                                       storeManager: viewModel.syncStoreManager)
@@ -327,15 +323,10 @@ struct TasksSection: View {
             }
         }
         .listStyle(GroupedListStyle())
-//        .onLoad {
-//            UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-//            UITableViewCell.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
-//            UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
-//        }
     }
 }
 
-struct TasksSection_Preview: PreviewProvider {
+struct TasksSectionPreview: PreviewProvider {
     static var previews: some View {
         let viewModel = TasksViewModel(OCKStoreManager.shared.synchronizedStoreManager)
         let tasksSection = TasksSection(viewModel: viewModel)

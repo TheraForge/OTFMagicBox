@@ -1,9 +1,36 @@
-//
-//  ModuleAppYmlReader+DataModel.swift
-//  OTFMagicBox
-//
-//  Created by Arsalan Raza on 17/05/2022.
-//
+/*
+ Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+
+ 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+ be used to endorse or promote products derived from this software without specific
+ prior written permission. No license is granted to the trademarks of the copyright
+ holders even if such marks are included in this software.
+
+ 4. Commercial redistribution in any form requires an explicit license agreement with the
+ copyright holder(s). Please contact support@hippocratestech.com for further information
+ regarding licensing.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+ OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ OF SUCH DAMAGE.
+ */
 
 import Foundation
 import UIKit
@@ -12,28 +39,20 @@ import Yams
 import OTFUtilities
 
 public class ModuleAppYmlReader {
-    
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.moduleAppFileName
-    
-    var onBoardingDataModel : OnBoardingScreen?
-    
+    var onBoardingDataModel: OnBoardingScreen?
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
         let fileUrl = URL(fileURLWithPath: fileUrlString)
         do {
-            if let dataSet = try? Data(contentsOf: fileUrl) {
-                guard let data = try? YAMLDecoder().decode([String: OnBoardingScreen].self, from: dataSet) else {
-                    OTFLog("Yaml decode error")
-                    return
-                }
-                if data["DataModel"] != nil {
-                    onBoardingDataModel = data["DataModel"]
-                }
-            }
+            let dataSet = try Data(contentsOf: fileUrl)
+            let data = try YAMLDecoder().decode(ConfigDataModel.self, from: dataSet)
+            onBoardingDataModel = data.dataModel
+        } catch {
+            OTFLog("Error $public{%@}", error.localizedDescription)
         }
     }
-    
     
     func getPreferredLocale() -> Locale {
         guard let preferredIdentifier = Locale.preferredLanguages.first else {
@@ -41,7 +60,7 @@ public class ModuleAppYmlReader {
         }
         return Locale(identifier: preferredIdentifier)
     }
-    
+
     var onboardingData: [Onboarding]? {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -51,22 +70,136 @@ public class ModuleAppYmlReader {
         }
     }
     
-    var primaryColor: UIColor {
+    var registration: Registration? {
         switch getPreferredLocale().languageCode {
         case "fr":
-            let valueSet = (onBoardingDataModel?.fr.onboarding ?? [])
-            for item in valueSet{
-                return item.color.color ?? UIColor.black
-            }
+            return onBoardingDataModel?.fr.registration
         default:
-            let valueSet = (onBoardingDataModel?.en.onboarding ?? [])
-            for item in valueSet{
-                return item.color.color ?? UIColor.black
-            }
+            return onBoardingDataModel?.en.registration
         }
-        return UIColor.black
+    }
+    var showGender: Bool {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            guard let showGender = onBoardingDataModel?.fr.registration.showGender else { return false }
+            return showGender == Constants.true
+        default:
+            guard let showGender = onBoardingDataModel?.en.registration.showGender else { return false }
+            return showGender == Constants.true
+        }
+    }
+    var showDateOfBirth: Bool {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            guard let showDOB = onBoardingDataModel?.fr.registration.showDateOfBirth else { return false }
+            return showDOB == Constants.true
+        default:
+            guard let showDOB = onBoardingDataModel?.en.registration.showDateOfBirth else { return false }
+            return showDOB == Constants.true
+        }
+    }
+    var completionStepTitle: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
+        default:
+            return onBoardingDataModel?.en.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
+        }
+    }
+    var completionStepText: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
+        default:
+            return onBoardingDataModel?.en.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
+        }
     }
     
+    var profileData: ProfileModel? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.profileDataModel
+        default:
+            return onBoardingDataModel?.en.profileDataModel
+        }
+    }
+    
+    var researchKitModel: ResearchKitModel? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.researchKitView
+        default:
+            return onBoardingDataModel?.en.researchKitView
+        }
+    }
+    var surverysTaskModel: SurverysTask? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.surverysTask
+        default:
+            return onBoardingDataModel?.en.surverysTask
+        }
+    }
+    var careKitModel: CarekitModel? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.carekitView
+        default:
+            return onBoardingDataModel?.en.carekitView
+        }
+    }
+    var healthRecords: HealthRecords? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthRecords
+        default:
+            return onBoardingDataModel?.en.healthRecords
+        }
+    }
+    var healthPermissionsTitle: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        default:
+            return onBoardingDataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+        }
+    }
+    var healthPermissionsText: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        default:
+            return onBoardingDataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+        }
+    }
+    var backgroundReadFrequency: String? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
+        default:
+            return onBoardingDataModel?.en.healthKitData.backgroundReadFrequency ?? "immediate"
+        }
+    }
+    var healthKitDataToRead: [HealthKitTypes] {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        default:
+            return onBoardingDataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
+        }
+    }
+    var withdrawl: Withdrawal? {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.withdrawal
+        default:
+            return onBoardingDataModel?.en.withdrawal
+        }
+    }
+}
+
+// MARK: - Consent
+extension ModuleAppYmlReader {
     var reasonForConsentText: String {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -102,68 +235,40 @@ public class ModuleAppYmlReader {
             return onBoardingDataModel?.en.consent
         }
     }
-    
-    var registration: Registration? {
+}
+
+// MARK: - Theme
+extension ModuleAppYmlReader {
+    var primaryColor: UIColor {
         switch getPreferredLocale().languageCode {
         case "fr":
-            return onBoardingDataModel?.fr.registration
+            let valueSet = (onBoardingDataModel?.fr.onboarding ?? [])
+            for item in valueSet {
+                return item.color.color ?? UIColor.black
+            }
         default:
-            return onBoardingDataModel?.en.registration
+            let valueSet = (onBoardingDataModel?.en.onboarding ?? [])
+            for item in valueSet {
+                return item.color.color ?? UIColor.black
+            }
         }
+        return UIColor.black
     }
     
-    
-    var showGender: Bool {
-        switch getPreferredLocale().languageCode {
+    var backgroundColor: UIColor {
+        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
+
+        switch langStr {
         case "fr":
-            guard let showGender = onBoardingDataModel?.fr.registration.showGender else { return false }
-            return showGender == Constants.true
+            return onBoardingDataModel?.fr.profileDataModel.backgroundColor.color ?? UIColor.black
         default:
-            guard let showGender = onBoardingDataModel?.en.registration.showGender else { return false }
-            return showGender == Constants.true
+            return onBoardingDataModel?.en.profileDataModel.backgroundColor.color ?? UIColor.black
         }
     }
-    
-    var showDateOfBirth: Bool {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            guard let showDOB = onBoardingDataModel?.fr.registration.showDateOfBirth else { return false }
-            return showDOB == Constants.true
-        default:
-            guard let showDOB = onBoardingDataModel?.en.registration.showDateOfBirth else { return false }
-            return showDOB == Constants.true
-        }
-    }
-    
-    var completionStepTitle: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
-        default:
-            return onBoardingDataModel?.en.completionStep.title ?? Constants.YamlDefaults.CompletionStepTitle
-        }
-    }
-    
-    var completionStepText: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
-        default:
-            return onBoardingDataModel?.en.completionStep.text ?? Constants.YamlDefaults.CompletionStepText
-        }
-    }
-    
-    var isPasscodeEnabled: Bool {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            guard let passcode = onBoardingDataModel?.fr.passcode.enable else { return true }
-            return passcode != Constants.false
-        default:
-            guard let passcode = onBoardingDataModel?.en.passcode.enable else { return true }
-            return passcode != Constants.false
-        }
-    }
-    
+}
+
+// MARK: - Login
+extension ModuleAppYmlReader {
     var failedLoginText: String? {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -182,37 +287,6 @@ public class ModuleAppYmlReader {
         }
     }
     
-    
-    var passcodeOnReturnText: String {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
-        default:
-            return onBoardingDataModel?.en.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
-        }
-    }
-    
-    var passcodeType: String {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.passcode.passcodeType ?? Constants.Passcode.lengthFour
-        default:
-            return onBoardingDataModel?.en.passcode.passcodeType ?? Constants.Passcode.lengthFour
-        }
-    }
-    
-    
-    var loginPasswordless: Bool {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            guard let passwordless = onBoardingDataModel?.fr.login.loginPasswordless else { return false }
-            return passwordless == Constants.true
-        default:
-            guard let passwordless = onBoardingDataModel?.en.login.loginPasswordless else { return false }
-            return passwordless == Constants.true
-        }
-    }
-    
     var loginStepTitle: String {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -222,23 +296,6 @@ public class ModuleAppYmlReader {
         }
     }
     
-    var loginStepText: String {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
-        default:
-            return onBoardingDataModel?.en.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
-        }
-    }
-    
-    var passcodeText: String {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
-        default:
-            return onBoardingDataModel?.en.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
-        }
-    }
     var loginOptionsText: String {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -257,108 +314,70 @@ public class ModuleAppYmlReader {
         }
     }
     
-    var profileData: ProfileModel? {
+    var loginStepText: String {
         switch getPreferredLocale().languageCode {
         case "fr":
-            return onBoardingDataModel?.fr.profileDataModel
+            return onBoardingDataModel?.fr.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
         default:
-            return onBoardingDataModel?.en.profileDataModel
+            return onBoardingDataModel?.en.login.loginStepText ?? Constants.YamlDefaults.LoginStepText
+        }
+    }
+}
+
+// MARK: - Passcode
+extension ModuleAppYmlReader {
+    var isPasscodeEnabled: Bool {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            guard let passcode = onBoardingDataModel?.fr.passcode.enable else {
+                return true
+            }
+            return passcode != Constants.false
+        default:
+            guard let passcode = onBoardingDataModel?.en.passcode.enable else {
+                return true
+            }
+            return passcode != Constants.false
         }
     }
     
-    var backgroundColor: UIColor {
-        guard let langStr = Locale.current.languageCode else { fatalError("language not found") }
-        
-        switch langStr {
-        case "fr":
-            return onBoardingDataModel?.fr.profileDataModel.backgroundColor.color ?? UIColor.black
-        default:
-            return onBoardingDataModel?.en.profileDataModel.backgroundColor.color ?? UIColor.black
-        }
-    }
-    
-    var researchKitModel: ResearchKitModel? {
+    var passcodeOnReturnText: String {
         switch getPreferredLocale().languageCode {
         case "fr":
-            return onBoardingDataModel?.fr.researchKitView
+            return onBoardingDataModel?.fr.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
         default:
-            return onBoardingDataModel?.en.researchKitView
-        }
-    }
-    
-    var surverysTaskModel: SurverysTask? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.surverysTask
-        default:
-            return onBoardingDataModel?.en.surverysTask
-        }
-    }
-    
-    var careKitModel: CarekitModel? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.carekitView
-        default:
-            return onBoardingDataModel?.en.carekitView
-        }
-    }
-    
-    var healthRecords: HealthRecords? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.healthRecords
-        default:
-            return onBoardingDataModel?.en.healthRecords
-        }
-    }
-    
-    var healthPermissionsTitle: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
-        default:
-            return onBoardingDataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
-        }
-    }
-    
-    var healthPermissionsText: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
-        default:
-            return onBoardingDataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
-        }
-    }
-    
-    
-    var backgroundReadFrequency: String? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.healthKitData.backgroundReadFrequency ?? "immediate"
-        default:
-            return onBoardingDataModel?.en.healthKitData.backgroundReadFrequency ?? "immediate"
-        }
-    }
-    
-    var healthKitDataToRead: [HealthKitTypes] {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
-        default:
-            return onBoardingDataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
-        }
-    }
-    
-    var withdrawl: Withdrawal? {
-        switch getPreferredLocale().languageCode {
-        case "fr":
-            return onBoardingDataModel?.fr.withdrawal
-        default:
-            return onBoardingDataModel?.en.withdrawal
+            return onBoardingDataModel?.en.passcode.passcodeOnReturnText ?? Constants.YamlDefaults.PasscodeOnReturnText
         }
     }
 
+    var passcodeType: String {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.passcode.passcodeType ?? Constants.Passcode.lengthFour
+        default:
+            return onBoardingDataModel?.en.passcode.passcodeType ?? Constants.Passcode.lengthFour
+        }
+    }
+    
+    var loginPasswordless: Bool {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            guard let passwordless = onBoardingDataModel?.fr.login.loginPasswordless else { return false }
+            return passwordless == Constants.true
+        default:
+            guard let passwordless = onBoardingDataModel?.en.login.loginPasswordless else { return false }
+            return passwordless == Constants.true
+        }
+    }
+    
+    var passcodeText: String {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
+        default:
+            return onBoardingDataModel?.en.passcode.passcodeText ?? Constants.YamlDefaults.PasscodeText
+        }
+    }
 }
 
 struct Consent: Codable {
@@ -395,7 +414,15 @@ struct CompletionStep: Codable {
     let text: String
 }
 
-struct OnBoardingScreen: Codable{
+struct ConfigDataModel: Codable {
+    let dataModel: OnBoardingScreen
+    
+    enum CodingKeys: String, CodingKey {
+        case dataModel = "DataModel"
+    }
+}
+
+struct OnBoardingScreen: Codable {
     let en: OnBoardingDataModel
     let fr: OnBoardingDataModel
 }
@@ -405,7 +432,7 @@ struct LoginOptionsInfo: Codable {
     let icon: String
 }
 
-struct OnBoardingDataModel: Codable{
+struct OnBoardingDataModel: Codable {
     let onboarding: [Onboarding]
     let consent: Consent
     let registration: Registration
@@ -442,11 +469,11 @@ struct HealthKitData: Codable {
     let healthKitTypes: [HealthKitTypes]
 }
 
-struct HealthKitTypes: Codable, Equatable  {
+struct HealthKitTypes: Codable, Equatable {
     let type: String
 }
 
-struct ProfileModel: Codable{
+struct ProfileModel: Codable {
     let title: String
     let profileImage: String
     let help: String
@@ -454,7 +481,7 @@ struct ProfileModel: Codable{
     let reportProblemText: String
     let supportText: String
     let consentText: String
-    let WithdrawStudyText: String
+    let withdrawStudyText: String
     let profileInfoHeader: String
     let firstName: String
     let lastName: String
@@ -466,7 +493,7 @@ struct ProfileModel: Codable{
     let backgroundColor: String
 }
 
-struct ResearchKitModel: Codable{
+struct ResearchKitModel: Codable {
     let surveysHeaderTitle: String
     let formSurveyExample: String
     let groupedFormSurveyExample: String
@@ -529,11 +556,9 @@ struct ResearchKitModel: Codable{
     let miscellaneousHeaderTitle: String
     let webView: String
     let researchKit: String
-    
 }
 
-
-struct SurverysTask: Codable{
+struct SurverysTask: Codable {
     let title: String
     let additionalText: String
     let itemQuestion: String
@@ -553,10 +578,10 @@ struct SurverysTask: Codable{
     let learnMoreTitle: String
     let learnMoreText: String
     let birthdayText: String
-    
+
 }
 
-struct CarekitModel: Codable{
+struct CarekitModel: Codable {
     let simple: String
     let instruction: String
     let buttonLog: String
@@ -569,4 +594,3 @@ struct CarekitModel: Codable{
     let detailed: String
     let careKit: String
 }
-

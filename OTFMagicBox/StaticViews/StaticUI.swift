@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -40,15 +40,15 @@ struct CareKitViews: View {
         VStack {
             Text("ResearchKit Views")
                 .foregroundColor(.otfTextColor)
-                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
-                .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                .font(Font.otfscreenTitleFont)
+                .fontWeight(Font.otfheaderTitleWeight)
             List {
-                ContactsSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-                TaskSection(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                ContactsSection()
+                TaskSection()
             }
             .listStyle(GroupedListStyle())
         }
-        
+
     }
 }
 
@@ -57,62 +57,62 @@ struct ResearchKitViews: View {
         VStack {
             Text("ResearchKit Views")
                 .foregroundColor(.otfTextColor)
-                .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
-                .fontWeight(YmlReader().appTheme?.screenTitleFont.fontWeight)
+                .font(Font.otfscreenTitleFont)
+                .fontWeight(Font.otfscreenTitleFontWeight)
             List {
-                SurveysList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-                SurveyQuestionsList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-                OnboardingList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-                ActiveTasksList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
-                MiscellaneousList(cellbackgroundColor: YmlReader().appTheme?.cellbackgroundColor.color ?? .black, headerColor: YmlReader().appTheme?.headerColor.color ?? .black, textColor: YmlReader().appTheme?.textColor.color ?? .black)
+                SurveysList()
+                SurveyQuestionsList()
+                OnboardingList()
+                ActiveTasksList()
+                MiscellaneousList()
             }
             .listStyle(GroupedListStyle())
         }
-        
+
     }
 }
 
 struct StaticUI: View {
-    
+
     @State private var isPresenting = false
-    
+
     init() {
-        UITableView.appearance().separatorColor = YmlReader().appTheme?.separatorColor.color
-        UITableView.appearance().backgroundColor = YmlReader().appTheme?.backgroundColor.color
+        UITableView.appearance().separatorColor = YmlReader().appStyle.separatorColor.color
+        UITableView.appearance().backgroundColor = YmlReader().appStyle.backgroundColor.color
     }
     var body: some View {
         NavigationView {
             VStack {
                 Text("Sample Views")
                     .foregroundColor(.otfTextColor)
-                    .font(YmlReader().appTheme?.screenTitleFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.headerTitleWeight.fontWeight)
+                    .font(Font.otfscreenTitleFont)
+                    .fontWeight(Font.otfheaderTitleWeight)
                 List {
-                    
+
                     NavigationLink(destination: CareKitViews()) {
                         Text(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit")
-                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                            .fontWeight(Font.otfFontWeight)
                     }
                     .foregroundColor(.otfTextColor)
                     .listRowBackground(Color.otfCellBackground)
-                    
+
                     NavigationLink(destination: ResearchKitViews()) {
                         Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
-                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                            .fontWeight(Font.otfFontWeight)
                     }
                     .foregroundColor(.otfTextColor)
                     .listRowBackground(Color.otfCellBackground)
                 }
                 .listStyle(GroupedListStyle())
-                .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { notification in
+                .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { _ in
                     isPresenting = true
                 }
                 .alert(isPresented: $isPresenting) {
-                    
+
                     Alert(
                         title: Text(Constants.CustomiseStrings.accountDeleted)
-                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                            .font(Font.otfAppFont)
+                            .fontWeight(Font.otfFontWeight),
                         message: Text(Constants.deleteAccount),
                         dismissButton: .default(Text(Constants.CustomiseStrings.okay), action: {
                             OTFTheraforgeNetwork.shared.moveToOnboardingView()
@@ -125,7 +125,7 @@ struct StaticUI: View {
                 .background(Color.otfCellBackground)
             }
         }
-        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+        .font(Font.otfAppFont)
     }
 }
 

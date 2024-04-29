@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -46,11 +46,11 @@ extension OCKAnyTask {
         let keys = try? JSONDecoder().decode(GroupIdentifierKeys.self, from: data)
         return keys ?? GroupIdentifierKeys()
     }
-    
+
     var category: TaskCategory {
         return groupIdentifierKeys.category
     }
-    
+
     var viewType: TaskStyle {
         return groupIdentifierKeys.viewType
     }
@@ -60,12 +60,12 @@ extension Collection where Element == OCKEvent<OCKTask, OCKOutcome> {
     func getTasksAndEventsOf(category: TaskCategory, for interval: DateInterval) -> [TaskEvents] {
         let categoryTaskEvents = filter({ $0.task.category == category })
         let categoryTasks = categoryTaskEvents.map({ $0.task })
-        
+
         let tasksAndEvents = categoryTasks.map { task -> TaskEvents in
             let eventsOfTask = categoryTaskEvents.filter({ $0.task.id == task.id })
             return TaskEvents(interval: interval, events: eventsOfTask)
         }
-        
+
         return tasksAndEvents
     }
 }
