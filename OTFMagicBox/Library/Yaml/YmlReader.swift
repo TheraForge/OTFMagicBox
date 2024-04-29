@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -42,12 +42,12 @@ import OTFUtilities
  YmlReader decodes the Yaml values from the given file.
  */
 public class YmlReader {
-    
+
     /// Yaml file name.
     private let fileName = Constants.YamlDefaults.FileName
-    
-    var dataModel : DefaultConfig?
-    
+
+    var dataModel: DefaultConfig?
+
     init() {
         let fileUrlString = Bundle.main.path(forResource: fileName, ofType: nil)!
         let fileUrl = URL(fileURLWithPath: fileUrlString)
@@ -63,45 +63,35 @@ public class YmlReader {
             }
         }
     }
-    
     func getPreferredLocale() -> Locale {
         guard let preferredIdentifier = Locale.preferredLanguages.first else {
             return Locale.current
         }
         return Locale(identifier: preferredIdentifier)
     }
-    
+
     // Returns primary color.
     var primaryColor: UIColor {
-        let valueSet = (dataModel?.designConfig ?? [])
-        
-        for value in valueSet where value.name == "label" {
-            return value.textValue.color ?? UIColor.black
+        guard let labelColor = appStyle.textColor.color else {
+            return .label
         }
-        return .black
+        return labelColor
     }
-    
-    
     // Returns tint color.
     var tintColor: UIColor {
-        let valueSet = (dataModel?.designConfig ?? [])
-        
-        for value in valueSet where value.name == "tintColor" {
-            return value.textValue.color ?? UIColor.black
+        guard let buttonTextColor = appStyle.buttonTextColor.color else {
+            return .black
         }
-        return .black
+        return buttonTextColor
     }
-    
     var apiKey: String {
         guard let apiKey = dataModel?.apiKey else {
             return Constants.YamlDefaults.APIKey
         }
         return apiKey
     }
-    
-    
     var appTitle: String {
-    switch getPreferredLocale().languageCode {
+        switch getPreferredLocale().languageCode {
         case "fr":
             if let title = dataModel?.fr.appTitle {
                 return title
@@ -113,7 +103,6 @@ public class YmlReader {
         }
         return Constants.YamlDefaults.TeamName
     }
-    
     var teamName: String {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -122,17 +111,17 @@ public class YmlReader {
             return dataModel?.en.teamName ?? Constants.YamlDefaults.TeamName
         }
     }
-    
+
     var teamEmail: String {
         return dataModel?.teamEmail ?? Constants.YamlDefaults.TeamEmail
     }
-    
+
     var teamPhone: String {
         return dataModel?.teamPhone ?? Constants.YamlDefaults.TeamPhone
     }
-    
+
     var teamCopyright: String {
-        
+
         switch getPreferredLocale().languageCode {
         case "fr":
             return dataModel?.fr.copyright ?? Constants.YamlDefaults.TeamCopyright
@@ -140,49 +129,49 @@ public class YmlReader {
             return dataModel?.en.copyright ?? Constants.YamlDefaults.TeamCopyright
         }
     }
-    
+
     var teamWebsite: String {
         return dataModel?.teamWebsite ?? Constants.YamlDefaults.TeamWebsite
     }
-    
+
     var showAppleLogin: Bool {
         guard let showSocialLogin = dataModel?.showAppleSignin else { return false }
         return showSocialLogin == Constants.true
     }
-    
+
     var showGoogleLogin: Bool {
         guard let showSocialLogin = dataModel?.showGoogleSignin else { return false }
         return showSocialLogin == Constants.true
     }
-    
-//    var healthPermissionsTitle: String? {
-//        switch getPreferredLocale().languageCode {
-//        case "fr":
-//            return dataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
-//        default:
-//            return dataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
-//        }
-//    }
-//    
-//    var healthPermissionsText: String? {
-//        switch getPreferredLocale().languageCode {
-//        case "fr":
-//            return dataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
-//        default:
-//            return dataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
-//        }
-//    }
-    
+
+    //    var healthPermissionsTitle: String? {
+    //        switch getPreferredLocale().languageCode {
+    //        case "fr":
+    //            return dataModel?.fr.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+    //        default:
+    //            return dataModel?.en.healthKitData.healthPermissionsTitle ?? Constants.YamlDefaults.HealthPermissionsTitle
+    //        }
+    //    }
+    //
+    //    var healthPermissionsText: String? {
+    //        switch getPreferredLocale().languageCode {
+    //        case "fr":
+    //            return dataModel?.fr.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+    //        default:
+    //            return dataModel?.en.healthKitData.healthPermissionsText ?? Constants.YamlDefaults.HealthPermissionsText
+    //        }
+    //    }
+
     var useCareKit: Bool {
         guard let useCareKit = dataModel?.useCareKit else { return false }
         return useCareKit == Constants.true
     }
-    
+
     var showCheckupScreen: Bool {
         guard let showCheckupScreen = dataModel?.showCheckupScreen else { return false }
         return showCheckupScreen == Constants.true
     }
-    
+
     var showStaticUIScreen: Bool {
         guard let showStaticUIScreen = dataModel?.showStaticUIScreen else { return false }
         return showStaticUIScreen == Constants.true
@@ -206,10 +195,6 @@ public class YmlReader {
 //        }
 //    }
     
-    var appTheme: ThemeCustomization? {
-        return dataModel?.appTheme
-    }
-    
 //    var withdrawl: Withdrawal? {
 //        switch getPreferredLocale().languageCode {
 //        case "fr":
@@ -227,4 +212,34 @@ public class YmlReader {
 //            return dataModel?.en.healthKitData.healthKitTypes ?? [HealthKitTypes(type: "stepCount"), HealthKitTypes(type: "distanceSwimming")]
 //        }
 //    }
+}
+
+extension YmlReader {
+    internal var defaultStyle: ThemeCustomization {
+        return ThemeCustomization(
+            name: "defaultStyle",
+            backgroundColor: "systemBackground",
+            textColor: "label",
+            separatorColor: "separator",
+            cellbackgroundColor: "secondarySystemGroupedBackground",
+            buttonTextColor: "Teal",
+            borderColor: "Black",
+            headerColor: "label",
+            textWeight: "",
+            textFont: "Inherited",
+            screenTitleFont: "Header",
+            screenTitleWeight: "",
+            headerTitleFont: "HeaderInherited",
+            headerTitleWeight: "Bold",
+            appTitleSize: "Large Title"
+        )
+    }
+    
+    var appStyle: ThemeCustomization {
+        guard let styleName = dataModel?.selectedStyle,
+              let style = dataModel?.styles.first(where: { $0.name == styleName }) else {
+            return defaultStyle
+        }
+        return style
+    }
 }

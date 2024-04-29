@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -39,16 +39,16 @@ import OTFCareKitStore
 // MARK: - Instruction Task View
 struct InstructionTaskView: UIViewControllerRepresentable {
     typealias UIViewControllerType = OCKInstructionsTaskViewController
-    
+
     let task: OCKAnyTask
     let date: Date
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIViewController(context: Context) -> OCKInstructionsTaskViewController {
         let instructionCard = OCKInstructionsTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)
         return instructionCard
     }
-    
+
     func updateUIViewController(_ uiViewController: OCKInstructionsTaskViewController, context: Context) {}
 }
 
@@ -66,14 +66,14 @@ struct GridTaskView: UIViewRepresentable {
     let task: OCKAnyTask
     let date: Date
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIView(context: Context) -> some UIView {
         let gridCard = OCKGridTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)
         return gridCard.view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+
     }
 }
 
@@ -90,14 +90,14 @@ struct SimpleTaskView: UIViewRepresentable {
     let task: OCKAnyTask
     let date: Date
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIView(context: Context) -> some UIView {
         let simpleCard = OCKSimpleTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)
         return simpleCard.view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+
     }
 }
 
@@ -115,14 +115,14 @@ struct ChecklistTaskView: UIViewRepresentable {
     let task: OCKAnyTask
     let date: Date
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIView(context: Context) -> some UIView {
         let checklistCard = OCKChecklistTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)
         return checklistCard.view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+
     }
 }
 
@@ -140,14 +140,14 @@ struct ButtonLogTaskView: UIViewRepresentable {
     let task: OCKAnyTask
     let date: Date
     let storeManager: OCKSynchronizedStoreManager
-    
+
     func makeUIView(context: Context) -> some UIView {
         let buttonLogCard = OCKButtonLogTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)
         return buttonLogCard.view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+
     }
 }
 
@@ -179,7 +179,7 @@ var dummyTask: OCKAnyTask {
     let task = OCKTask(id: OCKStore.Tasks.doxylamine.rawValue,
                        title: OCKStore.Tasks.doxylamine.rawValue,
                        carePlanUUID: nil, schedule: schedule)
-    
+
     return task
 }
 

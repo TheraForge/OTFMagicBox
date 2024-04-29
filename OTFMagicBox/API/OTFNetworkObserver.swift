@@ -11,29 +11,29 @@ import Foundation
 
 class OTFNetworkObserver: ObservableObject {
     @Published private(set) var status: OTFNetworkStatus
-    
+
     private let pathMonitor = NWPathMonitor()
     private let pathMonitorQueue = DispatchQueue(label: "NWPathMonitor")
-    
+
     init(status: OTFNetworkStatus = .unsatisfied, active: Bool = true) {
         self.status = status
         if active {
             enablePathMonitor()
         }
     }
-    
+
     private func enablePathMonitor() {
         pathMonitor.pathUpdateHandler = { path in
             guard path.status == .satisfied else {
                 self.status = .offline
                 return
             }
-            
+
             self.pingEndpoint(isExpensive: path.isExpensive)
         }
         pathMonitor.start(queue: pathMonitorQueue)
     }
-    
+
     func pingEndpoint(isExpensive: Bool) {
         guard let url = URL(string: "https://theraforge.org/api/v1/") else {
             self.status = .offline

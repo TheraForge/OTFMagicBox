@@ -16,68 +16,66 @@ struct ProfileDetaiDataModel {
     var showGenderPicker = false
     var showDatePicker = false
 }
-
-
 final class UpdateUserViewModel: ObservableObject {
-    
+
     @Published var profileDetaiDataModel: ProfileDetaiDataModel = ProfileDetaiDataModel()
     private var disposables = Set<AnyCancellable>()
     var patientPublisher = PassthroughSubject<OCKPatient, Never>()
     var profileImageData = PassthroughSubject<Data, Never>()
     var hideLoader = PassthroughSubject<Bool, Never>()
     let swiftSodium = SwiftSodium()
-    
+
     private var shouldDismissView = false {
         didSet {
             hideLoader.send(shouldDismissView)
         }
     }
-    
+
     private var patient: OCKPatient? {
         didSet {
             patientPublisher.send(patient!)
         }
     }
-    
+
     private var profileData: Data? {
         didSet {
             profileImageData.send(profileData!)
         }
     }
-    
-//  MARK:  Fetch OCKPatient
+
+    // MARK: Fetch OCKPatient
     func fetchPatient(userId: String) {
-        
-        CareKitManager.shared.cloudantStore?.fetchPatient(withID: userId, completion: { result in
+
+        CareKitStoreManager.shared.cloudantStore?.fetchPatient(withID: userId, completion: { _ in
             self.profileDataPublisher(userId: userId)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: {print ("Received completion: \($0).")},
+                .sink(receiveCompletion: { print("Received completion: \($0).") },
                       receiveValue: {patient in
-                    self.patient = patient
-                })
+                        self.patient = patient
+                      })
                 .store(in: &self.disposables)
         })
     }
-    
+
     func profileDataPublisher(userId: String) -> AnyPublisher<OCKPatient, Error> {
-         return Future<OCKPatient, Error> { promise in
-             CareKitManager.shared.cloudantStore?.fetchPatient(withID: userId, completion: { result in
-                 if case .success(let patient) = result {
-                     return promise(.success(patient))
-                 }
-             })
-         }
-         .receive(on: RunLoop.main)
-         .eraseToAnyPublisher()
-     }
-    
-//  MARK:  update OCKPatient
-    func updatePatient(user: OCKPatient) {
-        CareKitManager.shared.cloudantStore?.updatePatient(user)
+        return Future<OCKPatient, Error> { promise in
+            CareKitStoreManager.shared.cloudantStore?.fetchPatient(withID: userId, completion: { result in
+                if case .success(let patient) = result {
+                    return promise(.success(patient))
+                }
+            })
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
     }
-    
-//  MARK:  upload file request
-    func uploadFile(data: Data, fileName: String, encryptedFileKey: String? = nil , hashFileKey: String) {
+
+    // MARK: update OCKPatient
+    func updatePatient(user: OCKPatient) {
+        CareKitStoreManager.shared.cloudantStore?.updatePatient(user)
+    }
+
+    // MARK: upload file request
+    func uploadFile(data: Data, fileName: String, encryptedFileKey: String? = nil, hashFileKey: String) {
         OTFTheraforgeNetwork.shared.uploadFile(data: data, fileName: fileName, type: .profile, encryptedFileKey: encryptedFileKey, hashFileKey: hashFileKey)
             .receive(on: DispatchQueue.main)
             .sink { res in
@@ -94,20 +92,20 @@ final class UpdateUserViewModel: ObservableObject {
             }
             .store(in: &disposables)
     }
-    
-    func showProfileImage(user : OCKPatient, imageData: Data) -> UIImage {
-        
-        if let encryptedFileKey = user.attachments?.Profile?.encryptedFileKey, let hashFileKey = user.attachments?.Profile?.hashFileKey, !encryptedFileKey.isEmpty {
+
+    func showProfileImage(user: OCKPatient, imageData: Data) -> UIImage {
+
+        if let encryptedFileKey = user.attachments?.profile?.encryptedFileKey, let hashFileKey = user.attachments?.profile?.hashFileKey, !encryptedFileKey.isEmpty {
             let image = dataToImage(data: imageData, hashFileKey: hashFileKey)
-           return image
+            return image
         } else {
-            let image = dataToImageWithoutDecryption(data: imageData, key: user.attachments?.Profile?.hashFileKey)
+            let image = dataToImageWithoutDecryption(data: imageData, key: user.attachments?.profile?.hashFileKey)
             return image
         }
     }
-    
-//MARK:  downlaod file request
-    func downloadFile(attachmentID: String, isProfile : Bool = false) {
+
+    // MARK: downlaod file request
+    func downloadFile(attachmentID: String, isProfile: Bool = false) {
         OTFTheraforgeNetwork.shared.downloadFile(attachmentID: attachmentID, type: .profile)
             .receive(on: DispatchQueue.main)
             .sink { res in
@@ -120,21 +118,21 @@ final class UpdateUserViewModel: ObservableObject {
                 let fileData = data.data
                 fileData.saveFileToDocument(data: fileData, filename: data.metadata.attachmentID)
                 if isProfile {
-                    let dataDict:[String: Data] = ["imageData": fileData]
+                    let dataDict: [String: Data] = ["imageData": fileData]
                     NotificationCenter.default.post(name: .imageDownloaded, object: dataDict)
                 }
             }
             .store(in: &disposables)
     }
-    
-    //MARK:  decrypt encrypted data
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // MARK: decrypt encrypted data
     func decryptedFile(file: Data, hashFileKey: String) -> Data {
-        let dataToBytes =  swiftSodium.getArrayOfBytesFromData(FileData: file as NSData)
+        let dataToBytes =  swiftSodium.getArrayOfBytesFromData(fileData: file as NSData)
         let fileKey = swiftSodium.generateDeriveKey(key: KeychainCloudManager.getDefaultStorageKey)
-        
+
         let hashKey = swiftSodium.generateGenericHashWithKey(message: dataToBytes, fileKey: fileKey)
         let hashKeyHex = hashKey.bytesToHex(spacing: "").lowercased()
-        
+
         if hashKeyHex.contains(hashFileKey) {
             let (header, encryptedFile) = dataToBytes.splitFile()
             let encryption = swiftSodium.decryptFile(secretKey: fileKey, header: header, encryptedFile: encryptedFile)
@@ -145,11 +143,9 @@ final class UpdateUserViewModel: ObservableObject {
 
         }
         return Data()
-        
+
     }
-    
-    
-//MARK:  decrypt data and convert data to UIImage
+    // MARK: decrypt data and convert data to UIImage
     func dataToImage(data: Data, hashFileKey: String) -> UIImage {
         let decryptedData = decryptedFile(file: data, hashFileKey: hashFileKey)
         if let image = UIImage(data: decryptedData) {
@@ -157,46 +153,42 @@ final class UpdateUserViewModel: ObservableObject {
         }
         return UIImage()
     }
-    
+
     func dataToImageWithoutDecryption(data: Data, key: String?) -> UIImage {
-        let imageToBytes = swiftSodium.getArrayOfBytesFromData(FileData: data as NSData)
+        let imageToBytes = swiftSodium.getArrayOfBytesFromData(fileData: data as NSData)
         let hashFileKey = swiftSodium.generateGenericHashWithoutKey(message: imageToBytes)
-        
+
         let hashFileKeyHex = hashFileKey.bytesToHex(spacing: "").lowercased()
         if let keyhex = key, hashFileKeyHex.contains(keyhex),
-            let image = UIImage(data: data) {
+           let image = UIImage(data: data) {
             return image
         }
         return UIImage()
     }
-    
-//MARK:  Delete file request
+
+    // MARK: Delete file request
     func deleteAttachment(attachmentID: String) {
         OTFTheraforgeNetwork.shared.deleteFile(attachmentID: attachmentID)
             .receive(on: DispatchQueue.main)
             .sink { res in
                 switch res {
                 case .failure:
-                self.shouldDismissView = true
+                    self.shouldDismissView = true
                 default: break
                 }
-            } receiveValue: { data in
+            } receiveValue: { _ in
                 self.synchronizeDatabase()
                 self.shouldDismissView = true
             }
             .store(in: &disposables)
     }
-    
-//MARK:  delete file from document directory
+
+    // MARK: delete file from document directory
     func deleteFileFromDocument(fileName: String) {
-        deleteFile(filename: fileName)
+        try? FileManager.deleteFile(filename: fileName)
     }
-    
+
     public func synchronizeDatabase() {
         NotificationCenter.default.post(name: .databaseSuccessfllySynchronized, object: nil)
     }
 }
-
-
- 
-

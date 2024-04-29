@@ -1,0 +1,137 @@
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - Carthage
+    - Pods
+    - SwiftLint/Common/3rdPartyLib
+disabled_rules: # rule identifiers to exclude from running
+    - trailing_whitespace
+#    - force_cast
+#    - force_unwrapping
+#    - force_try
+    - empty_enum_arguments
+#    - overridden_super_call
+#    - sorted_imports
+#    - vertical_whitespace
+    - inclusive_language
+    - trailing_closure
+    - file_name
+
+opt_in_rules: # some rules are only opt-in
+#    - missing_docs
+    - yoda_condition            # Default configuration: warning
+    - empty_count               # Default configuration: error, only_after_dot: false
+    - empty_string              # Default configuration: warning
+    - closure_end_indentation   # Default configuration: warning
+    - closure_spacing           # Default configuration: warning
+    - explicit_init             # Default configuration: warning
+    - first_where               # Default configuration: warning
+    - number_separator          # Default configuration: warning, minimum_length: 0
+    - explicit_failure_calls
+    - fatal_error_message
+#    - extension_access_modifier
+#    - implicitly_unwrapped_optional
+#    - operator_usage_whitespace
+    - vertical_parameter_alignment_on_call
+    - multiline_parameters
+#    - multiple_empty_lines # Defined into custom roles
+    - nesting
+    - file_name
+    - convenience_type
+    - modifier_order
+
+    - private_outlet
+    - prohibited_super_call
+    - protocol_property_accessors_order
+    - redundant_nil_coalescing
+    - syntactic_sugar
+    - comments_space
+    - conditional_returns_on_newline
+
+conditional_returns_on_newline:
+    if_only: true
+    
+line_length:
+    warning: 200
+    error: 250
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_urls: true
+
+function_body_length:
+    warning: 300
+    error: 500
+
+function_parameter_count:
+    warning: 6
+    error: 8
+
+type_name: # class name
+    min_length: 3
+    max_length:
+        warning: 60
+        error: 80
+
+type_body_length:
+    warning: 300
+    error: 500
+
+file_length:
+    warning: 1000
+    error: 1500
+    ignore_comment_only_lines: true
+
+identifier_name: # Variable name
+    allowed_symbols: "_"
+    min_length: 1
+    max_length:
+        warning: 60
+        error: 80
+    excluded:
+        - id
+        - URL
+        - GlobalAPIKey
+
+large_tuple:
+    warning: 4
+    error: 5
+
+private_outlet:
+    allow_private_set: true
+
+#nesting:
+#    type_level:
+#      warning: 3
+#      error: 6
+#    statement_level:
+#      warning: 5
+#      error: 10
+  
+number_separator:
+    minimum_length: 8
+
+#cyclomatic complexity below 4 is considered good;
+#cyclomatic complexity between 5 and 7 is considered medium complexity,
+#between 8 and 10 is high complexity,
+#and above that is extreme complexity.
+cyclomatic_complexity:
+    ignores_case_statements: true
+    warning: 7
+    error: 11
+
+custom_rules:
+    comments_space: # From https://github.com/brandenr/swiftlintconfig
+      name: "Space After Comment"
+      regex: '(^ *//\w+)'
+      message: "There should be a space after //"
+      severity: warning
+    explicit_failure_calls:
+        name: “Avoid asserting ‘false’”
+        regex: ‘((assert|precondition)\(false)’
+        message: “Use assertionFailure() or preconditionFailure() instead.”
+        severity: warning
+    multiple_empty_lines:
+       name: "Multiple Empty Lines"
+       regex: '((?:\s*\n){3,})'
+       message: "There are too many line breaks"
+       severity: error

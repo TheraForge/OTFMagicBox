@@ -13,8 +13,7 @@ import OTFUtilities
 struct DeleteAccountView: View {
     @StateObject private var viewModel = DeleteAccountViewModel()
     @State private(set) var user: OCKPatient?
-    let textColor: Color
-    
+
     var body: some View {
         HStack {
             Spacer()
@@ -24,38 +23,38 @@ struct DeleteAccountView: View {
                 Text(Constants.CustomiseStrings.deleteAccount)
                     .font(.basicFontStyle)
                     .foregroundColor(Color.red)
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                    .font(Font.otfAppFont)
+                    .fontWeight(Font.otfFontWeight)
             })
             .actionSheet(isPresented: $viewModel.showingOptions) {
                 ActionSheet(
                     title: Text(Constants.CustomiseStrings.removeInformation)
-                        .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                        .fontWeight(YmlReader().appTheme?.textWeight.fontWeight),
+                        .font(Font.otfAppFont)
+                        .fontWeight(Font.otfFontWeight),
                     buttons: [
                         .destructive(Text(Constants.CustomiseStrings.deleteAccount), action: {
                             viewModel.deleteUserAccount(userId: user?.id ?? "")
                         }),
                         .cancel(Text(Constants.CustomiseStrings.cancel)
-                            .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
-                            .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0)))
+                                    .fontWeight(Font.otfFontWeight)
+                                    .font(Font.otfAppFont))
                     ]
                 )
             }
             .alert(isPresented: $viewModel.showingAlert) {
                 Alert(title: Text(Constants.CustomiseStrings.faliedToDeleteAccount)
-                    .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                    .fontWeight(YmlReader().appTheme?.textWeight.fontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
+                        .font(Font.otfAppFont)
+                        .fontWeight(Font.otfFontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
             }
-            
+
             Spacer()
         }
-        
+
     }
 }
 
 struct DeleteAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteAccountView(user: nil, textColor: Color.red)
+        DeleteAccountView(user: nil)
     }
 }

@@ -10,12 +10,12 @@ import SwiftUI
 
 struct RKTasks: UIViewControllerRepresentable {
     typealias UIViewControllerType = TaskListViewController
-    
+
     func makeUIViewController(context: Context) -> TaskListViewController {
         return TaskListViewController()
     }
-    
+
     func updateUIViewController(_ uiViewController: TaskListViewController, context: Context) {
-        
+
     }
 }

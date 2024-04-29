@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -38,33 +38,36 @@ import OTFUtilities
 
 /// The onboarding view.
 struct OnboardingView: View {
-    
+
     /// The list of the onboarding view elements.
     let color: Color
     var onboardingElements: [Onboarding] = []
-    var onComplete: (() -> Void)? = nil
-    
+    var onComplete: (() -> Void)?
+
     @State var showingOnboard = false
     @State var showingLogin = false
-    
+
     @State private var selectedAuthMethod = AuthMethod.email
-    
+
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
-        
-        // TODO: Add the actual default image, if the user doesnt enter any image.
         let config = ModuleAppYmlReader()
         let onboardingdata: [Onboarding] = {
-            config.onboardingData ?? [Onboarding(image: Constants.CustomiseStrings.splashImage, icon: Constants.CustomiseStrings.splashIcon, title: Constants.CustomiseStrings.welcome, color: "black", description: Constants.CustomiseStrings.defaultDescription)]
+            config.onboardingData ?? [Onboarding(
+                                        image: Constants.CustomiseStrings.splashImage,
+                                        icon: Constants.CustomiseStrings.splashIcon,
+                                        title: Constants.CustomiseStrings.welcome,
+                                        color: "black",
+                                        description: Constants.CustomiseStrings.defaultDescription)]
         }()
-        
+
         onboardingElements = onboardingdata
-        
+
         self.color = Color(config.primaryColor)
-        
+
         self.onComplete = onComplete
     }
-    
+
     /// Onboarding  view.
     var body: some View {
         ZStack {
@@ -74,11 +77,11 @@ struct OnboardingView: View {
                                       description: $0.description,
                                       color: Color($0.color.color ?? .black))
             })
-            
+
             GeometryReader { geometry in
                 VStack {
                     Spacer()
-                    
+
                     HStack {
                         Button(action: {
                             self.showingOnboard = true
@@ -89,17 +92,17 @@ struct OnboardingView: View {
                                 .foregroundColor(.white)
                                 .background(self.color)
                                 .cornerRadius(Metrics.RADIUS_CORNER_BUTTON)
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
+                                .font(Font.otfAppFont)
                         })
                         .padding(.leading, Metrics.PADDING_HORIZONTAL_BUTTON)
                         .padding(.trailing, Metrics.PADDING_HORIZONTAL_BUTTON / 2)
-                        
+
                         Button(action: {
                             self.showingLogin = true
                         }, label: {
                             Text(Constants.CustomiseStrings.signIn)
-                                .font(YmlReader().appTheme?.textFont.appFont ?? Font.system(size: 17.0))
-                                .fontWeight(YmlReader().appTheme?.textWeight.fontWeight)
+                                .font(Font.otfAppFont)
+                                .fontWeight(Font.otfFontWeight)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, Metrics.PADDING_VERTICAL_ROW)
                                 .foregroundColor(.white)
@@ -109,7 +112,7 @@ struct OnboardingView: View {
                         .padding(.trailing, Metrics.PADDING_HORIZONTAL_BUTTON)
                         .padding(.leading, Metrics.PADDING_HORIZONTAL_BUTTON / 2)
                     }
-                    
+
                     Spacer()
                         .frame(height: geometry.safeAreaInsets.bottom > 0 ? 0 : Metrics.BOTTOM_SPACER)
                 }
@@ -134,22 +137,22 @@ struct OnboardingView: View {
 
 /// The onboarding detailed view.
 struct OnboardingDetailsView: View {
-    
+
     /// Image of the onboarding item.
     let icon: String
-    
+
     /// Image of the onboarding item.
     let image: String
-    
+
     /// Title of the onboarding item.
     let title: String
-    
+
     /// Description of the onboarding item.
     let description: String
-    
+
     /// Color of the onboarding item.
     let color: Color
-    
+
     /// Onboarding detailed view.
     var body: some View {
         ZStack {
@@ -157,7 +160,7 @@ struct OnboardingDetailsView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .accessibilityHidden(true)
-            
+
             VStack {
                 Image(systemName: icon)
                     .imageScale(.large)
@@ -166,15 +169,15 @@ struct OnboardingDetailsView: View {
                     .padding(.top, Metrics.PADDING_VERTICAL_BUTTON * 2)
                     .padding(.bottom, Metrics.PADDING_VERTICAL_BUTTON)
                     .accessibilityHidden(true)
-                
+
                 Text(title)
                     .multilineTextAlignment(.center)
-                    .font(YmlReader().appTheme?.appTitleSize.appFont ?? Constants.YamlDefaults.AppTitleSize.appFont)
+                    .font(YmlReader().appStyle.appTitleSize.appFont ?? Constants.YamlDefaults.AppTitleSize.appFont)
                     .foregroundColor(color)
                     .shadow(color: .black, radius: 15)
                     .padding([.horizontal, .bottom],
                              Metrics.PADDING_VERTICAL_BUTTON)
-                
+
                 Text(description)
                     .multilineTextAlignment(.center)
                     .font(.body)
@@ -182,13 +185,13 @@ struct OnboardingDetailsView: View {
                     .shadow(radius: 5)
                     .padding(.horizontal,
                              Metrics.PADDING_HORIZONTAL_BUTTON)
-                
+
                 Spacer()
             }
             .frame(maxWidth: .infinity)
         }
     }
-    
+
 }
 
 struct OnboardingView_Previews: PreviewProvider {
@@ -196,4 +199,3 @@ struct OnboardingView_Previews: PreviewProvider {
         OnboardingView()
     }
 }
-

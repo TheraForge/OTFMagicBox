@@ -53,7 +53,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: "<your-team-email>", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the quotes is the value assigned for that Key.
+# Example: teamEmail: "<your-team-email>", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon "<your-team-email>" is the value assigned for that Key.
 
 
 # Default Values:-
@@ -192,7 +192,7 @@ DataModel:
           summary: "This is custom section."
           content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
           title: "Custom consent section"
-          image: "online-agreement1"
+          image: "online-agreement"
           
     registration:
       showDateOfBirth: "true"
@@ -283,7 +283,7 @@ DataModel:
       reportProblemHeader: "Report a Problem"
       supportText: "Support"
       consentText: "Consent Documents"
-      WithdrawStudyText: "Withdraw from Study"
+      withdrawStudyText: "Withdraw from Study"
       profileInfoHeader: "Basic Information"
       firstName: "First Name"
       lastName: "Last Name"
@@ -619,7 +619,7 @@ DataModel:
       reportProblemHeader: "Signaler un problème"
       supportText: "Soutien"
       consentText: "Documents de consentement"
-      WithdrawStudyText: "Se retirer de l'étude"
+      withdrawStudyText: "Se retirer de l'étude"
       profileInfoHeader: "Informations De Base"
       firstName: "Prénom"
       lastName: "nom de famille"
@@ -729,11 +729,3 @@ DataModel:
       taskHeader: "Tâche"
       detailed: "détaillée"
       careKit: "Kit de soins"
-
-     
-   #ProfileScreenSetup
-    
-
-    
-
-

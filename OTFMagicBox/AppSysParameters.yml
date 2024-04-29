@@ -106,12 +106,13 @@ DataModel:
   useCareKit: "true"
   
 ##############################################################################
-#                      TheraForge system                             #
+#                      TheraForge Custom Style                               #
 ##############################################################################
 
 #Fixed colors
 
-# Usually don't use fixed colors because they don't adapt to dark mode and accessibility mode.
+# Avoid using fixed UIKit colors because they don't adapt to dark mode and accessibility modes.
+# See: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3174519
 
 #    black
 #    blue
@@ -130,9 +131,10 @@ DataModel:
 #    yellow
 
 
-# Its recommened to use Adaptable colors because they adapt to dark mode and accessibility mode.
-#Adaptable gray colors
+# It's recommended to use adaptable UIKit grey colors because they adapt to dark mode and accessibility mode.
+# See: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3281252
 
+# Adaptable gray colors
 #    systemGray
 #    systemGray1
 #    systemGray2
@@ -141,8 +143,11 @@ DataModel:
 #    systemGray5
 #    systemGray6
 
-#Adaptable colors
+# It's recommended to use adaptable UIKit colors because they adapt to dark mode and accessibility mode.
+# See: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3174530
+# And see: https://developer.apple.com/documentation/uikit/uicolor/ui_element_colors
 
+# Adaptable colors
 #   systemBlue
 #   systemBrown
 #   systemOrange
@@ -170,76 +175,80 @@ DataModel:
 #   secondarySystemBackground
 #   tertiarySystemBackground
 
-  appTheme:
-    backgroundColor: "systemBackground"
-    textColor: "label"
-    separatorColor: "separator"
-    cellbackgroundColor: "secondarySystemGroupedBackground"
-    buttonTextColor: "systemBlue"
-    borderColor: "Black"
-    headerColor: "label"
-    screenTitleFont: "Header"
-    screenTitleWeight: ""
-    headerTitleFont: "HeaderInherited"
-    headerTitleWeight: "Bold"
-    textWeight: ""
-    textFont: "Inherited"
-    appTitleSize: "Large Title"
+  # Select the active style
+  selectedStyle: "customStyle"
+
+  # Define available styles with their respective configurations
+  styles:
+    # A clean and customizable look, providing a starting point for your unique app style.
+    - name: "customStyle"
+      # Background color of the app
+      backgroundColor: "systemBackground"
+      # Text color used throughout the app
+      textColor: "label"
+      # Color of separators between UI elements
+      separatorColor: "separator"
+      # Background color of table cells
+      cellbackgroundColor: "secondarySystemGroupedBackground"
+      # Text color for buttons with a red theme
+      buttonTextColor: "systemBlue"
+      # Color for borders
+      borderColor: "Black"
+      # Text color for headers and labels
+      headerColor: "label"
+      # Font for screen titles
+      screenTitleFont: "Header"
+      # Font weight for screen titles (if applicable)
+      screenTitleWeight: ""
+      # Font for header titles
+      headerTitleFont: "HeaderInherited"
+      # Font weight for header titles
+      headerTitleWeight: "Bold"
+      # Default font weight for text
+      textWeight: ""
+      # Default font for text
+      textFont: "Inherited"
+      # Font size for app titles
+      appTitleSize: "Large Title"
   
+    # Embraces the aesthetics of Apple's Health application, maintaining a familiar and health-centric appearance.
+    - name: "healthStyle"
+      backgroundColor: "systemBackground"
+      textColor: "label"
+      separatorColor: "separator"
+      cellbackgroundColor: "secondarySystemGroupedBackground"
+      buttonTextColor: "systemBlue"
+      borderColor: "Black"
+      headerColor: "label"
+      screenTitleFont: "Header"
+      screenTitleWeight: ""
+      headerTitleFont: "HeaderInherited"
+      headerTitleWeight: "Bold"
+      textWeight: ""
+      textFont: "Inherited"
+      appTitleSize: "Large Title"
   
+    # Provides a standard and consistent appearance, suitable for CareKit components.
+    - name: "careKitStyle"
+      backgroundColor: "systemBackground"
+      textColor: "label"
+      separatorColor: "separator"
+      cellbackgroundColor: "secondarySystemGroupedBackground"
+      buttonTextColor: "Teal"
+      borderColor: "Black"
+      headerColor: "label"
+      screenTitleFont: "Header"
+      screenTitleWeight: ""
+      headerTitleFont: "HeaderInherited"
+      headerTitleWeight: "Bold"
+      textWeight: ""
+      textFont: "Inherited"
+      appTitleSize: "Large Title"
   
   designConfig:
       # Offset value.
       - name: "offset"
         textValue: "20"
-      # Color codes
-      # Colors will be used in the design of the application.
-      # Please choose the colors according to Human Interface Guidelines from Apple.
-      # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
-      - name: "tintColor"
-        textValue: "Blue"
-      - name: "label"
-        textValue: "Teal"
-      - name: "secondaryLabel"
-        textValue: "Brown"
-      - name: "tertiaryLabel"
-        textValue: "Cyan"
-      - name: "customBackground"
-        textValue: "Brown"
-      - name: "secondaryCustomBackground"
-        textValue: "Black"
-      - name: "customGroupedBackground"
-        textValue: "Brown"
-      - name: "secondaryCustomGroupedBackground"
-        textValue: "Brown"
-      - name: "tertiaryCustomGroupedBackground"
-        textValue: "Brown"
-      - name: "separator"
-        textValue: "Gray"
-      - name: "customFill"
-        textValue: "Blue"
-      - name: "secondaryCustomFill"
-        textValue: "Mint"
-      - name: "tertiaryCustomFill"
-        textValue: "Teal"
-      - name: "quaternaryCustomFill"
-        textValue: "Blue"
-      - name: "customBlue"
-        textValue: "blue"
-      - name: "customGray"
-        textValue: "Gray"
-      - name: "customGray2"
-        textValue: "Gray2"
-      - name: "customGray3"
-        textValue: "Gray3"
-      - name: "customGray4"
-        textValue: "Gray4"
-      - name: "customGray5"
-        textValue: "Gray5"
-      - name: "black"
-        textValue: "black"
-      - name: "white"
-        textValue: "white"
         
       # Fonts
       # Fonts will be used in the design of the application.

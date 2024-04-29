@@ -8,17 +8,36 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 
 ## Change Log
 <details open>
+  <summary>Release 1.0.4-beta</summary>
+  
+  - **New Styling Structure**
+    - Thanks to the new OTFStyle structure, the app can now adopt a user-selected theme in the `AppSysParameter.yml` file, which is applied equally to custom components inside the app, CareKitUI components and OTFDesignSystem components.
+    - Added a new OTFStyle environment object and modifier, allowing developers to apply the selected custom style to all the components of the app, whether they are from the TheraForge design system or from CareKit; developers can even apply them to custom views they may want to create.
+    - Removed the appTheme property from AppSysParameter and replaced it with styles, an array of styles that developers can use to apply to the app or to add their own custom styles that they can create.
+    - Removed the color properties from the DesignConfig model, as the colors are now fetched from appStyle.
+  - **Updated OTFToolBox**
+    - Updated OTFToolbox version to 1.0.4-beta, which corresponds to an updated version of OTFToolBox that includes the new OTFDesignSystem framework.
+  - **Bug Fixes**
+    - Fixed a bug on the ScheduleViewController in which the background would not reach the bottom area of the screen outside the safe area.
+    - Fixed an issue in which, when scrolling a list on the ScheduleViewController list, the contents of the list would go over the navigation bar. This has been fixed by applying an opaque white background to the navigation bar.
+  - **WatchOS support**
+    - Improved watchOS support.
+  - **Watch Synchronisation**
+    - This release synchronizes daily tasks between iOS and watchOS and updates their outcomes in both local stores as well as in the cloud.
+</details>
+
+<details>
   <summary>Release 1.0.3-beta</summary>
   
-  - **End-to-End File Encryption (TheraForge CryptoBox)**
-    Added class-based end-to-end encryption (E2EE) and integrity verification technology to protect sensitive user data at rest or in transit with the XChaCha20Poly1305 algorithm, which is independent from and in addition to TLS and native storage crypto. This creates two independent layers of highly secure data cryptography.
-  - **Biometric Authentications**
-    The app supports biometric authentication (FaceID or TouchID), which provides a secure and user-friendly way to authenticate users.
-  - **Sign in Using Password AutoFill**
-    With just a few taps users can create and save new passwords or log in to an existing account
-  - **Manage Documents**
-    MagicBox allows you to upload, download, re-name and delete different documents. User profile pictures and consent forms are saved as documents.
-  - **Improved Theme Customization Using YAML File**
+  - **End-to-End File Encrption (TheraForge CryptoBox)**
+    Added end-to-end encrption feature which prevents third parties from accessing data while it's being transferred from one user to another
+  - **Biometric authentications**
+    The app supports biometric authentication which provides secure and user-friendly way to authenticate users
+  - **Password-less login, use auto-fill sign in**
+    With just a few taps, users can create and save new passwords or log in to an existing account
+  - **Manage documents**
+    MagicBox allows you to upload, donwload, re-name and delete different docuements. User's profile picture and consent form are saved as documents.
+  - **Improved theme customization using yml file**
     - Font
     - Font size
     - Font weight
@@ -27,17 +46,17 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
   - **Apple Watch Demo App**
     - Added a companion WatchOS app for MagicBox
     - Allow users to check and manage tasks for the current day from their Apple Watch
-  - **Enhanced Styling of the Profile Screen**
-  - **New Network Indicator**
+  - **Enhanced styling of the Profile screen**
+  - **New network indicator**
     - Implemented a networking indicator to provide a visual representation of the connection status to TheraForge CloudBox servers
-  - **New Consent Documents Layout Section in Profile Screen**
+  - **New Consent documents layout section in Profile screen**
   - **Accessibility Enhancements**
     - Enhanced VoiceOver support for the Bold Text and Invert Colors system options for enhanced accessibility
     - Added support for Bold Text and Invert Colors for enhanced accessibility options
   - **Design and Assets**
-    - Incorporated new assets, including more than 360 images and dozens of additional icons/non-Apple SF Symbols (such as social icons), ready to be used inside the iOS app
+    - Incorporated new assets, including more than 360 images and dozens of additional icons/SF Symbols, ready to be used inside the iOS app
   - **Compatibility Updates**
-    - Increased the iOS target version to iOS 14.5 for broader device compatibility and feature support, including all SF Symbols 2.2
+    - Increased the iOS target version to iOS 14.5 for broader device compatibility and feature support
 </details>
 
 <details>
@@ -88,8 +107,8 @@ These are its primary characteristics:
 * Care plan management using Apple's Carekit framework.
 * Monitoring of health data with Apple's HealthKit framework.
 * Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
-* Support for various popular and innovative technologies out of the box: manual and biometric user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- and GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), real-time app notifications using HTTP2 Server-Sent Events (SSE), end-to-end file cryptography and integrity verification, etc.
-* SF Symbols 2.2 support (available in iOS 14.5 and watchOS 7.4, and later releases)
+* Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
+* SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
 * CI/CD support via GitHub Actions.
 
 
@@ -107,7 +126,7 @@ When a user launches an app for the first time, the onboarding process presents 
 
 ## Consent
 
-The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for example, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
+The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for exammple, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
 <p align="center"><img src="Docs/3-Consent.png" width=35% height=35%></p>
 
@@ -119,8 +138,8 @@ The consent form contains the description of the items included in the applicati
 
 <p align="center"><img src="Docs/5-Signature.png" width=35% height=35%></p>
 
-## Consent Document in the Profile Section
-In MagicBox users can check out their consent form in the profile screen by tapping on the Consent Documents section, as shown in the figure below.
+## Add consent document page in profile section
+In MagicBox user can now see their consent form in their profile screen by clicking on the Consent documents section. 
 
 <p align="center"><img src="Docs/consent_02.png" width=35% height=35%></p>
 
@@ -140,23 +159,23 @@ User login credentials are securely stored in the device’s keychain.
 
 <p align="center"><img src="Docs/7-Login.png" width=35% height=35%></p>
 
-If you want to enable support for Google Sign-in, in Xcode add the GIDClientID parameter string in the info.plist file as shown in the figure.
+Addition, add GIDClientID into info.plist file to enable Google login.
 
 <p align="center"><img src="Docs/gmail_login_info.png" width=75% height=35%></p>
 
 
-## Biometric Authentication
-MagicBox supports biometric authentication: a secure and user-friendly way to authenticate users in iOS by using Face ID or Touch ID, as shown in the figure below.
+## Biometric authentications
+The App support Biometric authentication. A secure and user-friendly way to authenticate users in iOS applications with the introduction of Face ID and Touch ID.
 
-Users can authenticate by using Face ID or Touch ID.
+User can authenticate by using their Face ID or Touch ID.
 
-<p align="center"><img src="Docs/biometric_authentication.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/biometric_authenticaion.png" width=35% height=35%></p>
 
-## Sign in Using Password AutoFill
-MagicBox supports iOS Password AutoFill. With just a few taps, users can create and save new passwords or log in to an existing account. Users don’t need to enter their password, the system handles everything. It also encourages user to select strong passwords hence making user accounts more secure.
+## Password-less Login, Autofill Sign in
+MagicBox includes AutoFill feature. With just a few taps, users can create and save new passwords or log in to an existing account. Users don’t need to enter their password, the system handles everything. It also encourages user to select strong passwords hence making user account more secure.
 
-<p align="center"><img src="Docs/password_less_01.png" width=35% height=35%></p>
-<p align="center"><img src="Docs/password_less_02.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/passowrd_less_01.png" width=35% height=35%></p>
+<p align="center"><img src="Docs/passowrd_less_02.png" width=35% height=35%></p>
 
 ## Passcode
 
@@ -182,15 +201,19 @@ Contacts are cards that contain doctor and family member details, such as addres
 
 <p align="center"><img src="Docs/11-Contacts.png" width=35% height=35%></p>
 
-## End-to-end File Encryption (TheraForge CryptoBox)
-MagicBox supports class-based end-to-end file encryption using the secure and robust XChaCha20Poly1305 algorithm. It provides an additional layer of secure storage and additional security for communication that prevents third parties from accessing confidential data. Different classes can be used to provide selective access privileges to documents (the default class provides access to all the contacts explicitly approved by the user). Class-based encrypted files can only be decrypted by the intended receiver(s).
+## End-to-end File Encrption (TheraForge CryptoBox)
+MagicBox includes end-to-end encryption on document sending and receiving by the user. It provides secure storage and additional security for communication that prevents third parties from accessing confidential data.
+
+Encrypted files can only be decrypted by the intended receiver(s).
+
 
 ## User Profile
-In the profile section, users can manage their current session, edit their profile, contact support or withdraw from a study/project.
+
+In the profile section, the user can manage his current session, edit their profile, contact support and withdraw from a study.
 
 <p align="center"><img src="Docs/12-Profile.png" width=35% height=35%></p>
 
-There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or Wi-Fi. 
+There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or though a wi-fi hotspot. 
 
 ## TheraForge Secure Cloud with Sync Support
 
@@ -236,9 +259,9 @@ MagicBox app is designed to be compatible with the iOS accessibility features, e
 |:----------:|:----------:|:----------:|
 |   **Voice Over**  |   **Voice Control**  |   **Bold Text**  |
 
-## Apple Watch Demo App
+## Apple Watch App
 
-The MagicBox Demo Apple Watch App is designed as a companion app for the iPhone MagicBox application. This app is intended for users to quickly glance through their tasks and activities for the day conveniently on their Apple Watch.
+The MagicBox Apple Watch App is designed as a companion app for the iPhone MagicBox application. This app is intended for users to quickly glance through their tasks and activities for the day conveniently on their Apple Watch.
 
 ![Apple Watch Demo App](Docs/91-apple-watch-demo.png)
 
@@ -252,6 +275,22 @@ The app leverages [OTFCareKit](https://github.com/TheraForge/OTFCareKit) to fetc
 
 The Apple Watch app also supports Accessibility features, such as VoiceOver, Bold and Dynamic Text, ensuring that all users, regardless of their abilities, can use our app comfortably. 
 
+### Watch Synchronisation ###
+ - Synchronizes daily tasks from iOS to watchOS and updates their outcomes in both stores.
+ ```swift 
+  // .mobile: synchronise watchOS store from IOS app
+  // .watchOS: fetch IOS app store from watchOS
+  // .watchAppUpdate: notify other device about data update
+
+ CloudantSyncManager.shared.cloudantStore?.synchronize(target: .mobile, completion: { error in
+      if let error = error {
+             print(error)
+        } else {
+             OTFLog("Synced successfully!")
+          }
+    })
+ ```
+
 ## Assets
 
 MagicBox includes a variety of assets, such as illustrations, icons, and glyphs, that are available for customization within the app. You can preview all the available assets on our [asset gallery](https://tfmart.github.io/OTFMagicBox/).
@@ -263,7 +302,7 @@ You can also check the available assets locally on your machine by opening your 
 ```
 
 To use any of these assets in your project, simply follow these steps:
-1. Locate the Images resource in Xcode's sidebar as shown in the figure below
+1. Locate the Images resouce in Xcode's sidebar as shown in the figure below
 <p align="center"><img src="Docs/92-image-assets.png" width=100% height=100%></p>
 
 2. Choose an image that you want to use in your application
@@ -280,7 +319,7 @@ To review any of the optional assets to select and use them in the code, follow 
 Image("doctor4")
 ```
 
-Any installed assets can also be used in the YAML customization files. For example, if we want to use this image on a custom section in the onboarding section of the app:
+Any installed assets can also be used in the YAML customization files. For exameple, if we want to use this image on a custom section in the onboarding section of the app:
 
 ```yaml
 summary: "This is custom section."
@@ -436,7 +475,7 @@ git clone https://github.com/TheraForge/OTFMagicBox.git
 
 <img src="Docs/17-GitClone.png">
 
-Then change the directory to the newly created OTFMagicBox subdirectory:
+Then change the directory to the newly-created OTFMagicBox subdirectory:
 
 ```
 cd OTFMagicBox
@@ -526,38 +565,176 @@ Example: change $(PRODUCT_NAME) to “My Digital App”.
 
 ![Alt text](Docs/14-Bundle.png)
 
-## Modify the Style/Design
+## Modifying the App's Style
 
-You can change the tint color, label colors, font type, and size to customize the look of your application.
+The appearance of the app is determined by a flexible styling system defined within the AppSysParameters.yml file. This system is based on [CareKit’s custom styling](https://github.com/carekit-apple/CareKit?tab=readme-ov-file#styling).
 
-### Colors
+It allows you to personalize the app’s style (i.e., theme) according to your preferences, and you can easily switch between different predefined styles.
 
-To customize the colors, please choose the appropriate color codes according to the Human Interface Guidelines from Apple. Refer to [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color) for more information.
+### Style Configuration
+
+In the `AppSysParameters.yml` file, you'll discover a list of available styles, each representing a unique visual theme for your app. These styles are referred to as "styles," and they include preset configurations for colors, fonts, and other design elements.
+
+#### List of Themes
+
+1. Custom Style
+    - _Name_: `customStyle`
+    - _Description_: This style provides a clean and customizable look. Use it as a starting point to create your unique app style.
+
+2. Health App Style
+    - _Name_: `healthStyle`
+    - _Description_: This style provides colors and visuals based on Apple's Health app
+    
+3. CareKit Style Style
+    - _Name_: `careKitStyle`
+    - _Description_: A default theme that matches the default CareKit look and feel. It is used as a fallback in case a specific style is not selected.
+    
+#### Selected Style
+
+The `selectedStyle` field determines the active style. You can switch between styles by updating this field with the desired style name.
 
 ```yml
 # AppSysParameters.yml
 
-designConfig:
-    # Offset value.
-    - name: "offset"
-      textValue: "20"
-      
-    # Color codes
-    
-    # Please choose the colors according to Human Interface Guidelines from Apple.
-    # Refer here https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
-    
-    - name: "tintColor"
-      textValue: "Blue"
-    - name: "label"
-      textValue: "Teal"
-    - name: "secondaryLabel"
-      textValue: "Brown"
-    # ...
-   
+# Select the active style
+selectedStyle: "customStyle"
 ```
 
-### Fonts
+### Creating a New Style
+
+To create a new style, add a new entry to the styles array with the desired properties. Provide a unique name for the style.
+
+When picking colors for your custom style, refer to [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color) for valid UIKit color values. See:
+
+1. Semantic UI colors: https://developer.apple.com/documentation/uikit/uicolor/ui_element_colors
+2. Adaptable system grey shades: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3281252
+3. Adaptable system colors: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3174530
+4. Fixed colors: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3174519
+5. Adaptable colors in Dark Mode: https://sarunw.com/posts/dark-color-cheat-sheet/#cheat-sheet
+
+```yml
+# AppSysParameters.yml
+
+# Add a new style entry with a unique name
+styles:
+  - name: "newCustomStyle"
+    # Background color of the app
+    backgroundColor: "customBackgroundColor"
+    
+    # Text color used throughout the app
+    textColor: "customTextColor"
+    
+    # Color of separators between UI elements
+    separatorColor: "customSeparatorColor"
+    
+    # ... (add other properties)
+```
+
+### Updating Style Properties
+
+Update the style values to customize its appearance. For example, to update the text color in the "customStyle" theme to green:
+
+```yml
+# AppSysParameters.yml
+
+# Locate the desired style in the styles array
+styles:
+  - name: "customStyle"
+    # Update the text color property to "systemGreen"
+    textColor: "systemGreen"
+    
+    # ... (other properties)
+```
+
+### Automatic Application to Components
+
+Updating the style values in the selected style section of the YAML file will dynamically reflect on the layout and appearance of various components within the app, including CareKit components, ensuring a consistent and unified visual experience throughout the application.
+
+For example, if we set the `buttonTextColor` property to `systemRed`, we'll see that the tint and button colors of the app is set to a Red color:
+
+```yml
+# AppSysParameters.yml
+
+# Locate the selected style in the YAML file
+selectedStyle: "customStyle"
+
+# Update properties within the selected style to customize the appearance
+customStyle:
+  # ...
+  # Set the text color for buttons to "systemRed"
+  buttonTextColor: "systemRed"
+  # ...
+```
+
+| ![Info Card](Docs/93-style-info-card.png)  | ![Button Log](Docs/94-style-buttonlog.png)  | ![Checklist](Docs/95-style-checklist.png)  |  ![Numeric Data](Docs/96-style-numeric.png) |
+|:-:|:-:|:-:|:-:|
+
+### Apply Style to New Views
+
+When creating custom views, you can seamlessly integrate the colors of the current app style by fetching them from the `.otfdsStyle` environment variable.
+
+For example, if we have the following colors on `customStyle`
+
+```yml
+# AppSysParameters.yml
+
+# Locate the selected style in the YAML file
+selectedStyle: "customStyle"
+
+# Set specific colors within the selected style to be fetched in views
+customStyle:
+  # Set the text color to "systemGreen"
+  textColor: "systemGreen"
+  
+  # Set the button text color to "systemGreen"
+  buttonTextColor: "systemGreen"
+  
+  # ... (add other properties)ç
+```
+
+And read them through a View with the `.otfdsStyle` environment variable:
+
+```swift
+struct ContentView: View {
+    @Environment(\.otfdsStyle) var style: OTFDesignStyler?
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Secure your account")
+                .font(.title)
+                .foregroundColor(style?.color.label)
+            Text("Setup two-factor authentication to protect your account and your data")
+                .foregroundColor(style?.color.secondaryLabel)
+
+            Button("Continue") {
+                // ...
+            }
+            .buttonStyle(.otfPrimary)
+            .foregroundColor(style?.color.primaryButton)
+        }
+    }
+}
+```
+
+The following view would be generated:
+
+<img src="Docs/97-style-env-example.png" width=45% height=45%>
+
+Note that attempting to access the current style through the Environment property is not possible outside of a View. To read the style values outside of a View, you can use the `appStyle` property of `YmlReader`:
+
+```swift
+class SecureAccountViewModel {
+    var appStyle = YmlReader().appStyle
+
+    // ...
+}
+```
+
+### Default Theme
+
+In case the style under selectedStyle is omitted or fails to be read, the app will gracefully default to a predefined style called careKitStyle.
+
+## Fonts
 
 You can customize the fonts used in your application, including support for the Bold Text accessibility feature.
 
@@ -680,8 +857,7 @@ registration:
 
 Go to the Login section in the `ModuleAppSysParameter.yml` file and customize the title and the description.
 
-If you want to use the *Sign up With Google* feature, then change the **showGoogleSignin** key to `true`. Then click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). 
-Go to the row with the key named “GIDClientID”. Click on the Value column of that row and change the value to the one required by your application which you get from the Google developer portal. Then find the "CFBundleURLSchemes" key in the Info.plist file and add the URLSchemes value, which you can also get from the Google developer portal. Also add the URLSchemes value in the URL Types row as shown in the figure below.
+If you want to use the *Sign up With Google* feature, then change the **showGoogleSignin** key to `true`. Then click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “GIDClientID” Click on the Value column of that row and change the value to your application which you get from the google developer portal. Find the "CFBundleURLSchemes" key in Info.plist file and add the URLSchemes in value you can also get this value from google developer portal. Also add the URLSchemes in URL Types as shown in the figure below.
 
 <img src="Docs/84-urlScheme.png" width=45% height=45%>
 
@@ -723,6 +899,30 @@ useCareKit: "true"
 ```
 
 
+## UserInfo Usage
+
+The Framework `OTFCareKitStore` contains the property *userInfo* in `OCKPatient.swift` class, When you launch the `OTFMagicBox` application you will get a user object of type `OCKPatient` throught which you will able to access the userInfo object and its properties stored in `OTFCareKitStore`.
+
+You can you *userInfo* object to store your own properties on user level, as an example if you want to store the information of selected theme of application you need to create the `struct` including the property you want to store, assign the data to the property of your `sturct`.     As userInfo is a dictunary of type `[String: String]` thats why you need to create a string from for `stuct`, To create string encode your model using `JSONEncoder` that will return `data`, then decode this `data` to string using `UTF8` after that create a key in userInfo and assign that your newely created string to key.
+
+Then by using shared instance of `CareKitManager` call the method `updatePatient` as and assign the
+updated `OCKPatient` object to `updatePatient` method as shown in the example below.
+
+```
+struct yourStruct {
+let isDarkMode: Bool
+}
+```
+
+```
+if let data = try? encoder.encode(your-struct) {
+    let stingData = String(decoding: data, as: UTF8.self)
+    user?.userInfo?["Your-Key"] = stingData
+    CareKitManager.shared.cloudantStore?.updatePatient(user!)
+}
+```
+
+
 # Registration on Apple Developer Portal
 
 If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
@@ -731,27 +931,77 @@ Register your project in your Apple developer account by following [these steps]
 
 # Register a new API key
 
-- You can register a new API key using this [portal](https://theraforge.org/admin/register). 
-- You need to add valid details into the given form. After a successful submission, you will be presented with a popup window that will show your registered API key.
+- You can register a new API key using this [dashboard](https://stg.theraforge.org/admin/). 
+- You need to add valid details into the given form. After a successful submission, you will be presented with a popup window that will show your registerd API key.
 - Make sure to copy that API key and keep it in safe place.
-- Once you have registered your API key, our support team will contact you for further assistance. 
+- Once you have registered your API key, our support team will contact you for further asssistance. 
 - A dashboard (called AdminBox) is used to help clients to access and modify their API keys
-- AdminBox can be accessed using the [portal](https://theraforge.org/admin/login). 
-- Once you log in to the dashboard (as admin), you will be able to see the API key details.
+- AdminBox can be accessed using the [Portal](https://stg.theraforge.org/admin/login). 
+- Once a client is logged in to the dashboard (as admin), he/she will be able to see all API key details based upon their role.
 - Here are the screenshots for better understanding.
 <br>
 <br>
-You can register a new API key using this portal:
+Register API key component:
 <p align="center"><img src="Docs/register-api-key.png" width=85% height=85%></p>
-When a new API key is registered, you can review it and copy it in this popup window:
-<p align="center"><img src="Docs/show-api-key.png" width=85% height=85%></p>
-Display API key details:
-<p align="center"><img src="Docs/show-api-key-details.png" width=85% height=85%></p>
+When API key is registered:
+<p align="center"><img src="Docs/api-key.png" width=85% height=85%></p>
+Showing all API key details to admins:
+<p align="center"><img src="Docs/client-admin.png" width=85% height=85%></p>
 
 
 # Xcode Setup
 
 Set up the Xcode application with your Apple developer account information as [described here](XCODE-SETUP.md).
+
+
+# MVVM (Model View ViewModel) Architecture <a name="Model View ViewModel Architecture"></a>
+
+Whenever we start building a new application, this question always comes in our mind, which architecture pattern to choose for our new project. The most used architectural pattern in iOS is MVC. Most of the developers used the MVC pattern for their projects. Small projects work well with MVC, but when your project size starts increases, it starts making your source code messy.
+
+I always found the architecture pattern is good to use, but we should not strictly follow an architecture pattern in our project. Not every architecture pattern is good enough to give you everything, there are cons & pros of every architecture pattern. if we have a lot of modules in our project, we can decide the architecture pattern according to the module also. Some module suits well with MVVM, but maybe your new module will not work well with MVVM, so instead use another architecture pattern like MVP, VIPER. So we should not completely rely on a single architecture pattern, instead, we can check it according to the module also.
+
+So, in OTFMagicBox we are using MVVM as it fullfils all our  requirements.
+MVVM is the industry-recognized software architecture pattern that overcomes all drawbacks of MVP and MVC design patterns.
+MVVM suggests separating the data presentation logic(Views or UI) from the core business logic part of the application. 
+
+## The separate code layers of MVVM
+
+### 1. Model: 
+This layer is responsible for the abstraction of the data sources. Model and ViewModel work together to get and save the data.
+
+### 2. View:
+The purpose of this layer is to inform the ViewModel about the user’s action. This layer observes the ViewModel and does not contain any kind of application logic.
+
+### 3. ViewModel:
+ It exposes those data streams which are relevant to the View. Moreover, it serves as a link between the Model and the View.
+ 
+ Some impotent role played by MVVM.
+ 
+* ViewModel does not hold any kind of reference to the View.
+* Many to-1 relationships exist between View and ViewModel.
+* No triggering methods to update the View.
+
+For better understanding of MVVM architecture view [This Article](https://www.toptal.com/ios/swift-tutorial-introduction-to-mvvm)
+
+## Ways to Implement MVVM in the Project
+
+Recommended ways to implement MVVM design pattern in iOS projects:
+
+* Using RxJava for DataBinding.
+* Using combine framework for DataBinding.
+
+# Combine Framework
+
+The Combine framework provides a declarative Swift API for processing values over time. These values can represent many kinds of asynchronous events. Combine declares publishers to expose values that can change over time, and subscribers to receive those values from the publishers.
+
+If you are using swiftUI than it is recommended to use combine framework.
+
+Here are some link to understand and learn how to use combine framework.
+
+The [Official Documentation](https://developer.apple.com/documentation/combine/receiving-and-handling-events-with-combine) to understand the combine.
+
+Also view [This Article](https://medium.com/apple-developer-academy-federico-ii/combine-and-swiftui-9888f7b111bf) for basic understanding of combine framework.
+
 
 # CI/CD Setup
 

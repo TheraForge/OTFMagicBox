@@ -1,25 +1,25 @@
 /*
  Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
- 
+
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -44,7 +44,7 @@ struct Configuration {
     let targetURL: URL
     let username: String
     let password: String
-    
+
     static var `default`: Configuration {
         let remoteURLString = Constants.API.dbProxyURL
         let remoteURL = URL(string: remoteURLString)!
@@ -59,35 +59,35 @@ enum ReplicationDirection: String {
 class CloudantSyncManager {
     static let shared = CloudantSyncManager()
     var cloudantStore: OTFCloudantStore?
-    
+    let peer = OTFWatchConnectivityPeer()
+
     var storeManager: OCKSynchronizedStoreManager {
-        CareKitManager.shared.synchronizedStoreManager
+        CareKitStoreManager.shared.synchronizedStoreManager
     }
-    
+
     private var lastSynced: Date
     private var shouldSyncAgain: Bool {
         let secondsDiff = Date().timeIntervalSince(lastSynced)
         return secondsDiff >= 300
     }
-    
+
     private init() {
-        cloudantStore = try? StoreService.shared.currentStore()
+        cloudantStore = try? StoreService.shared.currentStore(peer: peer)
         guard let lastDate = Calendar.current.date(byAdding: .minute, value: -10, to: Date()) else {
             lastSynced = Date()
             return
         }
         lastSynced = lastDate
     }
-    
+
     func syncCloudantStore(notifyWhenDone: Bool, completion: ((Error?) -> Void)?) {
         guard let auth = TheraForgeKeychainService.shared.loadAuth() else {
             completion?(ForgeError.missingCredential)
             return
         }
-        
-        // TODO: - Implement a check to avoid synchronisation for every little change.
+
         // Perhaps use a timer and sync only if there are changes, perhaps.
-        
+
         if auth.isValid() {
             startSync(notifyWhenDone: notifyWhenDone, completion: completion)
         } else {
@@ -95,14 +95,14 @@ class CloudantSyncManager {
                 switch result {
                 case .success(_):
                     startSync(notifyWhenDone: notifyWhenDone, completion: completion)
-                    
+
                 case .failure(let error):
                     completion?(error)
                 }
             }
         }
     }
-    
+
     private func startSync(notifyWhenDone: Bool, completion: ((Error?) -> Void)?) {
         do {
             try replicate(direction: .push, completionBlock: { [unowned self] error in
@@ -110,22 +110,23 @@ class CloudantSyncManager {
                     didFinishSyncWith(error: error, completion: completion)
                     return
                 }
-                
+
                 do {
                     try replicate(direction: .pull, completionBlock: { [unowned self] error in
                         if let error = error {
                             OTFError("error in cloudent manager %{public}@", error.localizedDescription)
-                        }
-                        else {
-#if DEBUG
+                        } else {
+                            #if DEBUG
                             OTFLog("Synced successfully!")
-#endif
+                            #endif
                             lastSynced = Date()
+                            
                             if notifyWhenDone {
                                 DispatchQueue.main.async {
                                     NotificationCenter.default.post(name: .databaseSuccessfllySynchronized, object: nil)
                                 }
                             }
+                            
                         }
                         didFinishSyncWith(error: error, completion: completion)
                     })
@@ -137,20 +138,20 @@ class CloudantSyncManager {
             didFinishSyncWith(error: error, completion: completion)
         }
     }
-    
+
     private func didFinishSyncWith(error: Error?, completion: ((Error?) -> Void)?) {
         DispatchQueue.main.async {
             completion?(error)
         }
     }
-    
+
     private func replicate(direction: ReplicationDirection, completionBlock: @escaping ((Error?) -> Void)) throws {
-        let store = try StoreService.shared.currentStore()
+        let store = try StoreService.shared.currentStore(peer: peer)
         let datastoreManager = store.datastoreManager
         let factory = CDTReplicatorFactory(datastoreManager: datastoreManager)
-        
+
         let configuration = Configuration.default
-        
+
         let replication: CDTAbstractReplication
         switch direction {
         case .push:
@@ -164,15 +165,15 @@ class CloudantSyncManager {
                                              username: configuration.username,
                                              password: configuration.password)
         }
-        
+
         replication.add(TheraForgeHTTPInterceptor())
-        
+
         let replicator = try factory.oneWay(replication)
         let dataStore = try datastoreManager.datastoreNamed("local_db")
-        
+
         replicator.sessionConfigDelegate = TheraForgeNetwork.shared
         dataStore.sessionConfigDelegate = TheraForgeNetwork.shared
-        
+
         switch direction {
         case .push:
             dataStore.push(to: configuration.targetURL, replicator: replicator, username: configuration.username, password: configuration.password) { (error: Error?) in
@@ -184,7 +185,7 @@ class CloudantSyncManager {
                     completionBlock(nil)
                 }
             }
-            
+
         case .pull:
             dataStore.pull(from: configuration.targetURL, replicator: replicator, username: configuration.username, password: configuration.password) { error in
                 completionBlock(error)
