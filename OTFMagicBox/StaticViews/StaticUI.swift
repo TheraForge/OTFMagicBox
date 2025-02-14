@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -37,18 +37,18 @@ import OTFCareKit
 
 struct CareKitViews: View {
     var body: some View {
-        VStack {
-            Text("ResearchKit Views")
-                .foregroundColor(.otfTextColor)
-                .font(Font.otfscreenTitleFont)
-                .fontWeight(Font.otfheaderTitleWeight)
-            List {
-                ContactsSection()
-                TaskSection()
+            VStack {
+                Text("CareKit Views")
+                    .foregroundColor(.otfTextColor)
+                    .font(Font.otfscreenTitleFont)
+                    .fontWeight(Font.otfscreenTitleFontWeight)
+                    .padding(.top)
+                List {
+                    ContactsSection()
+                    TaskSection()
+                }
+                .listStyle(GroupedListStyle())
             }
-            .listStyle(GroupedListStyle())
-        }
-
     }
 }
 
@@ -59,6 +59,7 @@ struct ResearchKitViews: View {
                 .foregroundColor(.otfTextColor)
                 .font(Font.otfscreenTitleFont)
                 .fontWeight(Font.otfscreenTitleFontWeight)
+                .padding(.top)
             List {
                 SurveysList()
                 SurveyQuestionsList()
@@ -81,22 +82,16 @@ struct StaticUI: View {
         UITableView.appearance().backgroundColor = YmlReader().appStyle.backgroundColor.color
     }
     var body: some View {
-        NavigationView {
             VStack {
-                Text("Sample Views")
-                    .foregroundColor(.otfTextColor)
-                    .font(Font.otfscreenTitleFont)
-                    .fontWeight(Font.otfheaderTitleWeight)
                 List {
-
-                    NavigationLink(destination: CareKitViews()) {
+                    NavigationLink(destination: CareKitViews().navigationTitle(Text(""))) {
                         Text(ModuleAppYmlReader().careKitModel?.careKit ?? "CareKit")
                             .fontWeight(Font.otfFontWeight)
                     }
                     .foregroundColor(.otfTextColor)
                     .listRowBackground(Color.otfCellBackground)
 
-                    NavigationLink(destination: ResearchKitViews()) {
+                    NavigationLink(destination: ResearchKitViews().navigationTitle(Text(""))) {
                         Text(ModuleAppYmlReader().researchKitModel?.researchKit ?? "ResearchKit")
                             .fontWeight(Font.otfFontWeight)
                     }
@@ -124,7 +119,6 @@ struct StaticUI: View {
                 }
                 .background(Color.otfCellBackground)
             }
-        }
         .font(Font.otfAppFont)
     }
 }

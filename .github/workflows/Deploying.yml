@@ -10,35 +10,99 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
+      - name: Force XCode 15.1
+        run: sudo xcode-select -switch /Applications/Xcode_15.1.app
       - name: setup-cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
-          version: 1.11.3
+          version: 1.14.3
       - name: Github Credentials Store Setup
         run: |
           git config --global credential.helper store
           echo "https://${{ secrets.REPO_USERNAME }}:${{ secrets.ACCESS_TOKEN }}@github.com" > ~/.git-credentials
       - name: Install pods
-        run: pod install
+        env:
+          GIT_CLONE_PROTECTION_ACTIVE: false
+        run: pod install --repo-update
       - name: Setup keychain
         env:
           SIGNING_CERTIFICATE_DATA_RELEASE: ${{ secrets.SIGNING_CERTIFICATE_DATA_RELEASE }}
           SIGNING_CERTIFICATES_PASSWORD: ${{ secrets.SIGNING_CERTIFICATES_PASSWORD }}
         run: .github/secrets/decrypt_secrets.sh
-      - name: Import provisioning profile
+      - name: Import iOS provisioning profile
         env:
           PROVISIONING_PROFILE_DATA_RELEASE: ${{ secrets.PROVISIONING_PROFILE_DATA_RELEASE }}
         run: |
-          exec .github/secrets/import_profile.sh
-      - name: Archiving project
+          exec .github/secrets/import_ios_profile.sh
+      - name: Import watchOS provisioning profile
         env:
-          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          PROVISIONING_PROFILE_WATCH_RELEASE: ${{ secrets.PROVISIONING_PROFILE_WATCH_RELEASE }}
+        run: |
+          exec .github/secrets/import_watchos_profile.sh
+      - name: Get token
+        id: asc
+        uses: yuki0n0/action-appstoreconnect-token@v1.0
+        with: 
+          issuer id: "${{ secrets.APPLE_STORE_CONNECT_ISSUER_ID }}"
+          key id: "${{ secrets.KEY_ID }}"
+          key: "${{ secrets.TESTFLIGHT_API_KEY }}"
+      - name: Fetch Build Number from TestFlight
+        id: fetch_build_number
+        env:
+          TOKEN: ${{ steps.asc.outputs.token }}
+          APP_ID: ${{ secrets.APP_ID }}
+        run: .github/scripts/fetch_latest_build.sh
+      - name: Create New Build Number
+        id: increment_build
+        run: |
+           NEW_BUILD_NUMBER=$((${{steps.fetch_build_number.outputs.build_number}} + 1))
+           echo "::set-output name=new_build_number::$NEW_BUILD_NUMBER"
+           echo $NEW_BUILD_NUMBER
+      - name: Set Build Number
+        run: | 
+          INFO_PLIST="$PWD/OTFMagicBox/Info.plist"
+          WATCH_INFO_PLIST="$PWD/OTFMagicBoxWatch/Info.plist"
+          NEW_BUILD_NUMBER="${{ steps.increment_build.outputs.new_build_number }}"
+          NEW_BUILD_SHORT_VERSION="1.1.${{ steps.increment_build.outputs.new_build_number }}"
+
+          # Check if CFBundleVersion entry exists, create it if it doesn't
+          if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST" >/dev/null 2>&1; then
+            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD_NUMBER" "$INFO_PLIST"
+          else
+            /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $NEW_BUILD_NUMBER" "$INFO_PLIST"
+            fi
+
+          # Check if CFBundleShortVersionString entry exists, create it if it doesn't
+          if /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$INFO_PLIST" >/dev/null 2>&1; then
+            /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $NEW_BUILD_SHORT_VERSION" "$INFO_PLIST"
+          else
+            /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $NEW_BUILD_SHORT_VERSION" "$INFO_PLIST"
+            fi
+
+          # Check if CFBundleVersion entry exists, create it if it doesn't
+          if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$WATCH_INFO_PLIST" >/dev/null 2>&1; then
+            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD_NUMBER" "$WATCH_INFO_PLIST"
+          else
+            /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $NEW_BUILD_NUMBER" "$WATCH_INFO_PLIST"
+            fi
+
+          # Check if CFBundleShortVersionString entry exists, create it if it doesn't
+          if /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$WATCH_INFO_PLIST" >/dev/null 2>&1; then
+            /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $NEW_BUILD_SHORT_VERSION" "$WATCH_INFO_PLIST"
+          else
+            /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $NEW_BUILD_SHORT_VERSION" "$WATCH_INFO_PLIST"
+            fi
+      - name: Archiving project
+        # env:
+        #  BUILD_NUMBER: ${{ steps.fetch_build_number.outputs.build_number }}  + 1
+         #$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
         run: .github/scripts/archive_app.sh
       - name: Exporting .ipa
         run: .github/scripts/export_ipa.sh
       - name: Publishing app
         if: success()
         env:
-          APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
-          APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD}}
+         APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
+         APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD}}
         run: .github/scripts/publish_testflight.sh
+

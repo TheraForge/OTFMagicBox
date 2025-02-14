@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -54,7 +54,7 @@ class OTFTheraforgeNetwork {
 
     // Configure the API with required URL and API key.
     public func configureNetwork() {
-        guard let url = URL(string: Constants.API.developmentUrl) else {
+        guard let url = URL(string: Constants.API.openAPIURL) else {
             OTFLog("Error: cannot create URL")
             return
         }
@@ -76,6 +76,16 @@ class OTFTheraforgeNetwork {
         .eraseToAnyPublisher()
     }
 
+    public func resendVerificationEmail(email: String)-> AnyPublisher<Response.ResendVerifyEmail, ForgeError>{
+        return Future<Response.ResendVerifyEmail, ForgeError> { promise in
+            self.otfNetworkService.resendVerifyEmail(request: OTFCloudClientAPI.Request.ResendVerifyEmail(email: email)) { [weak self] result in
+                self?.handleResponse(result, completion: promise)
+            }
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
+    
     public func socialLoginRequest(userType: UserType,
                                    socialType: SocialType,
                                    authType: AuthType,

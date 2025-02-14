@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -59,6 +59,7 @@ struct ReportView: View {
         .frame(maxWidth: .infinity, minHeight: Metrics.TITLE_VIEW_HEIGHT)
         .contentShape(Rectangle())
         .gesture(TapGesture().onEnded({
+            print("report")
             EmailHelper.shared.sendEmail(subject: Constants.CustomiseStrings.appSupportRequest, body: Constants.CustomiseStrings.appSupportRequest, to: self.email)
         }))
         .accessibilityElement(children: .combine)

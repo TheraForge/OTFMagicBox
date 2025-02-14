@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -39,6 +39,7 @@ enum Metrics {
     /// used for button padding
     static let PADDING_HORIZONTAL_BUTTON: CGFloat = 15
     static let PADDING_VERTICAL_BUTTON: CGFloat = 15
+    static let SHADOW_RADIUS: CGFloat = 15.0
 
     /// used for button text padding
     static let PADDING_BUTTON_LABEL: CGFloat = 15
@@ -87,8 +88,9 @@ enum Metrics {
 
     static let BOTTOM_SPACER: CGFloat = 20
 
-    static let NETWORK_INDICATOR_WIDTH: CGFloat = 30
+    static let NETWORK_INDICATOR_WIDTH: CGFloat = 60
 
-    static let NETWORK_INDICATOR_ACCESSORY_WIDTH: CGFloat = 15
+    static let NETWORK_INDICATOR_ACCESSORY_WIDTH: CGFloat = 30
 
+    static let PROFILE_MAIN_AVATAR_SIZE: CGFloat = 120
 }

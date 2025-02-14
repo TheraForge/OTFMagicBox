@@ -2,8 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundleDisplayName</key>
+	<string>MagicBox</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -36,11 +42,11 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>Identify Yourself!</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Used for data security purposes.</string>
+	<string>would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Used for data security purposes.</string>
+	<string>would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Used for data security purposes.</string>
+	<string>would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Used for sensor collection demo tasks.</string>
 	<key>NSLocationUsageDescription</key>
@@ -55,6 +61,8 @@
 	<string>Please allow photos access to select image for profile picture.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Used for sensor collection demo tasks.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>The app needs to access your contact information to be able to select a profile photo.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

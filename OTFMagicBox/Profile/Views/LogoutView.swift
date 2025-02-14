@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -44,44 +44,33 @@ struct LogoutView: View {
 
     // MARK: - BODY
     var body: some View {
-        HStack {
-            Spacer()
-            Button(action: {
-                viewModel.showingOptions.toggle()
-            }, label: {
-                Text(Constants.CustomiseStrings.logout)
-                    .font(.basicFontStyle)
-                    .foregroundColor(.otfButtonColor)
+        Button(action: {
+            viewModel.showingOptions.toggle()
+        }, label: {
+            Text(Constants.CustomiseStrings.logout)
+                .foregroundColor(.otfButtonColor)
+                .fontWeight(Font.otfFontWeight)
+        })
+        .actionSheet(isPresented: $viewModel.showingOptions) {
+            ActionSheet(
+                title: Text(Constants.CustomiseStrings.areYouSure)
                     .font(Font.otfAppFont)
-                    .fontWeight(Font.otfFontWeight)
-            })
-            .actionSheet(isPresented: $viewModel.showingOptions) {
-                ActionSheet(
-                    title: Text(Constants.CustomiseStrings.areYouSure)
-                        .font(Font.otfAppFont)
-                        .fontWeight(Font.otfFontWeight),
-                    buttons: [
-                        .destructive(Text(Constants.CustomiseStrings.logout), action: {
-                            viewModel.signout()
-                        }),
-                        .cancel(Text(Constants.CustomiseStrings.cancel)
-                                    .fontWeight(Font.otfFontWeight)
-                                    .font(Font.otfAppFont))
-                    ]
-                )
-            }
-            .alert(isPresented: $viewModel.showingAlert) {
-                Alert(title: Text(Constants.CustomiseStrings.failedToLogout)
-                        .font(Font.otfAppFont)
-                        .fontWeight(Font.otfFontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
-            }
-            Spacer()
+                    .fontWeight(Font.otfFontWeight),
+                buttons: [
+                    .destructive(Text(Constants.CustomiseStrings.logout), action: {
+                        viewModel.signout()
+                    }),
+                    .cancel(Text(Constants.CustomiseStrings.cancel)
+                                .fontWeight(Font.otfFontWeight)
+                                .font(Font.otfAppFont))
+                ]
+            )
+        }
+        .alert(isPresented: $viewModel.showingAlert) {
+            Alert(title: Text(Constants.CustomiseStrings.failedToLogout)
+                    .font(Font.otfAppFont)
+                    .fontWeight(Font.otfFontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
         }
     }
 }
 
-struct LogoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogoutView()
-    }
-}

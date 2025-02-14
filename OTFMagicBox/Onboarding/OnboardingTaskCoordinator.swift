@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -44,7 +44,7 @@ final class OnboardingTaskCoordinator: NSObject {
     var disposeables: AnyCancellable?
     let documentManager = UploadDocumentManager()
     let swiftSodium = SwiftSodium()
-
+    var disposables: AnyCancellable?
     /// Change this value to true when registration step completes successfully
     private var registrationCompleted = false
     private var navigationDirection = ORKStepViewControllerNavigationDirection.forward
@@ -70,6 +70,7 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
         }
 
         if checkRegistrationStatusFirst, navigationDirection == .forward, !registrationCompleted {
+            
             let stepResult = taskViewController.result.stepResult(forStepIdentifier: Constants.Registration.Identifier)
 
             let emailRes = stepResult?.results?.first as? ORKTextQuestionResult
@@ -145,15 +146,21 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
                 .sink(receiveCompletion: { response in
                     switch response {
                     case .failure(let error):
+                        
+                        // Sign up failure, show error alert to the user
                         OTFError("error in signup request", error.error.message)
                         alert.dismiss(animated: false) {
                             let alert = UIAlertController(title: Constants.CustomiseStrings.error, message: error.error.message, preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: Constants.CustomiseStrings.okay, style: .cancel))
-                            taskViewController.present(alert, animated: false)
+                            taskViewController.present(alert, animated: false,completion: {
+                                taskViewController.dismiss(animated: true)
+                            })
                         }
                     default: break
                     }
                 }, receiveValue: { result in
+                    
+                    // Sign up successful
                     OTFLog("Successfully revrived", result.message ?? "")
                     alert.dismiss(animated: false) {
                         KeychainCloudManager.saveUserKeys(
@@ -163,16 +170,40 @@ extension OnboardingTaskCoordinator: ORKTaskViewControllerDelegate {
                             defaultStorageKey: defaultStorageKey,
                             confidentialStorageKey: confidentialStorageKey)
                         self.registrationCompleted = true
-                        taskViewController.goForward()
+                        
+                        // Call verify email API to send verification e-mail
+                        self.disposables = OTFTheraforgeNetwork.shared.resendVerificationEmail(email: email)
+                            .receive(on: DispatchQueue.main)
+                            .sink{ response in
+                                switch response{
+                                case .failure(let error):
+                                     
+                                    // Verification API error, Show user error alert
+                                    OTFError("error in login request -> %{public}@.", error.error.message)
+                                    taskViewController.alertWithAction(title: Constants.CustomiseStrings.error, message: error.error.message, completionYes: { _ in
+                                        taskViewController.dismiss(animated: true)
+                                    })
+                                    
+                                case .finished:
+                                    break
+                                }
+                            } receiveValue: { result in
+                                // Verification email sent successfully, show alert to user
+                                taskViewController.showEmailVerifyAlert(title: Constants.CustomiseStrings.emailVerifyConfirmation, message: Constants.CustomiseStrings.emailVerifyMessage, completionYes: {_ in
+                                    
+                                    taskViewController.dismiss(animated: true)
+                                    
+                                })
+                            }
                     }
                 })
-
+            
             return false
         }
-
+        
         return true
     }
-
+    
     func generateMasterKey(email: String, password: String) -> [UInt8] {
         let masterKey = swiftSodium.generateMasterKey(password: KeychainCloudManager.getPassword, email: KeychainCloudManager.getEmailAddress)
         return masterKey

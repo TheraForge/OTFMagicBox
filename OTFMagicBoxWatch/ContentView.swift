@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -39,9 +39,17 @@ import OTFCareKitStore
 
 struct ContentView: View {
     @ViewBuilder var body: some View {
-        if #available(watchOS 7, *) {
-            CareKitListView()
+        VStack(spacing: 0) {
+            CustomHeaderView()
+                .padding(.top, 4)
+            
+            if #available(watchOS 7, *) {
+                CareKitListView()
+                    .padding(.top, 30)
+            }
+            Spacer()
         }
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

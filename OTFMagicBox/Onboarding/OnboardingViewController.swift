@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -95,6 +95,10 @@ struct OnboardingViewController: UIViewControllerRepresentable {
         let registerStep = ORKRegistrationStep(identifier: Constants.Registration.Identifier, title: Constants.CustomiseStrings.registration,
                                                text: Constants.CustomiseStrings.studySignup, passcodeValidationRegularExpression: regexp,
                                                passcodeInvalidMessage: Constants.CustomiseStrings.notMeetCriteria, options: regOption)
+        updateFieldPlaceholder(registerStep: registerStep)
+        let sectionHeaderFormItem = ORKFormItem(sectionTitle: Constants.Registration.sectionHeaderText)
+        registerStep.formItems?.insert(sectionHeaderFormItem, at: 0)
+        
         loginSteps = [signInButtons, registerStep]
 
         // *  STEP (4): ask the user to create a security passcode
@@ -164,6 +168,34 @@ struct OnboardingViewController: UIViewControllerRepresentable {
 
         // & present the VC!
         return taskViewController
+    }
+    
+    func updateFieldPlaceholder(registerStep: ORKRegistrationStep) {
+        
+        if let emailItem = registerStep.formItems?.first(where: { $0.identifier == ORKRegistrationFormItemIdentifierEmail }) {
+            emailItem.placeholder = Constants.Registration.emailPlaceHolder
+        }
+        
+        if let passwordItem = registerStep.formItems?.first(where: { $0.identifier == ORKRegistrationFormItemIdentifierPassword }) {
+            passwordItem.placeholder = Constants.Registration.passwordPlaceholder
+        }
+        
+        if let dateOfBirthItem = registerStep.formItems?.first(where: { $0.identifier == ORKRegistrationFormItemIdentifierDOB }) {
+            dateOfBirthItem.placeholder = Constants.Registration.dateOfBirth
+        }
+        
+        if let genderItem = registerStep.formItems?.first(where: { $0.identifier == ORKRegistrationFormItemIdentifierGender }) {
+            genderItem.placeholder = Constants.Registration.gender
+        }
+        
+        if let firstNameItem = registerStep.formItems?.first(where: { $0.identifier == ORKRegistrationFormItemIdentifierGivenName }) {
+            firstNameItem.placeholder = Constants.Registration.firstName
+        }
+        
+        if let lastNameItem = registerStep.formItems?.first(where: { $0.identifier == ORKRegistrationFormItemIdentifierFamilyName }) {
+            lastNameItem.placeholder = Constants.Registration.lastName
+        }
+        
     }
 
 }

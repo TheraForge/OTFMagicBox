@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -58,7 +58,7 @@ struct ChangePasswordView: View {
         .gesture(TapGesture().onEnded {
             self.showResetPassword.toggle()
         }).sheet(isPresented: $showResetPassword, content: {
-            ChangePasswordDeatilsView(viewModel: ChangePasswordViewModel(email: email))
+            ChangePasswordDetailsView(viewModel: ChangePasswordViewModel(email: email))
         })
         .accessibilityAddTraits(.isButton)
         .accessibilityElement(children: .combine)
@@ -66,50 +66,62 @@ struct ChangePasswordView: View {
 }
 
 // View where we can reset the password.
-struct ChangePasswordDeatilsView: View {
+struct ChangePasswordDetailsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var viewModel: ChangePasswordViewModel
+    
     var body: some View {
-        VStack {
-
-            Spacer()
-            Image.theraforgeLogo.logoStyle()
-            Spacer()
-            TextField(Constants.CustomiseStrings.email, text: $viewModel.email)
-                .style(.emailField)
-                .foregroundColor(.otfTextColor)
-                .disabled(true)
-                .font(Font.otfAppFont)
-            SecureField(ModuleAppYmlReader().profileData?.oldPassword ?? Constants.CustomiseStrings.oldPassword, text: $viewModel.oldPassword)
-                .style(.secureField)
-                .foregroundColor(.otfTextColor)
-            SecureField(ModuleAppYmlReader().profileData?.newPassword ?? Constants.CustomiseStrings.newPassword, text: $viewModel.newPassword)
-                .style(.secureField)
-                .foregroundColor(.otfTextColor)
-            Spacer()
-            Button(action: {
-                viewModel.changePassword()
-            }, label: {
-                Text(ModuleAppYmlReader().profileData?.resetPassword ?? Constants.CustomiseStrings.resetPassword)
-                    .padding(Metrics.PADDING_BUTTON_LABEL)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.otfButtonColor)
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .overlay(
-                        Capsule().stroke(Color.otfButtonColor, lineWidth: 2)
-                    )
-            })
-            .padding()
-            .alert(isPresented: $viewModel.showFailureAlert, content: ({
-                Alert(title: Text(Constants.CustomiseStrings.passwordResetError).font(Font.otfAppFont)
+        NavigationView {
+            Form {
+                Section {
+                    HStack {
+                        Text(Constants.CustomiseStrings.email)
+                        Spacer()
+                        Text(viewModel.email)
+                            .foregroundColor(.secondary)
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("\(Constants.CustomiseStrings.email): \(viewModel.email)")
+                }
+                
+                Section(header: Text(Constants.CustomiseStrings.changePasscode)) {
+                    SecureField(Constants.CustomiseStrings.oldPassword, text: $viewModel.oldPassword)
+                        .accessibilityLabel(Constants.CustomiseStrings.oldPassword)
+                    
+                    SecureField(Constants.CustomiseStrings.newPassword, text: $viewModel.newPassword)
+                        .accessibilityLabel(Constants.CustomiseStrings.newPassword)
+                }
+                
+                Section {
+                    Button(action: {
+                        viewModel.changePassword()
+                    }) {
+                        Text(Constants.CustomiseStrings.resetPassword)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .accessibilityHint("Double tap to reset your password")
+                }
+            }
+            .navigationTitle(Constants.CustomiseStrings.changePasscode)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(Constants.CustomiseStrings.cancel) {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .accessibilityLabel("Cancel password change")
+                }
+            }
+            .alert(isPresented: $viewModel.showFailureAlert) {
+                Alert(
+                    title: Text(Constants.CustomiseStrings.passwordResetError)
+                        .font(Font.otfAppFont)
                         .fontWeight(Font.otfFontWeight),
-                      message: Text(viewModel.errorMessage),
-                      dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
-            }))
-
-            Spacer()
+                    message: Text(viewModel.errorMessage),
+                    dismissButton: .default(Text(Constants.CustomiseStrings.okay))
+                )
+            }
         }
-        .background(Color.otfCellBackground)
         .onReceive(viewModel.viewDismissModePublisher) { shouldDismiss in
             if shouldDismiss {
                 self.presentationMode.wrappedValue.dismiss()

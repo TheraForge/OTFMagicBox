@@ -35,7 +35,7 @@ class OTFNetworkObserver: ObservableObject {
     }
 
     func pingEndpoint(isExpensive: Bool) {
-        guard let url = URL(string: "https://theraforge.org/api/v1/") else {
+        guard let url = URL(string: Constants.API.gatewayServicesURL) else {
             self.status = .offline
             return
         }

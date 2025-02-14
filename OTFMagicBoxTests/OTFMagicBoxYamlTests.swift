@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -66,7 +66,7 @@ class OTFMagicBoxYamlTests: XCTestCase {
     /*************************************************   CARDINALKIT CONFIGURATIONS TESTS        *******************************************************************************/
 
     func testStudyTitle() {
-        let inputValue = YmlReader().studyTitle
+        let inputValue = YmlReader().appTitle
         let expectedValue = "Health Study"
         XCTAssertEqual(inputValue, expectedValue)
     }
@@ -100,7 +100,7 @@ class OTFMagicBoxYamlTests: XCTestCase {
 
     func testTeamEmail() {
         let inputValue = YmlReader().teamEmail
-        let expectedValue = "info@hippocratestech.com"
+        let expectedValue = "support@hippocratestech.com"
         XCTAssertEqual(inputValue, expectedValue)
     }
 

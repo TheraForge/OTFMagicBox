@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+# Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
 # Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
@@ -53,7 +53,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: "<your-team-email>", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the quotes is the value assigned for that Key.
+# Example: sampleKey: "sample-value", here "sampleKey" is the Key and whatever is displayed after punctuation (:) within the quotes "sample-value" is the value assigned for that Key.
 
 
 # Default Values:-
@@ -209,11 +209,11 @@ DataModel:
       # Default font for text
       textFont: "Inherited"
       # Font size for app titles
-      appTitleSize: "Large Title"
+      appTitleSize: "Title"
   
     # Embraces the aesthetics of Apple's Health application, maintaining a familiar and health-centric appearance.
     - name: "healthStyle"
-      backgroundColor: "systemBackground"
+      backgroundColor: "lightGray"
       textColor: "label"
       separatorColor: "separator"
       cellbackgroundColor: "secondarySystemGroupedBackground"
@@ -230,7 +230,7 @@ DataModel:
   
     # Provides a standard and consistent appearance, suitable for CareKit components.
     - name: "careKitStyle"
-      backgroundColor: "systemBackground"
+      backgroundColor: "lightGray"
       textColor: "label"
       separatorColor: "separator"
       cellbackgroundColor: "secondarySystemGroupedBackground"
