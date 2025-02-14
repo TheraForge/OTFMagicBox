@@ -22,5 +22,20 @@ extension UIViewController {
         alertController.addAction(okayAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    func showEmailVerifyAlert(title: String, message: String, completionYes: @escaping ((UIAlertAction) -> Void)) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let resendAction = UIAlertAction(title: "OK", style: .destructive, handler: completionYes)
+        alertController.addAction(resendAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 
+    func showResendEmailVerifyAlert(title: String, message: String, completionYes: @escaping ((UIAlertAction) -> Void)) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let resendAction = UIAlertAction(title: "Resend Email", style: .destructive, handler: completionYes)
+        alertController.addAction(resendAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

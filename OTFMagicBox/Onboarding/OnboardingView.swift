@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -35,6 +35,7 @@
 import SwiftUI
 import UIKit
 import OTFUtilities
+import WatchConnectivity
 
 /// The onboarding view.
 struct OnboardingView: View {
@@ -51,6 +52,7 @@ struct OnboardingView: View {
 
     /// Creates the on boarding view.
     init(onComplete: (() -> Void)? = nil) {
+        WCSession.default.sendMessage(["userNotLoggedIn": "true"]) { _ in }
         let config = ModuleAppYmlReader()
         let onboardingdata: [Onboarding] = {
             config.onboardingData ?? [Onboarding(
@@ -165,30 +167,33 @@ struct OnboardingDetailsView: View {
                 Image(systemName: icon)
                     .imageScale(.large)
                     .foregroundColor(color)
-                    .font(.system(size: 60.0).bold())
+                    .font(.system(size: Metrics.PROFILE_MAIN_VIEW_HEIGHT).bold())
                     .padding(.top, Metrics.PADDING_VERTICAL_BUTTON * 2)
                     .padding(.bottom, Metrics.PADDING_VERTICAL_BUTTON)
                     .accessibilityHidden(true)
 
-                Text(title)
-                    .multilineTextAlignment(.center)
-                    .font(YmlReader().appStyle.appTitleSize.appFont ?? Constants.YamlDefaults.AppTitleSize.appFont)
-                    .foregroundColor(color)
-                    .shadow(color: .black, radius: 15)
-                    .padding([.horizontal, .bottom],
-                             Metrics.PADDING_VERTICAL_BUTTON)
-
-                Text(description)
-                    .multilineTextAlignment(.center)
-                    .font(.body)
-                    .foregroundColor(color)
-                    .shadow(radius: 5)
-                    .padding(.horizontal,
-                             Metrics.PADDING_HORIZONTAL_BUTTON)
-
                 Spacer()
             }
             .frame(maxWidth: .infinity)
+            
+            VStack(alignment: .center) {
+                Text(title)
+                    .multilineTextAlignment(.center)
+                    .font(YmlReader().appStyle.appTitleSize.appFont?.weight(.bold) ?? Constants.YamlDefaults.AppTitleSize.appFont)
+                    .foregroundColor(Color.white)
+                    .shadow(color: .white, radius: Metrics.SHADOW_RADIUS)
+                    .padding([.horizontal, .bottom],
+                             Metrics.PADDING_VERTICAL_BUTTON/2)
+
+                Text(description)
+                    .multilineTextAlignment(.center)
+                    .font(.headline.weight(.medium))
+                    .foregroundColor(Color.white)
+                    .shadow(radius: Metrics.RADIUS_CORNER_BUTTON)
+                    .padding(.horizontal,
+                             Metrics.PADDING_HORIZONTAL_BUTTON*2)
+            }.frame(maxWidth: .infinity)
+                .padding(.bottom, Metrics.PADDING_VERTICAL_BUTTON * 6)
         }
     }
 

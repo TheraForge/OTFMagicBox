@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+# Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
 # Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
@@ -53,7 +53,7 @@
 
 # Key and Value:
 # Text written on left side of the punctuation (:) is called as Key and text written on right side is called as Value.
-# Example: teamEmail: "<your-team-email>", here "teamEmail" is the Key and whatever is displayed after punctuation (:) within the colon "<your-team-email>" is the value assigned for that Key.
+# Example: sampleKey: "sample-value", here "sampleKey" is the Key and whatever is displayed after punctuation (:) within the quotes "sample-value" is the value assigned for that Key.
 
 
 # Default Values:-
@@ -212,6 +212,7 @@ DataModel:
  # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
       failedLoginTitle: "Unable to Login"
       failedLoginText: "Please try again in five minutes"
+      failedLoginWithDoctorCred: 'You are trying to log in with doctor credentials. That is not currently supported by the app.'
       
     passcode:
       enable: "false"
@@ -276,7 +277,7 @@ DataModel:
       
     profileDataModel:
       title: "Profile"
-      profileImage: "user_profile"
+      profileImage: "default-avatar"
       help: "Help"
       resetPasswordText: "Reset Password"
       reportProblemText: "Report a Problem"
@@ -292,6 +293,7 @@ DataModel:
       newPassword: "New Password"
       resetPassword: "Reset Password"
       backgroundColor: "White"
+      diagnosticsText: "Diagnostics"
       
       
     researchKitView:
@@ -549,6 +551,7 @@ DataModel:
  # Properties failedLoginTitle and failedLoginText are displayed after unsuccessful login.
       failedLoginTitle: "Connection impossible"
       failedLoginText: "Veuillez réessayer dans cinq minutes"
+      failedLoginWithDoctorCred: "Vous essayez de vous connecter avec les informations d'identification d'un médecin. Cela n'est actuellement pas pris en charge par l'application."
 
     passcode:
       enable: "false"
@@ -612,7 +615,7 @@ DataModel:
       
     profileDataModel:
       title: "Profil"
-      profileImage: "user_profile"
+      profileImage: "default-avatar"
       help: "Aider"
       resetPasswordText: "réinitialiser le mot de passe"
       reportProblemText: "Signaler un problème"
@@ -628,7 +631,7 @@ DataModel:
       newPassword: "nouveau mot de passe"
       resetPassword: "réinitialiser le mot de passe"
       backgroundColor: "White"
-     
+      diagnosticsText: "la diagnose"
      
     researchKitView:
       surveysHeaderTitle: "ENQUÊTES"

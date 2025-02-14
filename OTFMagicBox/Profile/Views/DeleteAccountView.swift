@@ -15,39 +15,32 @@ struct DeleteAccountView: View {
     @State private(set) var user: OCKPatient?
 
     var body: some View {
-        HStack {
-            Spacer()
-            Button(action: {
-                viewModel.showingOptions.toggle()
-            }, label: {
-                Text(Constants.CustomiseStrings.deleteAccount)
-                    .font(.basicFontStyle)
-                    .foregroundColor(Color.red)
+        Button(action: {
+            viewModel.showingOptions.toggle()
+        }, label: {
+            Text(Constants.CustomiseStrings.deleteAccount)
+                .foregroundColor(Color.red)
+                .fontWeight(Font.otfFontWeight)
+        })
+        .actionSheet(isPresented: $viewModel.showingOptions) {
+            ActionSheet(
+                title: Text(Constants.CustomiseStrings.removeInformation)
                     .font(Font.otfAppFont)
-                    .fontWeight(Font.otfFontWeight)
-            })
-            .actionSheet(isPresented: $viewModel.showingOptions) {
-                ActionSheet(
-                    title: Text(Constants.CustomiseStrings.removeInformation)
-                        .font(Font.otfAppFont)
-                        .fontWeight(Font.otfFontWeight),
-                    buttons: [
-                        .destructive(Text(Constants.CustomiseStrings.deleteAccount), action: {
-                            viewModel.deleteUserAccount(userId: user?.id ?? "")
-                        }),
-                        .cancel(Text(Constants.CustomiseStrings.cancel)
-                                    .fontWeight(Font.otfFontWeight)
-                                    .font(Font.otfAppFont))
-                    ]
-                )
-            }
-            .alert(isPresented: $viewModel.showingAlert) {
-                Alert(title: Text(Constants.CustomiseStrings.faliedToDeleteAccount)
-                        .font(Font.otfAppFont)
-                        .fontWeight(Font.otfFontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
-            }
-
-            Spacer()
+                    .fontWeight(Font.otfFontWeight),
+                buttons: [
+                    .destructive(Text(Constants.CustomiseStrings.deleteAccount), action: {
+                        viewModel.deleteUserAccount(userId: user?.id ?? "")
+                    }),
+                    .cancel(Text(Constants.CustomiseStrings.cancel)
+                                .fontWeight(Font.otfFontWeight)
+                                .font(Font.otfAppFont))
+                ]
+            )
+        }
+        .alert(isPresented: $viewModel.showingAlert) {
+            Alert(title: Text(Constants.CustomiseStrings.faliedToDeleteAccount)
+                    .font(Font.otfAppFont)
+                    .fontWeight(Font.otfFontWeight), message: nil, dismissButton: .default(Text(Constants.CustomiseStrings.okay)))
         }
 
     }

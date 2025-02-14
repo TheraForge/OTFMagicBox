@@ -1,25 +1,25 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
-
+ 
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
-
+ 
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
-
+ 
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
-
+ 
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
-
+ 
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -54,11 +54,14 @@ enum Constants {
     static let dataBucketStorage = "storage"
     static let onboardingDidComplete = "didCompleteOnboarding"
     static let isConsentDocumentViewed = "isConsentDocumentViewed"
+    static let loginCompletionStep = "loginCompletionStep"
     static let sizeToCropImage = CGSize(width: 1920.0, height: 1500.0)
     // String representation of Bool to compare with yaml file's booleans
     static let `true` = "true"
     static let `false` = "false"
     static let deleteAccount = "Your account is deleted from one of your device"
+    static let theraforgeWebLink = "https://theraforge.org/portal/login"
+    static let doctorLogin = "Doctor Login"
     
     enum UserDefaults {
         // Patient data
@@ -94,7 +97,7 @@ enum Constants {
         static let MessageArrivedNotification = "MessageArrivedNotification"
         static let DidRegisterNotifications = "DidRegisterUserNotificationSettings"
         static let DidRegisterNotificationsWithToken = "didRegisterForRemoteNotificationsWithDeviceToken"
-
+        
         static let WalkTestRequest = "WalkTestRequest"
         static let APIUserErrorNotification = "APIUserErrorNotification"
         static let DataSyncRequest = "DataSyncRequest"
@@ -137,6 +140,7 @@ enum Constants {
         static let CompletionStepText = "Default: completion step text"
         static let FailedLoginText = "Default: failed login text"
         static let FailedLoginTitle = "Default: failed login title"
+        static let FailedLoginWithDoctorCred = "Default: Login failed with doctor credenttial"
         static let HealthPermissionsTitle = "Default: health permissions title"
         static let HealthPermissionsText = "Default: health permissions text"
         static let ConsentTitle = "Default: consent title"
@@ -146,7 +150,7 @@ enum Constants {
         static let ConsentContent = "Default: consent content"
         static let ConsentShow = true
         static let placeholder = "Your placeholder here"
-        static let questionText = "Your question goes here."
+        static let questionText = "Your question goes here"
         static let Questionnaire = "Questionnaire"
         static let newsletter = "Would you like to subscribe to our newsletter?"
         static let learnMoreText = "Learn more text"
@@ -162,44 +166,49 @@ enum Constants {
         static let defaultTitleForRK = "Default Title"
         static let AppTitleSize = "Title"
     }
-
+    
     enum CustomiseStrings {
         static let signUp = "Sign Up"
         static let signinWithApple = "Sign in with Apple"
         static let resetPassword = "Reset Password"
         static let enterPasscode = "Enter your passcode"
-        static let enterYourEmailToGetLink = "Enter your email to get a link for password reset."
+        static let enterYourEmailToGetLink = "Enter your email to get a link for password reset"
         static let enterYourEmail = "Enter your email"
         static let passwordResetError = "Password Reset Error!"
         static let enterTheCode = "Please enter the code sent to your email and new password"
         static let passwordUpdated = "Password has been updated"
         static let enterFirstAndLastName = "Enter your first and last name for the signature of the consent form:"
-        static let loginToCloud = "Log in to the cloud to store your data."
+        static let loginToCloud = "Log in to the cloud to store your data"
         static let signIn = "Sign In"
         static let signingIn = "Signing in..."
         static let signingUp = "Signing up..."
         static let loginingIn = "Logging in..."
         static let loginInError = "Login Error!"
+        static let signupError = "Signup Error!"
+        static let emailVerifyConfirmation = "Account Confirmation"
+        static let emailVerifyMessage = "An email of your account confirmation link has been sent to your address.\nCheck your email and approve the request"
         static let error = "Error"
         static let creatingAccount = "Creating account..."
         static let login = "Login"
         static let registration = "Registration"
         static let submit = "Submit"
         static let wrongPasscode = "Wrong passcode entered"
-        static let studySignup = "Sign up for this study."
+        static let studySignup = "Sign up"
         static let careTeam = "Care Team"
         static let checkUp = "Check Up"
         static let signinWithGoogle = "Sign in with Google"
         static let signinWithEmail = "Sign in with Email and Password"
+        static let signupWithEmail = "Sign up with Email and Password"
         static let missingCredentials = "Missing Credentials"
-        static let googleClientId = "You have not provided Google Client ID in the YAML file."
+        static let googleClientId = "You have not provided Google Client ID in the YAML file"
         static let signupForSTOPFoG = "Sign up for the STOP FoG app:"
         static let accountRegistration = "Account Registration"
+        static let noContacts = "No contacts available"
         static let notMeetCriteria = """
-Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character
-"""
+    Your password does not meet the following criteria: minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character
+    """
         static let welcome = "Welcome"
-        static let defaultDescription = "Default: This is the description."
+        static let defaultDescription = "Default: This is the description"
         static let signAppleIdFastWay = "Sign in using your Apple ID is fast and easy, and Apple will not track any of your activities."
         static let enterValidEmail = "Please enter valid email address!"
         static let forgotPassword = "error in forgot password"
@@ -209,14 +218,17 @@ Your password does not meet the following criteria: minimum 8 characters with at
         static let signUpWithApple = "Sign up with Apple"
         static let changePasscode = "Change Passcode"
         static let appSupportRequest = "App Support Request"
-        static let enterSupportRequest = "Enter your support request here."
+        static let enterSupportRequest = "Enter your support request here"
         static let logout = "Logout"
         static let areYouSure = "Are you sure?"
         static let cancel = "Cancel"
-        static let failedToLogout = "Failed to logout."
+        static let failedToLogout = "Failed to logout"
+        static let googleLoginError = "F"
         static let okay = "Okay"
         static let oldPassword = "Old Password"
         static let newPassword = "New Password"
+        static let diagnostics = "Diagnostics"
+        static let diagnosticsSupportMessage = "Diagnostics are supported on iOS 15 and above"
         static let basicInformation = "BASIC INFORMATION"
         static let firstName = "First Name"
         static let lastName = "Last Name"
@@ -229,8 +241,8 @@ Your password does not meet the following criteria: minimum 8 characters with at
         static let photoLibrary = "Photo Library"
         static let deleteProfile = "Remove Profile Image"
         static let deleteAccount = "Delete Account"
-        static let removeInformation = "Are you sure? This will remove all your information."
-        static let faliedToDeleteAccount = "Failed to delete account."
+        static let removeInformation = "Are you sure? This will remove all your information"
+        static let faliedToDeleteAccount = "Failed to delete account"
         static let profile = "Profile"
         static let help = "Help"
         static let reportProblem = "Report a Problem"
@@ -238,20 +250,19 @@ Your password does not meet the following criteria: minimum 8 characters with at
         static let consetDocument = "Consent Document"
         static let withdrawFromStudy = "Withdraw from Study"
         static let accountDeleted = "Account Deleted"
+        static let diagnosticsNotSupported = "Not Supported"
         static let email = "Email"
         static let schedule = "Schedule"
         static let noTasks = "No Tasks"
-        static let noTasksForThisDate = "No tasks for this date."
-        static let setValidApiKey = "Please set a valid API Key to use the app."
+        static let noTasksForThisDate = "No tasks for this date"
+        static let setValidApiKey = "Please set a valid API Key to use the app"
         static let apiKeyMissing = "API Key Missing"
         static let intendedDescription = "Tests ability to walk"
         static let instructionStepTitle = "Patient Questionnaire"
-        static let instructionStepText =
-            """
-            This information will help your doctors keep track of how you feel and how well you are able to do your usual activities.
-            If you are unsure about how to answer a question, please give the best answer you can and make a written comment beside your answer.
-            """
-
+        static let instructionStepText = """
+                This information will help your doctors keep track of how you feel and how well you are able to do your usual activities.
+                If you are unsure about how to answer a question, please give the best answer you can and make a written comment beside your answer.
+                """
         static let healthScaleTitle = "Question #1"
         static let healthScaleQuestion = "In general, would you say your health is:"
         static let rowTitle1 = "Row Title"
@@ -268,21 +279,40 @@ Your password does not meet the following criteria: minimum 8 characters with at
         static let progressRowTitle3 = "Checkups"
         static let progressRowTitle4 = "Appointments"
         static let checkupListHeader = "OVERALL ADHERENCE"
-        static let touchId = "Use Face ID"
-        static let faceId = "Use Touch ID"
-        static let faceIdAlertMessage = "To use faceID authentication please login with your credientials first."
+        static let touchId = "Use Face/Touch ID"
+        static let faceId = "Use Face/Touch ID"
+        static let faceIdAlertMessage = "To use face ID authentication please log in with your credientials first"
         static let touchIdAlertMessage = "To use touchID authentication please login with your credientials first"
+        static let viewProfile = "Manage Profile"
+        static let settings = "Settings"
+        static let manageTasks = "Manage Tasks"
+        static let contacts = "Contacts"
+        static let telephone = "Telephone"
+        static let loading = "Loading"
+        static let changePassword = "Change Password"
+        static let account = "Account"
+        static let personalInformation = "Personal Information"
+        static let editPhoto = "Edit Photo"
+        static let birthdate = "Birthdate"
+        static let gender = "Gender"
+        static let notSet = "Not set"
+        static let profilePicture = "Profile Picture"
+        static let editProfilePictureHint = "Double tap to change your profile picture"
+        static let fromContact = "Choose from Contacts"
+        static let noPhotoInContact = "No photo found in contact"
+        static let logs = "Logs"
+        static let password = "Password"
     }
-
+    
     enum Images {
         static let ConsentCustomImg = "online-agreement"
     }
-
+    
     enum Passcode {
         static let lengthSix = "6"
         static let lengthFour = "4"
     }
-
+    
     enum Identifier {
         static let ConsentStep = "VisualConsentStep"
         static let ConsentReviewStep = "ConsentReviewStep"
@@ -292,23 +322,52 @@ Your password does not meet the following criteria: minimum 8 characters with at
         static let CompletionStep = "CompletionStep"
         static let StudyOnboardingTask = "StudyOnboardingTask"
     }
-
+    
     enum Registration {
         static let Identifier = "RegistrationStep"
         static let Title = "Registration"
-        static let Text = "Sign up for this study."
-        static let PasscodeInvalidMessage = "Password must be at least 10 characters in length."
+        static let Text = "Sign up for this app"
+        static let PasscodeInvalidMessage = "Password must be at least 10 characters in length"
+        static let emailPlaceHolder = "jappleseed@example.com"
+        static let passwordPlaceholder = "Enter password"
+        static let dateOfBirth = "Pick a date"
+        static let gender = "Pick a gender"
+        static let firstName = "John"
+        static let lastName = "Appleseed"
+        static let sectionHeaderText = "New Account"
     }
-
+    
     enum Login {
         static let Identifier = "LoginStep"
         static let Title = "Login"
-        static let Text = "Log into this study."
+        static let Text = "Log in to this app"
+        static let emailPlaceHolder = "jappleseed@example.com"
+        static let passwordPlaceholder = "Enter password"
+        static let sectionHeaderText = "Credentials"
     }
-
+    
     enum API {
-        static let developmentUrl = "https://stg.theraforge.org/api"
-        static let dbProxyURL = API.developmentUrl + "/v1/db/"
+        static let openAPIURL = "https://stg.theraforge.org/api"
+        static let dbProxyURL = API.openAPIURL + "/v1/db/"
+        static let gatewayServicesURL = API.openAPIURL + "/v1/"
+    }
+    
+    enum RestAPICode{
+        static let loginError = 400
+        static let verificationError = 601
     }
 
+    enum Logger{
+        static let title = "Diagnostics"
+        static let loaderText = "Loading"
+        static let category = "App Logger"
+        static let startDate = "Start Date"
+        static let endDate = "End Date"
+        static let logLevel = "Logs Level"
+        static let noLogsMessage = "No logs available"
+        static let shareViewTitle = "Share logs"
+        static let filterText = "Filter logs"
+        static let navTitle = "Log Viewer"
+        static let logFileName = "MagicBoxLogs"
+    }
 }

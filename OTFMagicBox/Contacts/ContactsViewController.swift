@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -41,6 +41,7 @@ import SwiftUI
 struct ContactsViewController: UIViewControllerRepresentable {
     typealias UIViewControllerType = OCKContactsListViewController
     @State private var contactsListViewController: OCKContactsListViewController
+    private var viewModel = UpdateUserViewModel()
     var syncStoreManager: OCKSynchronizedStoreManager
     let queue = OperationQueue()
 
@@ -49,6 +50,24 @@ struct ContactsViewController: UIViewControllerRepresentable {
         let viewController = OCKContactsListViewController(storeManager: storeManager)
         contactsListViewController = viewController
         viewController.title = Constants.CustomiseStrings.careTeam
+        
+        let label = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2, width: 200, height: 20))
+        label.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.5)
+        label.textAlignment = .center
+        label.text = Constants.CustomiseStrings.noContacts
+        
+        viewModel.fetchContactsCount { result in
+            switch result {
+            case .success(let contacts):
+                if contacts == 0 {
+                    viewController.view.addSubview(label)
+                } else {
+                    label.removeFromSuperview()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
 
         NotificationCenter.default.addObserver(forName: .deleteUserAccount, object: nil, queue: queue) { _ in
             DispatchQueue.main.async {
@@ -60,6 +79,9 @@ struct ContactsViewController: UIViewControllerRepresentable {
 
         NotificationCenter.default.addObserver(forName: .databaseSuccessfllySynchronized, object: nil, queue: queue) { _ in
             viewController.fetchContacts()
+            DispatchQueue.main.async {
+                label.removeFromSuperview()
+            }
         }
     }
 

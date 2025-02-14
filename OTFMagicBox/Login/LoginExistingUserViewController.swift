@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -76,6 +76,13 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         var loginSteps: [ORKStep]
         let signInButtons = OnboardingOptionsStep(identifier: "SignInButtons")
         let loginUserPassword = ORKLoginStep(identifier: "LoginExistingStep", title: Constants.CustomiseStrings.login, text: Constants.Login.Text, loginViewControllerClass: LoginViewController.self)
+        
+        loginUserPassword.formItems?.first?.placeholder = Constants.Login.emailPlaceHolder
+        loginUserPassword.formItems?.last?.placeholder = Constants.Login.passwordPlaceholder
+        
+        let sectionHeaderFormItem = ORKFormItem(sectionTitle: Constants.Login.sectionHeaderText)
+        loginUserPassword.formItems?.insert(sectionHeaderFormItem, at: 0)
+
         loginSteps = [signInButtons, loginUserPassword]
 
         // add consent if user dont have consent in cloud
@@ -110,10 +117,13 @@ struct LoginExistingUserViewController: UIViewControllerRepresentable {
         }
 
         // set completion step
-        let completionStep = ORKCompletionStep(identifier: Constants.Identifier.CompletionStep)
-        completionStep.title = ModuleAppYmlReader().completionStepTitle
-        completionStep.text = ModuleAppYmlReader().completionStepText
-        loginSteps += [completionStep]
+        if UserDefaults.standard.bool(forKey: Constants.loginCompletionStep) == false {
+            UserDefaults.standard.setValue(true, forKey: Constants.loginCompletionStep)
+            let completionStep = ORKCompletionStep(identifier: Constants.Identifier.CompletionStep)
+            completionStep.title = ModuleAppYmlReader().completionStepTitle
+            completionStep.text = ModuleAppYmlReader().completionStepText
+            loginSteps += [completionStep]
+        }
 
         let navigableTask = ORKNavigableOrderedTask(identifier: "StudyLoginTask", steps: loginSteps)
         let resultSelector = ORKResultSelector(resultIdentifier: "SignInButtons")

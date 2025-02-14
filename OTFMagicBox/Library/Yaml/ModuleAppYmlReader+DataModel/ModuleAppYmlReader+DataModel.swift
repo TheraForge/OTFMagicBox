@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -287,6 +287,15 @@ extension ModuleAppYmlReader {
         }
     }
     
+    var failedLoginWithDoctorCred: String {
+        switch getPreferredLocale().languageCode {
+        case "fr":
+            return onBoardingDataModel?.fr.login.failedLoginWithDoctorCred ?? Constants.YamlDefaults.FailedLoginWithDoctorCred
+        default:
+            return onBoardingDataModel?.en.login.failedLoginWithDoctorCred ?? Constants.YamlDefaults.FailedLoginWithDoctorCred
+        }
+    }
+    
     var loginStepTitle: String {
         switch getPreferredLocale().languageCode {
         case "fr":
@@ -491,6 +500,7 @@ struct ProfileModel: Codable {
     let newPassword: String
     let resetPassword: String
     let backgroundColor: String
+    let diagnosticsText: String
 }
 
 struct ResearchKitModel: Codable {

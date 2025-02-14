@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -80,16 +80,20 @@ struct MainView: View {
             }
 
             if YmlReader().showCheckupScreen {
-                CheckUpView().tabItem {
+                NavigationView {
+                    CheckUpView().navigationBarTitle(Text(Constants.CustomiseStrings.checkUp), displayMode: .inline)
+                }.tabItem {
                     UIImage.loadImage(named: "tab_tasks").renderingMode(.template)
-                    Text("Check Up")
-                        .font(Font.otfAppFont)
-                        .fontWeight(Font.otfFontWeight)
+                    Text(Constants.CustomiseStrings.checkUp)
+                         .font(Font.otfAppFont)
+                         .fontWeight(Font.otfFontWeight)
                 }
             }
 
             if YmlReader().showStaticUIScreen {
-                StaticUI().tabItem {
+                NavigationView {
+                    StaticUI().navigationBarTitle(Text("Sample Views"), displayMode: .inline)
+                }.tabItem {
                     Image(systemName: "uiwindow.split.2x1")
                     Text("UI")
                         .font(Font.otfAppFont)
@@ -97,12 +101,13 @@ struct MainView: View {
                 }
             }
 
-            ProfileUIView().tabItem {
-                UIImage.loadImage(named: "tab_profile").renderingMode(.template)
-                Text(Constants.CustomiseStrings.profile)
-                    .font(Font.otfAppFont)
-                    .fontWeight(Font.otfFontWeight)
-            }
+            ProfileUIView().navigationBarTitle(Text(ModuleAppYmlReader().profileData?.title ?? Constants.CustomiseStrings.profile), displayMode: .inline)
+                .tabItem {
+                    UIImage.loadImage(named: "tab_profile").renderingMode(.template)
+                    Text(Constants.CustomiseStrings.profile)
+                        .font(Font.otfAppFont)
+                        .fontWeight(Font.otfFontWeight)
+                }
         }
         .accentColor(self.color)
     }

@@ -7,7 +7,30 @@ This sample application leverages TheraForge frameworks such as [OTFTemplateBox]
 For more details on the features of the SDK and on the TheraForge Cloud setup process (e.g., to obtain an API key), refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
 
 ## Change Log
-<details open>
+<details>
+  <summary>Release 1.0.5-beta</summary>
+  
+  - **New Profile Layout**
+    - The profile page has been redesigned to align more closely with the layout seen in Apple's apps, like the Health app, for a more familiar and intuitive experience.
+    - Despite the new design, all existing features are preserved, including the ability to update profile details, view support contact information, and change the account password.
+    - A dedicated page now displays key user information such as name, birthdate, and gender. Users can edit these details directly on this page. Additionally, users can update their profile picture by selecting an image from their Camera Roll, taking a new photo, or choosing a photo from their Contacts.
+    - Added the capability to select a user's profile image from the Contacts app
+    - The Change Passcode screen has also been updated to match the refreshed layout of other screens while maintaining the same functionality.
+  - **Email Verification Process**
+    - After creating a new account, the user will receive an email with a verification link. 
+    - After clicking on the link, the user will be redirected to the app and the email will be verified.
+  - **New Diagnostics Feature**
+    - Added a logging facility in the Diagnostics section to review and export app log messages
+  - **Network Indicator Updates**
+    - Fixed an issue which prevented OTFNetworkIndicator from pinging the API gateway's URL
+    - Increased the size of the OTFNetworkIndicator icon to better match the new profile layout
+   - **Design System** 
+      - Published a Figma Design Kit: https://www.figma.com/design/WuxurNZpSjnB7I4ueeM0Kf/TheraForge-Design-System
+  - **Bug Fixes**
+    - Fixed a bug which would prevent the user's profile picture to upload successfully.
+</details>
+
+<details>
   <summary>Release 1.0.4-beta</summary>
   
   - **New Styling Structure**
@@ -29,14 +52,14 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 <details>
   <summary>Release 1.0.3-beta</summary>
   
-  - **End-to-End File Encrption (TheraForge CryptoBox)**
-    Added end-to-end encrption feature which prevents third parties from accessing data while it's being transferred from one user to another
+  - **End-to-End File Encryption (TheraForge CryptoBox)**
+    Added end-to-end encryption feature which prevents third parties from accessing data while it's being transferred from one user to another
   - **Biometric authentications**
     The app supports biometric authentication which provides secure and user-friendly way to authenticate users
   - **Password-less login, use auto-fill sign in**
     With just a few taps, users can create and save new passwords or log in to an existing account
   - **Manage documents**
-    MagicBox allows you to upload, donwload, re-name and delete different docuements. User's profile picture and consent form are saved as documents.
+    MagicBox allows you to upload, donwnload, re-name and delete different documents. User's profile picture and consent form are saved as documents.
   - **Improved theme customization using yml file**
     - Font
     - Font size
@@ -107,7 +130,7 @@ These are its primary characteristics:
 * Care plan management using Apple's Carekit framework.
 * Monitoring of health data with Apple's HealthKit framework.
 * Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
-* Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- abd GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
+* Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- and GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
 * SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
 * CI/CD support via GitHub Actions.
 
@@ -126,7 +149,7 @@ When a user launches an app for the first time, the onboarding process presents 
 
 ## Consent
 
-The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for exammple, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
+The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for example, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
 <p align="center"><img src="Docs/3-Consent.png" width=35% height=35%></p>
 
@@ -209,15 +232,38 @@ Encrypted files can only be decrypted by the intended receiver(s).
 
 ## User Profile
 
-In the profile section, the user can manage his current session, edit their profile, contact support and withdraw from a study.
+In the profile section, users can manage their current session, edit their profile, contact support, view the app diagnostics, and withdraw from a study.
 
 <p align="center"><img src="Docs/12-Profile.png" width=35% height=35%></p>
 
-There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or though a wi-fi hotspot. 
+There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or through a wi-fi hotspot. 
+
+## Diagnostics
+
+In the diagnostics section, users can view and share the app's diagnostic logs with other users for troubleshooting and support purposes.
+
+The section's key features include:
+
+- A log viewer, which allows users to view the detailed logs within the app, helping diagnose potential issues. This feature requires iOS 15 or newer.
+
+<p align="center"><img src="Docs/100-Diagnostics_1.png" width=35% height=35%></p>
+
+- A log sharing button, though which users can export logs for the last 24 hours (configurable) and share them via email or messaging, making it easier to communicate with support.
+
+<p align="center"><img src="Docs/101-Diagnostics_2.png" width=35% height=35%></p>
+
+- Log filtering, using which the users can filter the logs on the basis of their type or the date. This feature requires iOS 17 or newer.
+
+<p align="center"><img src="Docs/102-Diagnostics_3.png" width=35% height=35%></p>
+
+- The configuration for log duration, support email, and messages can be customized using the YAML and Constants.swift files.
+This feature streamlines troubleshooting by providing comprehensive log access and export capabilities, facilitating efficient support interactions. Sensitive data in logs is masked by default to ensure user privacy and security.
+
+For devices running iOS 14, diagnostic log viewing is not supported. An alert informs users when this functionality is unavailable.
 
 ## TheraForge Secure Cloud with Sync Support
 
-MagicBox can be connected to the TheraForge Cloud service to implement offline-fist cloud synchronization.
+MagicBox can be connected to the TheraForge Cloud service to implement offline-first cloud synchronization.
 
 For example, below we show the app's user profile on multiple devices before the date of birth is changed:
 
@@ -254,10 +300,6 @@ MagicBox app is designed to be compatible with the iOS accessibility features, e
 - High Contrast
 - Color Invert
 - Differentiate Without Color
-
-| ![VoiceOver](Docs/84-voice-over.png) | ![Voice Control](Docs/85-voice-control.png) | ![Bold Text](Docs/86-bold-text.PNG) |
-|:----------:|:----------:|:----------:|
-|   **Voice Over**  |   **Voice Control**  |   **Bold Text**  |
 
 ## Apple Watch App
 
@@ -302,13 +344,15 @@ You can also check the available assets locally on your machine by opening your 
 ```
 
 To use any of these assets in your project, simply follow these steps:
-1. Locate the Images resouce in Xcode's sidebar as shown in the figure below
+1. Locate the Images resource in Xcode's sidebar as shown in the figure below
 <p align="center"><img src="Docs/92-image-assets.png" width=100% height=100%></p>
 
 2. Choose an image that you want to use in your application
 3. Control-click on it and select `Show in Finder`
 4. From the Finder select the imageset folder corresponding to the desired image
+<p align="center"><img src="Docs/98-assets-folder.png" width=100% height=100%></p>
 5. Select the `Assets` resource of OTFMagicBox in Xcode and drag the imageset folder from the Finder to Xcode. That will install the imageset in MagicBox and you can now start using it.
+<p align="center"><img src="Docs/99-drag-asset.png" width=100% height=80%></p>
 
 To review any of the optional assets to select and use them in the code, follow these steps:
 1. Hover your mouse pointer over the desired image in the aforementioned gallery (or in the Assets resource) to reveal its name
@@ -319,7 +363,7 @@ To review any of the optional assets to select and use them in the code, follow 
 Image("doctor4")
 ```
 
-Any installed assets can also be used in the YAML customization files. For exameple, if we want to use this image on a custom section in the onboarding section of the app:
+Any installed assets can also be used in the YAML customization files. For example, if we want to use this image on a custom section in the onboarding section of the app:
 
 ```yaml
 summary: "This is custom section."
@@ -406,7 +450,7 @@ OTFToolBox by default includes Apple's ResearchKit framework. Building it requir
 brew install git-lfs
 ```
 
-Finally, to install Cocoapods in Terminal enter:
+Finally, to install CocoaPods in Terminal enter:
 
 ```
 sudo gem install cocoapods
@@ -418,7 +462,7 @@ as shown below:
 
 Refer to our [Cocoapods Installation](Docs/Cocoapods.md) page for prerequisites, caveats and troubleshooting suggestions.
 
-After successful installation of `git-lfs` and Cocoapods, you can install the MagicBox app.
+After successful installation of `git-lfs` and CocoaPods, you can install the MagicBox app.
 
 ## App Setup <a name="App-Setup"></a>
 
@@ -788,7 +832,7 @@ designConfig:
     - name: "largeTitleFontSize"
       textValue: "20"
     - name: "titleFontName"
-      textValue: "Nurito Sans"  # Replace with the name of your custom font
+      textValue: "Noto Sans"  # Replace with the name of your custom font
     - name: "titleFontSize"
       textValue: "17"
     # ...
@@ -901,9 +945,9 @@ useCareKit: "true"
 
 ## UserInfo Usage
 
-The Framework `OTFCareKitStore` contains the property *userInfo* in `OCKPatient.swift` class, When you launch the `OTFMagicBox` application you will get a user object of type `OCKPatient` throught which you will able to access the userInfo object and its properties stored in `OTFCareKitStore`.
+The Framework `OTFCareKitStore` contains the property *userInfo* in `OCKPatient.swift` class, When you launch the `OTFMagicBox` application you will get a user object of type `OCKPatient` through which you will able to access the userInfo object and its properties stored in `OTFCareKitStore`.
 
-You can you *userInfo* object to store your own properties on user level, as an example if you want to store the information of selected theme of application you need to create the `struct` including the property you want to store, assign the data to the property of your `sturct`.     As userInfo is a dictunary of type `[String: String]` thats why you need to create a string from for `stuct`, To create string encode your model using `JSONEncoder` that will return `data`, then decode this `data` to string using `UTF8` after that create a key in userInfo and assign that your newely created string to key.
+You can you *userInfo* object to store your own properties on user level, as an example if you want to store the information of selected theme of application you need to create the `struct` including the property you want to store, assign the data to the property of your `struct`.     As userInfo is a dictionary of type `[String: String]` thats why you need to create a string from for `stuct`, To create string encode your model using `JSONEncoder` that will return `data`, then decode this `data` to string using `UTF8` after that create a key in userInfo and assign that your newly created string to key.
 
 Then by using shared instance of `CareKitManager` call the method `updatePatient` as and assign the
 updated `OCKPatient` object to `updatePatient` method as shown in the example below.
@@ -932,9 +976,9 @@ Register your project in your Apple developer account by following [these steps]
 # Register a new API key
 
 - You can register a new API key using this [dashboard](https://stg.theraforge.org/admin/). 
-- You need to add valid details into the given form. After a successful submission, you will be presented with a popup window that will show your registerd API key.
-- Make sure to copy that API key and keep it in safe place.
-- Once you have registered your API key, our support team will contact you for further asssistance. 
+- You need to add valid details into the given form. After a successful submission, you will be presented with a popup window that will show your registered API key.
+- Make sure to copy that API key and keep it in a safe place.
+- Once you have registered your API key, our support team will contact you for further assistance. 
 - A dashboard (called AdminBox) is used to help clients to access and modify their API keys
 - AdminBox can be accessed using the [Portal](https://stg.theraforge.org/admin/login). 
 - Once a client is logged in to the dashboard (as admin), he/she will be able to see all API key details based upon their role.
@@ -960,7 +1004,7 @@ Whenever we start building a new application, this question always comes in our 
 
 I always found the architecture pattern is good to use, but we should not strictly follow an architecture pattern in our project. Not every architecture pattern is good enough to give you everything, there are cons & pros of every architecture pattern. if we have a lot of modules in our project, we can decide the architecture pattern according to the module also. Some module suits well with MVVM, but maybe your new module will not work well with MVVM, so instead use another architecture pattern like MVP, VIPER. So we should not completely rely on a single architecture pattern, instead, we can check it according to the module also.
 
-So, in OTFMagicBox we are using MVVM as it fullfils all our  requirements.
+So, in OTFMagicBox we are using MVVM as it fulfills all our  requirements.
 MVVM is the industry-recognized software architecture pattern that overcomes all drawbacks of MVP and MVC design patterns.
 MVVM suggests separating the data presentation logic(Views or UI) from the core business logic part of the application. 
 
@@ -975,7 +1019,7 @@ The purpose of this layer is to inform the ViewModel about the user’s action. 
 ### 3. ViewModel:
  It exposes those data streams which are relevant to the View. Moreover, it serves as a link between the Model and the View.
  
- Some impotent role played by MVVM.
+ Some important role played by MVVM.
  
 * ViewModel does not hold any kind of reference to the View.
 * Many to-1 relationships exist between View and ViewModel.

@@ -1,25 +1,25 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
-
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
-
+ 
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
-
+ 
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
-
+ 
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
  holders even if such marks are included in this software.
-
+ 
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
  regarding licensing.
-
+ 
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -40,197 +40,271 @@ import OTFUtilities
 
 struct UpdateUserProfileDetailView: View {
     let genderValues = GenderType.allCases
-    @StateObject private var viewModel = UpdateUserViewModel()
+    @ObservedObject var viewModel: UpdateUserViewModel
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.editMode) private var editMode
     
-    private var selectedDate: Binding<Date> {
-        Binding<Date>(
-            get: { self.birthday },
-            set: {
-                self.birthday = $0
-                self.setDateString()
-            })
+    @State private var user: OCKPatient
+    @State private var tempUser: OCKPatient
+    @State private var image: UIImage?
+    @State private var tempImage: UIImage?
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+    @State private var showError = false
+    
+    @State private var shouldPresentImagePicker = false
+    @State private var shouldPresentActionSheet = false
+    @State private var sourceType = UIImagePickerController.SourceType.photoLibrary
+    @State private var shouldPresentContactPicker = false
+    
+    var avatarImage: Image? {
+        let selectedImage = editMode?.wrappedValue.isEditing == true ? tempImage : image
+        if let selectedImage {
+            return Image(uiImage: selectedImage)
+        } else {
+            return nil
+        }
     }
     
-    @State private(set) var user: OCKPatient
-    @State var firstName: String
-    @State var lastName: String
-    @State var dob: String
-    @State private var image: UIImage?
-    @State var profileImageData = Data()
-    @State var isHideLoader: Bool = true
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var birthday: Date
-    @State var gender: GenderType
-    
-    init(user: OCKPatient) {
+    init(user: OCKPatient, viewModel: UpdateUserViewModel) {
         self._user = State(initialValue: user)
-        self._firstName = State(initialValue: user.name.givenName ?? "")
-        self._lastName = State(initialValue: user.name.familyName ?? "")
-        self._dob = State(initialValue: user.birthday?.toString ?? "")
-        self._birthday = State(initialValue: user.birthday ?? Date())
-        self._gender = State(initialValue: user.sex?.genderType ?? .other)
-        let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: YmlReader().appStyle.textColor.color ?? UIColor.black]
+        self._tempUser = State(initialValue: user)
+        self.viewModel = viewModel
+        self._image = State(initialValue: viewModel.profileImage)
+        self._tempImage = State(initialValue: viewModel.profileImage)
     }
     
     var body: some View {
-        NavigationView {
+        ZStack {
             Form {
-                VStack {
-                    IconView(image: $image, hashFileKey: user.attachments?.profile?.hashFileKey ?? "", fileName: user.attachments?.profile?.attachmentID ?? "", viewModel: viewModel)
-                        .frame(width: Metrics.PROFILE_IMAGE_WIDTH, height: Metrics.PROFILE_IMAGE_HEIGHT )
-                    Text(name)
-                        .font(.title.weight(.bold))
+                avatarSection
+                
+                Section(header: Text(Constants.CustomiseStrings.personalInformation)) {
+                    HStack {
+                        Text(Constants.CustomiseStrings.firstName)
+                        Spacer()
+                        if editMode?.wrappedValue.isEditing == true {
+                            TextField(Constants.CustomiseStrings.firstName, text: Binding(
+                                get: { tempUser.name.givenName ?? "" },
+                                set: { tempUser.name.givenName = $0 }
+                            ))
+                            .multilineTextAlignment(.trailing)
+                            .textContentType(.givenName)
+                        } else {
+                            Text(user.name.givenName ?? "")
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Constants.CustomiseStrings.firstName)
+                    .accessibilityValue(user.name.givenName ?? "")
+                    
+                    HStack {
+                        Text(Constants.CustomiseStrings.lastName)
+                        Spacer()
+                        if editMode?.wrappedValue.isEditing == true {
+                            TextField(Constants.CustomiseStrings.lastName, text: Binding(
+                                get: { tempUser.name.familyName ?? "" },
+                                set: { tempUser.name.familyName = $0 }
+                            ))
+                            .textContentType(.familyName)
+                            .multilineTextAlignment(.trailing)
+                        } else {
+                            Text(user.name.familyName ?? "")
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Constants.CustomiseStrings.lastName)
+                    .accessibilityValue(user.name.familyName ?? "")
+                    
+                    birthdaySection
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel(Constants.CustomiseStrings.birthdate)
+                    
+                    genderSection
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel(Constants.CustomiseStrings.gender)
+                        .accessibilityValue(user.sex?.genderType.rawValue ?? Constants.CustomiseStrings.notSet)
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
-                .accessibilityElement(children: .ignore)
-                Section {
-                    HStack {
-                        Text(firstNameTitle)
-                            .foregroundColor(Color.otfTextColor)
-                            .font(Font.otfAppFont)
-                            .fontWeight(Font.otfFontWeight)
-                            .accessibilityHidden(true)
-                        TextField(firstNameTitle, text: $firstName)
-                            .style(.textField)
-                            .foregroundColor(Color.otfTextColor)
-                            .font(Font.otfAppFont)
-                            .accessibilityLabel("First Name")
+            }
+            .navigationTitle(Constants.CustomiseStrings.profile)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if editMode?.wrappedValue.isEditing == true {
+                        Button(Constants.CustomiseStrings.cancel) {
+                            editMode?.animation().wrappedValue = .inactive
+                            tempUser = user
+                            tempImage = image
+                        }
+                        .disabled(isLoading)
+                    } else {
+                        EmptyView()
                     }
-                    HStack {
-                        Text(ModuleAppYmlReader().profileData?.lastName ?? Constants.CustomiseStrings.lastName)
-                            .fontWeight(Font.otfFontWeight)
-                            .font(Font.otfAppFont)
-                            .foregroundColor(Color.otfTextColor)
-                            .accessibilityHidden(true)
-                        TextField(lastNameTitle, text: $lastName)
-                            .style(.textField)
-                            .foregroundColor(Color.otfTextColor)
-                            .font(Font.otfAppFont)
-                            .accessibilityLabel("Last Name")
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                        .disabled(isLoading)
+                }
+            }
+            .disabled(isLoading)
+            .sheet(isPresented: $shouldPresentImagePicker) {
+                SUImagePickerView(sourceType: self.sourceType, image: self.$tempImage, isPresented: self.$shouldPresentImagePicker)
+            }
+            .sheet(isPresented: $shouldPresentContactPicker) {
+                ContactPicker(image: self.$tempImage, isPresented: self.$shouldPresentContactPicker)
+            }
+            .actionSheet(isPresented: $shouldPresentActionSheet) { () -> ActionSheet in
+                ActionSheet(title: Text(Constants.CustomiseStrings.chooseMode)
+                    .font(Font.otfAppFont)
+                    .fontWeight(Font.otfFontWeight),
+                            message: Text(Constants.CustomiseStrings.chooseProfileImage)
+                    .fontWeight(Font.otfFontWeight)
+                    .font(Font.otfAppFont),
+                            buttons: [
+                                ActionSheet.Button.default(Text(Constants.CustomiseStrings.camera), action: {
+                                    self.shouldPresentImagePicker = true
+                                    self.sourceType = .camera
+                                }),
+                                ActionSheet.Button.default(Text(Constants.CustomiseStrings.photoLibrary), action: {
+                                    self.shouldPresentImagePicker = true
+                                    self.sourceType = .photoLibrary
+                                }),
+                                ActionSheet.Button.default(Text(Constants.CustomiseStrings.fromContact), action: {
+                                    self.shouldPresentContactPicker = true
+                                }),
+                                ActionSheet.Button.destructive(Text(Constants.CustomiseStrings.deleteProfile), action: {
+                                    self.tempImage = nil
+                                }),
+                                ActionSheet.Button.cancel(Text(Constants.CustomiseStrings.cancel))
+                            ])
+            }
+            .onChange(of: editMode?.wrappedValue) { newValue in
+                if newValue?.isEditing == false {
+                    if user != tempUser || tempImage != image {
+                        saveChanges()
                     }
-                } header: {
-                    Text(infoHeader)
+                } else if newValue?.isEditing == true {
+                    tempUser = user
+                    tempImage = image
+                }
+            }
+            .onReceive(viewModel.$isLoading) { loading in
+                isLoading = loading
+            }
+            .onReceive(viewModel.profileUpdateComplete) { _ in
+                self.editMode?.animation().wrappedValue = .inactive
+            }
+            .alert(isPresented: $showError) {
+                Alert(
+                    title: Text(Constants.CustomiseStrings.error)
                         .font(Font.otfAppFont)
-                        .fontWeight(Font.otfFontWeight)
-                        .foregroundColor(Color.otfHeaderColor)
-                        .textCase(nil)
-                }
-
-                Section {
-                    Picker(Constants.CustomiseStrings.selectGender, selection: $gender) {
-                        ForEach(GenderType.allCases, id: \.self) {
-                            Text($0.rawValue)
-                                .font(Font.otfAppFont)
-                                .fontWeight(Font.otfFontWeight)
-                        }
-                        .accessibilityLabel("Edit the gender set on your profile")
-                        .accessibilityInputLabels(["Edit Gender"])
-                    }
-
-                    DatePicker("Birthdate", selection: $birthday, displayedComponents: .date)
-                        .accessibilityLabel("Edit the birthdate set on your profile")
-                        .accessibilityInputLabels(["Edit Birthdate"])
-                } header: {
-                    Text(otherInfoHeader)
-                        .fontWeight(Font.otfheaderTitleWeight)
-                        .foregroundColor(Color.otfHeaderColor)
-                        .font(.otfheaderTitleFont)
-                        .textCase(nil)
-                }
-                Button(action: {
-                    updatePatient()
-                    if let image = image {
-                        isHideLoader = false
-                        if let imageData = image.pngData() {
-                            let bytesImage = viewModel.swiftSodium.getArrayOfBytesFromData(fileData: imageData as NSData)
-                            let hashKeyFile = viewModel.swiftSodium.generateGenericHashWithoutKey(message: bytesImage)
-                            let hashKeyFileHex = hashKeyFile.bytesToHex(spacing: "").lowercased()
-                            let uuid = UUID().uuidString + ".png"
-                            viewModel.uploadFile(data: imageData, fileName: uuid, hashFileKey: hashKeyFileHex)
-
-                        }
-                    }
-                }, label: {
-                    Text(Constants.CustomiseStrings.save)
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(Color.otfButtonColor)
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                .stroke(Color.otfButtonColor, lineWidth: 2)
-                        )
-                })
-
+                        .fontWeight(Font.otfFontWeight),
+                    message: Text(errorMessage ?? Constants.CustomiseStrings.error),
+                    dismissButton: .default(Text(Constants.CustomiseStrings.okay))
+                )
+            }
+            
+            if isLoading {
+                Color.black.opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(2)
+                    )
+                    .accessibilityLabel(Constants.CustomiseStrings.loading)
             }
         }
-        .listRowBackground(Color.otfCellBackground)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarTitle(Text(ModuleAppYmlReader().profileData?.title ?? "Profile"))
-        .overlay(LoaderView(tintColor: .black, scaleSize: 2.0).padding(.bottom, 50).hidden(isHideLoader))
-
-        .onReceive(NotificationCenter.default.publisher(for: .databaseSuccessfllySynchronized)) { _ in
-            viewModel.fetchPatient(userId: user.id)
-        }
-        .onReceive(viewModel.patientPublisher) { patient in
-            patientData(patient: patient)
-        }
-        .onReceive(viewModel.profileImageData) { data in
-            let dataDict: [String: Data] = ["imageData": data]
-            NotificationCenter.default.post(name: .imageUploaded, object: dataDict)
-            presentationMode.wrappedValue.dismiss()
-        }
-
-        .onReceive(NotificationCenter.default.publisher(for: .deleteProfile)) { _ in
-            if let fileName = user.attachments?.profile?.attachmentID {
-                isHideLoader = false
-                viewModel.deleteAttachment(attachmentID: fileName)
-                viewModel.deleteFileFromDocument(fileName: fileName)
+        .navigationBarBackButtonHidden(editMode?.wrappedValue.isEditing == true || isLoading)
+    }
+    
+    var avatarSection: some View {
+        Section {
+            VStack {
+                PatientAvatar(image: avatarImage,
+                              givenName: tempUser.name.givenName ?? "",
+                              familyName: tempUser.name.familyName ?? "")
+                .frame(width: Metrics.PROFILE_IMAGE_WIDTH, height: Metrics.PROFILE_IMAGE_HEIGHT)
+                .clipShape(Circle()) // Ensures a round image
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                if editMode?.wrappedValue.isEditing == true {
+                    Button(action: {
+                        self.shouldPresentActionSheet = true
+                    }) {
+                        Text(Constants.CustomiseStrings.editPhoto)
+                            .foregroundColor(.blue)
+                            .padding()
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
             }
+            .frame(maxWidth: .infinity)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(Constants.CustomiseStrings.profilePicture)
+            .accessibilityAddTraits(editMode?.wrappedValue.isEditing == true ? .isButton : [])
+            .accessibilityHint(editMode?.wrappedValue.isEditing == true ? Constants.CustomiseStrings.editProfilePictureHint : "")
+            .background(Color.clear)
         }
-        .onReceive(viewModel.hideLoader) { _ in
-            isHideLoader  = true
-            NotificationCenter.default.post(name: .imageUploaded, object: nil)
-            presentationMode.wrappedValue.dismiss()
-        }
-        .onAppear {
-            if let attachmentID = user.attachments?.profile?.attachmentID {
-                if profileImageData.retriveFile(fileName: attachmentID) != nil {} else {
-                    viewModel.downloadFile(attachmentID: attachmentID)
+        .listRowBackground(Color.clear)
+    }
+    
+    @ViewBuilder
+    var birthdaySection: some View {
+        if editMode?.wrappedValue.isEditing == true {
+            DatePicker(Constants.CustomiseStrings.birthdate, selection: Binding(
+                get: { tempUser.birthday ?? Date() },
+                set: { tempUser.birthday = $0 }
+            ), displayedComponents: .date)
+        } else {
+            HStack {
+                Text(Constants.CustomiseStrings.birthdate)
+                Spacer()
+                if #available(iOS 15.0, *) {
+                    Text(user.birthday?.formatted(date: .long, time: .omitted) ?? Constants.CustomiseStrings.notSet)
+                } else {
+                    Text(user.birthday?.description ?? Constants.CustomiseStrings.notSet)
                 }
             }
         }
     }
     
-    func patientData(patient: OCKPatient) {
-        self.user = patient
-        self.firstName = patient.name.givenName ?? ""
-        self.lastName = patient.name.familyName ?? ""
-        self.gender = patient.sex?.genderType ?? .other
-        self.birthday = patient.birthday ?? Date()
-        setDateString()
+    @ViewBuilder
+    var genderSection: some View {
+        if editMode?.wrappedValue.isEditing == true {
+            Picker(Constants.CustomiseStrings.selectGender, selection: Binding(
+                get: { tempUser.sex?.genderType ?? .other },
+                set: { tempUser.sex = $0.carekitGender }
+            )) {
+                ForEach(GenderType.allCases, id: \.self) { gender in
+                    Text(gender.rawValue).tag(gender)
+                }
+            }
+            .pickerStyle(.wheel)
+        } else {
+            HStack {
+                Text(Constants.CustomiseStrings.gender)
+                Spacer()
+                Text(user.sex?.genderType.rawValue ?? Constants.CustomiseStrings.notSet)
+            }
+        }
     }
     
-    func updatePatient() {
-        var name = PersonNameComponents()
-        name.givenName = firstName
-        name.familyName = lastName
-        user.name = name
-        user.birthday = birthday
-        user.sex = gender.carekitGender
-        viewModel.updatePatient(user: user)
-    }
-
-    private func setDateString() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
-        dob = formatter.string(from: self.birthday)
+    private func saveChanges() {
+        user = tempUser
+        image = tempImage
+        
+        viewModel.updatePatientWithImage(user: user, newImage: tempImage)
+        
+        // Wait for complete update
+        viewModel.profileUpdateComplete
+            .first()
+            .sink { _ in
+                self.isLoading = false
+            }
     }
 }
+
 
 // MARK: - Labels
 extension UpdateUserProfileDetailView {
@@ -241,19 +315,19 @@ extension UpdateUserProfileDetailView {
         }
         return "\(givenName) \(familyName)"
     }
-
+    
     var infoHeader: String {
         ModuleAppYmlReader().profileData?.profileInfoHeader ?? Constants.CustomiseStrings.basicInformation
     }
-
+    
     var firstNameTitle: String {
         ModuleAppYmlReader().profileData?.firstName ?? Constants.CustomiseStrings.firstName
     }
-
+    
     var lastNameTitle: String {
         ModuleAppYmlReader().profileData?.lastName ?? Constants.CustomiseStrings.lastName
     }
-
+    
     var otherInfoHeader: String {
         ModuleAppYmlReader().profileData?.otherInfo ?? Constants.CustomiseStrings.otherInformation
     }
@@ -264,10 +338,10 @@ extension GenderType {
         switch self {
         case .male:
             return .male
-
+            
         case .female:
             return .female
-
+            
         case .other:
             return .other("")
         }
@@ -279,74 +353,13 @@ extension OCKBiologicalSex {
         switch self {
         case .male:
             return .male
-
+            
         case .female:
             return .female
-
+            
         default:
             return .other
         }
-    }
-}
-
-struct IconView: View {
-    @Binding var image: UIImage?
-    @State var hashFileKey: String
-    @State var fileName: String
-    @State var imageViews = Data()
-    @State private var shouldPresentImagePicker = false
-    @State private var shouldPresentActionScheet = false
-    @State private var sourceType = UIImagePickerController.SourceType.photoLibrary
-    @StateObject var viewModel: UpdateUserViewModel
-    @State var imageUI: UIImage?
-
-    var imageView: Image {
-
-        if let image = image {
-            return Image(uiImage: image)
-        } else if let imageUI = imageUI {
-            return Image(uiImage: imageUI)
-        } else {
-            return Image.avatar
-        }
-
-    }
-
-    var body: some View {
-        imageView
-            .iconStyle()
-            .aspectRatio(contentMode: .fill)
-            .onTapGesture { self.shouldPresentActionScheet = true }
-            .sheet(isPresented: $shouldPresentImagePicker) {
-                SUImagePickerView(sourceType: self.sourceType, image: self.$image, isPresented: self.$shouldPresentImagePicker)
-            }
-            .onLoad {
-                DispatchQueue.main.async {
-                    if let retriveImageData = imageViews.retriveFile(fileName: fileName) {
-                        imageUI = viewModel.dataToImageWithoutDecryption(data: retriveImageData, key: hashFileKey)
-                    }
-                }
-            }
-            .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-                ActionSheet(title: Text(Constants.CustomiseStrings.chooseMode)
-                                .font(Font.otfAppFont)
-                                .fontWeight(Font.otfFontWeight),
-                            message: Text(Constants.CustomiseStrings.chooseProfileImage)
-                                .fontWeight(Font.otfFontWeight)
-                                .font(Font.otfAppFont), buttons: [ActionSheet.Button.default(Text(Constants.CustomiseStrings.camera), action: {
-                                    self.shouldPresentImagePicker = true
-                                    self.sourceType = .camera
-                                }), ActionSheet.Button.default(Text(Constants.CustomiseStrings.photoLibrary), action: {
-                                    self.shouldPresentImagePicker = true
-                                    self.sourceType = .photoLibrary
-                                }), ActionSheet.Button.destructive(Text(Constants.CustomiseStrings.deleteProfile), action: {
-                                    NotificationCenter.default.post(name: .deleteProfile, object: nil)
-                                }), ActionSheet.Button.cancel()])
-            }
-            .accessibilityLabel("Profile image")
-            .accessibilityAddTraits(.isButton)
-            .accessibilityHint("Double tap to update your profile image")
-            .accessibilityIgnoresInvertColors(true)
     }
 }
 
@@ -354,18 +367,18 @@ struct SUImagePickerView: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var image: UIImage?
     @Binding var isPresented: Bool
-
+    
     func makeCoordinator() -> ImagePickerViewCoordinator {
         return ImagePickerViewCoordinator(image: $image, isPresented: $isPresented)
     }
-
+    
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let pickerController = UIImagePickerController()
         pickerController.sourceType = sourceType
         pickerController.delegate = context.coordinator
         return pickerController
     }
-
+    
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
         // Nothing to update here
     }
@@ -375,19 +388,19 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate,
                                   UIImagePickerControllerDelegate {
     @Binding var image: UIImage?
     @Binding var isPresented: Bool
-
+    
     init(image: Binding<UIImage?>, isPresented: Binding<Bool>) {
         self._image = image
         self._isPresented = isPresented
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.image = image
         }
         self.isPresented = false
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.isPresented = false
     }
@@ -406,4 +419,8 @@ extension Array where Element == UInt8 {
         }
         return hexString
     }
+}
+
+#Preview {
+    UpdateUserProfileDetailView(user: .init(id: "1", givenName: "Branson", familyName: "Ashwin"), viewModel: .init())
 }

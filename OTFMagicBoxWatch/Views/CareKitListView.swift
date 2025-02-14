@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021, Hippocrates Technologies S.r.l.. All rights reserved.
+ Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -53,16 +53,10 @@ struct CareKitListView: View {
                 }
             } else {
                 if userLoggedOut {
-                    VStack(alignment: .center) {
-                        Text("Please log in on your phone app to see the tasks!")
-                            .padding(.init(top: 5, leading: 15, bottom: 5, trailing: 15))
-                    }
+                    LogoutUserView()
                 } else {
                     if tasks.isEmpty {
-                        VStack(alignment: .center) {
-                            Text("No task for today!")
-                                .padding(.init(top: 5, leading: 15, bottom: 5, trailing: 15))
-                        }
+                        NoTaskView()
                     } else {
                         List {
                             ForEach(tasks, id: \.id) { task in
@@ -93,7 +87,6 @@ struct CareKitListView: View {
             case .success(let data):
                 tasks = []
                 let todayTasks: [OCKTask] = data.filter({ $0.schedule.exists(onDay: Date()) })
-                print("message from peer! \(todayTasks)")
                 DispatchQueue.main.async {
                     self.tasks = todayTasks
                     isLoading  = false
