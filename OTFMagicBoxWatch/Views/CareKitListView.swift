@@ -41,9 +41,16 @@ import WatchConnectivity
 
 struct CareKitListView: View {
     let carekitstore = OTFCareKitStoreManager.shared
+    let formatter = DateFormatter()
     @State var tasks = [OCKTask]()
     @State var userLoggedOut = false
     @State var isLoading = true
+    var displayDate: String
+    
+    init() {
+        formatter.dateFormat = "d MMM YYYY"
+        displayDate = formatter.string(from: Date())
+    }
     
     var body: some View {
         VStack {
@@ -56,11 +63,19 @@ struct CareKitListView: View {
                     LogoutUserView()
                 } else {
                     if tasks.isEmpty {
-                        NoTaskView()
+                        NoTaskView(displayDate: displayDate)
                     } else {
+                        HStack() {
+                            Text(displayDate)
+                                .fontWeight(.bold)
+                                .padding(.bottom, 5)
+                                .padding(.leading, 5)
+                            
+                            Spacer()
+                        }
                         List {
                             ForEach(tasks, id: \.id) { task in
-                                SimpleTaskView(taskID: task.id, eventQuery: .init(for: task.effectiveDate), storeManager: carekitstore.synchronizedStoreManager)
+                                SimpleTaskView(taskID: task.id, eventQuery: .init(for: Date()), storeManager: carekitstore.synchronizedStoreManager)
                             }
                         }
                     }
