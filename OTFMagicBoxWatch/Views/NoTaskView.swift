@@ -9,17 +9,15 @@ import SwiftUI
 
 struct NoTaskView: View {
     
-    let formatter = DateFormatter()
-    var date: String
+    var displayDate: String
     
-    init() {
-        formatter.dateFormat = "d MMM YYYY"
-        date = formatter.string(from: Date())
+    init(displayDate: String) {
+        self.displayDate = displayDate
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(date)
+            Text(displayDate)
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
             VStack(alignment: .leading) {
@@ -38,5 +36,7 @@ struct NoTaskView: View {
 }
 
 #Preview {
-    NoTaskView()
+    let formatter = DateFormatter()
+    let displayDate = formatter.string(from: Date())
+    NoTaskView(displayDate: displayDate)
 }
