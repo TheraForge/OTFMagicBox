@@ -140,39 +140,39 @@ These are its primary characteristics:
 
 MagicBox includes the following customizable features:
 
-<p align="center"><img src="Docs/1-Features.png" width=80%></p>
+<p align="center"><img src="Docs/1-Features.png" width=85%></p>
 
 ## Onboarding
 
 When a user launches an app for the first time, the onboarding process presents the app’s goals and provides instructions that highlight key benefits and features.
 
-<p align="center"><img src="Docs/2-Onboarding.png" width=25%></p>
+<p align="center"><img src="Docs/2-Onboarding.png" width=35%></p>
 
 ## Consent
 
 The informed consent is the process of a user granting authorization to an application to access specific resources on their behalf (for example, health sensors) and/or to perform certain actions (for example, as part of a medical study). Users will be asked for consent to allow access to their personal data.
 
-<p align="center"><img src="Docs/3-Consent.png" width=25%></p>
+<p align="center"><img src="Docs/3-Consent.png" width=35%></p>
 
 ## Consent Form and Signature
 
 The consent form contains the description of the items included in the application that require explicit user consent. The user can agree to the clauses by signing the form.
 
 <p align="center">
-  <img src="Docs/4-Form.png" width="25%" style="margin-right: 20px;" />
-  <img src="Docs/5-Signature.png" width="25%" />
+  <img src="Docs/4-Form.png" width="35%" style="margin-right: 20px;" />
+  <img src="Docs/5-Signature.png" width="35%" />
 </p>
 
 ## Add consent document page in profile section
 In MagicBox user can now see their consent form in their profile screen by clicking on the Consent documents section. 
 
-<p align="center"><img src="Docs/consent_02.png" width=25%></p>
+<p align="center"><img src="Docs/consent_02.png" width=35%></p>
 
 ## Simplified Registration and Login Process
 
 The app includes screens to get a user to sign up to use a medical intervention, telemedicine account or research project. The registration page of the application asks for basic user details such as email, password, first name, last name, date of birth and gender, etc. For example, date of birth can be used for a minimum age eligibility check to limit the use of the app.
 
-<p align="center"><img src="Docs/6-Signup.png" width=25%></p>
+<p align="center"><img src="Docs/6-Signup.png" width=35%></p>
 
 ## Regular Login/Social Login
 
@@ -181,11 +181,11 @@ MagicBox supports different login strategies: regular login using registration d
 User login credentials are securely stored in the device’s keychain.
 
 
-<p align="center"><img src="Docs/7-Login.png" width=25%></p>
+<p align="center"><img src="Docs/7-Login.png" width=35%></p>
 
 Addition, add GIDClientID into info.plist file to enable Google login.
 
-<img src="Docs/gmail_login_info.png" width=80%>
+<p align="center"><img src="Docs/gmail_login_info.png" width=100%></p>
 
 
 ## Biometric authentications
@@ -193,39 +193,39 @@ The App support Biometric authentication. A secure and user-friendly way to auth
 
 User can authenticate by using their Face ID or Touch ID.
 
-<p align="center"><img src="Docs/biometric_authenticaion.png" width=25%></p>
+<p align="center"><img src="Docs/biometric_authenticaion.png" width=35%></p>
 
 ## Password-less Login, Autofill Sign in
 MagicBox includes AutoFill feature. With just a few taps, users can create and save new passwords or log in to an existing account. Users don’t need to enter their password, the system handles everything. It also encourages user to select strong passwords hence making user account more secure.
 
 <p align="center">
-  <img src="Docs/passowrd_less_01.png" width="25%" style="margin-right: 20px;" />
-  <img src="Docs/passowrd_less_02.png" width="25%" />
+  <img src="Docs/passowrd_less_01.png" width="35%" style="margin-right: 20px;" />
+  <img src="Docs/passowrd_less_02.png" width="35%" />
 </p>
 
 ## Passcode
 
 In order to protect access, the app can optionally require a four- or six-digit user-selected passcode.
 
-<p align="center"><img src="Docs/8-Passcode.png" width=25%></p>
+<p align="center"><img src="Docs/8-Passcode.png" width=35%></p>
 
 ## Activity
 
 There are a number of pre-defined task types that you can include in your project: for example, a two finger tap test, the 6 minute walk test, a special memory test and a short walk test to measure gait and balance. These tasks include the instructions for the steps to perform to complete them.
 
-<p align="center"><img src="Docs/9-Activity.png" width=25%></p>
+<p align="center"><img src="Docs/9-Activity.png" width=35%></p>
 
 ## Surveys
 
 A survey is a sequence of questions that you use to collect data from the users. Each step addresses a specific question in the survey, such as “What medications are you taking?” or “How many hours did you sleep last night?”. You can collect results for the individual steps or for the task as a whole.
 
-<p align="center"><img src="Docs/10-Survey.png" width=25%></p>
+<p align="center"><img src="Docs/10-Survey.png" width=35%></p>
 
 ## Contacts
 
 Contacts are cards that contain doctor and family member details, such as address, phone number, messaging number, email address, etc.
 
-<p align="center"><img src="Docs/11-Contacts.png" width=25%></p>
+<p align="center"><img src="Docs/11-Contacts.png" width=35%></p>
 
 ## End-to-end File Encrption (TheraForge CryptoBox)
 MagicBox includes end-to-end encryption on document sending and receiving by the user. It provides secure storage and additional security for communication that prevents third parties from accessing confidential data.
@@ -237,7 +237,7 @@ Encrypted files can only be decrypted by the intended receiver(s).
 
 In the profile section, users can manage their current session, edit their profile, contact support, view the app diagnostics, and withdraw from a study.
 
-<p align="center"><img src="Docs/12-Profile.png" width=25%></p>
+<p align="center"><img src="Docs/12-Profile.png" width=35%></p>
 
 There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or through a wi-fi hotspot. 
 
@@ -249,15 +249,15 @@ The section's key features include:
 
 - A log viewer, which allows users to view the detailed logs within the app, helping diagnose potential issues. This feature requires iOS 15 or newer.
 
-<p align="center"><img src="Docs/100-Diagnostics_1.png" width=25%></p>
+<p align="center"><img src="Docs/100-Diagnostics_1.png" width=35%></p>
 
 - A log sharing button, though which users can export logs for the last 24 hours (configurable) and share them via email or messaging, making it easier to communicate with support.
 
-<p align="center"><img src="Docs/101-Diagnostics_2.png" width=25%></p>
+<p align="center"><img src="Docs/101-Diagnostics_2.png" width=35%></p>
 
 - Log filtering, using which the users can filter the logs on the basis of their type or the date. This feature requires iOS 17 or newer.
 
-<p align="center"><img src="Docs/102-Diagnostics_3.png" width=25%></p>
+<p align="center"><img src="Docs/102-Diagnostics_3.png" width=35%></p>
 
 - The configuration for log duration, support email, and messages can be customized using the YAML and Constants.swift files.
 This feature streamlines troubleshooting by providing comprehensive log access and export capabilities, facilitating efficient support interactions. Sensitive data in logs is masked by default to ensure user privacy and security.
@@ -270,27 +270,27 @@ MagicBox can be connected to the TheraForge Cloud service to implement offline-f
 
 For example, below we show the app's user profile on multiple devices before the date of birth is changed:
 
-<img src="Docs/30-Profile-Before-Change.png" width=100%>
+<p align="center"><img src="Docs/30-Profile-Before-Change.png" width=100%></p>
 
 When the date of birth is changed to Dec 11, 2006 on the second device from the left:
 
-<img src="Docs/31-Profile-With-Change.png" width=100%>
+<p align="center"><img src="Docs/31-Profile-With-Change.png" width=100%></p>
 
 And after the date of birth is automatically synchronized securely across the cloud to all devices:
 
-<img src="Docs/32-Profile-After-Sync.png" width=100%>
+<p align="center"><img src="Docs/32-Profile-After-Sync.png" width=100%></p>
 
 For patient adherence tracking, a patient's glucose level is checked and recorded, then it’s automatically synchronized to multiple devices:
 
-<img src="Docs/33-Before-Glucose-Check.png" width=100%>
+<p align="center"><img src="Docs/33-Before-Glucose-Check.png" width=100%></p>
 
 Glucose level check completed on the second device from the left:
 
-<img src="Docs/34-Glucose-Level-Checked.png" width=100%>
+<p align="center"><img src="Docs/34-Glucose-Level-Checked.png" width=100%></p>
 
 Outcome is automatically synchronized securely across the cloud to all devices:
 
-<img src="Docs/35-Outcome-Synced.png" width=100%>
+<p align="center"><img src="Docs/35-Outcome-Synced.png" width=100%></p>
 
 ## Accessibility
 
@@ -308,7 +308,7 @@ MagicBox app is designed to be compatible with the iOS accessibility features, e
 
 The MagicBox Apple Watch App is designed as a companion app for the iPhone MagicBox application. This app is intended for users to quickly glance through their tasks and activities for the day conveniently on their Apple Watch.
 
-<img src="Docs/91-apple-watch-demo.png" alt="Apple Watch Demo App" width="50%">
+<p align="center"><img src="Docs/91-apple-watch-demo.png" alt="Apple Watch Demo App" width="60%"></p>
 
 To get started with the MagicBox Watch App, follow these steps:
 
@@ -349,22 +349,22 @@ You can also check the available assets locally on your machine by opening your 
 To use any of these assets in your project, simply follow these steps:
 1. Locate the Images resource in Xcode's sidebar as shown in the figure below
 
-<img src="Docs/92-image-assets.png" width=60%>
+<p align="center"><img src="Docs/92-image-assets.png" width=80%></p>
 
 2. Choose an image that you want to use in your application
 3. Control-click on it and select `Show in Finder`
 4. From the Finder select the imageset folder corresponding to the desired image
 
-<img src="Docs/98-assets-folder.png" width=80%>
+<p align="center"><img src="Docs/98-assets-folder.png" width=80%></p>
 
 5. Select the `Assets` resource of OTFMagicBox in Xcode and drag the imageset folder from the Finder to Xcode. That will install the imageset in MagicBox and you can now start using it.
 
-<img src="Docs/99-drag-asset.png" width=60%>
+<p align="center"><img src="Docs/99-drag-asset.png" width=80%></p>
 
 To review any of the optional assets to select and use them in the code, follow these steps:
 1. Hover your mouse pointer over the desired image in the aforementioned gallery (or in the Assets resource) to reveal its name
 
-<img src="Docs/89-custom-image-name.png" width=35%>
+<p align="center"><img src="Docs/89-custom-image-name.png" width=45%></p>
 
 2. In your code, utilize the [Image view](https://developer.apple.com/documentation/swiftui/image) and pass the installed image's name as an argument, like this:
 
@@ -381,7 +381,7 @@ title: "Custom consent section"
 image: "doctor4"
 ```
 
-<p align="center"><img src="Docs/90-custom-consent-image.png" width="25%" /></p> 
+<p align="center"><img src="Docs/90-custom-consent-image.png" width="35%" /></p> 
 
 MagicBox also includes preinstalled icon packs from [SF Feathers](https://nielsx.gumroad.com/l/sf-feathers) and [Icons8](https://icons8.com/l/sf/#use), providing you with even more design options to enhance your app. Similar to other graphical assets, you can utilize these packs by identifying the image name and employing it within an Image component or a YAML configuration file:
 
@@ -411,15 +411,15 @@ Let’s get MagicBox up and running on your machine. The easiest way? Use the **
 
 Once downloaded, unzip the folder:
 
-<img src="Docs/MagicBoxInstaller1.png" alt="Step 1" width="50%">
+<p align="center"><img src="Docs/MagicBoxInstaller1.png" alt="Step 1" width="80%"></p> 
 
 Right-click the unzipped folder and choose **“New Terminal at Folder”**:
 
-<img src="Docs/MagicBoxInstaller2.png" alt="Step 2" width="50%">
+<p align="center"><img src="Docs/MagicBoxInstaller2.png" alt="Step 2" width="80%"></p> 
 
 This opens a Terminal window in the correct directory:
 
-<img src="Docs/MagicBoxInstaller3.png" alt="Step 3" width="60%">
+<p align="center"><img src="Docs/MagicBoxInstaller3.png" alt="Step 3" width="80%"></p> 
 
 Now, just run the following command:
 
@@ -427,7 +427,7 @@ Now, just run the following command:
 bash install_magicbox.sh
 ```
 
-<img src="Docs/MagicBoxInstaller4.png" alt="Step 4" width="60%">
+<p align="center"><img src="Docs/MagicBoxInstaller4.png" alt="Step 4" width="80%"></p> 
 
 **Sit back while it installs everything for you**:
 - Xcode Command Line Tools
@@ -436,11 +436,11 @@ bash install_magicbox.sh
 - CocoaPods
 - MagicBox repo with all dependencies
 
-<img src="Docs/MagicBoxInstaller5.png" alt="Step 5" width="60%">
+<p align="center"><img src="Docs/MagicBoxInstaller5.png" alt="Step 5" width="80%"></p> 
 
 Once setup is complete, your project opens automatically in Xcode. Ready to customize!
 
-<img src="Docs/MagicBoxInstaller6.png" alt="Step 6" width="80%">
+<p align="center"><img src="Docs/MagicBoxInstaller6.png" alt="Step 6" width="100%"></p> 
 
 # Manual Installation
 
@@ -460,13 +460,13 @@ The MagicBox app installation process requires the installation of the ToolBox S
 
 In order to develop iOS apps, make sure to download Xcode, Apple's Integrated Development Environment (IDE), from the Mac App Store.
 
-<img src="Docs/29-Xcode.png" width=5%>
+<p align="center"><img src="Docs/29-Xcode.png" width=15%></p> 
 
 If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
 
 (Note that in case of Xcode 13.2 Apple recommends to [download it directly from the Apple Developer web site](https://developer.apple.com/download/all/?q=Xcode). Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
 
-<img src="Docs/27-cocoapods.png" width=10%>
+<p align="center"><img src="Docs/27-cocoapods.png" width=35%></p> 
 
 After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
 
@@ -474,7 +474,7 @@ If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guid
 
 CocoaPods is built with the Ruby language and can be installed with the default version of Ruby available with macOS.
 
-<img src="Docs/28-homebrew.png" width=5%>
+<p align="center"><img src="Docs/28-homebrew.png" width=15%></p> 
 
 However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
 
@@ -490,7 +490,7 @@ as explained in the [Homebrew](https://brew.sh/) main page. (If you get an error
 
 Wait for the installation to end.
 
-<img src="Docs/24-homebrew.png" width=60%>
+<p align="center"><img src="Docs/24-homebrew.png" width=80%></p> 
 
 OTFToolBox by default includes Apple's ResearchKit framework. Building it requires the installation of the `git-lfs` tool like so:
 
@@ -506,7 +506,7 @@ sudo gem install cocoapods
 
 as shown below:
 
-<img src="Docs/25-Terminal.png" width=60%>
+<p align="center"><img src="Docs/25-Terminal.png" width=80%></p> 
 
 
 Refer to our [Cocoapods Installation](Docs/Cocoapods.md) page for prerequisites, caveats and troubleshooting suggestions.
@@ -530,7 +530,7 @@ In the Finder that corresponds to your home directory (the one with the home ico
 The canonical way to store software development projects is by creating a ~/Developer sub-directory.
 The Finder has a special "hammer" icon just for this sub-directory (that you can also add to the sidebar):
 
-<img src="Docs/26-Developer.png" width=25%>
+<p align="center"><img src="Docs/26-Developer.png" width=50%></p>
 
 So go ahead and create a “Developer” directory (if you haven’t done it already) in the Finder or in Terminal like so:
 
@@ -550,7 +550,7 @@ cd ~/Developer
 
 Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repository URL (by clicking on the double square icon highlighted in red):
 
-<img src="Docs/16-CopyRepoLink.png" width=80%>
+<p align="center"><img src="Docs/16-CopyRepoLink.png" width=100%></p>
 
 This is the URL that you should get from GitHub:
 
@@ -566,7 +566,7 @@ Then go back to the Terminal app in the `Developer` directory and enter `git clo
 git clone https://github.com/TheraForge/OTFMagicBox.git
 ```
 
-<img src="Docs/17-GitClone.png" width=80%>
+<p align="center"><img src="Docs/17-GitClone.png" width=80%></p>
 
 Then change the directory to the newly-created OTFMagicBox subdirectory:
 
@@ -578,7 +578,7 @@ cd OTFMagicBox
 
 Run the `ls` command in Terminal to see the files in the directory cloned from the GitHub repository.
 
-<img src="Docs/18-ListFiles.png" width=80%>
+<p align="center"><img src="Docs/18-ListFiles.png" width=80%></p>
 
 Note the file called `Podfile` in the list.
 
@@ -586,28 +586,28 @@ Note the file called `Podfile` in the list.
 
 Run the `pod install` command to install the SDK and its dependencies. After you run this command, you should see something similar to what is shown in the image below:
 
-<img src="Docs/19-PodInstall.png" width=80%>
+<p align="center"><img src="Docs/19-PodInstall.png" width=80%></p>
 
 ### 6. List the Files Again
 
 Now list the files again using `ls` command in Terminal. This time you'll see two extra files in the list as highlighted in the image:
 
-<img src="Docs/20-ListFiles.png" width=80%>
+<p align="center"><img src="Docs/20-ListFiles.png" width=80%></p>
 
 ### 7. Open the Project Workspace
 
 `OTFMagicBox.xcworkspace` is the Xcode workspace file you should use from now onwards.
 To open this workspace file in Xcode, you may either double click it in the Finder or open it using the `open OTFMagicBox.xcworkspace` command in Terminal:
 
-<img src="Docs/21-OpenWorkspace.png" width=80%>
+<p align="center"><img src="Docs/21-OpenWorkspace.png" width=80%></p>
 
 You can also launch Xcode first and open this file from the startup screen:
 
-![Alt text](Docs/23-Xcode-start.png)
+<p align="center"><img src="Docs/23-Xcode-start.png" width=80%></p>
 
 When this project opens in Xcode you should see something like this:
 
-<img src="Docs/22-XcodeWorkspace.png" width=80%>
+<p align="center"><img src="Docs/22-XcodeWorkspace.png" width=100%></p>
 
 ### 8. Compile & Run
 
@@ -650,13 +650,13 @@ You can modify the app's name by following the instructions given below.
 
 Go to the root of your project in Xcode (sidebar shown in the figure below).
 
-<img src="Docs/13-Project.png" width=25%>
+<p align="center"><img src="Docs/13-Project.png" width=35%></p>
 
 Click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “Bundle name”. Click on the Value column of that row and change the value to your application name, as shown in the figure below.
 
 Example: change $(PRODUCT_NAME) to “My Digital App”.  
 
-<img src="Docs/14-Bundle.png" width=65%>
+<p align="center"><img src="Docs/14-Bundle.png" width=80%></p>
 
 ## Modifying the App's Style
 
@@ -759,8 +759,12 @@ customStyle:
   # ...
 ```
 
-| ![Info Card](Docs/93-style-info-card.png)  | ![Button Log](Docs/94-style-buttonlog.png)  | ![Checklist](Docs/95-style-checklist.png)  |  ![Numeric Data](Docs/96-style-numeric.png) |
-|:-:|:-:|:-:|:-:|
+<p align="center">
+  <img src="Docs/93-style-info-card.png" width="24%" style="margin-right: 10px;" />
+  <img src="Docs/94-style-buttonlog.png" width="24%" style="margin-right: 10px;" />
+  <img src="Docs/95-style-checklist.png" width="24%" style="margin-right: 10px;" />
+  <img src="Docs/96-style-numeric.png" width="24%" />
+</p>
 
 ### Apply Style to New Views
 
@@ -811,7 +815,7 @@ struct ContentView: View {
 
 The following view would be generated:
 
-<img src="Docs/97-style-env-example.png" width=35%>
+<p align="center"><img src="Docs/97-style-env-example.png" width=45%></p>
 
 Note that attempting to access the current style through the Environment property is not possible outside of a View. To read the style values outside of a View, you can use the `appStyle` property of `YmlReader`:
 
@@ -855,9 +859,8 @@ designConfig:
     # ...
 ```
 
-| <p align="center"><img src="Docs/88-custom-font-demo.jpeg" width="280" /></p> |
-|:----------:|
-|   In this example, we used the `Kohinoor Telugu` font  |
+<p align="center"><img src="Docs/88-custom-font-demo.jpeg" width="35%" /></p>
+<p align="center">In this example, we used the <code>Kohinoor Telugu</code> font</p>
 
 **Custom Fonts**
 
@@ -867,7 +870,7 @@ If you want to use custom fonts in your application, follow these steps:
 2. Ensure your custom font includes both regular and bold variants (e.g., "CustomFont-Regular" and "CustomFont-Bold"). If your custom font file includes bold variants in a single file, it will automatically adapt to the user's Bold Text accessibility setting.
 3. Open your application's Info.plist file and add a new key called "Fonts provided by application." Add an item for each custom font file.
 
-<img src="Docs/87-custom-font.png" width="80%" />
+<p align="center"><img src="Docs/87-custom-font.png" width="100%" /></p>
 
 4. Specify the font name in the YAML configuration file:
 
@@ -952,7 +955,7 @@ Go to the Login section in the `ModuleAppSysParameter.yml` file and customize th
 
 If you want to use the *Sign up With Google* feature, then change the **showGoogleSignin** key to `true`. Then click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “GIDClientID” Click on the Value column of that row and change the value to your application which you get from the google developer portal. Find the "CFBundleURLSchemes" key in Info.plist file and add the URLSchemes in value you can also get this value from google developer portal. Also add the URLSchemes in URL Types as shown in the figure below.
 
-<img src="Docs/84-urlScheme.png" width=45%>
+<p align="center"><img src="Docs/84-urlScheme.png" width=60%></p>
 
 If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
 
@@ -1037,15 +1040,15 @@ Register your project in your Apple developer account by following [these steps]
 
 Register API key component:
 
-<img src="Docs/register-api-key.png" width=55%>
+<p align="center"><img src="Docs/register-api-key.png" width=80%></p>
 
 When API key is registered:
 
-<img src="Docs/api-key.png" width=55%>
+<p align="center"><img src="Docs/api-key.png" width=80%></p>
 
 Showing all API key details to admins:
 
-<img src="Docs/client-admin.png" width=55%>
+<p align="center"><img src="Docs/client-admin.png" width=80%></p>
 
 <br>
 
