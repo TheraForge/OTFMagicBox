@@ -135,6 +135,8 @@ These are its primary characteristics:
 * SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
 * CI/CD support via GitHub Actions.
 
+For a hands-on walkthrough to set up and configure your own version of MagicBox with no coding required, check out this guide:  
+**[Build a Health App in Under an Hour with No Code](https://www.hippocratestech.com/build-a-health-app-in-under-an-hour-with-no-code/)**
 
 # MagicBox Features
 
