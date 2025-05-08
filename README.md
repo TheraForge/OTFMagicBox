@@ -135,7 +135,7 @@ These are its primary characteristics:
 * SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
 * CI/CD support via GitHub Actions.
 
-For a hands-on walkthrough to set up and configure your own version of MagicBox with no coding required, check out this guide:  
+For a hands-on walkthrough on how to set up and configure your own version of MagicBox with no coding required, check out this article:  
 **[Build a Health App in Under an Hour with No Code](https://www.hippocratestech.com/build-a-health-app-in-under-an-hour-with-no-code/)**
 
 # MagicBox Features
@@ -1061,15 +1061,15 @@ Set up the Xcode application with your Apple developer account information as [d
 
 # MVVM (Model View ViewModel) Architecture <a name="Model View ViewModel Architecture"></a>
 
-Whenever we start building a new application, this question always comes in our mind, which architecture pattern to choose for our new project. The most used architectural pattern in iOS is MVC. Most of the developers used the MVC pattern for their projects. Small projects work well with MVC, but when your project size starts increases, it starts making your source code messy.
+Whenever starting to build a new application, this question always comes to mind: which architectural pattern to choose for a new project. The most used architectural pattern in iOS is MVC. Most of the developers used the MVC pattern for their projects. Small projects work well with MVC, but when your project size starts to increase, it can make clean coding more difficult.
 
-I always found the architecture pattern is good to use, but we should not strictly follow an architecture pattern in our project. Not every architecture pattern is good enough to give you everything, there are cons & pros of every architecture pattern. if we have a lot of modules in our project, we can decide the architecture pattern according to the module also. Some module suits well with MVVM, but maybe your new module will not work well with MVVM, so instead use another architecture pattern like MVP, VIPER. So we should not completely rely on a single architecture pattern, instead, we can check it according to the module also.
+Not every architectural pattern is good enough to give you everything, there are pros and cons in every architectural pattern.
 
-So, in OTFMagicBox we are using MVVM as it fulfills all our  requirements.
-MVVM is the industry-recognized software architecture pattern that overcomes all drawbacks of MVP and MVC design patterns.
-MVVM suggests separating the data presentation logic(Views or UI) from the core business logic part of the application. 
+In OTFMagicBox we use the MVVM (Model-View-ViewModel) design pattern as it fulfills all our requirements.
 
-## The separate code layers of MVVM
+MVVM is a design pattern that can be used with SwiftUI and that separates an app's UI (View) from its data (Model) and business logic (ViewModel). This separation makes the code more maintainable, testable, and scalable. 
+
+## The Separate Code Layers of MVVM
 
 ### 1. Model: 
 This layer is responsible for the abstraction of the data sources. Model and ViewModel work together to get and save the data.
@@ -1078,34 +1078,15 @@ This layer is responsible for the abstraction of the data sources. Model and Vie
 The purpose of this layer is to inform the ViewModel about the user’s action. This layer observes the ViewModel and does not contain any kind of application logic.
 
 ### 3. ViewModel:
- It exposes those data streams which are relevant to the View. Moreover, it serves as a link between the Model and the View.
+It exposes those data streams which are relevant to the View. Moreover, it serves as a link between the Model and the View.
  
- Some important role played by MVVM.
+Some important roles played in MVVM:
  
-* ViewModel does not hold any kind of reference to the View.
-* Many to-1 relationships exist between View and ViewModel.
-* No triggering methods to update the View.
+* The ViewModel does not hold any kind of reference to a View.
+* Many-to-1 relationships exist between Views and ViewModel.
+* No triggering methods to update a View.
 
-For better understanding of MVVM architecture view [This Article](https://www.toptal.com/ios/swift-tutorial-introduction-to-mvvm)
-
-## Ways to Implement MVVM in the Project
-
-Recommended ways to implement MVVM design pattern in iOS projects:
-
-* Using RxJava for DataBinding.
-* Using combine framework for DataBinding.
-
-# Combine Framework
-
-The Combine framework provides a declarative Swift API for processing values over time. These values can represent many kinds of asynchronous events. Combine declares publishers to expose values that can change over time, and subscribers to receive those values from the publishers.
-
-If you are using swiftUI than it is recommended to use combine framework.
-
-Here are some link to understand and learn how to use combine framework.
-
-The [Official Documentation](https://developer.apple.com/documentation/combine/receiving-and-handling-events-with-combine) to understand the combine.
-
-Also view [This Article](https://medium.com/apple-developer-academy-federico-ii/combine-and-swiftui-9888f7b111bf) for basic understanding of combine framework.
+For better understanding of the MVVM architecture see [This Article](https://www.toptal.com/ios/swift-tutorial-introduction-to-mvvm)
 
 
 # CI/CD Setup
