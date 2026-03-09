@@ -1,0 +1,147 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# App configuration
+# -----------------
+# This file controls app-wide UI text, tab icons, and feature flags.
+# You can safely change the text values without touching the app code.
+# Format:
+#   - Localized strings are grouped by key with language codes (e.g., 'en', 'pt').
+#   - You may add more languages by adding more codes (e.g., 'es', 'fr') with translations.
+#   - Keep the structure flat (no deep nesting) to make it easy to edit.
+#
+# IMPORTANT
+# - Do not remove required keys; if you don’t need a language, leave at least one (e.g., 'en').
+# - Values on the right of the colon are the visible text in the app.
+# - Lines starting with '#' are comments and are ignored by the app.
+
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+# Backend/API access key used by the app. The app will show an alert if this is missing/invalid.
+# Tip: Prefer storing secrets securely (e.g., via CI or environment configuration not committed to source control).
+apiKey: "<your-api-key>"
+
+# Website for your team/company.
+teamWebsite: "<your-web-site-url>"
+# Team contact email address.
+teamEmail: "<your-team-email>"
+# Team contact phone number.
+teamPhone: "<your-team-phone>"
+
+# TAB: Titles
+# Localized titles for each tab bar item.
+# Title for the Schedule tab.
+scheduleTitle:
+  en: "Schedule"
+  pt: "Agenda"
+  ar: "الجدول"
+
+# Title for the Contacts tab.
+contactsTitle:
+  en: "Contacts"
+  pt: "Contatos"
+  ar: "جهات الاتصال"
+
+# Title for the Check-Up tab.
+checkupTitle:
+  en: "Check-Up"
+  pt: "Exames"
+  ar: "الفحص"
+
+# Title for the UI Lab tab (component demos).
+uiTitle:
+  en: "UI Lab"
+  pt: "UI Lab"
+  ar: "مختبر واجهة المستخدم"
+
+# Title for the Profile tab.
+profileTitle:
+  en: "Profile"
+  pt: "Perfil"
+  ar: "الملف الشخصي"
+
+# Title for the Playground.
+playgroundTitle:
+  en: "Playground"
+  pt: "Playground"
+  ar: "ساحة التجربة"
+
+# TAB: SF Symbols
+# SF Symbol names used for each tab icon. See the SF Symbols app for available names.
+# Tip: 'useFilledSymbols' controls whether to use filled variants where available.
+# Icon for Schedule tab.
+scheduleSymbol: "calendar"
+# Icon for Contacts tab.
+contactsSymbol: "heart"
+# Icon for Check-Up tab.
+checkupSymbol: "checkmark.circle"
+# Icon for UI tab.
+uiSymbol: "uiwindow.split.2x1"
+# Icon for Profile tab.
+profileSymbol: "person"
+# Icon for Playground tab.
+playgroundSymbol: "apple.image.playground"
+
+# TAB: true => filled, false => outline
+# Global toggle for tab icon style; affects supported symbols.
+# true = filled variant, false = outline variant
+useFilledSymbols: false
+
+# Enable CareKit-related features and UI:
+# If the useCareKit value is false then the Schedule and Contacts screen will not be displayed.
+useCareKit: true
+# Feature flag: show/hide the Check-Up tab/screen.
+showCheckupScreen: true
+# Feature flag: show/hide the UI tab/screen.
+showUIScreen: true
+
+# Feature flag: show/hide the Privacy Policy and Terms of Service rows in the Legal section.
+showPrivacyAndTerms: true
+
+# Feature flag: show/hide the Consent Document in the Legal section.
+showConsentDocument: true
+
+#Feature flag: overrides the root of the app for playground only
+playgroundMode: false
+
+# Title for the alert shown when the API key is missing/invalid.
+alertTitle:
+  en: "API Key Missing"
+  pt: "Chave da API em Falta"
+  ar: "مفتاح API مفقود"
+  
+# Body text for the missing/invalid API key alert.
+alertMessage:
+  en: "Please set a valid API Key to use the app"
+  pt: "Por favor configure uma chave de API válida para utilizar o app"
+  ar: "يرجى تعيين مفتاح API صالح لاستخدام التطبيق"

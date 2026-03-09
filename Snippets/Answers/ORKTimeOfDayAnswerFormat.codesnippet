@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orktimeofdayanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let defaultComponents = DateComponents(hour: &lt;#9#&gt;, minute: &lt;#30#&gt;) // DateComponents?. Example: 9:30 AM. Default picker time.
+let timeOfDayAnswerFormat: ORKTimeOfDayAnswerFormat = ORKAnswerFormat.timeOfDayAnswerFormat(
+    withDefaultComponents: defaultComponents // DateComponents?. Example: defaultComponents. Nil uses current time.
+)!
+timeOfDayAnswerFormat.minuteInterval = &lt;#5#&gt; // Int. Example: 5. Minute step in the picker.
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+timeOfDayAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+timeOfDayAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return timeOfDayAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKTimeOfDayAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Time-of-day picker answer format with default components and minute step.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKTimeOfDayAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

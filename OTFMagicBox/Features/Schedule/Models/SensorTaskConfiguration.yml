@@ -1,0 +1,148 @@
+# Copyright (c) 2026, Hippocrates Technologies Sagl. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+#
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Sensor task card configuration
+version: "2.0.0"
+
+sentLabel:
+  en: "Heart rate sent"
+  pt: "Frequência cardíaca enviada"
+  ar: "تم إرسال معدل ضربات القلب"
+
+pendingLabel:
+  en: "Send your heart rate"
+  pt: "Envie sua frequência cardíaca"
+  ar: "أرسل معدل ضربات القلب"
+
+sentValueFormat:
+  en: "Sent %@"
+  pt: "Enviado %@"
+  ar: "تم الإرسال %@"
+
+sendResultLabel:
+  en: "Send Result"
+  pt: "Enviar resultado"
+  ar: "أرسل النتيجة"
+
+reviewLabel:
+  en: "Review"
+  pt: "Revisar"
+  ar: "مراجعة"
+
+mockSensorTaskTitle:
+  en: "Example Sensor task"
+  pt: "Exemplo de Tarefa de Sensor"
+  ar: "مثال لمهمة الاستشعار"
+
+# Task titles
+# These are used for CareKit tasks created from HealthKit metrics.
+taskTitleHeartRate:
+  en: "Send your Heart Rate"
+  pt: "Envie sua Frequência Cardíaca"
+  ar: "أرسل معدل ضربات القلب"
+
+taskTitleBloodGlucose:
+  en: "Send your Blood Glucose"
+  pt: "Envie sua Glicose no Sangue"
+  ar: "أرسل سكر الدم"
+
+taskTitleBloodPressure:
+  en: "Send your Blood Pressure"
+  pt: "Envie sua Pressão Arterial"
+  ar: "أرسل ضغط الدم"
+
+taskTitleECG:
+  en: "Send your ECG"
+  pt: "Envie seu ECG"
+  ar: "أرسل تخطيط القلب"
+
+taskTitleRespiratoryRate:
+  en: "Send your Respiratory Rate"
+  pt: "Envie sua Frequência Respiratória"
+  ar: "أرسل معدل التنفس"
+
+taskTitleRestingHeartRate:
+  en: "Send your Resting Heart Rate"
+  pt: "Envie sua Frequência Cardíaca em Repouso"
+  ar: "أرسل معدل ضربات القلب أثناء الراحة"
+
+taskTitleOxygenSaturation:
+  en: "Send your Oxygen Saturation"
+  pt: "Envie sua Saturação de Oxigênio"
+  ar: "أرسل تشبع الأكسجين"
+
+taskTitleVO2Max:
+  en: "Send your VO2 Max"
+  pt: "Envie seu VO2 Máx"
+  ar: "أرسل الحد الأقصى لاستهلاك الأكسجين"
+
+# Task instructions
+# These appear as the CareKit task instructions.
+taskInstructionsHeartRate:
+  en: "Tap to review and send your heart rate."
+  pt: "Toque para revisar e enviar sua frequência cardíaca."
+  ar: "اضغط لمراجعة وإرسال معدل ضربات القلب."
+
+taskInstructionsBloodGlucose:
+  en: "Tap to review and send your blood glucose."
+  pt: "Toque para revisar e enviar sua glicose no sangue."
+  ar: "اضغط لمراجعة وإرسال سكر الدم."
+
+taskInstructionsBloodPressure:
+  en: "Tap to review and send your blood pressure."
+  pt: "Toque para revisar e enviar sua pressão arterial."
+  ar: "اضغط لمراجعة وإرسال ضغط الدم."
+
+taskInstructionsECG:
+  en: "Tap to review and send your ECG."
+  pt: "Toque para revisar e enviar seu ECG."
+  ar: "اضغط لمراجعة وإرسال تخطيط القلب."
+
+taskInstructionsRespiratoryRate:
+  en: "Tap to review and send your respiratory rate."
+  pt: "Toque para revisar e enviar sua frequência respiratória."
+  ar: "اضغط لمراجعة وإرسال معدل التنفس."
+
+taskInstructionsRestingHeartRate:
+  en: "Tap to review and send your resting heart rate."
+  pt: "Toque para revisar e enviar sua frequência cardíaca em repouso."
+  ar: "اضغط لمراجعة وإرسال معدل ضربات القلب أثناء الراحة."
+
+taskInstructionsOxygenSaturation:
+  en: "Tap to review and send your oxygen saturation."
+  pt: "Toque para revisar e enviar sua saturação de oxigênio."
+  ar: "اضغط لمراجعة وإرسال تشبع الأكسجين."
+
+taskInstructionsVO2Max:
+  en: "Tap to review and send your VO2 max."
+  pt: "Toque para revisar e enviar seu VO2 máx."
+  ar: "اضغط لمراجعة وإرسال الحد الأقصى لاستهلاك الأكسجين."

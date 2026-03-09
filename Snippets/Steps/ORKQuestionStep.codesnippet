@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkquestionstep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// Configure the answer format first so you can tweak any answer-format-specific options.
+// You can use any AnswerFormat snippet to create the answer format as needed.
+let answerFormat: ORKAnswerFormat = &lt;#ORKBooleanAnswerFormat()#&gt; // ORKAnswerFormat. Example: ORKBooleanAnswerFormat() or ORKAnswerFormat.scale(...).
+// Show an "I Don't Know" button on supported formats (optional).
+answerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true. If true, shows an "I Don't Know" button where supported.
+// Override the "I Don't Know" button text (optional).
+answerFormat.customDontKnowButtonText = &lt;#"Not sure"#&gt; // String?. Example: "Not sure". Set a custom title.
+
+// Optional: Provide a Learn More flow to be shown from the question's header.
+let learnMoreStep = ORKLearnMoreInstructionStep(identifier: &lt;#"learnMoreStep"#&gt;) // String. Example: "learnMoreStep". Identifier for the learn-more instruction step.
+learnMoreStep.title = &lt;#"Learn more title"#&gt; // String?. Example: "Learn more title". Title shown on the learn-more step.
+learnMoreStep.text = &lt;#"Learn more description goes here."#&gt; // String?. Example: "Learn more description goes here.". Body text for the learn-more step.
+let learnMoreItem = ORKLearnMoreItem(text: &lt;#"Learn more"#&gt;, // String?. Example: "Learn more". Button title in the question header; nil shows an info button.
+                                     learnMoreInstructionStep: learnMoreStep)
+
+// Create the question step (use the convenience initializer that supports a Learn More item).
+let step = ORKQuestionStep(
+    identifier: &lt;#"questionStep"#&gt;, // String. Example: "questionStep". Unique step identifier used in results.
+    title: &lt;#"Question Title"#&gt;, // String?. Example: "Question Title". Primary title shown in the header.
+    question: &lt;#"What is your answer?"#&gt;, // String?. Example: "What is your answer?". The question prompt (distinct from title).
+    answer: answerFormat, // ORKAnswerFormat. Example: answerFormat. The answer format defined above.
+    learnMoreItem: &lt;#learnMoreItem#&gt; // ORKLearnMoreItem?. Example: learnMoreItem. Pass learnMoreItem or nil to omit.
+)
+
+// ORKQuestionStep-specific properties
+
+step.placeholder = &lt;#"Enter your answer"#&gt; // String?. Example: "Enter your answer". Placeholder shown before an answer is entered (text/numeric/location).
+step.useCardView = &lt;#true#&gt; // Bool. Example: true. Render the question inside a card-style container (defaults to true).
+step.tagText = &lt;#"Required"#&gt; // String?. Example: "Required". Optional tag/chip shown near the title (e.g., "Required", "Demo").
+step.learnMoreItem = &lt;#learnMoreItem#&gt; // ORKLearnMoreItem?. Example: learnMoreItem. You can set/override the Learn More item here as well.
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKQuestionStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Full ORKQuestionStep setup with all configurable properties.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKQuestionStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

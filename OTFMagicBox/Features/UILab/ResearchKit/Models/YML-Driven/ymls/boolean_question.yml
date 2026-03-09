@@ -1,0 +1,69 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# This YAML contains a single ResearchKit task definition exported for the UI lab.
+# Keep this file minimal: only a small comment header and the `version` + `task` payload.
+# - Do NOT remove the `version` key (used by our versioned loader)
+# - Keep the `task:` payload structure identical to the original combined file
+# - Strings should remain localized where present (e.g., `en`, `pt`)
+#
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+task:
+  orderedTask:
+    identifier: "booleanQuestionTask"
+    steps:
+      - question:
+          identifier: "booleanQuestionStep"
+          title:
+            en: "Boolean"
+            pt: "Booleano"
+            ar: "منطقي"
+          question:
+            en: "Your question goes here."
+            pt: "A sua pergunta vai aqui."
+            ar: "سؤالك يوضع هنا."
+          text:
+            en: "Additional text can go here."
+            pt: "Texto adicional pode ser colocado aqui."
+            ar: "نص إضافي يمكن وضعه هنا."
+          answer:
+            boolean:
+              yesString:
+                en: "Yes"
+                pt: "Sim"
+                ar: "نعم"
+              noString:
+                en: "No"
+                pt: "Não"
+                ar: "لا"

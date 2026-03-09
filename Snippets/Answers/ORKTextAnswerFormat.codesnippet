@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orktextanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+// Choose the initializer that matches your needs (validation regex, max length, or default).
+let textAnswerFormat: ORKTextAnswerFormat = ORKAnswerFormat.textAnswerFormat(withMaximumLength: &lt;#50#&gt;) // ORKTextAnswerFormat. Example: max length 50.
+// Alternate: ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: try? NSRegularExpression(pattern: "^[A-Z]{3}$"), invalidMessage: "Must be 3 uppercase letters")
+// Alternate: ORKAnswerFormat.textAnswerFormat()
+
+// Presentation toggles
+textAnswerFormat.multipleLines = &lt;#true#&gt; // Bool. Example: true. Allow multiline entry.
+textAnswerFormat.placeholder = &lt;#"Enter text"#&gt; // String?. Example: "Enter text". Shown when empty.
+textAnswerFormat.defaultTextAnswer = &lt;#"Pre-filled value"#&gt; // String?. Example: "Pre-filled value".
+textAnswerFormat.hideClearButton = &lt;#false#&gt; // Bool. Example: false. Hide the clear button.
+textAnswerFormat.hideCharacterCountLabel = &lt;#false#&gt; // Bool. Example: false. Hide the character counter.
+
+// Input traits
+textAnswerFormat.keyboardType = &lt;#.default#&gt; // UIKeyboardType. Example: .emailAddress.
+textAnswerFormat.autocapitalizationType = &lt;#.sentences#&gt; // UITextAutocapitalizationType. Example: .sentences.
+textAnswerFormat.autocorrectionType = &lt;#.default#&gt; // UITextAutocorrectionType. Example: .no.
+textAnswerFormat.spellCheckingType = &lt;#.default#&gt; // UITextSpellCheckingType. Example: .no.
+textAnswerFormat.textContentType = &lt;#nil#&gt; // UITextContentType?. Example: UITextContentType(rawValue: "username").
+
+// Security
+textAnswerFormat.isSecureTextEntry = &lt;#false#&gt; // Bool. Example: true. Mask input for passwords.
+textAnswerFormat.passwordRules = &lt;#UITextInputPasswordRules(descriptor: "minlength: 8; required: upper; required: digit;")#&gt; // UITextInputPasswordRules?. Example: password rules (iOS 12+).
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+textAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+textAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return textAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKTextAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Text entry answer format with validation, traits, and security options.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKTextAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

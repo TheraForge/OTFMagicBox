@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkdateanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let dateAnswerFormat = ORKAnswerFormat.dateAnswerFormat(
+    withDefaultDate: &lt;#Date()#&gt;, // Date?. Example: Date(). Preselect a date (nil uses the current date/time)
+    minimumDate: &lt;#Calendar.current.date(byAdding: .year, value: -120, to: Date())#&gt;, // Date?. Example: 120 years ago cutoff. Prevent dates earlier than a reasonable cutoff.
+    maximumDate: &lt;#Date()#&gt;, // Date?. Example: Date(). Prevent selecting a future date (use today for DOB).
+    calendar: &lt;#Calendar.current#&gt; // Calendar?. Example: Calendar.current. Use the user's locale-specific calendar unless a specific one is required.
+)
+
+// Minute granularity for the date picker when time is shown (1 is most precise; higher values make selection faster)
+dateAnswerFormat.minuteInterval = &lt;#5#&gt; // Int. Example: 5.
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot provide a date
+dateAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+
+// If you enable the opt-out button, customize and localize the label to match your app's voice
+dateAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+return dateAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKDateAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Date/time picker answer format with limits and optional opt-out.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKDateAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

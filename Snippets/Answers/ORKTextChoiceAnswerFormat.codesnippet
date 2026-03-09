@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orktextchoiceanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let choices: [ORKTextChoice] = [
+    ORKTextChoice(text: &lt;#"Yes"#&gt;, detailText: &lt;#"I agree"#&gt;, value: &lt;#"yes" as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;, exclusive: &lt;#false#&gt;), // ORKTextChoice. Example: "Yes"/"I agree", value "yes", not exclusive.
+    ORKTextChoice(text: &lt;#"No"#&gt;, detailText: &lt;#"I disagree"#&gt;, value: &lt;#"no" as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;, exclusive: &lt;#false#&gt;), // ORKTextChoice. Example: "No"/"I disagree", value "no".
+    ORKTextChoice(text: &lt;#"Prefer not to answer"#&gt;, detailText: &lt;#nil#&gt;, value: &lt;#"skip" as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;, exclusive: &lt;#true#&gt;) // ORKTextChoice. Example: opt-out exclusive choice.
+]
+
+let textChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(
+    with: &lt;#.singleChoice#&gt;, // ORKChoiceAnswerStyle. Example: .multipleChoice.
+    textChoices: choices // [ORKTextChoice]. Example: choices defined above.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot choose
+textChoiceAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+
+// If you enable the opt-out button, customize and localize the label to match your app's voice
+textChoiceAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return textChoiceAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKTextChoiceAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Single or multiple text choice answer format with opt-out support.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKTextChoiceAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

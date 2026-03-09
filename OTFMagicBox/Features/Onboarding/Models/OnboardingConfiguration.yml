@@ -1,0 +1,153 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Onboarding configuration
+# ------------------------
+# This file defines the content and styling for the onboarding flow.
+# You can safely change the text values and visual options without touching the app code.
+# Format:
+#   - Localized strings are grouped by key with language codes (e.g., 'en', 'pt').
+#   - You may add more languages by adding more codes (e.g., 'es', 'fr') with translations.
+#   - Keep the structure simple; each page is a flat dictionary of properties.
+#
+# IMPORTANT
+# - Do not remove required keys; if you don’t need a language, leave at least one (e.g., 'en').
+# - Values on the right of the colon are the visible text or styling in the app.
+# - Lines starting with '#' are comments and are ignored by the app.
+
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+# -------------------------------
+# Primary (left) action button
+# -------------------------------
+# Localized visible text for the PRIMARY button.
+primaryButtonTitle:
+  en: "Sign Up"
+  pt: "Criar conta"
+  ar: "إنشاء حساب"
+# Background color of the PRIMARY button (its filled shape).
+primaryButtonBackgroundColor: "label"
+# Title (text) color of the PRIMARY button.
+primaryButtonTitleColor: "systemBackground"
+
+# ---------------------------------
+# Secondary (right) action button
+# ---------------------------------
+# Localized visible text for the SECONDARY button.
+secondaryButtonTitle:
+  en: "Sign In"
+  pt: "Entrar"
+  ar: "تسجيل الدخول"
+# Background color of the SECONDARY button (its filled shape).
+secondaryButtonBackgroundColor: "blue"
+# Title (text) color of the SECONDARY button.
+secondaryButtonTitleColor: "white"
+
+# -------------------------------
+# Pages (shown in this order)
+# -------------------------------
+pages:
+  # PAGE 1
+  - # Solid background color for this page (animates between pages).
+    backgroundColor: "blue"
+
+    # Illustration asset name (no SF Symbols here; use your image assets).
+    illustration: "illustration_welcome"
+
+    # Localized title. Short, clear.
+    title:
+      en: "Welcome to MagicBox"
+      pt: "Bem-vindo ao MagicBox"
+      ar: "مرحبًا بك في MagicBox"
+
+    # Localized subtitle. Richer and more descriptive.
+    subtitle:
+      en: "Start with a calm, private space built for your daily health journey. No clutter, no noise—just clear guidance and visuals that make it easy to understand what matters most before you even log in."
+      pt: "Comece num espaço calmo e privado, pensado para o seu dia a dia de saúde. Sem distrações—apenas orientação clara e visuais que o ajudam a entender o que realmente importa antes mesmo de iniciar sessão."
+      ar: "ابدأ في مساحة هادئة وخاصة صُمِّمت لرحلتك الصحية اليومية. بلا فوضى ولا ضجيج—فقط إرشاد واضح ومرئيات تساعدك على فهم ما يهم حقًا قبل أن تسجّل الدخول."
+
+    # Optional per-page typography overrides (use defaults if unsure).
+    # 'largeTitle', 'title', 'headline', etc.
+    titleFont: "title"
+
+    # 'regular', 'medium', 'semibold', 'bold', etc.
+    titleFontWeight: "bold"
+
+    # 'systemBackground', 'label', 'blue', 'secondary', etc.
+    titleColor: "label"
+
+    subtitleFont: "body"
+    subtitleFontWeight: "regular"
+    subtitleColor: "label"
+
+  # PAGE 2
+  - backgroundColor: "cyan"
+    illustration: "illustration_vitals"
+    title:
+      en: "Vitals at a glance"
+      pt: "Vitais num relance"
+      ar: "العلامات الحيوية في لمحة"
+
+    subtitle:
+      en: "Keep an eye on heart rate, blood pressure, steps, weight, and mood—all in one place. Designed to surface trends gently, so you can notice what changes, ask better questions, and stay proactive with your care."
+      pt: "Acompanhe frequência cardíaca, pressão, passos, peso e humor—tudo num só lugar. Concebido para revelar tendências com suavidade, para notar o que muda, fazer melhores perguntas e manter um cuidado proativo."
+      ar: "راقب معدل ضربات القلب وضغط الدم والخطوات والوزن والمزاج—كل ذلك في مكان واحد. صُمِّم لإبراز الاتجاهات بلطف، لتلاحظ ما يتغير، وتطرح أسئلة أفضل، وتبقى استباقيًا في رعايتك."
+
+    titleFont: "title"
+    titleFontWeight: "bold"
+    titleColor: "label"
+
+    subtitleFont: "body"
+    subtitleFontWeight: "regular"
+    subtitleColor: "label"
+
+  # PAGE 3
+  - backgroundColor: "indigo"
+    illustration: "illustration_activities"
+    title:
+      en: "Stay on track"
+      pt: "Fique no rumo"
+      ar: "حافظ على المسار"
+
+    subtitle:
+      en: "Turn good intentions into simple habits. Track medications, learning, and everyday activities with gentle prompts and clear progress—no distractions, only momentum."
+      pt: "Transforme intenções em hábitos simples. Acompanhe medicações, conteúdos de aprendizagem e atividades diárias com lembretes suaves e progresso visível—sem distrações, apenas avanço."
+      ar: "حوِّل النوايا الحسنة إلى عادات بسيطة. تتبّع الأدوية والتعلم والأنشطة اليومية عبر تذكيرات لطيفة وتقدم واضح—بلا مشتتات، فقط زخم."
+
+    titleFont: "title"
+    titleFontWeight: "bold"
+    titleColor: "label"
+
+    subtitleFont: "body"
+    subtitleFontWeight: "regular"
+    subtitleColor: "label"

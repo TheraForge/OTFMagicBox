@@ -1,0 +1,92 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# This YAML contains a single ResearchKit task definition exported for the UI lab.
+# Keep this file minimal: only a small comment header and the `version` + `task` payload.
+# - Do NOT remove the `version` key (used by our versioned loader)
+# - Keep the `task:` payload structure identical to the original combined file
+# - Strings should remain localized where present (e.g., `en`, `pt`)
+#
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+task:
+  orderedTask:
+    identifier: "accountCreationTask"
+    steps:
+      - registration:
+          identifier: "registrationStep"
+          title:
+            en: "Registration"
+            pt: "Registo"
+            ar: "التسجيل"
+          text:
+            en: "Please enter your details to create an account."
+            pt: "Introduza os seus dados para criar uma conta."
+            ar: "يرجى إدخال بياناتك لإنشاء حساب."
+          passcodeValidationRegex: "^(?=.*\\d).{4,8}$"
+          passcodeInvalidMessage:
+            en: "A valid password must be 4 to 8 characters long and include at least one numeric character."
+            pt: "Uma palavra-passe válida deve ter entre 4 e 8 caracteres e incluir pelo menos um algarismo."
+            ar: "يجب أن تتراوح كلمة المرور الصالحة بين 4 إلى 8 أحرف وتتضمن حرفًا رقميًا واحدًا على الأقل."
+          phoneValidationRegex: "^[+]{1,1}[1]{1,1}\\s{1,1}[(]{1,1}[1-9]{3,3}[)]{1,1}\\s{1,1}[1-9]{3,3}\\s{1,1}[1-9]{4,4}$"
+          phoneInvalidMessage:
+            en: "Expected format +1 (555) 5555 5555"
+            pt: "Formato esperado +1 (555) 5555 5555"
+            ar: "التنسيق المتوقع +1 (555) 5555 5555"
+          options:
+            - "givenName"
+            - "familyName"
+            - "gender"
+            - "dob"
+            - "phoneNumber"
+      - wait:
+          identifier: "waitStep"
+          title:
+            en: "Creating account"
+            pt: "A criar conta"
+            ar: "جارٍ إنشاء الحساب"
+          text:
+            en: "Please wait while we upload your data"
+            pt: "Aguarde enquanto carregamos os seus dados"
+            ar: "يرجى الانتظار بينما نقوم برفع بياناتك"
+          indicator: progressBar
+      - verification:
+          identifier: "verificationStep"
+          title:
+            en: "Verify Your Email"
+            pt: "Verifique o seu e-mail"
+            ar: "تحقق من بريدك الإلكتروني"
+          text:
+            en: "We have sent a verification link to your email. Please follow the link to continue."
+            pt: "Enviámos um link de verificação para o seu e-mail. Siga o link para continuar."
+            ar: "لقد أرسلنا رابط تحقق إلى بريدك الإلكتروني. يرجى اتباع الرابط للمتابعة."

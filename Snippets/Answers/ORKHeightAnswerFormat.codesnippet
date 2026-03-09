@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkheightanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let heightAnswerFormat: ORKHeightAnswerFormat = ORKAnswerFormat.heightAnswerFormat(
+    with: &lt;#.metric#&gt; // ORKMeasurementSystem. Example: .metric or .usC.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+heightAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+heightAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return heightAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKHeightAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Height picker answer format using a chosen measurement system.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKHeightAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

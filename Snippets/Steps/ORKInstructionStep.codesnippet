@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkinstructionstep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let step = ORKInstructionStep(identifier: &lt;#T##"introStep"##String#&gt;) // Unique step identifier used in results.
+
+    // ORKStep common properties
+    step.isOptional = &lt;#T##false##Bool#&gt; // Whether the participant can skip (default true).
+    step.title = &lt;#T##"Welcome to the Study"##String?#&gt; // Primary title shown in the header.
+    step.text = &lt;#T##"We will guide you through a short setup."##String?#&gt; // Secondary text under the title.
+    step.detailText = &lt;#T##"You will answer a few questions and read about data privacy."##String?#&gt; // Additional detail text.
+
+    // Attributed detail text (overrides detailText)
+    let attributedDetail = NSMutableAttributedString(
+        string: &lt;#T##"Tap Continue to see the tasks ahead."##String#&gt;,
+        attributes: [
+            .font: &lt;#T##UIFont.preferredFont(forTextStyle: .body)##UIFont#&gt;,
+            .foregroundColor: &lt;#T##UIColor.label##UIColor#&gt;
+        ]
+    )
+    step.attributedDetailText = &lt;#T##attributedDetail##NSAttributedString?#&gt; // Set nil to fall back to detailText.
+
+    // Header/body alignment
+    step.headerTextAlignment = &lt;#T##.center##NSTextAlignment#&gt; // Alignment for title/text/detailText.
+    step.bodyItemTextAlignment = &lt;#T##.left##NSTextAlignment#&gt; // Alignment for body items.
+
+    // Footnote (below the continue button)
+    step.footnote = &lt;#T##"You can pause or leave any time."##String?#&gt;
+
+    // Top content images and icon
+    step.image = &lt;#T##UIImage(named: "welcome")##UIImage?#&gt; // Main image (aspect fit).
+    step.imageContentMode = &lt;#T##.scaleAspectFit##UIView.ContentMode#&gt;
+    step.auxiliaryImage = &lt;#T##UIImage(named: "badge")##UIImage?#&gt; // Optional overlay image.
+    step.iconImage = &lt;#T##UIImage(named: "appIcon")##UIImage?#&gt; // Small icon above the title.
+
+    // Progress and padding
+    step.showsProgress = &lt;#T##true##Bool#&gt; // Whether to show task progress for this step.
+    step.useExtendedPadding = &lt;#T##true##Bool#&gt; // Adds more outer padding for wide layouts.
+
+    // Learn More (optional)
+    let learnMoreStep = ORKLearnMoreInstructionStep(identifier: &lt;#T##"privacyInfo"##String#&gt;) // Identifier for the learn-more step.
+    learnMoreStep.title = &lt;#T##"Why we collect this"##String?#&gt; // Title shown on the learn-more step.
+    learnMoreStep.text = &lt;#T##"We only use anonymized and encrypted results."##String?#&gt; // Body text for the learn-more step.
+    let learnMoreItem = ORKLearnMoreItem(
+        text: &lt;#T##"Learn more"##String?#&gt;, // Button title; nil shows an info button.
+        learnMoreInstructionStep: learnMoreStep
+    )
+
+    let textItem = ORKBodyItem(
+        text: &lt;#T##"What you will do"##String#&gt;,
+        detailText: &lt;#T##"Complete a short survey and a 3-minute walk test."##String?#&gt;,
+        image: &lt;#T##UIImage(named: "task")##UIImage?#&gt;,
+        learnMoreItem: &lt;#T##nil##ORKLearnMoreItem?#&gt;, // e.g., learnMoreItem
+        bodyItemStyle: .text
+    )
+    textItem.useCardStyle = &lt;#T##true##Bool#&gt;
+    textItem.useSecondaryColor = &lt;#T##true##Bool#&gt;
+
+    // Assign body items and build-in behavior
+    step.bodyItems = &lt;#T##[textItem]##[ORKBodyItem]?#&gt; // Optional array of ORKBodyItem for structured body content.
+    step.buildInBodyItems = &lt;#T##true##Bool#&gt; // If true, reveals body items progressively on continue.
+
+    // ORKInstructionStep specific
+    step.centerImageVertically = &lt;#T##false##Bool#&gt; // Keep image near the top.
+
+    return step</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKInstructionStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKInstructionStep template.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKInstructionStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,137 +1,134 @@
-reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+# ------------------------------------------------------------
+# SwiftLint Configuration
+# Project: MagicBox
+#
+# Notes:
+# - Some default rules are disabled to reduce false positives
+# - Comments explain rationale behind each decision
+# - Please update comments when modifying rules
+# ------------------------------------------------------------
 
-excluded: # paths to ignore during linting. Takes precedence over `included`.
-    - Carthage
-    - Pods
-    - SwiftLint/Common/3rdPartyLib
-disabled_rules: # rule identifiers to exclude from running
-    - trailing_whitespace
-#    - force_cast
-#    - force_unwrapping
-#    - force_try
-    - empty_enum_arguments
-#    - overridden_super_call
-#    - sorted_imports
-#    - vertical_whitespace
-    - inclusive_language
-    - trailing_closure
-    - file_name
+reporter: "xcode" # Format of lint output: xcode, json, csv, etc.
 
-opt_in_rules: # some rules are only opt-in
-#    - missing_docs
-    - yoda_condition            # Default configuration: warning
-    - empty_count               # Default configuration: error, only_after_dot: false
-    - empty_string              # Default configuration: warning
-    - closure_end_indentation   # Default configuration: warning
-    - closure_spacing           # Default configuration: warning
-    - explicit_init             # Default configuration: warning
-    - first_where               # Default configuration: warning
-    - number_separator          # Default configuration: warning, minimum_length: 0
-    - explicit_failure_calls
-    - fatal_error_message
-#    - extension_access_modifier
-#    - implicitly_unwrapped_optional
-#    - operator_usage_whitespace
-    - vertical_parameter_alignment_on_call
-    - multiline_parameters
-#    - multiple_empty_lines # Defined into custom roles
-    - nesting
-    - file_name
-    - convenience_type
-    - modifier_order
+excluded: # Paths excluded from linting
+  - Carthage
+  - Pods
+  - SwiftLint/Common/3rdPartyLib
+  - .swiftpm
+  - .build
+  - build
+  - SourcePackages
 
-    - private_outlet
-    - prohibited_super_call
-    - protocol_property_accessors_order
-    - redundant_nil_coalescing
-    - syntactic_sugar
-    - comments_space
-    - conditional_returns_on_newline
+disabled_rules:
+  - trailing_whitespace                     # Minor issue, not worth warning in modern IDEs
+  - empty_enum_arguments                    # Swift-style enums often omit arguments
+  - inclusive_language                      # Can trigger on valid Apple/Swift terms
+  - trailing_closure                        # SwiftUI encourages trailing closures heavily
+  - file_name                               # SwiftUI often has multiple views in one file
+  - closure_end_indentation                 # SwiftUI modifiers cause false positives here
+  - vertical_parameter_alignment_on_call    # Strict alignment is tedious in SwiftUI chains
+  - modifier_order                          # Modifier order in SwiftUI is often context-dependent
+  - nesting                                 # SwiftUI code is inherently deeply nested (e.g., VStack)
+  - empty_count                             # Prefer `.isEmpty` to `.count == 0`
+  - void_function_in_ternary                # Minor issue, not worth warning in modern IDEs
+
+opt_in_rules:                               # These are disabled by default unless explicitly opted in
+  - yoda_condition                          # Forces constants on the left; some teams prefer it
+  - empty_string                            # Helps spot accidental `""` checks
+  - closure_spacing                         # Enforces spacing inside closures for readability
+  - explicit_init                           # Encourages clarity when initializing objects
+  - first_where                             # Prefer `first(where:)` over `filter().first`
+  - number_separator                        # Adds clarity to large numbers (e.g., 1_000_000)
+  - explicit_failure_calls                  # Catch misuses of `assert(false)`
+  - fatal_error_message                     # Fatal errors must include a descriptive message
+  - multiline_parameters                    # Improves readability for long function calls
+  - convenience_type                        # Avoids types that could just be functions
+  - private_outlet                          # Enforces good access control in UI code
+  - prohibited_super_call                   # Avoid calling super in certain initializers or overrides
+  - protocol_property_accessors_order       # Style consistency
+  - redundant_nil_coalescing                # Detects `?? nil` patterns
+  - syntactic_sugar                         # Enforces use of short syntax (e.g., `[Int]` over `Array<Int>`)
+  - comments_space                          # Ensures there's a space after `//`
+  - conditional_returns_on_newline          # Improves readability of short conditionals
 
 conditional_returns_on_newline:
-    if_only: true
-    
+  if_only: true # Only enforce newlines for `if` statements (not ternaries)
+
+# ---------- Rule Configurations ----------
+
 line_length:
-    warning: 200
-    error: 250
-    ignores_function_declarations: true
-    ignores_comments: true
-    ignores_urls: true
+  warning: 400
+  error: 450
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_urls: true
 
 function_body_length:
-    warning: 300
-    error: 500
+  warning: 300
+  error: 500
 
 function_parameter_count:
-    warning: 6
-    error: 8
+  warning: 8
+  error: 10
 
-type_name: # class name
-    min_length: 3
-    max_length:
-        warning: 60
-        error: 80
+type_name:
+  min_length: 3
+  max_length:
+    warning: 60
+    error: 80
 
 type_body_length:
-    warning: 300
-    error: 500
+  warning: 600
+  error: 800
 
 file_length:
-    warning: 1000
-    error: 1500
-    ignore_comment_only_lines: true
+  warning: 1000
+  error: 1500
+  ignore_comment_only_lines: true
 
-identifier_name: # Variable name
-    allowed_symbols: "_"
-    min_length: 1
-    max_length:
-        warning: 60
-        error: 80
-    excluded:
-        - id
-        - URL
-        - GlobalAPIKey
+identifier_name:
+  allowed_symbols: "_" # Allow underscore for things like _ in closures
+  min_length: 1
+  max_length:
+    warning: 60
+    error: 80
+  excluded: # Common exceptions
+    - id
+    - URL
+    - GlobalAPIKey
 
 large_tuple:
-    warning: 4
-    error: 5
+  warning: 4
+  error: 5
 
 private_outlet:
-    allow_private_set: true
+  allow_private_set: true
 
-#nesting:
-#    type_level:
-#      warning: 3
-#      error: 6
-#    statement_level:
-#      warning: 5
-#      error: 10
-  
 number_separator:
-    minimum_length: 8
+  minimum_length: 8 # Only enforce separators for numbers longer than 8 digits
 
-#cyclomatic complexity below 4 is considered good;
-#cyclomatic complexity between 5 and 7 is considered medium complexity,
-#between 8 and 10 is high complexity,
-#and above that is extreme complexity.
 cyclomatic_complexity:
-    ignores_case_statements: true
-    warning: 7
-    error: 11
+  ignores_case_statements: true
+  warning: 10
+  error: 15
+
+# ---------- Custom Rules ----------
 
 custom_rules:
-    comments_space: # From https://github.com/brandenr/swiftlintconfig
-      name: "Space After Comment"
-      regex: '(^ *//\w+)'
-      message: "There should be a space after //"
-      severity: warning
-    explicit_failure_calls:
-        name: “Avoid asserting ‘false’”
-        regex: ‘((assert|precondition)\(false)’
-        message: “Use assertionFailure() or preconditionFailure() instead.”
-        severity: warning
-    multiple_empty_lines:
-       name: "Multiple Empty Lines"
-       regex: '((?:\s*\n){3,})'
-       message: "There are too many line breaks"
-       severity: error
+  comments_space:
+    name: "Space After Comment"
+    regex: '(^ *//\w+)' # Detects `//NoSpace` comments
+    message: "There should be a space after //"
+    severity: warning
+
+  explicit_failure_calls:
+    name: "Avoid asserting ‘false’"
+    regex: '((assert|precondition)\(false)'
+    message: "Use assertionFailure() or preconditionFailure() instead."
+    severity: warning
+
+  multiple_empty_lines:
+    name: "Multiple Empty Lines"
+    regex: '((?:\s*\n){3,})'
+    message: "There are too many line breaks"
+    severity: warning

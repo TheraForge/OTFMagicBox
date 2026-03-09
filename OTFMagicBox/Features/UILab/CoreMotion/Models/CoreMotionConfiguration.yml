@@ -1,0 +1,319 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# CoreMotion configuration
+# ------------------------------
+# This file controls the UI text and a few visual preferences for the CoreMotion cards.
+# You can safely change the text values without touching the app code.
+#
+# FORMAT
+# - All strings are localized. Every text key contains language codes:
+#   'en' for English, 'pt' for Portuguese. You may add more languages (e.g., 'es', 'fr').
+# - Keep the structure flat (no deep nesting) to make it easy to edit.
+#
+# IMPORTANT
+# - Do not remove required keys; if you don’t need a language, keep at least one (e.g., 'en').
+# - Values on the right of the colon are the visible text in the app.
+# - Lines starting with '#' are comments and ignored by the app.
+#
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+# ========= Sampling / Timing =========
+# Accelerometer sampling rate (Hz) -> interval = 1/Hz
+accelerometerHz: 50
+# Gyroscope sampling rate (Hz)
+gyroscopeHz: 50
+# Device Motion sampling rate (Hz) for Balance
+deviceMotionHz: 50
+# Balance test duration (seconds)
+balanceDurationSeconds: 20
+# Balance UI refresh/timer step (seconds)
+balanceTimerStepSeconds: 0.025
+# Cadence UI refresh/timer step (seconds)
+cadenceTimerStepSeconds: 0.5
+
+# ========= GPS =========
+# Location accuracy: one of [best, bestForNavigation, tenMeters, hundredMeters, kilometer, threeKilometers]
+gpsDesiredAccuracy: "best"
+# Ignore small movements under this threshold (meters)
+gpsDistanceFilterMeters: 5
+
+# ========= Formatting (decimals) =========
+# Decimal places for accelerometer numbers (g)
+accelerometerDecimals: 2
+# Decimal places for gyroscope numbers (degrees/sec)
+gyroscopeDecimals: 0
+# Decimal places for GPS speed numbers
+speedDecimals: 1
+# Decimal places for altitude numbers
+altitudeDecimals: 0
+# Decimal places for distance numbers
+distanceDecimals: 0
+
+# ========= Units (simple conversion/labels) =========
+# Convert m/s to chosen speed unit using factor. km/h = 3.6, mph = 2.23694
+speedUnitFactorFromMps: 3.6
+speedUnitSymbol: "km/h"
+# Distance unit symbol when displaying GPS distance
+distanceUnitSymbol: "m"
+# Altitude unit symbol
+altitudeUnitSymbol: "m"
+
+# ========= Localized titles (fallbacks used when CareKit task has no title/instructions) =========
+titleSteps:
+  en: "Daily Steps"
+  pt: "Passos diários"
+  ar: "الخطوات اليومية"
+  
+instructionsSteps:
+  en: "Keep your iPhone with you to record steps, distance and floors."
+  pt: "Mantenha o seu iPhone consigo para registar passos, distância e andares."
+  ar: "احتفظ بجهاز iPhone معك لتسجيل الخطوات والمسافة والطوابق."
+  
+titleCadence:
+  en: "Walking Cadence"
+  pt: "Cadência ao caminhar"
+  ar: "وتيرة المشي"
+
+instructionsCadence:
+  en: "Walk naturally and we’ll average your steps per minute."
+  pt: "Caminhe naturalmente e calcularemos a média dos seus passos por minuto."
+  ar: "امشِ بشكل طبيعي وسنقوم بحساب متوسط خطواتك في الدقيقة."
+
+titleBalance:
+  en: "Balance (Stillness) Test"
+  pt: "Equilíbrio (Imobilidade)"
+  ar: "اختبار التوازن (الثبات)"
+
+instructionsBalance:
+  en: "Stand still for ~20s holding the phone at chest level."
+  pt: "Fique parado por ~20s segurando o telefone ao nível do peito."
+  ar: "قف ثابتًا لمدة 20 ثانية تقريبًا ممسكًا بالهاتف عند مستوى الصدر."
+
+titleAccelerometer:
+  en: "Accelerometer"
+  pt: "Acelerómetro"
+  ar: "مقياس التسارع"
+
+instructionsAccelerometer:
+  en: "Move the phone to see X/Y/Z and RMS."
+  pt: "Mova o telefone para ver X/Y/Z e RMS."
+  ar: "حرك الهاتف لرؤية X/Y/Z و RMS."
+
+titleGyroscope:
+  en: "Gyroscope"
+  pt: "Giroscópio"
+  ar: "الجيروسكوب"
+
+instructionsGyroscope:
+  en: "Rotate the phone to see angular velocity."
+  pt: "Rode o telefone para ver a velocidade angular."
+  ar: "قم بتدوير الهاتف لرؤية السرعة الزاوية."
+
+titleGPS:
+  en: "GPS (Location)"
+  pt: "GPS (Localização)"
+  ar: "GPS (الموقع)"
+
+instructionsGPS:
+  en: "Start walking to see speed and distance."
+  pt: "Comece a caminhar para ver a velocidade e a distância."
+  ar: "ابدأ المشي لرؤية السرعة والمسافة."
+
+# ========= Localized metric labels =========
+metricX:
+  en: "X"
+  pt: "X"
+  ar: "X"
+
+metricY:
+  en: "Y"
+  pt: "Y"
+  ar: "Y"
+
+metricZ:
+  en: "Z"
+  pt: "Z"
+  ar: "Z"
+
+metricRMS:
+  en: "RMS (g)"
+  pt: "RMS (g)"
+  ar: "RMS (g)"
+
+metricPeak:
+  en: "Peak (°/s)"
+  pt: "Pico (°/s)"
+  ar: "الذروة (°/ث)"
+
+metricSpeed:
+  en: "Speed"
+  pt: "Velocidade"
+  ar: "السرعة"
+
+metricAvgSpeed:
+  en: "Avg Speed"
+  pt: "Velocidade média"
+  ar: "متوسط السرعة"
+
+metricDistance:
+  en: "Distance"
+  pt: "Distância"
+  ar: "المسافة"
+
+metricAltitude:
+  en: "Altitude"
+  pt: "Altitude"
+  ar: "الارتفاع"
+
+metricCadence:
+  en: "Cadence"
+  pt: "Cadência"
+  ar: "الوتيرة"
+
+metricDuration:
+  en: "Duration"
+  pt: "Duração"
+  ar: "المدة"
+
+metricSteps:
+  en: "Steps"
+  pt: "Passos"
+  ar: "الخطوات"
+
+metricFloors:
+  en: "Floors"
+  pt: "Andares"
+  ar: "الطوابق"
+
+metricSway:
+  en: "Sway"
+  pt: "Oscilação"
+  ar: "التمايل"
+
+metricGrade:
+  en: "Grade"
+  pt: "Nota"
+  ar: "الدرجة"
+
+captionSway:
+  en: "Sway (lower is better)"
+  pt: "Oscilação (quanto menor melhor)"
+  ar: "التمايل (الأقل أفضل)"
+
+# ========= Localized button text =========
+buttonStart:
+  en: "Start"
+  pt: "Iniciar"
+  ar: "بدء"
+
+buttonStop:
+  en: "Stop"
+  pt: "Parar"
+  ar: "إيقاف"
+
+buttonStartWalk:
+  en: "Start Walk"
+  pt: "Iniciar Caminhada"
+  ar: "بدء المشي"
+
+buttonSave:
+  en: "Save Result"
+  pt: "Guardar Resultado"
+  ar: "حفظ النتيجة"
+
+buttonSaved:
+  en: "Saved"
+  pt: "Guardado"
+  ar: "تم الحفظ"
+
+buttonRefresh:
+  en: "Refresh"
+  pt: "Atualizar"
+  ar: "تحديث"
+
+buttonMarkComplete:
+  en: "Mark Complete"
+  pt: "Marcar Concluído"
+  ar: "وضع علامة مكتمل"
+
+buttonCompleted:
+  en: "Completed"
+  pt: "Concluído"
+  ar: "مكتمل"
+
+# ========= Availability & permission messages =========
+warnAccelerometerUnavailable:
+  en: "Accelerometer isn’t available on this device."
+  pt: "O acelerómetro não está disponível neste dispositivo."
+  ar: "مقياس التسارع غير متوفر على هذا الجهاز."
+
+warnGyroUnavailable:
+  en: "Gyroscope isn’t available on this device."
+  pt: "O giroscópio não está disponível neste dispositivo."
+  ar: "الجيروسكوب غير متوفر على هذا الجهاز."
+
+warnDeviceMotionUnavailable:
+  en: "Device motion isn’t available on this device."
+  pt: "Movimento do dispositivo não está disponível neste dispositivo."
+  ar: "حركة الجهاز غير متوفرة على هذا الجهاز."
+
+warnStepsUnavailable:
+  en: "Step counting isn’t available on this device."
+  pt: "Contagem de passos não está disponível neste dispositivo."
+  ar: "عدّ الخطوات غير متوفر على هذا الجهاز."
+
+warnCadenceUnavailable:
+  en: "Cadence isn’t available on this device."
+  pt: "Cadência não está disponível neste dispositivo."
+  ar: "الوتيرة غير متوفرة على هذا الجهاز."
+
+warnLocationServicesOff:
+  en: "Location Services are disabled."
+  pt: "Os Serviços de Localização estão desativados."
+  ar: "خدمات الموقع معطلة."
+
+warnLocationNotDetermined:
+  en: "Location permission not determined."
+  pt: "Permissão de localização não definida."
+  ar: "لم يتم تحديد إذن الموقع."
+
+warnLocationDenied:
+  en: "Location permission denied. Enable it in Settings."
+  pt: "Permissão de localização negada. Ative-a nas Definições."
+  ar: "تم رفض إذن الموقع. فعِّله من الإعدادات."
+
+warnLocationRestricted:
+  en: "Location access restricted."
+  pt: "Acesso à localização restrito."
+  ar: "الوصول إلى الموقع مقيّد."

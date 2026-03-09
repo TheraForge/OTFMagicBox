@@ -1,0 +1,561 @@
+# Copyright (c) 2026, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+version: "2.0.0"
+
+title:
+  en: "Health Sensors"
+  pt: "Health Sensors"
+  ar: "مستشعرات الصحة"
+
+menuSettings:
+  en: "Settings"
+  pt: "Ajustes"
+  ar: "الإعدادات"
+
+menuMockData:
+  en: "Mock Data"
+  pt: "Dados Simulados"
+  ar: "بيانات تجريبية"
+
+menuResetMockSeed:
+  en: "Reset Mock Seed"
+  pt: "Redefinir Semente de Simulação"
+  ar: "إعادة ضبط بذرة التجربة"
+
+statusNeedsPermission:
+  en: "Needs Permission"
+  pt: "Precisa de Permissão"
+  ar: "بحاجة إلى إذن"
+
+statusAccessDenied:
+  en: "Access Denied"
+  pt: "Acesso Negado"
+  ar: "تم رفض الوصول"
+
+statusNoData:
+  en: "No Data"
+  pt: "Sem Dados"
+  ar: "لا توجد بيانات"
+
+statusSampleBased:
+  en: "Sample-based"
+  pt: "Baseado em Amostras"
+  ar: "يعتمد على عينات"
+
+statusLive:
+  en: "Live"
+  pt: "Ao Vivo"
+  ar: "مباشر"
+
+statusMock:
+  en: "Mock"
+  pt: "Simulado"
+  ar: "تجريبي"
+
+statusError:
+  en: "Error"
+  pt: "Erro"
+  ar: "خطأ"
+
+labelLastUpdated:
+  en: "Last updated"
+  pt: "Última atualização"
+  ar: "آخر تحديث"
+
+labelDataSource:
+  en: "Source"
+  pt: "Fonte"
+  ar: "المصدر"
+
+labelHowToUpdate:
+  en: "How to update this data"
+  pt: "Como atualizar estes dados"
+  ar: "كيفية تحديث هذه البيانات"
+
+labelConnectivity:
+  en: "Watch Connection"
+  pt: "Conexão do Relógio"
+  ar: "اتصال الساعة"
+
+dataSourceHealth:
+  en: "Health"
+  pt: "Saúde"
+  ar: "الصحة"
+
+dataSourceWatchLive:
+  en: "Watch Live"
+  pt: "Relógio ao Vivo"
+  ar: "الساعة المباشرة"
+
+dataSourceMock:
+  en: "Mock"
+  pt: "Simulado"
+  ar: "تجريبي"
+
+labelHealthAccessGranted:
+  en: "Health access granted"
+  pt: "Acesso ao Health concedido"
+  ar: "تم منح الوصول إلى الصحة"
+
+labelHealthAccessRequired:
+  en: "Health access needed"
+  pt: "Acesso ao Health necessário"
+  ar: "يلزم الوصول إلى الصحة"
+
+buttonGrantAccess:
+  en: "Grant Health Access"
+  pt: "Conceder Acesso ao Health"
+  ar: "منح الوصول إلى الصحة"
+
+buttonOpenSettings:
+  en: "Open Settings"
+  pt: "Abrir Ajustes"
+  ar: "فتح الإعدادات"
+
+buttonOpenHealth:
+  en: "Open Health"
+  pt: "Abrir Health"
+  ar: "فتح تطبيق الصحة"
+
+buttonStartLiveMeasurement:
+  en: "Start Live Measurement on Watch"
+  pt: "Iniciar Medição ao Vivo no Relógio"
+  ar: "بدء القياس المباشر على الساعة"
+
+buttonSendOutcome:
+  en: "Send Outcome"
+  pt: "Enviar Resultado"
+  ar: "إرسال النتيجة"
+
+labelOutcomeFreshnessHint:
+  en: "Fresh measurement are always preferred. Make sure the measurement is at most 15 minutes old."
+  pt: "Medições recentes são sempre preferíveis. Certifique-se de que a medição tenha no máximo 15 minutos."
+  ar: "القياسات الحديثة مفضلة دائمًا. تأكد أن القياس لا يتجاوز 15 دقيقة."
+
+connectivityConnected:
+  en: "Connected"
+  pt: "Conectado"
+  ar: "متصل"
+
+connectivityDisconnected:
+  en: "Not Connected"
+  pt: "Não Conectado"
+  ar: "غير متصل"
+
+# Secondary Metric Labels
+labelAverage:
+  en: "Avg"
+  pt: "Média"
+  ar: "المتوسط"
+
+labelMin:
+  en: "Min"
+  pt: "Mín"
+  ar: "الأدنى"
+
+labelMax:
+  en: "Max"
+  pt: "Máx"
+  ar: "الأقصى"
+
+labelSystolic:
+  en: "Systolic"
+  pt: "Sistólica"
+  ar: "الانقباضي"
+
+labelDiastolic:
+  en: "Diastolic"
+  pt: "Diastólica"
+  ar: "الانبساطي"
+
+emptyStateTitle:
+  en: "No Data Available"
+  pt: "Nenhum Dado Disponível"
+  ar: "لا توجد بيانات"
+
+# Card Titles
+cardTitleHeartRate:
+  en: "Heart Rate"
+  pt: "Frequência Cardíaca"
+  ar: "معدل ضربات القلب"
+
+cardTitleBloodGlucose:
+  en: "Blood Glucose"
+  pt: "Glicose no Sangue"
+  ar: "سكر الدم"
+
+cardTitleBloodPressure:
+  en: "Blood Pressure"
+  pt: "Pressão Arterial"
+  ar: "ضغط الدم"
+
+cardTitleECG:
+  en: "Electrocardiogram"
+  pt: "Eletrocardiograma"
+  ar: "تخطيط القلب"
+
+cardTitleRespiratoryRate:
+  en: "Respiratory Rate"
+  pt: "Frequência Respiratória"
+  ar: "معدل التنفس"
+
+cardTitleRestingHeartRate:
+  en: "Resting Heart Rate"
+  pt: "Frequência Cardíaca em Repouso"
+  ar: "معدل ضربات القلب أثناء الراحة"
+
+cardTitleOxygenSaturation:
+  en: "Oxygen Saturation"
+  pt: "Saturação de Oxigênio"
+  ar: "تشبع الأكسجين"
+
+cardTitleVO2Max:
+  en: "VO₂ Max"
+  pt: "VO₂ Máx"
+  ar: "الحد الأقصى لاستهلاك الأكسجين"
+
+# Card Symbols
+symbolHeartRate:
+  en: "heart.fill"
+  pt: "heart.fill"
+  ar: "heart.fill"
+
+symbolBloodGlucose:
+  en: "drop.fill"
+  pt: "drop.fill"
+  ar: "drop.fill"
+
+symbolBloodPressure:
+  en: "waveform.path.ecg"
+  pt: "waveform.path.ecg"
+  ar: "waveform.path.ecg"
+
+symbolECG:
+  en: "heart.text.square.fill"
+  pt: "heart.text.square.fill"
+  ar: "heart.text.square.fill"
+
+symbolRespiratoryRate:
+  en: "lungs.fill"
+  pt: "lungs.fill"
+  ar: "lungs.fill"
+
+symbolRestingHeartRate:
+  en: "heart.fill"
+  pt: "heart.fill"
+  ar: "heart.fill"
+
+symbolOxygenSaturation:
+  en: "o.circle.fill"
+  pt: "o.circle.fill"
+  ar: "o.circle.fill"
+
+symbolVO2Max:
+  en: "figure.run"
+  pt: "figure.run"
+  ar: "figure.run"
+
+# Card Subtitles
+cardSubtitleHeartRate:
+  en: "Beats per minute"
+  pt: "Batimentos por minuto"
+  ar: "نبضة في الدقيقة"
+
+cardSubtitleBloodGlucose:
+  en: "Sugar in blood"
+  pt: "Açúcar no sangue"
+  ar: "السكر في الدم"
+
+cardSubtitleBloodPressure:
+  en: "Systolic & Diastolic"
+  pt: "Sistólica e Diastólica"
+  ar: "الانقباضي والانبساطي"
+
+cardSubtitleECG:
+  en: "Electrical heart activity"
+  pt: "Atividade elétrica do coração"
+  ar: "النشاط الكهربائي للقلب"
+
+cardSubtitleRespiratoryRate:
+  en: "Breaths per minute"
+  pt: "Respirações por minuto"
+  ar: "نفس في الدقيقة"
+
+cardSubtitleRestingHeartRate:
+  en: "Resting beats per minute"
+  pt: "Batimentos em repouso por minuto"
+  ar: "نبضات الراحة في الدقيقة"
+
+cardSubtitleOxygenSaturation:
+  en: "Oxygen level in blood"
+  pt: "Nível de oxigênio no sangue"
+  ar: "مستوى الأكسجين في الدم"
+
+cardSubtitleVO2Max:
+  en: "Max oxygen consumption"
+  pt: "Consumo máximo de oxigênio"
+  ar: "الحد الأقصى لاستهلاك الأكسجين"
+
+# Units
+unitBPM:
+  en: "BPM"
+  pt: "BPM"
+  ar: "نبضة/د"
+
+unitMgDL:
+  en: "mg/dL"
+  pt: "mg/dL"
+  ar: "مغ/دل"
+
+unitMmHg:
+  en: "mmHg"
+  pt: "mmHg"
+  ar: "ملم زئبق"
+
+unitRecords:
+  en: "Records"
+  pt: "Registros"
+  ar: "سجلات"
+
+unitBreathsPerMin:
+  en: "br/min"
+  pt: "resp/min"
+  ar: "نفس/د"
+
+unitPercent:
+  en: "%"
+  pt: "%"
+  ar: "%"
+
+unitVO2Max:
+  en: "mL/(kg·min)"
+  pt: "mL/(kg·min)"
+  ar: "مل/(كغ·د)"
+
+# ECG Classification Labels
+ecgClassificationDefault:
+  en: "ECG"
+  pt: "ECG"
+  ar: "تخطيط القلب"
+
+ecgClassificationSinusRhythm:
+  en: "Sinus Rhythm"
+  pt: "Ritmo Sinusal"
+  ar: "نظم جيبي"
+
+ecgClassificationAtrialFibrillation:
+  en: "Atrial Fibrillation"
+  pt: "Fibrilação Atrial"
+  ar: "رجفان أذيني"
+
+ecgClassificationLowHeartRate:
+  en: "Low Heart Rate"
+  pt: "Frequência Cardíaca Baixa"
+  ar: "معدل قلب منخفض"
+
+ecgClassificationHighHeartRate:
+  en: "High Heart Rate"
+  pt: "Frequência Cardíaca Alta"
+  ar: "معدل قلب مرتفع"
+
+ecgClassificationInconclusive:
+  en: "Inconclusive"
+  pt: "Inconclusivo"
+  ar: "غير حاسم"
+
+ecgClassificationUnrecognized:
+  en: "Unrecognized"
+  pt: "Não Reconhecido"
+  ar: "غير معروف"
+
+# Empty State Messages
+emptyMessageHeartRate:
+  en: "No heart rate data found in HealthKit."
+  pt: "Nenhum dado de frequência cardíaca encontrado no HealthKit."
+  ar: "لم يتم العثور على بيانات معدل ضربات القلب في HealthKit."
+
+emptyMessageBloodGlucose:
+  en: "No blood glucose data found in HealthKit."
+  pt: "Nenhum dado de glicose no sangue encontrado no HealthKit."
+  ar: "لم يتم العثور على بيانات سكر الدم في HealthKit."
+
+emptyMessageBloodPressure:
+  en: "No blood pressure data found in HealthKit."
+  pt: "Nenhum dado de pressão arterial encontrado no HealthKit."
+  ar: "لم يتم العثور على بيانات ضغط الدم في HealthKit."
+
+emptyMessageECG:
+  en: "No ECG records found on this device."
+  pt: "Nenhum registro de ECG encontrado neste dispositivo."
+  ar: "لم يتم العثور على سجلات تخطيط القلب في هذا الجهاز."
+
+emptyMessageRespiratoryRate:
+  en: "No respiratory rate data found."
+  pt: "Nenhum dado de frequência respiratória encontrado."
+  ar: "لم يتم العثور على بيانات معدل التنفس."
+
+emptyMessageRestingHeartRate:
+  en: "No resting heart rate data found."
+  pt: "Nenhum dado de frequência cardíaca em repouso encontrado."
+  ar: "لم يتم العثور على بيانات معدل ضربات القلب أثناء الراحة."
+
+emptyMessageOxygenSaturation:
+  en: "No oxygen saturation data found."
+  pt: "Nenhum dado de saturação de oxigênio encontrado."
+  ar: "لم يتم العثور على بيانات تشبع الأكسجين."
+
+emptyMessageVO2Max:
+  en: "No VO₂ Max data found."
+  pt: "Nenhum dado de VO₂ Máx encontrado."
+  ar: "لم يتم العثور على بيانات الحد الأقصى لاستهلاك الأكسجين."
+
+# Guidance Steps
+guidanceHeartRateStep1:
+  en: "Make sure your Apple Watch is paired and unlocked."
+  pt: "Certifique-se de que seu Apple Watch esteja emparelhado e desbloqueado."
+  ar: "تأكد من اقتران Apple Watch وإلغاء قفلها."
+
+guidanceHeartRateStep2:
+  en: "Open the Heart Rate app on your Apple Watch."
+  pt: "Abra o app Batimentos no seu Apple Watch."
+  ar: "افتح تطبيق 'معدل ضربات القلب' على Apple Watch."
+
+guidanceHeartRateStep3:
+  en: "Wait for a measurement to complete."
+  pt: "Aguarde a conclusão da medição."
+  ar: "انتزر حتى يكتمل القياس."
+
+guidanceBloodGlucoseStep1:
+  en: "Data is typically added by a connected CGM or manual entry."
+  pt: "Dados geralmente são adicionados por um CGM conectado ou entrada manual."
+  ar: "تتم إضافة البيانات عادةً بواسطة جهاز مراقبة السكر المتصل أو الإدخال اليدوي."
+
+guidanceBloodGlucoseStep2:
+  en: "Open the Health app to manually add a data point."
+  pt: "Abra o app Saúde para adicionar um ponto de dados manualmente."
+  ar: "افتح تطبيق 'صحتي' لإضافة نقطة بيانات يدويًا."
+
+guidanceBloodGlucoseStep3:
+  en: "Or sync with your glucose monitoring device."
+  pt: "Ou sincronize com seu dispositivo de monitoramento de glicose."
+  ar: "أو قم بالمزامنة مع جهاز مراقبة الجلوكوز الخاص بك."
+
+guidanceBloodPressureStep1:
+  en: "Use a connected blood pressure cuff."
+  pt: "Use um medidor de pressão arterial conectado."
+  ar: "استخدم جهاز قياس ضغط الدم المتصل."
+
+guidanceBloodPressureStep2:
+  en: "Or manually enter a reading in the Health app."
+  pt: "Ou insira manualmente uma leitura no app Saúde."
+  ar: "أو أدخل قراءة يدويًا في تطبيق 'صحتي'."
+
+guidanceBloodPressureStep3:
+  en: "Ensure both Systolic and Diastolic values are recorded."
+  pt: "Certifique-se de que os valores Sistólico e Diastólico sejam registrados."
+  ar: "تأكد من تسجيل القيمتين الانقباضية والانبساطية."
+
+guidanceECGStep1:
+  en: "Open the ECG app on your Apple Watch."
+  pt: "Abra o app ECG no seu Apple Watch."
+  ar: "افتح تطبيق تخطيط القلب على Apple Watch."
+
+guidanceECGStep2:
+  en: "Hold your finger on the Digital Crown."
+  pt: "Mantenha o dedo na Digital Crown."
+  ar: "ضع إصبعك على التاج الرقمي."
+
+guidanceECGStep3:
+  en: "Wait 30 seconds for the recording to finish."
+  pt: "Aguarde 30 segundos para a gravação terminar."
+  ar: "انتظر 30 ثانية حتى ينتهي التسجيل."
+
+guidanceRespiratoryRateStep1:
+  en: "Wear your Apple Watch during sleep."
+  pt: "Use seu Apple Watch durante o sono."
+  ar: "ارتدِ Apple Watch أثناء النوم."
+
+guidanceRespiratoryRateStep2:
+  en: "Or use a supported third-party device."
+  pt: "Ou use um dispositivo de terceiro compatível."
+  ar: "أو استخدم جهازًا مدعومًا من جهة خارجية."
+
+guidanceRespiratoryRateStep3:
+  en: "Check 'Respiratory Rate' in the Health app."
+  pt: "Verifique 'Frequência Respiratória' no app Saúde."
+  ar: "تحقق من 'معدل التنفس' في تطبيق 'صحتي'."
+
+guidanceRestingHeartRateStep1:
+  en: "Wear your Apple Watch consistently."
+  pt: "Use seu Apple Watch consistentemente."
+  ar: "ارتدِ Apple Watch باستمرار."
+
+guidanceRestingHeartRateStep2:
+  en: "Resting heart rate is calculated when you differ from active states."
+  pt: "A frequência cardíaca em repouso é calculada quando você não está ativo."
+  ar: "يتم حساب معدل ضربات القلب أثناء الراحة عندما تكون في حالة سكون."
+
+guidanceRestingHeartRateStep3:
+  en: "Check 'Resting Heart Rate' in the Health app."
+  pt: "Verifique 'Freq. Cardíaca em Repouso' no app Saúde."
+  ar: "تحقق من 'معدل ضربات القلب أثناء الراحة' في تطبيق 'صحتي'."
+
+guidanceOxygenSaturationStep1:
+  en: "Open the Blood Oxygen app on your Apple Watch."
+  pt: "Abra o app Oxigênio no Sangue no Apple Watch."
+  ar: "افتح تطبيق أكسجين الدم على Apple Watch."
+
+guidanceOxygenSaturationStep2:
+  en: "Keep your wrist still during the 15-second measurement."
+  pt: "Mantenha o pulso imóvel durante a medição de 15 segundos."
+  ar: "أبقِ معصمك ثابتًا أثناء القياس لمدة 15 ثانية."
+
+guidanceOxygenSaturationStep3:
+  en: "Ensure the band is snug but comfortable."
+  pt: "Garanta que a pulseira esteja justa, mas confortável."
+  ar: "تأكد من أن السوار محكم ولكنه مريح."
+
+guidanceVO2MaxStep1:
+  en: "Record an Outdoor Walk, Run, or Hiking workout."
+  pt: "Registre um treino de Caminhada, Corrida ou Trilha ao Ar Livre."
+  ar: "سجّل تمرينًا للمشي أو الجري أو التنزه في الخارج."
+
+guidanceVO2MaxStep2:
+  en: "Sustain efforts for at least 20 minutes."
+  pt: "Mantenha o esforço por pelo menos 20 minutos."
+  ar: "حافظ على الجهد لمدة 20 دقيقة على الأقل."
+
+guidanceVO2MaxStep3:
+  en: "Check 'Cardio Fitness' in the Health app."
+  pt: "Verifique 'Aptidão Cardiorrespiratória' no app Saúde."
+  ar: "تحقق من 'لياقة القلب والأوعية الدموية' في تطبيق 'صحتي'."

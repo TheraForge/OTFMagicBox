@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkdecimalanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let decimalAnswerFormat: ORKNumericAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(
+    withUnit: &lt;#"kg"#&gt; // String?. Example: "kg". Unit label shown next to the value.
+)
+decimalAnswerFormat.minimum = &lt;#0#&gt; // NSNumber?. Example: 0. Minimum allowed value.
+decimalAnswerFormat.maximum = &lt;#100#&gt; // NSNumber?. Example: 100. Maximum allowed value.
+decimalAnswerFormat.maximumFractionDigits = &lt;#2#&gt; // NSNumber?. Example: 2. Max decimal places.
+decimalAnswerFormat.defaultNumericAnswer = &lt;#NSNumber(value: 50)#&gt; // NSNumber?. Example: 50.
+decimalAnswerFormat.hideUnitWhenAnswerIsEmpty = &lt;#true#&gt; // Bool. Example: true. Hide unit when empty.
+decimalAnswerFormat.placeholder = &lt;#"Enter value"#&gt; // String?. Example: "Enter value".
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+decimalAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+decimalAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return decimalAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKDecimalAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Decimal numeric entry with unit, bounds, and default.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKDecimalAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

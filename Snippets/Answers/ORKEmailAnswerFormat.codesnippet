@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkemailanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let emailAnswerFormat: ORKEmailAnswerFormat = ORKAnswerFormat.emailAnswerFormat() // ORKEmailAnswerFormat. Example: ORKAnswerFormat.emailAnswerFormat().
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+emailAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+emailAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return emailAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKEmailAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Email entry answer format with optional opt-out.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKEmailAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkscaleanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let scaleAnswerFormat = ORKAnswerFormat.scale(
+    withMaximumValue: &lt;#10#&gt;, // Int. Example: 10. Maximum value on the scale.
+    minimumValue: &lt;#1#&gt;, // Int. Example: 1. Minimum value on the scale.
+    defaultValue: &lt;#5#&gt;, // Int. Example: 5. Preselected value (use Int.max for none).
+    step: &lt;#1#&gt;, // Int. Example: 1. Increment step between values.
+    vertical: &lt;#false#&gt;, // Bool. Example: true. Render vertically instead of horizontally.
+    maximumValueDescription: &lt;#"High Value"#&gt;, // String?. Example: "High Value". Label for the max end.
+    minimumValueDescription: &lt;#"Low Value"#&gt; // String?. Example: "Low Value". Label for the min end.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot choose.
+scaleAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+scaleAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return scaleAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKScaleAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Discrete scale slider with min/max labels and step.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKScaleAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

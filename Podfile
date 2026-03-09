@@ -1,21 +1,25 @@
 # Uncomment the next line to define a global platform for your project
 source 'https://cdn.cocoapods.org'
-source 'https://github.com/TheraForge/OTFCocoapodSpecs'
+source 'https://github.com/theraforge/OTFCocoapodSpecs'
 
 use_frameworks!
 
 target 'OTFMagicBox' do
-  platform :ios, '14.6'
+  inhibit_all_warnings!
+
+  platform :ios, '16.4'
   
-  pod 'OTFToolBox/CareHealth', '1.0.5-beta'
+  pod 'OTFToolBox/CareHealth', '2.0.0'
   pod 'GoogleSignIn', '~> 7.0.0'
 end
 
 target 'OTFMagicBoxWatch' do
-  platform :watchos, '8.0'
+  inhibit_all_warnings!
   
-  pod 'OTFCloudantStore/CloudantCareHealth', '1.0.5-beta'
-  pod 'OTFCareKit/CareHealth', '2.0.2-beta.5'
+  platform :watchos, '9.0'
+  
+  pod 'OTFCloudantStore/CloudantCareHealth', '2.0.0'
+  pod 'OTFCareKit/CareHealth', '2.0.2-tf.2'
 end
 
 
@@ -23,8 +27,8 @@ post_install do |installer|
   installer.generated_projects.each do |project|
     project.targets.each do |target|
       target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
-        config.build_settings['WATCHOS_DEPLOYMENT_TARGET'] = '8.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.4'
+        config.build_settings['WATCHOS_DEPLOYMENT_TARGET'] = '9.0'
       end
     end
   end

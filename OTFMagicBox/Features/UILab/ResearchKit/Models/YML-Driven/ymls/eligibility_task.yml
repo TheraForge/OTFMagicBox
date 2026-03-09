@@ -1,0 +1,130 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# This YAML contains a single ResearchKit task definition exported for the UI lab.
+# Keep this file minimal: only a small comment header and the `version` + `task` payload.
+# - Do NOT remove the `version` key (used by our versioned loader)
+# - Keep the `task:` payload structure identical to the original combined file
+# - Strings should remain localized where present (e.g., `en`, `pt`)
+#
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+task:
+  navigableOrderedTask:
+    identifier: "eligibilityTask"
+    steps:
+      - instruction:
+          identifier: "eligibilityIntroStep"
+          title:
+            en: "Eligibility Task"
+            pt: "Tarefa de Elegibilidade"
+          text:
+            en: "Please use this space to provide instructions for participants."
+            pt: "Utilize este espaço para fornecer instruções aos participantes."
+          detailText:
+            en: "Please make sure to provide enough information so that users can progress through the survey and complete with ease."
+            pt: "Certifique-se de fornecer informação suficiente para que os utilizadores possam avançar no inquérito e concluí-lo com facilidade."
+      - form:
+          identifier: "eligibilityFormStep"
+          title:
+            en: "Eligibility"
+            pt: "Elegibilidade"
+          text:
+            en: "Eligibility"
+            pt: "Elegibilidade"
+          optional: false
+          items:
+            - identifier: "eligibilityFormItem01"
+              text:
+                en: "Your question goes here."
+                pt: "A sua pergunta vai aqui."
+              optional: false
+              answer:
+                textChoiceAnswer:
+                  style: "single"
+                  textChoices:
+                    - en: "Yes"
+                      pt: "Sim"
+                    - en: "No"
+                      pt: "Não"
+                    - en: "N/A"
+                      pt: "N/A"
+            - identifier: "eligibilityFormItem02"
+              text:
+                en: "Your question goes here."
+                pt: "A sua pergunta vai aqui."
+              optional: false
+              answer:
+                textChoiceAnswer:
+                  style: "single"
+                  textChoices:
+                    - en: "Yes"
+                      pt: "Sim"
+                    - en: "No"
+                      pt: "Não"
+                    - en: "N/A"
+                      pt: "N/A"
+            - identifier: "eligibilityFormItem03"
+              text:
+                en: "Your question goes here."
+                pt: "A sua pergunta vai aqui."
+              optional: false
+              answer:
+                textChoiceAnswer:
+                  style: "single"
+                  textChoices:
+                    - en: "Yes"
+                      pt: "Sim"
+                    - en: "No"
+                      pt: "Não"
+                    - en: "N/A"
+                      pt: "N/A"
+      - instruction:
+          identifier: "eligibilityIneligibleStep"
+          title:
+            en: "Eligibility Result"
+            pt: "Resultado de Elegibilidade"
+          text:
+            en: "Eligibility Result"
+            pt: "Resultado de Elegibilidade"
+          detailText:
+            en: "You are ineligible to join the study"
+            pt: "Não é elegível para participar no estudo"
+      - completion:
+          identifier: "eligibilityEligibleStep"
+          title:
+            en: "Eligibility Result"
+            pt: "Resultado de Elegibilidade"
+          detailText:
+            en: "You are eligible to join the study"
+            pt: "É elegível para participar no estudo"

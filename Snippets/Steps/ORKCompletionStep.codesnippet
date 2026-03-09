@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkcompletionstep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let step = ORKCompletionStep(identifier: &lt;#"completionStep"#&gt;) // String. Example: "completionStep". Unique step identifier used in results.
+step.title = &lt;#"Thank You!"#&gt; // String?. Example: "Thank You!". Primary title shown in the header.
+step.text = &lt;#"You have finished the task."#&gt; // String?. Example: "You have finished the task.". Secondary text under the title.
+step.detailText = &lt;#"We appreciate your participation."#&gt; // String?. Example: "We appreciate your participation.". Additional text for more detail.
+step.attributedDetailText = &lt;#NSAttributedString(string: "Rich detail text")#&gt; // NSAttributedString?. Example: NSAttributedString(...). Overrides detailText when set.
+step.centerImageVertically = &lt;#true#&gt; // Bool. Example: true. Center the image vertically on screen.
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKCompletionStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKCompletionStep for thank-you screens.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKCompletionStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

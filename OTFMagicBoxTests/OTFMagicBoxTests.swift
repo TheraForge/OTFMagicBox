@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
+ Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -55,5 +55,4 @@ class OTFMagicBoxTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }
