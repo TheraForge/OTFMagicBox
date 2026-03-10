@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkformstep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// Configure form items and their answer formats first.
+let ageAnswerFormat: ORKAnswerFormat = &lt;#ORKAnswerFormat.integerAnswerFormat(withUnit: "years")#&gt; // ORKAnswerFormat. Example: ORKAnswerFormat.integerAnswerFormat(withUnit: "years").
+let formItem = ORKFormItem(identifier: &lt;#"ageIdentifier"#&gt;, text: &lt;#"What is your age?"#&gt;, answerFormat: ageAnswerFormat) // ORKFormItem. Example: identifier "ageIdentifier".
+formItem.isOptional = &lt;#false#&gt; // Bool. Example: false. Require this item before continue is enabled.
+formItem.placeholder = &lt;#"e.g., 29"#&gt; // String?. Example: "e.g., 29". Placeholder shown in text fields.
+formItem.detailText = &lt;#"Optional detail shown under the prompt."#&gt; // String?. Example: "Optional detail shown under the prompt.".
+formItem.learnMoreItem = &lt;#ORKLearnMoreItem(text: "Why we ask this", learnMoreInstructionStep: ORKLearnMoreInstructionStep(identifier: "ageLearnMore"))#&gt; // ORKLearnMoreItem?. Example: ORKLearnMoreItem(...).
+formItem.showsProgress = &lt;#true#&gt; // Bool. Example: true. Display progress next to the item.
+formItem.tagText = &lt;#"Required"#&gt; // String?. Example: "Required". Optional tag/chip for the item.
+
+// Create the form step and add the items.
+let formStep = ORKFormStep(
+    identifier: &lt;#"formStepIdentifier"#&gt;, // String. Example: "formStepIdentifier". Unique step identifier used in results.
+    title: &lt;#"Form Title"#&gt;, // String?. Example: "Form Title". Primary title shown in the header.
+    text: &lt;#"Intro text shown under the title."#&gt; // String?. Example: "Intro text shown under the title.".
+)
+formStep.formItems = &lt;#[formItem]#&gt; // [ORKFormItem]?. Example: [sectionHeaderItem, formItem, consentFormItem].
+formStep.useCardView = &lt;#true#&gt; // Bool. Example: true. Present items inside card-style containers.
+formStep.footerText = &lt;#"Footer text below the last form item."#&gt; // String?. Example: "Footer text below the last form item.".
+formStep.cardViewStyle = &lt;#.default#&gt; // ORKCardViewStyle. Example: .bordered.
+
+return formStep
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKFormStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKFormStep with items and step options.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKFormStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

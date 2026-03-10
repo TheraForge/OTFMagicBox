@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkweightanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let weightAnswerFormat: ORKWeightAnswerFormat = ORKAnswerFormat.weightAnswerFormat(
+    withMeasurementSystem: &lt;#.metric#&gt;, // ORKMeasurementSystem. Example: .metric or .usC.
+    numericPrecision: &lt;#.default#&gt;, // ORKNumericPrecision. Example: .higher for finer increments.
+    minimumValue: &lt;#0#&gt;, // Double. Example: 0. Minimum allowed weight.
+    maximumValue: &lt;#200#&gt;, // Double. Example: 200. Maximum allowed weight.
+    defaultValue: &lt;#60#&gt; // Double. Example: 60. Default selected weight.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+weightAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+weightAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return weightAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKWeightAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Weight picker answer format with system, precision, and bounds.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKWeightAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

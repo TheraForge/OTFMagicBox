@@ -3,158 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		177A1E4904D45DC11DFB9A9F /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E68184427775AB0165882 /* Pods_OTFMagicBox.framework */; };
-		326086F7283E48A300888678 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326086F6283E48A300888678 /* DeleteAccountView.swift */; };
-		32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */ = {isa = PBXBuildFile; fileRef = 32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */; };
-		32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */; };
-		32C6DD9628D8A02C00E453A4 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9528D8A02C00E453A4 /* DeleteAccountViewModel.swift */; };
-		32C6DD9828D8A04700E453A4 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9728D8A04700E453A4 /* LogoutViewModel.swift */; };
-		32C6DD9A28D8A06F00E453A4 /* UpdateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9928D8A06F00E453A4 /* UpdateUserViewModel.swift */; };
-		32C6DD9C28D8A08700E453A4 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6DD9B28D8A08700E453A4 /* ChangePasswordViewModel.swift */; };
-		33B27CA02CF894BA0021896B /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B27C9F2CF894BA0021896B /* LogLevel.swift */; };
-		33B27CA22CF895050021896B /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B27CA12CF895050021896B /* LogManager.swift */; };
-		33B27CA42CF895720021896B /* LogViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B27CA32CF895720021896B /* LogViewer.swift */; };
-		33B27CA62CF895E20021896B /* LogListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B27CA52CF895E20021896B /* LogListView.swift */; };
-		5A41D023266A9106007CCEB4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D022266A9106007CCEB4 /* MainView.swift */; };
-		5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D033266A91CB007CCEB4 /* TasksUIView.swift */; };
-		5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D036266A955C007CCEB4 /* TaskItem.swift */; };
-		5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D039266A9D08007CCEB4 /* TaskViewController.swift */; };
-		5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03C266AA305007CCEB4 /* TaskSamples.swift */; };
-		5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41D03F266AA517007CCEB4 /* TaskItemView.swift */; };
-		5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */; };
-		5A430489272884CB00926584 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A430488272884CB00926584 /* Extension+Font.swift */; };
-		5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049B272ADF7900926584 /* Extension+Date.swift */; };
-		5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049D272AE84A00926584 /* ConsentDocumentView.swift */; };
-		5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */; };
-		5A4304AC272CB22600926584 /* NetworkIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AB272CB22600926584 /* NetworkIndicator.swift */; };
-		5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626E26D4A2EA00A4B4DF /* DataModel.swift */; };
-		5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */; };
-		5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */; };
-		5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */; };
-		5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */; };
-		5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */; };
+		4E8BE2A52E89DC8B00A7D6C5 /* RawModel in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BE2A42E89DC8B00A7D6C5 /* RawModel */; };
+		4EE7A0A32E89D35A00B9DED2 /* RawModel in Frameworks */ = {isa = PBXBuildFile; productRef = 4EE7A0A22E89D35A00B9DED2 /* RawModel */; };
 		5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49628426DF73B700A4B4DF /* HealthKit.framework */; };
-		5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */; };
-		5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628C26E1BD5C00A4B4DF /* UIColor.swift */; };
-		5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */; };
-		5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632326EB257200A4B4DF /* Extension+UIImage.swift */; };
-		5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632526EB5D8F00A4B4DF /* Extension+String.swift */; };
-		5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */; };
-		5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */; };
-		5A4F633D271F412D0080F0D7 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F633C271F412D0080F0D7 /* LogoutView.swift */; };
-		5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */; };
-		5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */; };
-		5A7B6DAC26FD282C00F872A1 /* OTFMagicBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */; };
-		5A7B6DB426FD285000F872A1 /* OTFMagicBoxYamlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */; };
-		5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */; };
-		5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD38264E86950069FEF7 /* OnboardingView.swift */; };
-		5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD46264E89510069FEF7 /* ConsentDocument.swift */; };
-		5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */; };
-		5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD4F264E9A880069FEF7 /* Constants.swift */; };
-		5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */; };
-		5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */; };
-		5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806726B882E9007AF766 /* ContactsViewController.swift */; };
-		5AB1806C26B8846B007AF766 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806B26B8846B007AF766 /* TipView.swift */; };
-		5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1806E26B8849A007AF766 /* ProfileUIView.swift */; };
-		5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807026B8849A007AF766 /* ChangePasscodeView.swift */; };
-		5AB1807826B8849A007AF766 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807126B8849A007AF766 /* ReportView.swift */; };
-		5AB1807926B8849A007AF766 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807226B8849A007AF766 /* SupportView.swift */; };
-		5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807526B8849A007AF766 /* WithdrawView.swift */; };
-		5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */; };
-		5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */; };
-		5AB1808226B88A2B007AF766 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808126B88A2B007AF766 /* Metrics.swift */; };
-		5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */; };
-		5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808726B9C489007AF766 /* ScheduleViewController.swift */; };
-		5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */; };
-		5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */; };
-		5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */; };
-		63D0DF3DF7754F50B445D6F7 /* Pods_OTFMagicBoxWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1B2F5966ABA0B6B16D62BF6 /* Pods_OTFMagicBoxWatch.framework */; };
-		7C3B200D2CB82A3A00D260BF /* PatientAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B200C2CB82A3A00D260BF /* PatientAvatar.swift */; };
-		7C3FE1B52CD626CC001F8B36 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FE1B42CD626CC001F8B36 /* ContactPicker.swift */; };
-		7C7EC6792A65912C003B0FFB /* OTFNetworkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7EC6782A65912C003B0FFB /* OTFNetworkObserver.swift */; };
-		7C979A602A5731C200EBCE2F /* OTFColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C979A5F2A5731C200EBCE2F /* OTFColor.swift */; };
-		84146ED82BD14F4B007D768C /* TaskListRow+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146ED72BD14F4B007D768C /* TaskListRow+Extras.swift */; };
-		841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA609275F719000C6861D /* ViewDidLoadModifier.swift */; };
-		841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CA60B275F827300C6861D /* CareKitStoreManager.swift */; };
-		841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */; };
-		841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */; };
-		841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */; };
-		841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */; };
-		841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */; };
-		84268455274770A3007C5D50 /* LoginSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268454274770A3007C5D50 /* LoginSteps.swift */; };
-		84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */; };
-		844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844270A1272A65C4000F7D78 /* StyleModifiers.swift */; };
-		8467619527DF89DE00A3207E /* CountProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619027DF89DE00A3207E /* CountProgressRow.swift */; };
-		8467619727DF89DE00A3207E /* CheckUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619227DF89DE00A3207E /* CheckUpViewModel.swift */; };
-		8467619827DF89DE00A3207E /* PercentProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619327DF89DE00A3207E /* PercentProgressRow.swift */; };
-		8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619427DF89DE00A3207E /* CheckUpView.swift */; };
-		8467619B27DF8A1F00A3207E /* OCKStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */; };
-		8467619F27DF8A6900A3207E /* Environment+StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */; };
-		846761A027DF8A6900A3207E /* Extension+OCKAnyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */; };
-		846761A127DF8A6900A3207E /* OCKHealthKitStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */; };
-		846761A427DF8AB800A3207E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761A227DF8AB800A3207E /* OnboardingViewController.swift */; };
-		846761A527DF8AB800A3207E /* OnboardingOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761A327DF8AB800A3207E /* OnboardingOptionsViewController.swift */; };
-		846761A827DF8B0700A3207E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 846761A727DF8B0700A3207E /* Preview Assets.xcassets */; };
-		846761B927DF8BC300A3207E /* PlatformPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AA27DF8BC300A3207E /* PlatformPicker.swift */; };
-		846761BA27DF8BC300A3207E /* StaticUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AB27DF8BC300A3207E /* StaticUI.swift */; };
-		846761BB27DF8BC300A3207E /* SurveysList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AD27DF8BC300A3207E /* SurveysList.swift */; };
-		846761BC27DF8BC300A3207E /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = 846761AE27DF8BC300A3207E /* tap.aif */; };
-		846761BD27DF8BC300A3207E /* TaskViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */; };
-		846761BE27DF8BC300A3207E /* RKTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B027DF8BC300A3207E /* RKTasks.swift */; };
-		846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B127DF8BC300A3207E /* TaskListRow.swift */; };
-		846761C027DF8BC300A3207E /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B227DF8BC300A3207E /* TaskListViewController.swift */; };
-		846761C127DF8BC300A3207E /* CardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B327DF8BC300A3207E /* CardBackground.swift */; };
-		846761C227DF8BC300A3207E /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B527DF8BC300A3207E /* TasksViewModel.swift */; };
-		846761C327DF8BC300A3207E /* ContactsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B627DF8BC300A3207E /* ContactsSection.swift */; };
-		846761C427DF8BC300A3207E /* TasksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B727DF8BC300A3207E /* TasksSection.swift */; };
-		846761C527DF8BC300A3207E /* CareKitTaskViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761B827DF8BC300A3207E /* CareKitTaskViews.swift */; };
-		846761C727DF8BEA00A3207E /* RingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846761C627DF8BEA00A3207E /* RingProgressView.swift */; };
-		84771FA9272974B700468E0E /* Extension+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84771FA8272974B700468E0E /* Extension+Image.swift */; };
-		8486C8DD278482D70013B4E9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486C8DC278482D70013B4E9 /* LoadingView.swift */; };
-		848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */; };
-		849989DA2AD7CAE4009CBA41 /* ProfileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989D92AD7CAE4009CBA41 /* ProfileIcon.swift */; };
-		849989DE2AD7CB1C009CBA41 /* PDFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989DD2AD7CB1B009CBA41 /* PDFViewer.swift */; };
-		849989E02AD7CB25009CBA41 /* PDFKitRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989DF2AD7CB25009CBA41 /* PDFKitRepresentedView.swift */; };
-		849989E22AD7CC67009CBA41 /* UploadDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E12AD7CC67009CBA41 /* UploadDocumentManager.swift */; };
-		849989E42AD7CD53009CBA41 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E32AD7CD53009CBA41 /* LoaderView.swift */; };
-		849989E62AD7D182009CBA41 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849989E52AD7D182009CBA41 /* Extension+Array.swift */; };
-		84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1758A2750A035001587BD /* Extention+Notification.swift */; };
-		84EEAD042BBCA6D100414955 /* OTFStyleColorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEAD012BBCA6D100414955 /* OTFStyleColorStyler.swift */; };
-		84EEAD052BBCA6D100414955 /* OTFStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEAD022BBCA6D100414955 /* OTFStyle.swift */; };
-		84EEAD062BBCA6D100414955 /* OTFYamlStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EEAD032BBCA6D100414955 /* OTFYamlStyle.swift */; };
-		84F43F502B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F43F4F2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift */; };
-		84F43F542B4D6A4C009DFFF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F43F532B4D6A4C009DFFF8 /* Assets.xcassets */; };
-		84F43F572B4D6A4C009DFFF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F43F562B4D6A4C009DFFF8 /* Preview Assets.xcassets */; };
 		84F43F5A2B4D6A4C009DFFF8 /* OTFMagicBoxWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9004A9222AD7DD390084622A /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004A9212AD7DD390084622A /* HelpView.swift */; };
-		901700F42B63B856006C611C /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901700F32B63B856006C611C /* ActivityIndicatorView.swift */; };
-		902E18A62AE8F0A000F694F2 /* OTFFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902E18A52AE8F0A000F694F2 /* OTFFont.swift */; };
-		90319EE72C527CC7000EA2A3 /* NoTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90319EE62C527CC7000EA2A3 /* NoTaskView.swift */; };
-		90319EE92C527DE1000EA2A3 /* LogoutUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90319EE82C527DE1000EA2A3 /* LogoutUserView.swift */; };
-		90319EEC2C52B169000EA2A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90319EEB2C52B169000EA2A3 /* Constants.swift */; };
-		909A0FB42BFCE96D00444CED /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909A0FB32BFCE96D00444CED /* ExportOptions.plist */; };
-		90C79E452B4DCE120020D20F /* OTFCareKitStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E3F2B4DCE110020D20F /* OTFCareKitStoreManager.swift */; };
-		90C79E462B4DCE120020D20F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E402B4DCE110020D20F /* ContentView.swift */; };
-		90C79E472B4DCE120020D20F /* CareKitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E412B4DCE120020D20F /* CareKitListView.swift */; };
-		90C79E482B4DCE120020D20F /* Extension+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E422B4DCE120020D20F /* Extension+Notification.swift */; };
-		90C79E492B4DCE120020D20F /* Extension+OCKTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E432B4DCE120020D20F /* Extension+OCKTask.swift */; };
-		90C79E4A2B4DCE120020D20F /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E442B4DCE120020D20F /* SessionManager.swift */; };
-		90C79E4C2B4E862A0020D20F /* WatchStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C79E4B2B4E862A0020D20F /* WatchStoreService.swift */; };
-		A802085A2C528C61006AFFE5 /* DoctorLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80208592C528C61006AFFE5 /* DoctorLoginViewController.swift */; };
-		A8C0556B296D61770098D1FB /* Extention+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C0556A296D61770098D1FB /* Extention+ViewController.swift */; };
-		A8E397802C6F445000E56C1D /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3977F2C6F445000E56C1D /* CustomHeaderView.swift */; };
-		A8FCD2AA2A4C6EF7006E0B6E /* KeychainCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCD2A92A4C6EF7006E0B6E /* KeychainCloudManager.swift */; };
-		A8FCD2AC2A4C6F0D006E0B6E /* LocalAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCD2AB2A4C6F0D006E0B6E /* LocalAuthentication.swift */; };
-		CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */ = {isa = PBXBuildFile; fileRef = CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */; };
-		CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */; };
-		CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */; };
-		CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CFA262C954A00C0A2D5 /* ContentView.swift */; };
-		CE482CFD262C954C00C0A2D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE482CFC262C954C00C0A2D5 /* Assets.xcassets */; };
-		CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */; };
+		BC0DD2448EC4F8BFB4D10BB9 /* Pods_OTFMagicBoxWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D562C5A4B7B5FEA7610A9B /* Pods_OTFMagicBoxWatch.framework */; };
+		E4C8CE6BE2199F8D112C17E0 /* Pods_OTFMagicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 317B0EBF823A947F90A5B722 /* Pods_OTFMagicBox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,176 +47,82 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		086E68184427775AB0165882 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2233830CDBB486DA15E6FCF4 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
-		24BB2EEA055D595EA220DC76 /* Pods-OTFMagicBox.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.carehealth.xcconfig"; sourceTree = "<group>"; };
-		32100A2B28AE5BB500035F5E /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
-		326086F6283E48A300888678 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
-		32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ModuleAppSysParameter.yml; sourceTree = "<group>"; };
-		32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModuleAppYmlReader+DataModel.swift"; sourceTree = "<group>"; };
-		32C6DD9528D8A02C00E453A4 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
-		32C6DD9728D8A04700E453A4 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
-		32C6DD9928D8A06F00E453A4 /* UpdateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserViewModel.swift; sourceTree = "<group>"; };
-		32C6DD9B28D8A08700E453A4 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
-		32E5138C28EC68F100A16FA5 /* Extention+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+ViewController.swift"; sourceTree = "<group>"; };
-		331DB9E7BD73554739757F09 /* Pods-OTFMagicBoxWatch.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.care.xcconfig"; sourceTree = "<group>"; };
-		33B27C9F2CF894BA0021896B /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
-		33B27CA12CF895050021896B /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
-		33B27CA32CF895720021896B /* LogViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewer.swift; sourceTree = "<group>"; };
-		33B27CA52CF895E20021896B /* LogListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogListView.swift; sourceTree = "<group>"; };
-		3CD7BC254CB8E0C8B57567C9 /* Pods-OTFMagicBox.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.care.xcconfig"; sourceTree = "<group>"; };
-		4656AE76EB1F32CACF6F4AC5 /* Pods-OTFMagicBoxWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.release.xcconfig"; sourceTree = "<group>"; };
-		5A41D022266A9106007CCEB4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		5A41D033266A91CB007CCEB4 /* TasksUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUIView.swift; sourceTree = "<group>"; };
-		5A41D036266A955C007CCEB4 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
-		5A41D039266A9D08007CCEB4 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
-		5A41D03C266AA305007CCEB4 /* TaskSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSamples.swift; sourceTree = "<group>"; };
-		5A41D03F266AA517007CCEB4 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
-		5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataStep.swift; sourceTree = "<group>"; };
-		5A430488272884CB00926584 /* Extension+Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
-		5A43049B272ADF7900926584 /* Extension+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
-		5A43049D272AE84A00926584 /* ConsentDocumentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocumentView.swift; sourceTree = "<group>"; };
-		5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentPreviewViewController.swift; sourceTree = "<group>"; };
-		5A4304AB272CB22600926584 /* NetworkIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicator.swift; sourceTree = "<group>"; };
-		5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserProfileDetailView.swift; sourceTree = "<group>"; };
-		5A49626E26D4A2EA00A4B4DF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YmlReader.swift; sourceTree = "<group>"; };
-		5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
-		5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFHealthKitManager.swift; sourceTree = "<group>"; };
-		5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
-		5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
-		5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBox.entitlements; sourceTree = "<group>"; };
+		01F69839E965FD3F90DFD35D /* Pods-OTFMagicBox.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.carehealth.xcconfig"; sourceTree = "<group>"; };
+		0AF99A1A9A0F89A44D3A1F92 /* Pods-OTFMagicBoxWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.debug.xcconfig"; sourceTree = "<group>"; };
+		279A4E133454E00700BF86BF /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		317B0EBF823A947F90A5B722 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35FAC6B92A9E1E23A15862CA /* Pods-OTFMagicBoxWatch.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.care.xcconfig"; sourceTree = "<group>"; };
+		4482AFA87C4403ABBF836F19 /* Pods-OTFMagicBox.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.care.xcconfig"; sourceTree = "<group>"; };
 		5A49628426DF73B700A4B4DF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordlessLoginStep.swift; sourceTree = "<group>"; };
-		5A49628C26E1BD5C00A4B4DF /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordManager.swift; sourceTree = "<group>"; };
-		5A49632326EB257200A4B4DF /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
-		5A49632526EB5D8F00A4B4DF /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
-		5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Character.swift"; sourceTree = "<group>"; };
-		5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
-		5A4F633C271F412D0080F0D7 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
-		5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCustomWaitStep.swift; sourceTree = "<group>"; };
-		5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFTheraforgeNetwork.swift; sourceTree = "<group>"; };
 		5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTFMagicBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxTests.swift; sourceTree = "<group>"; };
-		5A7B6DAD26FD282C00F872A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxYamlTests.swift; sourceTree = "<group>"; };
-		5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
-		5AADFD38264E86950069FEF7 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		5AADFD46264E89510069FEF7 /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
-		5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTaskCoordinator.swift; sourceTree = "<group>"; };
-		5AADFD4F264E9A880069FEF7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
-		5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewControllerRepresentable.swift; sourceTree = "<group>"; };
-		5AB1806726B882E9007AF766 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
-		5AB1806B26B8846B007AF766 /* TipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
-		5AB1806E26B8849A007AF766 /* ProfileUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
-		5AB1807026B8849A007AF766 /* ChangePasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasscodeView.swift; sourceTree = "<group>"; };
-		5AB1807126B8849A007AF766 /* ReportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
-		5AB1807226B8849A007AF766 /* SupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
-		5AB1807526B8849A007AF766 /* WithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
-		5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
-		5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OCKStore + SampleData.swift"; sourceTree = "<group>"; };
-		5AB1808126B88A2B007AF766 /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
-		5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExistingUserViewController.swift; sourceTree = "<group>"; };
-		5AB1808726B9C489007AF766 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
-		5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyItemViewController.swift; sourceTree = "<group>"; };
-		5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordStep.swift; sourceTree = "<group>"; };
-		6D78377B3FDDDDB96A752049 /* Pods-OTFMagicBoxWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.debug.xcconfig"; sourceTree = "<group>"; };
-		61CEB14F18744A195E3BD5AA /* Pods_OTFMagicBoxWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBoxWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C3B200C2CB82A3A00D260BF /* PatientAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAvatar.swift; sourceTree = "<group>"; };
-		7C3FE1B42CD626CC001F8B36 /* ContactPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
-		7C7EC6782A65912C003B0FFB /* OTFNetworkObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFNetworkObserver.swift; sourceTree = "<group>"; };
-		7C979A5F2A5731C200EBCE2F /* OTFColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFColor.swift; sourceTree = "<group>"; };
-		83899DF00E8F459CEB5DE81F /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
-		84146ED72BD14F4B007D768C /* TaskListRow+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskListRow+Extras.swift"; sourceTree = "<group>"; };
-		841CA609275F719000C6861D /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
-		841CA60B275F827300C6861D /* CareKitStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareKitStoreManager.swift; sourceTree = "<group>"; };
-		841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSEAndSyncManager.swift; sourceTree = "<group>"; };
-		841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudantSyncManager.swift; sourceTree = "<group>"; };
-		841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheraForgeHTTPInterceptor.swift; sourceTree = "<group>"; };
-		841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+URLRequest.swift"; sourceTree = "<group>"; };
-		84268454274770A3007C5D50 /* LoginSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSteps.swift; sourceTree = "<group>"; };
-		84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleStepViewController.swift; sourceTree = "<group>"; };
-		844270A1272A65C4000F7D78 /* StyleModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleModifiers.swift; sourceTree = "<group>"; };
-		8467619027DF89DE00A3207E /* CountProgressRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountProgressRow.swift; sourceTree = "<group>"; };
-		8467619227DF89DE00A3207E /* CheckUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUpViewModel.swift; sourceTree = "<group>"; };
-		8467619327DF89DE00A3207E /* PercentProgressRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentProgressRow.swift; sourceTree = "<group>"; };
-		8467619427DF89DE00A3207E /* CheckUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUpView.swift; sourceTree = "<group>"; };
-		8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKStoreManager.swift; sourceTree = "<group>"; };
-		8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Environment+StoreManager.swift"; sourceTree = "<group>"; };
-		8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+OCKAnyTask.swift"; sourceTree = "<group>"; };
-		8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OCKHealthKitStore+Extension.swift"; sourceTree = "<group>"; };
-		846761A227DF8AB800A3207E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		846761A327DF8AB800A3207E /* OnboardingOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingOptionsViewController.swift; sourceTree = "<group>"; };
-		846761A727DF8B0700A3207E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		846761AA27DF8BC300A3207E /* PlatformPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformPicker.swift; sourceTree = "<group>"; };
-		846761AB27DF8BC300A3207E /* StaticUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticUI.swift; sourceTree = "<group>"; };
-		846761AD27DF8BC300A3207E /* SurveysList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveysList.swift; sourceTree = "<group>"; };
-		846761AE27DF8BC300A3207E /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = tap.aif; sourceTree = "<group>"; };
-		846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewControllerRepresentable.swift; sourceTree = "<group>"; };
-		846761B027DF8BC300A3207E /* RKTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKTasks.swift; sourceTree = "<group>"; };
-		846761B127DF8BC300A3207E /* TaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListRow.swift; sourceTree = "<group>"; };
-		846761B227DF8BC300A3207E /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
-		846761B327DF8BC300A3207E /* CardBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBackground.swift; sourceTree = "<group>"; };
-		846761B527DF8BC300A3207E /* TasksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
-		846761B627DF8BC300A3207E /* ContactsSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsSection.swift; sourceTree = "<group>"; };
-		846761B727DF8BC300A3207E /* TasksSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksSection.swift; sourceTree = "<group>"; };
-		846761B827DF8BC300A3207E /* CareKitTaskViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareKitTaskViews.swift; sourceTree = "<group>"; };
-		846761C627DF8BEA00A3207E /* RingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingProgressView.swift; sourceTree = "<group>"; };
-		84771FA8272974B700468E0E /* Extension+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Image.swift"; sourceTree = "<group>"; };
-		8486C8DC278482D70013B4E9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		849989D92AD7CAE4009CBA41 /* ProfileIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIcon.swift; sourceTree = "<group>"; };
-		849989DD2AD7CB1B009CBA41 /* PDFViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewer.swift; sourceTree = "<group>"; };
-		849989DF2AD7CB25009CBA41 /* PDFKitRepresentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFKitRepresentedView.swift; sourceTree = "<group>"; };
-		849989E12AD7CC67009CBA41 /* UploadDocumentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadDocumentManager.swift; sourceTree = "<group>"; };
-		849989E32AD7CD53009CBA41 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
-		849989E52AD7D182009CBA41 /* Extension+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
-		84A1758A2750A035001587BD /* Extention+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+Notification.swift"; sourceTree = "<group>"; };
-		84EEAD012BBCA6D100414955 /* OTFStyleColorStyler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFStyleColorStyler.swift; sourceTree = "<group>"; };
-		84EEAD022BBCA6D100414955 /* OTFStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFStyle.swift; sourceTree = "<group>"; };
-		84EEAD032BBCA6D100414955 /* OTFYamlStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFYamlStyle.swift; sourceTree = "<group>"; };
+		6866B036622565469A099223 /* Pods-OTFMagicBoxWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.release.xcconfig"; sourceTree = "<group>"; };
 		84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBoxWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		84F43F4F2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFMagicBoxWatch.swift; sourceTree = "<group>"; };
-		84F43F532B4D6A4C009DFFF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		84F43F562B4D6A4C009DFFF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9004A9212AD7DD390084622A /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
-		901700F32B63B856006C611C /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		902E18A52AE8F0A000F694F2 /* OTFFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFFont.swift; sourceTree = "<group>"; };
-		90319EE62C527CC7000EA2A3 /* NoTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTaskView.swift; sourceTree = "<group>"; };
-		90319EE82C527DE1000EA2A3 /* LogoutUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUserView.swift; sourceTree = "<group>"; };
-		90319EEB2C52B169000EA2A3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		909A0FB02BFB869300444CED /* OTFMagicBoxWatchRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBoxWatchRelease.entitlements; sourceTree = "<group>"; };
-		909A0FB32BFCE96D00444CED /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
-		909A0FB52BFF1C9E00444CED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		90C79E3E2B4DCD9D0020D20F /* OTFMagicBoxWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBoxWatch.entitlements; sourceTree = "<group>"; };
-		90C79E3F2B4DCE110020D20F /* OTFCareKitStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTFCareKitStoreManager.swift; sourceTree = "<group>"; };
-		90C79E402B4DCE110020D20F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		90C79E412B4DCE120020D20F /* CareKitListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareKitListView.swift; sourceTree = "<group>"; };
-		90C79E422B4DCE120020D20F /* Extension+Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Notification.swift"; sourceTree = "<group>"; };
-		90C79E432B4DCE120020D20F /* Extension+OCKTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+OCKTask.swift"; sourceTree = "<group>"; };
-		90C79E442B4DCE120020D20F /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		90C79E4B2B4E862A0020D20F /* WatchStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStoreService.swift; sourceTree = "<group>"; };
-		90D568082BF6505A00CA44B0 /* OTFMagicBoxWatchDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTFMagicBoxWatchDebug.entitlements; sourceTree = "<group>"; };
-		9C4F1D42E931099C244B8395 /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.carehealth.xcconfig"; sourceTree = "<group>"; };
-		A80208592C528C61006AFFE5 /* DoctorLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLoginViewController.swift; sourceTree = "<group>"; };
-		A8B7A7762C7E354C0065068C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A8C0556A296D61770098D1FB /* Extention+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention+ViewController.swift"; sourceTree = "<group>"; };
-		A8E3977F2C6F445000E56C1D /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
-		A8FCD2A92A4C6EF7006E0B6E /* KeychainCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainCloudManager.swift; sourceTree = "<group>"; };
-		A8FCD2AB2A4C6F0D006E0B6E /* LocalAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthentication.swift; sourceTree = "<group>"; };
-		B1B2F5966ABA0B6B16D62BF6 /* Pods_OTFMagicBoxWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBoxWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = AppSysParameters.yml; sourceTree = "<group>"; };
+		A14C9E782B63A3E5E3ABFB46 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		ACBC985F3A507F502B53610A /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.carehealth.xcconfig"; sourceTree = "<group>"; };
+		B0D562C5A4B7B5FEA7610A9B /* Pods_OTFMagicBoxWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBoxWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE482CFA262C954A00C0A2D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CE482CFC262C954C00C0A2D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CE482D02262C954C00C0A2D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CE482D04262C954C00C0A2D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8F5F056B2F325B3A00B08C35 /* Exceptions for "OTFMagicBox" folder in "OTFMagicBox" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Samples.xcassets,
+			);
+			target = CE482CF2262C954A00C0A2D5 /* OTFMagicBox */;
+		};
+		8F5F056C2F325B3A00B08C35 /* Exceptions for "OTFMagicBox" folder in "OTFMagicBoxWatch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				MagicBox.icon,
+				UI/Components/ContentUnavailable.swift,
+			);
+			target = 84F43F4C2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */;
+		};
+		8F5F05752F326B0A00B08C35 /* Exceptions for "OTFMagicBoxTests" folder in "OTFMagicBoxTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				OTFMagicBoxTests.swift,
+			);
+			target = 5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */;
+		};
+		8F5F05922F326B3F00B08C35 /* Exceptions for "OTFMagicBoxWatch" folder in "OTFMagicBoxWatch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 84F43F4C2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8F5F042F2F325B3A00B08C35 /* OTFMagicBox */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F5F056B2F325B3A00B08C35 /* Exceptions for "OTFMagicBox" folder in "OTFMagicBox" target */,
+				8F5F056C2F325B3A00B08C35 /* Exceptions for "OTFMagicBox" folder in "OTFMagicBoxWatch" target */,
+			);
+			path = OTFMagicBox;
+			sourceTree = "<group>";
+		};
+		8F5F05732F326B0A00B08C35 /* OTFMagicBoxTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F5F05752F326B0A00B08C35 /* Exceptions for "OTFMagicBoxTests" folder in "OTFMagicBoxTests" target */,
+			);
+			path = OTFMagicBoxTests;
+			sourceTree = "<group>";
+		};
+		8F5F05872F326B3F00B08C35 /* OTFMagicBoxWatch */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F5F05922F326B3F00B08C35 /* Exceptions for "OTFMagicBoxWatch" folder in "OTFMagicBoxWatch" target */,
+			);
+			path = OTFMagicBoxWatch;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5A7B6DA626FD282C00F872A1 /* Frameworks */ = {
@@ -372,7 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63D0DF3DF7754F50B445D6F7 /* Pods_OTFMagicBoxWatch.framework in Frameworks */,
+				BC0DD2448EC4F8BFB4D10BB9 /* Pods_OTFMagicBoxWatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,427 +144,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EE7A0A32E89D35A00B9DED2 /* RawModel in Frameworks */,
 				5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */,
-				177A1E4904D45DC11DFB9A9F /* Pods_OTFMagicBox.framework in Frameworks */,
+				4E8BE2A52E89DC8B00A7D6C5 /* RawModel in Frameworks */,
+				E4C8CE6BE2199F8D112C17E0 /* Pods_OTFMagicBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		32C6DD9428D8A01700E453A4 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				32C6DD9528D8A02C00E453A4 /* DeleteAccountViewModel.swift */,
-				32C6DD9728D8A04700E453A4 /* LogoutViewModel.swift */,
-				32C6DD9928D8A06F00E453A4 /* UpdateUserViewModel.swift */,
-				32C6DD9B28D8A08700E453A4 /* ChangePasswordViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		32FFCFF128180A6800737FA3 /* ModuleAppYmlReader+DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				32AAA4A628339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift */,
-			);
-			path = "ModuleAppYmlReader+DataModel";
-			sourceTree = "<group>";
-		};
-		33B27C9E2CF894A10021896B /* Logger */ = {
-			isa = PBXGroup;
-			children = (
-				33B27C9F2CF894BA0021896B /* LogLevel.swift */,
-				33B27CA12CF895050021896B /* LogManager.swift */,
-				33B27CA32CF895720021896B /* LogViewer.swift */,
-				33B27CA52CF895E20021896B /* LogListView.swift */,
-			);
-			path = Logger;
-			sourceTree = "<group>";
-		};
-		5A41CD0D2664D729007CCEB4 /* HealthData */ = {
-			isa = PBXGroup;
-			children = (
-				5AB1808E26BC58DE007AF766 /* HealthRecordStep.swift */,
-				5A41E8A7267A5FCC007CCEB4 /* HealthDataStep.swift */,
-			);
-			path = HealthData;
-			sourceTree = "<group>";
-		};
-		5A41D032266A91B0007CCEB4 /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-				5A41D033266A91CB007CCEB4 /* TasksUIView.swift */,
-				5A41D036266A955C007CCEB4 /* TaskItem.swift */,
-				5A41D039266A9D08007CCEB4 /* TaskViewController.swift */,
-				5A41D03C266AA305007CCEB4 /* TaskSamples.swift */,
-				5A41D03F266AA517007CCEB4 /* TaskItemView.swift */,
-			);
-			path = Tasks;
-			sourceTree = "<group>";
-		};
-		5A41D164266CBA41007CCEB4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5AADFD76264FE8EE0069FEF7 /* LaunchView.swift */,
-				5A41D022266A9106007CCEB4 /* MainView.swift */,
-				8486C8DC278482D70013B4E9 /* LoadingView.swift */,
-				846761C627DF8BEA00A3207E /* RingProgressView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5A49626D26D4A2EA00A4B4DF /* Yaml */ = {
-			isa = PBXGroup;
-			children = (
-				32FFCFF128180A6800737FA3 /* ModuleAppYmlReader+DataModel */,
-				5A49626E26D4A2EA00A4B4DF /* DataModel.swift */,
-				5A49626F26D4A2EA00A4B4DF /* YmlReader.swift */,
-			);
-			path = Yaml;
-			sourceTree = "<group>";
-		};
-		5A49632926EB5E2E00A4B4DF /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				849989E52AD7D182009CBA41 /* Extension+Array.swift */,
-				5A49632726EB5DDD00A4B4DF /* Extension+Character.swift */,
-				5A49632526EB5D8F00A4B4DF /* Extension+String.swift */,
-				5A430488272884CB00926584 /* Extension+Font.swift */,
-				5A49632326EB257200A4B4DF /* Extension+UIImage.swift */,
-				84771FA8272974B700468E0E /* Extension+Image.swift */,
-				5A43049B272ADF7900926584 /* Extension+Date.swift */,
-				841FEFC3274E5DBC00698892 /* Extension+URLRequest.swift */,
-				84A1758A2750A035001587BD /* Extention+Notification.swift */,
-				8467619C27DF8A6900A3207E /* Environment+StoreManager.swift */,
-				8467619D27DF8A6900A3207E /* Extension+OCKAnyTask.swift */,
-				8467619E27DF8A6900A3207E /* OCKHealthKitStore+Extension.swift */,
-				A8C0556A296D61770098D1FB /* Extention+ViewController.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		5A7B6D8D26FA352000F872A1 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				5A7B6D8E26FA353B00F872A1 /* OTFTheraforgeNetwork.swift */,
-				841FEFBE274E5D8200698892 /* TheraForgeHTTPInterceptor.swift */,
-				841FEFBA274E5CE000698892 /* SSEAndSyncManager.swift */,
-				7C7EC6782A65912C003B0FFB /* OTFNetworkObserver.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */ = {
-			isa = PBXGroup;
-			children = (
-				5A7B6DAB26FD282C00F872A1 /* OTFMagicBoxTests.swift */,
-				5A7B6DAD26FD282C00F872A1 /* Info.plist */,
-				5A7B6DB326FD285000F872A1 /* OTFMagicBoxYamlTests.swift */,
-			);
-			path = OTFMagicBoxTests;
-			sourceTree = "<group>";
-		};
-		5AADFD35264E86950069FEF7 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				5AADFD37264E86950069FEF7 /* OnboardingItemView.swift */,
-				5AADFD38264E86950069FEF7 /* OnboardingView.swift */,
-				5AB1807D26B884C3007AF766 /* PasscodeViewController.swift */,
-				5AADFD4C264E98950069FEF7 /* OnboardingTaskCoordinator.swift */,
-				5A49628626DFEEBC00A4B4DF /* PasswordlessLoginStep.swift */,
-				846761A327DF8AB800A3207E /* OnboardingOptionsViewController.swift */,
-				846761A227DF8AB800A3207E /* OnboardingViewController.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		5AADFD3D264E86A20069FEF7 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				5A49632926EB5E2E00A4B4DF /* Extension */,
-				5A49626D26D4A2EA00A4B4DF /* Yaml */,
-				5AADFD4F264E9A880069FEF7 /* Constants.swift */,
-				849989E32AD7CD53009CBA41 /* LoaderView.swift */,
-				5AB1808126B88A2B007AF766 /* Metrics.swift */,
-				5A49627D26DEA59F00A4B4DF /* HealthKitManager.swift */,
-				5A49627926DE69AE00A4B4DF /* OTFHealthKitManager.swift */,
-				5A49627B26DE6A2E00A4B4DF /* ActivityManager.swift */,
-				5A49628C26E1BD5C00A4B4DF /* UIColor.swift */,
-				5A49628E26E206D200A4B4DF /* HealthRecordManager.swift */,
-				841FEFC1274E5DAF00698892 /* UserDefaultsManager.swift */,
-				7C979A5F2A5731C200EBCE2F /* OTFColor.swift */,
-				A8FCD2A92A4C6EF7006E0B6E /* KeychainCloudManager.swift */,
-				849989E12AD7CC67009CBA41 /* UploadDocumentManager.swift */,
-				A8FCD2AB2A4C6F0D006E0B6E /* LocalAuthentication.swift */,
-				902E18A52AE8F0A000F694F2 /* OTFFont.swift */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		5AADFD43264E86B00069FEF7 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				5AB1808C26BC4ED6007AF766 /* LoginViewController.swift */,
-				5AB1808326B88BDE007AF766 /* LoginExistingUserViewController.swift */,
-				5A7B6D7E26F0A1FF00F872A1 /* LoginCustomWaitStep.swift */,
-				84268456274791E5007C5D50 /* SignInWithAppleStepViewController.swift */,
-				84268454274770A3007C5D50 /* LoginSteps.swift */,
-				A80208592C528C61006AFFE5 /* DoctorLoginViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		5AADFD44264E86C40069FEF7 /* Consent */ = {
-			isa = PBXGroup;
-			children = (
-				5AADFD46264E89510069FEF7 /* ConsentDocument.swift */,
-			);
-			path = Consent;
-			sourceTree = "<group>";
-		};
-		5AB1806426B87FCB007AF766 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				5AB1806526B88051007AF766 /* ScheduleViewControllerRepresentable.swift */,
-				5AB1808726B9C489007AF766 /* ScheduleViewController.swift */,
-				5AB1808926B9C76D007AF766 /* SurveyItemViewController.swift */,
-				5AB1806B26B8846B007AF766 /* TipView.swift */,
-			);
-			path = Schedule;
-			sourceTree = "<group>";
-		};
-		5AB1806D26B8849A007AF766 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				5AB1806E26B8849A007AF766 /* ProfileUIView.swift */,
-				32C6DD9428D8A01700E453A4 /* ViewModel */,
-				5AB1806F26B8849A007AF766 /* Views */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		5AB1806F26B8849A007AF766 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5AB1807026B8849A007AF766 /* ChangePasscodeView.swift */,
-				5AB1807126B8849A007AF766 /* ReportView.swift */,
-				5AB1807226B8849A007AF766 /* SupportView.swift */,
-				5AB1807526B8849A007AF766 /* WithdrawView.swift */,
-				5A49627726DD5A8D00A4B4DF /* WithdrawalViewController.swift */,
-				5A4F633C271F412D0080F0D7 /* LogoutView.swift */,
-				5A4F633A271AA6360080F0D7 /* ChangePasswordView.swift */,
-				5A4304AB272CB22600926584 /* NetworkIndicator.swift */,
-				5A4304AD272CB23000926584 /* UpdateUserProfileDetailView.swift */,
-				5A43049D272AE84A00926584 /* ConsentDocumentView.swift */,
-				5A43049F272AE85200926584 /* DocumentPreviewViewController.swift */,
-				326086F6283E48A300888678 /* DeleteAccountView.swift */,
-				849989D92AD7CAE4009CBA41 /* ProfileIcon.swift */,
-				849989DD2AD7CB1B009CBA41 /* PDFViewer.swift */,
-				849989DF2AD7CB25009CBA41 /* PDFKitRepresentedView.swift */,
-				9004A9212AD7DD390084622A /* HelpView.swift */,
-				7C3B200C2CB82A3A00D260BF /* PatientAvatar.swift */,
-				7C3FE1B42CD626CC001F8B36 /* ContactPicker.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5AB1808B26BAADB1007AF766 /* Contacts */ = {
-			isa = PBXGroup;
-			children = (
-				5AB1806726B882E9007AF766 /* ContactsViewController.swift */,
-			);
-			path = Contacts;
-			sourceTree = "<group>";
-		};
-		841FEFBC274E5D8200698892 /* Datastore */ = {
-			isa = PBXGroup;
-			children = (
-				841FEFBD274E5D8200698892 /* CloudantSyncManager.swift */,
-				841CA60B275F827300C6861D /* CareKitStoreManager.swift */,
-				8467619A27DF8A1F00A3207E /* OCKStoreManager.swift */,
-			);
-			path = Datastore;
-			sourceTree = "<group>";
-		};
-		844270A0272A6596000F7D78 /* ViewModifiers */ = {
-			isa = PBXGroup;
-			children = (
-				844270A1272A65C4000F7D78 /* StyleModifiers.swift */,
-				841CA609275F719000C6861D /* ViewDidLoadModifier.swift */,
-			);
-			path = ViewModifiers;
-			sourceTree = "<group>";
-		};
-		8467618F27DF89DE00A3207E /* CheckUp */ = {
-			isa = PBXGroup;
-			children = (
-				8467619027DF89DE00A3207E /* CountProgressRow.swift */,
-				8467619227DF89DE00A3207E /* CheckUpViewModel.swift */,
-				8467619327DF89DE00A3207E /* PercentProgressRow.swift */,
-				8467619427DF89DE00A3207E /* CheckUpView.swift */,
-			);
-			path = CheckUp;
-			sourceTree = "<group>";
-		};
-		846761A627DF8B0700A3207E /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				846761A727DF8B0700A3207E /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		846761A927DF8BC300A3207E /* StaticViews */ = {
-			isa = PBXGroup;
-			children = (
-				846761B427DF8BC300A3207E /* CareKit */,
-				846761AC27DF8BC300A3207E /* RK UI */,
-				846761B327DF8BC300A3207E /* CardBackground.swift */,
-				846761AA27DF8BC300A3207E /* PlatformPicker.swift */,
-				846761AB27DF8BC300A3207E /* StaticUI.swift */,
-			);
-			path = StaticViews;
-			sourceTree = "<group>";
-		};
-		846761AC27DF8BC300A3207E /* RK UI */ = {
-			isa = PBXGroup;
-			children = (
-				846761AD27DF8BC300A3207E /* SurveysList.swift */,
-				846761AE27DF8BC300A3207E /* tap.aif */,
-				846761AF27DF8BC300A3207E /* TaskViewControllerRepresentable.swift */,
-				846761B027DF8BC300A3207E /* RKTasks.swift */,
-				846761B127DF8BC300A3207E /* TaskListRow.swift */,
-				84146ED72BD14F4B007D768C /* TaskListRow+Extras.swift */,
-				846761B227DF8BC300A3207E /* TaskListViewController.swift */,
-			);
-			path = "RK UI";
-			sourceTree = "<group>";
-		};
-		846761B427DF8BC300A3207E /* CareKit */ = {
-			isa = PBXGroup;
-			children = (
-				846761B527DF8BC300A3207E /* TasksViewModel.swift */,
-				846761B627DF8BC300A3207E /* ContactsSection.swift */,
-				846761B727DF8BC300A3207E /* TasksSection.swift */,
-				846761B827DF8BC300A3207E /* CareKitTaskViews.swift */,
-			);
-			path = CareKit;
-			sourceTree = "<group>";
-		};
-		84847E4A2BA1C42300B2B016 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				901700F32B63B856006C611C /* ActivityIndicatorView.swift */,
-				90C79E412B4DCE120020D20F /* CareKitListView.swift */,
-				90319EE62C527CC7000EA2A3 /* NoTaskView.swift */,
-				90319EE82C527DE1000EA2A3 /* LogoutUserView.swift */,
-				A8E3977F2C6F445000E56C1D /* CustomHeaderView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		84847E4B2BA1C51600B2B016 /* DataStore */ = {
-			isa = PBXGroup;
-			children = (
-				90C79E4B2B4E862A0020D20F /* WatchStoreService.swift */,
-				90C79E3F2B4DCE110020D20F /* OTFCareKitStoreManager.swift */,
-			);
-			path = DataStore;
-			sourceTree = "<group>";
-		};
-		84847E4C2BA1C58100B2B016 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				90C79E442B4DCE120020D20F /* SessionManager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		84EEAD002BBCA6D100414955 /* Styling */ = {
-			isa = PBXGroup;
-			children = (
-				84EEAD012BBCA6D100414955 /* OTFStyleColorStyler.swift */,
-				84EEAD022BBCA6D100414955 /* OTFStyle.swift */,
-				84EEAD032BBCA6D100414955 /* OTFYamlStyle.swift */,
-			);
-			path = Styling;
-			sourceTree = "<group>";
-		};
-		84F43F4E2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */ = {
-			isa = PBXGroup;
-			children = (
-				909A0FB52BFF1C9E00444CED /* Info.plist */,
-				909A0FB02BFB869300444CED /* OTFMagicBoxWatchRelease.entitlements */,
-				90D568082BF6505A00CA44B0 /* OTFMagicBoxWatchDebug.entitlements */,
-				84F43F4F2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift */,
-				90C79E402B4DCE110020D20F /* ContentView.swift */,
-				90319EEA2C52B143000EA2A3 /* Library */,
-				84847E4C2BA1C58100B2B016 /* Managers */,
-				84847E4B2BA1C51600B2B016 /* DataStore */,
-				901700EF2B5A701F006C611C /* Extensions */,
-				84847E4A2BA1C42300B2B016 /* Views */,
-				84F43F552B4D6A4C009DFFF8 /* Preview Content */,
-				84F43F532B4D6A4C009DFFF8 /* Assets.xcassets */,
-				90C79E3E2B4DCD9D0020D20F /* OTFMagicBoxWatch.entitlements */,
-			);
-			path = OTFMagicBoxWatch;
-			sourceTree = "<group>";
-		};
-		84F43F552B4D6A4C009DFFF8 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				84F43F562B4D6A4C009DFFF8 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2233830CDBB486DA15E6FCF4 /* Pods-OTFMagicBox.debug.xcconfig */,
-				24BB2EEA055D595EA220DC76 /* Pods-OTFMagicBox.carehealth.xcconfig */,
-				3CD7BC254CB8E0C8B57567C9 /* Pods-OTFMagicBox.care.xcconfig */,
-				83899DF00E8F459CEB5DE81F /* Pods-OTFMagicBox.release.xcconfig */,
-				6D78377B3FDDDDB96A752049 /* Pods-OTFMagicBoxWatch.debug.xcconfig */,
-				9C4F1D42E931099C244B8395 /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */,
-				331DB9E7BD73554739757F09 /* Pods-OTFMagicBoxWatch.care.xcconfig */,
-				4656AE76EB1F32CACF6F4AC5 /* Pods-OTFMagicBoxWatch.release.xcconfig */,
+				A14C9E782B63A3E5E3ABFB46 /* Pods-OTFMagicBox.debug.xcconfig */,
+				01F69839E965FD3F90DFD35D /* Pods-OTFMagicBox.carehealth.xcconfig */,
+				4482AFA87C4403ABBF836F19 /* Pods-OTFMagicBox.care.xcconfig */,
+				279A4E133454E00700BF86BF /* Pods-OTFMagicBox.release.xcconfig */,
+				0AF99A1A9A0F89A44D3A1F92 /* Pods-OTFMagicBoxWatch.debug.xcconfig */,
+				ACBC985F3A507F502B53610A /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */,
+				35FAC6B92A9E1E23A15862CA /* Pods-OTFMagicBoxWatch.care.xcconfig */,
+				6866B036622565469A099223 /* Pods-OTFMagicBoxWatch.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		901700EF2B5A701F006C611C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				90C79E432B4DCE120020D20F /* Extension+OCKTask.swift */,
-				90C79E422B4DCE120020D20F /* Extension+Notification.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		90319EEA2C52B143000EA2A3 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				90319EEB2C52B169000EA2A3 /* Constants.swift */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		A8705D29296E8E85003AFC0B /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				32E5138C28EC68F100A16FA5 /* Extention+ViewController.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		C9D92AAC7DE27C25427A4DB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
-				086E68184427775AB0165882 /* Pods_OTFMagicBox.framework */,
-				B1B2F5966ABA0B6B16D62BF6 /* Pods_OTFMagicBoxWatch.framework */,
+				317B0EBF823A947F90A5B722 /* Pods_OTFMagicBox.framework */,
+				B0D562C5A4B7B5FEA7610A9B /* Pods_OTFMagicBoxWatch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -808,15 +182,12 @@
 		CE482CEA262C954A00C0A2D5 = {
 			isa = PBXGroup;
 			children = (
-				A8B7A7762C7E354C0065068C /* Images.xcassets */,
-				32100A2B28AE5BB500035F5E /* .github */,
-				CE482CF5262C954A00C0A2D5 /* OTFMagicBox */,
-				5A7B6DAA26FD282C00F872A1 /* OTFMagicBoxTests */,
-				84F43F4E2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */,
+				8F5F042F2F325B3A00B08C35 /* OTFMagicBox */,
+				8F5F05732F326B0A00B08C35 /* OTFMagicBoxTests */,
+				8F5F05872F326B3F00B08C35 /* OTFMagicBoxWatch */,
 				CE482CF4262C954A00C0A2D5 /* Products */,
 				8C979D2203D122CC68BA93F2 /* Pods */,
 				C9D92AAC7DE27C25427A4DB9 /* Frameworks */,
-				A8705D29296E8E85003AFC0B /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -828,42 +199,6 @@
 				84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		CE482CF5262C954A00C0A2D5 /* OTFMagicBox */ = {
-			isa = PBXGroup;
-			children = (
-				5A49628326DF73B700A4B4DF /* OTFMagicBox.entitlements */,
-				5A7B6D8D26FA352000F872A1 /* API */,
-				841FEFBC274E5D8200698892 /* Datastore */,
-				5AB1808B26BAADB1007AF766 /* Contacts */,
-				8467618F27DF89DE00A3207E /* CheckUp */,
-				846761A927DF8BC300A3207E /* StaticViews */,
-				5AB1806D26B8849A007AF766 /* Profile */,
-				5AB1806426B87FCB007AF766 /* Schedule */,
-				5A41D164266CBA41007CCEB4 /* Views */,
-				844270A0272A6596000F7D78 /* ViewModifiers */,
-				5A41D032266A91B0007CCEB4 /* Tasks */,
-				5A41CD0D2664D729007CCEB4 /* HealthData */,
-				5AADFD44264E86C40069FEF7 /* Consent */,
-				33B27C9E2CF894A10021896B /* Logger */,
-				5AADFD43264E86B00069FEF7 /* Login */,
-				5AADFD3D264E86A20069FEF7 /* Library */,
-				5AADFD35264E86950069FEF7 /* Onboarding */,
-				84EEAD002BBCA6D100414955 /* Styling */,
-				CE482CF8262C954A00C0A2D5 /* SceneDelegate.swift */,
-				CE482CF6262C954A00C0A2D5 /* AppDelegate.swift */,
-				5AB1807F26B8877C007AF766 /* OCKStore + SampleData.swift */,
-				32AAA4A4283396CF00DA0DA8 /* ModuleAppSysParameter.yml */,
-				CE2DB9C6263B1EC400E2FB88 /* AppSysParameters.yml */,
-				909A0FB32BFCE96D00444CED /* ExportOptions.plist */,
-				CE482CFA262C954A00C0A2D5 /* ContentView.swift */,
-				CE482CFC262C954C00C0A2D5 /* Assets.xcassets */,
-				CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */,
-				CE482D04262C954C00C0A2D5 /* Info.plist */,
-				846761A627DF8B0700A3207E /* Preview Content */,
-			);
-			path = OTFMagicBox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -891,16 +226,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84F43F5D2B4D6A4C009DFFF8 /* Build configuration list for PBXNativeTarget "OTFMagicBoxWatch" */;
 			buildPhases = (
-				DBADF2A3A13B8F613536EE06 /* [CP] Check Pods Manifest.lock */,
+				E126EFF40ED2E4F5192D5565 /* [CP] Check Pods Manifest.lock */,
 				84F43F492B4D6A4A009DFFF8 /* Sources */,
 				84F43F4A2B4D6A4A009DFFF8 /* Frameworks */,
 				84F43F4B2B4D6A4A009DFFF8 /* Resources */,
-				901EEAFD2BDA2A10004EC8B5 /* ShellScript */,
-				A453FCDEB9C254226E119609 /* [CP] Embed Pods Frameworks */,
+				901EEAFD2BDA2A10004EC8B5 /* SwiftLint */,
+				F1C1256CE3247B6A7380A5E6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8F5F05872F326B3F00B08C35 /* OTFMagicBoxWatch */,
 			);
 			name = OTFMagicBoxWatch;
 			productName = "OTFMagicBoxWatch Watch App";
@@ -911,18 +249,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE482D07262C954C00C0A2D5 /* Build configuration list for PBXNativeTarget "OTFMagicBox" */;
 			buildPhases = (
-				ECB0218F69512BD055585145 /* [CP] Check Pods Manifest.lock */,
+				16A2AC60EC1D1A67B6330F79 /* [CP] Check Pods Manifest.lock */,
 				CE482CEF262C954A00C0A2D5 /* Sources */,
 				CE482CF0262C954A00C0A2D5 /* Frameworks */,
 				CE482CF1262C954A00C0A2D5 /* Resources */,
 				7CA3D3142A8A43C400FCB048 /* Embed Watch Content */,
-				902E18A92AEA869B00F694F2 /* ShellScript */,
-				1365D59FF414EE342D8B3FB8 /* [CP] Embed Pods Frameworks */,
+				902E18A92AEA869B00F694F2 /* SwiftLint */,
+				CF8D70C6DD2CC858EBFCD7B0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				84F43F592B4D6A4C009DFFF8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8F5F042F2F325B3A00B08C35 /* OTFMagicBox */,
 			);
 			name = OTFMagicBox;
 			productName = CompletelyNewApp;
@@ -935,9 +276,10 @@
 		CE482CEB262C954A00C0A2D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				DefaultBuildSystemTypeForWorkspace = Original;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					5A7B6DA826FD282C00F872A1 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -952,7 +294,6 @@
 				};
 			};
 			buildConfigurationList = CE482CEE262C954A00C0A2D5 /* Build configuration list for PBXProject "OTFMagicBox" */;
-			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -960,6 +301,10 @@
 				Base,
 			);
 			mainGroup = CE482CEA262C954A00C0A2D5;
+			packageReferences = (
+				4E8BE2A32E89DC8B00A7D6C5 /* XCLocalSwiftPackageReference "RawGenerableMacro" */,
+			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = CE482CF4262C954A00C0A2D5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -983,8 +328,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84F43F572B4D6A4C009DFFF8 /* Preview Assets.xcassets in Resources */,
-				84F43F542B4D6A4C009DFFF8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,112 +335,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32AAA4A5283396CF00DA0DA8 /* ModuleAppSysParameter.yml in Resources */,
-				CE2DB9C7263B1EC400E2FB88 /* AppSysParameters.yml in Resources */,
-				909A0FB42BFCE96D00444CED /* ExportOptions.plist in Resources */,
-				CE482D03262C954C00C0A2D5 /* LaunchScreen.storyboard in Resources */,
-				846761BC27DF8BC300A3207E /* tap.aif in Resources */,
-				846761A827DF8B0700A3207E /* Preview Assets.xcassets in Resources */,
-				CE482CFD262C954C00C0A2D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1365D59FF414EE342D8B3FB8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		901EEAFD2BDA2A10004EC8B5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		902E18A92AEA869B00F694F2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		A453FCDEB9C254226E119609 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBADF2A3A13B8F613536EE06 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OTFMagicBoxWatch-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ECB0218F69512BD055585145 /* [CP] Check Pods Manifest.lock */ = {
+		16A2AC60EC1D1A67B6330F79 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1119,6 +363,108 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		901EEAFD2BDA2A10004EC8B5 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n# SwiftLint Build Phase Script\n# Ensures SwiftLint is installed and runs it during the build process.\n\n# Prepend common Homebrew install paths to PATH (Apple Silicon and Intel)\nPATH=\"/opt/homebrew/bin:/usr/local/bin:$PATH\"\n\n# Prints formatted informational messages\ninfo() {\n    echo \"[SwiftLint] $1\"\n}\n\n# Installs SwiftLint using Homebrew if it's not already installed\ninstall_swiftlint() {\n    if command -v brew >/dev/null; then\n        info \"SwiftLint not found. Installing via Homebrew...\"\n        brew update\n        brew install swiftlint\n\n        # Verify installation\n        if ! command -v swiftlint >/dev/null; then\n            echo \"error: SwiftLint installation failed. Please install it manually.\"\n            exit 1\n        fi\n    else\n        echo \"error: Homebrew is not available. Please install SwiftLint manually:\"\n        echo \"https://github.com/realm/SwiftLint\"\n        exit 1\n    fi\n}\n\n# Check if SwiftLint is available; install it if missing\nif ! command -v swiftlint >/dev/null; then\n    install_swiftlint\nelse\n    info \"SwiftLint is already installed.\"\nfi\n\n# Run SwiftLint\ninfo \"Running SwiftLint...\"\nswiftlint\n";
+		};
+		902E18A92AEA869B00F694F2 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n# SwiftLint Build Phase Script\n# Ensures SwiftLint is installed and runs it during the build process.\n\n# Prepend common Homebrew install paths to PATH (Apple Silicon and Intel)\nPATH=\"/opt/homebrew/bin:/usr/local/bin:$PATH\"\n\n# Prints formatted informational messages\ninfo() {\n    echo \"[SwiftLint] $1\"\n}\n\n# Installs SwiftLint using Homebrew if it's not already installed\ninstall_swiftlint() {\n    if command -v brew >/dev/null; then\n        info \"SwiftLint not found. Installing via Homebrew...\"\n        brew update\n        brew install swiftlint\n\n        # Verify installation\n        if ! command -v swiftlint >/dev/null; then\n            echo \"error: SwiftLint installation failed. Please install it manually.\"\n            exit 1\n        fi\n    else\n        echo \"error: Homebrew is not available. Please install SwiftLint manually:\"\n        echo \"https://github.com/realm/SwiftLint\"\n        exit 1\n    fi\n}\n\n# Check if SwiftLint is available; install it if missing\nif ! command -v swiftlint >/dev/null; then\n    install_swiftlint\nelse\n    info \"SwiftLint is already installed.\"\nfi\n\n# Run SwiftLint\ninfo \"Running SwiftLint...\"\nswiftlint\n";
+		};
+		CF8D70C6DD2CC858EBFCD7B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E126EFF40ED2E4F5192D5565 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OTFMagicBoxWatch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1C1256CE3247B6A7380A5E6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1126,8 +472,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A7B6DB426FD285000F872A1 /* OTFMagicBoxYamlTests.swift in Sources */,
-				5A7B6DAC26FD282C00F872A1 /* OTFMagicBoxTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,19 +479,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90319EE72C527CC7000EA2A3 /* NoTaskView.swift in Sources */,
-				84F43F502B4D6A4A009DFFF8 /* OTFMagicBoxWatch.swift in Sources */,
-				90319EE92C527DE1000EA2A3 /* LogoutUserView.swift in Sources */,
-				90C79E492B4DCE120020D20F /* Extension+OCKTask.swift in Sources */,
-				90C79E452B4DCE120020D20F /* OTFCareKitStoreManager.swift in Sources */,
-				90C79E472B4DCE120020D20F /* CareKitListView.swift in Sources */,
-				90C79E482B4DCE120020D20F /* Extension+Notification.swift in Sources */,
-				901700F42B63B856006C611C /* ActivityIndicatorView.swift in Sources */,
-				A8E397802C6F445000E56C1D /* CustomHeaderView.swift in Sources */,
-				90C79E462B4DCE120020D20F /* ContentView.swift in Sources */,
-				90C79E4A2B4DCE120020D20F /* SessionManager.swift in Sources */,
-				90C79E4C2B4E862A0020D20F /* WatchStoreService.swift in Sources */,
-				90319EEC2C52B169000EA2A3 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,126 +486,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE482CF7262C954A00C0A2D5 /* AppDelegate.swift in Sources */,
-				846761BB27DF8BC300A3207E /* SurveysList.swift in Sources */,
-				5AB1806826B882E9007AF766 /* ContactsViewController.swift in Sources */,
-				A8FCD2AC2A4C6F0D006E0B6E /* LocalAuthentication.swift in Sources */,
-				5A41D034266A91CB007CCEB4 /* TasksUIView.swift in Sources */,
-				846761A527DF8AB800A3207E /* OnboardingOptionsViewController.swift in Sources */,
-				7C3B200D2CB82A3A00D260BF /* PatientAvatar.swift in Sources */,
-				84771FA9272974B700468E0E /* Extension+Image.swift in Sources */,
-				5AB1808826B9C489007AF766 /* ScheduleViewController.swift in Sources */,
-				84268457274791E5007C5D50 /* SignInWithAppleStepViewController.swift in Sources */,
-				841FEFBF274E5D8200698892 /* CloudantSyncManager.swift in Sources */,
-				84EEAD062BBCA6D100414955 /* OTFYamlStyle.swift in Sources */,
-				5A49632426EB257200A4B4DF /* Extension+UIImage.swift in Sources */,
-				846761C327DF8BC300A3207E /* ContactsSection.swift in Sources */,
-				84EEAD042BBCA6D100414955 /* OTFStyleColorStyler.swift in Sources */,
-				849989E62AD7D182009CBA41 /* Extension+Array.swift in Sources */,
-				5A7B6D8F26FA353B00F872A1 /* OTFTheraforgeNetwork.swift in Sources */,
-				5AADFD47264E89510069FEF7 /* ConsentDocument.swift in Sources */,
-				5AADFD4D264E98950069FEF7 /* OnboardingTaskCoordinator.swift in Sources */,
-				32C6DD9A28D8A06F00E453A4 /* UpdateUserViewModel.swift in Sources */,
-				7C979A602A5731C200EBCE2F /* OTFColor.swift in Sources */,
-				5A49627026D4A2EA00A4B4DF /* DataModel.swift in Sources */,
-				5A49627826DD5A8D00A4B4DF /* WithdrawalViewController.swift in Sources */,
-				846761C427DF8BC300A3207E /* TasksSection.swift in Sources */,
-				5A49632826EB5DDD00A4B4DF /* Extension+Character.swift in Sources */,
-				5AADFD77264FE8EE0069FEF7 /* LaunchView.swift in Sources */,
-				841FEFC4274E5DBC00698892 /* Extension+URLRequest.swift in Sources */,
-				846761C127DF8BC300A3207E /* CardBackground.swift in Sources */,
-				846761BA27DF8BC300A3207E /* StaticUI.swift in Sources */,
-				846761BE27DF8BC300A3207E /* RKTasks.swift in Sources */,
-				32AAA4A728339E7F00DA0DA8 /* ModuleAppYmlReader+DataModel.swift in Sources */,
-				846761C527DF8BC300A3207E /* CareKitTaskViews.swift in Sources */,
-				5AB1808A26B9C76D007AF766 /* SurveyItemViewController.swift in Sources */,
-				84146ED82BD14F4B007D768C /* TaskListRow+Extras.swift in Sources */,
-				84A1758B2750A035001587BD /* Extention+Notification.swift in Sources */,
-				A8C0556B296D61770098D1FB /* Extention+ViewController.swift in Sources */,
-				849989E22AD7CC67009CBA41 /* UploadDocumentManager.swift in Sources */,
-				84268455274770A3007C5D50 /* LoginSteps.swift in Sources */,
-				8467619F27DF8A6900A3207E /* Environment+StoreManager.swift in Sources */,
-				8467619B27DF8A1F00A3207E /* OCKStoreManager.swift in Sources */,
-				7C3FE1B52CD626CC001F8B36 /* ContactPicker.swift in Sources */,
-				5A43049E272AE84A00926584 /* ConsentDocumentView.swift in Sources */,
-				5AB1807E26B884C3007AF766 /* PasscodeViewController.swift in Sources */,
-				841CA60A275F719100C6861D /* ViewDidLoadModifier.swift in Sources */,
-				5AB1806C26B8846B007AF766 /* TipView.swift in Sources */,
-				846761A427DF8AB800A3207E /* OnboardingViewController.swift in Sources */,
-				841FEFBB274E5CE100698892 /* SSEAndSyncManager.swift in Sources */,
-				5AB1808426B88BDE007AF766 /* LoginExistingUserViewController.swift in Sources */,
-				5A49627A26DE69AE00A4B4DF /* OTFHealthKitManager.swift in Sources */,
-				33B27CA42CF895720021896B /* LogViewer.swift in Sources */,
-				841FEFC2274E5DAF00698892 /* UserDefaultsManager.swift in Sources */,
-				32C6DD9628D8A02C00E453A4 /* DeleteAccountViewModel.swift in Sources */,
-				8467619827DF89DE00A3207E /* PercentProgressRow.swift in Sources */,
-				5AB1807C26B8849A007AF766 /* WithdrawView.swift in Sources */,
-				844270A2272A65C4000F7D78 /* StyleModifiers.swift in Sources */,
-				9004A9222AD7DD390084622A /* HelpView.swift in Sources */,
-				5AB1808F26BC58DE007AF766 /* HealthRecordStep.swift in Sources */,
-				5A41E8A8267A5FCC007CCEB4 /* HealthDataStep.swift in Sources */,
-				5AB1808226B88A2B007AF766 /* Metrics.swift in Sources */,
-				5AB1808026B8877C007AF766 /* OCKStore + SampleData.swift in Sources */,
-				5A4F633D271F412D0080F0D7 /* LogoutView.swift in Sources */,
-				5A49628726DFEEBC00A4B4DF /* PasswordlessLoginStep.swift in Sources */,
-				846761C027DF8BC300A3207E /* TaskListViewController.swift in Sources */,
-				32C6DD9C28D8A08700E453A4 /* ChangePasswordViewModel.swift in Sources */,
-				5A41D037266A955C007CCEB4 /* TaskItem.swift in Sources */,
-				5AB1807926B8849A007AF766 /* SupportView.swift in Sources */,
-				32C6DD9828D8A04700E453A4 /* LogoutViewModel.swift in Sources */,
-				846761C727DF8BEA00A3207E /* RingProgressView.swift in Sources */,
-				846761C227DF8BC300A3207E /* TasksViewModel.swift in Sources */,
-				CE482CF9262C954A00C0A2D5 /* SceneDelegate.swift in Sources */,
-				5A49628F26E206D200A4B4DF /* HealthRecordManager.swift in Sources */,
-				5A41D03D266AA305007CCEB4 /* TaskSamples.swift in Sources */,
-				5A7B6D7F26F0A1FF00F872A1 /* LoginCustomWaitStep.swift in Sources */,
-				5AADFD3A264E86950069FEF7 /* OnboardingItemView.swift in Sources */,
-				5A4F633B271AA6360080F0D7 /* ChangePasswordView.swift in Sources */,
-				8467619527DF89DE00A3207E /* CountProgressRow.swift in Sources */,
-				8467619727DF89DE00A3207E /* CheckUpViewModel.swift in Sources */,
-				5AB1806626B88051007AF766 /* ScheduleViewControllerRepresentable.swift in Sources */,
-				846761B927DF8BC300A3207E /* PlatformPicker.swift in Sources */,
-				5AADFD3B264E86950069FEF7 /* OnboardingView.swift in Sources */,
-				848DDF65273D52A3004B98F1 /* UpdateUserProfileDetailView.swift in Sources */,
-				5A49632626EB5D8F00A4B4DF /* Extension+String.swift in Sources */,
-				5A41D03A266A9D08007CCEB4 /* TaskViewController.swift in Sources */,
-				849989DA2AD7CAE4009CBA41 /* ProfileIcon.swift in Sources */,
-				5AB1807626B8849A007AF766 /* ProfileUIView.swift in Sources */,
-				5A41D040266AA517007CCEB4 /* TaskItemView.swift in Sources */,
-				8486C8DD278482D70013B4E9 /* LoadingView.swift in Sources */,
-				5A430489272884CB00926584 /* Extension+Font.swift in Sources */,
-				CE482CFB262C954A00C0A2D5 /* ContentView.swift in Sources */,
-				A8FCD2AA2A4C6EF7006E0B6E /* KeychainCloudManager.swift in Sources */,
-				5A4304A0272AE85200926584 /* DocumentPreviewViewController.swift in Sources */,
-				846761BD27DF8BC300A3207E /* TaskViewControllerRepresentable.swift in Sources */,
-				841CA60C275F827300C6861D /* CareKitStoreManager.swift in Sources */,
-				849989E42AD7CD53009CBA41 /* LoaderView.swift in Sources */,
-				5AB1808D26BC4ED6007AF766 /* LoginViewController.swift in Sources */,
-				841FEFC0274E5D8200698892 /* TheraForgeHTTPInterceptor.swift in Sources */,
-				846761A127DF8A6900A3207E /* OCKHealthKitStore+Extension.swift in Sources */,
-				84EEAD052BBCA6D100414955 /* OTFStyle.swift in Sources */,
-				5A49628D26E1BD5D00A4B4DF /* UIColor.swift in Sources */,
-				5AB1807726B8849A007AF766 /* ChangePasscodeView.swift in Sources */,
-				846761A027DF8A6900A3207E /* Extension+OCKAnyTask.swift in Sources */,
-				33B27CA02CF894BA0021896B /* LogLevel.swift in Sources */,
-				5A49627126D4A2EA00A4B4DF /* YmlReader.swift in Sources */,
-				5A49627E26DEA59F00A4B4DF /* HealthKitManager.swift in Sources */,
-				5A4304AC272CB22600926584 /* NetworkIndicator.swift in Sources */,
-				5A43049C272ADF7900926584 /* Extension+Date.swift in Sources */,
-				326086F7283E48A300888678 /* DeleteAccountView.swift in Sources */,
-				33B27CA22CF895050021896B /* LogManager.swift in Sources */,
-				5AB1807826B8849A007AF766 /* ReportView.swift in Sources */,
-				849989DE2AD7CB1C009CBA41 /* PDFViewer.swift in Sources */,
-				846761BF27DF8BC300A3207E /* TaskListRow.swift in Sources */,
-				7C7EC6792A65912C003B0FFB /* OTFNetworkObserver.swift in Sources */,
-				8467619927DF89DE00A3207E /* CheckUpView.swift in Sources */,
-				33B27CA62CF895E20021896B /* LogListView.swift in Sources */,
-				902E18A62AE8F0A000F694F2 /* OTFFont.swift in Sources */,
-				A802085A2C528C61006AFFE5 /* DoctorLoginViewController.swift in Sources */,
-				849989E02AD7CB25009CBA41 /* PDFKitRepresentedView.swift in Sources */,
-				5A49627C26DE6A2E00A4B4DF /* ActivityManager.swift in Sources */,
-				5AADFD50264E9A880069FEF7 /* Constants.swift in Sources */,
-				5A41D023266A9106007CCEB4 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,26 +504,15 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		CE482D01262C954C00C0A2D5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE482D02262C954C00C0A2D5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		5A7B6DB026FD282C00F872A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1333,7 +533,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1349,21 +549,19 @@
 		};
 		84F43F5B2B4D6A4C009DFFF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D78377B3FDDDDB96A752049 /* Pods-OTFMagicBoxWatch.debug.xcconfig */;
+			baseConfigurationReference = 0AF99A1A9A0F89A44D3A1F92 /* Pods-OTFMagicBoxWatch.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatchDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=watchos*]" = 53UK9NNVG5;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1380,38 +578,35 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = OTFMagicBoxWatchProvDebug;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
 		84F43F5C2B4D6A4C009DFFF8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4656AE76EB1F32CACF6F4AC5 /* Pods-OTFMagicBoxWatch.release.xcconfig */;
+			baseConfigurationReference = 6866B036622565469A099223 /* Pods-OTFMagicBoxWatch.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatchRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 53UK9NNVG5;
-				"DEVELOPMENT_TEAM[sdk=watchos*]" = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1428,17 +623,16 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = OTFMagicBoxWatchProv;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = OTFMagicBoxWatchProv;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1446,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1498,6 +693,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1505,33 +701,36 @@
 		};
 		90C79E4E2B4E9ED00020D20F /* Care */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CD7BC254CB8E0C8B57567C9 /* Pods-OTFMagicBox.care.xcconfig */;
+			baseConfigurationReference = 4482AFA87C4403ABBF836F19 /* Pods-OTFMagicBox.care.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53UK9NNVG5;
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MagicBox;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
+					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					/usr/lib/swift,
+				);
+				MARKETING_VERSION = 2.0.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DSTATICUI";
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OTFMagicBoxRelease;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1542,9 +741,9 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1560,21 +759,19 @@
 		};
 		90C79E502B4E9ED00020D20F /* Care */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 331DB9E7BD73554739757F09 /* Pods-OTFMagicBoxWatch.care.xcconfig */;
+			baseConfigurationReference = 35FAC6B92A9E1E23A15862CA /* Pods-OTFMagicBoxWatch.care.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatch.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=watchos*]" = 53UK9NNVG5;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1591,18 +788,17 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = OTFMagicBoxWatchProv;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Care;
 		};
@@ -1610,6 +806,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1662,6 +859,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1669,33 +867,36 @@
 		};
 		90C79E522B4E9F070020D20F /* CareHealth */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24BB2EEA055D595EA220DC76 /* Pods-OTFMagicBox.carehealth.xcconfig */;
+			baseConfigurationReference = 01F69839E965FD3F90DFD35D /* Pods-OTFMagicBox.carehealth.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53UK9NNVG5;
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MagicBox;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
+					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					/usr/lib/swift,
+				);
+				MARKETING_VERSION = 2.0.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DSTATICUI";
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OTFMagicBoxRelease;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1706,9 +907,9 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D25537G8CD;
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				INFOPLIST_FILE = OTFMagicBoxTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1724,21 +925,19 @@
 		};
 		90C79E542B4E9F070020D20F /* CareHealth */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C4F1D42E931099C244B8395 /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */;
+			baseConfigurationReference = ACBC985F3A507F502B53610A /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBoxWatch/OTFMagicBoxWatch.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"OTFMagicBoxWatch/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=watchos*]" = 53UK9NNVG5;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1755,18 +954,17 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios.watchkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = OTFMagicBoxWatchProv;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = CareHealth;
 		};
@@ -1774,6 +972,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1826,6 +1025,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1835,6 +1035,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1880,6 +1081,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -1888,27 +1090,33 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2233830CDBB486DA15E6FCF4 /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = A14C9E782B63A3E5E3ABFB46 /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MagicBox;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
+					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					/usr/lib/swift,
+				);
+				MARKETING_VERSION = 2.0.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DSTATICUI";
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1919,32 +1127,35 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83899DF00E8F459CEB5DE81F /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = 279A4E133454E00700BF86BF /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OTFMagicBox/OTFMagicBox.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53UK9NNVG5;
+				DEVELOPMENT_TEAM = 53UK9NNVG5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OTFMagicBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MagicBox;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
+					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					/usr/lib/swift,
+				);
+				MARKETING_VERSION = 2.0.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DSTATICUI";
 				PRODUCT_BUNDLE_IDENTIFIER = org.theraforge.magicbox.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OTFMagicBoxRelease;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1998,6 +1209,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		4E06B5512E84935B009F4FFE /* XCLocalSwiftPackageReference "RawRepresentableMacro" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = RawRepresentableMacro;
+		};
+		4E8BE2A32E89DC8B00A7D6C5 /* XCLocalSwiftPackageReference "RawGenerableMacro" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = RawGenerableMacro;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E8BE2A42E89DC8B00A7D6C5 /* RawModel */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RawModel;
+		};
+		4EE7A0A22E89D35A00B9DED2 /* RawModel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E06B5512E84935B009F4FFE /* XCLocalSwiftPackageReference "RawRepresentableMacro" */;
+			productName = RawModel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE482CEB262C954A00C0A2D5 /* Project object */;
 }

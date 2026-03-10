@@ -1,0 +1,83 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Schedule feature configuration
+# ------------------------------
+# Controls UI text and a few preferences for the Schedule screen.
+# - Keep the structure flat (easy to edit).
+# - All user-visible strings are localized (en/pt shown; add more if needed).
+#
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+# Navigation bar title on the Schedule screen.
+navTitle:
+  en: "Schedule"
+  pt: "Agenda"
+  ar: "الجدول"
+
+# Label for the leading toolbar button that jumps to today.
+todayLabel:
+  en: "Today"
+  pt: "Hoje"
+  ar: "اليوم"
+
+# If true, the Today button uses "<DAY>.calendar" SF Symbol when available (1.calendar ... 31.calendar),
+# otherwise it falls back to "calendar".
+useDynamicCalendarSymbol: true
+
+# Show the leading "Today" button on the Schedule screen.
+showLeadingTodayButton: true
+
+# Texts for the empty day card (shown when there are no tasks on a given date).
+emptyDayTitle:
+  en: "No tasks"
+  pt: "Sem tarefas"
+  ar: "لا توجد مهام"
+
+# Secondary text shown under the empty day title.
+emptyDaySubtitle:
+  en: "No tasks scheduled for this date."
+  pt: "Não há tarefas agendadas para esta data."
+  ar: "لا توجد مهام مجدولة لهذا التاريخ."
+
+# Alert shown after the account is deleted (navigates back to onboarding).
+deletedAlertTitle:
+  en: "Account Deleted"
+  pt: "Conta Excluída"
+  ar: "تم حذف الحساب"
+
+# Body text for the Account Deleted alert.
+deletedAlertMessage:
+  en: "Your account was deleted. You'll be returned to onboarding."
+  pt: "Sua conta foi excluída. Você será levado ao onboarding."
+  ar: "تم حذف حسابك. ستتم إعادتك إلى شاشة الإعداد."

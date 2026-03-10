@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orktextscaleanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let textChoices = [
+    ORKTextChoice(text: &lt;#"Poor"#&gt;, value: &lt;#0 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;), // ORKTextChoice. Example: index 0.
+    ORKTextChoice(text: &lt;#"Fair"#&gt;, value: &lt;#1 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;),
+    ORKTextChoice(text: &lt;#"Good"#&gt;, value: &lt;#2 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;),
+    ORKTextChoice(text: &lt;#"Excellent"#&gt;, value: &lt;#3 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;)
+]
+
+let textScaleAnswerFormat = ORKAnswerFormat.textScale(
+    with: textChoices, // [ORKTextChoice]. Example: textChoices defined above.
+    defaultIndex: &lt;#Int.max#&gt;, // Int. Example: Int.max (no default) or 2.
+    vertical: &lt;#false#&gt; // Bool. Example: true. Render vertically instead of horizontally.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot choose.
+textScaleAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+textScaleAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return textScaleAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKTextScaleAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Text-based Likert scale with default index and orientation.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKTextScaleAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

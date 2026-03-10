@@ -1,0 +1,511 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Auth configuration
+# ------------------
+# This file controls the authentication and onboarding-related copy, options,
+# and feature flags across the app's sign-up/sign-in flows.
+# You can safely change the text values without touching the app code.
+# Format:
+#   - Localized strings are grouped by key with language codes (e.g., 'en', 'pt').
+#   - You may add more languages by adding more codes (e.g., 'es', 'fr') with translations.
+#   - Keep the structure flat (no deep nesting) to make it easy to edit.
+#
+# IMPORTANT
+# - Do not remove required keys; if you don’t need a language, leave at least one (e.g., 'en').
+# - Values on the right of the colon are the visible text in the app.
+# - Lines starting with '#' are comments and are ignored by the app.
+
+# Version of this YAML schema/content. Bump when you change copy/structure.
+version: "2.0.0"
+
+# Consent
+# Consent configuration for the study/terms screen.
+# Name of the consent resource/file (without extension if applicable).
+consentFileName: "TheraForgeConsent"
+# Localized reason statement shown to the user for consent.
+consentReason:
+  en: "I consent to participate in the study."
+  pt: "Eu concordo em participar no estudo."
+  ar: "أوافق على المشاركة في الدراسة."
+
+# Consent
+consentFileName: "TheraForgeConsent"
+
+# Update this to fit login-time consent
+consentReason:
+  en: "I agree to the Terms of Use and acknowledge the Privacy Policy."
+  pt: "Concordo com os Termos de Utilização e reconheço a Política de Privacidade."
+  ar: "أوافق على شروط الاستخدام وأقرّ بسياسة الخصوصية."
+
+# Title for the consent document
+consentTitle:
+  en: "Terms & Privacy Agreement"
+  pt: "Acordo de Termos e Privacidade"
+  ar: "اتفاقية الشروط والخصوصية"
+
+# Ordered sections; toggle with `show`
+consentSections:
+  - type: "overview"
+    show: true
+    title:
+      en: "Before You Continue"
+      pt: "Antes de Continuar"
+      ar: "قبل المتابعة"
+    summary:
+      en: "Review how we handle your data and agree to our terms."
+      pt: "Revise como tratamos os seus dados e aceite os nossos termos."
+      ar: "راجع كيف نتعامل مع بياناتك ووافق على شروطنا."
+    content:
+      en: "By continuing, you confirm you meet the minimum age, agree to the Terms of Use, and acknowledge the Privacy Policy. You can manage your choices in Settings at any time."
+      pt: "Ao continuar, confirma que cumpre a idade mínima, concorda com os Termos de Utilização e reconhece a Política de Privacidade. Pode gerir as suas escolhas nas Definições a qualquer momento."
+      ar: "بمتابعتك، تؤكد أنك تستوفي الحد الأدنى للعمر، وتوافق على شروط الاستخدام، وتقرّ بسياسة الخصوصية. يمكنك إدارة اختياراتك من الإعدادات في أي وقت."
+    image:
+
+  - type: "dataGathering"
+    show: true
+    title:
+      en: "Data We Collect"
+      pt: "Dados que Recolhemos"
+      ar: "البيانات التي نجمعها"
+    summary:
+      en: "Account info, app usage, diagnostics, and optional health data."
+      pt: "Informações de conta, utilização da app, diagnósticos e dados de saúde opcionais."
+      ar: "معلومات الحساب، واستخدام التطبيق، وبيانات التشخيص، وبيانات صحية اختيارية."
+    content:
+      en: "We collect your account details (e.g., email), device identifiers, crash/diagnostic data, and app usage analytics. With your permission, we may read Health data to power app features. We do not record audio or track precise location."
+      pt: "Recolhemos dados da sua conta (ex.: email), identificadores do dispositivo, dados de falhas/diagnóstico e análises de utilização. Com a sua permissão, podemos ler dados de Saúde para funcionalidades da app. Não gravamos áudio nem rastreamos a localização precisa."
+      ar: "نجمع تفاصيل حسابك (مثل البريد الإلكتروني)، ومعرّفات الجهاز، وبيانات الأعطال/التشخيص، وتحليلات استخدام التطبيق. وبموافقتك، قد نقرأ بيانات الصحة لتمكين ميزات التطبيق. نحن لا نسجل الصوت ولا نتتبع الموقع الدقيق."
+    image:
+
+  - type: "privacy"
+    show: true
+    title:
+      en: "Your Privacy & Security"
+      pt: "A Sua Privacidade e Segurança"
+      ar: "خصوصيتك وأمانك"
+    summary:
+      en: "Encryption in transit and at rest; limited access by authorized staff."
+      pt: "Encriptação em trânsito e em repouso; acesso limitado por pessoal autorizado."
+      ar: "تشفير أثناء النقل وعند التخزين؛ وصول محدود للموظفين المصرّح لهم."
+    content:
+      en: "We encrypt data in transit and at rest. Access is restricted to authorized personnel for support and operations. We never sell your personal information."
+      pt: "Encriptamos dados em trânsito e em repouso. O acesso é restrito a pessoal autorizado para apoio e operações. Nunca vendemos as suas informações pessoais."
+      ar: "نشفّر البيانات أثناء النقل وعند التخزين. يقتصر الوصول على الموظفين المصرّح لهم للدعم والتشغيل. نحن لا نبيع معلوماتك الشخصية أبدًا."
+    image:
+
+  - type: "dataUse"
+    show: true
+    title:
+      en: "How We Use Your Data"
+      pt: "Como Utilizamos os Seus Dados"
+      ar: "كيف نستخدم بياناتك"
+    summary:
+      en: "To provide the service, improve reliability, and meet legal obligations."
+      pt: "Para fornecer o serviço, melhorar a fiabilidade e cumprir obrigações legais."
+      ar: "لتقديم الخدمة، وتحسين الموثوقية، والوفاء بالالتزامات القانونية."
+    content:
+      en: "We use data to deliver core functionality, troubleshoot issues, improve performance, and comply with laws. Aggregated analytics may inform product decisions. Marketing is optional and can be disabled."
+      pt: "Utilizamos dados para fornecer funcionalidades essenciais, resolver problemas, melhorar o desempenho e cumprir a lei. Análises agregadas podem informar decisões do produto. Marketing é opcional e pode ser desativado."
+      ar: "نستخدم البيانات لتقديم الوظائف الأساسية، وتشخيص المشكلات، وتحسين الأداء، والامتثال للقوانين. قد تُستخدم التحليلات المجمّعة لاتخاذ قرارات المنتج. التسويق اختياري ويمكن تعطيله."
+    image:
+
+  - type: "withdrawing"
+    show: true
+    title:
+      en: "Your Choices"
+      pt: "As Suas Escolhas"
+      ar: "خياراتك"
+    summary:
+      en: "Manage permissions, download or delete data, or close your account."
+      pt: "Gerir permissões, descarregar ou eliminar dados, ou encerrar a conta."
+      ar: "إدارة الأذونات، وتنزيل البيانات أو حذفها، أو إغلاق حسابك."
+    content:
+      en: "You can revoke permissions in Settings, request data export or deletion, and close your account. Some data may be retained where required by law or for fraud prevention."
+      pt: "Pode revogar permissões nas Definições, pedir exportação ou eliminação dos dados e encerrar a conta. Alguns dados podem ser retidos quando exigido por lei ou para prevenção de fraude."
+      ar: "يمكنك إلغاء الأذونات من الإعدادات، وطلب تصدير البيانات أو حذفها، وإغلاق حسابك. قد نحتفظ ببعض البيانات عندما يقتضي القانون ذلك أو لأغراض منع الاحتيال."
+    image:
+
+  - type: "custom"
+    show: true
+    title:
+      en: "Links & Contact"
+      pt: "Ligações e Contacto"
+      ar: "الروابط والتواصل"
+    summary:
+      en: "Read the full Terms and Privacy Policy or contact support."
+      pt: "Leia os Termos e a Política de Privacidade completos ou contacte o suporte."
+      ar: "اقرأ الشروط وسياسة الخصوصية بالكامل أو تواصل مع الدعم."
+    content:
+      en: "Terms of Use: example.org/terms\nPrivacy Policy: example.org/privacy\nSupport: support@example.org"
+      pt: "Termos de Utilização: example.org/terms\nPolítica de Privacidade: example.org/privacy\nApoio: support@example.org"
+      ar: "شروط الاستخدام: example.org/terms\nسياسة الخصوصية: example.org/privacy\nالدعم: support@example.org"
+    image: "online-agreement"
+
+# Health Records
+healthRecords:
+  permissionsTitle:
+    en: "Health Records"
+    pt: "Registos de Saúde"
+    ar: "السجلات الصحية"
+  permissionsText:
+    en: "Allow the app to read your Health Records so you can view your clinical information in one secure place."
+    pt: "Permita que a app leia os seus Registos de Saúde para ver a sua informação clínica num único local seguro."
+    ar: "اسمح للتطبيق بقراءة سجلاتك الصحية لتتمكن من عرض معلوماتك السريرية في مكان آمن واحد."
+
+# Registration
+# Controls fields and copy for the sign-up/registration flow.
+# Include Date of Birth field in registration.
+includeDOB: true
+# Include Gender field in registration.
+includeGender: true
+# Title shown on the registration screen.
+registrationTitle:
+  en: "Registration"
+  pt: "Registro"
+  ar: "التسجيل"
+# Subtitle/description shown on the registration screen.
+registrationText:
+  en: "Sign up for this app"
+  pt: "Inscreva-se nesta aplicação"
+  ar: "أنشئ حسابًا لهذا التطبيق"
+# Section header for the registration form.
+registrationSectionHeader:
+  en: "New Account"
+  pt: "Nova conta"
+  ar: "حساب جديد"
+# Placeholder shown in the email field.
+emailPlaceholder:
+  en: "jappleseed@example.com"
+  pt: "jappleseed@example.com"
+# Placeholder shown in the password field.
+passwordPlaceholder:
+  en: "Enter password"
+  pt: "Introduza a palavra‑passe"
+  ar: "أدخل كلمة المرور"
+# Placeholder for the Date of Birth picker.
+dateOfBirthPlaceholder:
+  en: "Pick a date"
+  pt: "Escolha uma data"
+  ar: "اختر تاريخًا"
+# Placeholder for the Gender picker.
+genderPlaceholder:
+  en: "Pick a gender"
+  pt: "Escolha um género"
+  ar: "اختر الجنس"
+# Placeholder for the First Name field.
+firstNamePlaceholder:
+  en: "John"
+  pt: "João"
+  ar: "جون"
+# Placeholder for the Last Name field.
+lastNamePlaceholder:
+  en: "Appleseed"
+  pt: "Appleseed"
+# Validation message shown when the password doesn't meet requirements.
+passwordInvalidMessage:
+  en: "Password must be at least 10 characters in length"
+  pt: "A palavra‑passe deve ter pelo menos 10 caracteres"
+  ar: "يجب ألا تقل كلمة المرور عن 10 أحرف"
+
+# Passcode
+# Optional in-app passcode shown after login.
+# Enable the in-app passcode requirement.
+passcodeEnabled: false
+# Passcode length; allowed values are "4" or "6".
+passcodeType: "4"   # "4" or "6"
+# Localized prompt shown when asking for the passcode.
+passcodePrompt:
+  en: "Enter your passcode"
+  pt: "Introduza o seu código"
+  ar: "أدخل رمز المرور"
+
+# Sign‑in options
+# Informational text and icon for alternate sign-in methods.
+# Informational text describing available sign-in methods.
+loginOptionsText:
+  en: "You can sign in to your cloud account with username and password. Alternatively, you can sign in with your Apple ID or with your Gmail address."
+  pt: "Pode iniciar sessão na conta na nuvem com nome de utilizador e palavra‑passe. Em alternativa, utilize Apple ID ou Gmail."
+  ar: "يمكنك تسجيل الدخول إلى حسابك السحابي باستخدام اسم المستخدم وكلمة المرور. بدلاً من ذلك، يمكنك تسجيل الدخول باستخدام Apple ID أو عنوان Gmail."
+# SF Symbol name for the sign-in options icon.
+loginOptionsIcon: "cloud"
+
+# Auth providers
+# Feature flags to show/hide provider login buttons.
+# Show the "Sign in with Apple" option.
+showAppleLogin: true
+# Show the "Sign in with Google" option.
+showGoogleLogin: true
+
+# Buttons & messages
+# Localized labels for buttons and common status/error messages.
+# Button label for Apple sign-in.
+signInWithApple:
+  en: "Sign in with Apple"
+  pt: "Entrar com Apple"
+  ar: "تسجيل الدخول باستخدام Apple"
+# Button label for Apple sign-up.
+signUpWithApple:
+  en: "Sign up with Apple"
+  pt: "Registar com Apple"
+  ar: "إنشاء حساب باستخدام Apple"
+# Button label for Google sign-in.
+signInWithGoogle:
+  en: "Sign in with Google"
+  pt: "Entrar com Google"
+  ar: "تسجيل الدخول باستخدام Google"
+# Button label for Google sign-up.
+signUpWithGoogle:
+  en: "Sign up with Google"
+  pt: "Registar com Google"
+  ar: "إنشاء حساب باستخدام Google"
+# Button label for email/password sign-in.
+signInWithEmail:
+  en: "Sign in with Email and Password"
+  pt: "Entrar com Email e Senha"
+  ar: "تسجيل الدخول بالبريد الإلكتروني وكلمة المرور"
+# Button label for email/password sign-up.
+signUpWithEmail:
+  en: "Sign up with Email and Password"
+  pt: "Registar com Email e Senha"
+  ar: "إنشاء حساب بالبريد الإلكتروني وكلمة المرور"
+# Status message shown while signing in.
+signingInMessage:
+  en: "Signing in..."
+  pt: "A iniciar sessão..."
+  ar: "جارٍ تسجيل الدخول..."
+# Status message shown while signing up.
+signingUpMessage:
+  en: "Signing up..."
+  pt: "A registar..."
+  ar: "جارٍ إنشاء الحساب..."
+# Status message shown while creating an account.
+creatingAccountMessage:
+  en: "Creating account..."
+  pt: "A criar conta..."
+  ar: "جارٍ إنشاء الحساب..."
+# Generic error alert title.
+genericErrorTitle:
+  en: "Error"
+  pt: "Erro"
+  ar: "خطأ"
+# Default confirmation action title.
+okayActionTitle:
+  en: "OK"
+  pt: "OK"
+  ar: "موافق"
+# Cancel action title.
+cancelActionTitle:
+  en: "Cancel"
+  pt: "Cancelar"
+  ar: "إلغاء"
+# Open action title.
+openActionTitle:
+  en: "Open"
+  pt: "Abrir"
+  ar: "فتح"
+# Submit action title.
+submitActionTitle:
+  en: "Submit"
+  pt: "Submeter"
+  ar: "إرسال"
+# Error title used when login fails.
+loginErrorTitle:
+  en: "Unable to Login"
+  pt: "Não é Possível Efetuar o Login"
+  ar: "تعذر تسجيل الدخول"
+# Error title used when sign-up fails.
+signupErrorTitle:
+  en: "Unable to Signup"
+  pt: "Não é Possível Efetuar o Registro"
+  ar: "تعذر إنشاء الحساب"
+# Error title used when Google sign-in fails.
+googleSignInFailedTitle:
+  en: "Failed to Sign in with Google"
+  pt: "Falha ao iniciar sessão com Google"
+  ar: "فشل تسجيل الدخول باستخدام Google"
+# Title shown after sign-up when email verification is required.
+emailVerifyConfirmationTitle:
+  en: "Account Confirmation"
+  pt: "Confirmação da conta"
+  ar: "تأكيد الحساب"
+# Message explaining the email verification step.
+emailVerifyMessage:
+  en: "An email of your account confirmation link has been sent to your address.\nCheck your email and approve the request"
+  pt: "Foi enviado para o seu endereço um email com o link de confirmação da conta.\nVerifique o seu email e aprove o pedido."
+  ar: "تم إرسال رسالة بريد إلكتروني تحتوي على رابط تأكيد الحساب إلى عنوانك.\nتحقق من بريدك الإلكتروني ووافق على الطلب"
+
+# Login form (existing user)
+# Copy and placeholders for the existing user login form.
+# Title shown on the login screen.
+loginTitle:
+  en: "Login"
+  pt: "Iniciar sessão"
+  ar: "تسجيل الدخول"
+# Subtitle/description shown on the login screen.
+loginText:
+  en: "Log in to this app"
+  pt: "Inicie sessão nesta aplicação"
+  ar: "سجّل الدخول إلى هذا التطبيق"
+# Placeholder shown in the email field.
+loginEmailPlaceholder:
+  en: "jappleseed@example.com"
+  pt: "jappleseed@example.com"
+# Placeholder shown in the password field.
+loginPasswordPlaceholder:
+  en: "Enter password"
+  pt: "Introduza a palavra‑passe"
+  ar: "أدخل كلمة المرور"
+# Section header for the login form.
+loginSectionHeader:
+  en: "Credentials"
+  pt: "Credenciais"
+  ar: "بيانات الاعتماد"
+
+# Biometric login (Face ID / Touch ID)
+# Button titles and guidance for biometric authentication.
+# Button label for Face ID.
+faceIdButtonTitle:
+  en: "Use Face/Touch ID"
+  pt: "Usar Face/Touch ID"
+  ar: "استخدام Face/Touch ID"
+# Button label for Touch ID.
+touchIdButtonTitle:
+  en: "Use Face/Touch ID"
+  pt: "Usar Face/Touch ID"
+  ar: "استخدام Face/Touch ID"
+# Message shown when Face ID requires prior credential login.
+faceIdAlertMessage:
+  en: "To use Face ID authentication, please log in with your credentials first"
+  pt: "Para usar autenticação por Face ID, inicie sessão primeiro com as suas credenciais"
+  ar: "لاستخدام مصادقة Face ID، يرجى تسجيل الدخول ببيانات اعتمادك أولاً"
+# Message shown when Touch ID requires prior credential login.
+touchIdAlertMessage:
+  en: "To use Touch ID authentication, please log in with your credentials first"
+  pt: "Para usar autenticação por Touch ID, inicie sessão primeiro com as suas credenciais"
+  ar: "لاستخدام مصادقة Touch ID، يرجى تسجيل الدخول ببيانات اعتمادك أولاً"
+
+# Forgot/Reset password
+# Copy and placeholders for the password reset flow.
+# Title for the reset password screen.
+resetPasswordTitle:
+  en: "Reset Password"
+  pt: "Repor palavra‑passe"
+  ar: "إعادة تعيين كلمة المرور"
+# Error title used when the forgot password flow fails.
+forgotPasswordTitle:
+  en: "error in forgot password"
+  pt: "erro ao recuperar palavra‑passe"
+  ar: "خطأ في استعادة كلمة المرور"
+# Instruction text for requesting a password reset link.
+enterYourEmailToGetLink:
+  en: "Enter your email to get a link for password reset"
+  pt: "Introduza o seu email para receber um link de reposição de palavra‑passe"
+  ar: "أدخل بريدك الإلكتروني للحصول على رابط لإعادة تعيين كلمة المرور"
+# Placeholder for the email input field.
+enterYourEmailPlaceholder:
+  en: "Enter your email"
+  pt: "Introduza o seu email"
+  ar: "أدخل بريدك الإلكتروني"
+# Instruction text for entering the code and new password.
+enterTheCodeMessage:
+  en: "Please enter the code sent to your email and new password"
+  pt: "Introduza o código enviado para o email e a nova palavra‑passe"
+  ar: "يرجى إدخال الرمز المرسل إلى بريدك الإلكتروني وكلمة المرور الجديدة"
+# Placeholder for the new password field.
+newPasswordPlaceholder:
+  en: "New Password"
+  pt: "Nova palavra‑passe"
+  ar: "كلمة المرور الجديدة"
+# Validation message for invalid email addresses.
+enterValidEmailMessage:
+  en: "Please enter valid email address!"
+  pt: "Introduza um email válido!"
+  ar: "يرجى إدخال عنوان بريد إلكتروني صالح!"
+# Error title used when password reset fails.
+passwordResetErrorTitle:
+  en: "Password Reset Error!"
+  pt: "Erro ao repor palavra‑passe!"
+  ar: "خطأ في إعادة تعيين كلمة المرور!"
+# Confirmation title shown when the password has been updated.
+passwordUpdatedTitle:
+  en: "Password has been updated"
+  pt: "A palavra‑passe foi atualizada"
+  ar: "تم تحديث كلمة المرور"
+
+# Doctor portal
+# Optional doctor portal login information.
+# Doctor portal confirmation title
+doctorPortalConfirmTitle:
+  en: "Open Doctor Portal?"
+  pt: "Abrir Portal do Médico?"
+  ar: "فتح بوابة الطبيب؟"
+# Doctor portal confirmation message
+doctorPortalConfirmMessage:
+  en: "You are trying to log in with doctor credentials. That is not currently supported by the app. We'll open the portal at %@ to continue. Proceed?"
+  pt: "Você está tentando fazer login com credenciais médicas. Isso não é suportado pelo aplicativo no momento. Abriremos o portal em %@ para continuar. Deseja prosseguir?"
+  ar: "أنت تحاول تسجيل الدخول ببيانات اعتماد الطبيب. هذا غير مدعوم حاليًا من التطبيق. سنفتح البوابة على %@ للمتابعة. هل تريد المتابعة؟"
+# URL for the doctor portal login page.
+doctorPortalUrl: "https://theraforge.org/portal/login"
+
+# Health permissions
+# HealthKit permissions copy and configuration.
+# Title shown when requesting health permissions.
+healthPermissionsTitle:
+  en: "Permission to read activity data"
+  pt: "Permissão para ler dados de atividade"
+  ar: "إذن لقراءة بيانات النشاط"
+# Description shown when requesting health permissions.
+healthPermissionsText:
+  en: "Use this text to provide an explanation to your app participants about what activity data you intend to read from the Health app and why. This sample will read step count, distance, heart rate, and flights climbed data."
+  pt: "Use este texto para explicar aos participantes do seu aplicativo quais dados de atividade você pretende ler do aplicativo Saúde e por quê. Este exemplo lerá dados de contagem de passos, distância, frequência cardíaca e lances de escada."
+  ar: "استخدم هذا النص لشرح لمستخدمي تطبيقك بيانات النشاط التي تنوي قراءتها من تطبيق الصحة ولماذا. سيقرأ هذا المثال بيانات عدد الخطوات والمسافة ومعدل ضربات القلب وعدد الطوابق التي تم صعودها."
+# Background read frequency for health data (e.g., 'immediate', 'hourly', 'daily').
+healthBackgroundReadFrequency: "immediate"
+# Health data types to request (e.g., 'stepCount', 'distanceWalkingRunning').
+healthTypes:
+  - "StepCount"
+  - "DistanceWalkingRunning"
+  - "FlightsClimbed"
+
+# Completion
+# Copy for the final/confirmation step after onboarding/auth.
+# Title shown on the completion step.
+completionTitle:
+  en: "Welcome aboard"
+  pt: "Bem-vindo a bordo"
+  ar: "مرحبًا بك"
+# Description shown on the completion step.
+completionText:
+  en: "This step concludes the onboarding and consent process of the TheraForge framework. Next up, you will see main app functionality."
+  pt: "Esta etapa conclui o processo de integração e consentimento da estrutura TheraForge. Em seguida, você verá a funcionalidade principal do aplicativo."
+  ar: "تختتم هذه الخطوة عملية الإعداد والموافقة ضمن إطار TheraForge. بعد ذلك سترى وظائف التطبيق الرئيسية."

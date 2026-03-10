@@ -1,0 +1,254 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+##############################################################################
+#                         Global Style Configuration                         #
+##############################################################################
+# This file controls *global UI theming* for the app.
+#
+# HOW IT WORKS
+# ------------
+# - `selectedStyle` picks which style is active at runtime.
+# - `styles` is a list of named style presets.
+# - Each style is decoded into `AppStyle` and used by UIKit / SwiftUI views.
+#
+# All colors, fonts and font weights are symbolic tokens resolved by:
+#   - OTFColor       -> SwiftUI Color / UIKit UIColor
+#   - OTFFont        -> SwiftUI Font / UIKit UIFont
+#   - OTFFontWeight  -> SwiftUI Font.Weight / UIKit UIFont.Weight
+#
+# VALID VALUES
+# ------------
+# 1) Colors (OTFColor)
+#    -----------------
+#    Use any of the OTFColor cases, for example:
+#
+#      Basic        : black, white, clear, darkGray, lightGray, gray,
+#                     red, green, blue, cyan, mint, pink, teal, indigo,
+#                     yellow, orange, purple, brown
+#      System       : systemRed, systemBlue, systemGreen, systemOrange,
+#                     systemYellow, systemBrown, systemPink, systemPurple,
+#                     systemTeal, systemIndigo, systemMint, systemCyan
+#      System Grays : systemGray, systemGray2, systemGray3, systemGray4,
+#                     systemGray5, systemGray6
+#      Labels       : label, secondaryLabel, tertiaryLabel, quaternaryLabel,
+#                     placeholderText, link
+#      Separators   : separator, opaqueSeparator
+#      Fills        : systemFill, secondarySystemFill,
+#                     tertiarySystemFill, quaternarySystemFill
+#      Backgrounds  : systemBackground, secondarySystemBackground,
+#                     tertiarySystemBackground,
+#                     systemGroupedBackground,
+#                     secondarySystemGroupedBackground,
+#                     tertiarySystemGroupedBackground
+#
+#    If the string does not match any case, OTFColor falls back to `.unknown`
+#    and attempts to interpret the original string as a hex value (e.g. a
+#    custom brand color). This allows both named tokens and custom colors.
+#
+# 2) Fonts (OTFFont)
+#    ---------------
+#    Supported values (mapping to SwiftUI dynamic type styles):
+#
+#      largeTitle, title, title2, title3,
+#      headline, subheadline,
+#      body, callout,
+#      footnote, caption, caption2
+#
+# 3) Font Weights (OTFFontWeight)
+#    ----------------------------
+#    Supported values (mapping to Font.Weight / UIFont.Weight):
+#
+#      ultraLight, thin, light, regular,
+#      medium, semibold, bold, heavy, black
+#
+# 4) Fallback
+#    ----------------------------
+#    If a token is unknown or missing:
+#    falls back to safe defaults (see AppStyle.custom and StyleConfiguration.fallback).
+#
+# VERSIONING
+# ----------
+# `version` is used by `StyleConfiguration` for schema evolution and migrations.
+# If you change the structure of this file, bump the version and adjust the
+# migration logic if needed.
+#
+# ADDING A NEW STYLE
+# ------------------
+# 1) Add a new entry under `styles` with a unique `name`.
+# 2) Optionally set `selectedStyle` to that name to make it the default.
+# 3) Leave out any property you don’t care about; the framework will use
+#    the fallback values from `AppStyle.custom` or the configuration fallback.
+#
+# NOTE
+# ----
+# All properties below correspond 1:1 to properties in the `AppStyle` struct
+#
+##############################################################################
+
+# Version for this YAML schema/content
+version: "2.0.0"
+
+# Name of the active style (must match one of the `styles.name` values below)
+selectedStyle: "customStyle"
+
+# List of available styles
+styles:
+  ##########################################################################
+  # customStyle
+  #
+  # Neutral, iOS-like default.
+  # - Blue accent for primary actions.
+  # - Standard body text weight.
+  # - Large navigation titles enabled where supported.
+  ##########################################################################
+  - name: "customStyle"
+    # Use large navigation bar titles where applicable
+    useLargeNavigationTitle: true
+
+    # Tint color for primary buttons, links and interactive controls
+    tintColor: "systemBlue"
+
+    # Accent color for views that use .accentColor
+    accentColor: "systemBlue"
+
+    # Highlight color for buttons
+    buttonHighlightColor: "white"
+
+    # Border color for cards, cells, outlines
+    borderColor: "label"
+
+    # Whether section headers should have increased prominence
+    headerProminenceIncreased: true
+
+    # Base font used for regular text content
+    textFont: "body"
+    # Weight for the base text
+    textFontWeight: "regular"
+
+    # Typography for section headers (e.g. grouped table headers)
+    headerFont: "title2"
+    headerFontWeight: "semibold"
+
+    # Typography for main titles (e.g. titles in content areas)
+    titleFont: "title"
+    titleFontWeight: "bold"
+
+    # Font weight for text-based buttons (e.g. "Done", "Edit")
+    buttonTextFontWeight: "semibold"
+
+    # Color for disabled UI elements
+    disabledTintColor: "tertiarySystemFill"
+
+  ##########################################################################
+  # healthStyle
+  #
+  # Inspired by Apple's Health app.
+  # - Blue accent and subtle gray borders.
+  # - Stronger emphasis on section headers and titles.
+  # - Large navigation titles enabled.
+  ##########################################################################
+  - name: "healthStyle"
+    useLargeNavigationTitle: true
+
+    # Accent color similar to Apple Health
+    tintColor: "systemBlue"
+
+    # Accent color for views that use .accentColor
+    accentColor: "systemBlue"
+
+    # Highlight color for buttons
+    buttonHighlightColor: "white"
+
+    # Light border to separate health-related content
+    borderColor: "systemGray3"
+
+    headerProminenceIncreased: true
+
+    textFont: "body"
+    textFontWeight: "regular"
+
+    # Slightly stronger, more prominent headers
+    headerFont: "title2"
+    headerFontWeight: "bold"
+
+    # Strong title hierarchy
+    titleFont: "title"
+    titleFontWeight: "bold"
+
+    buttonTextFontWeight: "semibold"
+
+    # Color for disabled UI elements
+    disabledTintColor: "tertiarySystemFill"
+
+  ##########################################################################
+  # careKitStyle
+  #
+  # CareKit-inspired appearance.
+  # - Teal accent (CareKit default).
+  # - Medium-weight base text for better legibility in clinical UIs.
+  # - Inline navigation titles (no large titles).
+  ##########################################################################
+  - name: "careKitStyle"
+    # CareKit screens often use inline navigation titles
+    useLargeNavigationTitle: false
+
+    # Standard CareKit teal accent
+    tintColor: "systemTeal"
+
+    # Accent color for views that use .accentColor
+    accentColor: "systemBlue"
+
+    # Highlight color for buttons
+    buttonHighlightColor: "white"
+
+    # Border color suitable for cards and grouped lists
+    borderColor: "systemGray4"
+
+    headerProminenceIncreased: true
+
+    # Slightly heavier text for improved contrast and legibility
+    textFont: "body"
+    textFontWeight: "medium"
+
+    # Headers are strong but slightly more compact than `healthStyle`
+    headerFont: "title3"
+    headerFontWeight: "bold"
+
+    # Titles remain bold and clear
+    titleFont: "title"
+    titleFontWeight: "bold"
+
+    buttonTextFontWeight: "semibold"
+
+    # Color for disabled UI elements
+    disabledTintColor: "tertiarySystemFill"

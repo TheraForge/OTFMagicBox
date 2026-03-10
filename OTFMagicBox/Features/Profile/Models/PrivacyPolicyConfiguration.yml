@@ -1,0 +1,246 @@
+# Copyright (c) 2026, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Privacy Policy Configuration
+# ----------------------------
+# This file contains the full text of the Privacy Policy.
+# Markdown is supported for styling (e.g., **bold**, # headings).
+
+version: "2.0.0"
+
+content:
+  en: |    
+    **Last Updated:** January 2026
+
+    **1. Introduction**
+    
+    Welcome to **MagicBox** ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application (the "App").
+    
+    **By using the App, you agree to the collection and use of information in accordance with this policy.**
+
+    **2. Information We Collect**
+    
+    **2.1 Personal Health Data**
+    Our App is designed to help you manage your health data. We may collect or process:
+    - **Health Metrics:** Heart rate, activity levels, lab results, and other metrics you manually enter or sync via Apple Health (HealthKit).
+    - **Medical Records:** Documents or files you upload directly to the App.
+    
+    **2.2 Device and Usage Data**
+    We may collect anonymized data about how you access the App, including your device model, operating system version, and crash data, to improve app stability and performance.
+
+    **3. How We Use Your Information**
+    
+    We use the information we collect primarily to provide the Service to you. Specifically:
+    - **To Provide Features:** To display your health trends, organize your records, and facilitate secure sharing with your healthcare providers.
+    - **To Maintain the App:** To monitor usage trends and fix technical issues.
+    - **No Sale of Data:** We do not sell, rent, or trade your personal data.
+
+    **4. Data Security and Encryption**
+    
+    We prioritize your security with state-of-the-art protections:
+    - **End-to-End Encryption:** Your health data is encrypted on your device before it is synced to any cloud service. We **cannot** read your encrypted health data; only you hold the keys.
+    - **Local Storage:** You have the option to use the App in "Offline Mode," where data remains strictly on your device.
+    - **Secure Transfer:** All data transmission occurs over secure SSL/TLS connections.
+
+    **5. Sharing Your Information**
+    
+    We only share information in limited circumstances:
+    - **With Your Consent:** If you choose to share a report with a doctor or family member.
+    - **For Legal Reasons:** If required by law, court order, or governmental regulation.
+    - **Service Providers:** We may employ third-party companies to facilitate our Service (e.g., cloud storage), but they access your data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
+
+    **6. Data Retention**
+    
+    We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your information to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our legal agreements and policies.
+
+    **7. Children's Privacy**
+    
+    Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If you are a parent or guardian and you are aware that your child has provided us with Personal Data, please contact us.
+
+    **8. International Data Transfers**
+    
+    Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction. Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.
+
+    **9. Changes to This Privacy Policy**
+    
+    We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.
+
+    **10. Your Rights**
+    
+    Depending on your location (e.g., GDPR, CCPA, LGPD), you may have the right to:
+    - **Access** the data we hold about you.
+    - **Delete** your account and all associated data.
+    - **Object** to the processing of your data.
+    - **Anonymity:** Use the App without providing personally identifiable information where possible.
+
+    **11. Contact Us**
+    
+    If you have questions about this Privacy Policy, please contact us at:
+    **Email:** support@hippocratestech.com
+
+  pt: |    
+    **Última Atualização:** Janeiro de 2026
+
+    **1. Introdução**
+    
+    Bem-vindo ao **MagicBox** ("nós", "nosso" ou "nos"). Estamos comprometidos em proteger as suas informações pessoais e o seu direito à privacidade. Esta Política de Privacidade explica como recolhemos, usamos, divulgamos e protegemos as suas informações quando utiliza a nossa aplicação móvel (a "App").
+    
+    **Ao utilizar a App, concorda com a recolha e uso de informações de acordo com esta política.**
+
+    **2. Informações que Recolhemos**
+    
+    **2.1 Dados Pessoais de Saúde**
+    A nossa App foi concebida para ajudar a gerir os seus dados de saúde. Podemos recolher ou processar:
+    - **Métricas de Saúde:** Frequência cardíaca, níveis de atividade, resultados de exames e outras métricas que insira manualmente ou sincronize via Apple Health (HealthKit).
+    - **Registos Médicos:** Documentos ou ficheiros que carregue diretamente na App.
+    
+    **2.2 Dados de Dispositivo e Uso**
+    Podemos recolher dados anonimizados sobre como acede à App, incluindo o modelo do dispositivo, versão do sistema operativo e dados de falhas, para melhorar a estabilidade e desempenho.
+
+    **3. Como Utilizamos as Suas Informações**
+    
+    Utilizamos as informações que recolhemos principalmente para lhe fornecer o Serviço. Especificamente:
+    - **Para Fornecer Funcionalidades:** Para exibir as suas tendências de saúde, organizar os seus registos e facilitar a partilha segura com os seus prestadores de cuidados de saúde.
+    - **Para Manter a App:** Para monitorizar tendências de uso e corrigir problemas técnicos.
+    - **Sem Venda de Dados:** Não vendemos, alugamos ou negociamos os seus dados pessoais.
+
+    **4. Segurança de Dados e Encriptação**
+    
+    Priorizamos a sua segurança com proteções de última geração:
+    - **Encriptação Ponta-a-Ponta:** Os seus dados de saúde são encriptados no seu dispositivo antes de serem sincronizados com qualquer serviço na nuvem. Nós **não conseguimos** ler os seus dados de saúde encriptados; apenas o utilizador detém as chaves.
+    - **Armazenamento Local:** Tem a opção de utilizar a App em "Modo Offline", onde os dados permanecem estritamente no seu dispositivo.
+    - **Transferência Segura:** Toda a transmissão de dados ocorre através de conexões seguras SSL/TLS.
+
+    **5. Partilha das Suas Informações**
+    
+    Apenas partilhamos informações em circunstâncias limitadas:
+    - **Com o Seu Consentimento:** Se optar por partilhar um relatório com um médico ou familiar.
+    - **Por Motivos Legais:** Se exigido por lei, ordem judicial ou regulamentação governamental.
+    - **Prestadores de Serviços:** Podemos empregar empresas terceiras para facilitar o nosso Serviço (como armazenamento na nuvem), mas estas acedem aos seus dados apenas para realizar essas tarefas em nosso nome e são obrigadas a não os divulgar ou usar para qualquer outro fim.
+
+    **6. Retenção de Dados**
+    
+    Reteremos as suas informações pessoais apenas pelo tempo necessário para os fins estabelecidos nesta Política de Privacidade. Reteremos e usaremos as suas informações na medida do necessário para cumprir as nossas obrigações legais, resolver disputas e fazer cumprir os nossos acordos e políticas legais.
+
+    **7. Privacidade de Crianças**
+    
+    O nosso Serviço não se dirige a ninguém com menos de 13 anos. Não recolhemos intencionalmente informações pessoalmente identificáveis de ninguém com menos de 13 anos. Se é pai/mãe ou responsável e sabe que o seu filho nos forneceu Dados Pessoais, por favor contacte-nos.
+
+    **8. Transferências Internacionais de Dados**
+    
+    As suas informações, incluindo Dados Pessoais, podem ser transferidas para — e mantidas em — computadores localizados fora do seu estado, província, país ou outra jurisdição governamental onde as leis de proteção de dados podem ser diferentes das da sua jurisdição. O seu consentimento a esta Política de Privacidade seguido pelo envio de tais informações representa a sua concordância com essa transferência.
+
+    **9. Alterações a Esta Política de Privacidade**
+    
+    Podemos atualizar a nossa Política de Privacidade de tempos a tempos. Notificá-lo-emos de quaisquer alterações publicando a nova Política de Privacidade nesta página e atualizando a data "Última Atualização". Aconselha-se a rever esta Política de Privacidade periodicamente para quaisquer alterações.
+
+    **10. Os Seus Direitos**
+    
+    Dependendo da sua localização (ex: RGPD, LGPD, CCPA), pode ter o direito de:
+    - **Aceder** aos dados que mantemos sobre si.
+    - **Apagar** a sua conta e todos os dados associados.
+    - **Opor-se** ao processamento dos seus dados.
+    - **Anonimato:** Utilizar a App sem fornecer informações pessoalmente identificáveis sempre que possível.
+
+    **11. Contacte-nos**
+    
+    Se tiver dúvidas sobre esta Política de Privacidade, contacte-nos em:
+    **Email:** support@hippocratestech.com
+
+  ar: |
+    **آخر تحديث:** يناير 2026
+
+    **1. مقدمة**
+    
+    مرحبًا بك في **MagicBox** ("نحن" أو "نا" أو "الخاصة بنا"). نحن ملتزمون بحماية معلوماتك الشخصية وحقك في الخصوصية. تشرح سياسة الخصوصية هذه كيف نجمع معلوماتك ونستخدمها ونفصح عنها ونحميها عند استخدام تطبيق الهاتف المحمول الخاص بنا ("التطبيق").
+    
+    **بإستخدام التطبيق، فإنك توافق على جمع واستخدام المعلومات وفقًا لهذه السياسة.**
+
+    **2. المعلومات التي نجمعها**
+    
+    **2.1 البيانات الصحية الشخصية**
+    تم تصميم تطبيقنا لمساعدتك في إدارة بياناتك الصحية. قد نجمع أو نعالج:
+    - **المقاييس الصحية:** معدل ضربات القلب، ومستويات النشاط، ونتائج المختبر، والمقاييس الأخرى التي تدخلها يدويًا أو تزامنها عبر Apple Health (HealthKit).
+    - **السجلات الطبية:** المستندات أو الملفات التي ترفعها مباشرة إلى التطبيق.
+    
+    **2.2 بيانات الجهاز والاستخدام**
+    قد نجمع بيانات مجهولة الهوية حول كيفية وصولك إلى التطبيق، بما في ذلك طراز جهازك وإصدار نظام التشغيل وبيانات الأعطال، لتحسين استقرار التطبيق وأدائه.
+
+    **3. كيف نستخدم معلوماتك**
+    
+    نستخدم المعلومات التي نجمعها بشكل أساسي لتقديم الخدمة لك. تحديدًا:
+    - **لتوفير الميزات:** لعرض اتجاهاتك الصحية، وتنظيم سجلاتك، وتسهيل المشاركة الآمنة مع مقدمي الرعاية الصحية الخاصين بك.
+    - **لصيانة التطبيق:** لمراقبة اتجاهات الاستخدام وإصلاح المشكلات الفنية.
+    - **عدم بيع البيانات:** نحن لا نبيع أو نؤجر أو نتاجر ببياناتك الشخصية.
+
+    **4. أمن البيانات وتشفيرها**
+    
+    نحن نولي الأولوية لأمنك من خلال حماية متطورة:
+    - **التشفير من طرف لآخر:** يتم تشفير بياناتك الصحية على جهازك قبل مزامنتها مع أي خدمة سحابية. نحن **لا نستطيع** قراءة بياناتك الصحية المشفرة؛ أنت وحدك من يملك المفاتيح.
+    - **التخزين المحلي:** لديك خيار استخدام التطبيق في "وضع عدم الاتصال"، حيث تبقى البيانات حصريًا على جهازك.
+    - **النقل الآمن:** يتم نقل جميع البيانات عبر اتصالات SSL/TLS آمنة.
+
+    **5. مشاركة معلوماتك**
+    
+    نشارك المعلومات فقط في ظروف محدودة:
+    - **بموافقتك:** إذا اخترت مشاركة تقرير مع طبيب أو أحد أفراد العائلة.
+    - **لأسباب قانونية:** إذا طلب ذلك بموجب القانون أو أمر محكمة أو لائحة حكومية.
+    - **مقدمو الخدمة:** قد نستعين بشركات خارجية لتسهيل خدمتنا (مثل التخزين السحابي)، لكنهم يصلون إلى بياناتك فقط لأداء هذه المهام نيابة عنا ويلتزمون بعدم الكشف عنها أو استخدامها لأي غرض آخر.
+
+    **6. الاحتفاظ بالبيانات**
+    
+    سنحتفظ بمعلوماتك الشخصية فقط للفترة اللازمة للأغراض المنصوص عليها في سياسة الخصوصية هذه. سنحتفظ بمعلوماتك ونستخدمها بالقدر اللازم للامتثال لالتزاماتنا القانونية وحل النزاعات وإنفاذ اتفاقياتنا وسياساتنا القانونية.
+
+    **7. خصوصية الأطفال**
+    
+    خدمتنا لا تخاطب أي شخص يقل عمره عن 13 عامًا. نحن لا نجمع عن علم معلومات محددة للهوية من أي شخص يقل عمره عن 13 عامًا. إذا كنت والدًا أو وصيًا وتعلم أن طفلك قد زودنا ببيانات شخصية، فيرجى الاتصال بنا.
+
+    **8. عمليات نقل البيانات الدولية**
+    
+    قد يتم نقل معلوماتك، بما في ذلك البيانات الشخصية، إلى أجهزة كمبيوتر تقع خارج ولايتك أو مقاطعتك أو بلدك أو أي ولاية قضائية حكومية أخرى حيث قد تختلف قوانين حماية البيانات عن قوانين ولايتك القضائية. إن موافقتك على سياسة الخصوصية هذه متبوعة بتقديمك لهذه المعلومات تمثل موافقتك على هذا النقل.
+
+    **9. التغييرات في سياسة الخصوصية هذه**
+    
+    قد نقوم بتحديث سياسة الخصوصية الخاصة بنا من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة وتحديث تاريخ "آخر تحديث". ننصحك بمراجعة سياسة الخصوصية هذه بشكل دوري لمعرفة أي تغييرات.
+
+    **10. حقوقك**
+    
+    اعتمادًا على موقعك (مثل GDPR أو CCPA)، قد يكون لك الحق في:
+    - **الوصول** إلى البيانات التي نحتفظ بها عنك.
+    - **حذف** حسابك وجميع البيانات المرتبطة به.
+    - **الاعتراض** على معالجة بياناتك.
+    - **إغفال الهوية:** استخدام التطبيق دون تقديم معلومات محددة للهوية حيثما أمكن ذلك.
+
+    **11. اتصل بنا**
+    
+    إذا كانت لديك أسئلة حول سياسة الخصوصية هذه، فيرجى الاتصال بنا على:
+    **البريد الإلكتروني:** support@hippocratestech.com

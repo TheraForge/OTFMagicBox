@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkvaluepickeranswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let pickerChoices: [ORKTextChoice] = [
+    ORKTextChoice(text: &lt;#"Choice 1"#&gt;, value: &lt;#0 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;), // ORKTextChoice. Example: index 0.
+    ORKTextChoice(text: &lt;#"Choice 2"#&gt;, value: &lt;#1 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;),
+    ORKTextChoice(text: &lt;#"Choice 3"#&gt;, value: &lt;#2 as NSCoding &amp; NSCopying &amp; NSObjectProtocol#&gt;)
+]
+
+let valuePickerAnswerFormat: ORKValuePickerAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(
+    with: pickerChoices // [ORKTextChoice]. Example: pickerChoices defined above.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot choose.
+valuePickerAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+valuePickerAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return valuePickerAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKValuePickerAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Value picker answer format backed by text choices.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKValuePickerAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

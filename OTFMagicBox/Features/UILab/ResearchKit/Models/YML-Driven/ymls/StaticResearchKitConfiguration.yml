@@ -1,0 +1,308 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+version: "2.0.0"  # Configuration schema version. Used by OTFVersionedDecodable for migration/compatibility.
+
+sections:
+  # A section groups multiple tasks under a localized heading in the UI.
+  - title:
+      en: "Survey Questions"
+      pt: "Perguntas do Questionário"
+      ar: "أسئلة الاستبيان"
+    tasks:
+      # Each task card shown under the section. Title is shown in the list; payload defines behavior.
+      - title:
+          en: "Question Task"
+          pt: "Tarefa de Perguntas"
+          ar: "مهمة الأسئلة"
+        configFileName: "question_task"
+      - title:
+          en: "Survey Task"
+          pt: "Tarefa de Inquérito"
+          ar: "مهمة الاستقصاء"
+        configFileName: "survey_task"
+      - title:
+          en: "Boolean Question"
+          pt: "Pergunta Booleana"
+          ar: "سؤال منطقي"
+        configFileName: "boolean_question"
+      - title:
+          en: "Custom Boolean Question"
+          pt: "Pergunta Booleana Personalizada"
+          ar: "سؤال منطقي مخصص"
+        configFileName: "custom_boolean_question"
+      - title:
+          en: "Date Question"
+          pt: "Pergunta de Data"
+          ar: "سؤال التاريخ"
+        configFileName: "date_question"
+      - title:
+          en: "Date & Time Question"
+          pt: "Pergunta de Data e Hora"
+          ar: "سؤال التاريخ والوقت"
+        configFileName: "date_time_question"
+      - title:
+          en: "Numeric Question"
+          pt: "Pergunta Numérica"
+          ar: "سؤال رقمي"
+        configFileName: "numeric_question"
+      - title:
+          en: "Scale Question"
+          pt: "Pergunta de Escala"
+          ar: "سؤال المقياس"
+        configFileName: "scale_question"
+      - title:
+          en: "Text Question"
+          pt: "Pergunta de Texto"
+          ar: "سؤال نصي"
+        configFileName: "text_question"
+      - title:
+          en: "Text Choice Question"
+          pt: "Pergunta de Escolha de Texto"
+          ar: "سؤال اختيار النص"
+        configFileName: "text_choice_question"
+      - title:
+          en: "Validated Text Question"
+          pt: "Pergunta de Texto Validado"
+          ar: "سؤال نصي مدقق"
+        configFileName: "validated_text_question"
+      - title:
+          en: "Value Picker Question"
+          pt: "Pergunta com Selecionador de Valores"
+          ar: "سؤال منتقي القيم"
+        configFileName: "value_picker_question"
+      - title:
+          en: "Location Question"
+          pt: "Pergunta de Localização"
+          ar: "سؤال الموقع"
+        configFileName: "location_question"
+      - title:
+          en: "Time Interval Question"
+          pt: "Pergunta de Intervalo de Tempo"
+          ar: "سؤال الفاصل الزمني"
+        configFileName: "time_interval_question"
+      - title:
+          en: "Time of Day Question"
+          pt: "Pergunta de Hora do Dia"
+          ar: "سؤال وقت اليوم"
+        configFileName: "time_of_day_question"
+  # Form Tasks
+  - title:
+      en: "Form Tasks"
+      pt: "Tarefas de Formulário"
+      ar: "مهام النماذج"
+    tasks:
+      - title:
+          en: "Form Task"
+          pt: "Tarefa de Formulário"
+          ar: "مهمة النموذج"
+        configFileName: "form_task"
+      - title:
+          en: "Grouped Form Task"
+          pt: "Tarefa de Formulário Agrupado"
+          ar: "مهمة النموذج المجمع"
+        configFileName: "grouped_form_task"
+  - title:
+      en: "Image & Video Tasks"
+      pt: "Tarefas de Imagem e Vídeo"
+      ar: "مهام الصور والفيديو"
+    tasks:
+      - title:
+          en: "Image Capture Task"
+          pt: "Tarefa de Captura de Imagem"
+          ar: "مهمة التقاط الصور"
+        configFileName: "image_capture_task"
+      - title:
+          en: "Video Capture Task"
+          pt: "Tarefa de Captura de Vídeo"
+          ar: "مهمة التقاط الفيديو"
+        configFileName: "video_capture_task"
+      - title:
+          en: "Front Facing Camera Step"
+          pt: "Etapa de Câmara Frontal"
+          ar: "خطوة الكاميرا الأمامية"
+        configFileName: "front_facing_camera_step"
+      - title:
+          en: "Video Instruction"
+          pt: "Instrução em Vídeo"
+          ar: "تعليمات الفيديو"
+        configFileName: "video_instruction"
+  - title:
+      en: "Active Tasks"
+      pt: "Tarefas Ativas"
+      ar: "المهام النشطة"
+    tasks:
+      # ACTIVE TASKS — Predefined ResearchKit tasks that collect sensor/speech/motor data.
+      - title:
+          en: "Audio Task"
+          pt: "Tarefa de Áudio"
+          ar: "مهمة الصوت"
+        configFileName: "audio_task"
+      - title:
+          en: "Fitness Check"
+          pt: "Verificação de Condição Física"
+          ar: "التحقق من اللياقة"
+        configFileName: "fitness_check"
+      - title:
+          en: "Hole Peg Test"
+          pt: "Teste de Pinos"
+          ar: "اختبار الأوتاد"
+        configFileName: "hole_peg_test"
+      - title:
+          en: "PSAT"
+          pt: "PSAT"
+        configFileName: "psat"
+      - title:
+          en: "Reaction Time"
+          pt: "Tempo de Reação"
+          ar: "وقت رد الفعل"
+        configFileName: "reaction_time"
+      - title:
+          en: "Short Walk"
+          pt: "Caminhada Curta"
+          ar: "مشي قصير"
+        configFileName: "short_walk"
+      - title:
+          en: "Spatial Span Memory"
+          pt: "Memória de Extensão Espacial"
+          ar: "ذاكرة المدى المكاني"
+        configFileName: "spatial_span_memory"
+      - title:
+          en: "Speech Recognition"
+          pt: "Reconhecimento de Fala"
+          ar: "التعرف على الكلام"
+        configFileName: "speech_recognition"
+      - title:
+          en: "Speech in Noise"
+          pt: "Fala no Ruído"
+          ar: "الكلام في الضجيج"
+        configFileName: "speech_in_noise"
+      - title:
+          en: "Stroop"
+          pt: "Stroop"
+          ar: "اختبار ستروب"
+        configFileName: "stroop"
+      - title:
+          en: "Timed Walk (with Turn Around)"
+          pt: "Caminhada Temporizada (com Retorno)"
+          ar: "مشي مؤقت (مع الدوران)"
+        configFileName: "timed_walk_with_turn_around"
+      - title:
+          en: "Tone Audiometry"
+          pt: "Audiometria Tonal"
+          ar: "قياس السمع النغمي"
+        configFileName: "tone_audiometry"
+      - title:
+          en: "dBHL Tone Audiometry"
+          pt: "Audiometria Tonal dBHL"
+          ar: "قياس السمع النغمي dBHL"
+        configFileName: "dbhl_tone_audiometry"
+      - title:
+          en: "Amsler Grid"
+          pt: "Grelha de Amsler"
+          ar: "شبكة آمسلر"
+        configFileName: "amsler_grid"
+      - title:
+          en: "Tower of Hanoi"
+          pt: "Torre de Hanói"
+          ar: "برج هانوي"
+        configFileName: "tower_of_hanoi"
+      - title:
+          en: "Two Finger Tapping"
+          pt: "Toque com Dois Dedos"
+          ar: "النقر بإصبعين"
+        configFileName: "two_finger_tapping"
+      - title:
+          en: "Walk Back and Forth"
+          pt: "Caminhar para a Frente e para Trás"
+          ar: "مشي ذهابًا وإيابًا"
+        configFileName: "walk_back_and_forth"
+      - title:
+          en: "Tremor Test"
+          pt: "Teste de Tremor"
+          ar: "اختبار الرعاش"
+        configFileName: "tremor_test"
+      - title:
+          en: "Knee Range of Motion"
+          pt: "Amplitude de Movimento do Joelho"
+          ar: "نطاق حركة الركبة"
+        configFileName: "knee_range_of_motion"
+      - title:
+          en: "Shoulder Range of Motion"
+          pt: "Amplitude de Movimento do Ombro"
+          ar: "نطاق حركة الكتف"
+        configFileName: "shoulder_range_of_motion"
+      - title:
+          en: "Trail Making"
+          pt: "Teste de Trilhas"
+          ar: "تتبع المسار"
+        configFileName: "trail_making"
+      - title:
+          en: "Visual Acuity (Landolt C)"
+          pt: "Acuidade Visual (Landolt C)"
+          ar: "حدة البصر (Landolt C)"
+        configFileName: "visual_acuity_landolt_c"
+      - title:
+          en: "Contrast Sensitivity (Landolt C)"
+          pt: "Sensibilidade ao Contraste (Landolt C)"
+          ar: "حساسية التباين (Landolt C)"
+        configFileName: "contrast_sensitivity_landolt_c"
+  - title:
+      en: "Consent & Account Tasks"
+      pt: "Tarefas de Consentimento e Conta"
+      ar: "مهام الموافقة والحساب"
+    tasks:
+      - title:
+          en: "Consent Task"
+          pt: "Tarefa de Consentimento"
+          ar: "مهمة الموافقة"
+        configFileName: "consent_task"
+      - title:
+          en: "Account Creation Task"
+          pt: "Tarefa de Criação de Conta"
+          ar: "مهمة إنشاء حساب"
+        configFileName: "account_creation_task"
+      - title:
+          en: "Login Task"
+          pt: "Tarefa de Início de Sessão"
+          ar: "مهمة تسجيل الدخول"
+        configFileName: "login_task"
+      - title:
+          en: "Passcode Task"
+          pt: "Tarefa de Código de Acesso"
+          ar: "مهمة رمز المرور"
+        configFileName: "passcode_task"
+      - title:
+          en: "Eligibility Task"
+          pt: "Tarefa de Elegibilidade"
+          ar: "مهمة الأهلية"
+        configFileName: "eligibility_task"

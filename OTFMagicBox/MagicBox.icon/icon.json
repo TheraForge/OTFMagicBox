@@ -1,0 +1,104 @@
+{
+  "fill" : "system-light",
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "fill-specializations" : [
+            {
+              "value" : {
+                "automatic-gradient" : "srgb:1.00000,0.14913,0.00000,1.00000"
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "automatic-gradient" : "extended-srgb:1.00000,0.21961,0.23529,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "srgb:0.92143,0.92145,0.92144,1.00000"
+              }
+            }
+          ],
+          "glass" : false,
+          "image-name" : "cross.svg",
+          "name" : "cross",
+          "position" : {
+            "scale" : 0.85,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "value" : {
+                "automatic-gradient" : "srgb:0.26052,0.26052,0.26052,1.00000"
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "linear-gradient" : [
+                  "srgb:0.75407,0.75409,0.75408,1.00000",
+                  "srgb:1.00000,1.00000,1.00000,1.00000"
+                ]
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "linear-gradient" : [
+                  "srgb:0.57415,0.57416,0.57415,1.00000",
+                  "srgb:1.00000,1.00000,1.00000,1.00000"
+                ]
+              }
+            }
+          ],
+          "glass" : false,
+          "image-name" : "frame.svg",
+          "name" : "frame",
+          "position" : {
+            "scale" : 0.95,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

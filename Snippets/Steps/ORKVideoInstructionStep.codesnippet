@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkvideoinstructionstep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let step = ORKVideoInstructionStep(identifier: &lt;#"videoInstructionStep"#&gt;) // String. Example: "videoInstructionStep". Unique step identifier used in results.
+step.title = &lt;#"Video Instruction"#&gt; // String?. Example: "Video Instruction". Primary title shown in the header.
+step.text = &lt;#"Watch this short clip before proceeding."#&gt; // String?. Example: "Watch this short clip before proceeding.". Secondary text under the title.
+step.videoURL = &lt;#URL(string: "https://example.com/video.mov")#&gt; // URL?. Example: URL(string: "..."). Video to play (local or remote).
+step.thumbnailTime = &lt;#2#&gt; // UInt. Example: 2. Time (seconds) to grab preview thumbnail.
+
+// MARK: ORKInstructionStep (superclass) properties
+
+step.attributedDetailText = &lt;#NSAttributedString(string: "Rich detail text")#&gt; // NSAttributedString?. Example: NSAttributedString(...). Overrides detailText when set.
+step.centerImageVertically = &lt;#true#&gt; // Bool. Example: true. Center the image vertically on screen.
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKVideoInstructionStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKVideoInstructionStep with video URL and thumbnail time.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKVideoInstructionStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,230 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Profile feature configuration
+# -----------------------------
+# This file controls the UI text for the main Profile area:
+# - Profile main screen (sections and rows)
+# - PDF viewer title (consent document)
+# - Support labels
+# - Logout and Delete Account flows
+#
+# You can safely change the text values without touching the app code.
+#
+# FORMAT
+# - All strings are localized. Every text key contains language codes:
+#   'en' for English, 'pt' for Portuguese. You may add more languages (e.g., 'es', 'fr').
+# - Keep the structure flat (no deep nesting) to make it easy to edit.
+#
+# IMPORTANT
+# - Do not remove required keys; if you don’t need a language, keep at least one (e.g., 'en').
+# - Values on the right of the colon are the visible text in the app.
+# - Lines starting with '#' are comments and ignored by the app.
+#
+# Version of this YAML schema/content. Bump when you change copy/structure.
+# Clients may use fallback values if a key is missing.
+version: "2.0.0"
+
+# === Navigation ===
+# Title shown on the main Profile screen's navigation bar.
+navTitle:
+  en: "Profile"
+  pt: "Perfil"
+  ar: "الملف الشخصي"
+
+# Title shown on the PDF viewer screen (when opening the consent PDF).
+pdfViewerTitle:
+  en: "TheraForge Consent"
+  pt: "Consentimento TheraForge"
+  ar: "موافقة TheraForge"
+
+# === Section headers on the Profile screen ===
+# Header for the settings-related rows (e.g., manage profile, change password).
+sectionSettingsTitle:
+  en: "Settings"
+  pt: "Definições"
+  ar: "الإعدادات"
+
+# Header for support-related information (e.g., email, phone).
+sectionSupportTitle:
+  en: "Support"
+  pt: "Suporte"
+  ar: "الدعم"
+
+# Header for diagnostic/log-related options.
+sectionLogsTitle:
+  en: "Logs"
+  pt: "Registos"
+  ar: "السجلات"
+
+# Header for account-related actions (logout, delete account).
+sectionAccountTitle:
+  en: "Account"
+  pt: "Conta"
+  ar: "الحساب"
+
+# Header for legal documents (privacy, terms).
+sectionLegalTitle:
+  en: "Legal"
+  pt: "Legal"
+  ar: "القانوني"
+
+# === Rows / Buttons inside sections ===
+# Row that opens editable profile details (photo, name, etc.).
+manageProfileTitle:
+  en: "Manage Profile"
+  pt: "Gerir Perfil"
+  ar: "إدارة الملف الشخصي"
+
+# Row that navigates to the app diagnostics/logs screen.
+diagnosticsTitle:
+  en: "Diagnostics"
+  pt: "Diagnóstico"
+  ar: "التشخيص"
+
+# Row that opens the Change Password view.
+changePasswordTitle:
+  en: "Change Password"
+  pt: "Alterar Palavra-passe"
+  ar: "تغيير كلمة المرور"
+
+# Row that opens the consent PDF viewer.
+consentDocumentTitle:
+  en: "Consent Document"
+  pt: "Documento de Consentimento"
+  ar: "مستند الموافقة"
+
+# Row that opens the Privacy Policy.
+privacyPolicyTitle:
+  en: "Privacy Policy"
+  pt: "Política de Privacidade"
+  ar: "سياسة الخصوصية"
+
+# Row that opens the Terms of Service.
+termsOfServiceTitle:
+  en: "Terms of Service"
+  pt: "Termos de Serviço"
+  ar: "شروط الخدمة"
+
+# === Support labels ===
+# Label for the support email value.
+supportEmailLabel:
+  en: "Email"
+  pt: "Email"
+  ar: "البريد الإلكتروني"
+
+# Label for the support phone value.
+supportPhoneLabel:
+  en: "Telephone"
+  pt: "Telefone"
+  ar: "الهاتف"
+
+# === Forced logout alert (e.g., account deleted on another device) ===
+# Alert title shown when the account was deleted remotely and the user is forced to log out.
+accountDeletedAlertTitle:
+  en: "Account Deleted"
+  pt: "Conta Eliminada"
+  ar: "تم حذف الحساب"
+
+# Explanatory message shown in the forced logout alert.
+accountDeletedAlertMessage:
+  en: "Your account is deleted from one of your device"
+  pt: "A sua conta foi eliminada a partir de um dos seus dispositivos"
+  ar: "تم حذف حسابك من أحد أجهزتك"
+
+# Generic short action text used in alerts.
+okayActionTitle:
+  en: "OK"
+  pt: "OK"
+  ar: "موافق"
+
+# === Logout strings ===
+# Button title for initiating logout from the Profile screen.
+logoutButtonTitle:
+  en: "Logout"
+  pt: "Terminar sessão"
+  ar: "تسجيل الخروج"
+
+# Confirmation dialog title asking the user to confirm logout.
+logoutConfirmDialogTitle:
+  en: "Are you sure?"
+  pt: "Tem a certeza?"
+  ar: "هل أنت متأكد؟"
+
+# Action title confirming the logout.
+logoutConfirmActionTitle:
+  en: "Logout"
+  pt: "Terminar sessão"
+  ar: "تسجيل الخروج"
+
+# Action title to cancel the logout confirmation dialog.
+logoutCancelActionTitle:
+  en: "Cancel"
+  pt: "Cancelar"
+  ar: "إلغاء"
+
+# Alert title shown when the logout request fails.
+logoutFailureAlertTitle:
+  en: "Failed to logout"
+  pt: "Falha ao terminar sessão"
+  ar: "فشل تسجيل الخروج"
+
+# === Delete Account strings ===
+# Button title for starting the delete account flow.
+deleteAccountButtonTitle:
+  en: "Delete Account"
+  pt: "Eliminar Conta"
+  ar: "حذف الحساب"
+
+# Confirmation dialog title explaining the impact of deleting the account.
+deleteAccountConfirmDialogTitle:
+  en: "Are you sure? This will remove all your information"
+  pt: "Tem a certeza? Isto irá remover toda a sua informação"
+  ar: "هل أنت متأكد؟ سيؤدي ذلك إلى إزالة جميع معلوماتك"
+
+# Action title confirming deletion of the account.
+deleteAccountConfirmActionTitle:
+  en: "Delete Account"
+  pt: "Eliminar Conta"
+  ar: "حذف الحساب"
+
+# Action title to cancel the delete account confirmation dialog.
+deleteAccountCancelActionTitle:
+  en: "Cancel"
+  pt: "Cancelar"
+  ar: "إلغاء"
+
+# Alert title shown when deleting the account fails.
+deleteAccountFailureAlertTitle:
+  en: "Failed to delete account"
+  pt: "Falha ao eliminar conta"
+  ar: "فشل حذف الحساب"

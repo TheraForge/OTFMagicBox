@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkfrontfacingcamerastep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let step = ORKFrontFacingCameraStep(identifier: &lt;#"frontFacingCameraStep"#&gt;) // String. Example: "frontFacingCameraStep". Unique step identifier used in results.
+step.title = &lt;#"Front Facing Camera"#&gt; // String?. Example: "Front Facing Camera". Primary title shown in the header.
+step.text = &lt;#"Record a short clip with the front camera."#&gt; // String?. Example: "Record a short clip with the front camera.". Secondary text under the title.
+step.maximumRecordingLimit = &lt;#30.0#&gt; // TimeInterval. Example: 30.0. Max recording duration in seconds.
+step.allowsReview = &lt;#true#&gt; // Bool. Example: true. Allow participant to review the recording.
+step.allowsRetry = &lt;#true#&gt; // Bool. Example: true. Allow participant to retry the recording.
+
+// ORKActiveStep (superclass) configurable properties
+
+step.stepDuration = &lt;#0#&gt; // TimeInterval. Example: 0. Timer duration; 0 disables built-in timer.
+step.shouldShowDefaultTimer = &lt;#false#&gt; // Bool. Example: false. Show default timer UI when stepDuration > 0.
+step.shouldSpeakCountDown = &lt;#false#&gt; // Bool. Example: false. Speak last seconds of the countdown.
+step.shouldSpeakRemainingTimeAtHalfway = &lt;#false#&gt; // Bool. Example: false. Speak halfway remaining time.
+step.shouldStartTimerAutomatically = &lt;#false#&gt; // Bool. Example: false. Start timer automatically when the step starts.
+step.shouldPlaySoundOnStart = &lt;#false#&gt; // Bool. Example: false. Play sound when step starts.
+step.shouldPlaySoundOnFinish = &lt;#false#&gt; // Bool. Example: false. Play sound when step finishes.
+step.shouldVibrateOnStart = &lt;#false#&gt; // Bool. Example: false. Vibrate when step starts.
+step.shouldVibrateOnFinish = &lt;#false#&gt; // Bool. Example: false. Vibrate when step finishes.
+step.shouldUseNextAsSkipButton = &lt;#false#&gt; // Bool. Example: false. Use Next button as skip while in progress.
+step.shouldContinueOnFinish = &lt;#false#&gt; // Bool. Example: false. Auto-advance when step finishes.
+step.spokenInstruction = &lt;#"Look straight at the camera."#&gt; // String?. Example: "Look straight at the camera.". Voice prompt at start.
+step.finishedSpokenInstruction = &lt;#"Recording complete."#&gt; // String?. Example: "Recording complete.". Voice prompt at finish.
+step.recorderConfigurations = &lt;#[]#&gt; // [ORKRecorderConfiguration]?. Example: [] or [ORKPedometerRecorderConfiguration(...)].
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKFrontFacingCameraStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKFrontFacingCameraStep with recording limits and active step options.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKFrontFacingCameraStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

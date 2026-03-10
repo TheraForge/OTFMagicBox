@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2024, Hippocrates Technologies Sagl. All rights reserved.
+ Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -37,73 +37,123 @@ import WatchConnectivity
 import WatchKit
 import OTFCareKitStore
 import OTFCareKit
+import OTFUtilities
 
 class SessionManager: NSObject, WCSessionDelegate {
-    
-    fileprivate(set) var peer: OTFWatchConnectivityPeer!
-    fileprivate(set) var store: OTFCloudantStore!
+
+    private enum FileConstants {
+        static let liveStartMessageKey = "healthSensorsLiveHRStart"
+    }
+
+    let peer: OTFWatchConnectivityPeer
+    let store: OTFCloudantStore
+
     @Published var tasks = [OCKAnyTask]()
-    
-    init(peer: OTFWatchConnectivityPeer!, store: OTFCloudantStore!) {
-        super.init()
+
+    private let logger = OTFLogger.logger()
+
+    init(peer: OTFWatchConnectivityPeer, store: OTFCloudantStore) {
         self.peer = peer
         self.store = store
+        super.init()
         WCSession.default.delegate = self
         WCSession.default.activate()
     }
-    
+
     func session(_ session: WCSession,
                  activationDidCompleteWith activationState: WCSessionActivationState,
                  error: Error?) {
-            
-        print("New session state: \(activationState)")
+
+        logger.info("WCSession activation did complete with state: \(activationState.rawValue)")
+
         if let error {
-            print("Error is \(error.localizedDescription)")
+            logger.info("WCSession activation error: \(error.localizedDescription)")
         }
-        
+
         switch activationState {
         case .activated:
-            print("WCSession activated successfully")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.store.synchronize { error in
-                    print(error?.localizedDescription ?? "Successful sync!")
+            logger.info("WCSession activated successfully")
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [store, logger] in
+                store.synchronize { error in
+                    if let error {
+                        logger.info("Store synchronization error: \(error.localizedDescription)")
+                    } else {
+                        logger.info("Store synchronized successfully")
+                    }
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .databaseSync, object: nil)
+                        NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
                     }
                 }
             }
-            
+
         case .inactive:
-            print("Unable to activate the WCSession. Error: \(error?.localizedDescription ?? "--")")
+            logger.info("Unable to activate the WCSession. Error: \(error?.localizedDescription ?? "--")")
+
         case .notActivated:
-            print("Unexpected .notActivated state received after trying to activate the WCSession")
+            logger.info("Unexpected .notActivated state received after trying to activate the WCSession")
+
         @unknown default:
-            print("Unexpected state received after trying to activate the WCSession")
+            logger.info("Unexpected WCSession state received after trying to activate")
         }
     }
-    
+
     func session(_ session: WCSession,
                  didReceiveMessage message: [String: Any],
                  replyHandler: @escaping ([String: Any]) -> Void) {
-        print("Did receive message from MOBILE APP!")
-        if message[databaseSyncedKey] as? String != nil {
-            self.store.synchronize { error in
-                print(error?.localizedDescription ?? "Successful sync!")
+        handleIncomingMessage(message, replyHandler: replyHandler)
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        handleIncomingMessage(message, replyHandler: nil)
+    }
+
+    private func handleIncomingMessage(_ message: [String: Any], replyHandler: (([String: Any]) -> Void)?) {
+
+        logger.debug("Did receive message from MOBILE APP: \(message)")
+
+        if message[databaseSyncedKey] is String {
+            store.synchronize { [logger] error in
+                if let error {
+                    logger.info("Store synchronization error after databaseSyncedKey message: \(error.localizedDescription)")
+                } else {
+                    logger.info("Store synchronized successfully after databaseSyncedKey message")
+                }
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .databaseSync, object: nil)
+                    NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
                 }
             }
-        } else if message["userNotLoggedIn"] as? String != nil {
-            // Wipe out data
-            self.store.deleteRecords { _ in
+            replyHandler?(["received": true])
+            return
+        }
+
+        let shouldStartLiveHeartRate =
+            (message[FileConstants.liveStartMessageKey] as? Bool) == true ||
+            (message[FileConstants.liveStartMessageKey] as? Int) == 1
+
+        if shouldStartLiveHeartRate {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .healthSensorsLiveHeartRateStart, object: nil)
+            }
+            replyHandler?(["received": true])
+            return
+        }
+
+        if message["userNotLoggedIn"] is String {
+            logger.info("Received userNotLoggedIn message; deleting local records")
+            store.deleteRecords { _ in
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .userLoggedOut, object: nil)
                 }
             }
-        } else {
-            peer.reply(to: message, store: store) { reply in
-                replyHandler(reply)
-            }
+            replyHandler?(["received": true])
+            return
         }
+
+        guard let replyHandler else {
+            return
+        }
+
+        peer.reply(to: message, store: store, sendReply: replyHandler)
     }
 }

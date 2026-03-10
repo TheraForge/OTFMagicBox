@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orksesanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let sesAnswerFormat = ORKSESAnswerFormat(
+    topRungText: &lt;#"Best Off"#&gt;, // String?. Example: "Best Off". Label for the top rung.
+    bottomRungText: &lt;#"Worst Off"#&gt; // String?. Example: "Worst Off". Label for the bottom rung.
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+sesAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+sesAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return sesAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKSESAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Socio-economic ladder answer format with top and bottom labels.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKSESAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

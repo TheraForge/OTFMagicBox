@@ -1,0 +1,197 @@
+# Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# StaticCareKit configuration
+# ------------------------
+# This file defines the content and styling for the onboarding flow.
+# You can safely change the text values and visual options without touching the app code.
+# Format:
+#   - Localized strings are grouped by key with language codes (e.g., 'en', 'pt').
+#   - You may add more languages by adding more codes (e.g., 'es', 'fr') with translations.
+#   - Keep the structure simple; each page is a flat dictionary of properties.
+#
+# IMPORTANT
+# - Do not remove required keys; if you don’t need a language, leave at least one (e.g., 'en').
+# - Values on the right of the colon are the visible text or styling in the app.
+# - Lines starting with '#' are comments and are ignored by the app.
+
+# Version of this YAML schema/content
+version: "2.0.0"
+
+# Primary care contact shown in the app
+contact:
+    # Doctor's given name
+    name: "John"
+    # Doctor's family name
+    surname: "Appleseed"
+    # Image asset name for the doctor
+    asset: "doctor"
+    # Professional title or position
+    title: "Attending Physician"
+
+    # Doctor's role or specialty (localized)
+    role:
+      en: "Medical Director"
+      pt: "Diretor Médico"
+      ar: "المدير الطبي"
+
+    # Doctor's email address
+    email: "avery.morgan@test.com"
+    # Doctor's phone number
+    phoneNumber: "(408) 555-2024"
+
+    # Doctor's office address
+    address:
+      # Street line of the office
+      street: "1 Apple Park Way"
+      # City of the office
+      city: "Cupertino"
+      # Postal or ZIP code
+      postalCode: "95014"
+      # State or region
+      state: "CA"
+
+# A static task definition consumed by the app
+task:
+    # Unique identifier for the task
+    id: "doxylamine"
+    # Task title (localized)
+    title:
+      en: "Take Doxylamine"
+      pt: "Tomar Doxilamina"
+      ar: "تناول دوكسيلامين"
+    # Task instructions (localized)
+    instructions:
+      en: "Take 25mg of doxylamine when you experience nausea."
+      pt: "Tome 25mg de doxilamina quando sentir nausea."
+      ar: "تناول 25 ملغ من دوكسيلامين عندما تشعر بالغثيان."
+    # Visual asset associated with the task
+    asset: "pills"
+    # Whether completion impacts adherence
+    impactsAdherence: true
+    # One or more schedule entries for this task
+    schedules:
+      # Schedule entry: morning dose
+      - startHour: 8
+        # Repeats every N days
+        intervalDay: 1
+        # Short label for the schedule (localized)
+        text:
+          en: "Before breakfast"
+          pt: "Antes do café da manhã"
+          ar: "قبل الإفطار"
+      # Schedule entry: afternoon dose
+      - startHour: 14
+        # Repeats every N days
+        intervalDay: 2
+        # Short label for the schedule (localized)
+        text:
+          en: "After lunch"
+          pt: "Após o almoço"
+          ar: "بعد الغداء"
+
+# Numeric progress widget configuration
+numericProgress:
+    # Title configuration
+    title:
+        # Title text
+        text:
+          en: "Steps"
+          pt: "Passos"
+          ar: "الخطوات"
+        # Title font style key
+        font: "title"
+        # Title font weight key
+        fontWeight: "bold"
+    # Current progress value configuration
+    progress:
+        # Current value text
+        text: "0"
+        # Current value font style key
+        font: "title3"
+        # Current value font weight key
+        fontWeight: "bold"
+    # Goal value configuration
+    goal:
+        # Goal value text
+        text: "100"
+        # Goal font style key
+        font: "body"
+        # Goal font weight key
+        fontWeight: "regular"
+    # Completion state for the widget
+    isComplete: false
+
+# Labeled value widget configuration
+labeledValue:
+    # Title configuration
+    title:
+        # Title text
+        text:
+          en: "Heart Rate"
+          pt: "Frequência Cardíaca"
+          ar: "معدل ضربات القلب"
+        # Title font style key
+        font: "title"
+        # Title font weight key
+        fontWeight: "bold"
+    # Secondary detail line
+    detail:
+        # Detail text
+        text:
+          en: "Anytime"
+          pt: "A qualquer momento"
+          ar: "في أي وقت"
+        # Detail font style key
+        font: "body"
+        # Detail font weight key
+        fontWeight: "regular"
+    # State and value presentation
+    state:
+        # Visual state used by the UI
+        type: "complete"
+        # Value text styling
+        value:
+            # Value text
+            text: "62"
+            # Value font style key
+            font: "body"
+            # Value font weight key
+            fontWeight: "regular"
+        # Unit text styling
+        unit:
+            # Unit text
+            text: "BPM"
+            # Unit font style key
+            font: "body"
+            # Unit font weight key
+            fontWeight: "regular"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orktimeintervalanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let timeIntervalAnswerFormat: ORKTimeIntervalAnswerFormat = ORKAnswerFormat.timeIntervalAnswerFormat(
+	withDefaultInterval: &lt;#300#&gt;, // TimeInterval. Example: 300 (seconds). Default interval shown in picker.
+    step: &lt;#5#&gt; // Int. Example: 5. Step size in minutes (1...30).
+)
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot answer.
+timeIntervalAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+timeIntervalAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return timeIntervalAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKTimeIntervalAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Duration picker answer format with default interval and step.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKTimeIntervalAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkvideocapturestep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let step = ORKVideoCaptureStep(identifier: &lt;#"videoCaptureStep"#&gt;) // String. Example: "videoCaptureStep". Unique step identifier used in results.
+step.title = &lt;#"Video Capture"#&gt; // String?. Example: "Video Capture". Primary title shown in the header.
+step.text = &lt;#"Record a short video."#&gt; // String?. Example: "Record a short video.". Secondary text under the title.
+step.templateImage = &lt;#UIImage(named: "hand_outline_big")!#&gt; // UIImage. Example: UIImage(named: "hand_outline_big")!. Overlay template image on the preview.
+step.templateImageInsets = &lt;#UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)#&gt; // UIEdgeInsets. Example: UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05). Insets as percentages of preview frame.
+step.duration = &lt;#NSNumber(value: 120.0)#&gt; // NSNumber. Example: NSNumber(value: 120.0). Recording duration in seconds.
+step.isAudioMute = &lt;#false#&gt; // Bool. Example: false. Mute audio during recording.
+step.torchMode = &lt;#.auto#&gt; // AVCaptureTorchMode. Example: .auto. Torch mode to use.
+step.devicePosition = &lt;#.back#&gt; // AVCaptureDevice.Position. Example: .front. Camera device position.
+step.accessibilityInstructions = &lt;#"Extend your right hand, palm down, one foot from your device."#&gt; // String. Example: "Extend your right hand...". VoiceOver guidance for preview.
+step.accessibilityHint = &lt;#"Captures the video visible in the preview."#&gt; // String. Example: "Captures the video visible in the preview.". VoiceOver hint for capture button.
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKVideoCaptureStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKVideoCaptureStep with overlay, duration, and camera options.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKVideoCaptureStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

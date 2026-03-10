@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkcontinuousscaleanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let continuousScaleAnswerFormat = ORKAnswerFormat.continuousScale(
+    withMaximumValue: &lt;#1.0#&gt;, // Double. Example: 1.0. Maximum value on the scale.
+    minimumValue: &lt;#0.0#&gt;, // Double. Example: 0.0. Minimum value on the scale.
+    defaultValue: &lt;#0.0#&gt;, // Double. Example: 0.0. Preselected value.
+    maximumFractionDigits: &lt;#0#&gt;, // Int. Example: 0. Number of fraction digits to show.
+    vertical: &lt;#false#&gt;, // Bool. Example: true. Render vertically instead of horizontally.
+    maximumValueDescription: &lt;#"High Value"#&gt;, // String?. Example: "High Value". Label for the max end.
+    minimumValueDescription: &lt;#"Low Value"#&gt; // String?. Example: "Low Value". Label for the min end.
+)
+
+continuousScaleAnswerFormat.numberStyle = &lt;#.default#&gt; // NumberFormatter.Style. Example: .percent when isPercent is true.
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot choose.
+continuousScaleAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+continuousScaleAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return continuousScaleAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKContinuousScaleAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Continuous numeric scale with fraction digits and optional percent style.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKContinuousScaleAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

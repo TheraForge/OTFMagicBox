@@ -6,7 +6,50 @@ This sample application leverages TheraForge frameworks such as [OTFTemplateBox]
 
 For more details on the features of the SDK and on the TheraForge Cloud setup process (e.g., to obtain an API key), refer to the [OTFToolBox](../../../OTFToolBox) Readme file.
 
+## Why iOS 16.4?
+
+MagicBox requires **iOS 16.4+** to take advantage of modern iOS APIs while reducing legacy compatibility code:
+- **Enhanced SwiftUI**: Leverage new view modifiers for richer, resizable sheet experiences and interactive backgrounds.
+- **Improved Security**: Benefit from the latest platform security and privacy features.
+- **Improved Performance**: Take advantage of optimizations in the latest Swift and SwiftUI runtimes.
+- **SF Symbols 4.2+ Support**: Access thousands of consistent, high-quality icons with advanced rendering.
+
 ## Change Log
+
+<details open>
+  <summary><strong>Release 2.0.0</strong></summary>
+  
+  ### Breaking Changes
+  - **Minimum iOS Version Update**: MagicBox now requires **iOS 16.4** or later. Devices running older iOS versions are no longer supported.
+  
+  ### Added
+  - **Modular Configuration**: YAML configuration is now split per feature under `OTFMagicBox/Features/*/Models/*Configuration.yml` rather than using monolithic files.
+  - **Extended Localization**: Full support for **Arabic (AR) RTL** alongside English (EN) and Portuguese (PT).
+  - **UI Lab + Snippet Playground**: The UI tab is now **UI Lab**, including component/SDK demos and a snippets playground that can also be used as the root of the app via `playgroundMode`.
+  - **Xcode Code Snippets**: Added a curated ResearchKit snippets pack under `Snippets/` and an installer script (`Scripts/install_snippets.rb`).
+  - **Terms & Privacy Support**: Added new support for Terms of Service and Privacy Policy documents.
+  
+  ### Changed
+  - **Performance Improvements**: Significant performance improvements across the entire app.
+  - **Offline-First Architecture**: Reduced network calls and improved synchronization logic to support a robust offline-first system.
+  - **Diagnostics**: Improved log viewing, filtering, and export capabilities. Configuration is now in `OTFMagicBox/Features/Logger/Models/LogConfiguration.yml`.
+  - **Profile Layout**: Refined profile screen with clearer sections.
+  
+  ### Fixed
+  - **Bug Fixes**: Addressed several bugs and stability issues throughout the application.
+</details>
+
+<details>
+  <summary>Release 1.0.6-beta</summary>
+  
+  - **Minimum iOS Version Update**
+    - MagicBox now requires iOS 16.0 or later.
+    - Devices running older iOS versions are no longer supported.
+    - See "Why iOS 16?" section above for details on the advantages of this update.
+  
+  <!-- Other release notes here -->
+</details>
+
 <details>
   <summary>Release 1.0.5-beta</summary>
   
@@ -34,7 +77,7 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
   <summary>Release 1.0.4-beta</summary>
   
   - **New Styling Structure**
-    - Thanks to the new OTFStyle structure, the app can now adopt a user-selected theme in the `AppSysParameter.yml` file, which is applied equally to custom components inside the app, CareKitUI components and OTFDesignSystem components.
+    - Thanks to the new OTFStyle structure, the app can now adopt a user-selected theme in the `OTFMagicBox/App/Models/StyleConfiguration.yml` file, which is applied equally to custom components inside the app, CareKitUI components and OTFDesignSystem components.
     - Added a new OTFStyle environment object and modifier, allowing developers to apply the selected custom style to all the components of the app, whether they are from the TheraForge design system or from CareKit; developers can even apply them to custom views they may want to create.
     - Removed the appTheme property from AppSysParameter and replaced it with styles, an array of styles that developers can use to apply to the app or to add their own custom styles that they can create.
     - Removed the color properties from the DesignConfig model, as the colors are now fetched from appStyle.
@@ -97,7 +140,6 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 <details>
   <summary>Release 1.0.1-beta</summary>
   Removed warnings, improved profile section, added UI samples and made various other improvements
-  
 </details>
 
 <details>
@@ -111,10 +153,10 @@ For more details on the features of the SDK and on the TheraForge Cloud setup pr
 * [Features](#magicbox-features)
 * [Easy Installation (Recommended)](#easy-installation-recommended)
 * [Manual Installation](#manual-installation)
-* [Usage](#app-usage)
+* [Configuration and Usage](#configuration-and-usage)
+* [UI Lab and Snippets](#ui-lab-and-snippets)
 * [Registration on Apple Developer Portal](#registration-on-apple-developer-portal)
 * [Register a new API key](#register-a-new-api-key)
-* [Xcode Setup](#xcode-setup)
 * [CI/CD Setup](#cicd-setup)
 * [License](#license)
 
@@ -126,14 +168,15 @@ You can use MagicBox as a reference, or you can fork it and make it the starting
 
 These are its primary characteristics:
 
-* No-code configuration and setup for accelerated development.
-* Informed consent process and survey generation using Apple's ResearchKit framework.
-* Care plan management using Apple's Carekit framework.
-* Monitoring of health data with Apple's HealthKit framework.
-* Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
-* Support for various popular technologies out of the box: user authentication (Sign in with Apple in addition to standard login) with OAuth2, HIPAA- and GDPR-compliant traffic encryption at rest and in transit (uses TLS 1.3 crypto), app notifications using HTTP 2 Server-Sent Events (SSE), etc.
-* SF Symbols 1.1 support (available on iOS/iPadOS 13 and watchOS 6, and later releases).
-* CI/CD support via GitHub Actions.
+* **No-code configuration:** Setup using Modular YAML files for accelerated development.
+* **Localization:** Built-in support for **EN, PT, and AR (RTL)** with easy YAML-based customization.
+* **ResearchKit:** Informed consent process and survey generation.
+* **CareKit:** Care plan management.
+* **HealthKit:** Monitoring of health data.
+* **Sync:** Automatic data synchronization across the Cloud (a la Dropbox) using the OTFToolBox SDK.
+* **Security:** User authentication (Sign in with Apple, Google, Password-less), HIPAA- and GDPR-compliant traffic encryption (TLS 1.3).
+* **Modern UI:** **SF Symbols 4.2+** support (including variable color and animations), Dark Mode, and Dynamic Type.
+* **CI/CD:** Support via GitHub Actions.
 
 For a hands-on walkthrough on how to set up and configure your own version of MagicBox with no coding required, check out this article:  
 **[Build a Health App in Under an Hour with No Code](https://www.hippocratestech.com/build-a-health-app-in-under-an-hour-with-no-code/)**
@@ -182,10 +225,9 @@ MagicBox supports different login strategies: regular login using registration d
 
 User login credentials are securely stored in the device’s keychain.
 
-
 <p align="center"><img src="Docs/7-Login.png" width=35%></p>
 
-Addition, add GIDClientID into info.plist file to enable Google login.
+To enable Google login, add your `GIDClientID` into the `Info.plist` file.
 
 <p align="center"><img src="Docs/gmail_login_info.png" width=100%></p>
 
@@ -229,11 +271,10 @@ Contacts are cards that contain doctor and family member details, such as addres
 
 <p align="center"><img src="Docs/11-Contacts.png" width=35%></p>
 
-## End-to-end File Encrption (TheraForge CryptoBox)
+## End-to-end File Encryption (TheraForge CryptoBox)
 MagicBox includes end-to-end encryption on document sending and receiving by the user. It provides secure storage and additional security for communication that prevents third parties from accessing confidential data.
 
 Encrypted files can only be decrypted by the intended receiver(s).
-
 
 ## User Profile
 
@@ -241,58 +282,40 @@ In the profile section, users can manage their current session, edit their profi
 
 <p align="center"><img src="Docs/12-Profile.png" width=35%></p>
 
-There's also a network indicator on top of the user's profile picture, indicating whether the user currently has a connection to the TheraForge CloudBox servers and it even indicates if it's connected via cellular or through a wi-fi hotspot. 
+The profile photo also includes a network status indicator, showing whether the app is currently connected to the TheraForge CloudBox service and whether the connection is over cellular or Wi‑Fi.
 
 ## Diagnostics
 
-In the diagnostics section, users can view and share the app's diagnostic logs with other users for troubleshooting and support purposes.
+In Diagnostics, users can review and export the app’s diagnostic logs to support troubleshooting and customer-support requests.
 
-The section's key features include:
+Key features include:
 
-- A log viewer, which allows users to view the detailed logs within the app, helping diagnose potential issues. This feature requires iOS 15 or newer.
+- An in-app log viewer for inspecting detailed logs.
 
 <p align="center"><img src="Docs/100-Diagnostics_1.png" width=35%></p>
 
-- A log sharing button, though which users can export logs for the last 24 hours (configurable) and share them via email or messaging, making it easier to communicate with support.
+- Export and share recent logs (default: last 24 hours; configurable) via email or messaging.
 
 <p align="center"><img src="Docs/101-Diagnostics_2.png" width=35%></p>
 
-- Log filtering, using which the users can filter the logs on the basis of their type or the date. This feature requires iOS 17 or newer.
+- Filter logs by type and date (requires iOS 17 or newer).
 
 <p align="center"><img src="Docs/102-Diagnostics_3.png" width=35%></p>
 
-- The configuration for log duration, support email, and messages can be customized using the YAML and Constants.swift files.
-This feature streamlines troubleshooting by providing comprehensive log access and export capabilities, facilitating efficient support interactions. Sensitive data in logs is masked by default to ensure user privacy and security.
-
-For devices running iOS 14, diagnostic log viewing is not supported. An alert informs users when this functionality is unavailable.
+- The default export range and most Diagnostics/Logs UI copy can be customized in `OTFMagicBox/Features/Logger/Models/LogConfiguration.yml` (e.g. `defaultDaysBack`).
+- Sensitive values in logs are masked by default to help protect user privacy.
 
 ## TheraForge Secure Cloud with Sync Support
 
-MagicBox can be connected to the TheraForge Cloud service to implement offline-first cloud synchronization.
+MagicBox can connect to the TheraForge Cloud service to enable offline-first, cross-device synchronization.
 
-For example, below we show the app's user profile on multiple devices before the date of birth is changed:
+The GIF below demonstrates cross-device synchronization: an image update on one device is automatically propagated to another.
 
-<p align="center"><img src="Docs/30-Profile-Before-Change.png" width=100%></p>
+<p align="center"><img src="Docs/image-sync.gif" width=60%></p>
 
-When the date of birth is changed to Dec 11, 2006 on the second device from the left:
+The next GIF shows a task outcome (for example, a medication administration) being recorded and then synchronized to other devices:
 
-<p align="center"><img src="Docs/31-Profile-With-Change.png" width=100%></p>
-
-And after the date of birth is automatically synchronized securely across the cloud to all devices:
-
-<p align="center"><img src="Docs/32-Profile-After-Sync.png" width=100%></p>
-
-For patient adherence tracking, a patient's glucose level is checked and recorded, then it’s automatically synchronized to multiple devices:
-
-<p align="center"><img src="Docs/33-Before-Glucose-Check.png" width=100%></p>
-
-Glucose level check completed on the second device from the left:
-
-<p align="center"><img src="Docs/34-Glucose-Level-Checked.png" width=100%></p>
-
-Outcome is automatically synchronized securely across the cloud to all devices:
-
-<p align="center"><img src="Docs/35-Outcome-Synced.png" width=100%></p>
+<p align="center"><img src="Docs/task-sync.gif" width=60%></p>
 
 ## Accessibility
 
@@ -308,26 +331,25 @@ MagicBox app is designed to be compatible with the iOS accessibility features, e
 
 ## Apple Watch App
 
-The MagicBox Apple Watch App is designed as a companion app for the iPhone MagicBox application. This app is intended for users to quickly glance through their tasks and activities for the day conveniently on their Apple Watch.
+The MagicBox watchOS app is a companion to the iOS app, providing a glanceable view of today’s tasks and their status on Apple Watch. Updates are synchronized across devices, as shown below:
 
-<p align="center"><img src="Docs/91-apple-watch-demo.png" alt="Apple Watch Demo App" width="60%"></p>
+<p align="center"><img src="Docs/watch-sync.gif" alt="Apple Watch Demo App" width="60%"></p>
 
-To get started with the MagicBox Watch App, follow these steps:
+To get started with the MagicBox watchOS app:
 
 1. Ensure you have the MagicBox app installed on your iPhone.
 2. Pair your Apple Watch with your device, if you haven't already.
-3. Run the `OTFMagicBox Watch App` target on your Apple Watch
+3. Run the `OTFMagicBox Watch App` target from Xcode.
 
-The app leverages [OTFCareKit](https://github.com/TheraForge/OTFCareKit) to fetch and display a list of tasks for the current day on the Watch, on a glanceable and easy-to-use interface.
+The app leverages [OTFCareKit](https://github.com/TheraForge/OTFCareKit) to fetch and display a list of tasks for the current day in a watch-friendly UI.
 
-The Apple Watch app also supports Accessibility features, such as VoiceOver, Bold and Dynamic Text, ensuring that all users, regardless of their abilities, can use our app comfortably. 
-
-### Watch Synchronisation ###
- - Synchronizes daily tasks from iOS to watchOS and updates their outcomes in both stores.
- ```swift 
-  // .mobile: synchronise watchOS store from IOS app
-  // .watchOS: fetch IOS app store from watchOS
-  // .watchAppUpdate: notify other device about data update
+### Watch Synchronisation
+Syncs daily tasks from iOS to watchOS and updates their outcomes in both stores.
+ 
+```swift 
+ // .mobile: synchronise watchOS store from IOS app
+ // .watchOS: fetch IOS app store from watchOS
+ // .watchAppUpdate: notify other device about data update
 
  CloudantSyncManager.shared.cloudantStore?.synchronize(target: .mobile, completion: { error in
       if let error = error {
@@ -336,766 +358,393 @@ The Apple Watch app also supports Accessibility features, such as VoiceOver, Bol
              OTFLog("Synced successfully!")
           }
     })
- ```
+```
 
 ## Assets
 
-MagicBox includes a variety of assets, such as illustrations, icons, and glyphs, that are available for customization within the app. You can preview all the available assets on our [asset gallery](https://tfmart.github.io/OTFMagicBox/).
+MagicBox includes a variety of assets, such as illustrations, icons, and glyphs. You can preview all the available assets on our [asset gallery](https://tfmart.github.io/OTFMagicBox/).
 
-You can also check the available assets locally on your machine by opening your Terminal in the project directory and running the following command:
+You can also check the available assets locally by opening Terminal in the project directory and running:
 
+```bash
+./SampleImagesPreview.sh
 ```
-./openImagesPreview.sh
-```
 
-To use any of these assets in your project, simply follow these steps:
-1. Locate the Images resource in Xcode's sidebar as shown in the figure below
+To review and use images:
+1. Locate **`Samples.xcassets`** in Xcode's sidebar (this folder contains all the template assets).
+2. Select the asset you want to use.
+3. Copy the asset (Cmd+C) and paste it (Cmd+V) into **`Assets.xcassets`**.
+4. Use the image name in your code (e.g., `Image("doctor4")`) or in your YAML configuration.
 
 <p align="center"><img src="Docs/92-image-assets.png" width=80%></p>
 
-2. Choose an image that you want to use in your application
-3. Control-click on it and select `Show in Finder`
-4. From the Finder select the imageset folder corresponding to the desired image
-
-<p align="center"><img src="Docs/98-assets-folder.png" width=80%></p>
-
-5. Select the `Assets` resource of OTFMagicBox in Xcode and drag the imageset folder from the Finder to Xcode. That will install the imageset in MagicBox and you can now start using it.
-
-<p align="center"><img src="Docs/99-drag-asset.png" width=80%></p>
-
-To review any of the optional assets to select and use them in the code, follow these steps:
-1. Hover your mouse pointer over the desired image in the aforementioned gallery (or in the Assets resource) to reveal its name
-
-<p align="center"><img src="Docs/89-custom-image-name.png" width=45%></p>
-
-2. In your code, utilize the [Image view](https://developer.apple.com/documentation/swiftui/image) and pass the installed image's name as an argument, like this:
-
-```swift
-Image("doctor4")
-```
-
-Any installed assets can also be used in the YAML customization files. For example, if we want to use this image on a custom section in the onboarding section of the app:
-
-```yaml
-summary: "This is custom section."
-content: "Custom consent section. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
-title: "Custom consent section"
-image: "doctor4"
-```
-
-<p align="center"><img src="Docs/90-custom-consent-image.png" width="35%" /></p> 
-
-MagicBox also includes preinstalled icon packs from [SF Feathers](https://nielsx.gumroad.com/l/sf-feathers) and [Icons8](https://icons8.com/l/sf/#use), providing you with even more design options to enhance your app. Similar to other graphical assets, you can utilize these packs by identifying the image name and employing it within an Image component or a YAML configuration file:
-
-```swift
-// Slack icon from SF Feather
-Image("slack")
-
-// Instagram icon from Icons8
-Image("instagram")
-```
-
-```yml
-# Slack icon from SF Feather
-image: "slack"
-
-# Instagram icon from Icons8
-image: "instagram"
-```
-
 # Easy Installation (Recommended)
 
-Let’s get MagicBox up and running on your machine. The easiest way? Use the **MagicBox Installer script**—it takes care of everything for you, from installing dependencies to opening the app in Xcode. One script installs everything you need.
+Let’s get MagicBox up and running on your machine. The easiest way is to use the **MagicBox Installer script**.
 
-**Before you start**, make sure you have [Xcode](https://developer.apple.com/xcode/) 13 or later installed, and that you're running macOS Catalina 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon) or later.
+**Prerequisites**: [Xcode](https://developer.apple.com/xcode/) 16 or later.
 
-**[📦 Download the MagicBoxInstaller.zip](Docs/MagicBoxInstaller.zip)**
+1. **[📦 Download the MagicBoxInstaller.zip](Docs/MagicBoxInstaller.zip)**
+2. Unzip the folder.
+3. Right-click the folder -> **“New Terminal at Folder”**.
+4. Run:
+   ```bash
+   bash install_magicbox.sh
+   ```
 
-Once downloaded, unzip the folder:
+<p align="center"><img src="Docs/MagicBoxInstaller5.png" alt="Installation" width="80%"></p> 
 
-<p align="center"><img src="Docs/MagicBoxInstaller1.png" alt="Step 1" width="80%"></p> 
-
-Right-click the unzipped folder and choose **“New Terminal at Folder”**:
-
-<p align="center"><img src="Docs/MagicBoxInstaller2.png" alt="Step 2" width="80%"></p> 
-
-This opens a Terminal window in the correct directory:
-
-<p align="center"><img src="Docs/MagicBoxInstaller3.png" alt="Step 3" width="80%"></p> 
-
-Now, just run the following command:
-
-```bash
-bash install_magicbox.sh
-```
-
-<p align="center"><img src="Docs/MagicBoxInstaller4.png" alt="Step 4" width="80%"></p> 
-
-**Sit back while it installs everything for you**:
-- Xcode Command Line Tools
-- Homebrew
-- Git LFS
-- CocoaPods
-- MagicBox repo with all dependencies
-
-<p align="center"><img src="Docs/MagicBoxInstaller5.png" alt="Step 5" width="80%"></p> 
-
-Once setup is complete, your project opens automatically in Xcode. Ready to customize!
-
-<p align="center"><img src="Docs/MagicBoxInstaller6.png" alt="Step 6" width="100%"></p> 
+Once setup is complete, your project opens automatically in Xcode.
 
 # Manual Installation
 
-The MagicBox app installation process requires the installation of the ToolBox SDK and so it is similar to the process described in the [OTFToolBox](../../../OTFToolBox) Readme file.
+If you prefer to set up your environment manually (or encounter issues with the installer script), follow these steps to get ready for development.
 
-* [Prerequisites](#Prerequisites)
-* [App Setup](#App-Setup)
+## 1. Install Prerequisites
 
-## Prerequisites <a name="Prerequisites"></a>
+Before you begin, ensure you have the necessary tools installed on your Mac.
 
-- macOS Catalina 10.15.4 (Intel) or macOS 11 Big Sur (Apple Silicon)
-- Xcode 13.0 or later
-- CocoaPods
-- iOS 14.5 or later
+### <img src="Docs/29-Xcode.png" width="60" valign="middle"> Xcode
+download **Xcode 16+** from the [Mac App Store](https://apps.apple.com/us/app/xcode/id497799835).
+> **Note**: Confirm you are running macOS 14 (Sonoma) or later.
 
-### 1. Installation Prerequisites
+### <img src="Docs/28-homebrew.png" width="60" valign="middle"> Homebrew
+Homebrew is a package manager that simplifies installing software. Open **Terminal** and run:
 
-In order to develop iOS apps, make sure to download Xcode, Apple's Integrated Development Environment (IDE), from the Mac App Store.
-
-<p align="center"><img src="Docs/29-Xcode.png" width=15%></p> 
-
-If you haven't done it yet, follow this [Xcode article](https://medium.nextlevelswift.com/install-and-configure-xcode-7ed0c5592219) to install and configure it.
-
-(Note that in case of Xcode 13.2 Apple recommends to [download it directly from the Apple Developer web site](https://developer.apple.com/download/all/?q=Xcode). Some developers consider this installation method *preferable for all versions of Xcode*, that is, it’s considered a best practice. However, in this case you also need to install the *Command Line Tools for Xcode*, which are a separate download.)
-
-<p align="center"><img src="Docs/27-cocoapods.png" width=35%></p> 
-
-After installing the Xcode app, you will also need to install the [CocoaPods](https://cocoapods.org/) dependency manager for Swift and Objective-C Cocoa projects.
-
-If you are new to CocoaPods you can refer to the [CocoaPods Guides](https://guides.cocoapods.org/using/using-cocoapods.html) to learn more about it.
-
-CocoaPods is built with the Ruby language and can be installed with the default version of Ruby available with macOS.
-
-<p align="center"><img src="Docs/28-homebrew.png" width=15%></p> 
-
-However, before installing CocoaPods, we recommend that you also install the [Homebrew](https://brew.sh/) package manager. Refer to our [Homebrew Installation](Docs/Homebrew.md) page for prerequisites and caveats.
-
-To do that, open the Terminal application (you can type ⌘+spacebar to bring up the macOS Spotlight search, enter `Terminal` in it, and then press Return).
-
-Then type the following command in Terminal:
-
-```
+```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-as explained in the [Homebrew](https://brew.sh/) main page. (If you get an error, check out our [Homebrew Installation](Docs/Homebrew.md) page.)
+### <img src="Docs/27-cocoapods.png" width="90" valign="middle"> CocoaPods
+CocoaPods manages the libraries (like the TheraForge SDK) used by MagicBox.
 
-Wait for the installation to end.
+1. Install `git-lfs` (required for large files):
+   ```bash
+   brew install git-lfs
+   ```
 
-<p align="center"><img src="Docs/24-homebrew.png" width=80%></p> 
+2. Install CocoaPods:
+   ```bash
+   sudo gem install cocoapods
+   ```
 
-OTFToolBox by default includes Apple's ResearchKit framework. Building it requires the installation of the `git-lfs` tool like so:
+---
 
+## 2. Set Up the App
+
+Now that your tools are ready, let's download the code.
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/TheraForge/OTFMagicBox.git
+   cd OTFMagicBox
+   ```
+
+2. **Install Dependencies**:
+   This step downloads all the required frameworks.
+   ```bash
+   pod install
+   ```
+   > *This may take a few minutes the first time.*
+
+3. **Open the Project**:
+   **Important**: Always open the white `.xcworkspace` file, not the blue `.xcodeproj`.
+   ```bash
+   open OTFMagicBox.xcworkspace
+   ```
+
+## 3. Compile & Run
+
+1. Select a simulator (e.g., iPhone 16) from the top bar in Xcode.
+2. Press the **Play** button (or `Cmd + R`) to build and run the app.
+
+# Configuration and Usage
+
+MagicBox uses a **Modular YAML Configuration** system. You don’t need to be a developer to edit these files and customize the application—use a common editor (e.g., TextEdit or Xcode) and follow the inline comments in each file.
+
+## 1. Global App Settings
+
+**File**: `OTFMagicBox/App/Models/AppConfiguration.yml`
+
+This file controls app-wide settings, feature flags, and API keys.
+
+### Set up the TheraForge Cloud API Key
+To connect the app to the backend, you must provide a valid API Key from the TheraForge Cloud.
+1. Open `AppConfiguration.yml`.
+2. Locate the `apiKey` field.
+3. Paste your key:
+   ```yml
+   apiKey: "your.production.api.key"
+   ```
+
+### Enable CareKit
+To enable the CareKit integration (Schedule and Contacts tabs):
+```yml
+useCareKit: true
 ```
-brew install git-lfs
-```
+If set to `false`, the Schedule and Contacts tabs will be hidden.
 
-Finally, to install CocoaPods in Terminal enter:
+## 2. App Styling & Default Theme
 
-```
-sudo gem install cocoapods
-```
+The appearance of the app is determined by `OTFMagicBox/App/Models/StyleConfiguration.yml`.
 
-as shown below:
-
-<p align="center"><img src="Docs/25-Terminal.png" width=80%></p> 
-
-
-Refer to our [Cocoapods Installation](Docs/Cocoapods.md) page for prerequisites, caveats and troubleshooting suggestions.
-
-After successful installation of `git-lfs` and CocoaPods, you can install the MagicBox app.
-
-## App Setup <a name="App-Setup"></a>
-
-### 1. Create the Developer Directory and a Project Subdirectory 
-
-You need to create a project directory in your user directory.
-
-For example, in `Terminal` go to your personal directory by typing this command:
-
-```
-cd ~
-```
-
-In the Finder that corresponds to your home directory (the one with the home icon and your username).
-
-The canonical way to store software development projects is by creating a ~/Developer sub-directory.
-The Finder has a special "hammer" icon just for this sub-directory (that you can also add to the sidebar):
-
-<p align="center"><img src="Docs/26-Developer.png" width=50%></p>
-
-So go ahead and create a “Developer” directory (if you haven’t done it already) in the Finder or in Terminal like so:
-
-```
-mkdir ~/Developer
-```
-
-This directory will be used to add projects to it.
-
-In the Terminal application change your directory to the `Developer` folder:
-
-```
-cd ~/Developer
-```
-
-### 2. Copy MagicBox's Repository URL
-
-Next, copy the URL of MagicBox's repository in GitHub to clone it. Remember to select HTTPS from the options (as highlighted in red in the image) and copy the repository URL (by clicking on the double square icon highlighted in red):
-
-<p align="center"><img src="Docs/16-CopyRepoLink.png" width=100%></p>
-
-This is the URL that you should get from GitHub:
-
-```
-https://github.com/TheraForge/OTFMagicBox.git
-```
-
-### 3. Clone MagicBox's Repository to Install the App
-
-Then go back to the Terminal app in the `Developer` directory and enter `git clone` followed by the repository URL you just copied in the previous step:
-
-```
-git clone https://github.com/TheraForge/OTFMagicBox.git
-```
-
-<p align="center"><img src="Docs/17-GitClone.png" width=80%></p>
-
-Then change the directory to the newly-created OTFMagicBox subdirectory:
-
-```
-cd OTFMagicBox
-```
-
-### 4. List the Cloned Files
-
-Run the `ls` command in Terminal to see the files in the directory cloned from the GitHub repository.
-
-<p align="center"><img src="Docs/18-ListFiles.png" width=80%></p>
-
-Note the file called `Podfile` in the list.
-
-### 5. Installation of the ToolBox SDK
-
-Run the `pod install` command to install the SDK and its dependencies. After you run this command, you should see something similar to what is shown in the image below:
-
-<p align="center"><img src="Docs/19-PodInstall.png" width=80%></p>
-
-### 6. List the Files Again
-
-Now list the files again using `ls` command in Terminal. This time you'll see two extra files in the list as highlighted in the image:
-
-<p align="center"><img src="Docs/20-ListFiles.png" width=80%></p>
-
-### 7. Open the Project Workspace
-
-`OTFMagicBox.xcworkspace` is the Xcode workspace file you should use from now onwards.
-To open this workspace file in Xcode, you may either double click it in the Finder or open it using the `open OTFMagicBox.xcworkspace` command in Terminal:
-
-<p align="center"><img src="Docs/21-OpenWorkspace.png" width=80%></p>
-
-You can also launch Xcode first and open this file from the startup screen:
-
-<p align="center"><img src="Docs/23-Xcode-start.png" width=80%></p>
-
-When this project opens in Xcode you should see something like this:
-
-<p align="center"><img src="Docs/22-XcodeWorkspace.png" width=100%></p>
-
-### 8. Compile & Run
-
-Type `Cmd + B` or click on the **Product** -> **Build** menu item to build the project.
-
-You may want to select a specific iPhone model from the dropdown menu before building.
-
-Make sure that it's compiling without any errors.
-
-Then you are ready to rock!
-
-If you now wish to customize the app, refer to the sections below for detailed information.
-
-### 9. Xcode Troubleshooting
-
-After installing the pods and trying to run the application, the following error may sometimes occur:
-
-`error: Entitlements file "OTFMagicBox.entitlements" was modified during the build, which is not supported. You can disable this error by setting 'CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION' to 'YES', however this may cause the built product's code signature or provisioning profile to contain incorrect entitlements. (in target 'OTFMagicBox' from project 'OTFMagicBox')`
-
-The [recommended solution](https://stackoverflow.com/questions/55456335/entitlements-file-was-modified-during-the-build-which-is-not-supported) to this problem is to click the following menu item in Xcode:
-
-Product > Clean Build Folder
-
-For general troubleshooting tips to solve potential unexpected errors or crashes in Xcode, refer to this useful article:
-
-**[Xcode Quick Fix](https://developerinsider.co/clean-xcode-cache-quick-fix/)**
-
-# App Usage
-
-After following the above installation steps, go to the `AppSysParameters.yml` file in the root folder of your project.
-This yaml file contains the list of customizable parameters of your health application.
-You don’t need to be a developer to edit this file and customize the application, just use a common editor (e.g., TextEdit or Xcode) and follow the simple instructions present in the `AppSysParameters.yml` file.
-By editing this yaml file you can customize the health application according to your requirements, for example you can modify the app styling and flow.
-
-Review the complete yaml file to learn about the available settings (also called *key-value pairs*) and edit the values of the keys according to your application's requirements, which will allow you to customize your digital health application in just a few minutes.
-
-## Change the App's Name
-
-You can modify the app's name by following the instructions given below.
-
-Go to the root of your project in Xcode (sidebar shown in the figure below).
-
-<p align="center"><img src="Docs/13-Project.png" width=35%></p>
-
-Click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “Bundle name”. Click on the Value column of that row and change the value to your application name, as shown in the figure below.
-
-Example: change $(PRODUCT_NAME) to “My Digital App”.  
-
-<p align="center"><img src="Docs/14-Bundle.png" width=80%></p>
-
-## Modifying the App's Style
-
-The appearance of the app is determined by a flexible styling system defined within the AppSysParameters.yml file. This system is based on [CareKit’s custom styling](https://github.com/carekit-apple/CareKit?tab=readme-ov-file#styling).
-
-It allows you to personalize the app’s style (i.e., theme) according to your preferences, and you can easily switch between different predefined styles.
-
-### Style Configuration
-
-In the `AppSysParameters.yml` file, you'll discover a list of available styles, each representing a unique visual theme for your app. These styles are referred to as "styles," and they include preset configurations for colors, fonts, and other design elements.
-
-#### List of Themes
-
-1. Custom Style
-    - _Name_: `customStyle`
-    - _Description_: This style provides a clean and customizable look. Use it as a starting point to create your unique app style.
-
-2. Health App Style
-    - _Name_: `healthStyle`
-    - _Description_: This style provides colors and visuals based on Apple's Health app
-    
-3. CareKit Style Style
-    - _Name_: `careKitStyle`
-    - _Description_: A default theme that matches the default CareKit look and feel. It is used as a fallback in case a specific style is not selected.
-    
-#### Selected Style
-
-The `selectedStyle` field determines the active style. You can switch between styles by updating this field with the desired style name.
+### Default Theme
+To change the active theme used by the app, update `selectedStyle`:
 
 ```yml
-# AppSysParameters.yml
-
-# Select the active style
 selectedStyle: "customStyle"
 ```
 
 ### Creating a New Style
+To create a new style, add an entry under `styles` with a unique name.
 
-To create a new style, add a new entry to the styles array with the desired properties. Provide a unique name for the style.
-
-When picking colors for your custom style, refer to [Apple's Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color) for valid UIKit color values. See:
-
-1. Semantic UI colors: https://developer.apple.com/documentation/uikit/uicolor/ui_element_colors
-2. Adaptable system grey shades: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3281252
-3. Adaptable system colors: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3174530
-4. Fixed colors: https://developer.apple.com/documentation/uikit/uicolor/standard_colors#3174519
-5. Adaptable colors in Dark Mode: https://sarunw.com/posts/dark-color-cheat-sheet/#cheat-sheet
+> **Design Tip**: When creating a new style, refer to Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) for best practices and [SF Symbols](https://developer.apple.com/sf-symbols/) for iconography.
 
 ```yml
-# AppSysParameters.yml
-
-# Add a new style entry with a unique name
 styles:
-  - name: "newCustomStyle"
-    # Background color of the app
-    backgroundColor: "customBackgroundColor"
-    
-    # Text color used throughout the app
-    textColor: "customTextColor"
-    
-    # Color of separators between UI elements
-    separatorColor: "customSeparatorColor"
-    
-    # ... (add other properties)
-```
-
-### Updating Style Properties
-
-Update the style values to customize its appearance. For example, to update the text color in the "customStyle" theme to green:
-
-```yml
-# AppSysParameters.yml
-
-# Locate the desired style in the styles array
-styles:
-  - name: "customStyle"
-    # Update the text color property to "systemGreen"
-    textColor: "systemGreen"
-    
-    # ... (other properties)
-```
-
-### Automatic Application to Components
-
-Updating the style values in the selected style section of the YAML file will dynamically reflect on the layout and appearance of various components within the app, including CareKit components, ensuring a consistent and unified visual experience throughout the application.
-
-For example, if we set the `buttonTextColor` property to `systemRed`, we'll see that the tint and button colors of the app is set to a Red color:
-
-```yml
-# AppSysParameters.yml
-
-# Locate the selected style in the YAML file
-selectedStyle: "customStyle"
-
-# Update properties within the selected style to customize the appearance
-customStyle:
-  # ...
-  # Set the text color for buttons to "systemRed"
-  buttonTextColor: "systemRed"
-  # ...
-```
-
-<p align="center">
-  <img src="Docs/93-style-info-card.png" width="24%" style="margin-right: 10px;" />
-  <img src="Docs/94-style-buttonlog.png" width="24%" style="margin-right: 10px;" />
-  <img src="Docs/95-style-checklist.png" width="24%" style="margin-right: 10px;" />
-  <img src="Docs/96-style-numeric.png" width="24%" />
-</p>
-
-### Apply Style to New Views
-
-When creating custom views, you can seamlessly integrate the colors of the current app style by fetching them from the `.otfdsStyle` environment variable.
-
-For example, if we have the following colors on `customStyle`
-
-```yml
-# AppSysParameters.yml
-
-# Locate the selected style in the YAML file
-selectedStyle: "customStyle"
-
-# Set specific colors within the selected style to be fetched in views
-customStyle:
-  # Set the text color to "systemGreen"
-  textColor: "systemGreen"
-  
-  # Set the button text color to "systemGreen"
-  buttonTextColor: "systemGreen"
-  
-  # ... (add other properties)ç
-```
-
-And read them through a View with the `.otfdsStyle` environment variable:
-
-```swift
-struct ContentView: View {
-    @Environment(\.otfdsStyle) var style: OTFDesignStyler?
-
-    var body: some View {
-        VStack(spacing: 16) {
-            Text("Secure your account")
-                .font(.title)
-                .foregroundColor(style?.color.label)
-            Text("Setup two-factor authentication to protect your account and your data")
-                .foregroundColor(style?.color.secondaryLabel)
-
-            Button("Continue") {
-                // ...
-            }
-            .buttonStyle(.otfPrimary)
-            .foregroundColor(style?.color.primaryButton)
-        }
-    }
-}
-```
-
-The following view would be generated:
-
-<p align="center"><img src="Docs/97-style-env-example.png" width=45%></p>
-
-Note that attempting to access the current style through the Environment property is not possible outside of a View. To read the style values outside of a View, you can use the `appStyle` property of `YmlReader`:
-
-```swift
-class SecureAccountViewModel {
-    var appStyle = YmlReader().appStyle
-
-    // ...
-}
-```
-
-### Default Theme
-
-In case the style under selectedStyle is omitted or fails to be read, the app will gracefully default to a predefined style called careKitStyle.
-
-## Fonts
-
-You can customize the fonts used in your application, including support for the Bold Text accessibility feature.
-
-**Preinstalled Apple Fonts**
-
-Choose from a variety of [preinstalled fonts](https://developer.apple.com/fonts/system-fonts/) that come with iOS, such as:
-
-- Helvetica Neue: A widely used sans-serif font.
-- Arial: A popular sans-serif font.
-- Times New Roman: A classic serif font.
-
-```
-# AppSysParameters.yml
-
-designConfig:
-    # ...
-    
-    # Fonts
-    - name: "largeTitleFontSize"
-      textValue: "20"
-    - name: "titleFontName"
-      textValue: "Arial"  # Replace with the desired preinstalled font name
-    - name: "titleFontSize"
-      textValue: "17"
+  - name: "myBrandStyle"
+    tintColor: "systemBlue"
+    fontName: "Avenir"
     # ...
 ```
 
-<p align="center"><img src="Docs/88-custom-font-demo.jpeg" width="35%" /></p>
-<p align="center">In this example, we used the <code>Kohinoor Telugu</code> font</p>
+### Best Practices
 
-**Custom Fonts**
+#### 🎨 Semantic Colors
+Prefer **System Colors** (e.g., `systemBlue`, `systemGreen`) and **Semantic UI Colors** (e.g., `label`, `systemBackground`) over fixed hex codes.
+- **Adaptability**: They automatically adjust for **Light and Dark Mode**.
+- **Consistency**: They ensure your app looks at home on iOS.
+- [View Apple's System Colors Guidelines](https://developer.apple.com/design/human-interface-guidelines/color#System-colors)
 
-If you want to use custom fonts in your application, follow these steps:
+#### 📝 Semantic Typography
+Use **Dynamic Type** text styles (e.g., `headline`, `body`, `footnote`) instead of fixed font sizes.
+- **Accessibility**: Respects the user's system-wide text size preference.
+- **Hierarchy**: Automatically provides appropriate weights and leading.
+- [View Apple's Typography Guidelines](https://developer.apple.com/design/human-interface-guidelines/typography#Dynamic-Type-sizes)
 
-1. Add the font files (usually in .ttf or .otf format) to your Xcode project.
-2. Ensure your custom font includes both regular and bold variants (e.g., "CustomFont-Regular" and "CustomFont-Bold"). If your custom font file includes bold variants in a single file, it will automatically adapt to the user's Bold Text accessibility setting.
-3. Open your application's Info.plist file and add a new key called "Fonts provided by application." Add an item for each custom font file.
+## 3. Customize Onboarding
 
-<p align="center"><img src="Docs/87-custom-font.png" width="100%" /></p>
+**File**: `OTFMagicBox/Features/Onboarding/Models/OnboardingConfiguration.yml`
 
-4. Specify the font name in the YAML configuration file:
-
-```
-# AppSysParameters.yml
-
-designConfig:
-    # ...
-    
-    # Fonts
-    - name: "largeTitleFontSize"
-      textValue: "20"
-    - name: "titleFontName"
-      textValue: "Noto Sans"  # Replace with the name of your custom font
-    - name: "titleFontSize"
-      textValue: "17"
-    # ...
-
-```
-For a more detailed guide on working with custom fonts in iOS, refer to Apple's documentation on [Using Custom Fonts](https://developer.apple.com/documentation/uikit/text_display_and_fonts/adding_a_custom_font_to_your_app).
-
-## Set up the TheraForge Cloud API Key
-
-Update the API key field to access the TheraForge Secure Cloud service for synchronization and communication with the web dashboards:
+You can customize the welcome screens presented to new users. Define pages in the `pages` list:
 
 ```yml
-# AppSysParameters.yml
-DataModel:
-   # ...
-   apiKey: "<set_your_api_key_here>"
+pages:
+  - backgroundColor: "blue"
+    illustration: "illustration_welcome"
+    title:
+      en: "Welcome to MagicBox"
+      pt: "Bem-vindo ao MagicBox"
+    subtitle:
+      en: "Start your health journey..."
+      pt: "Comece sua jornada..."
 ```
 
-## Customize Onboarding
+## 4. Customize Authentication & Legal
 
-To customize the onboarding process, go to the onboarding section in the `ModuleAppSysParameter.yml` file and add as many onboarding pages as you need. You can add the image types of your choice such as Emoji, SF Symbols and assets. In the description you can write the text explaining each particular onboarding page:
+**File**: `OTFMagicBox/Features/Authentication/Models/AuthConfiguration.yml`
+
+This file controls the Sign Up, Sign In, and Consent flows.
+
+### Customize Consent and Terms
+You can explicitly define the sections of your content document.
+```yml
+consentSections:
+  - type: "overview"
+    show: true
+    title:
+      en: "Before You Continue"
+    summary:
+      en: "Review our terms..."
+```
+Set `showPrivacyAndTerms: true` in `AppConfiguration.yml` to display these in the Profile tab as well.
+
+### Customize Registration and Login
+Toggle available login methods and registration fields:
 
 ```yml
-# ModuleAppSysParameter.yml
+# Include extra fields
+includeDOB: true
+includeGender: true
 
-onboarding:
- - image: "Splash Image"
-   icon: "stethoscope"
-   title: "Welcome to MagicBox"
-   color: "Black"
-   description: "Your health care app"
- 
- - image: "Splash Image"
-   icon: "speedometer"
-   title: "This is another custom onboarding step"
-   color: "Black"
-   description: "MagicBox allows you to customize the onboarding experience with custom steps"
+# Enable Social Login
+showAppleLogin: true
+showGoogleLogin: true
 ```
 
-## Customize Consent
-
-To customize the Consent process of your application go to the Consent section in the `ModuleAppSysParameter.yml` file and add/modify the required sections. Follow the instructions given in the yaml file to add the correct type of consent sections:
-
+### Configure the Passcode
+To require a passcode (PIN) for accessing the app:
 ```yml
-# ModuleAppSysParameter.yml
- 
-## Custom Consent Section, if you want to display this in your application then assign true value otherwise false for the "show" key.
-- show: "true"
-  summary: "This is custom section."
-  content: "Describe here what the user is consenting to in this step of the onboarding"
+passcodeEnabled: true
+passcodeType: "4" # "4" or "6" digits
 ```
 
-## Customize Registration and Login
+## 5. Feature Configurations
 
-Go to the Registration section in the `ModuleAppSysParameter.yml` file and change the settings for *Date Of Birth* and *Gender* to `true` if you want to display those fields in your Registration form, otherwise set them to `false`:
+- **Profile**: `OTFMagicBox/Features/Profile/Models/ProfileConfiguration.yml`
+- **Schedule**: `OTFMagicBox/Features/Schedule/Models/ScheduleConfiguration.yml`
+- **Contacts**: `OTFMagicBox/Features/Contacts/Models/ContactsConfiguration.yml`
+- **Check-Up**: `OTFMagicBox/Features/CheckUp/Models/CheckUpConfiguration.yml`
+- **Diagnostics**: `OTFMagicBox/Features/Logger/Models/LogConfiguration.yml`
 
-```yml
-# ModuleAppSysParameter.yml
+## 6. App Localization
 
-registration:
-  showDateOfBirth: "true"
-  showGender: "true"
-```
+MagicBox supports **English (EN)**, **Portuguese (PT)**, and **Arabic (AR)**. Localization is handled directly within each feature's YAML configuration file, making it easy to support new languages without changing code.
 
-## Configure Regular Login/Social Login
-
-Go to the Login section in the `ModuleAppSysParameter.yml` file and customize the title and the description.
-
-If you want to use the *Sign up With Google* feature, then change the **showGoogleSignin** key to `true`. Then click on the `Info.plist` file. Xcode will show the contents of the `Info.plist` file as a list of settings (key-value pairs). Go to the row with the key named “GIDClientID” Click on the Value column of that row and change the value to your application which you get from the google developer portal. Find the "CFBundleURLSchemes" key in Info.plist file and add the URLSchemes in value you can also get this value from google developer portal. Also add the URLSchemes in URL Types as shown in the figure below.
-
-<p align="center"><img src="Docs/84-urlScheme.png" width=60%></p>
-
-If you want to use the *Sign up With Apple* feature, then change the corresponding setting to `true`:
-
-```yml
-# ModuleAppSysParameter.yml
-
-showAppleSignin:  "true"
-showGoogleSignin: "false"
-googleClientID: "add_your_client_id_here"
-```
-
-## Configure the Passcode
-
-Go to the Passcode section in the `ModuleAppSysParameter.yml` file and change the settings of passcode text and passcode type to either 4 or 6 digits:
+### How to Localize Content
+Each user-visible string in the configuration files is a dictionary of language codes. To add or update a translation, simply add the corresponding key:
 
 ```yaml
-# ModuleAppSysParameter.yml
-
- passcode:
-   enable: "false"
-   passcodeOnReturnText: "Welcome back!"
-   passcodeText: "Now you will create a passcode to identify yourself to the app and protect access to information you have entered."
-  
-   # Property passcodeType value can be either "4" or "6" only, which describes the number of digits for the passcode.
-   passcodeType: "4"
+title:
+  en: "Daily Check-Up"
+  pt: "Check-up Diário"
+  ar: "الفحص اليومي"
 ```
 
+### Right-to-Left (RTL) Support
+The app automatically handles **RTL (Right-to-Left)** layout when the system language is set to Arabic. This ensures that the UI components, text alignment, and navigation flows are correctly mirrored for an optimal user experience.
 
-## Enable CareKit
+<p align="center">
+  <img src="Docs/arabic_rtl.png" width="35%" alt="Arabic RTL Support Example" />
+</p>
 
-If your application requires support for tasks (for example, for a care plan) and contacts, then enable the `useCareKit` key, which allows you to display the contacts and list the tasks of the patients:
+### Adding More Languages
+1. Open the relevant YAML configuration file.
+2. Add the new language code (e.g., `es` for Spanish, `fr` for French) to all localized string dictionaries.
+3. Ensure the language is added to the supported languages in the Xcode project settings if required for system-level localization.
 
-```yml
-# AppSysParameters.yml
+## Change the App's Name
 
-useCareKit: "true"
+To rename the app:
+
+1. Select the project root in Xcode.
+
+   <p align="center"><img src="Docs/13-Project.png" width=35%></p>
+
+2. Open `Info.plist` and find the **Bundle name** key.
+3. Change its value to your desired name (e.g., from `$(PRODUCT_NAME)` to "My Digital App").
+
+   <p align="center"><img src="Docs/14-Bundle.png" width=80%></p>
+
+# Architecture
+
+MagicBox follows a modular **MVVM (Model-View-ViewModel)** architecture, ensuring separation of concerns and testability.
+
+### MVVM Pattern
+- **Models**: Plain Swift structs or Codable objects (often defined in YAML) that hold data.
+- **Views**: SwiftUI views that display data and capture user interactions.
+- **ViewModels**: `ObservableObject` classes that manage state, handle business logic, and communicate with the data layer.
+
+### UserInfo & Data Management
+User data is managed using **CareKit** entities (`OCKPatient`).
+- **Storage**: Data is stored locally in an encrypted database and synced to the cloud via `CloudantSyncManager`.
+- **Access**: The `ProfileViewModel` retrieves the current user (identified by email) from the `CareKitStoreManager`.
+- **Security**: Sensitive fields are handled securely, and the app supports "Right to be Forgotten" via account deletion APIs.
+
+# UI Lab and Snippets
+
+MagicBox 2.0.0 introduces the **UI Lab**, a dedicated tab for exploring components and running snippet-based experiments.
+
+- **Demos**: View working examples of ResearchKit tasks, CareKit components, and Charts.
+- **Playground**: Configure the `playgroundMode` in `AppConfiguration.yml` to launch directly into a specific test view.
+
+## Health Sensors (Remote Patient Monitoring)
+
+The **Health Sensors** feature is an educational catalog of HealthKit sensor cards for Remote Patient Monitoring (RPM). It features a **Dashboard** that summarizes key metrics and individual cards that visualize detailed data and handle permissions.
+Full documentation for Health Sensors can be found in [HEALTH-SENSORS.md](HEALTH-SENSORS.md).
+
+Health Sensors also includes a lightweight **CareKit sensor task** flow: from **Schedule → Sensors**, users can add a sensor task by metric and send outcomes from the sensor cards.
+
+- **Location**: UI Lab → CoreMotion → Health Sensors
+- **Config**: YAML-driven strings and configuration
+  - `OTFMagicBox/Features/UILab/HealthSensors/Models/HealthSensorsConfiguration.yml`
+  - `OTFMagicBox/Features/Schedule/Models/SensorTaskConfiguration.yml` (sensor task labels/titles/instructions)
+- **Dashboard**: Aggregates selected metrics (Heart Rate, Blood Pressure, etc.) into a single view.
+- **Mock data**: Toggle via the gear icon in the **Dashboard** toolbar (simulator-friendly).
+- **Live heart rate**: Watch-based streaming via WatchConnectivity (Apple Watch).
+- **Schedule tasks**: Add example sensor tasks from the Schedule toolbar and submit outcomes from sensor cards.
+
+## Xcode Snippets
+
+A curated set of **ResearchKit-focused Xcode code snippets** is included under `Snippets/` to help you scaffold common **steps** and **answer formats** quickly (with inline placeholders you can fill in as you go).
+
+**Contents**
+- **Answer formats**: `Snippets/Answers/*` (e.g. boolean, scale, text choice).
+- **Steps**: `Snippets/Steps/*` (e.g. question, form, instruction, completion).
+
+**Install**
+
+```bash
+ruby Scripts/install_snippets.rb
 ```
 
+Restart Xcode after installation.
 
-## UserInfo Usage
-
-The Framework `OTFCareKitStore` contains the property *userInfo* in `OCKPatient.swift` class, When you launch the `OTFMagicBox` application you will get a user object of type `OCKPatient` through which you will able to access the userInfo object and its properties stored in `OTFCareKitStore`.
-
-You can you *userInfo* object to store your own properties on user level, as an example if you want to store the information of selected theme of application you need to create the `struct` including the property you want to store, assign the data to the property of your `struct`.     As userInfo is a dictionary of type `[String: String]` thats why you need to create a string from for `stuct`, To create string encode your model using `JSONEncoder` that will return `data`, then decode this `data` to string using `UTF8` after that create a key in userInfo and assign that your newly created string to key.
-
-Then by using shared instance of `CareKitManager` call the method `updatePatient` as and assign the
-updated `OCKPatient` object to `updatePatient` method as shown in the example below.
-
-```
-struct yourStruct {
-let isDarkMode: Bool
-}
-```
-
-```
-if let data = try? encoder.encode(your-struct) {
-    let stingData = String(decoding: data, as: UTF8.self)
-    user?.userInfo?["Your-Key"] = stingData
-    CareKitManager.shared.cloudantStore?.updatePatient(user!)
-}
-```
+**Notes**
+- The installer copies snippets to `~/Library/Developer/Xcode/UserData/CodeSnippets/`.
+- The installer generates new identifiers each time it runs; re-running it can create duplicate snippets in Xcode. If you need to reinstall, remove the previously installed snippets from Xcode’s Snippet Library (or delete the corresponding `.codesnippet` files in the folder above) before running the script again.
 
 
-# Registration on Apple Developer Portal
+**Browse snippets (Library)**
+1. Press `Cmd+Shift+L` to open Xcode’s Snippets Library.
+2. Select **Code Snippets**.
+3. Search for a snippet by name/prefix (for example `ork`).
+4. Double-click (or drag and drop) to insert it into your Swift file.
 
-If you need to run an application on a physical device (like your personal iPhone) and/or if you need to use TestFlight, then you need to register on the Apple Developer Portal.
+<p align="center"><img src="Docs/snippets-window.png" width=40%></p>
 
-Register your project in your Apple developer account by following [these steps](APP-REGISTRATION.md).
+**Using snippets via autocomplete**
 
-# Register a new API key
+You can also insert snippets directly from the editor using autocomplete. Start typing a snippet name/prefix (for example `orkquestionstep` or `orkbooleananswerformat`) and select it from the suggestions.
+<p align="center"><img src="Docs/snippet-auto-complete.png" width=40%></p>
 
-- You can register a new API key using this [dashboard](https://stg.theraforge.org/admin/). 
-- You need to add valid details into the given form. After a successful submission, you will be presented with a popup window that will show your registered API key.
-- Make sure to copy that API key and keep it in a safe place.
-- Once you have registered your API key, our support team will contact you for further assistance. 
-- A dashboard (called AdminBox) is used to help clients to access and modify their API keys
-- AdminBox can be accessed using the [Portal](https://stg.theraforge.org/admin/login). 
-- Once a client is logged in to the dashboard (as admin), he/she will be able to see all API key details based upon their role.
-- Here are the screenshots for better understanding.
-<br>
-<br>
+After insertion, the snippet expands into a ready-to-edit scaffold. Use Tab / Shift + Tab to jump between placeholders and fill in the required values.
 
-Register API key component:
+<p align="center"><img src="Docs/snippet-result.png" width=60%></p>
 
-<p align="center"><img src="Docs/register-api-key.png" width=80%></p>
+# Development Setup
 
-When API key is registered:
+### Registration on Apple Developer Portal
+To deploy the app to a device or the App Store, you must have an active Apple Developer account.
 
-<p align="center"><img src="Docs/api-key.png" width=80%></p>
+- [Apple Developer Program](https://developer.apple.com/programs/)
+- [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources)
+- [**Detailed App Registration Guide**](https://github.com/HippocratesTech/OTFMagicBox/blob/main/APP-REGISTRATION.md)
 
-Showing all API key details to admins:
+1. **Register User**: Add your Apple ID to Xcode (Settings > Accounts).
+2. **Bundle ID**: Ensure the Bundle Identifier in `Signing & Capabilities` is unique to your team.
+3. **Capabilities**: The following capabilities must be enabled:
+   - HealthKit
+   - Push Notifications (if using sync)
+   - Sign In with Apple (if enabled in Auth config)
 
-<p align="center"><img src="Docs/client-admin.png" width=80%></p>
+### Register a new API key
 
-<br>
+To connect the app to the TheraForge Cloud, you need an API Key. Use the [TheraForge Admin Console](https://stg.theraforge.org/admin/).
 
-# Xcode Setup
+1. **Register Key**: Create a new API key for your project.
 
-Set up the Xcode application with your Apple developer account information as [described here](XCODE-SETUP.md).
+   <p align="center"><img src="Docs/register-api-key.png" width=80%></p>
 
+2. **Copy Key**: Copy the generated key.
 
-# MVVM (Model View ViewModel) Architecture <a name="Model View ViewModel Architecture"></a>
+   <p align="center"><img src="Docs/api-key.png" width=80%></p>
 
-Whenever starting to build a new application, this question always comes to mind: which architectural pattern to choose for a new project. The most used architectural pattern in iOS is MVC. Most of the developers used the MVC pattern for their projects. Small projects work well with MVC, but when your project size starts to increase, it can make clean coding more difficult.
+3. **Log In**: Visit the [Login Page](https://stg.theraforge.org/admin/login).
 
-Not every architectural pattern is good enough to give you everything, there are pros and cons in every architectural pattern.
+   <p align="center"><img src="Docs/client-admin.png" width=80%></p>
 
-In OTFMagicBox we use the MVVM (Model-View-ViewModel) design pattern as it fulfills all our requirements.
+4. **Paste in Config**: Open `OTFMagicBox/App/Models/AppConfiguration.yml` and paste the key into the `apiKey` field.
 
-MVVM is a design pattern that can be used with SwiftUI and that separates an app's UI (View) from its data (Model) and business logic (ViewModel). This separation makes the code more maintainable, testable, and scalable. 
+### CI/CD Setup
+The project includes standard GitHub Actions workflows for Continuous Integration.
+For detailed setup instructions, see the [CI/CD Guide](https://github.com/HippocratesTech/OTFMagicBox/blob/main/.github/CICD.md).
 
-## The Separate Code Layers of MVVM
+- **Workflows**: Located in `.github/workflows/`.
+- **Features**: Automatically builds the app and runs unit tests on every Pull Request.
+- **Customization**: Edit the YAML files in that directory to add deployment steps (e.g., TestFlight upload).
 
-### 1. Model: 
-This layer is responsible for the abstraction of the data sources. Model and ViewModel work together to get and save the data.
+## License
 
-### 2. View:
-The purpose of this layer is to inform the ViewModel about the user’s action. This layer observes the ViewModel and does not contain any kind of application logic.
-
-### 3. ViewModel:
-It exposes those data streams which are relevant to the View. Moreover, it serves as a link between the Model and the View.
- 
-Some important roles played in MVVM:
- 
-* The ViewModel does not hold any kind of reference to a View.
-* Many-to-1 relationships exist between Views and ViewModel.
-* No triggering methods to update a View.
-
-For better understanding of the MVVM architecture see [This Article](https://www.toptal.com/ios/swift-tutorial-introduction-to-mvvm)
-
-
-# CI/CD Setup
-
-Configure your project using a CI and CD pipeline via GitHub Actions as [described here](/.github/CICD.md).
-
-
-# License
-
-This project is made available under the terms of a modified BSD license. See the [LICENSE](LICENSE.md) file.
-
-
+This project is licensed under the **Hippocrates Technologies Commercial License**.
+See the [LICENSE](https://github.com/HippocratesTech/OTFMagicBox/blob/main/LICENSE.md) file for details.

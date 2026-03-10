@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkimagecapturestep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// Create the image capture step.
+let step = ORKImageCaptureStep(identifier: &lt;#"imageCaptureStep"#&gt;) // String. Example: "imageCaptureStep". Unique step identifier used in results.
+step.title = &lt;#"Image Capture"#&gt; // String?. Example: "Image Capture". Primary title shown in the header.
+step.text = &lt;#"Capture a photo following the guide."#&gt; // String?. Example: "Capture a photo following the guide.". Secondary text under the title.
+step.templateImage = &lt;#UIImage(named: "hand_outline_big")!#&gt; // UIImage. Example: UIImage(named: "hand_outline_big")!. Overlay template image on the preview.
+step.templateImageInsets = &lt;#UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)#&gt; // UIEdgeInsets. Example: UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05). Insets as percentages of preview frame.
+step.accessibilityInstructions = &lt;#"Extend your right hand, palm down, one foot from your device."#&gt; // String. Example: "Extend your right hand...". VoiceOver guidance for preview.
+step.accessibilityHint = &lt;#"Captures the image visible in the preview."#&gt; // String. Example: "Captures the image visible in the preview.". VoiceOver hint for capture button.
+step.captureRaw = &lt;#false#&gt; // Bool. Example: true. Capture RAW data when supported.
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKImageCaptureStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKImageCaptureStep with overlay and accessibility hints.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKImageCaptureStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

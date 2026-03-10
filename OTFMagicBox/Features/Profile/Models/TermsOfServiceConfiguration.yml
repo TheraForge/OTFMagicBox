@@ -1,0 +1,247 @@
+# Copyright (c) 2026, Hippocrates Technologies Sagl. All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation and/or
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
+# be used to endorse or promote products derived from this software without specific
+# prior written permission. No license is granted to the trademarks of the copyright
+# holders even if such marks are included in this software.
+
+# 4. Commercial redistribution in any form requires an explicit license agreement with the
+# copyright holder(s). Please contact support@hippocratestech.com for further information
+# regarding licensing.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+# OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+# OF SUCH DAMAGE.
+
+# Terms of Service Configuration
+# ------------------------------
+# This file contains the full text of the Terms of Service.
+# Markdown is supported for styling (e.g., **bold**, # headings).
+
+version: "2.0.0"
+
+content:
+  en: |
+    **1. Agreement to Terms**
+    
+    These Terms of Service (the "Terms") constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and **Hippocrates Technologies Sagl** ("we," "us," or "our"), concerning your access to and use of the **MagicBox** mobile application (the "App").
+    
+    **By accessing the App, you agree that you have read, understood, and agree to be bound by all of these Terms.**
+
+    **2. Medical Disclaimer**
+    
+    **IMPORTANT:** The App is for **informational and educational purposes only**.
+    - **Not Medical Advice:** The App does not provide medical advice, diagnosis, or treatment. Accessing this App does not create a physician-patient relationship.
+    - **Consult a Professional:** Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+    - **Emergencies:** If you think you may have a medical emergency, call your doctor or emergency services immediately.
+
+    **3. Account Responsibilities**
+    
+    To use certain features of the App, you may be required to create an account. You agree to:
+    - Maintain the confidentiality of your password and account information.
+    - Be responsible for all use of your account and password.
+    - Notify us immediately of any unauthorized use of your account.
+    
+    We grant you a limited, non-exclusive, non-transferable, revocable license to use the App for personal, non-commercial purposes.
+
+    **4. Intellectual Property Rights**
+    
+    Unless otherwise indicated, the App is our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the App (collectively, the "Content") are owned or controlled by us or licensed to us, and are protected by copyright and trademark laws.
+
+    **5. User Representations**
+    
+    By using the App, you represent and warrant that:
+    1.  All registration information you submit is true, accurate, current, and complete.
+    2.  You have the legal capacity and you agree to comply with these Terms.
+    3.  You will not access the App through automated or non-human means (bots, scripts).
+    4.  You will not use the App for any illegal or unauthorized purpose.
+
+    **6. Prohibited Activities**
+    
+    You may not access or use the App for any purpose other than that for which we make the App available. Specifically, you agree not to:
+    - Attempt to impersonate another user or person.
+    - Sell or otherwise transfer your profile.
+    - Use any information obtained from the App to harass, abuse, or harm another person.
+    - Interfere with, disrupt, or create an undue burden on the App or the networks or services connected to the App.
+
+    **7. Termination**
+    
+    We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms. If you wish to terminate your account, you may simply discontinue using the Service or delete your account within the App.
+
+    **8. Limitation of Liability**
+    
+    In no event will we or our directors, employees, or agents be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages, including lost profit, lost revenue, loss of data, or other damages arising from your use of the App, even if we have been advised of the possibility of such damages.
+
+    **9. Indemnification**
+    
+    You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys’ fees and expenses, made by any third party due to or arising out of: (1) your use of the App; (2) breach of these Terms; or (3) any breach of your representations and warranties set forth in these Terms.
+
+    **10. Governing Law**
+    
+    These Terms shall be governed by and defined following the laws of **Switzerland**. Hippocrates Technologies Sagl and yourself irrevocably consent that the courts of Switzerland shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.
+
+    **11. Changes to Terms**
+    
+    We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+
+    **12. Contact Us**
+    
+    To resolve a complaint regarding the App or to receive further information regarding use of the App, please contact us at:
+    **Email:** support@hippocratestech.com
+
+  pt: |
+    **Última Atualização:** Janeiro de 2026
+
+    **1. Acordo com os Termos**
+    
+    Estes Termos de Serviço (os "Termos") constituem um acordo juridicamente vinculativo celebrado entre si, pessoalmente ou em nome de uma entidade ("si") e a **Hippocrates Technologies Sagl** ("nós", "nos" ou "nosso"), relativo ao seu acesso e utilização da aplicação móvel **MagicBox** (a "App").
+    
+    **Ao aceder à App, concorda que leu, compreendeu e concorda em ficar vinculado a todos estes Termos.**
+
+    **2. Isenção de Responsabilidade Médica**
+    
+    **IMPORTANTE:** A App destina-se apenas a **fins informativos e educacionais**.
+    - **Não é Aconselhamento Médico:** A App não fornece aconselhamento médico, diagnóstico ou tratamento. O acesso a esta App não cria uma relação médico-paciente.
+    - **Consulte um Profissional:** Procure sempre o conselho do seu médico ou outro profissional de saúde qualificado com quaisquer questões que possa ter sobre uma condição médica.
+    - **Emergências:** Se pensa que pode ter uma emergência médica, ligue imediatamente para o seu médico ou para os serviços de emergência.
+
+    **3. Responsabilidades da Conta**
+    
+    Para utilizar certas funcionalidades, pode ser necessário criar uma conta. Concorda em:
+    - Manter a confidencialidade da sua palavra-passe e informações de conta.
+    - Ser responsável por toda a utilização da sua conta.
+    - Notificar-nos imediatamente de qualquer uso não autorizado.
+    
+    Concedemos-lhe uma licença limitada, não exclusiva, não transferível e revogável para usar a App para fins pessoais e não comerciais.
+
+    **4. Direitos de Propriedade Intelectual**
+    
+    Salvo indicação em contrário, a App é nossa propriedade exclusiva e todo o conteúdo (código, funcionalidades, designs, texto, gráficos) é propriedade nossa ou licenciado a nós, protegido por leis de direitos de autor e marcas registadas.
+
+    **5. Representações do Utilizador**
+    
+    Ao utilizar a App, declara e garante que:
+    1.  Todas as informações de registo são verdadeiras, precisas e atuais.
+    2.  Tem capacidade legal para cumprir estes Termos.
+    3.  Não acederá à App através de meios automatizados (bots, scripts).
+    4.  Não utilizará a App para fins ilegais.
+
+    **6. Atividades Proibidas**
+    
+    Não pode utilizar a App para fins não autorizados. Concorda em não:
+    - Tentar passar-se por outro utilizador.
+    - Vender ou transferir o seu perfil.
+    - Usar informações da App para assediar ou prejudicar outros.
+    - Interferir ou sobrecarregar a App ou redes conectadas.
+
+    **7. Rescisão**
+    
+    Podemos terminar ou suspender a sua conta e bloquear o acesso ao Serviço imediatamente, sem aviso prévio, a nosso critério exclusivo, por qualquer motivo, incluindo violação dos Termos. Se desejar terminar a sua conta, pode simplesmente deixar de usar o Serviço ou apagar a sua conta na App.
+
+    **8. Limitação de Responsabilidade**
+    
+    Em caso algum seremos responsáveis perante si ou terceiros por quaisquer danos diretos, indiretos, consequenciais, incidentais ou punitivos, incluindo lucros cessantes ou perda de dados, decorrentes da sua utilização da App, mesmo que tenhamos sido avisados da possibilidade de tais danos.
+
+    **9. Indemnização**
+    
+    Concorda em defender, indemnizar e isentar-nos de responsabilidade (incluindo subsidiárias e funcionários) contra qualquer perda, dano ou reclamação (incluindo honorários advocatícios) feita por terceiros devido a: (1) uso da App; (2) violação destes Termos; ou (3) violação das suas representações e garantias.
+
+    **10. Lei Aplicável**
+    
+    Estes Termos serão regidos pelas leis da **Suíça**. O utilizador consente irrevogavelmente que os tribunais da Suíça terão jurisdição exclusiva para resolver qualquer disputa relacionada.
+
+    **11. Alterações aos Termos**
+    
+    Reservamo-nos o direito de modificar estes Termos a qualquer momento. Se uma revisão for material, forneceremos pelo menos 30 dias de aviso prévio. O que constitui uma alteração material será determinado a nosso critério exclusivo.
+
+    **12. Contacte-nos**
+    
+    Para questões sobre a App, contacte-nos em:
+    **Email:** support@hippocratestech.com
+
+  ar: |
+    **آخر تحديث:** يناير 2026
+
+    **1. الموافقة على الشروط**
+    
+    تشكل شروط الخدمة هذه (المشار إليها بـ "الشروط") اتفاقية ملزمة قانونًا بينك وبين شركة **Hippocrates Technologies Sagl** ("نحن" أو "نا" أو "الخاصة بنا")، فيما يتعلق بوصولك إلى تطبيق الهاتف المحمول **MagicBox** واستخدامه ("التطبيق").
+    
+    **من خلال الوصول إلى التطبيق، فإنك تقر بأنك قرأت وفهمت وتوافق على الالتزام بجميع هذه الشروط.**
+
+    **2. إخلاء مسؤولية طبية**
+    
+    **هام:** التطبيق مخصص **لأغراض إعلامية وتعليمية فقط**.
+    - **ليس نصيحة طبية:** لا يقدم التطبيق نصيحة طبية أو تشخيصًا أو علاجًا. الوصول إلى هذا التطبيق لا ينشئ علاقة بين الطبيب والمريض.
+    - **استشر متخصصًا:** اطلب دائمًا المشورة من طبيبك أو غيره من مقدمي الخدمات الصحية المؤهلين بشأن أي أسئلة قد تكون لديك بخصوص حالة طبية.
+    - **حالات الطوارئ:** إذا كنت تعتقد أنك قد تواجه حالة طبية طارئة، فاتصل بطبيبك أو بخدمات الطوارئ على الفور.
+
+    **3. مسؤوليات الحساب**
+    
+    لاستخدام ميزات معينة في التطبيق، قد يُطلب منك إنشاء حساب. أنت توافق على:
+    - الحفاظ على سرية كلمة المرور ومعلومات حسابك.
+    - أن تكون مسؤولاً عن جميع استخدامات حسابك وكلمة المرور الخاصة بك.
+    - إخطارنا فوراً بأي استخدام غير مصرح به لحسابك.
+    
+    نمنحك ترخيصًا محدودًا وغير حصري وغير قابل للتحويل وقابل للإلغاء لاستخدام التطبيق لأغراض شخصية وغير تجارية.
+
+    **4. حقوق الملكية الفكرية**
+    
+    ما لم يذكر خلاف ذلك، فإن التطبيق هو ملكية خاصة بنا وجميع أكواد المصدر وقواعد البيانات والوظائف والبرامج وتصميمات مواقع الويب والصوت والفيديو والنصوص والصور والرسومات الموجودة في التطبيق (يشار إليها مجتمعة باسم "المحتوى") مملوكة لنا أو مرخصة لنا، وهي محمية بقوانين حقوق النشر والعلامات التجارية.
+
+    **5. تعهدات المستخدم**
+    
+    باستخدامك للتطبيق، فإنك تتعهد وتضمن ما يلي:
+    1.  أن جميع معلومات التسجيل التي تقدمها حقيقية ودقيقة وحالية وكاملة.
+    2.  أن لديك الأهلية القانونية وتوافق على الامتثال لهذه الشروط.
+    3.  أنك لن تصل إلى التطبيق من خلال وسائل آلية أو غير بشرية (روبوتات، نصوص برمجية).
+    4.  أنك لن تستخدم التطبيق لأي غرض غير قانوني أو غير مصرح به.
+
+    **6. الأنشطة المحظورة**
+    
+    لا يجوز لك الوصول إلى التطبيق أو استخدامه لأي غرض آخر غير الغرض الذي نوفره من أجله. أنت توافق على عدم:
+    - محاولة انتحال شخصية مستخدم أو شخص آخر.
+    - بيع أو نقل ملفك الشخصي بأي طريقة أخرى.
+    - استخدام أي معلومات تم الحصول عليها من التطبيق لمضايقة أو إساءة معاملة أو إيذاء شخص آخر.
+    - التدخل في التطبيق أو الشبكات أو الخدمات المتصلة بالتطبيق أو تعطيلها أو خلق عبء غير مبرر عليها.
+
+    **7. إنهاء الخدمة**
+    
+    يجوز لنا إنهاء أو تعليق حسابك ومنع الوصول إلى الخدمة على الفور، دون إشعار مسبق أو مسؤولية، وفقًا لتقديرنا المطلق، لأي سبب من الأسباب، بما في ذلك على سبيل المثال لا الحصر خرق الشروط. إذا كنت ترغب في إنهاء حسابك، يمكنك ببساطة التوقف عن استخدام الخدمة أو حذف حسابك داخل التطبيق.
+
+    **8. تحديد المسؤولية**
+    
+    بأي حال من الأحوال لن نكون نحن أو مديرينا أو موظفينا أو وكلائنا مسؤولين تجاهك أو تجاه أي طرف ثالث عن أي أضرار مباشرة أو غير مباشرة أو تبعية أو تحذيرية أو عرضية أو خاصة أو عقابية، بما في ذلك خسارة الأرباح أو فقدان الإيرادات أو فقدان البيانات، الناشئة عن استخدامك للتطبيق، حتى لو تم إخطارنا بإمكانية حدوث مثل هذه الأضرار.
+
+    **9. التعويض**
+    
+    أنت توافق على الدفاع عنا وتعويضنا وحمايتنا من أي ضرر، بما في ذلك الشركات التابعة لنا والمسؤولين والوكلاء والشركاء والموظفين، من وضد أي خسارة أو ضرر أو مسؤولية أو مطالبة، بما في ذلك أتعاب المحاماة المعقولة، التي يقدمها أي طرف ثالث نتيجة لـ: (1) استخدامك للتطبيق؛ (2) خرق هذه الشروط؛ أو (3) أي خرق لتعهداتك وضماناتك المذكورة في هذه الشروط.
+
+    **10. القانون الواجب التطبيق**
+    
+    تخضع هذه الشروط وتُفسر وفقًا لقوانين **سويسرا**. توافق أنت وشركة Hippocrates Technologies Sagl بشكل لا رجعة فيه على أن محاكم سويسرا سيكون لها الاختصاص القضائي الحصري لحل أي نزاع قد ينشأ بخصوص هذه الشروط.
+
+    **11. التغييرات في الشروط**
+    
+    نحتفظ بالحق، وفقًا لتقديرنا المطلق، في تعديل أو استبدال هذه الشروط في أي وقت. إذا كان التعديل جوهريًا، فسنقدم إشعارًا قبل 30 يومًا على الأقل من بدء سريان أي شروط جديدة. سيتم تحديد ما يشكل تغييرًا جوهريًا وفقًا لتقديرنا الخاص.
+
+    **12. اتصل بنا**
+    
+    لحل شكوى بخصوص التطبيق أو للحصول على مزيد من المعلومات فيما يتعلق باستخدامه، يرجى الاتصال بنا على:
+    **البريد الإلكتروني:** support@hippocratestech.com

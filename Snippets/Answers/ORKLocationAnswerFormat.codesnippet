@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orklocationanswerformat</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+let locationAnswerFormat = ORKLocationAnswerFormat() // ORKLocationAnswerFormat. Example: ORKLocationAnswerFormat().
+locationAnswerFormat.useCurrentLocation = &lt;#true#&gt; // Bool. Example: true. Autofill with current location on first tap.
+locationAnswerFormat.placeholder = &lt;#"Address"#&gt; // String?. Example: "Address". Placeholder for the address field.
+
+// Accessibility/UX: provide an explicit opt-out when the user truly cannot provide a location.
+locationAnswerFormat.shouldShowDontKnowButton = &lt;#false#&gt; // Bool. Example: true.
+locationAnswerFormat.customDontKnowButtonText = &lt;#"I'm not sure"#&gt; // String?. Example: "I'm not sure".
+
+return locationAnswerFormat
+	</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKLocationAnswerFormat</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Location entry answer format with placeholder and current-location toggle.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKLocationAnswerFormat</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

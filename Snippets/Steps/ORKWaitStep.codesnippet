@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>orkwaitstep</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let step = ORKWaitStep(identifier: &lt;#"waitStep"#&gt;) // String. Example: "waitStep". Unique step identifier used in results.
+step.title = &lt;#"Processing..."#&gt; // String?. Example: "Processing...". Primary title shown in the header.
+step.text = &lt;#"Please wait while we complete your request."#&gt; // String?. Example: "Please wait while we complete your request.". Secondary text under the title.
+step.indicatorType = &lt;#.indeterminate#&gt; // ORKProgressIndicatorType. Example: .progressBar. Progress style (indeterminate or determinate).
+
+return step
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ORKWaitStep</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Configurable ORKWaitStep with indicator and step options.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ORKWaitStep Creation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
