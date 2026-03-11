@@ -362,7 +362,7 @@ Syncs daily tasks from iOS to watchOS and updates their outcomes in both stores.
 
 ## Assets
 
-MagicBox includes a variety of assets, such as illustrations, icons, and glyphs. You can preview all the available assets on our [asset gallery](https://tfmart.github.io/OTFMagicBox/).
+MagicBox includes a variety of assets, such as illustrations, icons, and glyphs. You can preview all the available assets on our [asset gallery](OTFMagicBox).
 
 You can also check the available assets locally by opening Terminal in the project directory and running:
 
@@ -709,7 +709,7 @@ To deploy the app to a device or the App Store, you must have an active Apple De
 
 - [Apple Developer Program](https://developer.apple.com/programs/)
 - [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources)
-- [**Detailed App Registration Guide**](https://github.com/TheraForge/OTFMagicBox/blob/main/APP-REGISTRATION.md)
+- [**Detailed App Registration Guide**](APP-REGISTRATION.md)
 
 1. **Register User**: Add your Apple ID to Xcode (Settings > Accounts).
 2. **Bundle ID**: Ensure the Bundle Identifier in `Signing & Capabilities` is unique to your team.
@@ -738,7 +738,7 @@ To connect the app to the TheraForge Cloud, you need an API Key. Use the [TheraF
 
 ### CI/CD Setup
 The project includes standard GitHub Actions workflows for Continuous Integration.
-For detailed setup instructions, see the [CI/CD Guide](https://github.com/TheraForge/OTFMagicBox/blob/main/.github/CICD.md).
+For detailed setup instructions, see the [CI/CD Guide](.github/CICD.md).
 
 - **Workflows**: Located in `.github/workflows/`.
 - **Features**: Automatically builds the app and runs unit tests on every Pull Request.
@@ -747,4 +747,4 @@ For detailed setup instructions, see the [CI/CD Guide](https://github.com/TheraF
 ## License
 
 This project is licensed under the **Hippocrates Technologies Commercial License**.
-See the [LICENSE](https://github.com/TheraForge/OTFMagicBox/blob/main/LICENSE.md) file for details.
+See the [LICENSE](LICENSE.md) file for details.
