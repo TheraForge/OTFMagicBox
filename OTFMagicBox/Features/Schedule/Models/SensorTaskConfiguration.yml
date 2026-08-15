@@ -58,6 +58,156 @@ reviewLabel:
   pt: "Revisar"
   ar: "مراجعة"
 
+sensorSectionTitle:
+  en: "Sensor"
+  pt: "Sensor"
+  ar: "المستشعر"
+
+manualSectionTitle:
+  en: "Manual Entry"
+  pt: "Entrada Manual"
+  ar: "إدخال يدوي"
+
+sensorModeLabel:
+  en: "Sensor"
+  pt: "Sensor"
+  ar: "المستشعر"
+
+manualModeLabel:
+  en: "Manual"
+  pt: "Manual"
+  ar: "يدوي"
+
+unknownModeLabel:
+  en: "Unknown"
+  pt: "Desconhecido"
+  ar: "غير معروف"
+
+sensorDescription:
+  en: "Read from the Health app and submitted by the user."
+  pt: "Lido do app Saúde e enviado pelo usuário."
+  ar: "تُقرأ من تطبيق صحتي ويُرسلها المستخدم."
+
+manualDescription:
+  en: "Entered by the user."
+  pt: "Inserido pelo usuário."
+  ar: "أدخله المستخدم."
+
+notesLabel:
+  en: "Notes (Optional)"
+  pt: "Notas (Opcional)"
+  ar: "ملاحظات (اختياري)"
+
+notesPlaceholder:
+  en: "Add notes"
+  pt: "Adicionar notas"
+  ar: "أضف ملاحظات"
+
+recordedAtLabel:
+  en: "Recorded at"
+  pt: "Registrado em"
+  ar: "تم التسجيل في"
+
+submittedAtLabel:
+  en: "Submitted at"
+  pt: "Enviado em"
+  ar: "تم الإرسال في"
+
+submittedResultLabel:
+  en: "Submitted Result"
+  pt: "Resultado Enviado"
+  ar: "النتيجة المرسلة"
+
+payloadPreviewTitle:
+  en: "Outcome Payload"
+  pt: "Payload do Resultado"
+  ar: "بيانات النتيجة"
+
+previewPayloadLabel:
+  en: "Preview Payload"
+  pt: "Pré-visualizar Payload"
+  ar: "معاينة البيانات"
+
+invalidFormMessage:
+  en: "Enter valid values before continuing."
+  pt: "Insira valores válidos antes de continuar."
+  ar: "أدخل قيماً صالحة قبل المتابعة."
+
+valueLabel:
+  en: "Value"
+  pt: "Valor"
+  ar: "القيمة"
+
+dateLabel:
+  en: "Date"
+  pt: "Data"
+  ar: "التاريخ"
+
+unitLabel:
+  en: "Unit"
+  pt: "Unidade"
+  ar: "الوحدة"
+
+classificationLabel:
+  en: "Classification"
+  pt: "Classificação"
+  ar: "التصنيف"
+
+averageBPMLabel:
+  en: "Average BPM (Optional)"
+  pt: "BPM Médio (Opcional)"
+  ar: "متوسط النبض (اختياري)"
+
+samplingHzLabel:
+  en: "Sampling Frequency (Optional)"
+  pt: "Frequência de Amostragem (Opcional)"
+  ar: "تردد أخذ العينات (اختياري)"
+
+durationLabel:
+  en: "Duration (Optional)"
+  pt: "Duração (Opcional)"
+  ar: "المدة (اختياري)"
+
+sendManualResultLabel:
+  en: "Send Manual Result"
+  pt: "Enviar Resultado Manual"
+  ar: "إرسال النتيجة اليدوية"
+
+enterManuallyLabel:
+  en: "Enter Manually"
+  pt: "Inserir Manualmente"
+  ar: "إدخال يدوي"
+
+doneLabel:
+  en: "Done"
+  pt: "Concluído"
+  ar: "تم"
+
+retryLabel:
+  en: "Retry"
+  pt: "Tentar Novamente"
+  ar: "إعادة المحاولة"
+
+loadingLabel:
+  en: "Loading result…"
+  pt: "Carregando resultado…"
+  ar: "جارٍ تحميل النتيجة…"
+
+outcomeLoadError:
+  en: "Unable to load the submitted result."
+  pt: "Não foi possível carregar o resultado enviado."
+  ar: "تعذر تحميل النتيجة المرسلة."
+
+manualTaskTitleFormat:
+  en: "Enter %@ Manually"
+  pt: "Inserir %@ Manualmente"
+  ar: "إدخال %@ يدوياً"
+
+manualTaskInstructionsFormat:
+  en: "Enter and send your %@."
+  pt: "Insira e envie %@."
+  ar: "أدخل وأرسل %@."
+
 mockSensorTaskTitle:
   en: "Example Sensor task"
   pt: "Exemplo de Tarefa de Sensor"

@@ -393,6 +393,16 @@ ecgClassificationInconclusive:
   pt: "Inconclusivo"
   ar: "غير حاسم"
 
+ecgClassificationPoorReading:
+  en: "Inconclusive — Poor Reading"
+  pt: "Inconclusivo — Leitura Fraca"
+  ar: "غير حاسم — قراءة ضعيفة"
+
+ecgClassificationOther:
+  en: "Inconclusive — Other"
+  pt: "Inconclusivo — Outro"
+  ar: "غير حاسم — سبب آخر"
+
 ecgClassificationUnrecognized:
   en: "Unrecognized"
   pt: "Não Reconhecido"

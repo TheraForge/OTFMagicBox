@@ -24,6 +24,13 @@ let package = Package(
         .target(
             name: "RawModel",
             dependencies: ["RawGenerableMacros"]
+        ),
+        .testTarget(
+            name: "RawGenerableMacroTests",
+            dependencies: [
+                "RawGenerableMacros",
+                .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax")
+            ]
         )
     ]
 )

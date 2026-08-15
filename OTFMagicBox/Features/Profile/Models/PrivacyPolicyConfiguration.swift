@@ -46,8 +46,17 @@ extension PrivacyPolicyConfiguration: OTFVersionedDecodable {
     typealias Raw = RawPrivacyPolicyConfiguration
 
     static let fallback = PrivacyPolicyConfiguration(
-        version: "2.0.0",
-        content: "If you have questions about our Privacy Policy, please contact us at: support@hippocratestech.com"
+        version: "2.2.0",
+        content: """
+        When enabled, the optional Health Profile accepts only self-reported location/address and health conditions.
+        It does not request, access, infer, or collect GPS or precise device location. Provide only the minimum
+        detail needed, and edit or clear these values in your profile at any time. They are retained as account
+        data only as described in the Privacy Policy and subject to applicable legal obligations. You can request
+        account deletion, but a request is not confirmation that server-side deletion has completed. The exact
+        retention schedule and the account/patient data-path security controls require privacy and security
+        approval before this feature is enabled. If you have questions about our Privacy Policy, please contact
+        us at: support@hippocratestech.com
+        """
     )
 
     init(from raw: RawPrivacyPolicyConfiguration) {

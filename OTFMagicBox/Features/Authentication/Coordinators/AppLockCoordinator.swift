@@ -36,6 +36,29 @@ import UIKit
 import OTFUtilities
 import OTFResearchKit
 
+struct AppLockFailedAttemptCounter {
+    let maxFailedAttempts: Int
+    private(set) var failedAttempts = 0
+
+    init(maxFailedAttempts: Int = 3) {
+        self.maxFailedAttempts = maxFailedAttempts
+    }
+
+    mutating func recordFailure() -> Bool {
+        failedAttempts += 1
+        guard failedAttempts >= maxFailedAttempts else {
+            return false
+        }
+
+        failedAttempts = 0
+        return true
+    }
+
+    mutating func recordSuccess() {
+        failedAttempts = 0
+    }
+}
+
 final class AppLockCoordinator: NSObject, ORKPasscodeDelegate {
     static let shared = AppLockCoordinator()
 
@@ -43,7 +66,7 @@ final class AppLockCoordinator: NSObject, ORKPasscodeDelegate {
         static let maxFailedAttempts = 3
     }
 
-    private var failedAttempts = 0
+    private var failedAttemptCounter = AppLockFailedAttemptCounter(maxFailedAttempts: Constants.maxFailedAttempts)
     private let logger = OTFLogger.logger()
 
     func presentIfNeeded(from presenter: UIViewController? = UIApplication.shared.topMostViewController()) {
@@ -63,17 +86,18 @@ final class AppLockCoordinator: NSObject, ORKPasscodeDelegate {
     // MARK: - ORKPasscodeDelegate
 
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
-        failedAttempts = 0
+        failedAttemptCounter.recordSuccess()
         viewController.dismiss(animated: true)
     }
 
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
-        failedAttempts += 1
-        logger.warning("Passcode auth failed (\(self.failedAttempts)/\(Constants.maxFailedAttempts))")
+        let failedAttemptCount = failedAttemptCounter.failedAttempts + 1
+        let shouldForceLogout = failedAttemptCounter.recordFailure()
+        logger.warning(
+            "Passcode auth failed (\(failedAttemptCount)/\(Constants.maxFailedAttempts))"
+        )
 
-        guard failedAttempts >= Constants.maxFailedAttempts else { return }
-
-        failedAttempts = 0
+        guard shouldForceLogout else { return }
         if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }

@@ -36,116 +36,286 @@ import Foundation
 import SwiftUI
 import OTFCareKit
 import OTFCareKitStore
-import OTFCareKitUI
+
+final class SensorTaskQuickSendState: ObservableObject {
+    typealias Submission = (@escaping (Bool) -> Void) -> Void
+
+    @Published private(set) var isSubmitting = false
+    @Published private(set) var submissionFailed = false
+
+    func submit(using submission: Submission) {
+        guard !isSubmitting else { return }
+
+        isSubmitting = true
+        submissionFailed = false
+        submission { [weak self] success in
+            self?.isSubmitting = false
+            self?.submissionFailed = !success
+        }
+    }
+}
 
 struct SensorTaskCard: View {
 
     private enum FileConstants {
+        static let actionCornerRadius: CGFloat = 10
+        static let actionHorizontalPadding: CGFloat = 14
+        static let actionOuterPadding: CGFloat = 14
+        static let actionVerticalPadding: CGFloat = 12
+        static let cardPadding: CGFloat = 14
         static let chevronName = "chevron.right"
-        static let cornerRadius: CGFloat = 14
+        static let checkmarkName = "checkmark.circle.fill"
+        static let contentSpacing: CGFloat = 12
+        static let detailSpacing: CGFloat = 4
+        static let errorSymbol = "exclamationmark.triangle.fill"
+        static let headerSpacing: CGFloat = 12
+        static let minimumSpacerLength: CGFloat = 8
+        static let paperplaneName = "paperplane.fill"
+        static let rightArrowName = "arrow.right"
+        static let summarySpacing: CGFloat = 8
+        static let waveformName = "waveform.path.ecg"
     }
 
     private let config = SensorTaskConfigurationLoader.config
 
     let metric: HealthKitDataManager.HealthMetric
+    let mode: SensorTaskMode
     let task: OCKAnyTask
+    let occurrence: Int
+    let scheduledStart: Date
+    let showsScheduledTime: Bool
     let hasSentOutcome: Bool
     let sentValueText: String?
     let selectedDate: Date
     let storeManager: OCKSynchronizedStoreManager
     let onTap: () -> Void
 
-    let healthDataManager = HealthKitDataManager()
+    private let healthDataManager = HealthKitDataManager()
 
-    @State private var primaryValue: HealthKitDataManager.HealthMetricValue?
+    @State private var latestReading: HealthKitDataManager.HealthMetricValue?
+    @StateObject private var quickSendState = SensorTaskQuickSendState()
 
     private var canSendOutcome: Bool {
-        primaryValue != nil && !hasSentOutcome
+        guard mode == .sensor, let latestReading, !hasSentOutcome else {
+            return false
+        }
+        return SensorOutcomeSubmissionPolicy.canSubmit(
+            SensorOutcomePayload(
+                metric: metric,
+                reading: latestReading,
+                mode: .sensor
+            ),
+            on: selectedDate
+        )
     }
 
-    var hasAuthorization: Bool {
+    private var hasAuthorization: Bool {
         healthDataManager.authorizationState(for: [metric]) == .authorized
     }
 
-    var ctaText: String {
-        canSendOutcome ? config.sendResultLabel.localized : config.reviewLabel.localized
+    private var ctaText: String {
+        switch (mode, canSendOutcome) {
+        case (.sensor, true):
+            config.sendResultLabel.localized
+        case (.manual, _):
+            config.enterManuallyLabel.localized
+        default:
+            config.reviewLabel.localized
+        }
     }
 
     var body: some View {
-        Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(task.title ?? metric.id)
-                        .font(.headline)
+        let shape = RoundedRectangle(
+            cornerRadius: HealthSensorVisualStyle.cardCornerRadius,
+            style: .continuous
+        )
 
-                    Spacer()
+        VStack(spacing: 0) {
+            Button(action: onTap) {
+                VStack(alignment: .leading, spacing: FileConstants.contentSpacing) {
+                    HStack(alignment: .top, spacing: FileConstants.headerSpacing) {
+                        VStack(alignment: .leading, spacing: FileConstants.detailSpacing) {
+                            Text(task.title ?? metric.id)
+                                .font(.headline)
+                                .foregroundStyle(Color.primary)
 
-                    Image(systemName: FileConstants.chevronName)
-                        .foregroundStyle(Color.secondary)
-                }
+                            if let instructions = task.instructions, !instructions.isEmpty {
+                                Text(instructions)
+                                    .font(.subheadline)
+                                    .foregroundStyle(Color.secondary)
+                                    .lineLimit(2)
+                            }
+                        }
 
-                if let instructions = task.instructions, !instructions.isEmpty {
-                    Text(instructions)
-                        .font(.subheadline)
-                }
+                        Spacer(minLength: FileConstants.minimumSpacerLength)
 
-                Button {
-                    guard !hasSentOutcome else { return }
-                    if canSendOutcome {
-                        sendOutcome()
-                    } else {
-                        onTap()
+                        VStack(alignment: .trailing, spacing: FileConstants.summarySpacing) {
+                            SensorModeBadge(mode: mode)
+
+                            if showsScheduledTime {
+                                Text(scheduledStart, format: .dateTime.hour().minute())
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondary)
+                                    .monospacedDigit()
+                            }
+
+                            Image(systemName: FileConstants.chevronName)
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(Color.secondary)
+                        }
                     }
-                } label: {
-                    Text(sentValueText ?? ctaText)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(hasSentOutcome ? Color.accentColor : Color.white)
-                        .frame(maxWidth: .infinity)
+
+                    if let summary = readingSummary {
+                        Divider()
+
+                        HStack(spacing: FileConstants.summarySpacing) {
+                            Image(
+                                systemName: hasSentOutcome ?
+                                    FileConstants.checkmarkName :
+                                    FileConstants.waveformName
+                            )
+                                .foregroundStyle(Color.accentColor)
+                                .accessibilityHidden(true)
+                            Text(summary)
+                                .font(.subheadline.weight(.semibold).monospacedDigit())
+                                .foregroundStyle(Color.primary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .globalStyle(hasSentOutcome ? .disabledTintColor : .tintColor)
-                .padding(.top)
+                .padding(FileConstants.cardPadding)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
             }
-            .padding(16)
-            .background(Color(.secondarySystemBackground), in: .rect(cornerRadius: FileConstants.cornerRadius))
-            .overlay(
-                RoundedRectangle(cornerRadius: FileConstants.cornerRadius)
-                    .stroke(Color(.separator), lineWidth: 0.5)
-            )
+            .buttonStyle(.plain)
+
+            Divider()
+                .padding(.horizontal, FileConstants.cardPadding)
+
+            Button(action: performPrimaryAction) {
+                HStack {
+                    Text(primaryActionText)
+                        .font(.subheadline.weight(.semibold))
+                    Spacer()
+                    if quickSendState.isSubmitting {
+                        ProgressView()
+                            .tint(Color.white)
+                            .accessibilityHidden(true)
+                    } else {
+                        Image(systemName: primaryActionSymbol)
+                    }
+                }
+                .foregroundStyle(Color.white)
+                .padding(.horizontal, FileConstants.actionHorizontalPadding)
+                .padding(.vertical, FileConstants.actionVerticalPadding)
+                .frame(maxWidth: .infinity)
+                .background(
+                    Color.accentColor,
+                    in: .rect(cornerRadius: FileConstants.actionCornerRadius)
+                )
+            }
+            .buttonStyle(.plain)
+            .disabled(quickSendState.isSubmitting)
+            .padding(FileConstants.actionOuterPadding)
+
+            if quickSendState.submissionFailed {
+                Label(config.outcomeLoadError.localized, systemImage: FileConstants.errorSymbol)
+                    .font(.footnote)
+                    .foregroundStyle(Color.red)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, FileConstants.actionOuterPadding)
+                    .padding(.bottom, FileConstants.actionOuterPadding)
+            }
         }
-        .buttonStyle(.plain)
-        .onAppear {
-            guard hasAuthorization else { return }
-            Task {
-                self.primaryValue = await healthDataManager.fetchLatestValue(for: metric, limit: 1).first
-            }
+        .background(HealthSensorVisualStyle.cardBackground, in: shape)
+        .overlay {
+            shape
+                .strokeBorder(Color.primary.opacity(0.06), lineWidth: 0.5)
+                .allowsHitTesting(false)
+        }
+        .shadow(
+            color: Color.black.opacity(HealthSensorVisualStyle.cardShadowOpacity),
+            radius: HealthSensorVisualStyle.cardShadowRadius,
+            y: HealthSensorVisualStyle.cardShadowYOffset
+        )
+        .task(id: readingRequestID) {
+            latestReading = nil
+            guard mode == .sensor, hasAuthorization else { return }
+            latestReading = await healthDataManager.fetchLatestValue(for: metric, limit: 1).first
         }
     }
 
-    func sendOutcome() {
+    private var readingSummary: String? {
+        if hasSentOutcome {
+            return sentValueText
+        }
+        return latestReading?.compactSummary(config: HealthSensorsConfigurationLoader.config)
+    }
 
-        let healthSensorsConfig = HealthSensorsConfigurationLoader.config
+    private var primaryActionSymbol: String {
+        if hasSentOutcome {
+            return FileConstants.chevronName
+        }
+        return canSendOutcome ? FileConstants.paperplaneName : FileConstants.rightArrowName
+    }
 
-        Task {
-            guard let primaryValue else {
-                onTap()
-                return
+    private var primaryActionText: String {
+        hasSentOutcome ? config.reviewLabel.localized : ctaText
+    }
+
+    private var readingRequestID: String {
+        [
+            metric.id,
+            task.id,
+            "\(occurrence)",
+            selectedDate.ISO8601Format()
+        ].joined(separator: "-")
+    }
+
+    private func performPrimaryAction() {
+        guard !quickSendState.isSubmitting else { return }
+        if hasSentOutcome {
+            onTap()
+        } else if canSendOutcome {
+            sendOutcome()
+        } else {
+            onTap()
+        }
+    }
+
+    private func sendOutcome() {
+        guard let latestReading else {
+            onTap()
+            return
+        }
+
+        quickSendState.submit { completion in
+            Task {
+                let ecgReport: ECGReport?
+                if metric == .ecg,
+                   let waveform = await healthDataManager.fetchECGWaveform(for: latestReading.date) {
+                    ecgReport = ECGReportRenderer().makeReport(
+                        reading: latestReading,
+                        waveform: waveform
+                    )
+                } else {
+                    ecgReport = nil
+                }
+
+                SensorTaskOutcomeHelper.sendOutcome(
+                    payload: SensorOutcomePayload(
+                        metric: metric,
+                        reading: latestReading,
+                        mode: .sensor,
+                        ecgReport: ecgReport
+                    ),
+                    task: task,
+                    on: selectedDate,
+                    occurrence: occurrence,
+                    storeManager: storeManager,
+                    completion: completion
+                )
             }
-
-            let value = MetricValue(
-                label: nil,
-                value: primaryValue.displayValue,
-                unit: metric.displayUnit(config: healthSensorsConfig),
-                date: primaryValue.date,
-                source: .health
-            )
-            SensorTaskOutcomeHelper.sendOutcome(
-                value: value,
-                task: task,
-                on: selectedDate,
-                storeManager: storeManager
-            )
         }
     }
 }

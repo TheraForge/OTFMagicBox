@@ -48,6 +48,10 @@ struct UpdateUserProfileDetailView: View {
     @State private var tempUser: OCKPatient
     @State private var image: UIImage?
     @State private var tempImage: UIImage?
+    @State private var healthProfileDraft: HealthProfileDraft
+    @State private var isFullAddressExpanded: Bool
+    @State private var profileSaveErrorMessage: String?
+    @State private var shouldPreserveDraftAfterSaveFailure = false
 
     @State private var isLoading = false
     @State private var showPhotoOptions = false
@@ -60,6 +64,9 @@ struct UpdateUserProfileDetailView: View {
         _tempUser = State(initialValue: user)
         _image = State(initialValue: model.profileImage)
         _tempImage = State(initialValue: model.profileImage)
+        let healthProfileDraft = HealthProfileDraft(patient: user)
+        _healthProfileDraft = State(initialValue: healthProfileDraft)
+        _isFullAddressExpanded = State(initialValue: healthProfileDraft.location.hasStructuredAddress)
     }
 
     private var avatarImage: Image? {
@@ -154,6 +161,10 @@ struct UpdateUserProfileDetailView: View {
                     .globalStyle(.textFontWeight)
                 }
                 .globalStyle(.headerProminence)
+
+                if hasEnabledHealthProfileSections {
+                    healthProfileSections
+                }
             }
             .disabled(isLoading)
 
@@ -177,6 +188,11 @@ struct UpdateUserProfileDetailView: View {
             }
             Button(model.config.cancelTitle.localized, role: .cancel) { }
         }
+        .alert(model.config.profileSaveErrorTitle.localized, isPresented: isShowingProfileSaveError) {
+            Button(model.config.saveErrorDismissTitle.localized, role: .cancel) { }
+        } message: {
+            Text(profileSaveErrorMessage ?? model.config.profileSaveErrorMessage.localized)
+        }
         .photosPicker(isPresented: $showPhotosPicker, selection: $selectedPhoto, matching: .images)
         .onChange(of: selectedPhoto) { newItem in
             guard let newItem else { return }
@@ -189,6 +205,16 @@ struct UpdateUserProfileDetailView: View {
         .onChange(of: editMode?.wrappedValue) { mode in
             guard let mode else { return }
             if !mode.isEditing {
+                do {
+                    try applyHealthProfileDraft()
+                } catch HealthProfileDraftValidationError.invalidCountryCode {
+                    presentProfileSaveError(model.config.countryCodeValidationMessage.localized)
+                    return
+                } catch {
+                    presentProfileSaveError(model.config.profileSaveErrorMessage.localized)
+                    return
+                }
+
                 let userChanged  = (user != tempUser)
                 let imageChanged = (image != tempImage)
 
@@ -203,9 +229,12 @@ struct UpdateUserProfileDetailView: View {
                 } else {
                     model.updatePatient(user: tempUser, imageUpdated: imageChanged, newImage: tempImage)
                 }
+            } else if shouldPreserveDraftAfterSaveFailure {
+                shouldPreserveDraftAfterSaveFailure = false
             } else {
                 tempUser = user
                 tempImage = image
+                resetHealthProfileDraft()
             }
         }
         .onReceive(model.$isLoading) {
@@ -215,9 +244,13 @@ struct UpdateUserProfileDetailView: View {
             user = saved
             tempUser = saved
         }
+        .onReceive(model.profileUpdateFailed) { _ in
+            presentProfileSaveError(model.config.profileSaveErrorMessage.localized)
+        }
         .onReceive(model.profileUpdateComplete) { _ in
             user = tempUser
             image = tempImage
+            resetHealthProfileDraft()
             editMode?.animation().wrappedValue = .inactive
             model.fetchUserFromDB()
         }
@@ -232,9 +265,232 @@ struct UpdateUserProfileDetailView: View {
             }
         }
     }
-}
 
-// MARK: - Helpers
+    @ViewBuilder
+    private var healthProfileSections: some View {
+        if editMode?.wrappedValue.isEditing == true {
+            healthProfileNoticeSection
+            if model.appConfiguration.enableLocation {
+                healthProfileLocationSection
+            }
+            if model.appConfiguration.enableConditions {
+                healthProfileConditionsSection
+            }
+        } else {
+            healthProfileSummarySection
+        }
+    }
+
+    private var hasEnabledHealthProfileSections: Bool {
+        model.appConfiguration.enableLocation || model.appConfiguration.enableConditions
+    }
+
+    private var healthProfileNoticeSection: some View {
+        Section(model.config.healthProfileTitle.localized) {
+            Text(model.config.healthProfilePrivacyNotice.localized)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+        .globalStyle(.textFont)
+        .globalStyle(.textFontWeight)
+        .globalStyle(.headerProminence)
+    }
+
+    @ViewBuilder
+    private var healthProfileSummarySection: some View {
+        Section(model.config.healthProfileTitle.localized) {
+            if model.appConfiguration.enableLocation {
+                LabeledContent(
+                    model.config.locationLabel.localized,
+                    value: user.profileLocation?.bestAvailableSummary ?? model.config.notSetText.localized
+                )
+            }
+            if model.appConfiguration.enableConditions {
+                LabeledContent(
+                    model.config.conditionsLabel.localized,
+                    value: conditionsSummary(for: user)
+                )
+            }
+        }
+        .globalStyle(.textFont)
+        .globalStyle(.textFontWeight)
+        .globalStyle(.headerProminence)
+    }
+
+    private var healthProfileLocationSection: some View {
+        Section(model.config.locationLabel.localized) {
+            LabeledContent {
+                TextField(
+                    model.config.locationDisplayNamePlaceholder.localized,
+                    text: locationTextBinding(\.country)
+                )
+                .multilineTextAlignment(.trailing)
+                .textInputAutocapitalization(.words)
+            } label: {
+                Text(model.config.locationDisplayNameLabel.localized)
+            }
+
+            LabeledContent {
+                TextField(
+                    model.config.cityPlaceholder.localized,
+                    text: locationTextBinding(\.city)
+                )
+                .multilineTextAlignment(.trailing)
+                .textContentType(.addressCity)
+                .textInputAutocapitalization(.words)
+            } label: {
+                Text(model.config.cityLabel.localized)
+            }
+
+            DisclosureGroup(model.config.fullAddressTitle.localized, isExpanded: $isFullAddressExpanded) {
+                TextField(model.config.addressLine1Label.localized, text: locationTextBinding(\.addressLine1))
+                    .textContentType(.streetAddressLine1)
+                TextField(model.config.addressLine2Label.localized, text: locationTextBinding(\.addressLine2))
+                    .textContentType(.streetAddressLine2)
+                TextField(model.config.regionLabel.localized, text: locationTextBinding(\.region))
+                    .textContentType(.addressState)
+                TextField(model.config.postalCodeLabel.localized, text: locationTextBinding(\.postalCode))
+                    .textContentType(.postalCode)
+                TextField(
+                    model.config.countryCodePlaceholder.localized,
+                    text: locationTextBinding(\.countryCode)
+                )
+                .textContentType(.telephoneNumber)
+                .textInputAutocapitalization(.characters)
+                .autocorrectionDisabled()
+                .accessibilityLabel(model.config.countryCodeLabel.localized)
+            }
+
+            Button(model.config.clearLocationTitle.localized, role: .destructive) {
+                healthProfileDraft.location = ProfileLocation()
+                isFullAddressExpanded = false
+            }
+        }
+        .globalStyle(.textFont)
+        .globalStyle(.textFontWeight)
+        .globalStyle(.headerProminence)
+    }
+
+    private var healthProfileConditionsSection: some View {
+        Section(model.config.conditionsLabel.localized) {
+            Text(model.config.conditionsSelectionText.localized)
+                .foregroundStyle(.secondary)
+
+            ForEach(HealthProfileConditionCatalogue.conditions) { condition in
+                conditionSelectionRow(for: condition)
+            }
+
+            reportingStatusSelectionRow(
+                status: .none,
+                label: model.config.conditionsNoneReportedText.localized
+            )
+
+            Button(model.config.clearConditionsTitle.localized, role: .destructive) {
+                healthProfileDraft.clearConditions()
+            }
+        }
+        .globalStyle(.textFont)
+        .globalStyle(.textFontWeight)
+        .globalStyle(.headerProminence)
+    }
+
+    private var isShowingProfileSaveError: Binding<Bool> {
+        Binding(
+            get: { profileSaveErrorMessage != nil },
+            set: { isPresented in
+                if !isPresented {
+                    profileSaveErrorMessage = nil
+                }
+            }
+        )
+    }
+
+    private func locationTextBinding(_ keyPath: WritableKeyPath<ProfileLocation, String?>) -> Binding<String> {
+        Binding(
+            get: { healthProfileDraft.location[keyPath: keyPath] ?? "" },
+            set: { healthProfileDraft.location[keyPath: keyPath] = $0 }
+        )
+    }
+
+    private func conditionSelectionRow(for condition: MedicalCondition) -> some View {
+        let isSelected = healthProfileDraft.reportingStatus == .reported &&
+            healthProfileDraft.selectedConditions.contains(condition)
+
+        return Button {
+            healthProfileDraft.setCondition(condition, isSelected: !isSelected)
+        } label: {
+            HStack {
+                Text(model.config.conditionLabel(for: condition))
+                Spacer()
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityValue(isSelected ? "Selected" : "Not selected")
+    }
+
+    private func reportingStatusSelectionRow(
+        status: ConditionsReportingStatus,
+        label: String
+    ) -> some View {
+        let isSelected = healthProfileDraft.reportingStatus == status
+
+        return Button {
+            healthProfileDraft.setReportingStatus(status)
+        } label: {
+            HStack {
+                Text(label)
+                Spacer()
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityValue(isSelected ? "Selected" : "Not selected")
+    }
+
+    private func conditionsSummary(for patient: OCKPatient) -> String {
+        guard let response = patient.conditionsResponse else {
+            return model.config.notSetText.localized
+        }
+        switch response.status {
+        case .none:
+            return model.config.conditionsNoneReportedText.localized
+        case .unknown:
+            return model.config.conditionsUnknownText.localized
+        case .reported:
+            return response.items
+                .map { model.config.conditionLabel(for: $0.coding) }
+                .joined(separator: ", ")
+        }
+    }
+
+    private func applyHealthProfileDraft() throws {
+        guard hasEnabledHealthProfileSections else { return }
+        try healthProfileDraft.apply(
+            to: &tempUser,
+            applyLocation: model.appConfiguration.enableLocation,
+            applyConditions: model.appConfiguration.enableConditions
+        )
+    }
+
+    private func resetHealthProfileDraft() {
+        let draft = HealthProfileDraft(patient: user)
+        healthProfileDraft = draft
+        isFullAddressExpanded = draft.location.hasStructuredAddress
+    }
+
+    private func presentProfileSaveError(_ message: String) {
+        shouldPreserveDraftAfterSaveFailure = true
+        profileSaveErrorMessage = message
+        editMode?.animation().wrappedValue = .active
+    }
+}
 
 extension GenderType {
     var carekitGender: OCKBiologicalSex {

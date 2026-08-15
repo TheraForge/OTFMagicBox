@@ -37,9 +37,11 @@ import SwiftUI
 struct CardRowView: View {
 
     private enum FileConstants {
-        static let contentSpacing: CGFloat = 24
-        static let iconSize: CGFloat = 14
-        static let cardPadding: CGFloat = 8
+        static let contentSpacing: CGFloat = 5
+        static let detailSpacing: CGFloat = 2
+        static let iconSize: CGFloat = 30
+        static let rowSpacing: CGFloat = 12
+        static let verticalPadding: CGFloat = 8
     }
 
     let card: HealthSensorCard
@@ -51,70 +53,61 @@ struct CardRowView: View {
     }
 
     var body: some View {
-        VStack(spacing: FileConstants.contentSpacing) {
-            HStack {
-                Image(systemName: card.metric.symbolName)
-                    .foregroundStyle(card.metric.tint)
+        HStack(spacing: FileConstants.rowSpacing) {
+            HealthSensorMetricIcon(metric: card.metric, size: FileConstants.iconSize)
 
-                Text(card.title)
-                    .font(.headline)
-                    .foregroundStyle(Color.primary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(alignment: .leading, spacing: FileConstants.contentSpacing) {
+                HStack(alignment: .firstTextBaseline, spacing: FileConstants.rowSpacing) {
+                    VStack(alignment: .leading, spacing: FileConstants.detailSpacing) {
+                        Text(card.title)
+                            .font(.headline)
+                            .foregroundStyle(Color.primary)
 
-                if let timestamp = viewModel.timestampText {
-                    Text(timestamp)
-                        .font(.caption)
-                        .foregroundStyle(Color.secondary)
+                        Text(card.subtitle)
+                            .font(.caption)
+                            .foregroundStyle(Color.secondary)
+                            .lineLimit(1)
+                    }
+
+                    Spacer()
+
+                    if let timestamp = viewModel.timestampText {
+                        Text(timestamp)
+                            .font(.caption2)
+                            .foregroundStyle(Color.secondary)
+                    }
+                }
+
+                HStack(alignment: .firstTextBaseline, spacing: FileConstants.rowSpacing) {
+                    Text(viewModel.valueText)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(viewModel.usesPlaceholderStyle ? .secondary : .primary)
+                        .monospacedDigit()
+
+                    Spacer()
+
+                    if let detail = viewModel.detailText {
+                        Text(detail)
+                            .font(.caption)
+                            .foregroundStyle(Color.secondary)
+                            .lineLimit(1)
+                    }
                 }
             }
 
-            VStack(alignment: .leading) {
-                Text(viewModel.valueText)
-                    .font(.title3.weight(.semibold))
-                    .foregroundStyle(viewModel.usesPlaceholderStyle ? .secondary : .primary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .monospacedDigit()
-
-                Text(viewModel.detailText ?? card.subtitle)
-                    .font(.footnote)
-                    .foregroundStyle(Color.secondary)
-                    .lineLimit(2)
-            }
         }
-        .padding(FileConstants.cardPadding)
+        .padding(.vertical, FileConstants.verticalPadding)
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
         .onAppear(perform: viewModel.start)
         .onDisappear(perform: viewModel.stop)
     }
 }
 
-private extension HealthKitDataManager.HealthMetric {
-    var symbolName: String {
-        switch self {
-        case .heartRate, .restingHeartRate: "heart.fill"
-        case .bloodGlucose: "drop.fill"
-        case .bloodPressure: "gauge.with.dots.needle.67percent"
-        case .ecg: "waveform.path.ecg"
-        case .respiratoryRate: "lungs.fill"
-        case .oxygenSaturation: "aqi.low"
-        case .vo2Max: "figure.run"
-        }
-    }
-
-    var tint: Color {
-        switch self {
-        case .heartRate, .restingHeartRate: .red
-        case .bloodGlucose: .orange
-        case .bloodPressure: .pink
-        case .ecg: .indigo
-        case .respiratoryRate: .mint
-        case .oxygenSaturation: .blue
-        case .vo2Max: .teal
-        }
-    }
-}
-
 #Preview {
-    List {
+    HealthSensorSectionCard {
         CardRowView(card: CardRegistry.cards.first!)
     }
+    .padding()
+    .background(HealthSensorVisualStyle.screenBackground)
 }

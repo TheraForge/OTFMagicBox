@@ -80,6 +80,10 @@ enum KeychainCloudManager {
         swiftSodium.saveStringValue(password, keychainKey: KeychainKeys.passwordKey)
     }
 
+    static func saveEmailAddressInKeychain(_ email: String) {
+        SwiftSodium().saveStringValue(email, keychainKey: KeychainKeys.emailKey)
+    }
+
     static func isKeyStored(key: String) -> Bool {
         let swiftSodium = SwiftSodium()
         return swiftSodium.isKeyStored(keychainKey: key)

@@ -1,5 +1,7 @@
 # TheraForge MagicBox
 
+![Coverage](badges/coverage.svg)
+
 The Open TheraForge (OTF) MagicBox app is a template for creating digital health solutions that help people better manage their health.
 
 This sample application leverages TheraForge frameworks such as [OTFTemplateBox](../../../OTFTemplateBox) to implement a no-code solution that can be customized without requiring any code changes.
@@ -17,6 +19,25 @@ MagicBox requires **iOS 16.4+** to take advantage of modern iOS APIs while reduc
 ## Change Log
 
 <details open>
+  <summary><strong>Release 2.5.0</strong></summary>
+
+  ### Added
+  - **Optional Health Profile**: Users can optionally add self-reported location details and health conditions during registration, then edit or clear them in Manage Profile. This feature does not access GPS or precise device location.
+  - **Expanded Sensor Task Outcomes**: Sensor tasks now support validated manual entries, optional notes, and Health app-sourced results, while preserving the selected schedule date for each task occurrence.
+  - **Health Education Center**: UI Lab now includes a YAML-driven Health Education Center with configurable article cards and bundled educational content.
+  - **Secure ECG Report Attachments**: For eligible HealthKit ECG sensor results, MagicBox can generate a PDF report and store it as an encrypted secure attachment. Scalar ECG results can still be submitted when a report is unavailable.
+  - **Physical Device Setup Guide**: Added step-by-step guidance for running MagicBox on a personal iPhone and paired Apple Watch, including signing, identifiers, Developer Mode, and troubleshooting.
+
+  ### Changed
+  - **Synchronization and Apple Watch Reliability**: Hardened incremental cloud synchronization, remote-deletion processing, reconnect handling, schedule refreshes, and Apple Watch authentication and update delivery.
+  - **TheraForge Dependencies**: Updated `OTFToolBox/CareHealth` to 2.5.0 and `OTFCloudantStore/CloudantCareHealth` to 2.1.0, with an Xcode 26 CocoaPods toolchain-path compatibility update.
+  - **Testing and Coverage**: Expanded the Swift Testing suite across app configuration, synchronization, WatchConnectivity, HealthKit, ResearchKit, and the new health workflows. The README now documents the coverage workflow and displays its badge.
+
+  ### Fixed
+  - **Privacy-Preserving Diagnostics**: Network diagnostic output now redacts sensitive headers, request bodies, credential-bearing URL components, and replication response data.
+</details>
+
+<details>
   <summary><strong>Release 2.0.0</strong></summary>
   
   ### Breaking Changes
@@ -153,10 +174,12 @@ MagicBox requires **iOS 16.4+** to take advantage of modern iOS APIs while reduc
 * [Features](#magicbox-features)
 * [Easy Installation (Recommended)](#easy-installation-recommended)
 * [Manual Installation](#manual-installation)
+* [Run on a Physical iPhone and Apple Watch](Docs/RUN_ON_IPHONE_AND_APPLE_WATCH.md)
 * [Configuration and Usage](#configuration-and-usage)
 * [UI Lab and Snippets](#ui-lab-and-snippets)
 * [Registration on Apple Developer Portal](#registration-on-apple-developer-portal)
 * [Register a new API key](#register-a-new-api-key)
+* [Testing and Coverage](#testing-and-coverage)
 * [CI/CD Setup](#cicd-setup)
 * [License](#license)
 
@@ -458,6 +481,8 @@ Now that your tools are ready, let's download the code.
 1. Select a simulator (e.g., iPhone 16) from the top bar in Xcode.
 2. Press the **Play** button (or `Cmd + R`) to build and run the app.
 
+To install MagicBox on your own iPhone and paired Apple Watch, including Apple Account options, free-account limits, signing, bundle identifiers, Developer Mode, and troubleshooting, follow the **[complete physical device guide](Docs/RUN_ON_IPHONE_AND_APPLE_WATCH.md)**.
+
 # Configuration and Usage
 
 MagicBox uses a **Modular YAML Configuration** system. You don’t need to be a developer to edit these files and customize the application—use a common editor (e.g., TextEdit or Xcode) and follow the inline comments in each file.
@@ -650,7 +675,7 @@ MagicBox 2.0.0 introduces the **UI Lab**, a dedicated tab for exploring componen
 
 ## Health Sensors (Remote Patient Monitoring)
 
-The **Health Sensors** feature is an educational catalog of HealthKit sensor cards for Remote Patient Monitoring (RPM). It features a **Dashboard** that summarizes key metrics and individual cards that visualize detailed data and handle permissions.
+The **Health Sensors** feature is an educational catalog of HealthKit sensor cards for Remote Patient Monitoring (RPM). It lists supported metrics, previews recent values, and opens individual cards that visualize detailed data and handle permissions.
 Full documentation for Health Sensors can be found in [HEALTH-SENSORS.md](HEALTH-SENSORS.md).
 
 Health Sensors also includes a lightweight **CareKit sensor task** flow: from **Schedule → Sensors**, users can add a sensor task by metric and send outcomes from the sensor cards.
@@ -659,8 +684,8 @@ Health Sensors also includes a lightweight **CareKit sensor task** flow: from **
 - **Config**: YAML-driven strings and configuration
   - `OTFMagicBox/Features/UILab/HealthSensors/Models/HealthSensorsConfiguration.yml`
   - `OTFMagicBox/Features/Schedule/Models/SensorTaskConfiguration.yml` (sensor task labels/titles/instructions)
-- **Dashboard**: Aggregates selected metrics (Heart Rate, Blood Pressure, etc.) into a single view.
-- **Mock data**: Toggle via the gear icon in the **Dashboard** toolbar (simulator-friendly).
+- **Metric list**: Shows configured metrics (Heart Rate, Blood Pressure, etc.) with current or placeholder values.
+- **Mock data**: Toggle via the gear icon in the Health Sensors toolbar (simulator-friendly).
 - **Live heart rate**: Watch-based streaming via WatchConnectivity (Apple Watch).
 - **Schedule tasks**: Add example sensor tasks from the Schedule toolbar and submit outcomes from sensor cards.
 
@@ -705,13 +730,14 @@ After insertion, the snippet expands into a ready-to-edit scaffold. Use Tab / Sh
 # Development Setup
 
 ### Registration on Apple Developer Portal
-To deploy the app to a device or the App Store, you must have an active Apple Developer account.
+An Apple Account is enough for personal testing on your own devices. A paid Apple Developer Program membership is required for TestFlight, App Store distribution, and full access to advanced capabilities.
 
 - [Apple Developer Program](https://developer.apple.com/programs/)
 - [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources)
-- [**Detailed App Registration Guide**](APP-REGISTRATION.md)
+- [**Run MagicBox on a Physical iPhone and Apple Watch**](Docs/RUN_ON_IPHONE_AND_APPLE_WATCH.md)
+- [**Detailed App Registration Guide**](https://github.com/TheraForge/OTFMagicBox/blob/main/APP-REGISTRATION.md)
 
-1. **Register User**: Add your Apple ID to Xcode (Settings > Accounts).
+1. **Register User**: Add your Apple Account to Xcode (Xcode > Settings > Apple Accounts).
 2. **Bundle ID**: Ensure the Bundle Identifier in `Signing & Capabilities` is unique to your team.
 3. **Capabilities**: The following capabilities must be enabled:
    - HealthKit
@@ -736,9 +762,24 @@ To connect the app to the TheraForge Cloud, you need an API Key. Use the [TheraF
 
 4. **Paste in Config**: Open `OTFMagicBox/App/Models/AppConfiguration.yml` and paste the key into the `apiKey` field.
 
+### Testing and Coverage
+
+Before opening a pull request, run the local checks that cover the main app target, SwiftLint rules, and the package-hosted macro tests:
+
+```sh
+swiftlint lint --no-cache
+swift test --package-path RawGenerableMacro
+pod install
+xcodebuild test -workspace OTFMagicBox.xcworkspace -scheme OTFMagicBox -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5' -enableCodeCoverage YES -resultBundlePath /tmp/OTFMagicBox-coverage.xcresult
+xcrun xccov view --report --only-targets /tmp/OTFMagicBox-coverage.xcresult
+ruby Scripts/generate_coverage_badge.rb /tmp/OTFMagicBox-coverage.xcresult
+```
+
+The coverage badge is stored as `badges/coverage.svg` and referenced with a relative README path, so it works wherever the repository contents are published. The badge generator reads the `OTFMagicBox.app` target by default. To update the badge from a manually collected value instead of an Xcode result bundle, run `ruby Scripts/generate_coverage_badge.rb 82.4`.
+
 ### CI/CD Setup
 The project includes standard GitHub Actions workflows for Continuous Integration.
-For detailed setup instructions, see the [CI/CD Guide](.github/CICD.md).
+For detailed setup instructions, see the [CI/CD Guide](https://github.com/TheraForge/OTFMagicBox/blob/main/.github/CICD.md).
 
 - **Workflows**: Located in `.github/workflows/`.
 - **Features**: Automatically builds the app and runs unit tests on every Pull Request.
@@ -747,4 +788,4 @@ For detailed setup instructions, see the [CI/CD Guide](.github/CICD.md).
 ## License
 
 This project is licensed under the **Hippocrates Technologies Commercial License**.
-See the [LICENSE](LICENSE.md) file for details.
+See the [LICENSE](https://github.com/TheraForge/OTFMagicBox/blob/main/LICENSE.md) file for details.

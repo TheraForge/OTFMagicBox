@@ -34,11 +34,11 @@
 
 import Foundation
 
-enum CheckUpTaskType: String, Codable {
+enum CheckUpTaskType: String, Codable, CaseIterable {
     case medication, activity, checkup, appointment
 }
 
-struct CategorySummary {
+struct CategorySummary: Equatable {
     let totalTasks: Int
     let completedTasks: Int
 

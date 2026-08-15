@@ -88,6 +88,12 @@ struct CheckUpView: View {
             .onReceive(NotificationCenter.default.publisher(for: .deleteUserAccount)) { _ in
                 isShowingAccountDeletedAlert = true
             }
+            .onReceive(NotificationCenter.default.publisher(for: .scheduleRefreshRequested)) { notification in
+                model.scheduleRefresh(using: notification)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .localScheduleContentChanged)) { _ in
+                model.scheduleRefresh()
+            }
             .alert(model.config.alertAccountDeletedTitle.localized, isPresented: $isShowingAccountDeletedAlert, actions: {
                 Button(model.config.alertOkButtonTitle.localized) {
                     OTFTheraforgeNetwork.shared.moveToOnboardingView()

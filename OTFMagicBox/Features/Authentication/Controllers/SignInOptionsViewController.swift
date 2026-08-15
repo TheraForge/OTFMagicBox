@@ -52,6 +52,17 @@ final class SignInOptionsStep: ORKQuestionStep {
     }
 }
 
+enum SocialSignupSelection {
+    static func provider(from stepResult: ORKStepResult?) -> SocialType? {
+        guard let rawValue = (stepResult?.results?.first {
+            $0.identifier == Constants.Auth.socialSignupProvider
+        } as? ORKTextQuestionResult)?.textAnswer else {
+            return nil
+        }
+        return SocialType(rawValue: rawValue)
+    }
+}
+
 final class SignInOptionsViewController: ORKStepViewController, ASAuthorizationControllerDelegate {
     
     enum ButtonStyleType {
@@ -96,11 +107,17 @@ final class SignInOptionsViewController: ORKStepViewController, ASAuthorizationC
     
     // MARK: - Result + Navigation
 
-    private func setPredicateAnswer(isEmailFlow: Bool) {
+    private func setPredicateAnswer(isEmailFlow: Bool, socialProvider: SocialType? = nil) {
         let id = step?.identifier ?? Constants.Auth.signInButtons
         let boolean = ORKBooleanQuestionResult(identifier: id)
         boolean.booleanAnswer = NSNumber(value: isEmailFlow)
-        producedResult = ORKStepResult(stepIdentifier: id, results: [boolean])
+        var results: [ORKResult] = [boolean]
+        if let socialProvider {
+            let provider = ORKTextQuestionResult(identifier: Constants.Auth.socialSignupProvider)
+            provider.textAnswer = socialProvider.rawValue
+            results.append(provider)
+        }
+        producedResult = ORKStepResult(stepIdentifier: id, results: results)
     }
     
     private func advance() {
@@ -280,6 +297,12 @@ final class SignInOptionsViewController: ORKStepViewController, ASAuthorizationC
     }
     
     @objc private func loginAppleAction() {
+        if authType == .signup {
+            setPredicateAnswer(isEmailFlow: false, socialProvider: .apple)
+            advance()
+            return
+        }
+
         currentNonce = .makeRandomNonce()
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
@@ -300,8 +323,14 @@ final class SignInOptionsViewController: ORKStepViewController, ASAuthorizationC
         }
 
         let hud = presentBlockingHUD(message: authType == .login ? auth.signingInMessage.localized : auth.signingUpMessage.localized)
+        let request = Request.SocialLogin(
+            userType: .patient,
+            socialType: .apple,
+            authType: authType,
+            identityToken: idToken
+        )
         disposables = OTFTheraforgeNetwork.shared
-            .socialLoginRequest(userType: .patient, socialType: .apple, authType: authType, idToken: idToken)
+            .socialLoginRequest(request)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
@@ -317,6 +346,12 @@ final class SignInOptionsViewController: ORKStepViewController, ASAuthorizationC
     }
 
     @objc private func loginGoogleAction() {
+        if authType == .signup {
+            setPredicateAnswer(isEmailFlow: false, socialProvider: .gmail)
+            advance()
+            return
+        }
+
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] user, error in
             guard let self = self else { return }
 
@@ -333,8 +368,14 @@ final class SignInOptionsViewController: ORKStepViewController, ASAuthorizationC
                                               ? self.auth.signingInMessage.localized
                                               : self.auth.signingUpMessage.localized)
 
+            let request = Request.SocialLogin(
+                userType: .patient,
+                socialType: .gmail,
+                authType: self.authType,
+                identityToken: idToken
+            )
             self.disposables = OTFTheraforgeNetwork.shared
-                .socialLoginRequest(userType: .patient, socialType: .gmail, authType: self.authType, idToken: idToken)
+                .socialLoginRequest(request)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { [weak self] completion in
                     guard let self = self else { return }

@@ -40,6 +40,15 @@ import OTFCloudClientAPI
 typealias AuthType = Request.SocialLogin.AuthType
 typealias SocialType = Request.SocialLogin.SocialType
 
+enum SocialLoginSessionIdentity {
+    static func persist(
+        _ response: Response.Login,
+        saveEmail: (String) -> Void = { KeychainCloudManager.saveEmailAddressInKeychain($0) }
+    ) {
+        saveEmail(response.data.email)
+    }
+}
+
 class OTFTheraforgeNetwork {
     
     private enum FileConstants {
@@ -94,13 +103,17 @@ class OTFTheraforgeNetwork {
         .eraseToAnyPublisher()
     }
     
-    func socialLoginRequest(userType: UserType, socialType: SocialType, authType: AuthType, idToken: String) -> AnyPublisher<Response.Login, ForgeError> {
+    func socialLoginRequest(
+        _ request: OTFCloudClientAPI.Request.SocialLogin
+    ) -> AnyPublisher<Response.Login, ForgeError> {
         return Future<Response.Login, ForgeError> {  promise in
-            let socialRequest = OTFCloudClientAPI.Request.SocialLogin(userType: userType, socialType: socialType, authType: authType, identityToken: idToken)
-            self.otfNetworkService.socialLogin(request: socialRequest) { [weak self] result in
+            self.otfNetworkService.socialLogin(request: request) { [weak self] result in
                 self?.handleResponse(result, completion: promise)
             }
         }
+        .handleEvents(receiveOutput: { response in
+            SocialLoginSessionIdentity.persist(response)
+        })
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
@@ -229,7 +242,7 @@ class OTFTheraforgeNetwork {
     }
     
     func disconnectFromSSE() {
-        NetworkingLayer.shared.eventSource?.disconnect()
+        SSEAndSyncManager.shared.disconnectFromSSE()
     }
     
     func handleResponse<T: Decodable>(_ response: Result<T, ForgeError>, completion: ((Result<T, ForgeError>) -> Void)?) {
@@ -254,6 +267,7 @@ class OTFTheraforgeNetwork {
     
     func moveToOnboardingView() {
         DispatchQueue.main.async {
+            CareKitStoreManager.shared.setWatchSyncReady(false)
             NotificationCenter.default.post(name: .onboardingCompleted, object: false)
             try? CareKitStoreManager.shared.wipe()
             CareKitStoreManager.shared.refreshStore()

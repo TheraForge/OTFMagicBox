@@ -62,6 +62,7 @@ final class ChangePasswordViewModel: ObservableObject {
     private var disposables = Set<AnyCancellable>()
     private let logger = OTFLogger.logger()
     private let decoder: OTFYAMLDecoding
+    private let changePasswordRequest: (String, String, String) -> AnyPublisher<Response.ChangePassword, ForgeError>
 
     private var shouldDismissView = false {
         didSet {
@@ -71,16 +72,23 @@ final class ChangePasswordViewModel: ObservableObject {
 
     // MARK: Init
 
-    init(email: String, decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine()) {
+    init(
+        email: String,
+        decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine(),
+        changePasswordRequest: @escaping (String, String, String) -> AnyPublisher<Response.ChangePassword, ForgeError> = {
+            OTFTheraforgeNetwork.shared.changePassword(email: $0, oldPassword: $1, newPassword: $2)
+        }
+    ) {
         self.email = email
         self.decoder = decoder
+        self.changePasswordRequest = changePasswordRequest
         loadConfiguration()
     }
 
     // MARK: Methods
 
     func changePassword() {
-        OTFTheraforgeNetwork.shared.changePassword(email: email, oldPassword: oldPassword, newPassword: newPassword)
+        changePasswordRequest(email, oldPassword, newPassword)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] response in
                 switch response {

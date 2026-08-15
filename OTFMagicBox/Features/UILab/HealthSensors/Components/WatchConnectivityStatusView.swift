@@ -46,9 +46,10 @@ struct WatchConnectivityStatusView: View {
 
     var body: some View {
         HStack(spacing: FileConstants.spacing) {
-            Circle()
-                .fill(receiver.isReachable ? Color.green : Color.orange)
-                .frame(width: FileConstants.indicatorSize, height: FileConstants.indicatorSize)
+            Image(systemName: receiver.isReachable ? "checkmark.circle.fill" : "circle")
+                .font(.system(size: FileConstants.indicatorSize))
+                .foregroundStyle(receiver.isReachable ? Color.accentColor : Color.secondary)
+                .accessibilityHidden(true)
 
             Text(config.labelConnectivity.localized)
                 .font(.caption)

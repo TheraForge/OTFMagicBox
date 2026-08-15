@@ -45,4 +45,41 @@ enum ScheduleTaskType: String, Codable {
     case restingHeartRate
     case oxygenSaturation
     case vo2Max
+    case manualHeartRate
+    case manualBloodGlucose
+    case manualBloodPressure
+    case manualECG
+    case manualRespiratoryRate
+    case manualRestingHeartRate
+    case manualOxygenSaturation
+    case manualVO2Max
+}
+
+struct SensorTaskDescriptor {
+    let metric: HealthKitDataManager.HealthMetric
+    let mode: SensorTaskMode
+}
+
+extension ScheduleTaskType {
+    var sensorTaskDescriptor: SensorTaskDescriptor? {
+        switch self {
+        case .heartRate: SensorTaskDescriptor(metric: .heartRate, mode: .sensor)
+        case .bloodGlucose: SensorTaskDescriptor(metric: .bloodGlucose, mode: .sensor)
+        case .bloodPressure: SensorTaskDescriptor(metric: .bloodPressure, mode: .sensor)
+        case .ecg: SensorTaskDescriptor(metric: .ecg, mode: .sensor)
+        case .respiratoryRate: SensorTaskDescriptor(metric: .respiratoryRate, mode: .sensor)
+        case .restingHeartRate: SensorTaskDescriptor(metric: .restingHeartRate, mode: .sensor)
+        case .oxygenSaturation: SensorTaskDescriptor(metric: .oxygenSaturation, mode: .sensor)
+        case .vo2Max: SensorTaskDescriptor(metric: .vo2Max, mode: .sensor)
+        case .manualHeartRate: SensorTaskDescriptor(metric: .heartRate, mode: .manual)
+        case .manualBloodGlucose: SensorTaskDescriptor(metric: .bloodGlucose, mode: .manual)
+        case .manualBloodPressure: SensorTaskDescriptor(metric: .bloodPressure, mode: .manual)
+        case .manualECG: SensorTaskDescriptor(metric: .ecg, mode: .manual)
+        case .manualRespiratoryRate: SensorTaskDescriptor(metric: .respiratoryRate, mode: .manual)
+        case .manualRestingHeartRate: SensorTaskDescriptor(metric: .restingHeartRate, mode: .manual)
+        case .manualOxygenSaturation: SensorTaskDescriptor(metric: .oxygenSaturation, mode: .manual)
+        case .manualVO2Max: SensorTaskDescriptor(metric: .vo2Max, mode: .manual)
+        default: nil
+        }
+    }
 }

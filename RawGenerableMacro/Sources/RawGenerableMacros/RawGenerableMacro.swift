@@ -138,7 +138,8 @@ public struct RawGenerableMacro: PeerMacro {
             for binding in varDecl.bindings {
                 guard
                     let id = binding.pattern.as(IdentifierPatternSyntax.self)?.identifier.text,
-                    let typeSyntax = binding.typeAnnotation?.type
+                    let typeSyntax = binding.typeAnnotation?.type,
+                    binding.accessorBlock == nil
                 else { continue }
 
                 // Default policy: keep the type as-is but remove a single top-level optional (if present).
@@ -186,7 +187,7 @@ private func rewriteToRaw(_ type: TypeSyntax) -> String {
         return "[\(rewriteToRaw(arr.element))]"
     }
     if let dict = type.as(DictionaryTypeSyntax.self) {
-        return "[\(rewriteToRaw(dict.key)): \(rewriteToRaw(dict.value))]"
+        return "[\(dict.key.trimmedDescription): \(rewriteToRaw(dict.value))]"
     }
     if let member = type.as(MemberTypeSyntax.self) {
         // Keep module qualifier, prefix the final name

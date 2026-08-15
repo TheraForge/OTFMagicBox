@@ -41,40 +41,18 @@ final class UploadDocumentManager {
 
     private let logger = OTFLogger.logger()
     private var disposables = Set<AnyCancellable>()
-    let swiftSodium = SwiftSodium()
+    private let cryptor = SecureAttachmentCryptor()
 
     func encryptDocument(document: Data, fileName: String) {
         do {
-            let bytes: Bytes = Array(document)
-
-            // 1) Master key for wrapping fileKey
             let defaultStorageKey: Bytes = KeychainCloudManager.getDefaultStorageKey
-            guard !defaultStorageKey.isEmpty else {
-                logger.error("encryptDocument: missing defaultStorageKey.")
-                return
-            }
-
-            // 2) Derive per-file key from master key
-            let fileKey: Bytes = try swiftSodium.deriveKey(from: defaultStorageKey)
-
-            // 3) Encrypt fileKey with master key → encryptedFileKeyHex
-            let fileKeyPush = try swiftSodium.makePushStream(secretKey: defaultStorageKey)
-            let fileKeyCipher = try swiftSodium.pushChunk(fileKeyPush, message: fileKey)
-            let encryptedFileKey: Bytes = fileKeyPush.header() + fileKeyCipher
-            let encryptedFileKeyHex = encryptedFileKey.bytesToHex(spacing: "").lowercased()
-
-            // 4) Encrypt the document with fileKey → newFile (ciphertext)
-            let docPush = try swiftSodium.makePushStream(secretKey: fileKey)
-            let fileCipher = try swiftSodium.pushChunk(docPush, message: bytes)
-            let newFile: Bytes = docPush.header() + fileCipher
-
-            // 5) Hash ciphertext with fileKey → hashFileKeyHex
-            let hashBytes: Bytes = try swiftSodium.genericHash(message: newFile, key: fileKey)
-            let hashFileKeyHex = hashBytes.bytesToHex(spacing: "").lowercased()
-
-            // 6) Upload ciphertext and store keys
-            let encryptedFileData = Data(newFile)
-            uploadFile(data: encryptedFileData, fileName: fileName, encryptedFileKey: encryptedFileKeyHex, hashFileKey: hashFileKeyHex)
+            let envelope = try cryptor.encrypt(document, storageKey: defaultStorageKey)
+            uploadFile(
+                data: envelope.encryptedData,
+                fileName: fileName,
+                encryptedFileKey: envelope.encryptedFileKey,
+                hashFileKey: envelope.hashFileKey
+            )
         } catch {
             logger.error("encryptDocument failed: \(error.localizedDescription)")
         }
@@ -82,37 +60,12 @@ final class UploadDocumentManager {
 
     func decryptedFile(file: Data, encryptedFileKeyHex: String, hashFileKey: String) -> Data {
         do {
-            let ciphertextBytes: [UInt8] = Array(file)
-
-            // 1) Master key
-            let defaultStorageKey: [UInt8] = KeychainCloudManager.getDefaultStorageKey
-            guard !defaultStorageKey.isEmpty else {
-                logger.error("decryptedFile: missing defaultStorageKey.")
-                return Data()
-            }
-
-            // 2) Decode & decrypt fileKey from encryptedFileKeyHex
-            guard let encryptedFileKeyBytes = encryptedFileKeyHex.hexToBytes() else {
-                logger.error("decryptedFile: invalid encryptedFileKey hex.")
-                return Data()
-            }
-
-            let (fileKeyHeader, fileKeyCipher) = encryptedFileKeyBytes.splitFile()
-            let (fileKey, _) = try swiftSodium.pullChunk(secretKey: defaultStorageKey, header: fileKeyHeader, ciphertext: fileKeyCipher)
-
-            // 3) Verify hash of ciphertext
-            let hashBytes: [UInt8] = try swiftSodium.genericHash(message: ciphertextBytes, key: fileKey)
-            let hashHex = hashBytes.bytesToHex(spacing: "").lowercased()
-
-            guard hashHex == hashFileKey.lowercased() else {
-                logger.error("decryptedFile: hash mismatch. Expected: \(hashFileKey) - Got: \(hashHex)")
-                return Data()
-            }
-
-            // 4) Decrypt ciphertext
-            let (header, encryptedFile) = ciphertextBytes.splitFile()
-            let (plaintext, _) = try swiftSodium.pullChunk(secretKey: fileKey, header: header, ciphertext: encryptedFile)
-            return Data(plaintext)
+            return try cryptor.decrypt(
+                file,
+                encryptedFileKey: encryptedFileKeyHex,
+                hashFileKey: hashFileKey,
+                storageKey: KeychainCloudManager.getDefaultStorageKey
+            )
         } catch {
             logger.error("decryptedFile failed: \(error.localizedDescription)")
             return Data()

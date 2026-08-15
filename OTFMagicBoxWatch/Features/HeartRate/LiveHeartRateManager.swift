@@ -38,11 +38,6 @@ import WatchKit
 
 final class LiveHeartRateManager: NSObject, ObservableObject {
 
-    private enum FileConstants {
-        static let bpmKey = "bpm"
-        static let timestampKey = "timestamp"
-    }
-
     static let shared = LiveHeartRateManager()
 
     @Published private(set) var bpm: Int = 0
@@ -170,13 +165,16 @@ final class LiveHeartRateManager: NSObject, ObservableObject {
     }
 
     private func sendBpm(_ bpm: Int) {
-        guard WCSession.isSupported() else { return }
+        let isSessionSupported = WCSession.isSupported()
+        guard isSessionSupported else { return }
         let session = WCSession.default
-        guard session.isReachable else { return }
-        let payload: [String: Any] = [
-            FileConstants.bpmKey: bpm,
-            FileConstants.timestampKey: Date().timeIntervalSince1970
-        ]
+        guard let payload = WatchLiveHeartRateDelivery.bpmPayload(
+            bpm: bpm,
+            isSessionSupported: isSessionSupported,
+            isReachable: session.isReachable
+        ) else {
+            return
+        }
         session.sendMessage(payload, replyHandler: nil, errorHandler: nil)
     }
 

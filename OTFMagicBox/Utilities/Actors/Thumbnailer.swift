@@ -155,7 +155,17 @@ public actor Thumbnailer {
     // MARK: - Caching
 
     private let memoryCache = NSCache<NSString, UIImage>()
+    private let configuredDiskCacheURL: URL?
+
+    init(diskCacheURL: URL? = nil) {
+        self.configuredDiskCacheURL = diskCacheURL
+    }
+
     private lazy var diskCacheURL: URL = {
+        if let configuredDiskCacheURL {
+            try? FileManager.default.createDirectory(at: configuredDiskCacheURL, withIntermediateDirectories: true)
+            return configuredDiskCacheURL
+        }
         let base = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         let dir = base.appendingPathComponent("Thumbnails", isDirectory: true)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)

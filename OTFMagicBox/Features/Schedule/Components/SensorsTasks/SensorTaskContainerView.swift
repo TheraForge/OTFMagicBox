@@ -40,39 +40,38 @@ import OTFCareKitUI
 final class SensorTaskContainerView: UIView, OCKTaskDisplayable {
 
     weak var delegate: OCKTaskViewDelegate?
-    private var hostingController: UIHostingController<SensorTaskCard>?
-    private var eventIndexPath: IndexPath?
+    private var hostingController: UIHostingController<SensorTaskEventCardList>?
 
     func update(
         task: OCKAnyTask?,
-        hasSentOutcome: Bool,
-        sentValueText: String?,
-        eventIndexPath: IndexPath?,
+        eventCards: [SensorTaskEventCardModel],
         metric: HealthKitDataManager.HealthMetric,
+        mode: SensorTaskMode,
         selectedDate: Date,
         storeManager: OCKSynchronizedStoreManager
     ) {
-        self.eventIndexPath = eventIndexPath
         guard let task else { return }
 
-        let cardView = SensorTaskCard(
+        let cardList = SensorTaskEventCardList(
             metric: metric,
+            mode: mode,
             task: task,
-            hasSentOutcome: hasSentOutcome,
-            sentValueText: sentValueText,
+            eventCards: eventCards,
             selectedDate: selectedDate,
             storeManager: storeManager,
-            onTap: { [weak self] in
-                self?.notifySelection()
+            onTap: { [weak self] eventIndexPath in
+                self?.notifySelection(at: eventIndexPath)
             }
         )
 
         if let hostingController {
-            hostingController.rootView = cardView
+            hostingController.rootView = cardList
+            invalidateHostedContentSize()
             return
         }
 
-        let hostingController = UIHostingController(rootView: cardView)
+        let hostingController = UIHostingController(rootView: cardList)
+        hostingController.sizingOptions = .intrinsicContentSize
         hostingController.view.backgroundColor = .clear
         addSubview(hostingController.view)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -83,10 +82,49 @@ final class SensorTaskContainerView: UIView, OCKTaskDisplayable {
             hostingController.view.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         self.hostingController = hostingController
+        invalidateHostedContentSize()
     }
 
-    private func notifySelection() {
-        guard let eventIndexPath else { return }
+    private func invalidateHostedContentSize() {
+        hostingController?.view.invalidateIntrinsicContentSize()
+        invalidateIntrinsicContentSize()
+        setNeedsLayout()
+        superview?.setNeedsLayout()
+    }
+
+    private func notifySelection(at eventIndexPath: IndexPath) {
         delegate?.didSelectTaskView(self, eventIndexPath: eventIndexPath)
+    }
+}
+
+struct SensorTaskEventCardList: View {
+    let metric: HealthKitDataManager.HealthMetric
+    let mode: SensorTaskMode
+    let task: OCKAnyTask
+    let eventCards: [SensorTaskEventCardModel]
+    let selectedDate: Date
+    let storeManager: OCKSynchronizedStoreManager
+    let onTap: (IndexPath) -> Void
+
+    var body: some View {
+        VStack(spacing: HealthSensorVisualStyle.contentSpacing) {
+            ForEach(eventCards) { eventCard in
+                SensorTaskCard(
+                    metric: metric,
+                    mode: mode,
+                    task: task,
+                    occurrence: eventCard.occurrence,
+                    scheduledStart: eventCard.scheduledStart,
+                    showsScheduledTime: eventCards.count > 1,
+                    hasSentOutcome: eventCard.hasSentOutcome,
+                    sentValueText: eventCard.sentValueText,
+                    selectedDate: selectedDate,
+                    storeManager: storeManager,
+                    onTap: {
+                        onTap(eventCard.eventIndexPath)
+                    }
+                )
+            }
+        }
     }
 }

@@ -63,6 +63,11 @@ uiLabHealthSensors:
   pt: "Health Sensors"
   ar: "مستشعرات الصحة"
 
+uiLabHealthEducationCenter:
+  en: "Health Education Center"
+  pt: "Centro de Educação para a Saúde"
+  ar: "مركز التثقيف الصحي"
+
 uiLabPlayground:
   en: "Playground"
   pt: "Playground"

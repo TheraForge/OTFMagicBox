@@ -19,39 +19,39 @@ PODS:
     - OTFCareKitUI (= 2.0.2-tf.2)
   - OTFCareKitStore/CareHealth (2.0.2-tf.2)
   - OTFCareKitUI (2.0.2-tf.2)
-  - OTFCDTDatastore (2.1.1-tf.2):
-    - OTFCDTDatastore/standard (= 2.1.1-tf.2)
-  - OTFCDTDatastore/common-dependencies (2.1.1-tf.2):
+  - OTFCDTDatastore (2.1.1-tf.3):
+    - OTFCDTDatastore/standard (= 2.1.1-tf.3)
+  - OTFCDTDatastore/common-dependencies (2.1.1-tf.3):
     - OTFCDTDatastore/no-arc
-    - OTFToolBoxCore (= 2.0.0)
-  - OTFCDTDatastore/no-arc (2.1.1-tf.2)
-  - OTFCDTDatastore/standard (2.1.1-tf.2):
+    - OTFToolBoxCore (= 2.5.0)
+  - OTFCDTDatastore/no-arc (2.1.1-tf.3)
+  - OTFCDTDatastore/standard (2.1.1-tf.3):
     - OTFCDTDatastore/common-dependencies
-  - OTFCloudantStore/CloudantCareHealth (2.0.0):
+  - OTFCloudantStore/CloudantCareHealth (2.1.0):
     - OTFCareKitStore/CareHealth (= 2.0.2-tf.2)
-    - OTFCDTDatastore (= 2.1.1-tf.2)
-    - OTFCloudClientAPI (= 2.0.0)
+    - OTFCDTDatastore (= 2.1.1-tf.3)
+    - OTFCloudClientAPI (= 2.1.0)
     - OTFUtilities (= 2.0.0)
-  - OTFCloudClientAPI (2.0.0):
+  - OTFCloudClientAPI (2.1.0):
     - KeychainAccess
-    - OTFCDTDatastore (= 2.1.1-tf.2)
+    - OTFCDTDatastore (= 2.1.1-tf.3)
     - OTFUtilities (= 2.0.0)
-  - OTFDesignSystem (2.0.0)
+  - OTFDesignSystem (2.1.0)
   - OTFResearchKit (2.0.0-tf.2):
     - OTFResearchKit/Care (= 2.0.0-tf.2)
   - OTFResearchKit/Care (2.0.0-tf.2)
   - OTFTemplateBox (2.0.0):
     - OTFUtilities (= 2.0.0)
     - Yams
-  - OTFToolBox/CareHealth (2.0.0):
+  - OTFToolBox/CareHealth (2.5.0):
     - OTFCareKit/CareHealth (= 2.0.2-tf.2)
-    - OTFCloudantStore/CloudantCareHealth (= 2.0.0)
-    - OTFCloudClientAPI (= 2.0.0)
-    - OTFDesignSystem (= 2.0.0)
+    - OTFCloudantStore/CloudantCareHealth (= 2.1.0)
+    - OTFCloudClientAPI (= 2.1.0)
+    - OTFDesignSystem (= 2.1.0)
     - OTFResearchKit (= 2.0.0-tf.2)
     - OTFTemplateBox (= 2.0.0)
-    - OTFToolBoxCore (= 2.0.0)
-  - OTFToolBoxCore (2.0.0)
+    - OTFToolBoxCore (= 2.5.0)
+  - OTFToolBoxCore (2.5.0)
   - OTFUtilities (2.0.0):
     - Sodium (= 0.9.1)
   - Sodium (0.9.1)
@@ -60,8 +60,8 @@ PODS:
 DEPENDENCIES:
   - GoogleSignIn (~> 7.0.0)
   - OTFCareKit/CareHealth (= 2.0.2-tf.2)
-  - OTFCloudantStore/CloudantCareHealth (= 2.0.0)
-  - OTFToolBox/CareHealth (= 2.0.0)
+  - OTFCloudantStore/CloudantCareHealth (= 2.1.0)
+  - OTFToolBox/CareHealth (= 2.5.0)
 
 SPEC REPOS:
   https://github.com/HippocratesTech/OTFCocoapodSpecs:
@@ -92,21 +92,21 @@ SPEC CHECKSUMS:
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  OTFCareKit: f1a8b2fe3067edad1f3b1656e9abbce55bd3d4e4
-  OTFCareKitStore: e87a2a7c01af4d9a6d66ac4b8ac0919ed6df6532
-  OTFCareKitUI: c3acd7674214c895590e5b2f7428d80cedc4e8c1
-  OTFCDTDatastore: 571d4d2768eabf8aef484adf7f0db97b85892824
-  OTFCloudantStore: 1507782a9fa0c24b376fe89b3e8ac9fac7f95f58
-  OTFCloudClientAPI: 7a304c3d79e8715502d07e66a99254b9dcd9a4a6
-  OTFDesignSystem: f75cf44f44138165cb7458820fbfb5088fdc9887
+  OTFCareKit: c2345d2128a180d17a3fa3b745e65fc3eac6719e
+  OTFCareKitStore: 9e9644531eb916009a603bc42331bfee6f8901fa
+  OTFCareKitUI: 7db823d8f1ccf523e9bbd3440758305466c3b0bc
+  OTFCDTDatastore: 2dd82ef483654b30b559e63e1069ffbe66543d1e
+  OTFCloudantStore: 4aca832e412f30979c3c6f44efb45889bfcf2a21
+  OTFCloudClientAPI: 8a361b5682399101f6af2178f50cd209bf398eff
+  OTFDesignSystem: 15acc9da8ffec84ebbac64f9f200acd418441cc1
   OTFResearchKit: 0ec0df29d5f77307fcf8ff7ed4386a73abdfbac1
   OTFTemplateBox: c2de26548dc8a84d598f25d7eb91c2f02eaf5d65
-  OTFToolBox: a7c7cce70fcc2fd7f002705cee6036a874518c12
-  OTFToolBoxCore: df895fce579cd66318abe549f618b374a7ae1fa9
-  OTFUtilities: 55c07fa5e26c9e375524198115ab734e7b485a02
+  OTFToolBox: 3da3e458376158384f4ab25869be4f61206c36f4
+  OTFToolBoxCore: 20f8b0effdd22d1f9c4674a0971145f0533b2591
+  OTFUtilities: f3e52ab6c6bea3c69d9a0a3ea2b8ce6b943612a0
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   Yams: e10dae147f517ed57ecae37c5e8681bdf8fcab65
 
-PODFILE CHECKSUM: 288ff0cbbe3e9b6a3dc0f82d7a6ba1061d3bbe2a
+PODFILE CHECKSUM: 566cfe06e3e333aca37749a0237d14d405dab497
 
 COCOAPODS: 1.16.2

@@ -46,7 +46,7 @@
 # - Lines starting with '#' are comments and are ignored by the app.
 
 # Version of this YAML schema/content. Bump when you change copy/structure.
-version: "2.0.0"
+version: "2.3.0"
 
 # Consent
 # Consent configuration for the study/terms screen.
@@ -102,9 +102,9 @@ consentSections:
       pt: "Informações de conta, utilização da app, diagnósticos e dados de saúde opcionais."
       ar: "معلومات الحساب، واستخدام التطبيق، وبيانات التشخيص، وبيانات صحية اختيارية."
     content:
-      en: "We collect your account details (e.g., email), device identifiers, crash/diagnostic data, and app usage analytics. With your permission, we may read Health data to power app features. We do not record audio or track precise location."
-      pt: "Recolhemos dados da sua conta (ex.: email), identificadores do dispositivo, dados de falhas/diagnóstico e análises de utilização. Com a sua permissão, podemos ler dados de Saúde para funcionalidades da app. Não gravamos áudio nem rastreamos a localização precisa."
-      ar: "نجمع تفاصيل حسابك (مثل البريد الإلكتروني)، ومعرّفات الجهاز، وبيانات الأعطال/التشخيص، وتحليلات استخدام التطبيق. وبموافقتك، قد نقرأ بيانات الصحة لتمكين ميزات التطبيق. نحن لا نسجل الصوت ولا نتتبع الموقع الدقيق."
+      en: "We collect your account details (e.g., email), device identifiers, crash/diagnostic data, and app usage analytics. With your permission, we may read Health data to power app features. If you choose to complete the optional Health Profile, it collects only the self-reported location detail and health conditions you choose to type or select to complete your profile. Provide only the minimum location detail needed; a country, city, or region is enough when a full address is not needed. This feature does not request, access, or infer GPS or precise device location."
+      pt: "Recolhemos dados da sua conta (ex.: email), identificadores do dispositivo, dados de falhas/diagnóstico e análises de utilização. Com a sua permissão, podemos ler dados de Saúde para funcionalidades da app. Se optar por preencher o Perfil de Saúde opcional, este recolhe apenas os detalhes de localização e as condições de saúde autodeclarados que escolher escrever ou selecionar para completar o seu perfil. Indique apenas o detalhe de localização mínimo necessário; basta um país, cidade ou região quando não for necessária uma morada completa. Esta funcionalidade não solicita, acede nem infere dados de GPS ou localização precisa do dispositivo."
+      ar: "نجمع تفاصيل حسابك (مثل البريد الإلكتروني)، ومعرّفات الجهاز، وبيانات الأعطال/التشخيص، وتحليلات استخدام التطبيق. وبموافقتك، قد نقرأ بيانات الصحة لتمكين ميزات التطبيق. إذا اخترت إكمال الملف الصحي الاختياري، فإنه يجمع فقط تفاصيل الموقع والحالات الصحية التي تبلغ عنها بنفسك وتختار كتابتها أو تحديدها لإكمال ملفك الشخصي. قدّم الحد الأدنى من تفاصيل الموقع اللازمة؛ يكفي بلد أو مدينة أو منطقة عندما لا تكون هناك حاجة إلى عنوان كامل. لا تطلب هذه الميزة أو تصل إلى أو تستنتج بيانات GPS أو الموقع الدقيق للجهاز."
     image:
 
   - type: "privacy"
@@ -114,13 +114,13 @@ consentSections:
       pt: "A Sua Privacidade e Segurança"
       ar: "خصوصيتك وأمانك"
     summary:
-      en: "Encryption in transit and at rest; limited access by authorized staff."
-      pt: "Encriptação em trânsito e em repouso; acesso limitado por pessoal autorizado."
-      ar: "تشفير أثناء النقل وعند التخزين؛ وصول محدود للموظفين المصرّح لهم."
+      en: "Security and access controls are described in the Privacy Policy."
+      pt: "Os controlos de segurança e de acesso são descritos na Política de Privacidade."
+      ar: "تُوضَّح ضوابط الأمان وقيود الوصول في سياسة الخصوصية."
     content:
-      en: "We encrypt data in transit and at rest. Access is restricted to authorized personnel for support and operations. We never sell your personal information."
-      pt: "Encriptamos dados em trânsito e em repouso. O acesso é restrito a pessoal autorizado para apoio e operações. Nunca vendemos as suas informações pessoais."
-      ar: "نشفّر البيانات أثناء النقل وعند التخزين. يقتصر الوصول على الموظفين المصرّح لهم للدعم والتشغيل. نحن لا نبيع معلوماتك الشخصية أبدًا."
+      en: "The Privacy Policy describes the security and access controls for account and Health Profile data. Privacy and security approval is required before the optional Health Profile is enabled."
+      pt: "A Política de Privacidade descreve os controlos de segurança e de acesso para os dados da conta e do Perfil de Saúde. É necessária aprovação de privacidade e segurança antes de o Perfil de Saúde opcional ser ativado."
+      ar: "توضّح سياسة الخصوصية ضوابط الأمان والوصول لبيانات الحساب والملف الصحي. يلزم الحصول على موافقة الخصوصية والأمان قبل تفعيل الملف الصحي الاختياري."
     image:
 
   - type: "dataUse"
@@ -146,13 +146,13 @@ consentSections:
       pt: "As Suas Escolhas"
       ar: "خياراتك"
     summary:
-      en: "Manage permissions, download or delete data, or close your account."
-      pt: "Gerir permissões, descarregar ou eliminar dados, ou encerrar a conta."
-      ar: "إدارة الأذونات، وتنزيل البيانات أو حذفها، أو إغلاق حسابك."
+      en: "Edit or clear optional profile values, manage permissions, or request account deletion."
+      pt: "Editar ou limpar valores opcionais do perfil, gerir permissões ou pedir a eliminação da conta."
+      ar: "عدّل أو امسح قيم الملف الاختيارية، أو أدر الأذونات، أو اطلب حذف الحساب."
     content:
-      en: "You can revoke permissions in Settings, request data export or deletion, and close your account. Some data may be retained where required by law or for fraud prevention."
-      pt: "Pode revogar permissões nas Definições, pedir exportação ou eliminação dos dados e encerrar a conta. Alguns dados podem ser retidos quando exigido por lei ou para prevenção de fraude."
-      ar: "يمكنك إلغاء الأذونات من الإعدادات، وطلب تصدير البيانات أو حذفها، وإغلاق حسابك. قد نحتفظ ببعض البيانات عندما يقتضي القانون ذلك أو لأغراض منع الاحتيال."
+      en: "You can edit or clear optional Health Profile values in Manage Profile, revoke permissions in Settings, and request data export or account deletion. Retention and deletion, including any legal obligations, are governed by the Privacy Policy; a deletion request is not confirmation that processing has completed."
+      pt: "Pode editar ou limpar valores opcionais do Perfil de Saúde em Gerir Perfil, revogar permissões nas Definições e pedir exportação dos dados ou eliminação da conta. A retenção e a eliminação, incluindo quaisquer obrigações legais, são regidas pela Política de Privacidade; um pedido de eliminação não confirma que o tratamento foi concluído."
+      ar: "يمكنك تعديل قيم الملف الصحي الاختيارية أو مسحها من إدارة الملف الشخصي، وإلغاء الأذونات من الإعدادات، وطلب تصدير البيانات أو حذف الحساب. يخضع الاحتفاظ والحذف، بما في ذلك أي التزامات قانونية، لسياسة الخصوصية؛ ولا يؤكد طلب الحذف اكتمال المعالجة."
     image:
 
   - type: "custom"
@@ -236,6 +236,176 @@ passwordInvalidMessage:
   en: "Password must be at least 10 characters in length"
   pt: "A palavra‑passe deve ter pelo menos 10 caracteres"
   ar: "يجب ألا تقل كلمة المرور عن 10 أحرف"
+# Title of the optional registration profile-details step.
+signupProfileDetailsTitle:
+  en: "Profile details"
+  pt: "Detalhes do perfil"
+  ar: "تفاصيل الملف الشخصي"
+signupProfileDetailsText:
+  en: "You may optionally enter self-reported location and health conditions. This feature does not access GPS or precise device location."
+  pt: "Pode introduzir opcionalmente localização e condições de saúde que indica pessoalmente. Esta funcionalidade não acede a GPS nem à localização precisa do dispositivo."
+  ar: "يمكنك اختياريًا إدخال الموقع والحالات الصحية التي تبلغ عنها بنفسك. لا تصل هذه الميزة إلى GPS أو الموقع الدقيق للجهاز."
+addressSectionTitle:
+  en: "Address"
+  pt: "Morada"
+  ar: "العنوان"
+locationDisplayNameLabel:
+  en: "Country"
+  pt: "País"
+  ar: "البلد"
+locationDisplayNamePlaceholder:
+  en: "Enter your country"
+  pt: "Introduza o seu país"
+  ar: "أدخل بلدك"
+cityLabel:
+  en: "City"
+  pt: "Cidade"
+  ar: "المدينة"
+cityPlaceholder:
+  en: "Enter your city"
+  pt: "Introduza a sua cidade"
+  ar: "أدخل مدينتك"
+addressLine1Label:
+  en: "Address line 1"
+  pt: "Linha de endereço 1"
+  ar: "سطر العنوان 1"
+addressLine1Placeholder:
+  en: "Enter address line 1"
+  pt: "Introduza a linha de endereço 1"
+  ar: "أدخل سطر العنوان 1"
+addressLine2Label:
+  en: "Address line 2"
+  pt: "Linha de endereço 2"
+  ar: "سطر العنوان 2"
+addressLine2Placeholder:
+  en: "Enter address line 2"
+  pt: "Introduza a linha de endereço 2"
+  ar: "أدخل سطر العنوان 2"
+regionLabel:
+  en: "Region"
+  pt: "Região"
+  ar: "المنطقة"
+regionPlaceholder:
+  en: "Enter your region"
+  pt: "Introduza a sua região"
+  ar: "أدخل منطقتك"
+postalCodeLabel:
+  en: "Postal code"
+  pt: "Código postal"
+  ar: "الرمز البريدي"
+postalCodePlaceholder:
+  en: "Enter postal code"
+  pt: "Introduza o código postal"
+  ar: "أدخل الرمز البريدي"
+countryCodeLabel:
+  en: "Country calling code"
+  pt: "Código de chamada do país"
+  ar: "رمز الاتصال الدولي للبلد"
+countryCodePlaceholder:
+  en: "Enter calling code, for example +351"
+  pt: "Introduza o código de chamada, por exemplo +351"
+  ar: "أدخل رمز الاتصال، مثل +351"
+countryCodeValidationMessage:
+  en: "Use a valid country calling code, for example +351."
+  pt: "Utilize um código de chamada de país válido, por exemplo +351."
+  ar: "استخدم رمز اتصال دولي صالحًا للبلد، مثل +351."
+conditionsLabel:
+  en: "Health conditions"
+  pt: "Condições de saúde"
+  ar: "الحالات الصحية"
+conditionsDetailText:
+  en: "Select all that apply or None reported."
+  pt: "Selecione todas as opções aplicáveis ou Nenhuma indicada."
+  ar: "حدد كل ما ينطبق أو لا توجد حالات مُبلَّغ عنها."
+conditionsValidationMessage:
+  en: "Select conditions or None reported, not both."
+  pt: "Selecione condições ou Nenhuma indicada, mas não ambas."
+  ar: "حدد الحالات أو لا توجد حالات مُبلَّغ عنها، وليس كليهما."
+conditionsNoneReportedText:
+  en: "None reported"
+  pt: "Nenhuma indicada"
+  ar: "لا توجد حالات مُبلَّغ عنها"
+conditionLabels:
+  "44054006":
+    en: "Type 2 diabetes mellitus"
+    pt: "Diabetes mellitus tipo 2"
+    ar: "داء السكري من النوع الثاني"
+  "46635009":
+    en: "Type 1 diabetes mellitus"
+    pt: "Diabetes mellitus tipo 1"
+    ar: "داء السكري من النوع الأول"
+  "38341003":
+    en: "Hypertensive disorder, systemic arterial"
+    pt: "Hipertensão arterial sistémica"
+    ar: "اضطراب ارتفاع ضغط الدم الشرياني الجهازي"
+  "84114007":
+    en: "Heart failure"
+    pt: "Insuficiência cardíaca"
+    ar: "قصور القلب"
+  "53741008":
+    en: "Coronary arteriosclerosis"
+    pt: "Aterosclerose coronária"
+    ar: "تصلب الشرايين التاجية"
+  "22298006":
+    en: "Myocardial infarction"
+    pt: "Enfarte do miocárdio"
+    ar: "احتشاء عضلة القلب"
+  "230690007":
+    en: "Cerebrovascular accident"
+    pt: "Acidente vascular cerebral"
+    ar: "سكتة دماغية"
+  "13645005":
+    en: "Chronic obstructive pulmonary disease"
+    pt: "Doença pulmonar obstrutiva crónica"
+    ar: "مرض الانسداد الرئوي المزمن"
+  "195967001":
+    en: "Asthma"
+    pt: "Asma"
+    ar: "الربو"
+  "233604007":
+    en: "Pneumonia"
+    pt: "Pneumonia"
+    ar: "الالتهاب الرئوي"
+  "65363002":
+    en: "Otitis media"
+    pt: "Otite média"
+    ar: "التهاب الأذن الوسطى"
+  "444814009":
+    en: "Viral upper respiratory tract infection"
+    pt: "Infeção viral das vias respiratórias superiores"
+    ar: "عدوى فيروسية في الجهاز التنفسي العلوي"
+  "36971009":
+    en: "Acute sinusitis"
+    pt: "Sinusite aguda"
+    ar: "التهاب الجيوب الأنفية الحاد"
+  "10509002":
+    en: "Acute bronchitis"
+    pt: "Bronquite aguda"
+    ar: "التهاب الشعب الهوائية الحاد"
+  "193462001":
+    en: "Chronic kidney disease"
+    pt: "Doença renal crónica"
+    ar: "مرض الكلى المزمن"
+  "709044004":
+    en: "Chronic kidney disease stage 3"
+    pt: "Doença renal crónica estádio 3"
+    ar: "مرض الكلى المزمن، المرحلة الثالثة"
+  "271737000":
+    en: "Anemia"
+    pt: "Anemia"
+    ar: "فقر الدم"
+  "64859006":
+    en: "Osteoporosis"
+    pt: "Osteoporose"
+    ar: "هشاشة العظام"
+  "396275006":
+    en: "Osteoarthritis"
+    pt: "Osteoartrose"
+    ar: "الفصال العظمي"
+  "370143000":
+    en: "Major depressive disorder"
+    pt: "Perturbação depressiva major"
+    ar: "الاضطراب الاكتئابي الشديد"
 
 # Passcode
 # Optional in-app passcode shown after login.
@@ -348,6 +518,11 @@ signupErrorTitle:
   en: "Unable to Signup"
   pt: "Não é Possível Efetuar o Registro"
   ar: "تعذر إنشاء الحساب"
+# Generic sign-up failure message. Do not surface server text because it can echo entered metadata.
+signupFailureMessage:
+  en: "We could not complete sign up. Please review your account details and try again."
+  pt: "Não foi possível concluir o registo. Reveja os dados da conta e tente novamente."
+  ar: "تعذر إكمال إنشاء الحساب. راجع بيانات حسابك وحاول مرة أخرى."
 # Error title used when Google sign-in fails.
 googleSignInFailedTitle:
   en: "Failed to Sign in with Google"

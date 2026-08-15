@@ -46,19 +46,40 @@ final class CardRowViewModel: ObservableObject {
         static let randomOffsetSeed: UInt64 = 12345
     }
 
-    @Published private(set) var valueText = "--"
+    @Published private(set) var valueText = MetricFormatter.unavailableValue
     @Published private(set) var detailText: String?
     @Published private(set) var timestampText: String?
     @Published private(set) var usesPlaceholderStyle = true
 
     private let metric: HealthKitDataManager.HealthMetric
-    private let dataManager = HealthKitDataManager()
-    private let config = HealthSensorsConfigurationLoader.config
+    private let dataManager: HealthKitDataProviding
+    private let config: HealthSensorsConfiguration
+    private let mockData: HealthSensorMockDataProviding
+    private let healthDataAvailable: () -> Bool
+    private let notificationCenter: NotificationCenter
+    private let now: () -> Date
+    private let calendar: Calendar
     private var cancellables = Set<AnyCancellable>()
     private var refreshTask: Task<Void, Never>?
 
-    init(metric: HealthKitDataManager.HealthMetric) {
+    init(
+        metric: HealthKitDataManager.HealthMetric,
+        dataManager: HealthKitDataProviding = HealthKitDataManager(),
+        config: HealthSensorsConfiguration = HealthSensorsConfigurationLoader.config,
+        mockData: HealthSensorMockDataProviding = LiveHealthSensorMockDataProvider(),
+        healthDataAvailable: @escaping () -> Bool = { HKHealthStore.isHealthDataAvailable() },
+        notificationCenter: NotificationCenter = .default,
+        now: @escaping () -> Date = Date.init,
+        calendar: Calendar = .current
+    ) {
         self.metric = metric
+        self.dataManager = dataManager
+        self.config = config
+        self.mockData = mockData
+        self.healthDataAvailable = healthDataAvailable
+        self.notificationCenter = notificationCenter
+        self.now = now
+        self.calendar = calendar
     }
 
     func start() {
@@ -67,14 +88,14 @@ final class CardRowViewModel: ObservableObject {
             return
         }
 
-        NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+        notificationCenter.publisher(for: UserDefaults.didChangeNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.refresh()
             }
             .store(in: &cancellables)
 
-        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+        notificationCenter.publisher(for: UIApplication.didBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.refresh()
@@ -97,13 +118,13 @@ final class CardRowViewModel: ObservableObject {
         }
     }
 
-    private func loadLatestSnapshot() async {
-        if MockDataStore.isEnabled {
+    func loadLatestSnapshot() async {
+        if mockData.isEnabled {
             applyMock()
             return
         }
 
-        guard HKHealthStore.isHealthDataAvailable() else {
+        guard healthDataAvailable() else {
             applyPlaceholder(value: config.statusError.localized, detail: config.emptyStateTitle.localized)
             return
         }
@@ -220,7 +241,7 @@ final class CardRowViewModel: ObservableObject {
     }
 
     private func applyMock() {
-        let now = Date()
+        let now = now()
         var generator = mockGenerator()
 
         switch metric {
@@ -286,31 +307,16 @@ final class CardRowViewModel: ObservableObject {
 
     private func mockGenerator() -> SeededRandomNumberGenerator {
         let index = HealthKitDataManager.HealthMetric.allCases.firstIndex(of: metric) ?? 0
-        let seed = UInt64(MockDataStore.seed)
+        let seed = UInt64(mockData.seed)
             &+ UInt64(index + 1) * FileConstants.mockIndexSeedMultiplier
             &+ FileConstants.randomOffsetSeed
         return SeededRandomNumberGenerator(seed: seed)
     }
 
     private func formattedTimestamp(for date: Date) -> String {
-        if Calendar.current.isDateInToday(date) {
+        if calendar.isDateInToday(date) {
             return date.formatted(date: .omitted, time: .shortened)
         }
         return date.formatted(date: .abbreviated, time: .omitted)
-    }
-}
-
-private extension HKElectrocardiogram.Classification {
-    func displayTitle(config: HealthSensorsConfiguration) -> String {
-        switch self {
-        case .notSet: config.ecgClassificationDefault.localized
-        case .sinusRhythm: config.ecgClassificationSinusRhythm.localized
-        case .atrialFibrillation: config.ecgClassificationAtrialFibrillation.localized
-        case .inconclusiveLowHeartRate: config.ecgClassificationLowHeartRate.localized
-        case .inconclusiveHighHeartRate: config.ecgClassificationHighHeartRate.localized
-        case .inconclusivePoorReading, .inconclusiveOther: config.ecgClassificationInconclusive.localized
-        case .unrecognized: config.ecgClassificationUnrecognized.localized
-        @unknown default: config.ecgClassificationDefault.localized
-        }
     }
 }

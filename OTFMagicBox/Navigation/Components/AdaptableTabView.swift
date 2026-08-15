@@ -39,26 +39,7 @@ struct AdaptableTabView: View {
     @ObservedObject var model: ContentViewModel
 
     private var visibleTabs: [RootDestination] {
-
-        guard !model.config.playgroundMode else {
-            return [.playground]
-        }
-
-        var roots: [RootDestination] = []
-        if model.config.useCareKit {
-            roots.append(.schedule)
-            roots.append(.contacts)
-        }
-        if model.config.showCheckupScreen {
-            roots.append(.checkup)
-        }
-        #if STATICUI
-        if model.config.showUIScreen {
-            roots.append(.ui)
-        }
-        #endif
-        roots.append(.profile)
-        return roots
+        RootDestination.visibleTabs(for: model.config)
     }
 
     private var symbolVariant: SymbolVariants {

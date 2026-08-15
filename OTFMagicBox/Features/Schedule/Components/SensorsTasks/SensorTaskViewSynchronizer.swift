@@ -37,16 +37,32 @@ import OTFCareKit
 import OTFCareKitStore
 import OTFCareKitUI
 
+struct SensorTaskEventCardModel: Identifiable, Equatable {
+    let id: String
+    let eventIndexPath: IndexPath
+    let occurrence: Int
+    let scheduledStart: Date
+    let hasSentOutcome: Bool
+    let sentValueText: String?
+}
+
 final class SensorTaskViewSynchronizer: OCKTaskViewSynchronizerProtocol {
 
     typealias View = SensorTaskContainerView
 
     private let metric: HealthKitDataManager.HealthMetric
+    private let mode: SensorTaskMode
     private let selectedDate: Date
     private let storeManager: OCKSynchronizedStoreManager
 
-    init(metric: HealthKitDataManager.HealthMetric, selectedDate: Date, storeManager: OCKSynchronizedStoreManager) {
+    init(
+        metric: HealthKitDataManager.HealthMetric,
+        mode: SensorTaskMode,
+        selectedDate: Date,
+        storeManager: OCKSynchronizedStoreManager
+    ) {
         self.metric = metric
+        self.mode = mode
         self.selectedDate = selectedDate
         self.storeManager = storeManager
     }
@@ -58,23 +74,42 @@ final class SensorTaskViewSynchronizer: OCKTaskViewSynchronizerProtocol {
     func updateView(_ view: SensorTaskContainerView, context: OCKSynchronizationContext<OCKTaskEvents>) {
         let task = context.viewModel.tasks.first
         let events = context.viewModel.first ?? []
-        let hasSentOutcome = events.contains { $0.outcome != nil }
-        let sentValueText = outcomeValueText(from: events)
-        let eventIndexPath = events.isEmpty ? nil : IndexPath(row: 0, section: 0)
         view.update(
             task: task,
-            hasSentOutcome: hasSentOutcome,
-            sentValueText: sentValueText,
-            eventIndexPath: eventIndexPath,
+            eventCards: eventCardModels(from: events),
             metric: metric,
+            mode: mode,
             selectedDate: selectedDate,
             storeManager: storeManager
         )
     }
 
-    private func outcomeValueText(from events: [OCKAnyEvent]) -> String? {
-        guard let outcomeValue = events.first?.outcome?.values.first else { return nil }
-        let valueText = formatOutcomeValue(outcomeValue)
+    func eventCardModels(from events: [OCKAnyEvent]) -> [SensorTaskEventCardModel] {
+        events.enumerated().map { index, event in
+            SensorTaskEventCardModel(
+                id: event.id,
+                eventIndexPath: IndexPath(row: index, section: 0),
+                occurrence: event.scheduleEvent.occurrence,
+                scheduledStart: event.scheduleEvent.start,
+                hasSentOutcome: event.outcome != nil,
+                sentValueText: outcomeValueText(from: event.outcome)
+            )
+        }
+    }
+
+    private func outcomeValueText(from outcome: OCKAnyOutcome?) -> String? {
+        guard let values = outcome?.values else { return nil }
+        let decoded = SensorOutcomeCodec.decode(metric: metric, values: values)
+        let valueText: String
+        switch decoded {
+        case .payload(let payload):
+            valueText = payload.reading.compactSummary(
+                config: HealthSensorsConfigurationLoader.config
+            )
+        case .legacy:
+            guard let firstValue = values.first else { return nil }
+            valueText = formatOutcomeValue(firstValue)
+        }
         guard !valueText.isEmpty else { return nil }
         let format = SensorTaskConfigurationLoader.config.sentValueFormat.localized
         return String(format: format, valueText)

@@ -44,6 +44,36 @@ struct SensorTaskConfiguration: Codable {
     let sentValueFormat: OTFStringLocalized
     let sendResultLabel: OTFStringLocalized
     let reviewLabel: OTFStringLocalized
+    let sensorSectionTitle: OTFStringLocalized
+    let manualSectionTitle: OTFStringLocalized
+    let sensorModeLabel: OTFStringLocalized
+    let manualModeLabel: OTFStringLocalized
+    let unknownModeLabel: OTFStringLocalized
+    let sensorDescription: OTFStringLocalized
+    let manualDescription: OTFStringLocalized
+    let notesLabel: OTFStringLocalized
+    let notesPlaceholder: OTFStringLocalized
+    let recordedAtLabel: OTFStringLocalized
+    let submittedAtLabel: OTFStringLocalized
+    let submittedResultLabel: OTFStringLocalized
+    let payloadPreviewTitle: OTFStringLocalized
+    let previewPayloadLabel: OTFStringLocalized
+    let invalidFormMessage: OTFStringLocalized
+    let valueLabel: OTFStringLocalized
+    let dateLabel: OTFStringLocalized
+    let unitLabel: OTFStringLocalized
+    let classificationLabel: OTFStringLocalized
+    let averageBPMLabel: OTFStringLocalized
+    let samplingHzLabel: OTFStringLocalized
+    let durationLabel: OTFStringLocalized
+    let sendManualResultLabel: OTFStringLocalized
+    let enterManuallyLabel: OTFStringLocalized
+    let doneLabel: OTFStringLocalized
+    let retryLabel: OTFStringLocalized
+    let loadingLabel: OTFStringLocalized
+    let outcomeLoadError: OTFStringLocalized
+    let manualTaskTitleFormat: OTFStringLocalized
+    let manualTaskInstructionsFormat: OTFStringLocalized
     let mockSensorTaskTitle: OTFStringLocalized
     let taskTitleHeartRate: OTFStringLocalized
     let taskTitleBloodGlucose: OTFStringLocalized
@@ -73,6 +103,36 @@ extension SensorTaskConfiguration: OTFVersionedDecodable {
         sentValueFormat: "Sent %@",
         sendResultLabel: "Send Result",
         reviewLabel: "Review",
+        sensorSectionTitle: "Sensor",
+        manualSectionTitle: "Manual Entry",
+        sensorModeLabel: "Sensor",
+        manualModeLabel: "Manual",
+        unknownModeLabel: "Unknown",
+        sensorDescription: "Read from the Health app and submitted by the user.",
+        manualDescription: "Entered by the user.",
+        notesLabel: "Notes (Optional)",
+        notesPlaceholder: "Add notes",
+        recordedAtLabel: "Recorded at",
+        submittedAtLabel: "Submitted at",
+        submittedResultLabel: "Submitted Result",
+        payloadPreviewTitle: "Outcome Payload",
+        previewPayloadLabel: "Preview Payload",
+        invalidFormMessage: "Enter valid values before continuing.",
+        valueLabel: "Value",
+        dateLabel: "Date",
+        unitLabel: "Unit",
+        classificationLabel: "Classification",
+        averageBPMLabel: "Average BPM (Optional)",
+        samplingHzLabel: "Sampling Frequency (Optional)",
+        durationLabel: "Duration (Optional)",
+        sendManualResultLabel: "Send Manual Result",
+        enterManuallyLabel: "Enter Manually",
+        doneLabel: "Done",
+        retryLabel: "Retry",
+        loadingLabel: "Loading result…",
+        outcomeLoadError: "Unable to load the submitted result.",
+        manualTaskTitleFormat: "Enter %@ Manually",
+        manualTaskInstructionsFormat: "Enter and send your %@.",
         mockSensorTaskTitle: "Mock Sensor task",
         taskTitleHeartRate: "Send your Heart Rate",
         taskTitleBloodGlucose: "Send your Blood Glucose",
@@ -100,6 +160,36 @@ extension SensorTaskConfiguration: OTFVersionedDecodable {
         self.sentValueFormat = raw.sentValueFormat ?? fallback.sentValueFormat
         self.sendResultLabel = raw.sendResultLabel ?? fallback.sendResultLabel
         self.reviewLabel = raw.reviewLabel ?? fallback.reviewLabel
+        self.sensorSectionTitle = raw.sensorSectionTitle ?? fallback.sensorSectionTitle
+        self.manualSectionTitle = raw.manualSectionTitle ?? fallback.manualSectionTitle
+        self.sensorModeLabel = raw.sensorModeLabel ?? fallback.sensorModeLabel
+        self.manualModeLabel = raw.manualModeLabel ?? fallback.manualModeLabel
+        self.unknownModeLabel = raw.unknownModeLabel ?? fallback.unknownModeLabel
+        self.sensorDescription = raw.sensorDescription ?? fallback.sensorDescription
+        self.manualDescription = raw.manualDescription ?? fallback.manualDescription
+        self.notesLabel = raw.notesLabel ?? fallback.notesLabel
+        self.notesPlaceholder = raw.notesPlaceholder ?? fallback.notesPlaceholder
+        self.recordedAtLabel = raw.recordedAtLabel ?? fallback.recordedAtLabel
+        self.submittedAtLabel = raw.submittedAtLabel ?? fallback.submittedAtLabel
+        self.submittedResultLabel = raw.submittedResultLabel ?? fallback.submittedResultLabel
+        self.payloadPreviewTitle = raw.payloadPreviewTitle ?? fallback.payloadPreviewTitle
+        self.previewPayloadLabel = raw.previewPayloadLabel ?? fallback.previewPayloadLabel
+        self.invalidFormMessage = raw.invalidFormMessage ?? fallback.invalidFormMessage
+        self.valueLabel = raw.valueLabel ?? fallback.valueLabel
+        self.dateLabel = raw.dateLabel ?? fallback.dateLabel
+        self.unitLabel = raw.unitLabel ?? fallback.unitLabel
+        self.classificationLabel = raw.classificationLabel ?? fallback.classificationLabel
+        self.averageBPMLabel = raw.averageBPMLabel ?? fallback.averageBPMLabel
+        self.samplingHzLabel = raw.samplingHzLabel ?? fallback.samplingHzLabel
+        self.durationLabel = raw.durationLabel ?? fallback.durationLabel
+        self.sendManualResultLabel = raw.sendManualResultLabel ?? fallback.sendManualResultLabel
+        self.enterManuallyLabel = raw.enterManuallyLabel ?? fallback.enterManuallyLabel
+        self.doneLabel = raw.doneLabel ?? fallback.doneLabel
+        self.retryLabel = raw.retryLabel ?? fallback.retryLabel
+        self.loadingLabel = raw.loadingLabel ?? fallback.loadingLabel
+        self.outcomeLoadError = raw.outcomeLoadError ?? fallback.outcomeLoadError
+        self.manualTaskTitleFormat = raw.manualTaskTitleFormat ?? fallback.manualTaskTitleFormat
+        self.manualTaskInstructionsFormat = raw.manualTaskInstructionsFormat ?? fallback.manualTaskInstructionsFormat
         self.mockSensorTaskTitle = raw.mockSensorTaskTitle ?? fallback.mockSensorTaskTitle
         self.taskTitleHeartRate = raw.taskTitleHeartRate ?? fallback.taskTitleHeartRate
         self.taskTitleBloodGlucose = raw.taskTitleBloodGlucose ?? fallback.taskTitleBloodGlucose

@@ -46,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard !isRunningInPreviews else { return nil }
         let sessionManager = SessionManager()
         sessionManager.peer  = CareKitStoreManager.shared.cloudantSyncManager.peer
-        sessionManager.store = CareKitStoreManager.shared.cloudantStore
         return sessionManager
     }()
 

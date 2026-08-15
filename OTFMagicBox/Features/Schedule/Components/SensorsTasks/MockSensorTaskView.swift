@@ -36,43 +36,108 @@ import SwiftUI
 
 struct MockSensorTaskView: View {
 
+    private enum FileConstants {
+        static let addSymbol = "plus.circle.fill"
+        static let contentSpacing: CGFloat = 4
+        static let iconSize: CGFloat = 38
+        static let rowSpacing: CGFloat = 12
+        static let rowVerticalPadding: CGFloat = 4
+    }
+
     @Environment(\.dismiss) private var dismiss
+    @State private var selectedMode = SensorTaskMode.sensor
+
+    let selectedDate: Date
 
     private var healthConfig = HealthSensorsConfigurationLoader.config
+    private var sensorConfig = SensorTaskConfigurationLoader.config
+
+    init(selectedDate: Date) {
+        self.selectedDate = selectedDate
+    }
 
     var body: some View {
         NavigationStack {
-            List {
-                Section {
-                    ForEach(HealthKitDataManager.HealthMetric.allCases) { metric in
-                        Button {
-                            CareKitStoreManager.shared.mockSensorTask(for: metric, on: Date())
-                            dismiss()
-                        } label: {
-                            Label {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(metric.displayTitle(config: healthConfig))
-                                        .foregroundStyle(Color.primary)
-                                        .globalStyle(.textFont)
-                                        .globalStyle(.headerFontWeight)
-                                    Text(metric.displaySubtitle(config: healthConfig))
-                                        .font(.footnote)
-                                        .foregroundStyle(Color.secondary)
-                                }
-                            } icon: {
-                                Image(systemName: metric.displaySymbol(config: healthConfig))
-                                    .foregroundStyle(Color.primary)
-                            }
-                        }
+            VStack(spacing: 0) {
+                Picker(sensorConfig.sensorModeLabel.localized, selection: $selectedMode) {
+                    Text(sensorConfig.sensorModeLabel.localized)
+                        .tag(SensorTaskMode.sensor)
+                    Text(sensorConfig.manualModeLabel.localized)
+                        .tag(SensorTaskMode.manual)
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, HealthSensorVisualStyle.horizontalPadding)
+                .padding(
+                    .vertical,
+                    HealthSensorVisualStyle.segmentedControlVerticalPadding
+                )
+
+                List {
+                    Section {
+                        sensorButtons(mode: selectedMode)
+                    } header: {
+                        Text(modeDescription)
+                            .textCase(nil)
+                            .font(.footnote)
+                    }
+                }
+                .listStyle(.insetGrouped)
+                .scrollContentBackground(.hidden)
+            }
+            .background(HealthSensorVisualStyle.screenBackground)
+            .navigationTitle(SensorTaskConfigurationLoader.config.mockSensorTaskTitle.localized)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(sensorConfig.doneLabel.localized) {
+                        dismiss()
                     }
                 }
             }
-            .navigationTitle(SensorTaskConfigurationLoader.config.mockSensorTaskTitle.localized)
         }
         .globalStyle(.tintColor)
+    }
+
+    private func sensorButtons(mode: SensorTaskMode) -> some View {
+        ForEach(HealthKitDataManager.HealthMetric.allCases) { metric in
+            Button {
+                CareKitStoreManager.shared.mockSensorTask(for: metric, mode: mode, on: selectedDate)
+                dismiss()
+            } label: {
+                HStack(spacing: FileConstants.rowSpacing) {
+                    HealthSensorMetricIcon(metric: metric, size: FileConstants.iconSize)
+
+                    VStack(alignment: .leading, spacing: FileConstants.contentSpacing) {
+                        Text(metric.displayTitle(config: healthConfig))
+                            .foregroundStyle(Color.primary)
+                            .globalStyle(.textFont)
+                            .globalStyle(.headerFontWeight)
+                        Text(metric.displaySubtitle(config: healthConfig))
+                            .font(.footnote)
+                            .foregroundStyle(Color.secondary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: FileConstants.addSymbol)
+                        .font(.title3)
+                        .foregroundStyle(Color.secondary)
+                }
+                .padding(.vertical, FileConstants.rowVerticalPadding)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private var modeDescription: String {
+        switch selectedMode {
+        case .sensor:
+            sensorConfig.sensorDescription.localized
+        case .manual:
+            sensorConfig.manualDescription.localized
+        }
     }
 }
 
 #Preview {
-    MockSensorTaskView()
+    MockSensorTaskView(selectedDate: Date())
 }

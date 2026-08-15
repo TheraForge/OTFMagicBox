@@ -35,11 +35,11 @@
 import Foundation
 
 enum MetricFormatter {
+    static let unavailableValue = "--"
+
     static func format(_ value: Double, decimals: Int) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = decimals
-        formatter.minimumFractionDigits = decimals
-        return formatter.string(from: NSNumber(value: value)) ?? "--"
+        value.formatted(
+            .number.precision(.fractionLength(decimals))
+        )
     }
 }

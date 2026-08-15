@@ -48,26 +48,48 @@ import OTFCloudClientAPI
 class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
 
     private let logger = OTFLogger.logger()
+    private let verboseLoggingEnabled: Bool
+    private let responseLogHandler: ((String) -> Void)?
+    private let authHeaderQueue = DispatchQueue(label: "com.hippocrates.magicbox.replication.auth-header")
+    private var cachedAuthorizationHeader: String?
+    private let clientIdentifierProvider: () -> String
+    private let apiKeyProvider: () -> String
+
+    init(
+        authorizationHeader: String? = nil,
+        clientIdentifierProvider: @escaping () -> String = {
+            "\(TheraForgeNetwork.shared.identifierForVendor)"
+        },
+        apiKeyProvider: @escaping () -> String = {
+            "\(TheraForgeNetwork.configurations!.apiKey)"
+        },
+        verboseLoggingEnabled: Bool = ProcessInfo.processInfo.environment["OTF_VERBOSE_REPLICATION_LOGS"] == "1",
+        responseLogHandler: ((String) -> Void)? = nil
+    ) {
+        self.cachedAuthorizationHeader = authorizationHeader
+        self.clientIdentifierProvider = clientIdentifierProvider
+        self.apiKeyProvider = apiKeyProvider
+        self.verboseLoggingEnabled = verboseLoggingEnabled
+        self.responseLogHandler = responseLogHandler
+    }
 
     // MARK: - CDTHTTPInterceptor
 
     func interceptRequest(in context: CDTHTTPInterceptorContext) -> CDTHTTPInterceptorContext? {
-        context.request.setValue("\(TheraForgeNetwork.shared.identifierForVendor)", forHTTPHeaderField: "Client")
-        context.request.addValue("\(TheraForgeNetwork.configurations!.apiKey)", forHTTPHeaderField: "API-KEY")
+        context.request.setValue(clientIdentifierProvider(), forHTTPHeaderField: "Client")
+        context.request.addValue(apiKeyProvider(), forHTTPHeaderField: "API-KEY")
 
-        if let currentAuth = TheraForgeNetwork.shared.currentAuth {
-            context.request.setValue("Bearer \(currentAuth.token)", forHTTPHeaderField: "Authorization")
-        } else if let auth = TheraForgeKeychainService.shared.loadAuth() {
-            context.request.setValue("Bearer \(auth.token)", forHTTPHeaderField: "Authorization")
+        if let authorizationHeader {
+            context.request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
         }
         return context
     }
 
     func interceptResponse(in context: CDTHTTPInterceptorContext) -> CDTHTTPInterceptorContext? {
-        logger.info("TheraForgeHTTPInterceptor: \((context.request as URLRequest).cURL)")
-
         guard let response = context.response, let responseData = context.responseData else {
-            logger.info("TheraForgeHTTPInterceptor: Response or data is nil")
+            if verboseLoggingEnabled {
+                logger.info("TheraForgeHTTPInterceptor: replication response metadata is unavailable.")
+            }
             return context
         }
 
@@ -75,11 +97,27 @@ class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
             return handle404Response(in: context, response: response, responseData: responseData)
         }
 
-        logResponse(context: context, response: response, responseData: responseData)
+        logResponse(response: response)
         return context
     }
 
     // MARK: - Private Methods
+
+    private var authorizationHeader: String? {
+        return authHeaderQueue.sync {
+            if let cachedAuthorizationHeader {
+                return cachedAuthorizationHeader
+            }
+
+            guard let auth = TheraForgeKeychainService.shared.loadAuth() else {
+                return nil
+            }
+
+            let header = "Bearer \(auth.token)"
+            cachedAuthorizationHeader = header
+            return header
+        }
+    }
 
     /// Handles 404 responses by checking if they represent deleted documents.
     /// If so, mocks a 200 OK response with `_deleted: true` to unblock replication.
@@ -90,10 +128,7 @@ class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
     ) -> CDTHTTPInterceptorContext? {
         guard let url = context.request.url else { return context }
 
-        logger.info("TheraForgeHTTPInterceptor: 404 Detected for URL: \(url.absoluteString)")
-
-        // Ignore session-related 404s (expected when cookie auth is not supported)
-        if url.path.contains("_session") {
+        guard isDocumentRevisionRequest(url: url) else {
             return context
         }
 
@@ -110,40 +145,44 @@ class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
     private func shouldMock404As200Response(url: URL, responseData: Data) -> Bool {
         // Check if JSON indicates "deleted" reason
         if isDeletedDocumentResponse(responseData: responseData) {
-            logger.info("TheraForgeHTTPInterceptor: confirmed 'deleted' reason.")
             return true
         }
 
-        // Fallback: mock if path looks like a document request
-        if isDocumentLikePath(url: url) {
-            logger.info("TheraForgeHTTPInterceptor: 404 on doc-like path. Mocking to unblock sync.")
-            return true
-        }
-
-        return false
+        // Some backend tombstones omit the "deleted" reason, but revision GETs still need
+        // a deletion body so the puller can mark the remote sequence as processed.
+        return true
     }
 
     /// Checks if the response JSON indicates a deleted document.
     private func isDeletedDocumentResponse(responseData: Data) -> Bool {
         do {
             if let json = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] {
-                logger.info("TheraForgeHTTPInterceptor: JSON parsed: \(json)")
                 if let error = json["error"] as? String, error == "not_found",
                    let reason = json["reason"] as? String, reason == "deleted" {
                     return true
                 }
             }
         } catch {
-            logger.error("TheraForgeHTTPInterceptor error parsing 404 body: \(error)")
+            if verboseLoggingEnabled {
+                logger.error("TheraForgeHTTPInterceptor could not parse a 404 response.")
+            }
         }
         return false
     }
 
-    /// Determines if the URL path looks like a document request (vs. system endpoints).
-    private func isDocumentLikePath(url: URL) -> Bool {
-        let lastComponent = url.lastPathComponent
+    /// Determines if the URL is a document revision fetch instead of a replication control endpoint.
+    private func isDocumentRevisionRequest(url: URL) -> Bool {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              components.queryItems?.contains(where: { $0.name == "rev" }) == true else {
+            return false
+        }
+
         let path = url.path
-        return lastComponent.count > 10 || path.contains("_local") || path.contains("attachments")
+        return !path.contains("/_local/")
+            && !path.contains("/_session")
+            && !path.contains("/_changes")
+            && !path.contains("/_bulk_get")
+            && !path.contains("/_all_docs")
     }
 
     /// Creates a mocked 200 OK response with `_deleted: true` for the given context.
@@ -153,11 +192,14 @@ class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
         responseData: Data
     ) -> CDTHTTPInterceptorContext? {
         var newBody: [String: Any] = ["_deleted": true]
-        newBody["_id"] = url.lastPathComponent
+        newBody["_id"] = documentID(from: url)
 
         // Preserve revision if available
         if let rev = extractRevision(from: url, responseData: responseData) {
             newBody["_rev"] = rev
+            if let revisions = couchRevisionHistory(for: rev) {
+                newBody["_revisions"] = revisions
+            }
         }
 
         guard let newResponseData = try? JSONSerialization.data(withJSONObject: newBody, options: []) else {
@@ -176,7 +218,10 @@ class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
 
         context.response = newResponse
         context.responseData = newResponseData
-        logger.info("TheraForgeHTTPInterceptor: Mocked 200 OK for doc: \(url.lastPathComponent)")
+        SyncPerformanceTracker.shared.recordTombstone404()
+        if verboseLoggingEnabled {
+            logger.info("TheraForgeHTTPInterceptor: mocked a deleted-document response.")
+        }
         return context
     }
 
@@ -197,13 +242,44 @@ class TheraForgeHTTPInterceptor: NSObject, CDTHTTPInterceptor {
         return nil
     }
 
-    /// Logs the response details for debugging.
-    private func logResponse(
-        context: CDTHTTPInterceptorContext,
-        response: HTTPURLResponse,
-        responseData: Data
-    ) {
-        let dataString = String(data: responseData, encoding: .utf8) ?? "nil"
-        logger.info("TheraForgeHTTPInterceptor Request: \(context.request) Response: \(response) data: \(dataString)")
+    private func documentID(from url: URL) -> String {
+        let marker = "/db/"
+        guard let markerRange = url.path.range(of: marker) else {
+            return url.lastPathComponent
+        }
+
+        let suffix = String(url.path[markerRange.upperBound...])
+        return suffix.removingPercentEncoding ?? suffix
+    }
+
+    private func couchRevisionHistory(for revisionID: String) -> [String: Any]? {
+        let parts = revisionID.split(separator: "-", maxSplits: 1, omittingEmptySubsequences: true)
+        guard parts.count == 2,
+              let generation = Int(parts[0]),
+              generation > 0,
+              !parts[1].isEmpty else {
+            return nil
+        }
+
+        return [
+            "start": generation,
+            "ids": [String(parts[1])]
+        ]
+    }
+
+    /// Emits only redacted response metadata so replication debug logs cannot expose patient documents or credentials.
+    private func logResponse(response: HTTPURLResponse) {
+        guard verboseLoggingEnabled else { return }
+
+        let message = Self.redactedResponseLogMessage(statusCode: response.statusCode)
+        if let responseLogHandler {
+            responseLogHandler(message)
+        } else {
+            logger.info("\(message, privacy: .public)")
+        }
+    }
+
+    static func redactedResponseLogMessage(statusCode: Int) -> String {
+        "TheraForgeHTTPInterceptor: replication response completed (HTTP \(statusCode))."
     }
 }

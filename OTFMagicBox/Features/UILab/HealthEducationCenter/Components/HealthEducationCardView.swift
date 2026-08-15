@@ -32,38 +32,58 @@
  OF SUCH DAMAGE.
  */
 
-import Foundation
-import OTFCloudantStore
-import OTFCDTDatastore
+import OTFDesignSystem
+import SwiftUI
+import UIKit
 
-extension OTFCloudantStore {
-    
-    /// Ensures that all necessary client-side indexes exist for the application.
-    ///
-    /// ## Created Indexes
-    /// - Base: `entityType`
-    /// - Date queries: `entityType` + `effectiveDate`, `startDate`, `endDate`, `updatedDate`, `createdDate`
-    /// - Outcome queries: `entityType` + `taskUUID`, `uuid`
-    /// - Task queries: `entityType` + `groupIdentifier`, `carePlanUUID`, `remoteID`
-    /// - Compound: `entityType` + `taskUUID` + `createdDate`, `entityType` + `uuid` + `updatedDate`
-    ///
-    /// Note: Runs synchronously to ensure indexes are ready before first query.
-    func ensureClientSideIndexes() {
-        let store = self.dataStore
-        _ = store.ensureIndexed(["entityType"])
-        _ = store.ensureIndexed(["entityType", "effectiveDate"])
-        _ = store.ensureIndexed(["entityType", "id"])
-        _ = store.ensureIndexed(["entityType", "updatedDate"])
-        _ = store.ensureIndexed(["entityType", "createdDate"])
-        _ = store.ensureIndexed(["entityType", "startDate"])
-        _ = store.ensureIndexed(["entityType", "endDate"])
-        _ = store.ensureIndexed(["entityType", "startDate", "endDate"])
-        _ = store.ensureIndexed(["entityType", "taskUUID"])
-        _ = store.ensureIndexed(["entityType", "uuid"])
-        _ = store.ensureIndexed(["entityType", "groupIdentifier"])
-        _ = store.ensureIndexed(["entityType", "carePlanUUID"])
-        _ = store.ensureIndexed(["entityType", "remoteID"])
-        _ = store.ensureIndexed(["entityType", "taskUUID", "createdDate"])
-        _ = store.ensureIndexed(["entityType", "uuid", "updatedDate"])
+struct HealthEducationCardView: View {
+    let article: HealthEducationArticle
+    let articleLanguageLabel: String
+    let accessibilityHint: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            OTFInfoCard(
+                image: cardImage,
+                title: Text(article.title.localized)
+                    .font(.title)
+                    .fontWeight(.bold),
+                description: (
+                    Text(article.summary.localized)
+                        .font(.body)
+                    + Text("\n")
+                    + Text(articleLanguageLabel)
+                        .font(.caption)
+                        .italic()
+                )
+            )
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(HealthEducationCardButtonStyle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            Text(
+                "\(article.title.localized). "
+                    + "\(article.summary.localized). "
+                    + articleLanguageLabel
+            )
+        )
+        .accessibilityHint(Text(accessibilityHint))
+    }
+
+    private var cardImage: Image? {
+        guard UIImage(named: article.imageName) != nil else { return nil }
+        return Image(decorative: article.imageName)
+    }
+}
+
+private struct HealthEducationCardButtonStyle: ButtonStyle {
+    func makeBody(configuration: ButtonStyleConfiguration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .opacity(configuration.isPressed ? 0.84 : 1)
+            .animation(.easeOut(duration: 0.14), value: configuration.isPressed)
     }
 }
