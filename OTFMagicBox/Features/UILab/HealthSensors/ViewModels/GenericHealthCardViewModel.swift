@@ -38,6 +38,20 @@ import UIKit
 import WatchConnectivity
 import Foundation
 
+protocol WatchLiveHeartRateProviding: AnyObject {
+    var bpm: Int? { get }
+    var lastReceived: Date? { get }
+    var updates: AnyPublisher<Void, Never> { get }
+}
+
+extension WatchBPMReceiver: WatchLiveHeartRateProviding {
+    var updates: AnyPublisher<Void, Never> {
+        Publishers.CombineLatest($lastReceived, $bpm)
+            .map { _ in () }
+            .eraseToAnyPublisher()
+    }
+}
+
 final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
 
     private enum FileConstants {
@@ -49,7 +63,6 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         static let timeBucketDays: TimeInterval = 60 * 60 * 24
         static let maxLinePoints = 42
         static let maxScatterPoints = 56
-        static let liveStartMessageKey = "healthSensorsLiveHRStart"
     }
 
     @Published private(set) var state: CardState = .needsPermission
@@ -57,15 +70,46 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
     @Published private(set) var secondary: [MetricValue] = []
     @Published private(set) var series: [MetricSeries] = []
     @Published private(set) var statusText: String?
+    @Published private(set) var latestReading: HealthKitDataManager.HealthMetricValue?
+    @Published private(set) var ecgReport: ECGReport?
+    @Published private(set) var isPreparingECGReport = false
 
     let metric: HealthKitDataManager.HealthMetric
-    private let dataManager = HealthKitDataManager()
-    private let kitConfig = HealthSensorsConfigurationLoader.config
-    private let receiver = WatchBPMReceiver.shared
+    private let dataManager: HealthKitDataProviding
+    private let kitConfig: HealthSensorsConfiguration
+    private let mockData: HealthSensorMockDataProviding
+    private let receiver: WatchLiveHeartRateProviding
+    private let healthDataAvailable: () -> Bool
+    private let notificationCenter: NotificationCenter
+    private let now: () -> Date
+    private let calendar: Calendar
+    private let reportRenderer: ECGReportRendering
     private var cancellables = Set<AnyCancellable>()
+    private var refreshTask: Task<Void, Never>?
+    private var refreshGeneration = 0
 
-    init(metric: HealthKitDataManager.HealthMetric) {
+    init(
+        metric: HealthKitDataManager.HealthMetric,
+        dataManager: HealthKitDataProviding = HealthKitDataManager(),
+        kitConfig: HealthSensorsConfiguration = HealthSensorsConfigurationLoader.config,
+        mockData: HealthSensorMockDataProviding = LiveHealthSensorMockDataProvider(),
+        receiver: WatchLiveHeartRateProviding = WatchBPMReceiver.shared,
+        healthDataAvailable: @escaping () -> Bool = { HKHealthStore.isHealthDataAvailable() },
+        notificationCenter: NotificationCenter = .default,
+        now: @escaping () -> Date = Date.init,
+        calendar: Calendar = .current,
+        reportRenderer: ECGReportRendering = ECGReportRenderer()
+    ) {
         self.metric = metric
+        self.dataManager = dataManager
+        self.kitConfig = kitConfig
+        self.mockData = mockData
+        self.receiver = receiver
+        self.healthDataAvailable = healthDataAvailable
+        self.notificationCenter = notificationCenter
+        self.now = now
+        self.calendar = calendar
+        self.reportRenderer = reportRenderer
     }
 
     func start() {
@@ -74,6 +118,8 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
     }
 
     func stop() {
+        refreshTask?.cancel()
+        refreshTask = nil
         cancellables.removeAll()
     }
 
@@ -98,35 +144,39 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         guard metric == .heartRate else {
             return
         }
-        guard WCSession.isSupported() else {
+        let isSessionSupported = WCSession.isSupported()
+        guard isSessionSupported else {
             return
         }
         let session = WCSession.default
-        guard session.isReachable else {
+        guard let payload = WatchLiveHeartRateDelivery.startRequestPayload(
+            isSessionSupported: isSessionSupported,
+            isReachable: session.isReachable
+        ) else {
             return
         }
-        session.sendMessage([FileConstants.liveStartMessageKey: true], replyHandler: { _ in }, errorHandler: nil)
+        session.sendMessage(payload, replyHandler: { _ in }, errorHandler: nil)
     }
 
     private func observeLiveUpdates() {
         // Only observe watch updates for heart rate
         if metric == .heartRate {
-            Publishers.CombineLatest(receiver.$lastReceived, receiver.$bpm)
+            receiver.updates
                 .receive(on: DispatchQueue.main)
-                .sink { [weak self] _, _ in
+                .sink { [weak self] _ in
                     self?.refreshData()
                 }
                 .store(in: &cancellables)
         }
 
-        NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+        notificationCenter.publisher(for: UserDefaults.didChangeNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.refreshData()
             }
             .store(in: &cancellables)
 
-        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+        notificationCenter.publisher(for: UIApplication.didBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.refreshData()
@@ -134,18 +184,26 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
             .store(in: &cancellables)
     }
 
-    private func refreshData() {
-        if MockDataStore.isEnabled {
+    func refreshData() {
+        refreshTask?.cancel()
+        refreshTask = nil
+        refreshGeneration += 1
+        let generation = refreshGeneration
+
+        if mockData.isEnabled {
             applyMock()
             return
         }
 
-        guard HKHealthStore.isHealthDataAvailable() else {
+        guard healthDataAvailable() else {
             state = .error(metric.displayEmptyStateMessage(config: kitConfig))
             statusText = nil
             primary = nil
             secondary = []
             series = []
+            latestReading = nil
+            ecgReport = nil
+            isPreparingECGReport = false
             return
         }
 
@@ -158,6 +216,9 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
             primary = nil
             secondary = []
             series = []
+            latestReading = nil
+            ecgReport = nil
+            isPreparingECGReport = false
             return
         case .denied:
             state = .permissionDenied
@@ -165,26 +226,58 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
             primary = nil
             secondary = []
             series = []
+            latestReading = nil
+            ecgReport = nil
+            isPreparingECGReport = false
             return
         case .authorized:
             break
         }
+        isPreparingECGReport = metric == .ecg
 
         // Fetch data
-        Task {
+        refreshTask = Task { [weak self] in
+            guard let self else { return }
             let values = await dataManager.fetchLatestValue(
                 for: metric,
                 since: FileConstants.fetchLookbackSeconds,
                 limit: FileConstants.fetchLimit
             )
 
-            await MainActor.run {
+            guard Task.isCancelled == false else { return }
+            let didApplyValues = await MainActor.run {
+                guard generation == self.refreshGeneration else { return false }
                 self.processFetchedValues(values)
+                return true
+            }
+            guard didApplyValues else { return }
+
+            guard self.metric == .ecg, let reading = values.first else {
+                await MainActor.run {
+                    guard generation == self.refreshGeneration else { return }
+                    self.isPreparingECGReport = false
+                }
+                return
+            }
+            let waveform = await self.dataManager.fetchECGWaveform(for: reading.date)
+            guard Task.isCancelled == false else { return }
+            let report = waveform.flatMap {
+                self.reportRenderer.makeReport(reading: reading, waveform: $0)
+            }
+            await MainActor.run {
+                guard
+                    generation == self.refreshGeneration,
+                    self.latestReading?.date == reading.date
+                else {
+                    return
+                }
+                self.ecgReport = report
+                self.isPreparingECGReport = false
             }
         }
     }
 
-    private func processFetchedValues(_ values: [HealthKitDataManager.HealthMetricValue]) {
+    func processFetchedValues(_ values: [HealthKitDataManager.HealthMetricValue]) {
         let unitString = metric.displayUnit(config: kitConfig)
         let liveValue = liveHeartRateMetricValue(unit: unitString)
 
@@ -197,6 +290,9 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
                 primary = nil
                 secondary = []
                 series = []
+                latestReading = nil
+                ecgReport = nil
+                isPreparingECGReport = false
             }
             return
         }
@@ -210,6 +306,9 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
                 primary = nil
                 secondary = []
                 series = []
+                latestReading = nil
+                ecgReport = nil
+                isPreparingECGReport = false
             }
             return
         }
@@ -217,15 +316,21 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         // If live heart rate is active, prefer that for primary
         if let liveValue {
             self.primary = liveValue
+            self.latestReading = .heartRate(bpm: liveValue.value, date: liveValue.date)
             self.statusText = kitConfig.statusLive.localized
         } else {
-            self.primary = MetricValue(
-                label: nil,
-                value: latest.displayValue,
-                unit: unitString,
-                date: latest.date,
-                source: .health
-            )
+            self.latestReading = latest
+            if let displayValue = latest.displayValue {
+                self.primary = MetricValue(
+                    label: nil,
+                    value: displayValue,
+                    unit: unitString,
+                    date: latest.date,
+                    source: .health
+                )
+            } else {
+                self.primary = nil
+            }
             self.statusText = kitConfig.statusSampleBased.localized
         }
 
@@ -243,6 +348,7 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
 
     private func applyLiveOnlyState(_ liveValue: MetricValue, unit: String) {
         primary = liveValue
+        latestReading = .heartRate(bpm: liveValue.value, date: liveValue.date)
         state = .ready
         statusText = kitConfig.statusLive.localized
         let livePoints = [MetricPoint(date: liveValue.date, value: liveValue.value)]
@@ -250,7 +356,7 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         secondary = makeSecondaryMetrics(points: livePoints, unit: unit, source: .watchLive)
     }
 
-    private func buildChartData(
+    func buildChartData(
         values: [HealthKitDataManager.HealthMetricValue],
         liveValue: MetricValue?,
         unit: String
@@ -268,8 +374,9 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         liveValue: MetricValue?,
         unit: String
     ) -> (series: [MetricSeries], summaryPoints: [MetricPoint]) {
-        var points = values.reversed().map { value in
-            MetricPoint(date: value.date, value: value.displayValue)
+        var points = values.reversed().compactMap { value -> MetricPoint? in
+            guard let displayValue = value.displayValue else { return nil }
+            return MetricPoint(date: value.date, value: displayValue)
         }
 
         if let liveValue {
@@ -422,7 +529,7 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         guard metric == .heartRate, let lastReceived = receiver.lastReceived else {
             return false
         }
-        return Date().timeIntervalSince(lastReceived) <= FileConstants.liveWindowSeconds
+        return now().timeIntervalSince(lastReceived) <= FileConstants.liveWindowSeconds
     }
 
     private func liveHeartRateMetricValue(unit: String) -> MetricValue? {
@@ -434,7 +541,7 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
             label: nil,
             value: Double(bpm),
             unit: unit,
-            date: receiver.lastReceived ?? Date(),
+            date: receiver.lastReceived ?? now(),
             source: .watchLive
         )
     }
@@ -447,7 +554,7 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
         let average = values.reduce(0, +) / Double(values.count)
         let minValue = values.min() ?? average
         let maxValue = values.max() ?? average
-        let now = Date()
+        let now = now()
 
         return [
             MetricValue(label: kitConfig.labelAverage.localized, value: average, unit: unit, date: now, source: source),
@@ -457,9 +564,9 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
     }
 
     private func applyMock() {
-        var generator = MockDataStore.generator()
-        let now = Date()
-        let calendar = Calendar.current
+        var generator = mockData.generator()
+        let now = now()
+        let calendar = calendar
         let unitString = metric.displayUnit(config: kitConfig)
 
         switch metric {
@@ -480,6 +587,12 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
                 unit: unitString,
                 date: now,
                 source: .mock
+            )
+            latestReading = .bloodPressure(
+                systolic: systolicPoints.last?.value ?? 120,
+                diastolic: diastolicPoints.last?.value ?? 80,
+                unit: .millimeterOfMercury(),
+                date: now
             )
             series = [
                 MetricSeries(label: kitConfig.labelSystolic.localized, unit: kitConfig.unitMmHg.localized, points: systolicPoints),
@@ -513,11 +626,50 @@ final class GenericHealthCardViewModel: ObservableObject, CardDataSource {
                 date: now,
                 source: .mock
             )
+            latestReading = mockReading(value: primary?.value ?? range.lowerBound, date: now)
             series = [MetricSeries(label: metric.displayTitle(config: kitConfig), unit: unitString, points: points)]
             secondary = makeSecondaryMetrics(points: points, unit: unitString, source: .mock)
         }
 
         state = .ready
         statusText = kitConfig.statusMock.localized
+        if metric == .ecg, let latestReading {
+            let averageBPM = latestReading.displayValue ?? 72
+            let waveform = ECGWaveform.synthetic(averageBPM: averageBPM)
+            ecgReport = reportRenderer.makeReport(reading: latestReading, waveform: waveform)
+        } else {
+            ecgReport = nil
+        }
+        isPreparingECGReport = false
+    }
+
+    private func mockReading(
+        value: Double,
+        date: Date
+    ) -> HealthKitDataManager.HealthMetricValue {
+        switch metric {
+        case .heartRate:
+            .heartRate(bpm: value, date: date)
+        case .bloodGlucose:
+            .bloodGlucose(mgPerdL: value, date: date)
+        case .bloodPressure:
+            .bloodPressure(systolic: value, diastolic: 80, unit: .millimeterOfMercury(), date: date)
+        case .ecg:
+            .ecg(
+                classification: .sinusRhythm,
+                averageBPM: value,
+                samplingHz: 512,
+                duration: 30,
+                date: date
+            )
+        case .respiratoryRate:
+            .respiratoryRate(breathsPerMin: value, date: date)
+        case .restingHeartRate:
+            .restingHeartRate(bpm: value, date: date)
+        case .oxygenSaturation:
+            .oxygenSaturation(percent: value, date: date)
+        case .vo2Max:
+            .vo2Max(mlPerKgMin: value, date: date)
+        }
     }
 }

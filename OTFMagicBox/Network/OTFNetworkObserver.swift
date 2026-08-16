@@ -36,7 +36,7 @@ import Network
 import Combine
 import Foundation
 
-enum OTFNetworkStatus {
+enum OTFNetworkStatus: Equatable {
     case offline
     case wifi
     case cellular
@@ -46,13 +46,21 @@ enum OTFNetworkStatus {
 @MainActor
 class OTFNetworkObserver: ObservableObject {
 
+    typealias EndpointPinging = (_ completion: @escaping (Bool) -> Void) -> Void
+
     @Published private(set) var status: OTFNetworkStatus
 
     private let pathMonitor = NWPathMonitor()
     private let pathMonitorQueue = DispatchQueue(label: "NWPathMonitor")
+    private let endpointPing: EndpointPinging
 
-    init(status: OTFNetworkStatus = .unsatisfied, active: Bool = true) {
+    init(
+        status: OTFNetworkStatus = .unsatisfied,
+        active: Bool = true,
+        pingEndpoint: @escaping EndpointPinging = OTFNetworkObserver.defaultPingEndpoint
+    ) {
         self.status = status
+        self.endpointPing = pingEndpoint
         if active {
             enablePathMonitor()
         }
@@ -61,36 +69,44 @@ class OTFNetworkObserver: ObservableObject {
     private func enablePathMonitor() {
         pathMonitor.pathUpdateHandler = { path in
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                guard path.status == .satisfied else {
-                    self.status = .offline
-                    return
-                }
-                self.pingEndpoint(isExpensive: path.isExpensive)
+                self?.updateStatusForPath(isSatisfied: path.status == .satisfied, isExpensive: path.isExpensive)
             }
         }
         pathMonitor.start(queue: pathMonitorQueue)
     }
 
+    func updateStatusForPath(isSatisfied: Bool, isExpensive: Bool) {
+        guard isSatisfied else {
+            status = .offline
+            return
+        }
+
+        endpointPing { [weak self] didReachEndpoint in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                guard didReachEndpoint else {
+                    self.status = .offline
+                    return
+                }
+                self.status = isExpensive ? .cellular : .wifi
+            }
+        }
+    }
+
     func pingEndpoint(isExpensive: Bool) {
+        updateStatusForPath(isSatisfied: true, isExpensive: isExpensive)
+    }
+
+    nonisolated private static func defaultPingEndpoint(completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: Constants.Network.gatewayServicesURL) else {
-            self.status = .offline
+            completion(false)
             return
         }
         let config = URLSessionConfiguration.default
         config.waitsForConnectivity = true
         let session = URLSession(configuration: config)
-        let task = session.dataTask(with: url) { [weak self] _, response, _ in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                if response == nil {
-                    self.status = .offline
-                } else if isExpensive {
-                    self.status = .cellular
-                } else {
-                    self.status = .wifi
-                }
-            }
+        let task = session.dataTask(with: url) { _, response, _ in
+            completion(response != nil)
         }
         task.resume()
     }

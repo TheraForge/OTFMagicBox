@@ -34,19 +34,25 @@
 
 import SwiftUI
 
-private enum CardShellConstants {
-    static let contentSpacing: CGFloat = 20
+private enum FileConstants {
+    static let emptyIconSize: CGFloat = 36
+    static let emptySpacing: CGFloat = 12
+    static let guidanceNumberSize: CGFloat = 26
+    static let guidanceSpacing: CGFloat = 14
+    static let metadataSpacing: CGFloat = 4
+    static let modeSpacing: CGFloat = 8
+    static let primaryValueSize: CGFloat = 52
     static let sectionSpacing: CGFloat = 12
-    static let primaryValueSize: CGFloat = 48
-    static let unitOffset: CGFloat = 8
-    static let guidanceSpacing: CGFloat = 8
     static let statusDotSize: CGFloat = 8
     static let statusSpacing: CGFloat = 6
+    static let unitSpacing: CGFloat = 8
+    static let waveformSymbol = "waveform.path.ecg"
 }
 
 struct CardShellView<Secondary: View, Chart: View, Actions: View>: View {
 
     let title: String
+    let metric: HealthKitDataManager.HealthMetric
     let emptyTitle: String
     let emptyMessage: String
     let guidanceTitle: String
@@ -54,40 +60,108 @@ struct CardShellView<Secondary: View, Chart: View, Actions: View>: View {
     let config: HealthSensorsConfiguration
     let primaryValueText: String?
     let primaryUnitText: String?
+    let sampleDate: Date?
+    let entryMode: SensorTaskMode
+    let entryModeDescription: String
+    let showsActions: Bool
 
-    @ObservedObject var dataSource: AnyCardDataSource
+    @ObservedObject private var dataSource: AnyCardDataSource
 
-    @ViewBuilder let secondaryContent: () -> Secondary
-    @ViewBuilder let chartContent: () -> Chart
-    @ViewBuilder let actionsContent: () -> Actions
+    @ViewBuilder private let secondaryContent: Secondary
+    @ViewBuilder private let chartContent: Chart
+    @ViewBuilder private let actionsContent: Actions
+
+    init(
+        title: String,
+        metric: HealthKitDataManager.HealthMetric,
+        emptyTitle: String,
+        emptyMessage: String,
+        guidanceTitle: String,
+        guidanceSteps: [String],
+        config: HealthSensorsConfiguration,
+        primaryValueText: String?,
+        primaryUnitText: String?,
+        sampleDate: Date?,
+        entryMode: SensorTaskMode,
+        entryModeDescription: String,
+        showsActions: Bool,
+        dataSource: AnyCardDataSource,
+        @ViewBuilder secondaryContent: () -> Secondary,
+        @ViewBuilder chartContent: () -> Chart,
+        @ViewBuilder actionsContent: () -> Actions
+    ) {
+        self.title = title
+        self.metric = metric
+        self.emptyTitle = emptyTitle
+        self.emptyMessage = emptyMessage
+        self.guidanceTitle = guidanceTitle
+        self.guidanceSteps = guidanceSteps
+        self.config = config
+        self.primaryValueText = primaryValueText
+        self.primaryUnitText = primaryUnitText
+        self.sampleDate = sampleDate
+        self.entryMode = entryMode
+        self.entryModeDescription = entryModeDescription
+        self.showsActions = showsActions
+        self.dataSource = dataSource
+        self.secondaryContent = secondaryContent()
+        self.chartContent = chartContent()
+        self.actionsContent = actionsContent()
+    }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: CardShellConstants.contentSpacing) {
+            LazyVStack(alignment: .leading, spacing: HealthSensorVisualStyle.contentSpacing) {
                 primaryMetric
 
                 if dataSource.state == .ready {
-                    secondaryContent()
-                    chartContent()
+                    HealthSensorSectionCard {
+                        secondaryContent
+                    }
+
+                    if hasChartData {
+                        HealthSensorSectionCard {
+                            chartContent
+                        }
+                    }
                 } else {
                     emptyState
                 }
 
                 guidanceSection
-                actionsContent()
+
+                if showsActions {
+                    actionsContent
+                }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, HealthSensorVisualStyle.horizontalPadding)
+            .padding(.top, HealthSensorVisualStyle.screenTopPadding)
+            .padding(.bottom, HealthSensorVisualStyle.screenBottomPadding)
         }
+        .background(HealthSensorVisualStyle.screenBackground)
         .navigationTitle(title)
         .globalStyle(.navigationTitleDisplayMode)
     }
 
     private var primaryMetric: some View {
-        VStack(alignment: .leading, spacing: CardShellConstants.sectionSpacing) {
-            HStack(alignment: .center) {
-                HStack(alignment: .firstTextBaseline, spacing: CardShellConstants.unitOffset) {
-                    Text(primaryValueText ?? "--")
-                        .font(.system(size: CardShellConstants.primaryValueSize, weight: .semibold))
+        HealthSensorSectionCard {
+            VStack(alignment: .leading, spacing: FileConstants.sectionSpacing) {
+                HStack(alignment: .top) {
+                    HealthSensorMetricIcon(metric: metric)
+
+                    VStack(alignment: .trailing, spacing: FileConstants.modeSpacing) {
+                        SensorModeBadge(mode: entryMode)
+                        statusIndicator
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+
+                HStack(alignment: .firstTextBaseline, spacing: FileConstants.unitSpacing) {
+                    Text(primaryValueText ?? MetricFormatter.unavailableValue)
+                        .font(.system(size: FileConstants.primaryValueSize, weight: .semibold))
+                        .minimumScaleFactor(0.68)
+                        .lineLimit(1)
+                        .monospacedDigit()
 
                     if let unit = primaryUnitText {
                         Text(unit)
@@ -96,52 +170,83 @@ struct CardShellView<Secondary: View, Chart: View, Actions: View>: View {
                     }
                 }
 
-                statusIndicator
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-
-            if let primary = dataSource.primary {
-                VStack(alignment: .leading, spacing: CardShellConstants.guidanceSpacing) {
-                    Text("\(config.labelLastUpdated.localized): \(primary.date.formatted(date: .abbreviated, time: .shortened))")
-                        .font(.caption)
-
-                    Text("\(config.labelDataSource.localized): \(dataSourceLabel(for: primary.source))")
-                        .font(.caption)
+                if let metadata {
+                    VStack(alignment: .leading, spacing: FileConstants.metadataSpacing) {
+                        Label(
+                            "\(config.labelLastUpdated.localized): \(metadata.date.formatted(date: .abbreviated, time: .shortened))",
+                            systemImage: "clock"
+                        )
+                        Label(
+                            "\(config.labelDataSource.localized): \(dataSourceLabel(for: metadata.source))",
+                            systemImage: FileConstants.waveformSymbol
+                        )
+                    }
+                    .font(.caption)
+                    .foregroundStyle(Color.secondary)
                 }
-                .foregroundStyle(Color.secondary)
+
+                Divider()
+
+                Text(entryModeDescription)
+                    .font(.footnote)
+                    .foregroundStyle(Color.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .accessibilityElement(children: .combine)
     }
 
     private var emptyState: some View {
-        VStack(alignment: .leading, spacing: CardShellConstants.guidanceSpacing) {
-            Text(emptyTitle)
-                .font(.headline)
+        HealthSensorSectionCard {
+            HStack(alignment: .top, spacing: FileConstants.emptySpacing) {
+                Image(systemName: FileConstants.waveformSymbol)
+                    .font(.title2)
+                    .foregroundStyle(Color.accentColor)
+                    .frame(
+                        width: FileConstants.emptyIconSize,
+                        height: FileConstants.emptyIconSize
+                    )
+                    .accessibilityHidden(true)
 
-            Text(emptyMessage)
-                .font(.callout)
-                .foregroundStyle(Color.secondary)
+                VStack(alignment: .leading, spacing: HealthSensorVisualStyle.sectionLabelSpacing) {
+                    Text(emptyTitle)
+                        .font(.headline)
 
-            if case .error(let errorMessage) = dataSource.state {
-                Text(errorMessage)
-                    .font(.callout)
-                    .foregroundStyle(Color.red)
+                    Text(emptyMessage)
+                        .font(.callout)
+                        .foregroundStyle(Color.secondary)
+
+                    if case .error(let errorMessage) = dataSource.state {
+                        Text(errorMessage)
+                            .font(.callout)
+                            .foregroundStyle(Color.red)
+                    }
+                }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var guidanceSection: some View {
-        VStack(alignment: .leading, spacing: CardShellConstants.guidanceSpacing) {
-            Text(guidanceTitle)
-                .font(.headline)
+        HealthSensorSectionCard {
+            VStack(alignment: .leading, spacing: FileConstants.guidanceSpacing) {
+                HealthSensorSectionTitle(title: guidanceTitle, systemImage: "lightbulb")
 
-            VStack(alignment: .leading, spacing: CardShellConstants.guidanceSpacing) {
-                ForEach(guidanceSteps, id: \.self) { step in
-                    HStack(alignment: .top, spacing: CardShellConstants.guidanceSpacing) {
-                        Text("• " + step)
+                ForEach(Array(zip(guidanceSteps.indices, guidanceSteps)), id: \.0) { index, step in
+                    HStack(alignment: .top, spacing: FileConstants.sectionSpacing) {
+                        Image(systemName: "\(index + 1).circle.fill")
+                            .font(.title3)
+                            .foregroundStyle(Color.accentColor)
+                            .frame(
+                                width: FileConstants.guidanceNumberSize,
+                                height: FileConstants.guidanceNumberSize
+                            )
+                            .accessibilityHidden(true)
+
+                        Text(step)
                             .font(.callout)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
@@ -162,29 +267,37 @@ struct CardShellView<Secondary: View, Chart: View, Actions: View>: View {
         switch dataSource.state {
         case .needsPermission: return .orange
         case .permissionDenied: return .red
-        case .noData: return .gray
+        case .noData: return .secondary
         case .error: return .red
-        case .ready:
-            if dataSource.statusText == config.statusLive.localized {
-                return .teal
-            }
-            if dataSource.statusText == config.statusMock.localized {
-                return .orange
-            }
-            return .blue
+        case .ready: return .accentColor
         }
     }
 
     private var statusIndicator: some View {
-        HStack(spacing: CardShellConstants.statusSpacing) {
+        HStack(spacing: FileConstants.statusSpacing) {
             Circle()
                 .fill(statusColor)
-                .frame(width: CardShellConstants.statusDotSize, height: CardShellConstants.statusDotSize)
+                .frame(
+                    width: FileConstants.statusDotSize,
+                    height: FileConstants.statusDotSize
+                )
             Text(statusText)
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(statusColor)
                 .lineLimit(1)
         }
+    }
+
+    private var hasChartData: Bool {
+        dataSource.series.contains { !$0.points.isEmpty }
+    }
+
+    private var metadata: (date: Date, source: MetricSource)? {
+        if let primary = dataSource.primary {
+            return (primary.date, primary.source)
+        }
+        guard let sampleDate else { return nil }
+        return (sampleDate, .health)
     }
 
     private func dataSourceLabel(for source: MetricSource) -> String {
@@ -201,6 +314,7 @@ struct CardShellView<Secondary: View, Chart: View, Actions: View>: View {
     let dataSource = AnyCardDataSource(viewModel)
     CardShellView(
         title: "Heart Rate",
+        metric: .heartRate,
         emptyTitle: "No Data",
         emptyMessage: "Start measuring",
         guidanceTitle: "How to",
@@ -208,12 +322,18 @@ struct CardShellView<Secondary: View, Chart: View, Actions: View>: View {
         config: HealthSensorsConfigurationLoader.config,
         primaryValueText: "72",
         primaryUnitText: "BPM",
+        sampleDate: Date(),
+        entryMode: .sensor,
+        entryModeDescription: "Read from the Health app and submitted by the user.",
+        showsActions: true,
         dataSource: dataSource
     ) {
         Text("Secondary")
     } chartContent: {
         Text("Chart")
     } actionsContent: {
-        Button("Action") {}
+        HealthSensorSectionCard {
+            Button("Action") {}
+        }
     }
 }

@@ -41,7 +41,16 @@ final class CheckUpViewModel: ObservableObject {
 
     private enum FileConstants {
         static let fileName = "CheckUpConfiguration"
+        static let refreshDebounceInterval: TimeInterval = 0.2
     }
+
+    typealias SummaryFetcher = (
+        _ date: Date,
+        _ forceRefresh: Bool,
+        _ completion: @escaping (Result<DaySummarySnapshot, OCKStoreError>) -> Void
+    ) -> Void
+    typealias SnapshotInvalidator = (ScheduleRefreshContext) -> Void
+    typealias RefreshScheduler = (TimeInterval, DispatchWorkItem) -> Void
 
     // MARK: - Publishers
 
@@ -55,11 +64,39 @@ final class CheckUpViewModel: ObservableObject {
 
     private let decoder: OTFYAMLDecoding
     private let logger = OTFLogger.logger()
+    private var refreshWorkItem: DispatchWorkItem?
+    private let calendar: Calendar
+    private let now: () -> Date
+    private let summaryFetcher: SummaryFetcher
+    private let snapshotInvalidator: SnapshotInvalidator
+    private let refreshScheduler: RefreshScheduler
 
     // MARK: - Init
 
-    init(decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine()) {
+    init(
+        decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine(),
+        calendar: Calendar = .current,
+        now: @escaping () -> Date = Date.init,
+        summaryFetcher: @escaping SummaryFetcher = { date, forceRefresh, completion in
+            CareKitStoreManager.shared.daySnapshotStore.summary(
+                for: date,
+                forceRefresh: forceRefresh,
+                completion: completion
+            )
+        },
+        snapshotInvalidator: @escaping SnapshotInvalidator = { context in
+            CareKitStoreManager.shared.daySnapshotStore.invalidate(using: context)
+        },
+        refreshScheduler: @escaping RefreshScheduler = { delay, workItem in
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: workItem)
+        }
+    ) {
         self.decoder = decoder
+        self.calendar = calendar
+        self.now = now
+        self.summaryFetcher = summaryFetcher
+        self.snapshotInvalidator = snapshotInvalidator
+        self.refreshScheduler = refreshScheduler
         load()
     }
 
@@ -75,124 +112,61 @@ final class CheckUpViewModel: ObservableObject {
     }
 
     func fetchTasks() {
-        let todayStart = Calendar.current.startOfDay(for: .now)
+        let today = calendar.startOfDay(for: now())
 
-        guard let todayEnd = Calendar.current.date(byAdding: .day, value: 1, to: todayStart)?.addingTimeInterval(-1) else { return }
+        fetchSummary(for: today, forceRefresh: false, errorMessage: "CheckUp summary fetch failed")
+    }
 
-        let todayInterval = DateInterval(start: todayStart, end: todayEnd)
-        let query = OCKTaskQuery(dateInterval: todayInterval)
+    func scheduleRefresh() {
+        scheduleRefresh(forceRefresh: true)
+    }
 
-        guard let store = CareKitStoreManager.shared.cloudantStore else {
-            logger.error("CloudantStore is nil; aborting fetch")
+    func scheduleRefresh(using notification: Notification) {
+        let context = ScheduleRefreshContext(notification: notification) ?? ScheduleRefreshContext(changeKind: .fullResync)
+        guard context.changeKind == .fullResync || context.affects(date: now(), calendar: calendar) else {
             return
         }
 
-        logger.info("Fetching tasks for interval \(todayStart) → \(todayEnd)")
-        store.fetchTasks(query: query, callbackQueue: DispatchQueue.global(qos: .userInitiated)) { [weak self] result in
+        snapshotInvalidator(context)
+        scheduleRefresh(forceRefresh: true)
+    }
+
+    private func scheduleRefresh(forceRefresh: Bool) {
+        refreshWorkItem?.cancel()
+
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self else { return }
+            if forceRefresh {
+                let today = self.calendar.startOfDay(for: self.now())
+                self.fetchSummary(for: today, forceRefresh: true, errorMessage: "CheckUp summary refresh failed")
+            } else {
+                self.fetchTasks()
+            }
+        }
+
+        refreshWorkItem = workItem
+        refreshScheduler(FileConstants.refreshDebounceInterval, workItem)
+    }
+
+    private func fetchSummary(for date: Date, forceRefresh: Bool, errorMessage: String) {
+        summaryFetcher(date, forceRefresh) { [weak self] result in
             guard let self else { return }
 
             switch result {
             case .failure(let error):
-                self.logger.error("Fetch tasks failed: \(error)")
-                DispatchQueue.main.async {
-                    self.applySummaries(from: [])
-                }
+                self.logger.error("\(errorMessage): \(error)")
+                self.applySummaries(from: nil)
 
-            case .success(let tasks):
-                let tasksToFetch: [(task: OCKTask, interval: DateInterval)] = tasks.compactMap { task in
-                    guard let interval = self.validEventInterval(for: task, within: todayInterval) else { return nil }
-                    return (task, interval)
-                }
-
-                self.logger.debug("Fetched \(tasks.count) task(s); \(tasksToFetch.count) overlap interval; resolving events")
-
-                guard !tasksToFetch.isEmpty else {
-                    DispatchQueue.main.async {
-                        self.applySummaries(from: [])
-                    }
-                    return
-                }
-
-                let group = DispatchGroup()
-                let lock = NSLock()
-
-                var firstError: Error?
-                var allEvents: [OCKEvent<OCKTask, OCKOutcome>] = []
-
-                for (task, interval) in tasksToFetch {
-                    group.enter()
-                    let eventQuery = OCKEventQuery(dateInterval: interval)
-
-                    store.fetchEvents(task: task, query: eventQuery, previousEvents: []) { eventsResult in
-                        defer { group.leave() }
-
-                        switch eventsResult {
-                        case .failure(let error):
-                            self.logger.error("Fetch Events failed for identifier='\(task.id)': \(error)")
-                            lock.lock()
-                            if firstError == nil { firstError = error }
-                            lock.unlock()
-
-                        case .success(let fetchedEvents):
-                            lock.lock()
-                            allEvents.append(contentsOf: fetchedEvents)
-                            lock.unlock()
-                        }
-                    }
-                }
-
-                group.notify(queue: .main) {
-                    if let error = firstError {
-                        self.logger.error("One or more event fetches failed: \(error)")
-                    }
-                    self.applySummaries(from: allEvents)
-                }
+            case .success(let snapshot):
+                self.applySummaries(from: snapshot)
             }
         }
     }
 
-    private func applySummaries(from events: [OCKEvent<OCKTask, OCKOutcome>]) {
-        medicationSummary = buildSummary(from: events, category: .medication)
-        activitySummary = buildSummary(from: events, category: .activity)
-        checkupSummary = buildSummary(from: events, category: .checkup)
-        appointmentSummary = buildSummary(from: events, category: .appointment)
-    }
-
-    private func validEventInterval(for task: OCKTask, within requested: DateInterval) -> DateInterval? {
-        let elementStarts = task.schedule.elements.map(\.start)
-        let elementEnds = task.schedule.elements.compactMap(\.end)
-
-        let activeStart = ([task.effectiveDate] + elementStarts).min() ?? task.effectiveDate
-        let activeEnd = elementEnds.max() ?? .distantFuture
-
-        guard activeEnd > activeStart else { return nil }
-
-        let activeInterval = DateInterval(start: activeStart, end: activeEnd)
-        guard let intersection = activeInterval.intersection(with: requested), intersection.duration > 0 else {
-            return nil
-        }
-
-        return intersection
-    }
-
-    // MARK: - Helpers
-
-    /// Builds a per-category summary by grouping events by task id and
-    /// counting tasks where *all* occurrences were completed.
-    private func buildSummary(from events: [OCKEvent<OCKTask, OCKOutcome>], category: CheckUpTaskType) -> CategorySummary {
-        // Keep only events for the desired category.
-        let filtered = events.filter { $0.task.category == category }
-
-        // Group occurrences by task id to avoid duplicates.
-        let groups = Dictionary(grouping: filtered, by: { $0.task.id })
-
-        let total = groups.count
-        let completed = groups.values.reduce(0) { count, taskEvents in
-            // A task is considered "completed" if *every* occurrence has an outcome.
-            let allDone = !taskEvents.isEmpty && taskEvents.allSatisfy { $0.outcome != nil }
-            return count + (allDone ? 1 : 0)
-        }
-
-        return CategorySummary(totalTasks: total, completedTasks: completed)
+    private func applySummaries(from snapshot: DaySummarySnapshot?) {
+        medicationSummary = snapshot?.summary(for: .medication) ?? .zero
+        activitySummary = snapshot?.summary(for: .activity) ?? .zero
+        checkupSummary = snapshot?.summary(for: .checkup) ?? .zero
+        appointmentSummary = snapshot?.summary(for: .appointment) ?? .zero
     }
 }

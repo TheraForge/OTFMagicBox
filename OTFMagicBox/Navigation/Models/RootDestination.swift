@@ -39,25 +39,55 @@ enum RootDestination: String, Hashable, Identifiable, CaseIterable {
 
     var id: Self { self }
 
+    static func visibleTabs(for config: AppConfiguration) -> [RootDestination] {
+        guard !config.playgroundMode else {
+            return [.playground]
+        }
+
+        var roots: [RootDestination] = []
+        if config.useCareKit {
+            roots.append(.schedule)
+            roots.append(.contacts)
+        }
+        if config.showCheckupScreen {
+            roots.append(.checkup)
+        }
+        #if STATICUI
+        if config.showUIScreen {
+            roots.append(.ui)
+        }
+        #endif
+        roots.append(.profile)
+        return roots
+    }
+
     func title(from model: ContentViewModel) -> String {
+        title(from: model.config)
+    }
+
+    func title(from config: AppConfiguration) -> String {
         switch self {
-        case .schedule: model.config.scheduleTitle.localized
-        case .contacts: model.config.contactsTitle.localized
-        case .checkup: model.config.checkupTitle.localized
-        case .ui: model.config.uiTitle.localized
-        case .profile: model.config.profileTitle.localized
-        case .playground: model.config.playgroundTitle.localized
+        case .schedule: config.scheduleTitle.localized
+        case .contacts: config.contactsTitle.localized
+        case .checkup: config.checkupTitle.localized
+        case .ui: config.uiTitle.localized
+        case .profile: config.profileTitle.localized
+        case .playground: config.playgroundTitle.localized
         }
     }
 
     func symbol(from model: ContentViewModel) -> String {
+        symbol(from: model.config)
+    }
+
+    func symbol(from config: AppConfiguration) -> String {
         switch self {
-        case .schedule: model.config.scheduleSymbol
-        case .contacts: model.config.contactsSymbol
-        case .checkup: model.config.checkupSymbol
-        case .ui: model.config.uiSymbol
-        case .profile: model.config.profileSymbol
-        case .playground: model.config.playgroundSymbol
+        case .schedule: config.scheduleSymbol
+        case .contacts: config.contactsSymbol
+        case .checkup: config.checkupSymbol
+        case .ui: config.uiSymbol
+        case .profile: config.profileSymbol
+        case .playground: config.playgroundSymbol
         }
     }
 

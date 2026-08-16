@@ -36,8 +36,13 @@ import SwiftUI
 
 struct ScheduleView: View {
 
+    private struct SensorTaskSheet: Identifiable {
+        let id = UUID()
+        let selectedDate: Date
+    }
+
     @StateObject private var model = ScheduleViewModel()
-    @State private var showingSensorTasks = false
+    @State private var sensorTaskSheet: SensorTaskSheet?
 
     var body: some View {
         NavigationStack {
@@ -63,13 +68,13 @@ struct ScheduleView: View {
 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Sensors", systemImage: "waveform.path.ecg") {
-                        showingSensorTasks = true
+                        sensorTaskSheet = SensorTaskSheet(selectedDate: model.selectedDate)
                     }
                     .accessibilityLabel("Show sensor tasks")
                 }
             }
-            .sheet(isPresented: $showingSensorTasks) {
-                MockSensorTaskView()
+            .sheet(item: $sensorTaskSheet) { sheet in
+                MockSensorTaskView(selectedDate: sheet.selectedDate)
             }
         }
     }

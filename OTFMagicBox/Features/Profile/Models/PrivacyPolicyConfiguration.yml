@@ -35,7 +35,7 @@
 # This file contains the full text of the Privacy Policy.
 # Markdown is supported for styling (e.g., **bold**, # headings).
 
-version: "2.0.0"
+version: "2.2.0"
 
 content:
   en: |    
@@ -53,6 +53,7 @@ content:
     Our App is designed to help you manage your health data. We may collect or process:
     - **Health Metrics:** Heart rate, activity levels, lab results, and other metrics you manually enter or sync via Apple Health (HealthKit).
     - **Medical Records:** Documents or files you upload directly to the App.
+    - **Self-Reported Health Profile (when enabled):** Optional location (a short description or address) and health conditions you choose to select or describe. This feature uses only what you enter; it does not request, access, infer, or collect GPS or precise device location. To minimize data, provide only the city, region, or country when that is sufficient; a full address is optional.
     
     **2.2 Device and Usage Data**
     We may collect anonymized data about how you access the App, including your device model, operating system version, and crash data, to improve app stability and performance.
@@ -70,6 +71,7 @@ content:
     - **End-to-End Encryption:** Your health data is encrypted on your device before it is synced to any cloud service. We **cannot** read your encrypted health data; only you hold the keys.
     - **Local Storage:** You have the option to use the App in "Offline Mode," where data remains strictly on your device.
     - **Secure Transfer:** All data transmission occurs over secure SSL/TLS connections.
+    - **Health Profile Data (when enabled):** The optional Health Profile uses the existing account/patient data path. The applicable encryption, access controls, and backup handling for this sensitive data require privacy and security approval before the feature is enabled.
 
     **5. Sharing Your Information**
     
@@ -80,7 +82,7 @@ content:
 
     **6. Data Retention**
     
-    We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your information to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our legal agreements and policies.
+    We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. Health Profile values are part of your account data while the feature is enabled; you can edit or clear them in your profile. You can submit an account-deletion request through the App. A successful local cleanup or return to onboarding is not confirmation that server-side deletion has completed. Retention and deletion remain subject to legal retention obligations, dispute resolution, and enforcement of our legal agreements and policies. The exact retention schedule, backup handling, and account/patient data-path security controls require privacy and security approval before this rollout is enabled.
 
     **7. Children's Privacy**
     
@@ -122,6 +124,7 @@ content:
     A nossa App foi concebida para ajudar a gerir os seus dados de saúde. Podemos recolher ou processar:
     - **Métricas de Saúde:** Frequência cardíaca, níveis de atividade, resultados de exames e outras métricas que insira manualmente ou sincronize via Apple Health (HealthKit).
     - **Registos Médicos:** Documentos ou ficheiros que carregue diretamente na App.
+    - **Perfil de Saúde indicado pelo utilizador (quando ativado):** Localização opcional (uma descrição curta ou morada) e condições de saúde que escolher selecionar ou descrever. Esta funcionalidade utiliza apenas o que introduzir; não solicita, acede, infere nem recolhe GPS ou localização precisa do dispositivo. Para minimizar os dados, indique apenas cidade, região ou país quando for suficiente; a morada completa é opcional.
     
     **2.2 Dados de Dispositivo e Uso**
     Podemos recolher dados anonimizados sobre como acede à App, incluindo o modelo do dispositivo, versão do sistema operativo e dados de falhas, para melhorar a estabilidade e desempenho.
@@ -139,6 +142,7 @@ content:
     - **Encriptação Ponta-a-Ponta:** Os seus dados de saúde são encriptados no seu dispositivo antes de serem sincronizados com qualquer serviço na nuvem. Nós **não conseguimos** ler os seus dados de saúde encriptados; apenas o utilizador detém as chaves.
     - **Armazenamento Local:** Tem a opção de utilizar a App em "Modo Offline", onde os dados permanecem estritamente no seu dispositivo.
     - **Transferência Segura:** Toda a transmissão de dados ocorre através de conexões seguras SSL/TLS.
+    - **Dados do Perfil de Saúde (quando ativado):** O Perfil de Saúde opcional utiliza o percurso de dados existente da conta/do paciente. A encriptação, os controlos de acesso e o tratamento de cópias de segurança aplicáveis a estes dados sensíveis requerem aprovação de privacidade e segurança antes de a funcionalidade ser ativada.
 
     **5. Partilha das Suas Informações**
     
@@ -149,7 +153,7 @@ content:
 
     **6. Retenção de Dados**
     
-    Reteremos as suas informações pessoais apenas pelo tempo necessário para os fins estabelecidos nesta Política de Privacidade. Reteremos e usaremos as suas informações na medida do necessário para cumprir as nossas obrigações legais, resolver disputas e fazer cumprir os nossos acordos e políticas legais.
+    Reteremos as suas informações pessoais apenas pelo tempo necessário para os fins estabelecidos nesta Política de Privacidade. Os valores do Perfil de Saúde fazem parte dos dados da sua conta enquanto a funcionalidade estiver ativada; pode editá-los ou limpá-los no seu perfil. Pode submeter um pedido de eliminação da conta através da App. Uma limpeza local bem-sucedida ou o regresso ao início não confirma que a eliminação do lado do servidor foi concluída. A retenção e a eliminação continuam sujeitas a obrigações legais de retenção, resolução de litígios e cumprimento dos nossos acordos e políticas legais. O calendário de retenção exato, o tratamento de cópias de segurança e os controlos de segurança do percurso de dados da conta/do paciente requerem aprovação de privacidade e segurança antes de esta implementação ser ativada.
 
     **7. Privacidade de Crianças**
     
@@ -191,6 +195,7 @@ content:
     تم تصميم تطبيقنا لمساعدتك في إدارة بياناتك الصحية. قد نجمع أو نعالج:
     - **المقاييس الصحية:** معدل ضربات القلب، ومستويات النشاط، ونتائج المختبر، والمقاييس الأخرى التي تدخلها يدويًا أو تزامنها عبر Apple Health (HealthKit).
     - **السجلات الطبية:** المستندات أو الملفات التي ترفعها مباشرة إلى التطبيق.
+    - **الملف الصحي المبلّغ عنه ذاتيًا (عند تفعيله):** موقع اختياري (وصف قصير أو عنوان) وحالات صحية تختار تحديدها أو وصفها. تستخدم هذه الميزة ما تدخله فقط؛ ولا تطلب أو تصل إلى أو تستنتج أو تجمع GPS أو الموقع الدقيق للجهاز. لتقليل البيانات، أدخل المدينة أو المنطقة أو البلد فقط عندما يكون ذلك كافيًا؛ والعنوان الكامل اختياري.
     
     **2.2 بيانات الجهاز والاستخدام**
     قد نجمع بيانات مجهولة الهوية حول كيفية وصولك إلى التطبيق، بما في ذلك طراز جهازك وإصدار نظام التشغيل وبيانات الأعطال، لتحسين استقرار التطبيق وأدائه.
@@ -208,6 +213,7 @@ content:
     - **التشفير من طرف لآخر:** يتم تشفير بياناتك الصحية على جهازك قبل مزامنتها مع أي خدمة سحابية. نحن **لا نستطيع** قراءة بياناتك الصحية المشفرة؛ أنت وحدك من يملك المفاتيح.
     - **التخزين المحلي:** لديك خيار استخدام التطبيق في "وضع عدم الاتصال"، حيث تبقى البيانات حصريًا على جهازك.
     - **النقل الآمن:** يتم نقل جميع البيانات عبر اتصالات SSL/TLS آمنة.
+    - **بيانات الملف الصحي (عند تفعيله):** يستخدم الملف الصحي الاختياري مسار بيانات الحساب/المريض القائم. وتتطلب آليات التشفير وضوابط الوصول ومعالجة النسخ الاحتياطية المطبقة على هذه البيانات الحساسة موافقة الخصوصية والأمان قبل تفعيل الميزة.
 
     **5. مشاركة معلوماتك**
     
@@ -218,7 +224,7 @@ content:
 
     **6. الاحتفاظ بالبيانات**
     
-    سنحتفظ بمعلوماتك الشخصية فقط للفترة اللازمة للأغراض المنصوص عليها في سياسة الخصوصية هذه. سنحتفظ بمعلوماتك ونستخدمها بالقدر اللازم للامتثال لالتزاماتنا القانونية وحل النزاعات وإنفاذ اتفاقياتنا وسياساتنا القانونية.
+    سنحتفظ بمعلوماتك الشخصية فقط للفترة اللازمة للأغراض المنصوص عليها في سياسة الخصوصية هذه. تكون قيم الملف الصحي جزءًا من بيانات حسابك أثناء تفعيل الميزة، ويمكنك تعديلها أو مسحها من ملفك الشخصي. يمكنك إرسال طلب حذف الحساب من خلال التطبيق. ولا يؤكد التنظيف المحلي الناجح أو العودة إلى بدء الاستخدام اكتمال الحذف من جانب الخادم. ويظل الاحتفاظ والحذف خاضعين لالتزامات الاحتفاظ القانونية وحل النزاعات وإنفاذ اتفاقياتنا وسياساتنا القانونية. ويتطلب جدول الاحتفاظ الدقيق ومعالجة النسخ الاحتياطية وضوابط أمان مسار بيانات الحساب/المريض موافقة الخصوصية والأمان قبل تفعيل هذا الطرح.
 
     **7. خصوصية الأطفال**
     

@@ -36,12 +36,7 @@ import Foundation
 import WatchConnectivity
 
 final class WatchBPMReceiver: ObservableObject {
-    
-    private enum FileConstants {
-        static let bpmKey = "bpm"
-        static let timestampKey = "timestamp"
-    }
-    
+
     static let shared = WatchBPMReceiver()
     
     @Published private(set) var bpm: Int?
@@ -51,12 +46,10 @@ final class WatchBPMReceiver: ObservableObject {
     
     private init() {
         observer = NotificationCenter.default.addObserver(forName: .healthSensorsLiveHeartRate, object: nil, queue: .main) { [weak self] notification in
-            guard let userInfo = notification.userInfo,
-                  let bpm = userInfo[FileConstants.bpmKey] as? Int,
-                  let timestamp = userInfo[FileConstants.timestampKey] as? TimeInterval else { return }
+            guard let sample = WatchLiveHeartRateMessage.sample(from: notification.userInfo) else { return }
             
-            self?.bpm = bpm
-            self?.lastReceived = Date(timeIntervalSince1970: timestamp)
+            self?.bpm = sample.bpm
+            self?.lastReceived = Date(timeIntervalSince1970: sample.timestamp)
         }
     }
     

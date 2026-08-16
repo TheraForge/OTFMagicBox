@@ -33,8 +33,14 @@
  */
 
 import Foundation
+import OTFCloudClientAPI
 import OTFUtilities
 import OTFTemplateBox
+
+enum RootContentRoute: Equatable {
+    case onboarding
+    case tabs
+}
 
 final class ContentViewModel: ObservableObject {
 
@@ -46,13 +52,25 @@ final class ContentViewModel: ObservableObject {
 
     // MARK: - Properties
 
+    private let runtime: AppRuntime
     private let userDefaults: UserDefaults
     private let logger = OTFLogger.logger()
 
     // MARK: - Init
 
     init(userDefaults: UserDefaults = .standard) {
+        self.runtime = .live(userDefaults: userDefaults)
         self.userDefaults = userDefaults
+        config = runtime.appConfiguration
+        isOnboardingCompleted = userDefaults.bool(forKey: Constants.Storage.kOnboardingCompleted)
+        checkDefaultAPIKey()
+        refreshToken()
+    }
+
+    init(runtime: AppRuntime) {
+        self.runtime = runtime
+        self.userDefaults = runtime.userDefaults
+        config = runtime.appConfiguration
         isOnboardingCompleted = userDefaults.bool(forKey: Constants.Storage.kOnboardingCompleted)
         checkDefaultAPIKey()
         refreshToken()
@@ -65,6 +83,20 @@ final class ContentViewModel: ObservableObject {
         userDefaults.set(completed, forKey: Constants.Storage.kOnboardingCompleted)
     }
 
+    func handleOnboardingCompletedNotification(_ notification: Notification) {
+        guard let isOnboardingCompleted = notification.object as? Bool else { return }
+        setOnboarding(completed: isOnboardingCompleted)
+    }
+
+    func contentRoute(hasUser: Bool) -> RootContentRoute {
+        isOnboardingCompleted && hasUser ? .tabs : .onboarding
+    }
+
+    func applicationDidBecomeActive() {
+        runtime.presentAppLock()
+        runtime.syncOnForeground()
+    }
+
     // MARK: - Private Methods
 
     private func didCompleteOnBoarding() {
@@ -72,13 +104,13 @@ final class ContentViewModel: ObservableObject {
     }
 
     private func refreshToken() {
-        OTFTheraforgeNetwork.shared.refreshToken { response in
+        runtime.refreshToken { [weak self] response in
             switch response {
             case .success(let data):
-                SSEAndSyncManager.shared.subscribeToSSEWith(auth: data.accessToken)
+                self?.runtime.subscribeToSSE(data.accessToken)
             case .failure(let error):
                 guard error.error.statusCode == 410 else { return }
-                OTFTheraforgeNetwork.shared.moveToOnboardingView()
+                self?.runtime.moveToOnboarding()
             }
         }
     }

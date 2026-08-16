@@ -37,6 +37,9 @@ import OTFCloudantStore
 import OTFCDTDatastore
 import OTFUtilities
 import OTFCloudClientAPI
+#if canImport(OTFCareKitStore)
+import OTFCareKitStore
+#endif
 
 /// Tracks real-time changes from the remote Cloudant/CouchDB database using longpoll.
 ///
@@ -49,23 +52,40 @@ import OTFCloudClientAPI
 ///   unintentionally modify newly created documents.
 ///
 /// ## Important Design Decisions
-/// - Does NOT trigger sync on change detection: SSE events already handle remote change syncs.
-/// - Does NOT post UI notifications: The sync completion handler posts notifications.
+/// - Triggers sync only when the remote revision is missing, newer, or divergent locally.
+/// - Ignores changes already present locally to avoid echo-syncing this device's own push.
 /// - Handles deletions by directly removing local documents to prevent 404 errors during pull.
 class ChangesTracker {
 
     // MARK: - Private Properties
 
+    typealias RemoteChangeHandler = (
+        _ changedDocumentIDs: [String],
+        _ deletedDocumentIDs: [String],
+        _ typedDeletions: [OTFWatchSyncDeletion]
+    ) -> Void
+    typealias RequestStarter = (URLRequest, @escaping (Data?, Error?) -> Void) -> Void
+    typealias RetryScheduler = (TimeInterval, @escaping () -> Void) -> Void
+
     private let datastore: CDTDatastore
     private let remoteURL: URL
+    private let startRequest: RequestStarter
+    private let startDeletionSweepRequest: RequestStarter
+    private let scheduleAfter: RetryScheduler
+    private let remoteChangeHandler: RemoteChangeHandler
+    private let defaults: UserDefaults
     private var isTracking = false
+    private var lastSequenceToken = "now"
     private let logger = OTFLogger.logger()
+    private let deletionSweepSequenceKey = "changes.tracker.deletion.sweep.sequence"
 
     /// Retry delay in seconds when a connection error occurs.
     private let retryDelaySeconds: TimeInterval = 5
+    private let idlePollDelaySeconds: TimeInterval = 5
 
     /// Heartbeat interval in milliseconds for the longpoll connection.
     private let heartbeatMs = "30000"
+    private let verboseLoggingEnabled = ProcessInfo.processInfo.environment["OTF_VERBOSE_REPLICATION_LOGS"] == "1"
 
     // MARK: - Initialization
 
@@ -73,9 +93,22 @@ class ChangesTracker {
     /// - Parameters:
     ///   - datastore: The local CDTDatastore to update when deletions are detected.
     ///   - remoteURL: The base URL of the remote Cloudant/CouchDB database.
-    init(datastore: CDTDatastore, remoteURL: URL) {
+    init(
+        datastore: CDTDatastore,
+        remoteURL: URL,
+        startRequest: @escaping RequestStarter = ChangesTracker.defaultStartRequest,
+        startDeletionSweepRequest: @escaping RequestStarter = ChangesTracker.defaultStartRequest,
+        scheduleAfter: @escaping RetryScheduler = ChangesTracker.defaultScheduleAfter,
+        remoteChangeHandler: @escaping RemoteChangeHandler = { _, _, _ in },
+        defaults: UserDefaults = .standard
+    ) {
         self.datastore = datastore
         self.remoteURL = remoteURL
+        self.startRequest = startRequest
+        self.startDeletionSweepRequest = startDeletionSweepRequest
+        self.scheduleAfter = scheduleAfter
+        self.remoteChangeHandler = remoteChangeHandler
+        self.defaults = defaults
     }
 
     // MARK: - Public Methods
@@ -84,6 +117,7 @@ class ChangesTracker {
     func start() {
         guard !isTracking else { return }
         isTracking = true
+        lastSequenceToken = "now"
         logger.info("ChangesTracker: Starting change tracking")
         trackChanges()
     }
@@ -94,21 +128,53 @@ class ChangesTracker {
         logger.info("ChangesTracker: Stopped change tracking")
     }
 
-    /// Performs a deletion sweep. Currently disabled.
+    /// Applies remote tombstones before replication so stale local outcomes cannot be pushed back.
     ///
-    /// This method was previously used to fetch the entire change history and replay deletions,
-    /// but it caused issues where old deletion events would uncheck recently completed tasks.
-    /// The live `trackChanges` with `since=now` is sufficient for real-time sync.
+    /// The sweep only deletes a local document when the remote deleted revision is newer than the
+    /// local revision. That keeps old tombstones from erasing newer local work while still allowing
+    /// devices that were offline to catch up with deletions made elsewhere.
     func performDeletionSweep(completion: @escaping () -> Void) {
-        completion()
+        guard let url = buildChangesURL(since: deletionSweepSinceToken, feed: nil, heartbeat: nil) else {
+            logger.error("ChangesTracker: Failed to build deletion sweep URL")
+            completion()
+            return
+        }
+
+        var request = URLRequest(url: url)
+        addAuthHeaders(to: &request)
+
+        startDeletionSweepRequest(request) { [weak self] data, error in
+            guard let self else {
+                completion()
+                return
+            }
+
+            if let error {
+                self.logger.error("ChangesTracker deletion sweep error: \(error.localizedDescription)")
+                completion()
+                return
+            }
+
+            let summary = data.map(self.processDeletionSweep) ?? .empty
+            if self.verboseLoggingEnabled || summary.deletedCount > 0 || summary.skippedCount > 0 {
+                self.logger.info(
+                    "ChangesTracker: deletion sweep deleted=\(summary.deletedCount) skipped=\(summary.skippedCount)"
+                )
+            }
+            completion()
+        }
     }
 
     // MARK: - Private Methods
 
+    private var deletionSweepSinceToken: String {
+        defaults.string(forKey: deletionSweepSequenceKey) ?? "0"
+    }
+
     private func trackChanges() {
         guard isTracking else { return }
 
-        guard let url = buildChangesURL() else {
+        guard let url = buildChangesURL(since: lastSequenceToken, feed: "longpoll", heartbeat: heartbeatMs) else {
             logger.error("ChangesTracker: Failed to build changes URL")
             return
         }
@@ -116,21 +182,41 @@ class ChangesTracker {
         var request = URLRequest(url: url)
         addAuthHeaders(to: &request)
 
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+        startRequest(request) { [weak self] data, error in
             self?.handleChangesResponse(data: data, error: error)
         }
-        task.resume()
     }
 
-    private func buildChangesURL() -> URL? {
+    private static func defaultStartRequest(
+        _ request: URLRequest,
+        completion: @escaping (Data?, Error?) -> Void
+    ) {
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            completion(data, error)
+        }.resume()
+    }
+
+    private static func defaultScheduleAfter(
+        _ delay: TimeInterval,
+        work: @escaping () -> Void
+    ) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + delay, execute: work)
+    }
+
+    private func buildChangesURL(since: String, feed: String?, heartbeat: String?) -> URL? {
         let changesURL = remoteURL.appendingPathComponent("_changes")
         var components = URLComponents(url: changesURL, resolvingAgainstBaseURL: false)
-        components?.queryItems = [
-            URLQueryItem(name: "feed", value: "longpoll"),
+        var queryItems = [
             URLQueryItem(name: "style", value: "all_docs"),
-            URLQueryItem(name: "since", value: "now"),
-            URLQueryItem(name: "heartbeat", value: heartbeatMs)
+            URLQueryItem(name: "since", value: since)
         ]
+        if let feed {
+            queryItems.append(URLQueryItem(name: "feed", value: feed))
+        }
+        if let heartbeat {
+            queryItems.append(URLQueryItem(name: "heartbeat", value: heartbeat))
+        }
+        components?.queryItems = queryItems
         return components?.url
     }
 
@@ -154,60 +240,427 @@ class ChangesTracker {
             return
         }
 
-        if let data = data {
-            processChanges(data)
-        }
-
-        // Continue tracking (longpoll returns after each batch of changes)
-        DispatchQueue.global().async { [weak self] in
-            self?.trackChanges()
-        }
+        let processedChanges = data.map(processChanges) ?? .empty
+        continueTracking(after: processedChanges.hasActivity ? 0 : idlePollDelaySeconds)
     }
 
     private func scheduleRetry() {
-        DispatchQueue.global().asyncAfter(deadline: .now() + retryDelaySeconds) { [weak self] in
+        scheduleAfter(self.retryDelaySeconds) { [weak self] in
             self?.trackChanges()
         }
     }
 
-    private func processChanges(_ data: Data) {
-        do {
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                  let results = json["results"] as? [[String: Any]] else {
-                return
-            }
+    private func continueTracking(after delay: TimeInterval) {
+        let work: () -> Void = { [weak self] in
+            self?.trackChanges()
+        }
 
-            for change in results {
-                guard let docId = change["id"] as? String else { continue }
-
-                if let deleted = change["deleted"] as? Bool, deleted {
-                    logger.info("ChangesTracker: Detected deletion for doc: \(docId)")
-                    deleteLocalDocument(id: docId)
-                } else {
-                    logger.info("ChangesTracker: Detected change for doc: \(docId)")
-                }
-            }
-
-            // Note: We do NOT trigger a sync here because:
-            // 1. SSE events (db_update) already trigger syncs for remote changes
-            // 2. Local changes are pushed by CareKitStoreManager
-            // 3. Triggering sync here causes echo effect where your own changes loop back
-
-        } catch {
-            logger.error("ChangesTracker: JSON parse error: \(error)")
+        if delay <= 0 {
+            DispatchQueue.global().async(execute: work)
+        } else {
+            DispatchQueue.global().asyncAfter(deadline: .now() + delay, execute: work)
         }
     }
 
-    private func deleteLocalDocument(id: String) {
+    private func processChanges(_ data: Data) -> ProcessedChanges {
+        do {
+            guard let payload = try decodeChangesPayload(from: data) else {
+                return .empty
+            }
+
+            updateLastSequenceToken(payload.lastSequenceToken)
+
+            let batch = processChangeResults(payload.results)
+            logProcessedChanges(batch)
+            notifyRemoteChanges(batch)
+
+            return batch.processedChanges
+        } catch {
+            logger.error("ChangesTracker: JSON parse error: \(error)")
+            return .empty
+        }
+    }
+
+    private func decodeChangesPayload(from data: Data) throws -> ChangesPayload? {
+        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+              let results = json["results"] as? [[String: Any]] else {
+            return nil
+        }
+
+        return ChangesPayload(
+            results: results,
+            lastSequenceToken: json["last_seq"].map { String(describing: $0) }
+        )
+    }
+
+    private func updateLastSequenceToken(_ token: String?) {
+        guard let token else { return }
+        lastSequenceToken = token
+    }
+
+    private func processChangeResults(_ results: [[String: Any]]) -> ProcessedChangeBatch {
+        var batch = ProcessedChangeBatch()
+
+        for change in results {
+            guard let docId = change["id"] as? String else { continue }
+
+            if change["deleted"] as? Bool == true {
+                processDeletedChange(id: docId, change: change, batch: &batch)
+            } else {
+                processChangedDocument(id: docId, change: change, batch: &batch)
+            }
+        }
+
+        return batch
+    }
+
+    private func processDeletedChange(
+        id docId: String,
+        change: [String: Any],
+        batch: inout ProcessedChangeBatch
+    ) {
+        let typedDeletion = typedDeletionDescriptor(for: docId)
+        let deletionResult = deleteLocalDocumentIfRemoteDeletionIsNewer(
+            id: docId,
+            deletedRevId: deletedRevisionID(from: change)
+        )
+
+        var locallyDeletedDocumentIDs = batch.recordPrimaryDeletionResult(deletionResult, documentID: docId)
+
+        guard deletionResult != .failed else { return }
+
+        let matchingDeletedDocumentIDs = deleteLocalOutcomeDocumentsMatchingDeletedDocumentID(docId)
+        if !matchingDeletedDocumentIDs.isEmpty {
+            locallyDeletedDocumentIDs.append(docId)
+            locallyDeletedDocumentIDs.append(contentsOf: matchingDeletedDocumentIDs)
+        }
+        batch.recordDeletedDocuments(
+            locallyDeletedDocumentIDs,
+            typedDeletion: typedDeletion
+        )
+    }
+
+    private func processChangedDocument(
+        id docId: String,
+        change: [String: Any],
+        batch: inout ProcessedChangeBatch
+    ) {
+        batch.changedCount += 1
+
+        guard shouldPullRemoteRevision(id: docId, remoteRevId: revisionID(from: change)) else {
+            return
+        }
+
+        batch.remoteRevisionCount += 1
+        batch.changedDocumentIDs.append(docId)
+    }
+
+    private func logProcessedChanges(_ batch: ProcessedChangeBatch) {
+        guard verboseLoggingEnabled || batch.deletedCount > 0 || batch.remoteRevisionCount > 0 else {
+            return
+        }
+
+        logger.info(
+            "ChangesTracker: processed batch changed=\(batch.changedCount) remoteNeeded=\(batch.remoteRevisionCount) deleted=\(batch.deletedCount) missingLocal=\(batch.missingLocalCount)"
+        )
+    }
+
+    private func notifyRemoteChanges(_ batch: ProcessedChangeBatch) {
+        guard !batch.changedDocumentIDs.isEmpty || !batch.deletedDocumentIDs.isEmpty else {
+            return
+        }
+
+        remoteChangeHandler(batch.changedDocumentIDs, batch.deletedDocumentIDs, batch.typedDeletions)
+    }
+
+    private struct ChangesPayload {
+        let results: [[String: Any]]
+        let lastSequenceToken: String?
+    }
+
+    private struct ProcessedChangeBatch {
+        var changedCount = 0
+        var remoteRevisionCount = 0
+        var changedDocumentIDs = [String]()
+        var deletedCount = 0
+        var deletedDocumentIDs = [String]()
+        var typedDeletions = [OTFWatchSyncDeletion]()
+        var missingLocalCount = 0
+
+        var processedChanges: ProcessedChanges {
+            ProcessedChanges(
+                changedCount: changedCount,
+                deletedCount: deletedCount,
+                missingLocalCount: missingLocalCount
+            )
+        }
+
+        mutating func recordPrimaryDeletionResult(
+            _ deletionResult: LocalDeletionResult,
+            documentID: String
+        ) -> [String] {
+            switch deletionResult {
+            case .deleted:
+                deletedCount += 1
+                return [documentID]
+            case .missing:
+                missingLocalCount += 1
+                return []
+            case .failed:
+                return []
+            }
+        }
+
+        mutating func recordDeletedDocuments(
+            _ locallyDeletedDocumentIDs: [String],
+            typedDeletion: OTFWatchSyncDeletion?
+        ) {
+            guard !locallyDeletedDocumentIDs.isEmpty else { return }
+
+            let deletedIDs = Array(Set(locallyDeletedDocumentIDs)).sorted()
+            deletedDocumentIDs.append(contentsOf: deletedIDs)
+            guard let typedDeletion else { return }
+            typedDeletions.append(typedDeletion)
+        }
+    }
+
+    private struct ProcessedChanges {
+        let changedCount: Int
+        let deletedCount: Int
+        let missingLocalCount: Int
+
+        var hasActivity: Bool {
+            changedCount > 0 || deletedCount > 0 || missingLocalCount > 0
+        }
+
+        static let empty = ProcessedChanges(changedCount: 0, deletedCount: 0, missingLocalCount: 0)
+    }
+
+#if DEBUG
+    @discardableResult
+    func processChangesForTesting(_ data: Data) -> Bool {
+        processChanges(data).hasActivity
+    }
+#endif
+
+    private struct DeletionSweepSummary {
+        let deletedCount: Int
+        let skippedCount: Int
+
+        static let empty = DeletionSweepSummary(deletedCount: 0, skippedCount: 0)
+    }
+
+    private enum LocalDeletionResult {
+        case deleted
+        case missing
+        case failed
+    }
+
+    private func processDeletionSweep(_ data: Data) -> DeletionSweepSummary {
+        do {
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                  let results = json["results"] as? [[String: Any]] else {
+                return .empty
+            }
+
+            if let lastSeq = json["last_seq"] {
+                defaults.set(String(describing: lastSeq), forKey: deletionSweepSequenceKey)
+            }
+
+            var deletedCount = 0
+            var skippedCount = 0
+
+            for change in results {
+                guard change["deleted"] as? Bool == true,
+                      let docId = change["id"] as? String,
+                      let deletedRevId = deletedRevisionID(from: change) else {
+                    continue
+                }
+
+                let deletionResult = deleteLocalDocumentIfRemoteDeletionIsNewer(id: docId, deletedRevId: deletedRevId)
+                switch deletionResult {
+                case .deleted:
+                    deletedCount += 1
+                case .missing:
+                    break
+                case .failed:
+                    skippedCount += 1
+                }
+                if deletionResult != .failed {
+                    deletedCount += deleteLocalOutcomeDocumentsMatchingDeletedDocumentID(docId).count
+                }
+            }
+
+            return DeletionSweepSummary(deletedCount: deletedCount, skippedCount: skippedCount)
+        } catch {
+            logger.error("ChangesTracker deletion sweep JSON parse error: \(error)")
+            return .empty
+        }
+    }
+
+    private func deletedRevisionID(from change: [String: Any]) -> String? {
+        revisionID(from: change)
+    }
+
+    private func revisionID(from change: [String: Any]) -> String? {
+        guard let changes = change["changes"] as? [[String: Any]] else {
+            return nil
+        }
+        return changes.compactMap { $0["rev"] as? String }.first
+    }
+
+    private func shouldPullRemoteRevision(id: String, remoteRevId: String?) -> Bool {
+        guard let remoteRevId else {
+            return true
+        }
+
+        guard let localRevision = try? datastore.getDocumentWithId(id),
+              let localRevId = localRevision.revId else {
+            return true
+        }
+
+        guard localRevId != remoteRevId else {
+            return false
+        }
+
+        guard let remoteGeneration = revisionGeneration(remoteRevId),
+              let localGeneration = revisionGeneration(localRevId) else {
+            return true
+        }
+
+        return remoteGeneration >= localGeneration
+    }
+
+    @discardableResult
+    private func deleteLocalDocumentIfRemoteDeletionIsNewer(id: String, deletedRevId: String?) -> LocalDeletionResult {
+        do {
+            guard let revision = try? datastore.getDocumentWithId(id) else {
+                return .missing
+            }
+
+            guard let deletedRevId else {
+                return .failed
+            }
+
+            guard isRemoteRevision(deletedRevId, newerThan: revision.revId) else {
+                return .failed
+            }
+
+            try datastore.deleteDocument(from: revision)
+            return .deleted
+        } catch {
+            logger.error("ChangesTracker: Failed to sweep deleted doc \(id): \(error)")
+            return .failed
+        }
+    }
+
+    private func isRemoteRevision(_ remoteRevId: String, newerThan localRevId: String?) -> Bool {
+        guard let localRevId,
+              let remoteGeneration = revisionGeneration(remoteRevId),
+              let localGeneration = revisionGeneration(localRevId) else {
+            return false
+        }
+
+        return remoteGeneration > localGeneration
+    }
+
+    private func revisionGeneration(_ revId: String) -> Int? {
+        Int(revId.split(separator: "-", maxSplits: 1).first ?? "")
+    }
+
+    private func typedDeletionDescriptor(for documentID: String) -> OTFWatchSyncDeletion? {
+#if canImport(OTFCareKitStore)
+        if let outcomeIdentity = outcomeIdentity(forCanonicalDocumentID: documentID) {
+            return OTFWatchSyncDeletion(
+                documentID: documentID,
+                entityType: .outcome,
+                taskUUID: outcomeIdentity.taskUUID,
+                occurrenceIndex: outcomeIdentity.occurrenceIndex
+            )
+        }
+
+        guard let revision = try? datastore.getDocumentWithId(documentID),
+              let body = revision.body as? [String: Any],
+              body["entityType"] as? String == String(describing: OCKTask.self) else {
+            return nil
+        }
+
+        return OTFWatchSyncDeletion(documentID: documentID, entityType: .task)
+#else
+        return nil
+#endif
+    }
+
+    private func deleteLocalOutcomeDocumentsMatchingDeletedDocumentID(_ documentID: String) -> [String] {
+#if canImport(OTFCareKitStore)
+        guard let logicalKey = logicalOutcomeKey(forCanonicalDocumentID: documentID) else {
+            return []
+        }
+
+        return (datastore.getAllDocuments() ?? []).compactMap { revision in
+            guard let docId = revision.docId,
+                  docId != documentID,
+                  let body = revision.body as? [String: Any],
+                  body["entityType"] as? String == String(describing: OCKOutcome.self),
+                  let outcome = try? revision.data(as: OCKOutcome.self),
+                  logicalOutcomeKey(outcome) == logicalKey else {
+                return nil
+            }
+
+            do {
+                try datastore.deleteDocument(from: revision)
+                return docId
+            } catch {
+                logger.error("ChangesTracker: Failed to delete matching outcome doc \(docId): \(error)")
+                return nil
+            }
+        }
+#else
+        return []
+#endif
+    }
+
+#if canImport(OTFCareKitStore)
+    private func logicalOutcomeKey(_ outcome: OCKOutcome) -> String {
+        "\(outcome.taskUUID.uuidString)|\(outcome.taskOccurrenceIndex)"
+    }
+
+    private func logicalOutcomeKey(forCanonicalDocumentID documentID: String) -> String? {
+        guard let outcomeIdentity = outcomeIdentity(forCanonicalDocumentID: documentID) else {
+            return nil
+        }
+
+        return "\(outcomeIdentity.taskUUID.uuidString)|\(outcomeIdentity.occurrenceIndex)"
+    }
+
+    private func outcomeIdentity(forCanonicalDocumentID documentID: String) -> (taskUUID: UUID, occurrenceIndex: Int)? {
+        guard let separatorRange = documentID.range(of: "_", options: .backwards) else {
+            return nil
+        }
+
+        let uuidString = String(documentID[..<separatorRange.lowerBound])
+        let occurrenceIndexString = String(documentID[separatorRange.upperBound...])
+        guard let taskUUID = UUID(uuidString: uuidString),
+              let occurrenceIndex = Int(occurrenceIndexString) else {
+            return nil
+        }
+
+        return (taskUUID, occurrenceIndex)
+    }
+#endif
+
+    @discardableResult
+    private func deleteLocalDocument(id: String) -> LocalDeletionResult {
         do {
             if let revision = try? datastore.getDocumentWithId(id) {
                 try datastore.deleteDocument(from: revision)
-                logger.info("ChangesTracker: Deleted local doc: \(id)")
+                return .deleted
             } else {
-                logger.info("ChangesTracker: Doc not found locally or already deleted: \(id)")
+                return .missing
             }
         } catch {
             logger.error("ChangesTracker: Failed to delete doc \(id): \(error)")
+            return .failed
         }
     }
 }

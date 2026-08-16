@@ -38,7 +38,6 @@ import OTFCareKitStore
 import OTFUtilities
 import OTFTemplateBox
 import OTFResearchKit
-import WatchConnectivity
 import OTFCloudClientAPI
 import OTFCloudantStore
 
@@ -48,6 +47,14 @@ final class ProfileViewModel: ObservableObject {
         static let profileConfig = "ProfileConfiguration"
         static let privacyPolicyConfig = "PrivacyPolicyConfiguration"
         static let termsOfServiceConfig = "TermsOfServiceConfiguration"
+    }
+
+    private enum ProfileFetchError: LocalizedError {
+        case cloudantStoreUnavailable
+
+        var errorDescription: String? {
+            "Cloudant store unavailable"
+        }
     }
 
     // MARK: - Publishers
@@ -68,6 +75,15 @@ final class ProfileViewModel: ObservableObject {
     private var disposables = Set<AnyCancellable>()
     private let logger = OTFLogger.logger()
     private let decoder: OTFYAMLDecoding
+    private let signOutRequest: () -> AnyPublisher<Response.LogOut, ForgeError>
+    private let deleteUserRequest: (String) -> AnyPublisher<Response.DeleteAccount, ForgeError>
+    private let moveToOnboarding: () -> Void
+    private let localLogoutCleanup: () -> Void
+    private let deleteAccountCleanup: () async -> Void
+    private let syncCloudantStore: () -> Void
+    private let keychainEmail: () -> String
+    private let fetchPatientsByEmail: (String, @escaping (Result<[OCKPatient], Error>) -> Void) -> Void
+    private let notificationCenter: NotificationCenter
 
     var userName: String {
         guard let components = user?.name else { return "" }
@@ -82,8 +98,55 @@ final class ProfileViewModel: ObservableObject {
 
     // MARK: - Init
 
-    init(decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine()) {
+    init(
+        decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine(),
+        signOutRequest: @escaping () -> AnyPublisher<Response.LogOut, ForgeError> = {
+            OTFTheraforgeNetwork.shared.signOut()
+        },
+        deleteUserRequest: @escaping (String) -> AnyPublisher<Response.DeleteAccount, ForgeError> = {
+            OTFTheraforgeNetwork.shared.deleteUser(userId: $0)
+        },
+        moveToOnboarding: @escaping () -> Void = {
+            OTFTheraforgeNetwork.shared.moveToOnboardingView()
+        },
+        localLogoutCleanup: @escaping () -> Void = {
+            ProfileViewModel.performLocalLogoutCleanup()
+        },
+        deleteAccountCleanup: @escaping () async -> Void = {
+            ProfileViewModel.prepareWatchAuthForLocalAuthTransition()
+            await LocalUserPurger.shared.purgeAll()
+        },
+        syncCloudantStore: @escaping () -> Void = {
+            CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true, completion: nil)
+        },
+        keychainEmail: @escaping () -> String = {
+            KeychainCloudManager.getEmailAddress
+        },
+        fetchPatientsByEmail: @escaping (String, @escaping (Result<[OCKPatient], Error>) -> Void) -> Void = { email, completion in
+            guard let store = CareKitStoreManager.shared.cloudantStore else {
+                completion(.failure(ProfileFetchError.cloudantStoreUnavailable))
+                return
+            }
+
+            var query = OCKPatientQuery()
+            query.remoteIDs = [email]
+            query.limit = 1
+            store.fetchPatients(query: query, callbackQueue: .main) { result in
+                completion(result.mapError { $0 as Error })
+            }
+        },
+        notificationCenter: NotificationCenter = .default
+    ) {
         self.decoder = decoder
+        self.signOutRequest = signOutRequest
+        self.deleteUserRequest = deleteUserRequest
+        self.moveToOnboarding = moveToOnboarding
+        self.localLogoutCleanup = localLogoutCleanup
+        self.deleteAccountCleanup = deleteAccountCleanup
+        self.syncCloudantStore = syncCloudantStore
+        self.keychainEmail = keychainEmail
+        self.fetchPatientsByEmail = fetchPatientsByEmail
+        self.notificationCenter = notificationCenter
         loadProfileConfiguration()
         loadLegalConfiguration()
     }
@@ -93,7 +156,7 @@ final class ProfileViewModel: ObservableObject {
     func onAppear() {
         guard !didFetchUser else { return }
         didFetchUser = true
-        CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true, completion: nil)
+        syncCloudantStore()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.fetchUserFromDB()
@@ -104,23 +167,21 @@ final class ProfileViewModel: ObservableObject {
             }
         }
 
-        NotificationCenter.default.publisher(for: .databaseSynchronized)
+        notificationCenter.publisher(for: .databaseSynchronized)
             .sink { [weak self] _ in self?.fetchUserFromDB() }
             .store(in: &disposables)
 
-        NotificationCenter.default.publisher(for: .deleteUserAccount)
+        notificationCenter.publisher(for: .deleteUserAccount)
             .sink { [weak self] _ in self?.accountDeletedAlert = true }
             .store(in: &disposables)
     }
 
     func acknowledgeAccountDeleted() {
-        OTFTheraforgeNetwork.shared.moveToOnboardingView()
+        moveToOnboarding()
     }
 
     func fetchUserFromDB() {
-        guard let store = CareKitStoreManager.shared.cloudantStore else { return }
-
-        let email = KeychainCloudManager.getEmailAddress
+        let email = keychainEmail()
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .lowercased()
 
@@ -129,12 +190,8 @@ final class ProfileViewModel: ObservableObject {
             return
         }
 
-        var query = OCKPatientQuery()
-        query.remoteIDs = [email]
-        query.limit = 1
-
         isLoading = true
-        store.fetchPatients(query: query) { [weak self] result in
+        fetchPatientsByEmail(email) { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 self.isLoading = false
@@ -142,45 +199,47 @@ final class ProfileViewModel: ObservableObject {
                 case .success(let patients):
                     self.user = patients.first
                     if self.user == nil {
-                        self.logger.warning("No OCKPatient found for remoteID(email)=\(email).")
+                        self.logger.warning("No patient found for the current account.")
                     }
-                case .failure(let error):
-                    self.logger.error("fetchPatients failed: \(error.localizedDescription)")
+                case .failure:
+                    self.logger.error("Profile patient fetch failed.")
                 }
             }
         }
     }
 
     func signout() {
-        OTFTheraforgeNetwork.shared.signOut()
+        signOutRequest()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
-                if case let .failure(error) = completion {
+                if case .failure = completion {
                     self?.showingAlert = true
-                    self?.logger.error("Logout error: \(error.error.message)")
+                    self?.logger.error("Logout request failed.")
                 }
-            } receiveValue: { _ in
-                Self.performLocalLogoutCleanup()
+            } receiveValue: { [weak self] _ in
+                self?.localLogoutCleanup()
             }
             .store(in: &disposables)
     }
 
     func deleteUserAccount(userId: String) {
-        OTFTheraforgeNetwork.shared.deleteUser(userId: userId)
+        deleteUserRequest(userId)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] res in
                 switch res {
-                case .failure(let error):
+                case .failure:
                     self?.deleteFailureAlert = true
-                    self?.logger.error("delete user request failed -> \(error.error.message)")
+                    self?.logger.error("Delete account request failed.")
                 default: break
                 }
-            } receiveValue: { [weak self] data in
+            } receiveValue: { [weak self] _ in
                 guard let self = self else { return }
-                self.logger.info("delete user request succeeded -> \(data.message)")
+                self.logger.info("Delete account request succeeded.")
                 Task {
-                    await LocalUserPurger.shared.purgeAll()
-                    NotificationCenter.default.post(name: .deleteUserAccount, object: nil)
+                    await self.deleteAccountCleanup()
+                    await MainActor.run {
+                        self.notificationCenter.post(name: .deleteUserAccount, object: nil)
+                    }
                 }
             }
             .store(in: &disposables)
@@ -225,8 +284,8 @@ extension ProfileViewModel {
         OTFTheraforgeNetwork.shared.signOut()
             .receive(on: DispatchQueue.main)
             .sink { completion in
-                if case let .failure(error) = completion {
-                    logger.warning("Force logout signOut failed: \(error.error.message)")
+                if case .failure = completion {
+                    logger.warning("Force logout signOut failed.")
                 }
                 performLocalLogoutCleanup()
             } receiveValue: { _ in }
@@ -235,17 +294,21 @@ extension ProfileViewModel {
 
     private static func performLocalLogoutCleanup() {
         Task {
+            prepareWatchAuthForLocalAuthTransition()
             await LocalUserPurger.shared.purgeAll()
             await MainActor.run {
                 if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
                     ORKPasscodeViewController.removePasscodeFromKeychain()
                 }
-                WCSession.default.sendMessage(["userNotLoggedIn": "true"], replyHandler: nil) { error in
-                    logger.info("Failed to send userNotLoggedIn to watch: \(error.localizedDescription)")
-                }
                 KeychainWiper.wipeAll()
                 OTFTheraforgeNetwork.shared.moveToOnboardingView()
             }
         }
+    }
+
+    private static func prepareWatchAuthForLocalAuthTransition() {
+        let command = WatchAuthSessionStore.shared.makeLogoutCommand()
+        CareKitStoreManager.shared.setWatchSyncReady(false)
+        WatchAuthCommandPublisher.shared.publish(command, cancelOutstandingUserInfoTransfers: true)
     }
 }

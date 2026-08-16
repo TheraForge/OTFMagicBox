@@ -41,10 +41,6 @@ import OTFUtilities
 
 class SessionManager: NSObject, WCSessionDelegate {
 
-    private enum FileConstants {
-        static let liveStartMessageKey = "healthSensorsLiveHRStart"
-    }
-
     let peer: OTFWatchConnectivityPeer
     let store: OTFCloudantStore
 
@@ -75,6 +71,7 @@ class SessionManager: NSObject, WCSessionDelegate {
             logger.info("WCSession activated successfully")
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [store, logger] in
+                OCKStoreManager.shared.beginApplyingRemoteWatchChanges()
                 store.synchronize { error in
                     if let error {
                         logger.info("Store synchronization error: \(error.localizedDescription)")
@@ -82,7 +79,12 @@ class SessionManager: NSObject, WCSessionDelegate {
                         logger.info("Store synchronized successfully")
                     }
                     DispatchQueue.main.async {
+                        OCKStoreManager.shared.notifyRemoteOutcomeChange("iphone activation sync")
+                        NotificationCenter.default.postScheduleRefresh(
+                            ScheduleRefreshContext(changeKind: .fullResync)
+                        )
                         NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
+                        OCKStoreManager.shared.endApplyingRemoteWatchChanges()
                     }
                 }
             }
@@ -108,52 +110,271 @@ class SessionManager: NSObject, WCSessionDelegate {
         handleIncomingMessage(message, replyHandler: nil)
     }
 
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
+        handleIncomingMessage(userInfo, replyHandler: nil)
+    }
+
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        handleIncomingMessage(applicationContext, replyHandler: nil)
+    }
+
+    /// Routes inbound iPhone messages through auth validation before applying store changes.
     private func handleIncomingMessage(_ message: [String: Any], replyHandler: (([String: Any]) -> Void)?) {
 
         logger.debug("Did receive message from MOBILE APP: \(message)")
 
-        if message[databaseSyncedKey] is String {
-            store.synchronize { [logger] error in
-                if let error {
-                    logger.info("Store synchronization error after databaseSyncedKey message: \(error.localizedDescription)")
-                } else {
-                    logger.info("Store synchronized successfully after databaseSyncedKey message")
-                }
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
-                }
+        switch WatchIncomingMessageRoute(message: message) {
+        case .authCommand(let command):
+            handleAuthCommand(command, replyHandler: replyHandler)
+
+        case .incrementalRevisionPush(let payload):
+            prepareForPhoneAuthContext(in: message, replyHandler: replyHandler) { [weak self] in
+                self?.applyIncrementalSyncPayload(payload, replyHandler: replyHandler)
             }
-            replyHandler?(["received": true])
-            return
-        }
 
-        let shouldStartLiveHeartRate =
-            (message[FileConstants.liveStartMessageKey] as? Bool) == true ||
-            (message[FileConstants.liveStartMessageKey] as? Int) == 1
+        case .invalidIncrementalRevisionPush:
+            replyHandler?([OTFWatchConnectivityMessageKey.revisionError: "Invalid incremental sync payload"])
 
-        if shouldStartLiveHeartRate {
+        case .databaseSynced:
+            prepareForPhoneAuthContext(in: message, replyHandler: replyHandler) { [weak self] in
+                self?.synchronizeAfterDatabaseSynced(replyHandler: replyHandler)
+            }
+
+        case .liveHeartRateStart:
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .healthSensorsLiveHeartRateStart, object: nil)
             }
             replyHandler?(["received": true])
-            return
-        }
 
-        if message["userNotLoggedIn"] is String {
-            logger.info("Received userNotLoggedIn message; deleting local records")
-            store.deleteRecords { _ in
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .userLoggedOut, object: nil)
-                }
+        case .legacyLogout:
+            handleLegacyLogout(replyHandler: replyHandler)
+
+        case .peerFallback:
+            guard let replyHandler else { return }
+
+            prepareForPhoneAuthContext(in: message, replyHandler: replyHandler) { [weak self] in
+                guard let self else { return }
+                self.peer.reply(to: message, store: self.store, sendReply: replyHandler)
             }
-            replyHandler?(["received": true])
-            return
         }
-
-        guard let replyHandler else {
-            return
-        }
-
-        peer.reply(to: message, store: store, sendReply: replyHandler)
     }
+
+    /// Applies authenticated incremental phone changes to the watch-local store.
+    private func applyIncrementalSyncPayload(
+        _ payload: OTFWatchSyncPayload,
+        replyHandler: (([String: Any]) -> Void)?
+    ) {
+        OCKStoreManager.shared.beginApplyingRemoteWatchChanges()
+        do {
+            let result = try store.applyIncrementalSync(payload: payload)
+            let didApplyChanges = result.tasks > 0 || result.outcomes > 0 || result.deletions > 0
+            SyncPerformanceTracker.shared.recordWatchPayload(
+                direction: "watch_received",
+                tasks: result.tasks,
+                outcomes: result.outcomes,
+                deletions: result.deletions
+            )
+            DispatchQueue.main.async {
+                if result.outcomes > 0 || result.deletions > 0 {
+                    OCKStoreManager.shared.notifyRemoteOutcomeChange("iphone incremental import")
+                }
+                if didApplyChanges {
+                    if let scheduleRefreshContext = WatchSyncScheduleRefreshContextResolver.context(
+                        for: result,
+                        payload: payload,
+                        store: self.store
+                    ) {
+                        NotificationCenter.default.postScheduleRefresh(scheduleRefreshContext)
+                    }
+                    NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
+                }
+                OCKStoreManager.shared.endApplyingRemoteWatchChanges()
+            }
+            replyHandler?([
+                "received": true,
+                OTFWatchConnectivityMessageKey.revisionPushResult: [
+                    "tasks": result.tasks,
+                    "outcomes": result.outcomes,
+                    "deletions": result.deletions,
+                    "skipped": result.skipped,
+                    "skippedDeletions": result.skippedDeletions
+                ]
+            ])
+        } catch {
+            OCKStoreManager.shared.endApplyingRemoteWatchChanges()
+            replyHandler?([OTFWatchConnectivityMessageKey.revisionError: error.localizedDescription])
+        }
+    }
+
+    private func synchronizeAfterDatabaseSynced(replyHandler: (([String: Any]) -> Void)?) {
+        OCKStoreManager.shared.beginApplyingRemoteWatchChanges()
+        store.synchronize { [logger] error in
+            if let error {
+                logger.info("Store synchronization error after database synced message: \(error.localizedDescription)")
+            } else {
+                logger.info("Store synchronized successfully after database synced message")
+            }
+            DispatchQueue.main.async {
+                OCKStoreManager.shared.notifyRemoteOutcomeChange("iphone full sync")
+                NotificationCenter.default.postScheduleRefresh(
+                    ScheduleRefreshContext(changeKind: .fullResync)
+                )
+                NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
+                OCKStoreManager.shared.endApplyingRemoteWatchChanges()
+                replyHandler?(["received": true])
+            }
+        }
+    }
+
+    private func handleLegacyLogout(replyHandler: (([String: Any]) -> Void)?) {
+        logger.info("Received userNotLoggedIn message; deleting local records")
+        guard WatchAuthSessionStore.shared.shouldAcceptLegacyLogout() else {
+            replyHandler?(["received": true, "staleAuthCommand": true])
+            return
+        }
+
+        deleteLocalRecordsForAuthTransition { [weak self] error in
+            guard let self else { return }
+            guard self.replyIfAuthTransitionWipeFailed(error, replyHandler: replyHandler) == false else {
+                return
+            }
+            self.postLoggedOut(replyHandler: replyHandler)
+        }
+    }
+
+    private func handleAuthCommand(_ command: WatchAuthCommand, replyHandler: (([String: Any]) -> Void)?) {
+        switch WatchAuthSessionStore.shared.transitionResult(for: command) {
+        case .stale:
+            replyHandler?(["received": true, "staleAuthCommand": true])
+
+        case .accepted(let needsWipe):
+            guard needsWipe else {
+                commitAuthCommandAndContinue(command, replyHandler: replyHandler)
+                return
+            }
+
+            logger.info("Watch auth session changed; deleting local records")
+            deleteLocalRecordsForAuthTransition { [weak self] error in
+                guard let self else { return }
+                guard self.replyIfAuthTransitionWipeFailed(error, replyHandler: replyHandler) == false else {
+                    return
+                }
+                self.commitAuthCommandAndContinue(command, replyHandler: replyHandler)
+            }
+        }
+    }
+
+    private func commitAuthCommandAndContinue(
+        _ command: WatchAuthCommand,
+        replyHandler: (([String: Any]) -> Void)?
+    ) {
+        switch WatchAuthSessionStore.shared.commit(command) {
+        case .stale:
+            replyHandler?(["received": true, "staleAuthCommand": true])
+
+        case .accepted:
+            if command.kind == .loginReady {
+                synchronizeAfterLoginReady(replyHandler: replyHandler)
+            } else {
+                postLoggedOut(replyHandler: replyHandler)
+            }
+        }
+    }
+
+    /// Clears local watch records when a new phone auth session replaces the previous one.
+    private func deleteLocalRecordsForAuthTransition(completion: @escaping (String?) -> Void) {
+        OCKStoreManager.shared.beginApplyingRemoteWatchChanges()
+        store.deleteRecords { [logger] error in
+            if let error {
+                logger.info("Watch auth local record delete failed: \(error)")
+            }
+            OCKStoreManager.shared.endApplyingRemoteWatchChanges()
+            completion(error)
+        }
+    }
+
+    private func replyIfAuthTransitionWipeFailed(
+        _ error: String?,
+        replyHandler: (([String: Any]) -> Void)?
+    ) -> Bool {
+        guard let error else {
+            return false
+        }
+
+        replyHandler?([
+            OTFWatchConnectivityMessageKey.revisionError: "Watch auth local wipe failed: \(error)"
+        ])
+        return true
+    }
+
+    /// Pulls the phone-prepared Cloudant data after accepting a durable loginReady command.
+    private func synchronizeAfterLoginReady(replyHandler: (([String: Any]) -> Void)?) {
+        OCKStoreManager.shared.beginApplyingRemoteWatchChanges()
+        store.synchronize { [logger] error in
+            if let error {
+                logger.info("Store synchronization error after loginReady: \(error.localizedDescription)")
+            } else {
+                logger.info("Store synchronized successfully after loginReady")
+            }
+            DispatchQueue.main.async {
+                OCKStoreManager.shared.notifyRemoteOutcomeChange("iphone loginReady sync")
+                NotificationCenter.default.postScheduleRefresh(
+                    ScheduleRefreshContext(changeKind: .fullResync)
+                )
+                NotificationCenter.default.post(name: .databaseSynchronized, object: nil)
+                OCKStoreManager.shared.endApplyingRemoteWatchChanges()
+                replyHandler?(["received": true])
+            }
+        }
+    }
+
+    private func postLoggedOut(replyHandler: (([String: Any]) -> Void)?) {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+            replyHandler?(["received": true])
+        }
+    }
+
+    /// Validates auth context carried by phone-originated sync payloads before applying them.
+    private func prepareForPhoneAuthContext(
+        in message: [String: Any],
+        replyHandler: (([String: Any]) -> Void)?,
+        apply: @escaping () -> Void
+    ) {
+        switch WatchAuthSessionStore.shared.incomingPhoneAuthResult(for: message) {
+        case .rejected(let error):
+            replyHandler?([OTFWatchConnectivityMessageKey.revisionError: error])
+
+        case .accepted(let context, let needsWipe):
+            guard needsWipe else {
+                commitIncomingPhoneContextAndApply(context, replyHandler: replyHandler, apply: apply)
+                return
+            }
+
+            logger.info("Phone auth session changed before sync payload; deleting local records")
+            deleteLocalRecordsForAuthTransition { [weak self] error in
+                guard let self else { return }
+                guard self.replyIfAuthTransitionWipeFailed(error, replyHandler: replyHandler) == false else {
+                    return
+                }
+
+                self.commitIncomingPhoneContextAndApply(context, replyHandler: replyHandler, apply: apply)
+            }
+        }
+    }
+
+    /// Commits a validated phone auth context, then applies the queued sync operation.
+    private func commitIncomingPhoneContextAndApply(
+        _ context: OTFWatchAuthContext,
+        replyHandler: (([String: Any]) -> Void)?,
+        apply: () -> Void
+    ) {
+        switch WatchAuthSessionStore.shared.commitIncomingPhoneContext(context) {
+        case .stale:
+            replyHandler?([OTFWatchConnectivityMessageKey.revisionError: "Stale phone auth session"])
+        case .accepted:
+            apply()
+        }
+    }
+
 }

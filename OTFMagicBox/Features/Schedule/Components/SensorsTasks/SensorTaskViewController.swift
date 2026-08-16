@@ -43,12 +43,22 @@ final class SensorTaskViewController: OCKTaskViewController<OCKTaskController, S
     private let selectedDate: Date
 
     private let metric: HealthKitDataManager.HealthMetric
+    private let mode: SensorTaskMode
 
-    init(task: OCKAnyTask, eventQuery: OCKEventQuery, storeManager: OCKSynchronizedStoreManager, selectedDate: Date, metric: HealthKitDataManager.HealthMetric) {
+    init(
+        task: OCKAnyTask,
+        eventQuery: OCKEventQuery,
+        storeManager: OCKSynchronizedStoreManager,
+        selectedDate: Date,
+        metric: HealthKitDataManager.HealthMetric,
+        mode: SensorTaskMode
+    ) {
         self.selectedDate = selectedDate
         self.metric = metric
+        self.mode = mode
         let viewSynchronizer = SensorTaskViewSynchronizer(
             metric: metric,
+            mode: mode,
             selectedDate: selectedDate,
             storeManager: storeManager
         )
@@ -66,25 +76,32 @@ final class SensorTaskViewController: OCKTaskViewController<OCKTaskController, S
     }
 
     override func didSelectTaskView(_ taskView: UIView & OCKTaskDisplayable, eventIndexPath: IndexPath) {
-        presentModal()
+        presentModal(eventIndexPath: eventIndexPath)
     }
 
-    private func presentModal() {
+    private func presentModal(eventIndexPath: IndexPath) {
         guard presentedViewController == nil else { return }
-        guard let task = controller.taskEvents.tasks.first else { return }
+        let taskEvents = controller.taskEvents
+        guard taskEvents.indices.contains(eventIndexPath.section) else { return }
+        let events = taskEvents[eventIndexPath.section]
+        guard events.indices.contains(eventIndexPath.row) else { return }
+        let event = events[eventIndexPath.row]
 
         let modalView = SensorTaskDetailView(
             viewModel: .init(
-                task: task,
+                task: event.task,
                 selectedDate: selectedDate,
-                storeManager: controller.storeManager, dataManager: .init(),
-                metric: metric
+                occurrence: event.scheduleEvent.occurrence,
+                storeManager: controller.storeManager,
+                metric: metric,
+                mode: mode
             )
         )
         let hostingController = UIHostingController(rootView: modalView)
         hostingController.modalPresentationStyle = .pageSheet
         if let sheet = hostingController.sheetPresentationController {
             sheet.detents = [.large()]
+            sheet.prefersGrabberVisible = true
         }
         present(hostingController, animated: true)
     }

@@ -14,7 +14,7 @@
  3. Neither the name of the copyright holder(s) nor the names of any contributor(s) may
  be used to endorse or promote products derived from this software without specific
  prior written permission. No license is granted to the trademarks of the copyright
- holders even if such marks are included in this software.
+ holders even if such marks are included in the software.
 
  4. Commercial redistribution in any form requires an explicit license agreement with the
  copyright holder(s). Please contact support@hippocratestech.com for further information
@@ -32,27 +32,53 @@
  OF SUCH DAMAGE.
  */
 
-import XCTest
+import Foundation
+import OTFCloudantStore
+import OTFCareKitStore
 
-class OTFMagicBoxTests: XCTestCase {
+enum WatchSyncScheduleRefreshContextResolver {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    static func context(
+        for result: OTFIncrementalSyncApplyResult,
+        payload: OTFWatchSyncPayload,
+        store: OTFCloudantStore? = nil
+    ) -> ScheduleRefreshContext? {
+        if result.tasks > 0 {
+            return ScheduleRefreshContext(changeKind: .taskMembership)
         }
+
+        if result.outcomes > 0 || result.deletions > 0 {
+            guard let outcomeDates = outcomeEffectiveDates(in: payload) else {
+                return ScheduleRefreshContext(changeKind: .fullResync)
+            }
+
+            let deletionDates = store?.affectedDatesForDeletedOutcomeDocumentIDs(payload.deletedDocumentIDs) ?? []
+            guard result.deletions == 0 || !deletionDates.isEmpty else {
+                return ScheduleRefreshContext(changeKind: .fullResync)
+            }
+
+            let affectedDates = outcomeDates + deletionDates
+            guard !affectedDates.isEmpty else {
+                return ScheduleRefreshContext(changeKind: .fullResync)
+            }
+
+            return ScheduleRefreshContext(changeKind: .outcomeOnly, affectedDates: affectedDates)
+        }
+
+        return nil
+    }
+
+    private static func outcomeEffectiveDates(in payload: OTFWatchSyncPayload) -> [Date]? {
+        let decoder = JSONDecoder()
+        var affectedDates = [Date]()
+
+        for outcomeData in payload.outcomes {
+            guard let outcome = try? decoder.decode(OCKOutcome.self, from: outcomeData) else {
+                return nil
+            }
+            affectedDates.append(outcome.effectiveDate)
+        }
+
+        return affectedDates
     }
 }

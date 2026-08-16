@@ -35,40 +35,8 @@
 import OTFCareKitStore
 import OTFCareKit
 
-private struct GroupIdentifierKeys: Codable {
-    var viewType: TaskStyle = .simple
-}
-
 extension OCKTask {
-    private var groupIdentifierKeys: GroupIdentifierKeys {
-        guard let groupIdentifier,
-              let data = groupIdentifier.data(using: .utf8),
-              let keys = try? JSONDecoder().decode(GroupIdentifierKeys.self, from: data)
-        else {
-            return GroupIdentifierKeys()
-        }
-        
-        return keys
-    }
-    
-    var viewType: TaskStyle {
-        groupIdentifierKeys.viewType
-    }
-}
-
-enum TaskStyle: String, CaseIterable, Codable {
-    case simple = "Simple"
-    case instruction = "Instruction"
-    case buttonLog = "Button Log"
-    case grid = "Grid"
-    case checklist = "Checklist"
-    case labeledValue = "Labeled Value"
-    case numericProgress = "Numeric Progress"
-    
-    var supportsSwiftUI: Bool {
-        switch self {
-        case .simple, .instruction, .labeledValue, .numericProgress: return true
-        case .grid, .checklist, .buttonLog: return false
-        }
+    var viewType: WatchTaskStyle {
+        watchViewType
     }
 }

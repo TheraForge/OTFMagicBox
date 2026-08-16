@@ -35,13 +35,64 @@
 import OTFResearchKit
 import OTFUtilities
 import Combine
-import WatchConnectivity
+import OTFCloudClientAPI
+
+enum LoginFailureRoute: Equatable {
+    case resendVerificationEmail
+    case showLoginError(message: String)
+}
+
+enum LoginSuccessRoute: Equatable {
+    case patient(encryptedDefaultStorageKeyHex: String?, encryptedConfidentialStorageKeyHex: String?)
+    case doctorPortal(URL)
+}
+
+struct LoginRouteResolver {
+    static let verificationStatusCode = 601
+
+    let doctorPortalURLString: String
+
+    func failureRoute(for error: ForgeError) -> LoginFailureRoute {
+        guard error.error.statusCode == Self.verificationStatusCode else {
+            return .showLoginError(message: error.error.message)
+        }
+
+        return .resendVerificationEmail
+    }
+
+    func successRoute(for response: Response.Login) -> LoginSuccessRoute? {
+        guard response.data.type != .patient else {
+            return .patient(
+                encryptedDefaultStorageKeyHex: response.data.encryptedDefaultStorageKey,
+                encryptedConfidentialStorageKeyHex: response.data.encryptedConfidentialStorageKey
+            )
+        }
+
+        guard let url = URL(string: doctorPortalURLString) else { return nil }
+        return .doctorPortal(url)
+    }
+}
+
+struct LoginCredentials: Equatable {
+    let email: String
+    let password: String
+}
+
+enum LoginCredentialExtractor {
+    static func credentials(from stepResult: ORKStepResult?) -> LoginCredentials? {
+        guard let textResults = stepResult?.results?.compactMap({ $0 as? ORKTextQuestionResult }),
+              textResults.count >= 2,
+              let email = textResults.first?.textAnswer,
+              let password = textResults.last?.textAnswer
+        else {
+            return nil
+        }
+
+        return LoginCredentials(email: email, password: password)
+    }
+}
 
 class LoginViewController: ORKLoginStepViewController {
-
-    private enum FileConstants {
-        static let verificationError = 601
-    }
 
     private let logger = OTFLogger.logger()
     private lazy var styleConfig = StyleConfigurationLoader.config
@@ -119,15 +170,11 @@ class LoginViewController: ORKLoginStepViewController {
     }
 
     override func goForward() {
-        guard let stepResult = result,
-              let textResults = stepResult.results?.compactMap({ $0 as? ORKTextQuestionResult }),
-              let email = textResults.first?.textAnswer,
-              let password = textResults.last?.textAnswer
-        else {
+        guard let credentials = LoginCredentialExtractor.credentials(from: result) else {
             logger.error("Missing email or password in Login step result.")
             return
         }
-        loginRequest(email: email, password: password)
+        loginRequest(email: credentials.email, password: credentials.password)
     }
     
     func loginRequest(email: String, password: String) {
@@ -139,8 +186,8 @@ class LoginViewController: ORKLoginStepViewController {
                 guard let self = self else { return }
                 if case let .failure(error) = completion {
                     hud.dismiss(animated: true) {
-                        switch error.error.statusCode {
-                        case FileConstants.verificationError:
+                        switch LoginRouteResolver(doctorPortalURLString: self.auth.doctorPortalUrl).failureRoute(for: error) {
+                        case .resendVerificationEmail:
                             self.showResendEmailVerifyAlert(
                                 title: self.auth.emailVerifyConfirmationTitle.localized,
                                 message: self.auth.emailVerifyMessage.localized
@@ -149,37 +196,36 @@ class LoginViewController: ORKLoginStepViewController {
                                     .receive(on: DispatchQueue.main)
                                     .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
                             }
-                        default:
-                            self.showAlert(title: self.auth.loginErrorTitle.localized, message: error.error.message)
+                        case .showLoginError(let message):
+                            self.showAlert(title: self.auth.loginErrorTitle.localized, message: message)
                         }
                     }
                 }
             } receiveValue: { [weak self] result in
                 guard let self = self else { return }
-                if result.data.type == .patient {
+
+                switch LoginRouteResolver(doctorPortalURLString: self.auth.doctorPortalUrl).successRoute(for: result) {
+                case .patient(let encryptedDefaultStorageKeyHex, let encryptedConfidentialStorageKeyHex):
+                    CareKitStoreManager.shared.setWatchSyncReady(false)
                     self.saveUserCrredentials(email: email, password: password)
-                    if let defHex = result.data.encryptedDefaultStorageKey,
-                       let confHex = result.data.encryptedConfidentialStorageKey {
+                    if let defHex = encryptedDefaultStorageKeyHex,
+                       let confHex = encryptedConfidentialStorageKeyHex {
                         self.saveUserKeysToLocal(email: email, password: password,
                                                  encryptedDefaultStorageKeyHex: defHex,
                                                  encryptedconfidentialStorageKeyHex: confHex)
                     }
-                    self.synchronizedDatabase { _ in
-                        WCSession.default.sendMessage(["databaseSynced": "true"], replyHandler: nil) { error in
-                            self.logger.info("Failed to send databaseSynced to watch: \(error.localizedDescription)")
-                        }
-
-                        hud.dismiss(animated: false) {
-                            self.advanceAfterSuccessfulLogin()
-                        }
+                    _ = WatchAuthSessionStore.shared.beginPendingLoginSession()
+                    self.synchronizeDatabaseInBackground()
+                    hud.dismiss(animated: false) {
+                        self.advanceAfterSuccessfulLogin()
                     }
-                } else {
+                case .doctorPortal(let url):
                     hud.dismiss(animated: true) { [weak self] in
                         guard let self = self else { return }
-                        if let url = URL(string: self.auth.doctorPortalUrl) {
-                            self.confirmDoctorPortalOpen(url: url, email: email)
-                        }
+                        self.confirmDoctorPortalOpen(url: url, email: email)
                     }
+                case nil:
+                    hud.dismiss(animated: true)
                 }
             }
     }
@@ -188,6 +234,20 @@ class LoginViewController: ORKLoginStepViewController {
         DispatchQueue.main.async {
             CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true) { result in
                 completion?(result)
+            }
+        }
+    }
+
+    /// Runs the first post-login Cloudant sync before the watch login is committed.
+    ///
+    /// The pending watch auth command has already been stored by `WatchAuthSessionStore`.
+    /// `CloudantSyncManager` publishes and commits it only after this sync succeeds and
+    /// the command has been written to WatchConnectivity's application context.
+    private func synchronizeDatabaseInBackground() {
+        synchronizedDatabase { [weak self] result in
+            if let result {
+                self?.logger.error("LoginViewController: Background database sync failed: \(result.localizedDescription)")
+                return
             }
         }
     }

@@ -40,7 +40,11 @@ struct MetricSeriesChartView: View {
     private enum FileConstants {
         static let chartValue = "Date"
         static let chartHeight: CGFloat = 180
-        static let colors: [Color] = [.red, .blue, .green, .orange]
+        static let colors: [Color] = [
+            .accentColor,
+            .primary.opacity(0.55),
+            .secondary
+        ]
         static let denseLinePointThreshold = 24
         static let lineWidth: CGFloat = 2
         static let linePointSize: CGFloat = 18
@@ -49,6 +53,7 @@ struct MetricSeriesChartView: View {
     
     let series: [MetricSeries]
     let chartType: HealthKitDataManager.HealthMetric.ChartType
+    var tint: Color?
     
     var body: some View {
         Chart {
@@ -61,7 +66,7 @@ struct MetricSeriesChartView: View {
                             y: .value(line.label, point.value)
                         )
                         .lineStyle(StrokeStyle(lineWidth: FileConstants.lineWidth))
-                        .foregroundStyle(FileConstants.colors[index % FileConstants.colors.count])
+                        .foregroundStyle(color(at: index))
                         .interpolationMethod(.monotone)
                         
                         if line.points.count <= FileConstants.denseLinePointThreshold {
@@ -69,7 +74,7 @@ struct MetricSeriesChartView: View {
                                 x: .value(FileConstants.chartValue, point.date),
                                 y: .value(line.label, point.value)
                             )
-                            .foregroundStyle(FileConstants.colors[index % FileConstants.colors.count])
+                            .foregroundStyle(color(at: index))
                             .symbolSize(FileConstants.linePointSize)
                         }
                         
@@ -78,14 +83,14 @@ struct MetricSeriesChartView: View {
                             x: .value(FileConstants.chartValue, point.date),
                             y: .value(line.label, point.value)
                         )
-                        .foregroundStyle(FileConstants.colors[index % FileConstants.colors.count])
+                        .foregroundStyle(color(at: index))
                         
                     case .scatter:
                         PointMark(
                             x: .value(FileConstants.chartValue, point.date),
                             y: .value(line.label, point.value)
                         )
-                        .foregroundStyle(FileConstants.colors[index % FileConstants.colors.count])
+                        .foregroundStyle(color(at: index))
                         .symbolSize(FileConstants.scatterPointSize)
                     }
                 }
@@ -99,6 +104,13 @@ struct MetricSeriesChartView: View {
             AxisMarks(values: .automatic(desiredCount: 4))
         }
     }
+
+    private func color(at index: Int) -> Color {
+        if index == 0, let tint {
+            return tint
+        }
+        return FileConstants.colors[index % FileConstants.colors.count]
+    }
 }
 
 #Preview {
@@ -107,5 +119,5 @@ struct MetricSeriesChartView: View {
         MetricPoint(date: Date().addingTimeInterval(-60), value: 85)
     ]
     let series = [MetricSeries(label: "HR", unit: "bpm", points: points)]
-    MetricSeriesChartView(series: series, chartType: .line)
+    MetricSeriesChartView(series: series, chartType: .line, tint: .red)
 }

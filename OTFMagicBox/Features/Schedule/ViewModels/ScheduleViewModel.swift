@@ -52,25 +52,36 @@ final class ScheduleViewModel: ObservableObject {
 
     var todaySymbol: String {
         guard config.useDynamicCalendarSymbol else { return "calendar" }
-        let day = Calendar.current.component(.day, from: .now)
+        let day = calendar.component(.day, from: now())
         let candidate = "\(day).calendar"
-        return UIImage(systemName: candidate) != nil ? candidate : "calendar"
+        return systemImageExists(candidate) ? candidate : "calendar"
     }
 
     private let logger = OTFLogger.logger()
     private let decoder: OTFYAMLDecoding
+    private let calendar: Calendar
+    private let now: () -> Date
+    private let systemImageExists: (String) -> Bool
 
     // MARK: - Init
 
-    init(decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine()) {
+    init(
+        decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine(),
+        calendar: Calendar = .current,
+        now: @escaping () -> Date = Date.init,
+        systemImageExists: @escaping (String) -> Bool = { UIImage(systemName: $0) != nil }
+    ) {
         self.decoder = decoder
+        self.calendar = calendar
+        self.now = now
+        self.systemImageExists = systemImageExists
         loadConfiguration()
     }
 
     // MARK: - Methods
 
     func goToToday() {
-        selectedDate = Date()
+        selectedDate = now()
     }
 
     // MARK: - Private Methods

@@ -16,6 +16,7 @@ excluded: # Paths excluded from linting
   - SwiftLint/Common/3rdPartyLib
   - .swiftpm
   - .build
+  - RawGenerableMacro/.build
   - build
   - SourcePackages
 

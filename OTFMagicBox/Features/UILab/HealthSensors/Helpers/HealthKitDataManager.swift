@@ -35,6 +35,130 @@
 import Foundation
 import HealthKit
 
+protocol HealthKitDataProviding: AnyObject {
+    func requestAuthorization(for metrics: Set<HealthKitDataManager.HealthMetric>) async throws
+    func authorizationState(for metrics: Set<HealthKitDataManager.HealthMetric>) -> HealthKitDataManager.AuthorizationState
+    func fetchLatestValue(
+        for metric: HealthKitDataManager.HealthMetric,
+        since lookback: TimeInterval,
+        limit: Int?
+    ) async -> [HealthKitDataManager.HealthMetricValue]
+    func fetchECGWaveform(for recordingDate: Date) async -> ECGWaveform?
+}
+
+extension HealthKitDataProviding {
+    func fetchECGWaveform(for recordingDate: Date) async -> ECGWaveform? {
+        nil
+    }
+}
+
+protocol HealthKitStoreQuerying: AnyObject {
+    func requestAuthorization(
+        toShare shareTypes: Set<HKSampleType>,
+        read readTypes: Set<HKObjectType>,
+        completion: @escaping (Bool, Error?) -> Void
+    )
+    func quantitySamples(of type: HKQuantityType, since lookback: TimeInterval, limit: Int?) async -> [HKQuantitySample]
+    func correlationSamples(of type: HKCorrelationType, since lookback: TimeInterval, limit: Int?) async -> [HKCorrelation]
+    func electrocardiogramSamples(since lookback: TimeInterval, limit: Int?) async -> [HKElectrocardiogram]
+    func voltageMeasurements(for electrocardiogram: HKElectrocardiogram) async throws -> [ECGVoltageSample]
+}
+
+extension HealthKitStoreQuerying {
+    func voltageMeasurements(for electrocardiogram: HKElectrocardiogram) async throws -> [ECGVoltageSample] {
+        []
+    }
+}
+
+final class LiveHealthKitStore: HealthKitStoreQuerying {
+    private let healthStore = HKHealthStore()
+
+    func requestAuthorization(
+        toShare shareTypes: Set<HKSampleType>,
+        read readTypes: Set<HKObjectType>,
+        completion: @escaping (Bool, Error?) -> Void
+    ) {
+        healthStore.requestAuthorization(toShare: shareTypes, read: readTypes, completion: completion)
+    }
+
+    func quantitySamples(of type: HKQuantityType, since lookback: TimeInterval, limit: Int?) async -> [HKQuantitySample] {
+        let startDate = Date().addingTimeInterval(-lookback)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        let queryLimit = limit ?? HKObjectQueryNoLimit
+
+        return await withCheckedContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: type,
+                predicate: predicate,
+                limit: queryLimit,
+                sortDescriptors: [sort]
+            ) { _, results, _ in
+                continuation.resume(returning: results as? [HKQuantitySample] ?? [])
+            }
+            self.healthStore.execute(query)
+        }
+    }
+
+    func correlationSamples(of type: HKCorrelationType, since lookback: TimeInterval, limit: Int?) async -> [HKCorrelation] {
+        let startDate = Date().addingTimeInterval(-lookback)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        let queryLimit = limit ?? HKObjectQueryNoLimit
+
+        return await withCheckedContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: type,
+                predicate: predicate,
+                limit: queryLimit,
+                sortDescriptors: [sort]
+            ) { _, results, _ in
+                continuation.resume(returning: results as? [HKCorrelation] ?? [])
+            }
+            self.healthStore.execute(query)
+        }
+    }
+
+    func electrocardiogramSamples(since lookback: TimeInterval, limit: Int?) async -> [HKElectrocardiogram] {
+        let ecgType = HKObjectType.electrocardiogramType()
+        let startDate = Date().addingTimeInterval(-lookback)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        let queryLimit = limit ?? HKObjectQueryNoLimit
+
+        return await withCheckedContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: ecgType,
+                predicate: predicate,
+                limit: queryLimit,
+                sortDescriptors: [sort]
+            ) { _, results, _ in
+                continuation.resume(returning: results as? [HKElectrocardiogram] ?? [])
+            }
+            self.healthStore.execute(query)
+        }
+    }
+
+    func voltageMeasurements(for electrocardiogram: HKElectrocardiogram) async throws -> [ECGVoltageSample] {
+        let descriptor = HKElectrocardiogramQueryDescriptor(electrocardiogram)
+        var samples = [ECGVoltageSample]()
+        samples.reserveCapacity(electrocardiogram.numberOfVoltageMeasurements)
+
+        for try await measurement in descriptor.results(for: healthStore) {
+            guard let quantity = measurement.quantity(for: .appleWatchSimilarToLeadI) else {
+                continue
+            }
+            samples.append(
+                ECGVoltageSample(
+                    timeSinceSampleStart: measurement.timeSinceSampleStart,
+                    millivolts: quantity.doubleValue(for: .voltUnit(with: .milli))
+                )
+            )
+        }
+        return samples
+    }
+}
+
 final class HealthKitDataManager {
 
     enum HealthMetric: CaseIterable {
@@ -133,20 +257,29 @@ final class HealthKitDataManager {
         return types
     }
 
-    private let healthStore = HKHealthStore()
+    private let healthStore: HealthKitStoreQuerying
     
     /// Storage key for requested metrics
     private let requestedMetricsKey = Constants.Storage.kHealthKitRequestedMetrics
 
     /// Track whether we have requested authorization for specific metrics
     private var requestedMetrics: Set<HealthMetric> = []
+    private let defaults: UserDefaults
+    private let healthDataAvailable: () -> Bool
 
-    init() {
+    init(
+        defaults: UserDefaults = .standard,
+        healthDataAvailable: @escaping () -> Bool = { HKHealthStore.isHealthDataAvailable() },
+        healthStore: HealthKitStoreQuerying = LiveHealthKitStore()
+    ) {
+        self.defaults = defaults
+        self.healthDataAvailable = healthDataAvailable
+        self.healthStore = healthStore
         loadRequestedMetrics()
     }
     
     private func loadRequestedMetrics() {
-        if let savedParams = UserDefaults.standard.array(forKey: requestedMetricsKey) as? [String] {
+        if let savedParams = defaults.array(forKey: requestedMetricsKey) as? [String] {
             let loadedMetrics = savedParams.compactMap { id -> HealthMetric? in
                 HealthMetric.allCases.first { String(describing: $0) == id }
             }
@@ -156,14 +289,14 @@ final class HealthKitDataManager {
     
     private func saveRequestedMetrics() {
         let params = requestedMetrics.map { String(describing: $0) }
-        UserDefaults.standard.set(params, forKey: requestedMetricsKey)
+        defaults.set(params, forKey: requestedMetricsKey)
     }
 
     // MARK: - Authorization
 
     /// Requests authorization only for the specified metrics.
     func requestAuthorization(for metrics: Set<HealthMetric>) async throws {
-        guard HKHealthStore.isHealthDataAvailable() else {
+        guard healthDataAvailable() else {
             throw NSError(
                 domain: "HealthKitDataManager",
                 code: 1,
@@ -201,7 +334,7 @@ final class HealthKitDataManager {
     /// For read access, we must attempt to fetch data - if we get results, we have access.
     /// This method returns a best-guess based on whether we have requested permission before.
     func authorizationState(for metrics: Set<HealthMetric>) -> AuthorizationState {
-        guard HKHealthStore.isHealthDataAvailable() else {
+        guard healthDataAvailable() else {
             return .denied
         }
 
@@ -240,6 +373,47 @@ final class HealthKitDataManager {
         case .vo2Max:
             return await fetchLatestVO2Max(since: lookback, limit: limit)
         }
+    }
+
+    func fetchECGWaveform(for recordingDate: Date) async -> ECGWaveform? {
+        let samples = await healthStore.electrocardiogramSamples(
+            since: 60 * 60 * 24 * 7,
+            limit: nil
+        )
+        guard let electrocardiogram = samples.min(by: {
+            abs($0.endDate.timeIntervalSince(recordingDate)) <
+                abs($1.endDate.timeIntervalSince(recordingDate))
+        }), abs(electrocardiogram.endDate.timeIntervalSince(recordingDate)) <= 1 else {
+            return nil
+        }
+
+        guard let measurements = try? await healthStore.voltageMeasurements(for: electrocardiogram) else {
+            return nil
+        }
+        let validMeasurements = measurements
+            .filter {
+                $0.timeSinceSampleStart.isFinite &&
+                    $0.timeSinceSampleStart >= 0 &&
+                    $0.millivolts.isFinite
+            }
+            .sorted { $0.timeSinceSampleStart < $1.timeSinceSampleStart }
+        guard validMeasurements.count > 1 else { return nil }
+
+        let samplingFrequency = electrocardiogram.samplingFrequency?
+            .doubleValue(for: .hertz()) ?? inferredSamplingFrequency(from: validMeasurements)
+        guard samplingFrequency.isFinite, samplingFrequency > 0 else { return nil }
+        return ECGWaveform(
+            sourceSampleUUID: electrocardiogram.uuid,
+            lead: ECGWaveform.appleWatchLead,
+            samplingFrequencyHz: samplingFrequency,
+            samples: validMeasurements
+        )
+    }
+
+    private func inferredSamplingFrequency(from samples: [ECGVoltageSample]) -> Double {
+        let duration = samples.last?.timeSinceSampleStart ?? 0
+        guard duration > 0 else { return 0 }
+        return Double(samples.count - 1) / duration
     }
 
     /// Fetch the latest values for a collection of metrics. Authorization should be requested beforehand.
@@ -312,23 +486,7 @@ final class HealthKitDataManager {
             return [.unavailable("Blood Pressure types unavailable")]
         }
 
-        let startDate = Date().addingTimeInterval(-lookback)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
-
-        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-        let queryLimit = limit ?? HKObjectQueryNoLimit
-
-        let samples: [HKCorrelation] = await withCheckedContinuation { continuation in
-            let query = HKSampleQuery(
-                sampleType: corrType,
-                predicate: predicate,
-                limit: queryLimit,
-                sortDescriptors: [sort]
-            ) { _, results, _ in
-                continuation.resume(returning: results as? [HKCorrelation] ?? [])
-            }
-            self.healthStore.execute(query)
-        }
+        let samples = await healthStore.correlationSamples(of: corrType, since: lookback, limit: limit)
 
         if samples.isEmpty {
             return []
@@ -346,23 +504,7 @@ final class HealthKitDataManager {
     }
 
     func fetchLatestECG(since lookback: TimeInterval, limit: Int?) async -> [HealthMetricValue] {
-        let ecgType = HKObjectType.electrocardiogramType()
-        let startDate = Date().addingTimeInterval(-lookback)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
-        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-        let queryLimit = limit ?? HKObjectQueryNoLimit
-
-        let samples: [HKElectrocardiogram] = await withCheckedContinuation { continuation in
-            let query = HKSampleQuery(
-                sampleType: ecgType,
-                predicate: predicate,
-                limit: queryLimit,
-                sortDescriptors: [sort]
-            ) { _, results, _ in
-                continuation.resume(returning: results as? [HKElectrocardiogram] ?? [])
-            }
-            self.healthStore.execute(query)
-        }
+        let samples = await healthStore.electrocardiogramSamples(since: lookback, limit: limit)
 
         if samples.isEmpty {
             return []
@@ -456,21 +598,8 @@ final class HealthKitDataManager {
     // MARK: - Helpers
 
     private func quantitySamples(of type: HKQuantityType, since lookback: TimeInterval, limit: Int?) async -> [HKQuantitySample] {
-        let startDate = Date().addingTimeInterval(-lookback)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
-        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-        let queryLimit = limit ?? HKObjectQueryNoLimit
-
-        return await withCheckedContinuation { continuation in
-            let query = HKSampleQuery(
-                sampleType: type,
-                predicate: predicate,
-                limit: queryLimit,
-                sortDescriptors: [sort]
-            ) { _, results, _ in
-                continuation.resume(returning: results as? [HKQuantitySample] ?? [])
-            }
-            self.healthStore.execute(query)
-        }
+        await healthStore.quantitySamples(of: type, since: lookback, limit: limit)
     }
 }
+
+extension HealthKitDataManager: HealthKitDataProviding {}

@@ -45,7 +45,7 @@
 # - Lines starting with '#' are comments and are ignored by the app.
 
 # Version of this YAML schema/content. Bump when you change copy/structure.
-version: "2.0.0"
+version: "2.1.0"
 
 # Backend/API access key used by the app. The app will show an alert if this is missing/invalid.
 # Tip: Prefer storing secrets securely (e.g., via CI or environment configuration not committed to source control).
@@ -124,6 +124,11 @@ useCareKit: true
 showCheckupScreen: true
 # Feature flag: show/hide the UI tab/screen.
 showUIScreen: true
+
+# Optional self-reported profile fields. These are the only Location/Conditions
+# feature toggles and apply to both signup and Manage Profile.
+enableLocation: true
+enableConditions: true
 
 # Feature flag: show/hide the Privacy Policy and Terms of Service rows in the Legal section.
 showPrivacyAndTerms: true

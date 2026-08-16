@@ -33,6 +33,7 @@
  */
 
 import Foundation
+import HealthKit
 
 extension HealthKitDataManager.HealthMetric {
     
@@ -64,7 +65,11 @@ extension HealthKitDataManager.HealthMetric: Identifiable {
         case .vo2Max: "vo2Max"
         }
     }
-    
+
+    var sensorSymbol: String {
+        displaySymbol(config: HealthSensorsConfigurationLoader.config)
+    }
+
     // MARK: - Localized Accessors
     
     /// Returns the localized display title for this metric
@@ -203,7 +208,7 @@ extension HealthKitDataManager.HealthMetricValue {
     
     /// Returns the primary display value for this metric.
     /// For composite metrics like blood pressure, returns the systolic value.
-    var displayValue: Double {
+    var displayValue: Double? {
         switch self {
         case .heartRate(let bpm, _):
             return bpm
@@ -212,7 +217,7 @@ extension HealthKitDataManager.HealthMetricValue {
         case .bloodPressure(let sys, _, _, _):
             return sys
         case .ecg(_, let avg, _, _, _):
-            return avg ?? 0
+            return avg
         case .respiratoryRate(let val, _):
             return val
         case .restingHeartRate(let bpm, _):
@@ -222,7 +227,62 @@ extension HealthKitDataManager.HealthMetricValue {
         case .vo2Max(let val, _):
             return val
         case .unavailable:
-            return 0
+            return nil
+        }
+    }
+
+    func compactSummary(config: HealthSensorsConfiguration) -> String {
+        switch self {
+        case .heartRate(let bpm, _):
+            "\(MetricFormatter.format(bpm, decimals: 0)) \(config.unitBPM.localized)"
+        case .bloodGlucose(let mgPerdL, _):
+            "\(MetricFormatter.format(mgPerdL, decimals: 0)) \(config.unitMgDL.localized)"
+        case .bloodPressure(let systolic, let diastolic, _, _):
+            "\(MetricFormatter.format(systolic, decimals: 0))/\(MetricFormatter.format(diastolic, decimals: 0)) \(config.unitMmHg.localized)"
+        case .ecg(let classification, let averageBPM, _, _, _):
+            if let averageBPM {
+                "\(classification.displayTitle(config: config)) · \(MetricFormatter.format(averageBPM, decimals: 0)) \(config.unitBPM.localized)"
+            } else {
+                classification.displayTitle(config: config)
+            }
+        case .respiratoryRate(let breathsPerMin, _):
+            "\(MetricFormatter.format(breathsPerMin, decimals: 1)) \(config.unitBreathsPerMin.localized)"
+        case .restingHeartRate(let bpm, _):
+            "\(MetricFormatter.format(bpm, decimals: 0)) \(config.unitBPM.localized)"
+        case .oxygenSaturation(let percent, _):
+            "\(MetricFormatter.format(percent, decimals: 0))\(config.unitPercent.localized)"
+        case .vo2Max(let mlPerKgMin, _):
+            "\(MetricFormatter.format(mlPerKgMin, decimals: 1)) \(config.unitVO2Max.localized)"
+        case .unavailable(let message):
+            message
+        }
+    }
+}
+
+extension HKElectrocardiogram.Classification {
+    static var manualEntryCases: [Self] {
+        [
+            .sinusRhythm,
+            .atrialFibrillation,
+            .inconclusiveLowHeartRate,
+            .inconclusiveHighHeartRate,
+            .inconclusivePoorReading,
+            .inconclusiveOther,
+            .unrecognized
+        ]
+    }
+
+    func displayTitle(config: HealthSensorsConfiguration) -> String {
+        switch self {
+        case .notSet: config.ecgClassificationDefault.localized
+        case .sinusRhythm: config.ecgClassificationSinusRhythm.localized
+        case .atrialFibrillation: config.ecgClassificationAtrialFibrillation.localized
+        case .inconclusiveLowHeartRate: config.ecgClassificationLowHeartRate.localized
+        case .inconclusiveHighHeartRate: config.ecgClassificationHighHeartRate.localized
+        case .inconclusivePoorReading: config.ecgClassificationPoorReading.localized
+        case .inconclusiveOther: config.ecgClassificationOther.localized
+        case .unrecognized: config.ecgClassificationUnrecognized.localized
+        @unknown default: config.ecgClassificationDefault.localized
         }
     }
 }

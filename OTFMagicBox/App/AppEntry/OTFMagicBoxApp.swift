@@ -38,17 +38,22 @@ import SwiftUI
 struct OTFMagicBoxApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    private let style = StyleConfigurationLoader.config.activeStyle
+    private let runtime: AppRuntime
 
     init() {
-        OTFTheraforgeNetwork.shared.configureNetwork()
+        self.init(runtime: .live)
+    }
+
+    init(runtime: AppRuntime) {
+        self.runtime = runtime
+        runtime.configureNetwork()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(runtime: runtime)
                 .globalStyle(.tintColor)
-                .background(WindowTintSetter(tint: style.tintColor.uiColor))
+                .background(WindowTintSetter(tint: runtime.styleConfiguration.activeStyle.tintColor.uiColor))
         }
     }
 }

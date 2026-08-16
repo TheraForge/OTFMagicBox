@@ -50,8 +50,14 @@ extension URLRequest {
 
         var curlCommand = "curl --verbose \\\n"
 
-        // URL
-        curlCommand = curlCommand.appendingFormat(" '%@' \\\n", url.absoluteString)
+        var diagnosticURL = url
+        if var components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+           components.user != nil || components.password != nil {
+            components.user = components.user == nil ? nil : "<redacted>"
+            components.password = components.password == nil ? nil : "<redacted>"
+            diagnosticURL = components.url ?? url
+        }
+        curlCommand = curlCommand.appendingFormat(" '%@' \\\n", diagnosticURL.absoluteString)
 
         // Method if different from GET
         if httpMethod != "GET" {
@@ -59,18 +65,27 @@ extension URLRequest {
         }
 
         // Headers
-        let allHeadersFields = allHTTPHeaderFields!
+        let sensitiveHeaderNames = Set([
+            "authorization",
+            "api-key",
+            "cookie",
+            "set-cookie"
+        ])
+        let allHeadersFields = allHTTPHeaderFields ?? [:]
         let allHeadersKeys = Array(allHeadersFields.keys)
         let sortedHeadersKeys  = allHeadersKeys.sorted(by: <)
         for key in sortedHeadersKeys {
-            curlCommand = curlCommand.appendingFormat(" -H '%@: %@' \\\n", key, self.value(forHTTPHeaderField: key)!)
+            let value = sensitiveHeaderNames.contains(key.lowercased())
+                ? "<redacted>"
+                : self.value(forHTTPHeaderField: key) ?? ""
+            curlCommand = curlCommand.appendingFormat(" -H '%@: %@' \\\n", key, value)
         }
 
-        // HTTP body
-        if let httpBody = httpBody, !httpBody.isEmpty {
-            let httpBodyString = String(data: httpBody, encoding: String.Encoding.utf8)!
-            let escapedHttpBody = URLRequest.escapeAllSingleQuotes(httpBodyString)
-            curlCommand = curlCommand.appendingFormat(" --data '%@' \\\n", escapedHttpBody)
+        if let httpBody, !httpBody.isEmpty {
+            curlCommand = curlCommand.appendingFormat(
+                " --data '<redacted: %d bytes>' \\\n",
+                httpBody.count
+            )
         }
         return curlCommand
     }

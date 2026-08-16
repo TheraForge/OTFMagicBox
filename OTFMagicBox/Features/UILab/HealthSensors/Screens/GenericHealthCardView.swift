@@ -38,29 +38,46 @@ import SwiftUI
 struct GenericHealthCardView: View {
 
     private enum FileConstants {
-        static let valueDecimals = 0
+        static let deviceActionSpacing: CGFloat = 16
+        static let deviceControlSpacing: CGFloat = 10
+        static let freshnessSymbol = "clock.badge.exclamationmark"
+        static let heartAccessSymbol = "heart.text.clipboard"
+        static let heartWatchSymbol = "applewatch"
+        static let notesSpacing: CGFloat = 8
         static let secondaryColumns = 3
         static let secondarySpacing: CGFloat = 12
-        static let outcomeFreshnessMinutes = 15
-        static let outcomeFreshnessInterval: TimeInterval = 15 * 60
+        static let submissionSpacing: CGFloat = 10
+        static let valueDecimals = 0
+        static let watchStatusPadding: CGFloat = 12
     }
 
     private let metric: HealthKitDataManager.HealthMetric
-    private let onSendOutcome: ((MetricValue) -> Void)?
+    private let onSendOutcome: ((SensorOutcomePayload) -> Void)?
     private let sendOutcomeDisabled: Bool
+    private let outcomeActionLabel: String
+    private let scheduledDate: Date?
+    private let now: () -> Date
     private let kitConfig = HealthSensorsConfigurationLoader.config
+    private let sensorConfig = SensorTaskConfigurationLoader.config
 
     @StateObject private var viewModel: GenericHealthCardViewModel
     @StateObject private var dataSource: AnyCardDataSource
+    @State private var notes = ""
 
     init(
         metric: HealthKitDataManager.HealthMetric,
-        onSendOutcome: ((MetricValue) -> Void)? = nil,
-        sendOutcomeDisabled: Bool = false
+        onSendOutcome: ((SensorOutcomePayload) -> Void)? = nil,
+        sendOutcomeDisabled: Bool = false,
+        outcomeActionLabel: String = HealthSensorsConfigurationLoader.config.buttonSendOutcome.localized,
+        scheduledDate: Date? = nil,
+        now: @escaping () -> Date = Date.init
     ) {
         self.metric = metric
         self.onSendOutcome = onSendOutcome
         self.sendOutcomeDisabled = sendOutcomeDisabled
+        self.outcomeActionLabel = outcomeActionLabel
+        self.scheduledDate = scheduledDate
+        self.now = now
         let viewModel = GenericHealthCardViewModel(metric: metric)
         _viewModel = StateObject(wrappedValue: viewModel)
         _dataSource = StateObject(wrappedValue: AnyCardDataSource(viewModel))
@@ -69,52 +86,40 @@ struct GenericHealthCardView: View {
     var body: some View {
         CardShellView(
             title: metric.displayTitle(config: kitConfig),
+            metric: metric,
             emptyTitle: metric.displayEmptyStateTitle(config: kitConfig),
             emptyMessage: metric.displayEmptyStateMessage(config: kitConfig),
             guidanceTitle: kitConfig.labelHowToUpdate.localized,
             guidanceSteps: metric.displayGuidanceSteps(config: kitConfig),
             config: kitConfig,
             primaryValueText: primaryValueText,
-            primaryUnitText: dataSource.primary?.unit,
+            primaryUnitText: primaryUnitText,
+            sampleDate: viewModel.latestReading?.date,
+            entryMode: .sensor,
+            entryModeDescription: sensorConfig.sensorDescription.localized,
+            showsActions: showsActions,
             dataSource: dataSource
         ) {
-            secondaryMetrics
-        } chartContent: {
-            MetricSeriesChartView(
-                series: dataSource.series,
-                chartType: metric.chartType
-            )
-        } actionsContent: {
             VStack(alignment: .leading, spacing: FileConstants.secondarySpacing) {
-                if dataSource.state == .needsPermission {
-                    Button(kitConfig.buttonGrantAccess.localized, action: dataSource.requestPermission)
-                        .buttonStyle(.borderedProminent)
+                if let reading = viewModel.latestReading {
+                    SensorReadingDetailsView(reading: reading)
                 }
-
-                if metric == .heartRate {
-                    Button(kitConfig.buttonStartLiveMeasurement.localized) {
-                        viewModel.startLiveMeasurementOnWatch()
-                    }
-                    .buttonStyle(.bordered)
-
-                    WatchConnectivityStatusView()
-                }
-
-                if let onSendOutcome {
-                    Button(kitConfig.buttonSendOutcome.localized) {
-                        guard let primary = dataSource.primary else { return }
-                        onSendOutcome(primary)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(sendOutcomeDisabled || dataSource.primary == nil)
-
-                    if dataSource.primary != nil, !isPrimaryRecent {
-                        Text(kitConfig.labelOutcomeFreshnessHint.localized)
-                            .font(.footnote)
-                            .foregroundStyle(Color.secondary)
-                    }
+                if metric != .ecg {
+                    secondaryMetrics
                 }
             }
+        } chartContent: {
+            if let report = viewModel.ecgReport {
+                ECGReportInlineView(report: report)
+            } else {
+                MetricSeriesChartView(
+                    series: dataSource.series,
+                    chartType: metric.chartType,
+                    tint: .accentColor
+                )
+            }
+        } actionsContent: {
+            actionSections
         }
         .onAppear(perform: dataSource.start)
         .onDisappear(perform: dataSource.stop)
@@ -122,19 +127,188 @@ struct GenericHealthCardView: View {
     }
 
     private var primaryValueText: String? {
+        if let reading = viewModel.latestReading {
+            switch reading {
+            case .bloodPressure:
+                return reading.compactSummary(config: kitConfig)
+            case .ecg(let classification, _, _, _, _):
+                return classification.displayTitle(config: kitConfig)
+            default:
+                break
+            }
+        }
         guard let primary = dataSource.primary else { return nil }
         return MetricFormatter.format(primary.value, decimals: FileConstants.valueDecimals)
     }
 
+    private var primaryUnitText: String? {
+        guard let reading = viewModel.latestReading else {
+            return dataSource.primary?.unit
+        }
+        switch reading {
+        case .bloodPressure, .ecg:
+            return nil
+        default:
+            return dataSource.primary?.unit
+        }
+    }
+
     private var isPrimaryRecent: Bool {
-        guard let primary = dataSource.primary else { return false }
-        let age = abs(Date().timeIntervalSince(primary.date))
-        return age <= FileConstants.outcomeFreshnessInterval
+        guard let reading = viewModel.latestReading else { return false }
+        return SensorOutcomeSubmissionPolicy.isFreshSensorReading(reading, now: now())
+    }
+
+    private var canSubmitLatestReading: Bool {
+        guard let payload = latestPayload else { return false }
+        let currentDate = now()
+        return SensorOutcomeSubmissionPolicy.canSubmit(
+            payload,
+            on: scheduledDate ?? currentDate,
+            now: currentDate
+        )
+    }
+
+    private var latestPayload: SensorOutcomePayload? {
+        guard let reading = viewModel.latestReading else { return nil }
+        return SensorOutcomePayload(
+            metric: metric,
+            reading: reading,
+            mode: .sensor,
+            notes: notes,
+            ecgReport: viewModel.ecgReport
+        )
+    }
+
+    private var showsActions: Bool {
+        dataSource.state == .needsPermission || metric == .heartRate || onSendOutcome != nil
+    }
+
+    private var actionSections: some View {
+        VStack(alignment: .leading, spacing: FileConstants.secondarySpacing) {
+            if dataSource.state == .needsPermission || metric == .heartRate {
+                HealthSensorSectionCard {
+                    deviceActions
+                }
+            }
+
+            if onSendOutcome != nil {
+                notesSection
+                submissionSection
+            }
+        }
+    }
+
+    private var deviceActions: some View {
+        VStack(alignment: .leading, spacing: FileConstants.deviceActionSpacing) {
+            if dataSource.state == .needsPermission {
+                VStack(alignment: .leading, spacing: FileConstants.deviceControlSpacing) {
+                    HealthSensorSectionTitle(
+                        title: kitConfig.labelHealthAccessRequired.localized,
+                        systemImage: FileConstants.heartAccessSymbol
+                    )
+
+                    Button(kitConfig.buttonGrantAccess.localized, action: dataSource.requestPermission)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
+
+            if dataSource.state == .needsPermission, metric == .heartRate {
+                Divider()
+            }
+
+            if metric == .heartRate {
+                VStack(alignment: .leading, spacing: FileConstants.deviceControlSpacing) {
+                    HealthSensorSectionTitle(
+                        title: kitConfig.buttonStartLiveMeasurement.localized,
+                        systemImage: FileConstants.heartWatchSymbol
+                    )
+
+                    Button(kitConfig.buttonStartLiveMeasurement.localized) {
+                        viewModel.startLiveMeasurementOnWatch()
+                    }
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+
+                    WatchConnectivityStatusView()
+                        .padding(.vertical, FileConstants.watchStatusPadding / 2)
+                }
+            }
+        }
+    }
+
+    private var notesSection: some View {
+        VStack(alignment: .leading, spacing: FileConstants.notesSpacing) {
+            HealthSensorFieldSectionTitle(title: sensorConfig.notesLabel.localized)
+
+            HealthSensorSectionCard {
+                TextField(
+                    sensorConfig.notesPlaceholder.localized,
+                    text: $notes,
+                    axis: .vertical
+                )
+                .lineLimit(4...8)
+                .frame(
+                    minHeight: HealthSensorVisualStyle.fieldMinimumHeight,
+                    alignment: .top
+                )
+                .accessibilityLabel(sensorConfig.notesLabel.localized)
+            }
+        }
+    }
+
+    private var submissionSection: some View {
+        VStack(alignment: .leading, spacing: FileConstants.submissionSpacing) {
+            Button(action: sendOutcome) {
+                Text(outcomeActionLabel)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .disabled(
+                sendOutcomeDisabled ||
+                    !canSubmitLatestReading ||
+                    viewModel.isPreparingECGReport
+            )
+
+            if viewModel.latestReading != nil, !isPrimaryRecent {
+                Label(
+                    kitConfig.labelOutcomeFreshnessHint.localized,
+                    systemImage: FileConstants.freshnessSymbol
+                )
+                .font(.footnote)
+                .foregroundStyle(Color.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+
+    private func sendOutcome() {
+        guard let payload = latestPayload, let onSendOutcome else { return }
+        let currentDate = now()
+        guard SensorOutcomeSubmissionPolicy.canSubmit(
+            payload,
+            on: scheduledDate ?? currentDate,
+            now: currentDate
+        ) else { return }
+        onSendOutcome(payload)
     }
 
     private var secondaryMetrics: some View {
         let metrics = dataSource.secondary
-        return LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: FileConstants.secondarySpacing), count: FileConstants.secondaryColumns), spacing: FileConstants.secondarySpacing) {
+        let columns = Array(
+            repeating: GridItem(.flexible(), spacing: FileConstants.secondarySpacing),
+            count: FileConstants.secondaryColumns
+        )
+        return LazyVGrid(
+            columns: columns,
+            spacing: FileConstants.secondarySpacing
+        ) {
             ForEach(metrics) { metric in
                 MetricChipView(
                     label: metric.label ?? "",

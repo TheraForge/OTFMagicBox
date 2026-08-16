@@ -38,32 +38,26 @@ struct HealthSensorsListView: View {
 
     private enum FileConstants {
         static let mockSeedRange = 1...Int.max
-        static let sectionSpacing: CGFloat = 10
         static let symbolGearshape = "gearshape"
     }
 
     private let config = HealthSensorsConfigurationLoader.config
-
     @AppStorage(Constants.Storage.kHealthSensorsMockEnabled) private var isMockEnabled = false
     @AppStorage(Constants.Storage.kHealthSensorsMockSeed) private var mockSeed = 1
 
     var body: some View {
         List {
-            ForEach(CardRegistry.cards) { card in
-                Section {
+            Section {
+                ForEach(CardRegistry.cards) { card in
                     NavigationLink(value: card.destination) {
                         CardRowView(card: card)
                     }
                 }
-                .availability { content in
-                    if #available(iOS 17.0, *) {
-                        content.listSectionSpacing(FileConstants.sectionSpacing)
-                    } else {
-                        content
-                    }
-                }
             }
         }
+        .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(HealthSensorVisualStyle.screenBackground)
         .navigationTitle(config.title.localized)
         .globalStyle(.navigationTitleDisplayMode)
         .toolbar {

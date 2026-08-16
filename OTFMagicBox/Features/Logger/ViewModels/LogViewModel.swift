@@ -38,6 +38,47 @@ import OTFTemplateBox
 import OTFUtilities
 import OSLog
 
+protocol LogEntryReading {
+    func entries(startDate: Date, endDate: Date, level: OSLogEntryLog.Level) throws -> [OSLogEntryLog]
+}
+
+struct OSLogStoreLogEntryReader: LogEntryReading {
+    private let store: OSLogStore
+
+    init() throws {
+        store = try OSLogStore(scope: .currentProcessIdentifier)
+    }
+
+    func entries(startDate: Date, endDate: Date, level: OSLogEntryLog.Level) throws -> [OSLogEntryLog] {
+        let position = store.position(date: startDate)
+        let predicate = NSPredicate(value: true)
+        return try store.getEntries(at: position, matching: predicate)
+            .compactMap { $0 as? OSLogEntryLog }
+            .filter { entry in
+                guard entry.date >= startDate, entry.date <= endDate else { return false }
+                if level != .undefined, entry.level != level {
+                    return false
+                }
+                return true
+            }
+    }
+}
+
+protocol DiagnosticsLogWriting {
+    func write(entries: [OSLogEntryLog]) throws -> URL
+}
+
+struct TemporaryDiagnosticsLogWriter: DiagnosticsLogWriting {
+    func write(entries: [OSLogEntryLog]) throws -> URL {
+        let text = entries.map { entry in
+            "[\(entry.date)] [\(entry.category)] [\(entry.level.rawValue)] [\(entry.subsystem)] \n\(entry.composedMessage)"
+        }.joined(separator: "\n\n")
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("Diagnostics.log")
+        try text.write(to: url, atomically: true, encoding: .utf8)
+        return url
+    }
+}
+
 @MainActor
 final class LogViewModel: ObservableObject {
 
@@ -73,18 +114,33 @@ final class LogViewModel: ObservableObject {
 
     private let decoder: OTFYAMLDecoding
     private let logger = OTFLogger.logger()
-    private var store: OSLogStore?
+    private let logReaderFactory: () throws -> LogEntryReading
+    private let diagnosticsWriter: DiagnosticsLogWriting
+    private var logReader: LogEntryReading?
 
     // MARK: - Init
 
-    init(decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine()) {
+    init(
+        decoder: OTFYAMLDecoding = OTFYAMLDecoderEngine(),
+        logReaderFactory: @escaping () throws -> LogEntryReading = {
+            try OSLogStoreLogEntryReader()
+        },
+        diagnosticsWriter: DiagnosticsLogWriting = TemporaryDiagnosticsLogWriter(),
+        now: () -> Date = Date.init,
+        autoRefresh: Bool = true
+    ) {
         self.decoder = decoder
+        self.logReaderFactory = logReaderFactory
+        self.diagnosticsWriter = diagnosticsWriter
         let fallback = LogConfiguration.fallback
-        self.startDate = Calendar.current.date(byAdding: .day, value: -fallback.defaultDaysBack, to: Date()) ?? Date().addingTimeInterval(-86400)
-        self.endDate = Date()
+        let now = now()
+        self.startDate = Calendar.current.date(byAdding: .day, value: -fallback.defaultDaysBack, to: now) ?? now.addingTimeInterval(-86400)
+        self.endDate = now
         loadConfig()
         configureStore()
-        refresh()
+        if autoRefresh {
+            refresh()
+        }
     }
 
     // MARK: - Methods
@@ -100,7 +156,7 @@ final class LogViewModel: ObservableObject {
 
     func configureStore() {
         do {
-            store = try OSLogStore(scope: .currentProcessIdentifier)
+            logReader = try logReaderFactory()
         } catch {
             logger.error("OSLogStore init failed: \(error.localizedDescription)")
             showAlert(with: error)
@@ -108,22 +164,12 @@ final class LogViewModel: ObservableObject {
     }
 
     func refresh() {
-        guard let store else { return }
+        guard let logReader else { return }
         isLoading = true
 
         Task.detached(priority: .userInitiated) { [startDate, endDate, level] in
             do {
-                let position = store.position(date: startDate)
-                let predicate = NSPredicate(value: true)
-                let items = try store.getEntries(at: position, matching: predicate)
-                  .compactMap { $0 as? OSLogEntryLog }
-                  .filter { entry in
-                      guard entry.date >= startDate, entry.date <= endDate else { return false }
-                      if level != .undefined, entry.level != level {
-                          return false
-                      }
-                      return true
-                  }
+                let items = try logReader.entries(startDate: startDate, endDate: endDate, level: level)
                 await MainActor.run { [weak self] in
                     self?.entries = items
                     self?.isLoading = false
@@ -143,12 +189,7 @@ final class LogViewModel: ObservableObject {
 
     private func exportURL() -> URL? {
         do {
-            let text = filteredEntries.map { entry in
-                "[\(entry.date)] [\(entry.category)] [\(entry.level.rawValue)] [\(entry.subsystem)] \n\(entry.composedMessage)"
-            }.joined(separator: "\n\n")
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent("Diagnostics.log")
-            try text.write(to: url, atomically: true, encoding: .utf8)
-            return url
+            return try diagnosticsWriter.write(entries: filteredEntries)
         } catch {
             showAlert(with: error)
             return nil

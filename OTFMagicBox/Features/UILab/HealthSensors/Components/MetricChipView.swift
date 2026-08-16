@@ -33,12 +33,10 @@
  */
 
 import SwiftUI
-import UIKit
 
 struct MetricChipView: View {
 
     private enum FileConstants {
-        static let cornerRadius: CGFloat = 12
         static let valueSpacing: CGFloat = 2
     }
 
@@ -54,8 +52,8 @@ struct MetricChipView: View {
             Text(value)
                 .font(.body.weight(.semibold))
         }
-        .padding()
-        .background(Color(.secondarySystemBackground), in: .rect(cornerRadius: FileConstants.cornerRadius))
+        .padding(.vertical, HealthSensorVisualStyle.sectionPadding / 2)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

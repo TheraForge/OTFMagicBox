@@ -47,19 +47,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01F69839E965FD3F90DFD35D /* Pods-OTFMagicBox.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.carehealth.xcconfig"; sourceTree = "<group>"; };
 		0AF99A1A9A0F89A44D3A1F92 /* Pods-OTFMagicBoxWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.debug.xcconfig"; sourceTree = "<group>"; };
-		279A4E133454E00700BF86BF /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 		317B0EBF823A947F90A5B722 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35FAC6B92A9E1E23A15862CA /* Pods-OTFMagicBoxWatch.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.care.xcconfig"; sourceTree = "<group>"; };
-		4482AFA87C4403ABBF836F19 /* Pods-OTFMagicBox.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.care.xcconfig"; sourceTree = "<group>"; };
+		4E429C441DAA8A1D47C5F8E4 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
 		5A49628426DF73B700A4B4DF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTFMagicBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6866B036622565469A099223 /* Pods-OTFMagicBoxWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.release.xcconfig"; sourceTree = "<group>"; };
 		84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBoxWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A14C9E782B63A3E5E3ABFB46 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		8D9F43C4DB7707444D1B5F3E /* Pods-OTFMagicBox.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.carehealth.xcconfig"; sourceTree = "<group>"; };
 		ACBC985F3A507F502B53610A /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.carehealth.xcconfig"; sourceTree = "<group>"; };
 		B0D562C5A4B7B5FEA7610A9B /* Pods_OTFMagicBoxWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBoxWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24F8A12C1E9EA74BF47C119 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
+		BE0308B235B5A7BE05091CF5 /* Pods-OTFMagicBox.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.care.xcconfig"; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,6 +76,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				MagicBox.icon,
+				Managers/SyncPerformanceTracker.swift,
 				UI/Components/ContentUnavailable.swift,
 			);
 			target = 84F43F4C2B4D6A4A009DFFF8 /* OTFMagicBoxWatch */;
@@ -83,7 +84,7 @@
 		8F5F05752F326B0A00B08C35 /* Exceptions for "OTFMagicBoxTests" folder in "OTFMagicBoxTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				OTFMagicBoxTests.swift,
+				Info.plist,
 			);
 			target = 5A7B6DA826FD282C00F872A1 /* OTFMagicBoxTests */;
 		};
@@ -122,6 +123,13 @@
 			path = OTFMagicBoxWatch;
 			sourceTree = "<group>";
 		};
+		A71F3D512F81A7A600D4F0C1 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,14 +165,14 @@
 		8C979D2203D122CC68BA93F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A14C9E782B63A3E5E3ABFB46 /* Pods-OTFMagicBox.debug.xcconfig */,
-				01F69839E965FD3F90DFD35D /* Pods-OTFMagicBox.carehealth.xcconfig */,
-				4482AFA87C4403ABBF836F19 /* Pods-OTFMagicBox.care.xcconfig */,
-				279A4E133454E00700BF86BF /* Pods-OTFMagicBox.release.xcconfig */,
 				0AF99A1A9A0F89A44D3A1F92 /* Pods-OTFMagicBoxWatch.debug.xcconfig */,
 				ACBC985F3A507F502B53610A /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */,
 				35FAC6B92A9E1E23A15862CA /* Pods-OTFMagicBoxWatch.care.xcconfig */,
 				6866B036622565469A099223 /* Pods-OTFMagicBoxWatch.release.xcconfig */,
+				B24F8A12C1E9EA74BF47C119 /* Pods-OTFMagicBox.debug.xcconfig */,
+				8D9F43C4DB7707444D1B5F3E /* Pods-OTFMagicBox.carehealth.xcconfig */,
+				BE0308B235B5A7BE05091CF5 /* Pods-OTFMagicBox.care.xcconfig */,
+				4E429C441DAA8A1D47C5F8E4 /* Pods-OTFMagicBox.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 				8F5F042F2F325B3A00B08C35 /* OTFMagicBox */,
 				8F5F05732F326B0A00B08C35 /* OTFMagicBoxTests */,
 				8F5F05872F326B3F00B08C35 /* OTFMagicBoxWatch */,
+				A71F3D512F81A7A600D4F0C1 /* Shared */,
 				CE482CF4262C954A00C0A2D5 /* Products */,
 				8C979D2203D122CC68BA93F2 /* Pods */,
 				C9D92AAC7DE27C25427A4DB9 /* Frameworks */,
@@ -217,6 +226,9 @@
 			dependencies = (
 				5A7B6DAF26FD282C00F872A1 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				8F5F05732F326B0A00B08C35 /* OTFMagicBoxTests */,
+			);
 			name = OTFMagicBoxTests;
 			productName = OTFMagicBoxTests;
 			productReference = 5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */;
@@ -239,6 +251,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8F5F05872F326B3F00B08C35 /* OTFMagicBoxWatch */,
+				A71F3D512F81A7A600D4F0C1 /* Shared */,
 			);
 			name = OTFMagicBoxWatch;
 			productName = "OTFMagicBoxWatch Watch App";
@@ -264,6 +277,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8F5F042F2F325B3A00B08C35 /* OTFMagicBox */,
+				A71F3D512F81A7A600D4F0C1 /* Shared */,
 			);
 			name = OTFMagicBox;
 			productName = CompletelyNewApp;
@@ -279,7 +293,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				DefaultBuildSystemTypeForWorkspace = Original;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					5A7B6DA826FD282C00F872A1 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -409,13 +423,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -452,13 +462,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -701,7 +707,7 @@
 		};
 		90C79E4E2B4E9ED00020D20F /* Care */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4482AFA87C4403ABBF836F19 /* Pods-OTFMagicBox.care.xcconfig */;
+			baseConfigurationReference = BE0308B235B5A7BE05091CF5 /* Pods-OTFMagicBox.care.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -723,7 +729,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
-					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					"\"${DEVELOPER_DIR}/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/${PLATFORM_NAME}\"",
 					/usr/lib/swift,
 				);
 				MARKETING_VERSION = 2.0.0;
@@ -867,7 +873,7 @@
 		};
 		90C79E522B4E9F070020D20F /* CareHealth */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01F69839E965FD3F90DFD35D /* Pods-OTFMagicBox.carehealth.xcconfig */;
+			baseConfigurationReference = 8D9F43C4DB7707444D1B5F3E /* Pods-OTFMagicBox.carehealth.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -889,7 +895,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
-					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					"\"${DEVELOPER_DIR}/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/${PLATFORM_NAME}\"",
 					/usr/lib/swift,
 				);
 				MARKETING_VERSION = 2.0.0;
@@ -1090,7 +1096,7 @@
 		};
 		CE482D08262C954C00C0A2D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A14C9E782B63A3E5E3ABFB46 /* Pods-OTFMagicBox.debug.xcconfig */;
+			baseConfigurationReference = B24F8A12C1E9EA74BF47C119 /* Pods-OTFMagicBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1112,7 +1118,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
-					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					"\"${DEVELOPER_DIR}/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/${PLATFORM_NAME}\"",
 					/usr/lib/swift,
 				);
 				MARKETING_VERSION = 2.0.0;
@@ -1127,7 +1133,7 @@
 		};
 		CE482D09262C954C00C0A2D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 279A4E133454E00700BF86BF /* Pods-OTFMagicBox.release.xcconfig */;
+			baseConfigurationReference = 4E429C441DAA8A1D47C5F8E4 /* Pods-OTFMagicBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = MagicBox;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1148,7 +1154,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Sodium\"",
-					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					"\"${DEVELOPER_DIR}/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/${PLATFORM_NAME}\"",
 					/usr/lib/swift,
 				);
 				MARKETING_VERSION = 2.0.0;

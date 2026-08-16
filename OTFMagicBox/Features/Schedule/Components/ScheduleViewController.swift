@@ -46,13 +46,9 @@ import OTFUtilities
 /// - Handle empty states with a user-friendly tip view
 ///
 /// ## Synchronization Behavior
-/// The view controller observes `.databaseSynchronized` notifications and reloads content
-/// after a short debounce delay (300ms). This debounce prevents rapid consecutive reloads
-/// when multiple sync events occur in quick succession.
-///
-/// - Note: Local task completions do NOT trigger this reload because CareKit's internal
-///   subscription system handles those updates automatically. Only remote changes
-///   (from other devices via SSE) trigger the notification-based reload.
+/// The view controller observes typed schedule refresh notifications and only invalidates
+/// the cached days that were affected. Full resyncs still reload the visible day, while
+/// outcome-only changes can avoid unnecessary cold reloads.
 class ScheduleViewController: OCKDailyPageViewController {
 
     // MARK: - Configuration
@@ -67,9 +63,12 @@ class ScheduleViewController: OCKDailyPageViewController {
     // MARK: - Private Properties
 
     private let logger = OTFLogger.logger()
+    private let calendar = Calendar.current
+    private let initialDate: Date
     private var loadTokens: [ObjectIdentifier: UUID] = [:]
     private var reloadWorkItem: DispatchWorkItem?
     private let reloadDebounceInterval: TimeInterval = 0.3
+    private var isApplyingInitialDate = false
     
     /// Tracks first load to show skeleton cards while waiting for sync
     private var isFirstLoad = true
@@ -81,8 +80,25 @@ class ScheduleViewController: OCKDailyPageViewController {
 
     // MARK: - Lifecycle
 
+    init(storeManager: OCKSynchronizedStoreManager, initialDate: Date = Date()) {
+        self.initialDate = initialDate
+        super.init(storeManager: storeManager)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
+        isApplyingInitialDate = true
         super.viewDidLoad()
+
+        if !calendar.isDate(selectedDate, inSameDayAs: initialDate) {
+            super.selectDate(initialDate, animated: false)
+        }
+
+        isApplyingInitialDate = false
         setupNotificationObservers()
     }
 
@@ -100,6 +116,11 @@ class ScheduleViewController: OCKDailyPageViewController {
     }
 
     override func selectDate(_ date: Date, animated: Bool) {
+        let calendar = Calendar.current
+        if calendar.isDate(selectedDate, inSameDayAs: date) {
+            return
+        }
+
         super.selectDate(date, animated: animated)
         onSelectedDateChange?(date)
     }
@@ -111,50 +132,50 @@ class ScheduleViewController: OCKDailyPageViewController {
         prepare listViewController: OCKListViewController,
         for date: Date
     ) {
+        reportSelectedDateIfVisible(date)
+
         let listID = ObjectIdentifier(listViewController)
         let token = UUID()
         loadTokens[listID] = token
 
-        var query = OCKTaskQuery(for: date)
-        query.excludesTasksWithNoEvents = true
-
-        DispatchQueue.global(qos: .userInitiated).async { [weak self, weak listViewController] in
-            self?.storeManager.store.fetchAnyTasks(query: query, callbackQueue: .main) { result in
-                self?.handleTasksResult(result, listViewController: listViewController, date: date, token: token)
-            }
+        let snapshotStore = CareKitStoreManager.shared.daySnapshotStore
+        if let cachedSnapshot = snapshotStore.cachedSnapshot(for: date) {
+            let cachedTasks = cachedSnapshot.tasks.map { $0 as OCKAnyTask }
+            SyncPerformanceTracker.shared.recordScheduleLoad(date: date, fetchedTasks: cachedTasks.count, fromCache: true)
+            handleTasksResult(.success(cachedTasks), listViewController: listViewController, date: date, token: token)
+            return
         }
+
+        snapshotStore.snapshot(for: date) { [weak self, weak listViewController] result in
+            let anyResult = result.map { snapshot in
+                snapshot.tasks.map { $0 as OCKAnyTask }
+            }
+            self?.handleTasksResult(anyResult, listViewController: listViewController, date: date, token: token)
+        }
+    }
+
+    func reportSelectedDateIfVisible(_ date: Date) {
+        guard !isApplyingInitialDate else { return }
+        guard calendar.isDate(selectedDate, inSameDayAs: date) else { return }
+        onSelectedDateChange?(date)
     }
 
     // MARK: - Private Methods
 
     private func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveStoreChangeNotification), name: .databaseSynchronized, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveScheduleRefreshNotification), name: .scheduleRefreshRequested, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteProfileEventNotification), name: .deleteUserAccount, object: nil)
     }
 
-    @objc private func didReceiveStoreChangeNotification(_ notification: Notification) {
-        // Debounce rapid notifications
+    @objc private func didReceiveScheduleRefreshNotification(_ notification: Notification) {
+        let context = ScheduleRefreshContext(notification: notification) ?? ScheduleRefreshContext(changeKind: .fullResync)
         reloadWorkItem?.cancel()
+
         let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
-            
-            // If we receive a sync notification, we can assume the initial wait is over.
-            self.isFirstLoad = false
-            self.reload()
-            
-            // Force full UI refresh (including header rings) by toggling the date
-            // The simple selectDate(current) is optimized away by CareKit, so we must
-            // switch to a different date and back to force a redraw.
-            let currentDate = self.selectedDate
-            let pastDate = Calendar.current.date(byAdding: .year, value: -1, to: currentDate) ?? currentDate
-            
-            // Temporarily disable callback to avoid side effects
-            let originalCallback = self.onSelectedDateChange
-            self.onSelectedDateChange = nil
-            self.selectDate(pastDate, animated: false)
-            self.selectDate(currentDate, animated: false)
-            self.onSelectedDateChange = originalCallback
+            self.applyScheduleRefresh(context)
         }
+
         reloadWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + reloadDebounceInterval, execute: workItem)
     }
@@ -179,6 +200,9 @@ class ScheduleViewController: OCKDailyPageViewController {
             let todayTasks = tasks
                 .filter { $0.schedule.exists(onDay: date) }
                 .sorted { $0.id < $1.id }
+
+            SyncPerformanceTracker.shared.recordScheduleLoad(date: date, fetchedTasks: todayTasks.count, fromCache: false)
+            prefetchAdjacentDays(around: date)
             
             if todayTasks.isEmpty {
                 if isFirstLoad {
@@ -196,6 +220,119 @@ class ScheduleViewController: OCKDailyPageViewController {
                 appendTaskViewControllers(for: todayTasks, to: list, date: date)
             }
         }
+    }
+
+    private func applyScheduleRefresh(_ context: ScheduleRefreshContext) {
+        isFirstLoad = false
+        let visibleDay = normalizedDate(for: selectedDate)
+        let snapshotStore = CareKitStoreManager.shared.daySnapshotStore
+        let affectsVisibleDate = context.affects(date: selectedDate, calendar: calendar)
+        let hasCachedVisibleSnapshot = snapshotStore.cachedSnapshot(for: selectedDate) != nil
+        let preserveVisibleDay = affectsVisibleDate && hasCachedVisibleSnapshot
+        snapshotStore.invalidate(using: context, preserving: preserveVisibleDay ? [visibleDay] : [])
+        refreshAffectedCalendarRings(using: context)
+
+        guard context.changeKind == .fullResync || affectsVisibleDate else {
+            return
+        }
+
+        if context.changeKind == .outcomeOnly, preserveVisibleDay {
+            return
+        }
+
+        if preserveVisibleDay {
+            snapshotStore.snapshot(for: selectedDate, forceRefresh: true) { [weak self] _ in
+                guard let self else { return }
+                SyncPerformanceTracker.shared.increment("schedule.reloads")
+                self.reload()
+            }
+            return
+        }
+
+        SyncPerformanceTracker.shared.increment("schedule.reloads")
+        reload()
+    }
+
+    private func refreshAffectedCalendarRings(using context: ScheduleRefreshContext) {
+        guard context.changeKind == .outcomeOnly else { return }
+
+        let visibleCalendarControllers = childViewControllers(ofType: OCKWeekCalendarViewController.self)
+        let visibleCalendarViews = view.descendants(ofType: OCKWeekCalendarView.self)
+        guard !visibleCalendarControllers.isEmpty || !visibleCalendarViews.isEmpty else { return }
+
+        let snapshotStore = CareKitStoreManager.shared.daySnapshotStore
+        let affectedDates = context.affectedDates.map(normalizedDate(for:))
+        affectedDates.forEach { affectedDate in
+            let visibleControllersForDate = visibleCalendarControllers.filter {
+                $0.calendarView.dateInterval.contains(affectedDate)
+            }
+            let visibleViewsForDate = visibleCalendarViews.filter {
+                $0.dateInterval.contains(affectedDate) && $0.completionRingFor(date: affectedDate) != nil
+            }
+            guard !visibleControllersForDate.isEmpty || !visibleViewsForDate.isEmpty else { return }
+
+            snapshotStore.summary(for: affectedDate, forceRefresh: true) { [weak self] result in
+                guard let self,
+                      case .success(let snapshot) = result else {
+                    return
+                }
+
+                let state = self.completionState(for: snapshot, date: affectedDate)
+                visibleControllersForDate.forEach {
+                    self.updateCalendarController($0, state: state, for: affectedDate)
+                }
+                visibleViewsForDate.forEach { calendarView in
+                    calendarView.completionRingFor(date: affectedDate)?.setState(state, animated: true)
+                }
+            }
+        }
+    }
+
+    private func updateCalendarController(
+        _ calendarController: OCKWeekCalendarViewController,
+        state: OCKCompletionState,
+        for date: Date
+    ) {
+        let dayOffset = calendar.dateComponents([.day], from: calendarController.calendarView.dateInterval.start, to: date).day
+        guard let dayOffset,
+              dayOffset >= 0,
+              dayOffset < calendarController.calendarView.completionRingButtons.count else {
+            return
+        }
+
+        var states = calendarController.controller.completionStates
+        if states.count == calendarController.calendarView.completionRingButtons.count {
+            states[dayOffset] = state
+            calendarController.controller.completionStates = states
+        } else {
+            calendarController.calendarView.completionRingButtons[dayOffset].setState(state, animated: true)
+        }
+    }
+
+    private func completionState(for snapshot: DaySummarySnapshot, date: Date) -> OCKCompletionState {
+        let totals = CheckUpTaskType.allCases.reduce(into: (total: 0, completed: 0)) { result, category in
+            let summary = snapshot.summary(for: category)
+            result.total += summary.totalTasks
+            result.completed += summary.completedTasks
+        }
+
+        guard totals.total > 0 else {
+            return .dimmed
+        }
+
+        guard totals.completed > 0 else {
+            return date > Date() && !calendar.isDateInToday(date) ? .empty : .zero
+        }
+
+        return .progress(CGFloat(totals.completed) / CGFloat(totals.total))
+    }
+
+    private func prefetchAdjacentDays(around date: Date) {
+        CareKitStoreManager.shared.daySnapshotStore.prefetchAdjacentDays(around: date)
+    }
+
+    private func normalizedDate(for date: Date) -> Date {
+        calendar.startOfDay(for: date)
     }
 
     private func appendSkeletonCards(to list: OCKListViewController, count: Int) {
@@ -225,17 +362,28 @@ class ScheduleViewController: OCKDailyPageViewController {
     private func createTaskViewController(for task: OCKAnyTask, date: Date) -> UIViewController {
         let eventQuery = OCKEventQuery(for: date)
 
+        if let descriptor = task.viewType.sensorTaskDescriptor {
+            return SensorTaskViewController(
+                task: task,
+                eventQuery: eventQuery,
+                storeManager: storeManager,
+                selectedDate: date,
+                metric: descriptor.metric,
+                mode: descriptor.mode
+            )
+        }
+
         switch task.viewType {
         case .simple:
-            return OCKSimpleTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
+            return SyncingSimpleTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .instruction:
-            return OCKInstructionsTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
+            return SyncingInstructionsTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .buttonLog:
-            return OCKButtonLogTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
+            return SyncingButtonLogTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .grid:
-            return OCKGridTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
+            return SyncingGridTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .checklist:
-            return OCKChecklistTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
+            return SyncingChecklistTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .steps:
             return MotionStepsHostingController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .cadence:
@@ -248,22 +396,37 @@ class ScheduleViewController: OCKDailyPageViewController {
             return MotionGyroscopeHostingController(task: task, eventQuery: eventQuery, storeManager: storeManager)
         case .gps:
             return MotionGPSHostingController(task: task, eventQuery: eventQuery, storeManager: storeManager)
-        case .heartRate:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .heartRate)
-        case .bloodGlucose:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .bloodGlucose)
-        case .bloodPressure:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .bloodPressure)
-        case .ecg:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .ecg)
-        case .respiratoryRate:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .respiratoryRate)
-        case .restingHeartRate:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .restingHeartRate)
-        case .oxygenSaturation:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .oxygenSaturation)
-        case .vo2Max:
-            return SensorTaskViewController(task: task, eventQuery: eventQuery, storeManager: storeManager, selectedDate: date, metric: .vo2Max)
+        case .heartRate, .bloodGlucose, .bloodPressure, .ecg,
+             .respiratoryRate, .restingHeartRate, .oxygenSaturation, .vo2Max,
+             .manualHeartRate, .manualBloodGlucose, .manualBloodPressure, .manualECG,
+             .manualRespiratoryRate, .manualRestingHeartRate, .manualOxygenSaturation, .manualVO2Max:
+            preconditionFailure("Sensor task type must provide a descriptor")
+        }
+    }
+}
+
+private extension UIViewController {
+    func childViewControllers<ViewControllerType: UIViewController>(
+        ofType type: ViewControllerType.Type
+    ) -> [ViewControllerType] {
+        children.flatMap { child -> [ViewControllerType] in
+            var matches = child.childViewControllers(ofType: type)
+            if let typedChild = child as? ViewControllerType {
+                matches.insert(typedChild, at: 0)
+            }
+            return matches
+        }
+    }
+}
+
+private extension UIView {
+    func descendants<ViewType: UIView>(ofType type: ViewType.Type) -> [ViewType] {
+        subviews.flatMap { subview -> [ViewType] in
+            var matches = subview.descendants(ofType: type)
+            if let typedSubview = subview as? ViewType {
+                matches.insert(typedSubview, at: 0)
+            }
+            return matches
         }
     }
 }

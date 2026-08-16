@@ -35,6 +35,28 @@
 import SwiftUI
 import OTFResearchKit
 
+enum AuthTaskNavigation {
+
+    static func signInOptionsDefaultDestination(
+        mode: AuthType,
+        profileDetailsStepId: String?,
+        shouldShowConsent: Bool,
+        includesPasscodeStep: Bool
+    ) -> String {
+        if mode == .signup {
+            // Social signup must arrive at either the optional profile-details step
+            // or an authentication trigger. Preserve passcode setup when it exists.
+            return profileDetailsStepId ?? (
+                includesPasscodeStep ? Constants.Auth.passcodeStep : Constants.Auth.healthKitDataStep
+            )
+        }
+        if shouldShowConsent {
+            return Constants.Auth.visualConsentStep
+        }
+        return includesPasscodeStep ? Constants.Auth.passcodeStep : Constants.Auth.completionStep
+    }
+}
+
 /// Use: AuthTaskRepresentable(mode: .signup) or .login
 struct AuthTaskRepresentable: UIViewControllerRepresentable {
 
@@ -48,7 +70,7 @@ struct AuthTaskRepresentable: UIViewControllerRepresentable {
     }
 
     func makeCoordinator() -> AuthTaskCoordinator {
-        AuthTaskCoordinator(authType: mode)
+        AuthTaskCoordinator(authType: mode, appConfiguration: config)
     }
 
     func makeUIViewController(context: Context) -> ORKTaskViewController {
@@ -60,6 +82,7 @@ struct AuthTaskRepresentable: UIViewControllerRepresentable {
 
         // (B) Email step differs by mode
         let emailStepId: String
+        var profileDetailsStepId: String?
         switch mode {
         case .signup:
             let regexp = try? NSRegularExpression(pattern: "^.{10,}$")
@@ -78,6 +101,13 @@ struct AuthTaskRepresentable: UIViewControllerRepresentable {
             )
             insertRegistrationHeaderAndPlaceholders(register)
             steps.append(register)
+            if let profileDetails = SignupProfileDetailsStepFactory(
+                auth: auth,
+                appConfiguration: config
+            ).makeStep() {
+                steps.append(profileDetails)
+                profileDetailsStepId = profileDetails.identifier
+            }
             emailStepId = Constants.Auth.registrationStep
 
         case .login:
@@ -107,7 +137,8 @@ struct AuthTaskRepresentable: UIViewControllerRepresentable {
         }
 
         // (D) Passcode (optional)
-        if auth.passcodeEnabled && !ORKPasscodeViewController.isPasscodeStoredInKeychain() {
+        let includesPasscodeStep = auth.passcodeEnabled && !ORKPasscodeViewController.isPasscodeStoredInKeychain()
+        if includesPasscodeStep {
             let pass = ORKPasscodeStep(identifier: Constants.Auth.passcodeStep)
             pass.text = auth.passcodePrompt.localized
             pass.passcodeType = auth.passcodeType == "6" ? .type6Digit : .type4Digit
@@ -133,15 +164,14 @@ struct AuthTaskRepresentable: UIViewControllerRepresentable {
         let sel  = ORKResultSelector(resultIdentifier: Constants.Auth.signInButtons)
         let pred = ORKResultPredicate.predicateForBooleanQuestionResult(with: sel, expectedAnswer: true)
 
-        // If user taps Email on options (== true) → go to the email step.
-        // If they choose social / anything else (== false) → jump to Consent when pending,
-        // otherwise to Passcode or Completion.
-        let defaultId: String = {
-            if shouldShowConsent {
-                return Constants.Auth.visualConsentStep
-            }
-            return auth.passcodeEnabled ? Constants.Auth.passcodeStep : Constants.Auth.completionStep
-        }()
+        // Email continues to its credential step. Social signup routes through an
+        // authentication trigger even when profile details and passcode are absent.
+        let defaultId = AuthTaskNavigation.signInOptionsDefaultDestination(
+            mode: mode,
+            profileDetailsStepId: profileDetailsStepId,
+            shouldShowConsent: shouldShowConsent,
+            includesPasscodeStep: includesPasscodeStep
+        )
 
         let rule = ORKPredicateStepNavigationRule(
             resultPredicates: [pred],

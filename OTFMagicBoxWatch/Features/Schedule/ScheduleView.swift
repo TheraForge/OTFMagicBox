@@ -43,11 +43,15 @@ struct ScheduleView: View {
     }
 
     @State private var tasks: [OCKTask] = []
+    @State private var cachedTasksByDay = [Date: [OCKTask]]()
     @State private var viewState: ViewState = .loading
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
+    @State private var fetchToken = UUID()
+    @State private var prefetchedDaysInFlight = Set<Date>()
 
     private let careKitStore = OCKStoreManager.shared
+    private let calendar = Calendar.current
 
     private let dateRange: ClosedRange<Date> = {
         let now = Date()
@@ -98,23 +102,25 @@ struct ScheduleView: View {
                                     eventQuery: .init(for: selectedDate),
                                     storeManager: careKitStore.synchronizedStoreManager
                                 )
-                                .id(task.id + selectedDate.timeIntervalSinceReferenceDate.description)
+                                .id(taskViewIdentity(for: task, date: selectedDate))
                             }
                         }
                     }
                 }
             }
             .navigationTitle("MagicBox")
-            .onAppear(perform: loadDailyTasks)
-            .onChange(of: selectedDate) { _ in
-                loadDailyTasks()
+            .onAppear {
+                loadDailyTasks(showLoadingState: true)
             }
-            .onReceive(NotificationCenter.default.publisher(for: .databaseSynchronized)) { _ in
-                viewState = .loading
-                loadDailyTasks()
+            .onChange(of: selectedDate) { _ in
+                loadDailyTasks(showLoadingState: cachedTasks(for: selectedDate) == nil)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .scheduleRefreshRequested)) { notification in
+                handleScheduleRefresh(notification)
             }
             .onReceive(NotificationCenter.default.publisher(for: .userLoggedOut)) { _ in
                 tasks = []
+                cachedTasksByDay.removeAll()
                 viewState = .loggedOut
             }
             .sheet(isPresented: $showDatePicker) {
@@ -130,28 +136,131 @@ struct ScheduleView: View {
         }
     }
 
-    private func loadDailyTasks() {
+    private func loadDailyTasks(forceRefresh: Bool = false, showLoadingState: Bool) {
         guard let cloudantStore = careKitStore.cloudantStore else {
             viewState = .loggedOut
             return
         }
 
-        cloudantStore.fetchTasks { result in
+        let day = normalizedDate(for: selectedDate)
+        if !forceRefresh, let cachedTasks = cachedTasksByDay[day] {
+            tasks = cachedTasks
+            viewState = .content
+            SyncPerformanceTracker.shared.recordWatchScheduleLoad(date: selectedDate, fetchedTasks: cachedTasks.count, fromCache: true)
+            return
+        }
+
+        if showLoadingState {
+            viewState = .loading
+        }
+
+        let activeFetchToken = UUID()
+        fetchToken = activeFetchToken
+
+        var query = OCKTaskQuery(for: selectedDate)
+        query.excludesTasksWithNoEvents = true
+
+        cloudantStore.fetchTasks(query: query) { result in
             DispatchQueue.main.async {
+                guard self.fetchToken == activeFetchToken else { return }
+
                 switch result {
                 case .failure:
-                    self.tasks = []
+                    self.tasks = self.cachedTasksByDay[day] ?? []
                     self.viewState = .content
 
                 case .success(let data):
                     let todayTasks = data
                         .filter { $0.schedule.exists(onDay: selectedDate) }
                         .sorted { $0.id < $1.id }
+                    self.cachedTasksByDay[day] = todayTasks
                     self.tasks = todayTasks
                     self.viewState = .content
+                    SyncPerformanceTracker.shared.recordWatchScheduleLoad(date: selectedDate, fetchedTasks: todayTasks.count, fromCache: false)
+                    self.prefetchAdjacentDays(around: selectedDate)
                 }
             }
         }
+    }
+
+    private func handleScheduleRefresh(_ notification: Notification) {
+        let context = ScheduleRefreshContext(notification: notification) ?? ScheduleRefreshContext(changeKind: .fullResync)
+        let visibleDay = normalizedDate(for: selectedDate)
+        let preserveVisibleDay = context.affects(date: selectedDate, calendar: calendar) && cachedTasksByDay[visibleDay] != nil
+        invalidateCachedDays(using: context, preserving: preserveVisibleDay ? [visibleDay] : [])
+
+        guard context.changeKind == .fullResync || context.affects(date: selectedDate, calendar: calendar) else {
+            return
+        }
+
+        if context.changeKind == .outcomeOnly, preserveVisibleDay {
+            return
+        }
+
+        loadDailyTasks(forceRefresh: true, showLoadingState: false)
+    }
+
+    private func invalidateCachedDays(using context: ScheduleRefreshContext, preserving preservedDays: Set<Date> = []) {
+        let invalidation = WatchScheduleCacheInvalidation.result(
+            cachedDays: Set(cachedTasksByDay.keys),
+            prefetchedDaysInFlight: prefetchedDaysInFlight,
+            context: context,
+            preserving: preservedDays,
+            calendar: calendar
+        )
+
+        cachedTasksByDay.keys
+            .filter { !invalidation.cachedDays.contains($0) }
+            .forEach {
+            cachedTasksByDay.removeValue(forKey: $0)
+        }
+        prefetchedDaysInFlight = invalidation.prefetchedDaysInFlight
+    }
+
+    private func prefetchAdjacentDays(around date: Date) {
+        [-1, 1]
+            .compactMap { calendar.date(byAdding: .day, value: $0, to: date) }
+            .forEach(prefetchTasksIfNeeded(for:))
+    }
+
+    private func prefetchTasksIfNeeded(for date: Date) {
+        guard let cloudantStore = careKitStore.cloudantStore else { return }
+
+        let normalizedDay = normalizedDate(for: date)
+        guard cachedTasksByDay[normalizedDay] == nil,
+              !prefetchedDaysInFlight.contains(normalizedDay) else {
+            return
+        }
+
+        prefetchedDaysInFlight.insert(normalizedDay)
+
+        var query = OCKTaskQuery(for: date)
+        query.excludesTasksWithNoEvents = true
+
+        cloudantStore.fetchTasks(query: query) { result in
+            DispatchQueue.main.async {
+                self.prefetchedDaysInFlight.remove(normalizedDay)
+
+                guard case .success(let data) = result else { return }
+                let dayTasks = data
+                    .filter { $0.schedule.exists(onDay: date) }
+                    .sorted { $0.id < $1.id }
+                self.cachedTasksByDay[normalizedDay] = dayTasks
+            }
+        }
+    }
+
+    private func cachedTasks(for date: Date) -> [OCKTask]? {
+        cachedTasksByDay[normalizedDate(for: date)]
+    }
+
+    private func normalizedDate(for date: Date) -> Date {
+        calendar.startOfDay(for: date)
+    }
+
+    private func taskViewIdentity(for task: OCKTask, date: Date) -> String {
+        let day = normalizedDate(for: date).timeIntervalSince1970
+        return "\(task.id)-\(day)"
     }
 }
 

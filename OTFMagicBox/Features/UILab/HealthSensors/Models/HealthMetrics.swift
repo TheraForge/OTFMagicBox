@@ -34,7 +34,7 @@
 
 import Foundation
 
-enum MetricSource {
+enum MetricSource: Equatable {
     case health
     case watchLive
     case mock

@@ -34,6 +34,12 @@
 
 import Foundation
 
+protocol HealthSensorMockDataProviding {
+    var isEnabled: Bool { get }
+    var seed: Int { get }
+    func generator() -> SeededRandomNumberGenerator
+}
+
 enum MockDataStore {
 
     private enum FileConstants {
@@ -51,6 +57,15 @@ enum MockDataStore {
 
     static func generator() -> SeededRandomNumberGenerator {
         SeededRandomNumberGenerator(seed: UInt64(seed))
+    }
+}
+
+struct LiveHealthSensorMockDataProvider: HealthSensorMockDataProviding {
+    var isEnabled: Bool { MockDataStore.isEnabled }
+    var seed: Int { MockDataStore.seed }
+
+    func generator() -> SeededRandomNumberGenerator {
+        MockDataStore.generator()
     }
 }
 

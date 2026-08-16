@@ -66,7 +66,24 @@ public actor LocalUserPurger {
     /// Global instance for common flows.
     public static let shared = LocalUserPurger()
 
-    private let defaults = UserDefaults.standard
+    private let defaults: UserDefaults
+    private let thumbnailPurger: () async -> Void
+    private let deleteFile: (String) throws -> Void
+
+    init(
+        defaults: UserDefaults = .standard,
+        thumbnailPurger: @escaping () async -> Void = {
+            Thumbnailer.shared.clearMemory()
+            await Thumbnailer.shared.clearDisk()
+        },
+        deleteFile: @escaping (String) throws -> Void = { filename in
+            try FileManager.deleteFile(filename: filename)
+        }
+    ) {
+        self.defaults = defaults
+        self.thumbnailPurger = thumbnailPurger
+        self.deleteFile = deleteFile
+    }
 
     // MARK: - High-level API
 
@@ -82,8 +99,7 @@ public actor LocalUserPurger {
     ///
     /// This does **not** touch your app’s originals in `Documents`.
     public func purgeThumbnails() async {
-        await Thumbnailer.shared.clearMemory()
-        await Thumbnailer.shared.clearDisk()
+        await thumbnailPurger()
     }
 
     /// Removes app-owned original files for the current user (non-cache).
@@ -98,7 +114,7 @@ public actor LocalUserPurger {
         if let id = defaults.string(forKey: Constants.Storage.kLastProfileAttachmentID) {
             do {
                 // Uses OTFUtilities’s FileManager extension.
-                try FileManager.deleteFile(filename: id)
+                try deleteFile(id)
             } catch {
                 // Missing is fine; nothing to delete.
             }

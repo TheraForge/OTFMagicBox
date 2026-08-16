@@ -53,8 +53,18 @@ enum Constants {
 
     enum Auth {
         static let signInButtons = "SignInButtons"
+        static let socialSignupProvider = "SocialSignupProvider"
         static let loginExistingStep = "LoginExistingStep"
         static let registrationStep = "RegistrationStep"
+        static let registrationProfileDetailsStep = "RegistrationProfileDetailsStep"
+        static let registrationLocationDisplayName = "registration.location.displayName"
+        static let registrationLocationCity = "registration.location.city"
+        static let registrationLocationAddressLine1 = "registration.location.addressLine1"
+        static let registrationLocationAddressLine2 = "registration.location.addressLine2"
+        static let registrationLocationRegion = "registration.location.region"
+        static let registrationLocationPostalCode = "registration.location.postalCode"
+        static let registrationLocationCountryCode = "registration.location.countryCode"
+        static let registrationConditions = "registration.conditions"
         static let loginStep = "LoginStep"
         static let passcodeStep = "PasscodeStep"
         static let consentReviewStep = "ConsentReviewStep"

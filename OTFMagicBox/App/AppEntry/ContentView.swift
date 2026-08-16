@@ -33,16 +33,19 @@
  */
 
 import SwiftUI
-import OTFCloudClientAPI
 
 struct ContentView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     
-    @StateObject private var model = ContentViewModel()
-    @State private var isDefaultAPIKey = false
+    @StateObject private var model: ContentViewModel
 
-    private let keychainStore: TheraForgeKeychainService = .shared
+    private let runtime: AppRuntime
+
+    init(runtime: AppRuntime = .live) {
+        self.runtime = runtime
+        _model = StateObject(wrappedValue: ContentViewModel(runtime: runtime))
+    }
 
     var body: some View {
         ZStack {
@@ -50,21 +53,19 @@ struct ContentView: View {
                 Button("OK") { model.setOnboarding(completed: false) }
             } message: { Text(model.config.alertMessage.localized) }
 
-            if model.isOnboardingCompleted, keychainStore.loadUser() != nil {
+            if model.contentRoute(hasUser: runtime.loadUser() != nil) == .tabs {
                 AdaptableTabView(model: model)
             } else {
                 OnboardingView()
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .onboardingCompleted)) { output in
-            guard let isOnboardingCompleted = output.object as? Bool else { return }
-            model.setOnboarding(completed: isOnboardingCompleted)
+        .onReceive(runtime.notificationCenter.publisher(for: .onboardingCompleted)) { output in
+            model.handleOnboardingCompletedNotification(output)
         }
         .onChange(of: scenePhase) { phase in
             switch phase {
             case .active:
-                AppLockCoordinator.shared.presentIfNeeded()
-                CloudantSyncManager.shared.syncCloudantStore(notifyWhenDone: true) { _ in }
+                model.applicationDidBecomeActive()
             default:
                 break
             }

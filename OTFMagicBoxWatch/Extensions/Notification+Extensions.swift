@@ -34,8 +34,65 @@
 
 import Foundation
 
+enum ScheduleRefreshKind: String {
+    case taskMembership
+    case outcomeOnly
+    case fullResync
+}
+
+struct ScheduleRefreshContext {
+    private enum UserInfoKeys {
+        static let kind = "schedule.refresh.kind"
+        static let affectedDates = "schedule.refresh.affectedDates"
+    }
+
+    let changeKind: ScheduleRefreshKind
+    let affectedDates: [Date]
+
+    init(changeKind: ScheduleRefreshKind, affectedDates: [Date] = []) {
+        let calendar = Calendar.current
+        self.changeKind = changeKind
+        self.affectedDates = Array(
+            Set(affectedDates.map { calendar.startOfDay(for: $0) })
+        ).sorted()
+    }
+
+    init?(notification: Notification) {
+        guard let rawKind = notification.userInfo?[UserInfoKeys.kind] as? String,
+              let changeKind = ScheduleRefreshKind(rawValue: rawKind) else {
+            return nil
+        }
+
+        let affectedDates = notification.userInfo?[UserInfoKeys.affectedDates] as? [Date] ?? []
+        self.init(changeKind: changeKind, affectedDates: affectedDates)
+    }
+
+    var invalidatesAllDates: Bool {
+        changeKind == .fullResync || affectedDates.isEmpty
+    }
+
+    func affects(date: Date, calendar: Calendar = .current) -> Bool {
+        guard !invalidatesAllDates else { return true }
+        return affectedDates.contains { calendar.isDate($0, inSameDayAs: date) }
+    }
+
+    var notificationUserInfo: [AnyHashable: Any] {
+        [
+            UserInfoKeys.kind: changeKind.rawValue,
+            UserInfoKeys.affectedDates: affectedDates
+        ]
+    }
+}
+
 extension Notification.Name {
     static let databaseSynchronized = Notification.Name(rawValue: "notification.database.synchronized")
+    static let scheduleRefreshRequested = Notification.Name(rawValue: "notification.schedule.refresh.requested")
     static let userLoggedOut = Notification.Name(rawValue: "notification.user.logged.out")
     static let healthSensorsLiveHeartRateStart = Notification.Name(rawValue: "notification.healthsensors.live.hr.start")
+}
+
+extension NotificationCenter {
+    func postScheduleRefresh(_ context: ScheduleRefreshContext, object: Any? = nil) {
+        post(name: .scheduleRefreshRequested, object: object, userInfo: context.notificationUserInfo)
+    }
 }

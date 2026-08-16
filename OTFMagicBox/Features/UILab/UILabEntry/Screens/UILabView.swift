@@ -69,7 +69,7 @@ struct UILabView: View {
             .navigationDestination(for: CardDestination.self) { destination in
                 switch destination {
                 case .metric(let metric):
-                    GenericHealthCardView(metric: metric)
+                    SensorUILabExperienceView(metric: metric)
                 }
             }
         }

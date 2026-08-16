@@ -59,6 +59,30 @@ struct AuthConfiguration: Codable {
     let firstNamePlaceholder: OTFStringLocalized
     let lastNamePlaceholder: OTFStringLocalized
     let passwordInvalidMessage: OTFStringLocalized
+    let signupProfileDetailsTitle: OTFStringLocalized
+    let signupProfileDetailsText: OTFStringLocalized
+    let signupFailureMessage: OTFStringLocalized
+    let addressSectionTitle: OTFStringLocalized
+    let locationDisplayNameLabel: OTFStringLocalized
+    let locationDisplayNamePlaceholder: OTFStringLocalized
+    let cityLabel: OTFStringLocalized
+    let cityPlaceholder: OTFStringLocalized
+    let addressLine1Label: OTFStringLocalized
+    let addressLine1Placeholder: OTFStringLocalized
+    let addressLine2Label: OTFStringLocalized
+    let addressLine2Placeholder: OTFStringLocalized
+    let regionLabel: OTFStringLocalized
+    let regionPlaceholder: OTFStringLocalized
+    let postalCodeLabel: OTFStringLocalized
+    let postalCodePlaceholder: OTFStringLocalized
+    let countryCodeLabel: OTFStringLocalized
+    let countryCodePlaceholder: OTFStringLocalized
+    let countryCodeValidationMessage: OTFStringLocalized
+    let conditionsLabel: OTFStringLocalized
+    let conditionsDetailText: OTFStringLocalized
+    let conditionsValidationMessage: OTFStringLocalized
+    let conditionsNoneReportedText: OTFStringLocalized
+    let conditionLabels: [String: OTFStringLocalized]
 
     // Passcode
     let passcodeEnabled: Bool
@@ -141,8 +165,18 @@ struct AuthConfiguration: Codable {
 extension AuthConfiguration: OTFVersionedDecodable {
     typealias Raw = RawAuthConfiguration
 
+    private static let fallbackDataGatheringContent = OTFStringLocalized(
+        "We collect your account details (e.g., email), device identifiers, crash/diagnostic data, " +
+            "and app usage analytics. With your permission, we may read Health data to power app features. " +
+            "If you choose to complete the optional Health Profile, it collects only the self-reported " +
+            "location detail and health conditions you choose to type or select to complete your profile. " +
+            "Provide only the minimum location detail needed; a country, city, or region is " +
+            "enough when a full address is not needed. This feature does not request, access, or infer GPS " +
+            "or precise device location."
+    )
+
     static let fallback = AuthConfiguration(
-        version: "2.0.0",
+        version: "2.3.0",
 
         // Consent
         consentFileName: "TheraForgeConsent",
@@ -162,15 +196,15 @@ extension AuthConfiguration: OTFVersionedDecodable {
                 show: true,
                 title: "Data We Collect",
                 summary: "Account info, app usage, diagnostics, and optional health data.",
-                content: "We collect your account details (e.g., email), device identifiers, crash/diagnostic data, and app usage analytics. With your permission, we may read Health data to power app features. We do not record audio or track precise location.",
+                content: fallbackDataGatheringContent,
                 image: nil
             ),
             .init(
                 type: "privacy",
                 show: true,
                 title: "Your Privacy & Security",
-                summary: "Encryption in transit and at rest; limited access by authorized staffallback.",
-                content: "We encrypt data in transit and at rest. Access is restricted to authorized personnel for support and operations. We never sell your personal information.",
+                summary: "Security and access controls are described in the Privacy Policy.",
+                content: "The Privacy Policy describes the security and access controls for account and Health Profile data. Privacy and security approval is required before the optional Health Profile is enabled.",
                 image: nil
             ),
             .init(
@@ -185,8 +219,8 @@ extension AuthConfiguration: OTFVersionedDecodable {
                 type: "withdrawing",
                 show: true,
                 title: "Your Choices",
-                summary: "Manage permissions, download or delete data, or close your account.",
-                content: "You can revoke permissions in Settings, request data export or deletion, and close your account. Some data may be retained where required by law or for fraud prevention.",
+                summary: "Edit or clear optional profile values, manage permissions, or request account deletion.",
+                content: "You can edit or clear optional Health Profile values in Manage Profile, revoke permissions in Settings, and request data export or account deletion. Retention and deletion, including any legal obligations, are governed by the Privacy Policy; a deletion request is not confirmation that processing has completed.",
                 image: nil
             ),
             .init(
@@ -212,6 +246,30 @@ extension AuthConfiguration: OTFVersionedDecodable {
         firstNamePlaceholder: "John",
         lastNamePlaceholder: "Appleseed",
         passwordInvalidMessage: "Password must be at least 10 characters in length",
+        signupProfileDetailsTitle: "Profile details",
+        signupProfileDetailsText: "You may optionally enter self-reported location and health conditions. This feature does not access GPS or precise device location.",
+        signupFailureMessage: "We could not complete sign up. Please review your account details and try again.",
+        addressSectionTitle: "Address",
+        locationDisplayNameLabel: "Country",
+        locationDisplayNamePlaceholder: "Enter your country",
+        cityLabel: "City",
+        cityPlaceholder: "Enter your city",
+        addressLine1Label: "Address line 1",
+        addressLine1Placeholder: "Enter address line 1",
+        addressLine2Label: "Address line 2",
+        addressLine2Placeholder: "Enter address line 2",
+        regionLabel: "Region",
+        regionPlaceholder: "Enter your region",
+        postalCodeLabel: "Postal code",
+        postalCodePlaceholder: "Enter postal code",
+        countryCodeLabel: "Country calling code",
+        countryCodePlaceholder: "Enter calling code, for example +351",
+        countryCodeValidationMessage: "Use a valid country calling code, for example +351.",
+        conditionsLabel: "Health conditions",
+        conditionsDetailText: "Select all that apply or None reported.",
+        conditionsValidationMessage: "Select conditions or None reported, not both.",
+        conditionsNoneReportedText: "None reported",
+        conditionLabels: HealthProfileConditionCatalogue.defaultLabels,
 
         // Passcode
         passcodeEnabled: false,
@@ -318,6 +376,30 @@ extension AuthConfiguration: OTFVersionedDecodable {
         firstNamePlaceholder = raw.firstNamePlaceholder ?? fallback.firstNamePlaceholder
         lastNamePlaceholder = raw.lastNamePlaceholder ?? fallback.lastNamePlaceholder
         passwordInvalidMessage = raw.passwordInvalidMessage ?? fallback.passwordInvalidMessage
+        signupProfileDetailsTitle = raw.signupProfileDetailsTitle ?? fallback.signupProfileDetailsTitle
+        signupProfileDetailsText = raw.signupProfileDetailsText ?? fallback.signupProfileDetailsText
+        signupFailureMessage = raw.signupFailureMessage ?? fallback.signupFailureMessage
+        addressSectionTitle = raw.addressSectionTitle ?? fallback.addressSectionTitle
+        locationDisplayNameLabel = raw.locationDisplayNameLabel ?? fallback.locationDisplayNameLabel
+        locationDisplayNamePlaceholder = raw.locationDisplayNamePlaceholder ?? fallback.locationDisplayNamePlaceholder
+        cityLabel = raw.cityLabel ?? fallback.cityLabel
+        cityPlaceholder = raw.cityPlaceholder ?? fallback.cityPlaceholder
+        addressLine1Label = raw.addressLine1Label ?? fallback.addressLine1Label
+        addressLine1Placeholder = raw.addressLine1Placeholder ?? fallback.addressLine1Placeholder
+        addressLine2Label = raw.addressLine2Label ?? fallback.addressLine2Label
+        addressLine2Placeholder = raw.addressLine2Placeholder ?? fallback.addressLine2Placeholder
+        regionLabel = raw.regionLabel ?? fallback.regionLabel
+        regionPlaceholder = raw.regionPlaceholder ?? fallback.regionPlaceholder
+        postalCodeLabel = raw.postalCodeLabel ?? fallback.postalCodeLabel
+        postalCodePlaceholder = raw.postalCodePlaceholder ?? fallback.postalCodePlaceholder
+        countryCodeLabel = raw.countryCodeLabel ?? fallback.countryCodeLabel
+        countryCodePlaceholder = raw.countryCodePlaceholder ?? fallback.countryCodePlaceholder
+        countryCodeValidationMessage = raw.countryCodeValidationMessage ?? fallback.countryCodeValidationMessage
+        conditionsLabel = raw.conditionsLabel ?? fallback.conditionsLabel
+        conditionsDetailText = raw.conditionsDetailText ?? fallback.conditionsDetailText
+        conditionsValidationMessage = raw.conditionsValidationMessage ?? fallback.conditionsValidationMessage
+        conditionsNoneReportedText = raw.conditionsNoneReportedText ?? fallback.conditionsNoneReportedText
+        conditionLabels = raw.conditionLabels ?? fallback.conditionLabels
 
         // Passcode
         passcodeEnabled = raw.passcodeEnabled ?? fallback.passcodeEnabled

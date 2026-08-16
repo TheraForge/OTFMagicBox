@@ -41,6 +41,7 @@ enum UILabViewType: String, CaseIterable, Identifiable {
     case researchKit
     case coreMotion
     case healthSensors
+    case healthEducationCenter
     case playground
 
     var id: String { rawValue }
@@ -52,6 +53,7 @@ enum UILabViewType: String, CaseIterable, Identifiable {
         case .researchKit: config.uiLabResearchKit.localized
         case .coreMotion: config.uiLabCoreMotion.localized
         case .healthSensors: config.uiLabHealthSensors.localized
+        case .healthEducationCenter: config.uiLabHealthEducationCenter.localized
         case .playground: config.uiLabPlayground.localized
         }
     }
@@ -63,6 +65,7 @@ enum UILabViewType: String, CaseIterable, Identifiable {
         case .researchKit: StaticResearchKitViews()
         case .coreMotion: CoreMotionViews()
         case .healthSensors: HealthSensorsListView()
+        case .healthEducationCenter: HealthEducationCenterView()
         case .playground: SnippetPlaygroundView()
         }
     }

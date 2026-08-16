@@ -44,17 +44,16 @@ import OTFUtilities
 ///
 /// ## Strategy
 /// The most recent revision wins, regardless of whether it's deleted or not.
-/// This ensures that if Device B unchecks a task (deletes the outcome) AFTER Device A
-/// checked it, the uncheck (deletion) wins on all devices. This is the expected behavior
-/// for a real-time collaborative system.
+/// When one side is a tombstone without body timestamps, the resolver falls back to the
+/// Cloudant revision generation so a newer uncheck does not resurrect an older outcome.
 ///
 /// ## Timestamp Extraction
 /// Timestamps are extracted from the document body in the following order:
-/// 1. `updatedDate` as ISO8601 string
-/// 2. `createdDate` as ISO8601 string
-/// 3. `updatedDate` as Unix timestamp (TimeInterval)
-/// 4. `createdDate` as Unix timestamp (TimeInterval)
-/// 5. Fallback to `Date.distantPast` if no date is found
+/// 1. `deletedDate` as ISO8601 string or Unix timestamp
+/// 2. `updatedDate` as ISO8601 string or Unix timestamp
+/// 3. `createdDate` as ISO8601 string or Unix timestamp
+/// 4. Revision generation when a comparable timestamp is missing
+/// 5. Stable deleted/revision ID tie-breakers
 class OutcomeConflictResolver: NSObject, CDTConflictResolver {
 
     private let logger = OTFLogger.logger()
@@ -67,9 +66,7 @@ class OutcomeConflictResolver: NSObject, CDTConflictResolver {
     func resolve(_ docId: String, conflicts: [CDTDocumentRevision]) -> CDTDocumentRevision? {
         logger.info("OutcomeConflictResolver: Resolving \(conflicts.count) conflicts for doc: \(docId)")
 
-        let sorted = conflicts.sorted { rev1, rev2 in
-            extractDate(from: rev1) > extractDate(from: rev2)
-        }
+        let sorted = conflicts.sorted { isPreferred($0, over: $1) }
 
         guard let winner = sorted.first else {
             logger.info("OutcomeConflictResolver: No conflicts to resolve, returning first")
@@ -78,39 +75,75 @@ class OutcomeConflictResolver: NSObject, CDTConflictResolver {
 
         let deletedStatus = winner.deleted ? "deleted" : "active"
         let winnerDate = extractDate(from: winner)
-        logger.info("OutcomeConflictResolver: Winner is \(deletedStatus) revision \(winner.revId ?? "nil") with date \(winnerDate)")
+        let winnerDateDescription = winnerDate.map { "\($0)" } ?? "nil"
+        logger.info("OutcomeConflictResolver: Winner is \(deletedStatus) revision \(winner.revId ?? "nil") with date \(winnerDateDescription)")
 
         return winner
     }
 
     // MARK: - Private Methods
 
+    private func isPreferred(_ candidate: CDTDocumentRevision, over existing: CDTDocumentRevision) -> Bool {
+        let candidateDate = extractDate(from: candidate)
+        let existingDate = extractDate(from: existing)
+
+        if let candidateDate, let existingDate, candidateDate != existingDate {
+            return candidateDate > existingDate
+        }
+
+        let candidateGeneration = revisionGeneration(candidate.revId)
+        let existingGeneration = revisionGeneration(existing.revId)
+        if candidateGeneration != existingGeneration {
+            return candidateGeneration > existingGeneration
+        }
+
+        if candidate.deleted != existing.deleted {
+            return candidate.deleted
+        }
+
+        if candidateDate != existingDate {
+            return (candidateDate ?? .distantPast) > (existingDate ?? .distantPast)
+        }
+
+        return (candidate.revId ?? "") > (existing.revId ?? "")
+    }
+
+    private func revisionGeneration(_ revId: String?) -> Int {
+        guard let revId,
+              let generation = Int(revId.split(separator: "-", maxSplits: 1).first ?? "") else {
+            return 0
+        }
+        return generation
+    }
+
     /// Extracts the most recent date from a document revision's body.
-    private func extractDate(from revision: CDTDocumentRevision) -> Date {
+    private func extractDate(from revision: CDTDocumentRevision) -> Date? {
         guard let body = revision.body as? [String: Any] else {
-            return Date.distantPast
+            return nil
         }
 
-        // Try ISO8601 string format
-        if let dateString = body["updatedDate"] as? String,
-           let date = iso8601Formatter.date(from: dateString) {
+        for key in ["deletedDate", "updatedDate", "createdDate"] {
+            if let date = dateValue(body[key]) {
+                return date
+            }
+        }
+
+        return nil
+    }
+
+    private func dateValue(_ value: Any?) -> Date? {
+        if let date = value as? Date {
             return date
         }
 
-        if let dateString = body["createdDate"] as? String,
-           let date = iso8601Formatter.date(from: dateString) {
-            return date
+        if let dateString = value as? String {
+            return iso8601Formatter.date(from: dateString)
         }
 
-        // Try Unix timestamp format
-        if let timestamp = body["updatedDate"] as? TimeInterval {
+        if let timestamp = value as? TimeInterval {
             return Date(timeIntervalSince1970: timestamp)
         }
 
-        if let timestamp = body["createdDate"] as? TimeInterval {
-            return Date(timeIntervalSince1970: timestamp)
-        }
-
-        return Date.distantPast
+        return nil
     }
 }

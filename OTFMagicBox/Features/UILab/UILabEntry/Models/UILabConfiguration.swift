@@ -48,6 +48,7 @@ struct UILabConfiguration: Codable {
     let uiLabResearchKit: OTFStringLocalized
     let uiLabCoreMotion: OTFStringLocalized
     let uiLabHealthSensors: OTFStringLocalized
+    let uiLabHealthEducationCenter: OTFStringLocalized
     let uiLabPlayground: OTFStringLocalized
     let uiLabPlaygroundStep: OTFStringLocalized
     let uiLabPlaygroundAnswer: OTFStringLocalized
@@ -89,6 +90,7 @@ extension UILabConfiguration: OTFVersionedDecodable {
         uiLabResearchKit: "ResearchKit",
         uiLabCoreMotion: "CoreMotion",
         uiLabHealthSensors: "Health Sensors",
+        uiLabHealthEducationCenter: "Health Education Center",
         uiLabPlayground: "Playground",
         uiLabPlaygroundStep: "Step",
         uiLabPlaygroundAnswer: "Answer",
@@ -120,6 +122,8 @@ extension UILabConfiguration: OTFVersionedDecodable {
         self.uiLabResearchKit = raw.uiLabResearchKit ?? fallback.uiLabResearchKit
         self.uiLabCoreMotion = raw.uiLabCoreMotion ?? fallback.uiLabCoreMotion
         self.uiLabHealthSensors = raw.uiLabHealthSensors ?? fallback.uiLabHealthSensors
+        self.uiLabHealthEducationCenter = raw.uiLabHealthEducationCenter
+            ?? fallback.uiLabHealthEducationCenter
         self.uiLabPlayground = raw.uiLabPlayground ?? fallback.uiLabPlayground
         self.uiLabPlaygroundStep = raw.uiLabPlaygroundStep ?? fallback.uiLabPlaygroundStep
         self.uiLabPlaygroundAnswer = raw.uiLabPlaygroundAnswer ?? fallback.uiLabPlaygroundAnswer

@@ -130,6 +130,8 @@ struct HealthSensorsConfiguration: Codable {
     let ecgClassificationLowHeartRate: OTFStringLocalized
     let ecgClassificationHighHeartRate: OTFStringLocalized
     let ecgClassificationInconclusive: OTFStringLocalized
+    let ecgClassificationPoorReading: OTFStringLocalized
+    let ecgClassificationOther: OTFStringLocalized
     let ecgClassificationUnrecognized: OTFStringLocalized
 
     // Empty State Messages
@@ -258,6 +260,8 @@ extension HealthSensorsConfiguration: OTFVersionedDecodable {
         ecgClassificationLowHeartRate: "Low Heart Rate",
         ecgClassificationHighHeartRate: "High Heart Rate",
         ecgClassificationInconclusive: "Inconclusive",
+        ecgClassificationPoorReading: "Inconclusive — Poor Reading",
+        ecgClassificationOther: "Inconclusive — Other",
         ecgClassificationUnrecognized: "Unrecognized",
         // Empty State Messages
         emptyMessageHeartRate: "No heart rate data found in HealthKit.",
@@ -375,6 +379,8 @@ extension HealthSensorsConfiguration: OTFVersionedDecodable {
         self.ecgClassificationLowHeartRate = raw.ecgClassificationLowHeartRate ?? fallback.ecgClassificationLowHeartRate
         self.ecgClassificationHighHeartRate = raw.ecgClassificationHighHeartRate ?? fallback.ecgClassificationHighHeartRate
         self.ecgClassificationInconclusive = raw.ecgClassificationInconclusive ?? fallback.ecgClassificationInconclusive
+        self.ecgClassificationPoorReading = raw.ecgClassificationPoorReading ?? fallback.ecgClassificationPoorReading
+        self.ecgClassificationOther = raw.ecgClassificationOther ?? fallback.ecgClassificationOther
         self.ecgClassificationUnrecognized = raw.ecgClassificationUnrecognized ?? fallback.ecgClassificationUnrecognized
 
         // Empty State Messages

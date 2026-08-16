@@ -40,14 +40,44 @@ import OTFCareKitUI
 
 struct ScheduleViewRepresentable: UIViewControllerRepresentable {
 
+    final class Coordinator {
+        private let calendar = Calendar.current
+        private var synchronizedDate: Date
+
+        init(selectedDate: Date) {
+            synchronizedDate = selectedDate
+        }
+
+        func controllerSelectedDate(_ date: Date) {
+            synchronizedDate = date
+        }
+
+        func shouldApplyBoundDate(_ date: Date) -> Bool {
+            guard !calendar.isDate(synchronizedDate, inSameDayAs: date) else {
+                return false
+            }
+
+            synchronizedDate = date
+            return true
+        }
+    }
+
     @Binding var selectedDate: Date
     let ui: ScheduleViewModel.UIStrings
 
+    func makeCoordinator() -> Coordinator {
+        Coordinator(selectedDate: selectedDate)
+    }
+
     func makeUIViewController(context: Context) -> ScheduleViewController {
         let manager = CareKitStoreManager.shared
-        let controller = ScheduleViewController(storeManager: manager.synchronizedStoreManager)
+        let controller = ScheduleViewController(
+            storeManager: manager.synchronizedStoreManager,
+            initialDate: selectedDate
+        )
 
         controller.onSelectedDateChange = { newDate in
+            context.coordinator.controllerSelectedDate(newDate)
             if !Calendar.current.isDate(self.selectedDate, inSameDayAs: newDate) {
                 self.selectedDate = newDate
             }
@@ -64,7 +94,7 @@ struct ScheduleViewRepresentable: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ controller: ScheduleViewController, context: Context) {
-        if !Calendar.current.isDate(controller.selectedDate, inSameDayAs: selectedDate) {
+        if context.coordinator.shouldApplyBoundDate(selectedDate) {
             controller.selectDate(selectedDate, animated: true)
         }
     }

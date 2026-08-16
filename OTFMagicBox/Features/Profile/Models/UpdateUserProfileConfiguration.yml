@@ -47,7 +47,7 @@
 # - Lines starting with '#' are comments and ignored by the app.
 #
 # Version of this YAML schema/content. Bump when you change copy/structure.
-version: "2.0.0"
+version: "2.4.0"
 
 # Navigation bar title on the profile details screen.
 navTitle:
@@ -87,6 +87,210 @@ notSetText:
   en: "Not set"
   pt: "Não definido"
   ar: "غير محدد"
+
+healthProfileTitle:
+  en: "Health Profile"
+  pt: "Perfil de Saúde"
+  ar: "الملف الصحي"
+
+# Shown while editing the configured Health Profile. This feature accepts only
+# self-reported values; it must not be described as GPS or precise-location collection.
+healthProfilePrivacyNotice:
+  en: "Optional self-reported location and health conditions help complete your profile. Provide only the minimum location detail needed; a country, city, or region is enough when a full address is not needed. This feature does not access GPS or precise device location. You can edit or clear these values at any time."
+  pt: "A localização e as condições de saúde, indicadas opcionalmente por si, ajudam a completar o seu perfil. Indique apenas o detalhe de localização mínimo necessário; basta um país, cidade ou região quando não for necessária uma morada completa. Esta funcionalidade não acede a GPS nem à localização precisa do dispositivo. Pode editar ou limpar estes valores a qualquer momento."
+  ar: "يساعد الموقع والحالات الصحية التي تبلغ عنها اختياريًا في استكمال ملفك الشخصي. قدّم الحد الأدنى من تفاصيل الموقع اللازمة؛ يكفي بلد أو مدينة أو منطقة عندما لا تكون هناك حاجة إلى عنوان كامل. لا تصل هذه الميزة إلى GPS أو الموقع الدقيق للجهاز. يمكنك تعديل هذه القيم أو مسحها في أي وقت."
+
+locationLabel:
+  en: "Location"
+  pt: "Localização"
+  ar: "الموقع"
+
+locationDisplayNameLabel:
+  en: "Country"
+  pt: "País"
+  ar: "البلد"
+
+locationDisplayNamePlaceholder:
+  en: "Enter your country"
+  pt: "Introduza o seu país"
+  ar: "أدخل بلدك"
+
+cityLabel:
+  en: "City"
+  pt: "Cidade"
+  ar: "المدينة"
+
+cityPlaceholder:
+  en: "Enter your city"
+  pt: "Introduza a sua cidade"
+  ar: "أدخل مدينتك"
+
+fullAddressTitle:
+  en: "Full address"
+  pt: "Morada completa"
+  ar: "العنوان الكامل"
+
+addressLine1Label:
+  en: "Address line 1"
+  pt: "Morada, linha 1"
+  ar: "سطر العنوان 1"
+
+addressLine2Label:
+  en: "Address line 2"
+  pt: "Morada, linha 2"
+  ar: "سطر العنوان 2"
+
+regionLabel:
+  en: "State / region"
+  pt: "Distrito / região"
+  ar: "الولاية / المنطقة"
+
+postalCodeLabel:
+  en: "Postal code"
+  pt: "Código postal"
+  ar: "الرمز البريدي"
+
+countryCodeLabel:
+  en: "Country calling code"
+  pt: "Código de chamada do país"
+  ar: "رمز الاتصال الدولي للبلد"
+
+countryCodePlaceholder:
+  en: "Enter calling code, for example +351"
+  pt: "Introduza o código de chamada, por exemplo +351"
+  ar: "أدخل رمز الاتصال، مثل +351"
+
+clearLocationTitle:
+  en: "Clear location"
+  pt: "Limpar localização"
+  ar: "مسح الموقع"
+
+conditionsLabel:
+  en: "Health conditions"
+  pt: "Condições de saúde"
+  ar: "الحالات الصحية"
+
+conditionsSelectionText:
+  en: "Select all that apply or None reported."
+  pt: "Selecione todas as opções aplicáveis ou Nenhuma indicada."
+  ar: "حدد كل ما ينطبق أو لا توجد حالات مُبلَّغ عنها."
+
+conditionsNoneReportedText:
+  en: "None reported"
+  pt: "Nenhuma indicada"
+  ar: "لا توجد حالات مُبلَّغ عنها"
+
+conditionsUnknownText:
+  en: "Not sure"
+  pt: "Não tenho a certeza"
+  ar: "لست متأكدًا"
+
+clearConditionsTitle:
+  en: "Clear conditions"
+  pt: "Limpar condições"
+  ar: "مسح الحالات"
+
+conditionLabels:
+  "44054006":
+    en: "Type 2 diabetes mellitus"
+    pt: "Diabetes mellitus tipo 2"
+    ar: "داء السكري من النوع الثاني"
+  "46635009":
+    en: "Type 1 diabetes mellitus"
+    pt: "Diabetes mellitus tipo 1"
+    ar: "داء السكري من النوع الأول"
+  "38341003":
+    en: "Hypertensive disorder, systemic arterial"
+    pt: "Hipertensão arterial sistémica"
+    ar: "اضطراب ارتفاع ضغط الدم الشرياني الجهازي"
+  "84114007":
+    en: "Heart failure"
+    pt: "Insuficiência cardíaca"
+    ar: "قصور القلب"
+  "53741008":
+    en: "Coronary arteriosclerosis"
+    pt: "Aterosclerose coronária"
+    ar: "تصلب الشرايين التاجية"
+  "22298006":
+    en: "Myocardial infarction"
+    pt: "Enfarte do miocárdio"
+    ar: "احتشاء عضلة القلب"
+  "230690007":
+    en: "Cerebrovascular accident"
+    pt: "Acidente vascular cerebral"
+    ar: "سكتة دماغية"
+  "13645005":
+    en: "Chronic obstructive pulmonary disease"
+    pt: "Doença pulmonar obstrutiva crónica"
+    ar: "مرض الانسداد الرئوي المزمن"
+  "195967001":
+    en: "Asthma"
+    pt: "Asma"
+    ar: "الربو"
+  "233604007":
+    en: "Pneumonia"
+    pt: "Pneumonia"
+    ar: "الالتهاب الرئوي"
+  "65363002":
+    en: "Otitis media"
+    pt: "Otite média"
+    ar: "التهاب الأذن الوسطى"
+  "444814009":
+    en: "Viral upper respiratory tract infection"
+    pt: "Infeção viral das vias respiratórias superiores"
+    ar: "عدوى فيروسية في الجهاز التنفسي العلوي"
+  "36971009":
+    en: "Acute sinusitis"
+    pt: "Sinusite aguda"
+    ar: "التهاب الجيوب الأنفية الحاد"
+  "10509002":
+    en: "Acute bronchitis"
+    pt: "Bronquite aguda"
+    ar: "التهاب الشعب الهوائية الحاد"
+  "193462001":
+    en: "Chronic kidney disease"
+    pt: "Doença renal crónica"
+    ar: "مرض الكلى المزمن"
+  "709044004":
+    en: "Chronic kidney disease stage 3"
+    pt: "Doença renal crónica estádio 3"
+    ar: "مرض الكلى المزمن، المرحلة الثالثة"
+  "271737000":
+    en: "Anemia"
+    pt: "Anemia"
+    ar: "فقر الدم"
+  "64859006":
+    en: "Osteoporosis"
+    pt: "Osteoporose"
+    ar: "هشاشة العظام"
+  "396275006":
+    en: "Osteoarthritis"
+    pt: "Osteoartrose"
+    ar: "الفصال العظمي"
+  "370143000":
+    en: "Major depressive disorder"
+    pt: "Perturbação depressiva major"
+    ar: "الاضطراب الاكتئابي الشديد"
+
+countryCodeValidationMessage:
+  en: "Use a valid country calling code, for example +351."
+  pt: "Utilize um código de chamada do país válido, por exemplo +351."
+  ar: "استخدم رمز اتصال دولي صالحًا للبلد، مثل +351."
+
+profileSaveErrorTitle:
+  en: "Unable to save profile"
+  pt: "Não foi possível guardar o perfil"
+  ar: "تعذر حفظ الملف الشخصي"
+
+profileSaveErrorMessage:
+  en: "Your changes are still available to edit. Please try again."
+  pt: "As suas alterações continuam disponíveis para edição. Tente novamente."
+  ar: "لا تزال تعديلاتك متاحة للتحرير. يرجى المحاولة مرة أخرى."
+
+saveErrorDismissTitle:
+  en: "OK"
+  pt: "OK"
+  ar: "موافق"
 
 # Photo editing strings used in the photo action sheet / dialog.
 editPhotoTitle:

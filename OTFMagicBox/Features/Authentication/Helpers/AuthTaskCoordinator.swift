@@ -37,42 +37,280 @@ import OTFUtilities
 import Combine
 import Sodium
 import OTFCloudClientAPI
+import AuthenticationServices
+import GoogleSignIn
 import UIKit
 
-final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
+enum SignupAuthenticationTrigger {
 
+    static func isAuthenticationTrigger(
+        stepIdentifier: String,
+        isSocialSignup: Bool,
+        passcodeEnabled: Bool
+    ) -> Bool {
+        (passcodeEnabled && stepIdentifier == Constants.Auth.passcodeStep) ||
+            stepIdentifier == Constants.Auth.completionStep ||
+            (isSocialSignup && stepIdentifier == Constants.Auth.healthKitDataStep)
+    }
+}
+
+enum SignupAuthenticationBoundary {
+    private static let preAuthenticationStepIdentifiers: Set<String> = [
+        Constants.Auth.signInButtons,
+        Constants.Auth.registrationStep,
+        Constants.Auth.registrationProfileDetailsStep
+    ]
+
+    static func shouldPresent(
+        stepIdentifier: String,
+        navigationDirection: ORKStepViewControllerNavigationDirection,
+        registrationCompleted: Bool,
+        isSocialSignup: Bool
+    ) -> Bool {
+        guard isSocialSignup,
+              registrationCompleted,
+              navigationDirection == .reverse else {
+            return true
+        }
+        return !preAuthenticationStepIdentifiers.contains(stepIdentifier)
+    }
+}
+
+protocol SignupCryptoProviding {
+    func generateMasterKey(password: String, email: String) throws -> Bytes
+    func keyPair(seed: Bytes) -> Box.KeyPair?
+    func encryptSealedBox(bytes: Bytes, recipientPublicKey: Bytes) throws -> Bytes
+    func defaultStorageKey(from masterKey: Bytes) throws -> Bytes
+    func confidentialStorageKey(from masterKey: Bytes) throws -> Bytes
+}
+
+extension SwiftSodium: SignupCryptoProviding {
+    func keyPair(seed: Bytes) -> Box.KeyPair? {
+        sodium.box.keyPair(seed: seed)
+    }
+}
+
+struct SignupRequestData {
+    let signupRequest: OTFCloudClientAPI.Request.SignUp
+    let masterKey: Bytes
+    let keyPair: Box.KeyPair
+    let defaultStorageKey: Bytes
+    let confidentialStorageKey: Bytes
+}
+
+struct SignupProfileRequestValues: Equatable {
+    let location: OTFCloudClientAPI.Request.SignUpLocation?
+    let conditions: [OTFCloudClientAPI.Request.SignUpCondition]?
+
+    init(profileData: SignupProfileData?) throws {
+        let payload = try profileData?.signupPayload()
+        location = payload?.location.map { location in
+            .init(
+                displayName: location.country,
+                addressLine1: location.addressLine1,
+                addressLine2: location.addressLine2,
+                city: location.city,
+                region: location.region,
+                postalCode: location.postalCode,
+                countryCode: location.countryCode
+            )
+        }
+        conditions = payload?.conditions.map { conditions in
+            conditions.map { condition in
+                .init(code: condition.code, name: condition.name)
+            }
+        }
+    }
+}
+
+struct SocialSignupRequestFactory {
+    func createRequest(
+        socialType: SocialType,
+        identityToken: String,
+        profileData: SignupProfileData?
+    ) throws -> OTFCloudClientAPI.Request.SocialLogin {
+        let profileValues = try SignupProfileRequestValues(profileData: profileData)
+        return OTFCloudClientAPI.Request.SocialLogin(
+            userType: .patient,
+            socialType: socialType,
+            authType: .signup,
+            identityToken: identityToken,
+            location: profileValues.location,
+            conditions: profileValues.conditions
+        )
+    }
+}
+
+struct SignupRequestFactory {
     private enum FileConstants {
         static let patientFirstName = "patientFirstName"
         static let patientLastName = "patientLastName"
     }
 
-    private struct SignupRequestData {
-        let signupRequest: OTFCloudClientAPI.Request.SignUp
-        let masterKey: Bytes
-        let keyPair: Box.KeyPair
-        let defaultStorageKey: Bytes
-        let confidentialStorageKey: Bytes
+    let crypto: SignupCryptoProviding
+
+    static let live = SignupRequestFactory(crypto: SwiftSodium())
+
+    func createSignupRequest(
+        from stepResult: ORKStepResult,
+        profileData: SignupProfileData? = nil
+    ) -> SignupRequestData? {
+        guard
+            let email = textAnswer(for: ORKRegistrationFormItemIdentifierEmail, in: stepResult),
+            let pass = textAnswer(for: ORKRegistrationFormItemIdentifierPassword, in: stepResult),
+            let gender = choiceAnswer(for: ORKRegistrationFormItemIdentifierGender, in: stepResult),
+            let dob = dateAnswer(for: ORKRegistrationFormItemIdentifierDOB, in: stepResult)?.toString(format: .iso8601)
+        else {
+            OTFLogger.logger().error("createSignupRequest: missing required fields from step result.")
+            return nil
+        }
+
+        let givenName = textAnswer(
+            for: ORKRegistrationFormItemIdentifierGivenName,
+            in: stepResult
+        ) ?? FileConstants.patientFirstName
+        let familyName = textAnswer(
+            for: ORKRegistrationFormItemIdentifierFamilyName,
+            in: stepResult
+        ) ?? FileConstants.patientLastName
+
+        do {
+            let profileValues = try SignupProfileRequestValues(profileData: profileData)
+            let masterKey = try crypto.generateMasterKey(password: pass, email: email)
+
+            guard let keyPair = crypto.keyPair(seed: masterKey) else {
+                OTFLogger.logger().error("createSignupRequest: failed to derive key pair from master key.")
+                return nil
+            }
+
+            let encryptedMasterKey = try crypto.encryptSealedBox(bytes: masterKey, recipientPublicKey: keyPair.publicKey)
+            let defaultStorageKey = try crypto.defaultStorageKey(from: masterKey)
+            let confidentialStorageKey = try crypto.confidentialStorageKey(from: masterKey)
+
+            let encryptedDefaultStorageKeyHex = try crypto
+                .encryptSealedBox(bytes: defaultStorageKey, recipientPublicKey: keyPair.publicKey)
+                .bytesToHex(spacing: "").lowercased()
+
+            let encryptedConfidentialStorageKeyHex = try crypto
+                .encryptSealedBox(bytes: confidentialStorageKey, recipientPublicKey: keyPair.publicKey)
+                .bytesToHex(spacing: "").lowercased()
+
+            let signupRequest = OTFCloudClientAPI.Request.SignUp(
+                email: email,
+                password: pass,
+                first_name: givenName,
+                last_name: familyName,
+                type: .patient,
+                dob: dob,
+                gender: gender,
+                phoneNo: "",
+                encryptedMasterKey: encryptedMasterKey.bytesToHex(spacing: "").lowercased(),
+                publicKey: keyPair.publicKey.bytesToHex(spacing: "").lowercased(),
+                encryptedDefaultStorageKey: encryptedDefaultStorageKeyHex,
+                encryptedConfidentialStorageKey: encryptedConfidentialStorageKeyHex,
+                location: profileValues.location,
+                conditions: profileValues.conditions
+            )
+
+            return SignupRequestData(
+                signupRequest: signupRequest,
+                masterKey: masterKey,
+                keyPair: keyPair,
+                defaultStorageKey: defaultStorageKey,
+                confidentialStorageKey: confidentialStorageKey
+            )
+        } catch {
+            OTFLogger.logger().error("createSignupRequest failed before signup request creation.")
+            return nil
+        }
     }
 
+    private func textAnswer(for identifier: String, in stepResult: ORKStepResult) -> String? {
+        (stepResult.results?.first { $0.identifier == identifier } as? ORKTextQuestionResult)?.textAnswer
+    }
+
+    private func choiceAnswer(for identifier: String, in stepResult: ORKStepResult) -> String? {
+        (stepResult.results?.first { $0.identifier == identifier } as? ORKChoiceQuestionResult)?
+            .choiceAnswers?
+            .first as? String
+    }
+
+    private func dateAnswer(for identifier: String, in stepResult: ORKStepResult) -> Date? {
+        (stepResult.results?.first { $0.identifier == identifier } as? ORKDateQuestionResult)?.dateAnswer
+    }
+}
+
+final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate, ASAuthorizationControllerDelegate {
     let authType: AuthType
     private let documentManager = UploadDocumentManager()
     private let swiftSodium = SwiftSodium()
+    private let signupRequestFactory: SignupRequestFactory
+    private let socialSignupRequestFactory: SocialSignupRequestFactory
     private var disposables: AnyCancellable?
     private var registrationCompleted = false
+    private var socialSignupInFlight = false
+    private var currentNonce: String?
+    private var pendingSocialProfileData: SignupProfileData?
+    private weak var pendingSocialTaskViewController: ORKTaskViewController?
     private var navigationDirection = ORKStepViewControllerNavigationDirection.forward
     private let auth = AuthConfigurationLoader.auth
+    private let appConfiguration: AppConfiguration
     private let logger = OTFLogger.logger()
 
-    init(authType: AuthType) {
+    init(
+        authType: AuthType,
+        signupRequestFactory: SignupRequestFactory = .live,
+        socialSignupRequestFactory: SocialSignupRequestFactory = .init(),
+        appConfiguration: AppConfiguration = AppConfigurationLoader.config
+    ) {
         self.authType = authType
+        self.signupRequestFactory = signupRequestFactory
+        self.socialSignupRequestFactory = socialSignupRequestFactory
+        self.appConfiguration = appConfiguration
     }
 
     func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
         guard authType == .signup else { return true }
 
-        if shouldCheckRegistration(step: step) {
+        let optionsResult = taskViewController.result.stepResult(
+            forStepIdentifier: Constants.Auth.signInButtons
+        )
+        let socialProvider = SocialSignupSelection.provider(from: optionsResult)
+
+        guard SignupAuthenticationBoundary.shouldPresent(
+            stepIdentifier: step.identifier,
+            navigationDirection: navigationDirection,
+            registrationCompleted: registrationCompleted,
+            isSocialSignup: socialProvider != nil
+        ) else {
+            return false
+        }
+
+        if shouldCheckRegistration(step: step, isSocialSignup: socialProvider != nil) {
+            let profileData: SignupProfileData?
+            switch validateSignupProfileDetails(in: taskViewController) {
+            case .notShown:
+                profileData = nil
+            case let .valid(validatedProfileData):
+                profileData = validatedProfileData
+            case .invalid:
+                return false
+            }
+
+            if let socialProvider {
+                beginSocialSignup(
+                    provider: socialProvider,
+                    profileData: profileData,
+                    taskViewController: taskViewController
+                )
+                return false
+            }
+
             guard let stepResult = taskViewController.result.stepResult(forStepIdentifier: Constants.Auth.registrationStep),
-                  let signupRequestData = createSignupRequest(from: stepResult) else { return false }
+                  let signupRequestData = signupRequestFactory.createSignupRequest(
+                      from: stepResult,
+                      profileData: profileData
+                  ) else { return false }
 
             presentSignupLoadingAlert(on: taskViewController)
 
@@ -90,74 +328,185 @@ final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
         return true
     }
 
-    private func shouldCheckRegistration(step: ORKStep) -> Bool {
-        let isPasscodeOrCompletion = (auth.passcodeEnabled && step.identifier == Constants.Auth.passcodeStep)
-        || step.identifier == Constants.Auth.completionStep
-        return isPasscodeOrCompletion && navigationDirection == .forward && !registrationCompleted
+    private func shouldCheckRegistration(step: ORKStep, isSocialSignup: Bool) -> Bool {
+        let isPostRegistrationStep = SignupAuthenticationTrigger.isAuthenticationTrigger(
+            stepIdentifier: step.identifier,
+            isSocialSignup: isSocialSignup,
+            passcodeEnabled: auth.passcodeEnabled
+        )
+        return isPostRegistrationStep && navigationDirection == .forward && !registrationCompleted
     }
 
-    private func createSignupRequest(from stepResult: ORKStepResult) -> SignupRequestData? {
-        guard
-            let email = (stepResult.results?.first as? ORKTextQuestionResult)?.textAnswer,
-            let pass = (stepResult.results?[1] as? ORKTextQuestionResult)?.textAnswer,
-            let gender = (stepResult.results?[5] as? ORKChoiceQuestionResult)?.choiceAnswers?.first as? String,
-            let dob = (stepResult.results?[6] as? ORKDateQuestionResult)?.dateAnswer?.toString(format: .iso8601)
-        else {
-            logger.error("createSignupRequest: missing required fields from step result.")
-            return nil
+    private func validateSignupProfileDetails(
+        in taskViewController: ORKTaskViewController
+    ) -> SignupProfileDetailsValidation {
+        guard appConfiguration.enableLocation || appConfiguration.enableConditions else {
+            return .notShown
         }
-
-        let givenName = (stepResult.results?[3] as? ORKTextQuestionResult)?.textAnswer ?? FileConstants.patientFirstName
-        let familyName = (stepResult.results?[4] as? ORKTextQuestionResult)?.textAnswer ?? FileConstants.patientLastName
+        guard let stepResult = taskViewController.result.stepResult(
+            forStepIdentifier: Constants.Auth.registrationProfileDetailsStep
+        ) else {
+            presentSignupProfileDetailsValidationError(.detailsUnavailable, on: taskViewController)
+            return .invalid
+        }
 
         do {
-            let masterKey = try swiftSodium.generateMasterKey(password: pass, email: email)
+            return .valid(try SignupProfileData.make(
+                from: stepResult,
+                auth: auth,
+                appConfiguration: appConfiguration
+            ))
+        } catch let error as SignupProfileDataValidationError {
+            presentSignupProfileDetailsValidationError(error, on: taskViewController)
+            return .invalid
+        } catch {
+            presentSignupProfileDetailsValidationError(.detailsUnavailable, on: taskViewController)
+            return .invalid
+        }
+    }
 
-            guard let keyPair = swiftSodium.sodium.box.keyPair(seed: masterKey) else {
-                logger.error("createSignupRequest: failed to derive key pair from master key.")
-                return nil
+    private func presentSignupProfileDetailsValidationError(
+        _ error: SignupProfileDataValidationError,
+        on taskViewController: ORKTaskViewController
+    ) {
+        taskViewController.alertWithAction(
+            title: auth.signupErrorTitle.localized,
+            message: error.localizedMessage(using: auth)
+        ) { _ in }
+    }
+
+    private enum SignupProfileDetailsValidation: Equatable {
+        case notShown
+        case valid(SignupProfileData)
+        case invalid
+    }
+
+    private func beginSocialSignup(
+        provider: SocialType,
+        profileData: SignupProfileData?,
+        taskViewController: ORKTaskViewController
+    ) {
+        guard !socialSignupInFlight else { return }
+        socialSignupInFlight = true
+        pendingSocialProfileData = profileData
+        pendingSocialTaskViewController = taskViewController
+
+        switch provider {
+        case .apple:
+            currentNonce = .makeRandomNonce()
+            let provider = ASAuthorizationAppleIDProvider()
+            let request = provider.createRequest()
+            request.requestedScopes = [.email]
+            request.nonce = currentNonce?.sha256
+            let controller = ASAuthorizationController(authorizationRequests: [request])
+            controller.delegate = self
+            controller.performRequests()
+        case .gmail:
+            beginGoogleSocialSignup(presenting: taskViewController)
+        }
+    }
+
+    private func beginGoogleSocialSignup(presenting taskViewController: ORKTaskViewController) {
+        GIDSignIn.sharedInstance.signIn(withPresenting: taskViewController) { [weak self] user, error in
+            guard let self else { return }
+            guard error == nil, let idToken = user?.user.idToken?.tokenString else {
+                self.handleSocialAuthorizationFailure()
+                return
             }
+            self.executeSocialSignup(provider: .gmail, identityToken: idToken)
+        }
+    }
 
-            let encryptedMasterKey = try swiftSodium.encryptSealedBox(bytes: masterKey, recipientPublicKey: keyPair.publicKey)
-            let defaultStorageKey = try swiftSodium.defaultStorageKey(from: masterKey)
-            let confidentialStorageKey = try swiftSodium.confidentialStorageKey(from: masterKey)
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
+              let tokenData = credential.identityToken,
+              let identityToken = String(data: tokenData, encoding: .utf8) else {
+            handleSocialAuthorizationFailure()
+            return
+        }
+        executeSocialSignup(provider: .apple, identityToken: identityToken)
+    }
 
-            // Encrypt storage keys with our key, then hex-encode (lowercase to match server)
-            let encryptedDefaultStorageKeyHex = try swiftSodium
-                .encryptSealedBox(bytes: defaultStorageKey, recipientPublicKey: keyPair.publicKey)
-                .bytesToHex(spacing: "").lowercased()
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithError error: Error
+    ) {
+        handleSocialAuthorizationFailure()
+    }
 
-            let encryptedConfidentialStorageKeyHex = try swiftSodium
-                .encryptSealedBox(bytes: confidentialStorageKey, recipientPublicKey: keyPair.publicKey)
-                .bytesToHex(spacing: "").lowercased()
+    private func executeSocialSignup(provider: SocialType, identityToken: String) {
+        guard let taskViewController = pendingSocialTaskViewController else {
+            resetSocialSignupState()
+            return
+        }
 
-            // Build request payload
-            let signupRequest = OTFCloudClientAPI.Request.SignUp(
-                email: email,
-                password: pass,
-                first_name: givenName,
-                last_name: familyName,
-                type: .patient,
-                dob: dob,
-                gender: gender,
-                phoneNo: "",
-                encryptedMasterKey: encryptedMasterKey.bytesToHex(spacing: "").lowercased(),
-                publicKey: keyPair.publicKey.bytesToHex(spacing: "").lowercased(),
-                encryptedDefaultStorageKey: encryptedDefaultStorageKeyHex,
-                encryptedConfidentialStorageKey: encryptedConfidentialStorageKeyHex
-            )
-
-            return SignupRequestData(
-                signupRequest: signupRequest,
-                masterKey: masterKey,
-                keyPair: keyPair,
-                defaultStorageKey: defaultStorageKey,
-                confidentialStorageKey: confidentialStorageKey
+        let request: OTFCloudClientAPI.Request.SocialLogin
+        do {
+            request = try socialSignupRequestFactory.createRequest(
+                socialType: provider,
+                identityToken: identityToken,
+                profileData: pendingSocialProfileData
             )
         } catch {
-            logger.error("createSignupRequest failed: \(error.localizedDescription)")
-            return nil
+            handleSocialAuthorizationFailure()
+            return
         }
+
+        presentSignupLoadingAlert(on: taskViewController)
+        disposables = OTFTheraforgeNetwork.shared.socialLoginRequest(request)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self, weak taskViewController] completion in
+                    guard let self, let taskViewController else { return }
+                    if case .failure = completion {
+                        self.handleSocialSignupFailure(taskViewController: taskViewController)
+                    }
+                },
+                receiveValue: { [weak self, weak taskViewController] _ in
+                    guard let self, let taskViewController else { return }
+                    self.registrationCompleted = true
+                    self.resetSocialSignupState()
+                    taskViewController.dismiss(animated: true) {
+                        taskViewController.goForward()
+                    }
+                }
+            )
+    }
+
+    private func handleSocialAuthorizationFailure() {
+        logger.error("Social signup authorization failed.")
+        guard let taskViewController = pendingSocialTaskViewController else {
+            resetSocialSignupState()
+            return
+        }
+        resetSocialSignupState()
+        presentGenericSignupError(on: taskViewController)
+    }
+
+    private func handleSocialSignupFailure(taskViewController: ORKTaskViewController) {
+        logger.error("Social signup request failed.")
+        resetSocialSignupState()
+        taskViewController.dismiss(animated: false) { [weak self, weak taskViewController] in
+            guard let self, let taskViewController else { return }
+            self.presentGenericSignupError(on: taskViewController)
+        }
+    }
+
+    private func presentGenericSignupError(on taskViewController: ORKTaskViewController) {
+        taskViewController.alertWithAction(
+            title: auth.signupErrorTitle.localized,
+            message: auth.signupFailureMessage.localized
+        ) { _ in }
+    }
+
+    private func resetSocialSignupState() {
+        socialSignupInFlight = false
+        currentNonce = nil
+        pendingSocialProfileData = nil
+        pendingSocialTaskViewController = nil
     }
 
     private func presentSignupLoadingAlert(on taskViewController: ORKTaskViewController) {
@@ -197,9 +546,14 @@ final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 })
     }
 
-    private func handleSignupError(_ error: ForgeError, taskViewController: ORKTaskViewController) {
+    private func handleSignupError(_: ForgeError, taskViewController: ORKTaskViewController) {
+        logger.error("Signup request failed.")
         taskViewController.dismiss(animated: false) {
-            let alert = UIAlertController(title: self.auth.genericErrorTitle.localized, message: error.error.message, preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: self.auth.signupErrorTitle.localized,
+                message: self.auth.signupFailureMessage.localized,
+                preferredStyle: .alert
+            )
             alert.addAction(UIAlertAction(title: self.auth.okayActionTitle.localized, style: .cancel))
             taskViewController.present(alert, animated: false)
         }
@@ -228,10 +582,11 @@ final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] response in
                 guard let self else { return }
-                if case let .failure(error) = response {
+                if case .failure = response {
+                    self.logger.error("Verification email request failed.")
                     taskViewController.alertWithAction(
-                        title: self.auth.genericErrorTitle.localized,
-                        message: error.error.message
+                        title: self.auth.signupErrorTitle.localized,
+                        message: self.auth.signupFailureMessage.localized
                     ) { _ in taskViewController.dismiss(animated: true) }
                 }
             }, receiveValue: { [weak self] _ in
@@ -254,7 +609,7 @@ final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
         do {
             return try swiftSodium.generateMasterKey(password: password, email: email)
         } catch {
-            logger.error("generateMasterKey failed: \(error.localizedDescription)")
+            logger.error("Master key generation failed.")
             return []
         }
     }
@@ -300,8 +655,8 @@ final class AuthTaskCoordinator: NSObject, ORKTaskViewControllerDelegate {
 
                         try data.write(to: url)
                         UserDefaults.standard.set(url.path, forKey: Constants.Storage.kConsentDocumentURL)
-                    } catch let error {
-                        logger.error("error in writting data in pdf \(error.localizedDescription)")
+                    } catch {
+                        logger.error("Consent PDF data could not be written.")
                     }
                 }
             }

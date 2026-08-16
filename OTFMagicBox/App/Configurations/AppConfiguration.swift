@@ -59,6 +59,8 @@ struct AppConfiguration: Codable {
     let useCareKit: Bool
     let showCheckupScreen: Bool
     let showUIScreen: Bool
+    let enableLocation: Bool
+    let enableConditions: Bool
     let showPrivacyAndTerms: Bool
     let showConsentDocument: Bool
     let playgroundMode: Bool
@@ -70,7 +72,7 @@ extension AppConfiguration: OTFVersionedDecodable {
     typealias Raw = RawAppConfiguration
 
     static let fallback = AppConfiguration(
-        version: "2.0.0",
+        version: "2.1.0",
         apiKey: "<your-api-key>",
         teamWebsite: "<your-web-site-url>",
         teamEmail: "<your-team-email>",
@@ -91,6 +93,8 @@ extension AppConfiguration: OTFVersionedDecodable {
         useCareKit: true,
         showCheckupScreen: true,
         showUIScreen: true,
+        enableLocation: false,
+        enableConditions: false,
         showPrivacyAndTerms: true,
         showConsentDocument: true,
         playgroundMode: false,
@@ -121,6 +125,8 @@ extension AppConfiguration: OTFVersionedDecodable {
         self.useCareKit = raw.useCareKit ?? fallback.useCareKit
         self.showCheckupScreen = raw.showCheckupScreen ?? fallback.showCheckupScreen
         self.showUIScreen = raw.showUIScreen ?? fallback.showUIScreen
+        self.enableLocation = raw.enableLocation ?? fallback.enableLocation
+        self.enableConditions = raw.enableConditions ?? fallback.enableConditions
         self.showPrivacyAndTerms = raw.showPrivacyAndTerms ?? fallback.showPrivacyAndTerms
         self.showConsentDocument = raw.showConsentDocument ?? fallback.showConsentDocument
         self.playgroundMode = raw.playgroundMode ?? fallback.playgroundMode
