@@ -831,9 +831,7 @@ final class CareKitDaySnapshotStore {
     }
 
     private func dayInterval(for date: Date) -> DateInterval {
-        let startOfDay = normalizedDate(for: date)
-        let endOfDay = calendar.date(byAdding: DateComponents(day: 1, second: -1), to: startOfDay) ?? startOfDay
-        return DateInterval(start: startOfDay, end: endOfDay)
+        CareKitScheduleDay(containing: date, calendar: calendar).eventQuery.dateInterval
     }
 }
 
@@ -887,14 +885,8 @@ struct DaySummarySnapshotBuilder {
         DaySummarySnapshot(date: date, summaries: emptySummaries())
     }
 
-    private func normalizedDate(for date: Date) -> Date {
-        calendar.startOfDay(for: date)
-    }
-
     private func dayInterval(for date: Date) -> DateInterval {
-        let startOfDay = normalizedDate(for: date)
-        let endOfDay = calendar.date(byAdding: DateComponents(day: 1, second: -1), to: startOfDay) ?? startOfDay
-        return DateInterval(start: startOfDay, end: endOfDay)
+        CareKitScheduleDay(containing: date, calendar: calendar).eventQuery.dateInterval
     }
 
     private func emptySummaries() -> [CheckUpTaskType: CategorySummary] {

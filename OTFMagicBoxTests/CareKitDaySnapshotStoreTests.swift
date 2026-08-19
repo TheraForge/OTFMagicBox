@@ -343,6 +343,44 @@ struct CareKitDaySnapshotStoreTests {
         #expect(snapshot.summary(for: .checkup).totalTasks == 0)
         #expect(snapshot.summary(for: .checkup).completedTasks == 0)
     }
+
+    @Test("Summary snapshots include a task in the final second of the day")
+    func summarySnapshotsIncludeFinalSecondTask() throws {
+        let requestedDay = fixedSnapshotCalendar.startOfDay(for: snapshotDay)
+        let startOfNextDay = try #require(
+            fixedSnapshotCalendar.date(byAdding: .day, value: 1, to: requestedDay)
+        )
+        let finalSecond = startOfNextDay.addingTimeInterval(-1)
+        let schedule = OCKSchedule(composing: [
+            OCKScheduleElement(
+                start: finalSecond,
+                end: startOfNextDay,
+                interval: DateComponents(day: 1),
+                duration: .minutes(1)
+            )
+        ])
+        var task = OCKTask(
+            id: "bedtime-medication",
+            title: "Bedtime medication",
+            carePlanUUID: nil,
+            schedule: schedule
+        )
+        task.groupIdentifier = groupIdentifier(category: .medication)
+        let outcome = OCKOutcome(
+            taskUUID: task.uuid,
+            taskOccurrenceIndex: 0,
+            values: [OCKOutcomeValue(true)]
+        )
+
+        let snapshot = DaySummarySnapshotBuilder(calendar: fixedSnapshotCalendar).makeSummarySnapshot(
+            for: requestedDay,
+            tasks: [task],
+            outcomes: [outcome]
+        )
+
+        #expect(snapshot.summary(for: .medication).totalTasks == 1)
+        #expect(snapshot.summary(for: .medication).completedTasks == 1)
+    }
 }
 
 private actor SnapshotResultRecorder<Value> {

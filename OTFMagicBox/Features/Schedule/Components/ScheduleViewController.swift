@@ -355,7 +355,7 @@ class ScheduleViewController: OCKDailyPageViewController {
     }
 
     private func createTaskViewController(for task: OCKAnyTask, date: Date) -> UIViewController {
-        let eventQuery = OCKEventQuery(for: date)
+        let eventQuery = CareKitScheduleDay(containing: date, calendar: calendar).eventQuery
 
         if let descriptor = task.viewType.sensorTaskDescriptor {
             return SensorTaskViewController(

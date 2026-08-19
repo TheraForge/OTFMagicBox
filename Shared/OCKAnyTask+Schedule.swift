@@ -35,15 +35,45 @@
 import Foundation
 import OTFCareKitStore
 
+/// The calendar boundaries CareKit uses when selecting and rendering one day of a schedule.
+///
+/// `OCKSchedule.events(from:to:)` treats its upper bound as exclusive for timed events, but
+/// expands all-day events through the calendar day containing that bound. The rendering query
+/// therefore stops at the greatest representable `Date` before the next day: this includes
+/// events in the final second without admitting an all-day event from the following day.
+struct CareKitScheduleDay {
+    let start: Date
+    let startOfNextDay: Date
+
+    init(containing date: Date, calendar: Calendar = .current) {
+        start = calendar.startOfDay(for: date)
+        startOfNextDay = calendar.date(byAdding: .day, value: 1, to: start) ??
+            start.addingTimeInterval(24 * 60 * 60)
+    }
+
+    var eventQuery: OCKEventQuery {
+        OCKEventQuery(
+            dateInterval: DateInterval(
+                start: start,
+                end: Date(
+                    timeIntervalSinceReferenceDate:
+                        startOfNextDay.timeIntervalSinceReferenceDate.nextDown
+                )
+            )
+        )
+    }
+
+    func contains(_ event: OCKScheduleEvent) -> Bool {
+        event.start >= start && event.start < startOfNextDay
+    }
+}
+
 extension OCKAnyTask {
     func hasScheduledEvents(onDay date: Date, calendar: Calendar = .current) -> Bool {
-        let startOfDay = calendar.startOfDay(for: date)
-        guard let startOfNextDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
-            return false
-        }
+        let day = CareKitScheduleDay(containing: date, calendar: calendar)
 
         return schedule
-            .events(from: startOfDay, to: startOfNextDay)
-            .contains { $0.start < startOfNextDay }
+            .events(from: day.start, to: day.startOfNextDay)
+            .contains(where: day.contains)
     }
 }

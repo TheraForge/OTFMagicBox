@@ -99,7 +99,10 @@ struct ScheduleView: View {
                             ForEach(tasks, id: \.id) { task in
                                 SimpleTaskView(
                                     taskID: task.id,
-                                    eventQuery: .init(for: selectedDate),
+                                    eventQuery: CareKitScheduleDay(
+                                        containing: selectedDate,
+                                        calendar: calendar
+                                    ).eventQuery,
                                     storeManager: careKitStore.synchronizedStoreManager
                                 )
                                 .id(taskViewIdentity(for: task, date: selectedDate))
