@@ -171,7 +171,7 @@ struct ScheduleView: View {
 
                 case .success(let data):
                     let todayTasks = data
-                        .filter { hasScheduledEvents($0, onDay: selectedDate) }
+                        .filter { $0.hasScheduledEvents(onDay: selectedDate, calendar: calendar) }
                         .sorted { $0.id < $1.id }
                     self.cachedTasksByDay[day] = todayTasks
                     self.tasks = todayTasks
@@ -243,7 +243,7 @@ struct ScheduleView: View {
 
                 guard case .success(let data) = result else { return }
                 let dayTasks = data
-                    .filter { self.hasScheduledEvents($0, onDay: date) }
+                    .filter { $0.hasScheduledEvents(onDay: date, calendar: self.calendar) }
                     .sorted { $0.id < $1.id }
                 self.cachedTasksByDay[normalizedDay] = dayTasks
             }
@@ -256,15 +256,6 @@ struct ScheduleView: View {
 
     private func normalizedDate(for date: Date) -> Date {
         calendar.startOfDay(for: date)
-    }
-
-    private func hasScheduledEvents(_ task: OCKTask, onDay date: Date) -> Bool {
-        let startOfDay = calendar.startOfDay(for: date)
-        let endOfDay = calendar.date(
-            byAdding: DateComponents(day: 1, second: -1),
-            to: startOfDay
-        ) ?? startOfDay
-        return !task.schedule.events(from: startOfDay, to: endOfDay).isEmpty
     }
 
     private func taskViewIdentity(for task: OCKTask, date: Date) -> String {

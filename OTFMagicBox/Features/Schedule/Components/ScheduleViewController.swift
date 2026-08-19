@@ -196,10 +196,8 @@ class ScheduleViewController: OCKDailyPageViewController {
             isFirstLoad = false
 
         case .success(let tasks):
-            // Filter and sort tasks for consistent display order
-            let todayTasks = tasks
-                .filter { $0.hasScheduledEvents(onDay: date, calendar: calendar) }
-                .sorted { $0.id < $1.id }
+            // The day snapshot store already excludes tasks without occurrences.
+            let todayTasks = tasks.sorted { $0.id < $1.id }
 
             SyncPerformanceTracker.shared.recordScheduleLoad(date: date, fetchedTasks: todayTasks.count, fromCache: false)
             prefetchAdjacentDays(around: date)
@@ -351,9 +349,6 @@ class ScheduleViewController: OCKDailyPageViewController {
 
     private func appendTaskViewControllers(for tasks: [OCKAnyTask], to list: OCKListViewController, date: Date) {
         for task in tasks {
-
-            guard task.hasScheduledEvents(onDay: date, calendar: calendar) else { continue }
-
             let controller = createTaskViewController(for: task, date: date)
             list.appendViewController(controller, animated: false)
         }

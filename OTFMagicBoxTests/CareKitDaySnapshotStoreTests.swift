@@ -99,18 +99,20 @@ struct CareKitDaySnapshotStoreTests {
 
     @Test("Task snapshots exclude bounded schedules without an event on the requested day")
     func taskSnapshotsExcludeBoundedSchedulesWithoutAnEventOnRequestedDay() async throws {
+        let calendar = Calendar.current
+        let scheduleStart = calendar.startOfDay(for: snapshotDay).addingTimeInterval(9 * 60 * 60)
         let requestedDay = try #require(
-            fixedSnapshotCalendar.date(byAdding: .day, value: 1, to: snapshotDay)
+            calendar.date(byAdding: .day, value: 1, to: scheduleStart)
         )
         let scheduleEnd = try #require(
-            fixedSnapshotCalendar.date(byAdding: .day, value: 14, to: snapshotDay)
+            calendar.date(byAdding: .day, value: 14, to: scheduleStart)
         )
         let sparseSchedule = OCKSchedule(composing: [
             OCKScheduleElement(
-                start: snapshotDay,
+                start: scheduleStart,
                 end: scheduleEnd,
                 interval: DateComponents(weekOfYear: 1),
-                duration: .allDay
+                duration: .hours(1)
             )
         ])
         let sparseTask = OCKTask(
@@ -120,7 +122,7 @@ struct CareKitDaySnapshotStoreTests {
             schedule: sparseSchedule
         )
         let store = CareKitDaySnapshotStore(
-            calendar: fixedSnapshotCalendar,
+            calendar: calendar,
             taskFetcher: { _, callbackQueue, completion in
                 callbackQueue.async { completion(.success([sparseTask])) }
             },
@@ -130,6 +132,81 @@ struct CareKitDaySnapshotStoreTests {
         let snapshot = try await taskSnapshot(from: store, for: requestedDay)
 
         #expect(sparseTask.schedule.exists(onDay: requestedDay))
+        #expect(snapshot.tasks.isEmpty)
+    }
+
+    @Test("Task snapshots include an event starting at the final second of the requested day")
+    func taskSnapshotsIncludeEventAtFinalSecondOfRequestedDay() async throws {
+        let requestedDay = fixedSnapshotCalendar.startOfDay(for: snapshotDay)
+        let startOfNextDay = try #require(
+            fixedSnapshotCalendar.date(byAdding: .day, value: 1, to: requestedDay)
+        )
+        let finalSecond = startOfNextDay.addingTimeInterval(-1)
+        let schedule = OCKSchedule(composing: [
+            OCKScheduleElement(
+                start: finalSecond,
+                end: startOfNextDay,
+                interval: DateComponents(day: 1),
+                duration: .minutes(1)
+            )
+        ])
+        let task = OCKTask(
+            id: "final-second-task",
+            title: "Final second task",
+            carePlanUUID: nil,
+            schedule: schedule
+        )
+        let store = CareKitDaySnapshotStore(
+            calendar: fixedSnapshotCalendar,
+            taskFetcher: { _, callbackQueue, completion in
+                callbackQueue.async { completion(.success([task])) }
+            },
+            outcomeFetcher: successfulOutcomeFetcher([])
+        )
+
+        let snapshot = try await taskSnapshot(from: store, for: requestedDay)
+
+        #expect(task.hasScheduledEvents(onDay: requestedDay, calendar: fixedSnapshotCalendar))
+        #expect(snapshot.tasks.map(\.id) == ["final-second-task"])
+    }
+
+    @Test("Task snapshots exclude an all-day event starting on the next day")
+    func taskSnapshotsExcludeAllDayEventStartingOnNextDay() async throws {
+        let calendar = Calendar.current
+        let requestedDay = calendar.startOfDay(for: snapshotDay)
+        let startOfNextDay = try #require(
+            calendar.date(byAdding: .day, value: 1, to: requestedDay)
+        )
+        let scheduleEnd = try #require(
+            calendar.date(byAdding: .day, value: 2, to: requestedDay)
+        )
+        let schedule = OCKSchedule(composing: [
+            OCKScheduleElement(
+                start: startOfNextDay,
+                end: scheduleEnd,
+                interval: DateComponents(day: 1),
+                duration: .allDay
+            )
+        ])
+        let task = OCKTask(
+            id: "next-day-task",
+            title: "Next day task",
+            carePlanUUID: nil,
+            schedule: schedule
+        )
+        let expandedEvents = schedule.events(from: requestedDay, to: startOfNextDay)
+        let store = CareKitDaySnapshotStore(
+            calendar: calendar,
+            taskFetcher: { _, callbackQueue, completion in
+                callbackQueue.async { completion(.success([task])) }
+            },
+            outcomeFetcher: successfulOutcomeFetcher([])
+        )
+
+        let snapshot = try await taskSnapshot(from: store, for: requestedDay)
+
+        #expect(expandedEvents.contains { $0.start == startOfNextDay })
+        #expect(!task.hasScheduledEvents(onDay: requestedDay, calendar: calendar))
         #expect(snapshot.tasks.isEmpty)
     }
 

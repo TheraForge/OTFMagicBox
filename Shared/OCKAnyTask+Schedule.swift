@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2025, Hippocrates Technologies Sagl. All rights reserved.
+ Copyright (c) 2026, Hippocrates Technologies Sagl. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,26 +32,18 @@
  OF SUCH DAMAGE.
  */
 
+import Foundation
 import OTFCareKitStore
 
 extension OCKAnyTask {
-    var groupIdentifierKeys: GroupIdentifierKeys {
-        guard let groupIdentifier else { return GroupIdentifierKeys() }
-        let data = Data(groupIdentifier.utf8)
-        let keys = try? JSONDecoder().decode(GroupIdentifierKeys.self, from: data)
-        return keys ?? GroupIdentifierKeys()
-    }
+    func hasScheduledEvents(onDay date: Date, calendar: Calendar = .current) -> Bool {
+        let startOfDay = calendar.startOfDay(for: date)
+        guard let startOfNextDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
+            return false
+        }
 
-    var category: CheckUpTaskType {
-        groupIdentifierKeys.category
+        return schedule
+            .events(from: startOfDay, to: startOfNextDay)
+            .contains { $0.start < startOfNextDay }
     }
-
-    var viewType: ScheduleTaskType {
-        groupIdentifierKeys.viewType
-    }
-}
-
-struct GroupIdentifierKeys: Codable {
-    var category: CheckUpTaskType = .medication
-    var viewType: ScheduleTaskType = .simple
 }
