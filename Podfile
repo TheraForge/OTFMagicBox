@@ -11,6 +11,10 @@ target 'OTFMagicBox' do
   
   pod 'OTFToolBox/CareHealth', '2.5.0'
   pod 'GoogleSignIn', '~> 7.0.0'
+
+  target 'OTFMagicBoxTests' do
+    inherit! :search_paths
+  end
 end
 
 target 'OTFMagicBoxWatch' do

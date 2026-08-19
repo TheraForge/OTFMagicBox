@@ -97,6 +97,42 @@ struct CareKitDaySnapshotStoreTests {
         #expect(snapshots.allSatisfy { $0.tasks.map(\.id) == ["coalesced"] })
     }
 
+    @Test("Task snapshots exclude bounded schedules without an event on the requested day")
+    func taskSnapshotsExcludeBoundedSchedulesWithoutAnEventOnRequestedDay() async throws {
+        let requestedDay = try #require(
+            fixedSnapshotCalendar.date(byAdding: .day, value: 1, to: snapshotDay)
+        )
+        let scheduleEnd = try #require(
+            fixedSnapshotCalendar.date(byAdding: .day, value: 14, to: snapshotDay)
+        )
+        let sparseSchedule = OCKSchedule(composing: [
+            OCKScheduleElement(
+                start: snapshotDay,
+                end: scheduleEnd,
+                interval: DateComponents(weekOfYear: 1),
+                duration: .allDay
+            )
+        ])
+        let sparseTask = OCKTask(
+            id: "weekly-task",
+            title: "Weekly task",
+            carePlanUUID: nil,
+            schedule: sparseSchedule
+        )
+        let store = CareKitDaySnapshotStore(
+            calendar: fixedSnapshotCalendar,
+            taskFetcher: { _, callbackQueue, completion in
+                callbackQueue.async { completion(.success([sparseTask])) }
+            },
+            outcomeFetcher: successfulOutcomeFetcher([])
+        )
+
+        let snapshot = try await taskSnapshot(from: store, for: requestedDay)
+
+        #expect(sparseTask.schedule.exists(onDay: requestedDay))
+        #expect(snapshot.tasks.isEmpty)
+    }
+
     @Test("Targeted invalidation preserves unaffected cached days")
     func targetedInvalidationPreservesUnaffectedCachedDays() async throws {
         var taskFetchCount = 0

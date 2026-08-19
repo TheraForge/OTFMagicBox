@@ -49,6 +49,15 @@ extension OCKAnyTask {
     var viewType: ScheduleTaskType {
         groupIdentifierKeys.viewType
     }
+
+    func hasScheduledEvents(onDay date: Date, calendar: Calendar = .current) -> Bool {
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(
+            byAdding: DateComponents(day: 1, second: -1),
+            to: startOfDay
+        ) ?? startOfDay
+        return !schedule.events(from: startOfDay, to: endOfDay).isEmpty
+    }
 }
 
 struct GroupIdentifierKeys: Codable {

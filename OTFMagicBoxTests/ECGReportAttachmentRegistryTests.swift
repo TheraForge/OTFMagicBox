@@ -205,8 +205,10 @@ struct ECGReportAttachmentRegistryTests {
         let response = PassthroughSubject<Response.DeleteFile, ForgeError>()
         var cancellationCount = 0
         var deletionResult: Result<Void, Error>?
-        var deletionStarted = false
-        var deletionStartedContinuation: CheckedContinuation<Void, Never>?
+        let deletionStarted = AsyncStream<Void>.makeStream()
+        var deletionStartedIterator = deletionStarted.stream.makeAsyncIterator()
+        let deletionFinished = AsyncStream<Result<Void, Error>>.makeStream()
+        var deletionFinishedIterator = deletionFinished.stream.makeAsyncIterator()
         var recoveredPair: (deletedID: String, replacement: ECGReportAttachment)?
         let restoredAttachment = try #require(ECGReportAttachment(
             attachmentID: "restored",
@@ -234,10 +236,8 @@ struct ECGReportAttachmentRegistryTests {
                 makeRegistryDeletionBackup(attachmentID)
             },
             deleteRequest: { _ in
-                deletionStarted = true
-                deletionStartedContinuation?.resume()
-                deletionStartedContinuation = nil
-                response
+                deletionStarted.continuation.yield()
+                return response
                     .handleEvents(receiveCancel: { cancellationCount += 1 })
                     .eraseToAnyPublisher()
             },
@@ -247,13 +247,10 @@ struct ECGReportAttachmentRegistryTests {
         await confirmation("Server deletion finishes") { finished in
             store.delete(attachmentID: "restored") {
                 deletionResult = $0
+                deletionFinished.continuation.yield($0)
                 finished()
             }
-            if deletionStarted == false {
-                await withCheckedContinuation { continuation in
-                    deletionStartedContinuation = continuation
-                }
-            }
+            _ = await deletionStartedIterator.next()
             #expect(registry.pendingDeletionAttachmentIDs == ["restored"])
             response.send(Response.DeleteFile(
                 error: false,
@@ -261,6 +258,7 @@ struct ECGReportAttachmentRegistryTests {
                 statusCode: 200
             ))
             response.send(completion: .finished)
+            _ = await deletionFinishedIterator.next()
         }
 
         await withCheckedContinuation { continuation in

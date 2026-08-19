@@ -751,7 +751,7 @@ final class CareKitDaySnapshotStore {
 
         case .success(let tasks):
             var dayTasks = [OCKTask]()
-            for task in tasks where task.schedule.exists(onDay: date) {
+            for task in tasks where task.hasScheduledEvents(onDay: date, calendar: calendar) {
                 dayTasks.append(task)
             }
 
