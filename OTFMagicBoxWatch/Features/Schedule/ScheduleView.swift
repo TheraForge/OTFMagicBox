@@ -99,7 +99,10 @@ struct ScheduleView: View {
                             ForEach(tasks, id: \.id) { task in
                                 SimpleTaskView(
                                     taskID: task.id,
-                                    eventQuery: .init(for: selectedDate),
+                                    eventQuery: CareKitScheduleDay(
+                                        containing: selectedDate,
+                                        calendar: calendar
+                                    ).eventQuery,
                                     storeManager: careKitStore.synchronizedStoreManager
                                 )
                                 .id(taskViewIdentity(for: task, date: selectedDate))
@@ -171,7 +174,7 @@ struct ScheduleView: View {
 
                 case .success(let data):
                     let todayTasks = data
-                        .filter { $0.schedule.exists(onDay: selectedDate) }
+                        .filter { $0.hasScheduledEvents(onDay: selectedDate, calendar: calendar) }
                         .sorted { $0.id < $1.id }
                     self.cachedTasksByDay[day] = todayTasks
                     self.tasks = todayTasks
@@ -243,7 +246,7 @@ struct ScheduleView: View {
 
                 guard case .success(let data) = result else { return }
                 let dayTasks = data
-                    .filter { $0.schedule.exists(onDay: date) }
+                    .filter { $0.hasScheduledEvents(onDay: date, calendar: self.calendar) }
                     .sorted { $0.id < $1.id }
                 self.cachedTasksByDay[normalizedDay] = dayTasks
             }

@@ -91,7 +91,7 @@ struct AppShellTests {
         let defaultsFixture = makeIsolatedUserDefaults(prefix: "app-shell")
         defer { defaultsFixture.cleanup() }
         defaultsFixture.defaults.set(true, forKey: Constants.Storage.kOnboardingCompleted)
-        let probe = AppRuntimeProbe(appConfiguration: makeAppConfiguration(apiKey: "<your-api-key>"))
+        let probe = AppRuntimeProbe(appConfiguration: makeAppConfiguration())
 
         let model = ContentViewModel(runtime: probe.runtime(userDefaults: defaultsFixture.defaults))
 

@@ -149,8 +149,10 @@ struct ECGReportAttachmentLifecycleTests {
         try await addLifecycleTask(task, to: careKitStore)
         try await addLifecycleOutcome(outcome, to: careKitStore)
         let deletionResponse = PassthroughSubject<Response.DeleteFile, ForgeError>()
-        var deletionStarted = false
-        var deletionStartedContinuation: CheckedContinuation<Void, Never>?
+        let deletionStarted = AsyncStream<Void>.makeStream()
+        var deletionStartedIterator = deletionStarted.stream.makeAsyncIterator()
+        let deletionFinished = AsyncStream<Result<Void, Error>>.makeStream()
+        var deletionFinishedIterator = deletionFinished.stream.makeAsyncIterator()
         let attachmentStore = ECGReportAttachmentStore(
             uploadRequest: { data, fileName, _, encryptedKey, hash in
                 Just(Response.FileResponse(
@@ -179,9 +181,7 @@ struct ECGReportAttachmentLifecycleTests {
                 .eraseToAnyPublisher()
             },
             deleteRequest: { _ in
-                deletionStarted = true
-                deletionStartedContinuation?.resume()
-                deletionStartedContinuation = nil
+                deletionStarted.continuation.yield()
                 return deletionResponse.eraseToAnyPublisher()
             },
             registry: registry
@@ -194,19 +194,17 @@ struct ECGReportAttachmentLifecycleTests {
         await confirmation("Server deletion finishes") { finished in
             attachmentStore.delete(attachmentID: "ecg-attachment") {
                 deletionResult = $0
+                deletionFinished.continuation.yield($0)
                 finished()
             }
-            if deletionStarted == false {
-                await withCheckedContinuation { startedContinuation in
-                    deletionStartedContinuation = startedContinuation
-                }
-            }
+            _ = await deletionStartedIterator.next()
             deletionResponse.send(Response.DeleteFile(
                 error: false,
                 message: "Deleted",
                 statusCode: 200
             ))
             deletionResponse.send(completion: .finished)
+            _ = await deletionFinishedIterator.next()
         }
         await withCheckedContinuation { continuation in
             coordinator.reconcile(
@@ -218,8 +216,8 @@ struct ECGReportAttachmentLifecycleTests {
 
         let repairedOutcomes = try await fetchLifecycleOutcomes(from: careKitStore)
         let repairedOutcome = try #require(repairedOutcomes.first)
-        let deletionResult = try #require(deletionResult)
-        guard case .success = deletionResult else {
+        let completedDeletionResult = try #require(deletionResult)
+        guard case .success = completedDeletionResult else {
             Issue.record("Expected the server deletion to finish before reconciliation")
             return
         }

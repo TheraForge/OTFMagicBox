@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C9D2613132B6BDDFB4A9DCB /* Pods_OTFMagicBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A505E00FA30D2A172D968A0 /* Pods_OTFMagicBoxTests.framework */; };
 		4E8BE2A52E89DC8B00A7D6C5 /* RawModel in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BE2A42E89DC8B00A7D6C5 /* RawModel */; };
 		4EE7A0A32E89D35A00B9DED2 /* RawModel in Frameworks */ = {isa = PBXBuildFile; productRef = 4EE7A0A22E89D35A00B9DED2 /* RawModel */; };
 		5A49628526DF73B700A4B4DF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49628426DF73B700A4B4DF /* HealthKit.framework */; };
@@ -51,9 +52,12 @@
 		317B0EBF823A947F90A5B722 /* Pods_OTFMagicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35FAC6B92A9E1E23A15862CA /* Pods-OTFMagicBoxWatch.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.care.xcconfig"; sourceTree = "<group>"; };
 		4E429C441DAA8A1D47C5F8E4 /* Pods-OTFMagicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.release.xcconfig"; sourceTree = "<group>"; };
+		5945C812791B74E300E984AB /* Pods-OTFMagicBoxTests.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxTests.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxTests/Pods-OTFMagicBoxTests.carehealth.xcconfig"; sourceTree = "<group>"; };
 		5A49628426DF73B700A4B4DF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		5A7B6DA926FD282C00F872A1 /* OTFMagicBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTFMagicBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6641032BCB6DF55FA78CB87D /* Pods-OTFMagicBoxTests.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxTests.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxTests/Pods-OTFMagicBoxTests.care.xcconfig"; sourceTree = "<group>"; };
 		6866B036622565469A099223 /* Pods-OTFMagicBoxWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.release.xcconfig"; sourceTree = "<group>"; };
+		7A505E00FA30D2A172D968A0 /* Pods_OTFMagicBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OTFMagicBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F43F4D2B4D6A4A009DFFF8 /* OTFMagicBoxWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBoxWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9F43C4DB7707444D1B5F3E /* Pods-OTFMagicBox.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.carehealth.xcconfig"; sourceTree = "<group>"; };
 		ACBC985F3A507F502B53610A /* Pods-OTFMagicBoxWatch.carehealth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxWatch.carehealth.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxWatch/Pods-OTFMagicBoxWatch.carehealth.xcconfig"; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 		B24F8A12C1E9EA74BF47C119 /* Pods-OTFMagicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		BE0308B235B5A7BE05091CF5 /* Pods-OTFMagicBox.care.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBox.care.xcconfig"; path = "Target Support Files/Pods-OTFMagicBox/Pods-OTFMagicBox.care.xcconfig"; sourceTree = "<group>"; };
 		CE482CF3262C954A00C0A2D5 /* OTFMagicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTFMagicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E21A6A024671681172F694C3 /* Pods-OTFMagicBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxTests.release.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxTests/Pods-OTFMagicBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		FF2CC7FEB112021F92BDDD71 /* Pods-OTFMagicBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTFMagicBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-OTFMagicBoxTests/Pods-OTFMagicBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -137,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9D2613132B6BDDFB4A9DCB /* Pods_OTFMagicBoxTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +180,10 @@
 				8D9F43C4DB7707444D1B5F3E /* Pods-OTFMagicBox.carehealth.xcconfig */,
 				BE0308B235B5A7BE05091CF5 /* Pods-OTFMagicBox.care.xcconfig */,
 				4E429C441DAA8A1D47C5F8E4 /* Pods-OTFMagicBox.release.xcconfig */,
+				FF2CC7FEB112021F92BDDD71 /* Pods-OTFMagicBoxTests.debug.xcconfig */,
+				5945C812791B74E300E984AB /* Pods-OTFMagicBoxTests.carehealth.xcconfig */,
+				6641032BCB6DF55FA78CB87D /* Pods-OTFMagicBoxTests.care.xcconfig */,
+				E21A6A024671681172F694C3 /* Pods-OTFMagicBoxTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -183,6 +194,7 @@
 				5A49628426DF73B700A4B4DF /* HealthKit.framework */,
 				317B0EBF823A947F90A5B722 /* Pods_OTFMagicBox.framework */,
 				B0D562C5A4B7B5FEA7610A9B /* Pods_OTFMagicBoxWatch.framework */,
+				7A505E00FA30D2A172D968A0 /* Pods_OTFMagicBoxTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -217,6 +229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A7B6DB226FD282C00F872A1 /* Build configuration list for PBXNativeTarget "OTFMagicBoxTests" */;
 			buildPhases = (
+				8F5E127EA3BB5A40C353F654 /* [CP] Check Pods Manifest.lock */,
 				5A7B6DA526FD282C00F872A1 /* Sources */,
 				5A7B6DA626FD282C00F872A1 /* Frameworks */,
 				5A7B6DA726FD282C00F872A1 /* Resources */,
@@ -377,6 +390,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8F5E127EA3BB5A40C353F654 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OTFMagicBoxTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		901EEAFD2BDA2A10004EC8B5 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -513,6 +548,7 @@
 /* Begin XCBuildConfiguration section */
 		5A7B6DB026FD282C00F872A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF2CC7FEB112021F92BDDD71 /* Pods-OTFMagicBoxTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -534,6 +570,7 @@
 		};
 		5A7B6DB126FD282C00F872A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E21A6A024671681172F694C3 /* Pods-OTFMagicBoxTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -744,6 +781,7 @@
 		};
 		90C79E4F2B4E9ED00020D20F /* Care */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6641032BCB6DF55FA78CB87D /* Pods-OTFMagicBoxTests.care.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -910,6 +948,7 @@
 		};
 		90C79E532B4E9F070020D20F /* CareHealth */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5945C812791B74E300E984AB /* Pods-OTFMagicBoxTests.carehealth.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
